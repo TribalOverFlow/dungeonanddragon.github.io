@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 07:37:52 GMT
+ * Sun, 06 Sep 2020 08:10:40 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3433,7 +3433,7 @@ define('two/autoHealer/ui', [
     'two/ui',
     'two/autoHealer',
     'two/utils',
-    'two/EventQueue'
+    'queues/EventQueue'
 ], function (
     interfaceOverflow,
     autoHealer,
@@ -3443,7 +3443,7 @@ define('two/autoHealer/ui', [
     let $button
 
     const init = function () {
-        $button = interfaceOverflow.addMenuButton('Medyk', 70, $filter('i18n')('description', $rootScope.loc.ale, 'auto_healer'))
+        $button = interfaceOverflow.addMenuButton('Medyk', 50, $filter('i18n')('description', $rootScope.loc.ale, 'auto_healer'))
 
         $button.addEventListener('click', function () {
             if (autoHealer.isRunning()) {
