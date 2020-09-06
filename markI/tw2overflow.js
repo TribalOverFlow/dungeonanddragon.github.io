@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 09:17:33 GMT
+ * Sun, 06 Sep 2020 09:24:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3371,11 +3371,9 @@ require([
 })
 
 define('two/autoHealer', [
-    'queues/EventQueue',
-    'two/utils'
-], function(
-    eventQueue,
-    utils
+    'queues/EventQueue'
+], function (
+    eventQueue
 ) {
     let initialized = false
     let running = false
@@ -3405,12 +3403,12 @@ define('two/autoHealer', [
                                 patient_id: heal.id
                             })
                         }, index * interval1)
-                        utils.notif('success', 'W wiosce: ' + village.getName() + ' wyleczono: ' + heal.id)
+                        console.log('W wiosce: ' + village.getName() + ' wyleczono: ' + heal.id)
                     })
                 }, index * interval)
             }
         })
-        utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_healer'))
+        console.log('Medyk zatrzymany')
         autoHealer.stop()
     }
     let autoHealer = {}
