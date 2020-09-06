@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 19:45:10 GMT
+ * Sun, 06 Sep 2020 19:51:46 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -2281,7 +2281,7 @@ define('two/about/ui', [
     }
 
     const init = function () {
-        interfaceOverflow.addDivisor(99)
+        interfaceOverflow.addDivisor(189)
         const $button = interfaceOverflow.addMenuButton('O mnie', 190)
 
         $button.addEventListener('click', function () {
@@ -7080,7 +7080,7 @@ define('two/faithChecker/ui', [
     'two/ui',
     'two/faithChecker',
     'two/utils',
-    'queues/eventQueue'
+    'queues/EventQueue'
 ], function (
     interfaceOverflow,
     faithChecker,
