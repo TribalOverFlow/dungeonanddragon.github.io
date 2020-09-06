@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 09:31:01 GMT
+ * Sun, 06 Sep 2020 09:36:49 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -554,6 +554,12 @@ define('two/language', [
             "activated": "Kolekcjoner aktywowany",
             "deactivated": "Kolekcjoner deaktywowany"
         },
+        "auto_healer": {
+            "title": "Medyk",
+            "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
+            "activated": "Medyk aktywowany",
+            "deactivated": "Medyk skończył działanie"
+        },
         "builder_queue": {
             "title": "Budowniczy",
             "started": "Budowniczy Uruchomiony",
@@ -998,6 +1004,12 @@ define('two/language', [
             "description": "Automatyczny kolekcjoner depozytu/drugiej wioski.",
             "activated": "Kolekcjoner aktywowany",
             "deactivated": "Kolekcjoner deaktywowany"
+        },
+        "auto_healer": {
+            "title": "Medyk",
+            "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
+            "activated": "Medyk aktywowany",
+            "deactivated": "Medyk skończył działanie"
         },
         "builder_queue": {
             "title": "Budowniczy",
