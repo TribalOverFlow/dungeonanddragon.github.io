@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 08:10:40 GMT
+ * Sun, 06 Sep 2020 08:26:14 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3429,6 +3429,13 @@ define('two/autoHealer', [
     }
     return autoHealer
 })
+define('two/autoHealer/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        AUTO_HEALER_STARTED: 'auto_healer_started',
+        AUTO_HEALER_STOPPED: 'auto_healer_stopped'
+    })
+})
+
 define('two/autoHealer/ui', [
     'two/ui',
     'two/autoHealer',
