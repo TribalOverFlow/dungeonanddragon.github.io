@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 18:27:41 GMT
+ * Sun, 06 Sep 2020 18:30:39 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -10637,6 +10637,13 @@ define('two/mintHelper', [
     }
     return mintHelper
 })
+define('two/mintHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        MINT_HELPER_STARTED: 'mint_helper_started',
+        MINT_HELPER_STOPPED: 'mint_helper_stopped'
+    })
+})
+
 define('two/mintHelper/ui', [
     'two/ui',
     'two/mintHelper',
