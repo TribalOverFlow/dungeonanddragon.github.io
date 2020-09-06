@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 08:26:14 GMT
+ * Sun, 06 Sep 2020 08:43:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3377,18 +3377,18 @@ define('two/autoHealer', [
     eventQueue,
     utils
 ) {
-    var initialized = false
-    var running = false
-    var interval = 3000
-    var interval1 = 1000
+    let initialized = false
+    let running = false
+    let interval = 3000
+    let interval1 = 1000
 
     function healUnits() {
-        var player = modelDataService.getSelectedCharacter()
-        var villages = player.getVillageList()
+        let player = modelDataService.getSelectedCharacter()
+        let villages = player.getVillageList()
         villages.forEach(function(village, index) {
-            var hospital = village.hospital
-            var patients = hospital.patients
-            var healed = patients.healed
+            let hospital = village.hospital
+            let patients = hospital.patients
+            let healed = patients.healed
             if (healed.length == 0) {
                 utils.notif('success', $filter('i18n')('no-patients', $rootScope.loc.ale, 'auto_healer'))
             } else {
@@ -3408,7 +3408,7 @@ define('two/autoHealer', [
         utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_healer'))
         autoHealer.stop()
     }
-    var autoHealer = {}
+    let autoHealer = {}
     autoHealer.init = function() {
         initialized = true
     }
