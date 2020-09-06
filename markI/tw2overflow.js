@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 09:24:06 GMT
+ * Sun, 06 Sep 2020 09:31:01 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3393,7 +3393,7 @@ define('two/autoHealer', [
             let patients = hospital.patients
             let healed = patients.healed
             if (healed.length == 0) {
-                console.log('W wiosce: ' + village.getName() + ' brak jednostek do wyleczenia.')
+                console.log('W wiosce ' + village.getName() + ' brak jednostek do wyleczenia.')
             } else {
                 setTimeout(function() {
                     healed.forEach(function(heal, index) {
@@ -3491,6 +3491,7 @@ require([
     'two/autoHealer/ui',
     'Lockr',
     'queues/EventQueue',
+    'two/autoHealer/events'
 ], function(
     ready,
     autoHealer,
