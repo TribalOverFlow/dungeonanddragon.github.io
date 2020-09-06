@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 08:43:06 GMT
+ * Sun, 06 Sep 2020 09:01:20 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3400,7 +3400,6 @@ define('two/autoHealer', [
                                 patient_id: heal.id
                             })
                         }, index * interval1)
-                        utils.notif('success', 'W wiosce: ' + village.getName() + ' wyleczono: ' + heal.id)
                     })
                 }, index * interval)
             }
