@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 05 Sep 2020 18:08:32 GMT
+ * Sun, 06 Sep 2020 18:30:39 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -554,6 +554,12 @@ define('two/language', [
             "activated": "Kolekcjoner aktywowany",
             "deactivated": "Kolekcjoner deaktywowany"
         },
+        "auto_healer": {
+            "title": "Medyk",
+            "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
+            "activated": "Medyk aktywowany",
+            "deactivated": "Medyk skończył działanie"
+        },
         "builder_queue": {
             "title": "Budowniczy",
             "started": "Budowniczy Uruchomiony",
@@ -865,6 +871,12 @@ define('two/language', [
             "tooltip.player-id": "Id gracza",
             "tooltip.tribe-id": "Id plemienia"
         },
+        "mint_helper": {
+            "title": "Mincerz",
+            "description": "Automatycznie wybija monety gdy włączony.",
+            "activated": "Mincerz aktywowany",
+            "deactivated": "Mincerz deaktywowany"
+        },
         "common": {
             "start": "Start",
             "started": "Uruchomiony",
@@ -998,6 +1010,12 @@ define('two/language', [
             "description": "Automatyczny kolekcjoner depozytu/drugiej wioski.",
             "activated": "Kolekcjoner aktywowany",
             "deactivated": "Kolekcjoner deaktywowany"
+        },
+        "auto_healer": {
+            "title": "Medyk",
+            "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
+            "activated": "Medyk aktywowany",
+            "deactivated": "Medyk skończył działanie"
         },
         "builder_queue": {
             "title": "Budowniczy",
@@ -1309,6 +1327,12 @@ define('two/language', [
             "tooltip.village-id": "Id wioski",
             "tooltip.player-id": "Id gracza",
             "tooltip.tribe-id": "Id plemienia"
+        },
+        "mint_helper": {
+            "title": "Mincerz",
+            "description": "Automatycznie wybija monety gdy włączony.",
+            "activated": "Mincerz aktywowany",
+            "deactivated": "Mincerz deaktywowany"
         },
         "common": {
             "start": "Start",
@@ -3370,6 +3394,165 @@ require([
     })
 })
 
+define('two/autoHealer', [
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    utils,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+	
+    let interval = 3000
+    let interval1 = 1000
+
+    const healUnits = function () {
+        if (!running) {
+            return false
+        }
+        console.log('Medyk uruchomiony')
+		
+        let player = modelDataService.getSelectedCharacter()
+        let villages = player.getVillageList()
+        villages.forEach(function(village, index) {
+            let hospital = village.hospital
+            let patients = hospital.patients
+            let healed = patients.healed
+            if (healed.length == 0) {
+                console.log('W wiosce ' + village.getName() + ' brak jednostek do wyleczenia.')
+            } else {
+                setTimeout(function() {
+                    healed.forEach(function(heal, index) {
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.HOSPITAL_RELEASE_PATIENT, {
+                                village_id: village.getId(),
+                                patient_id: heal.id
+                            })
+                        }, index * interval1)
+                        console.log('W wiosce: ' + village.getName() + ' wyleczono: ' + heal.id)
+                    })
+                }, index * interval)
+            }
+        })
+        utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_healer'))
+        console.log('Medyk zatrzymany')
+        autoHealer.stop()
+    }
+    let autoHealer = {}
+    autoHealer.init = function() {
+        initialized = true
+    }
+    autoHealer.start = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STARTED)
+        running = true
+        healUnits()
+    }
+    autoHealer.stop = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STOPPED)
+        running = false
+    }
+    autoHealer.isRunning = function() {
+        return running
+    }
+    autoHealer.isInitialized = function() {
+        return initialized
+    }
+    return autoHealer
+})
+define('two/autoHealer/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        AUTO_HEALER_STARTED: 'auto_healer_started',
+        AUTO_HEALER_STOPPED: 'auto_healer_stopped'
+    })
+})
+
+define('two/autoHealer/ui', [
+    'two/ui',
+    'two/autoHealer',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    autoHealer,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Medyk', 60, $filter('i18n')('description', $rootScope.loc.ale, 'auto_healer'))
+
+        $button.addEventListener('click', function () {
+            if (autoHealer.isRunning()) {
+                autoHealer.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_healer'))
+            } else {
+                autoHealer.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_healer'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_HEALER_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (autoHealer.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+
+require([
+    'two/ready',
+    'two/autoHealer',
+    'two/autoHealer/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/autoHealer/events'
+], function(
+    ready,
+    autoHealer,
+    autoHealerInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'auto_healer_active'
+    }
+	
+    if (autoHealer.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        autoHealer.init()
+        autoHealerInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                autoHealer.start()
+            }
+
+            eventQueue.register(eventTypeProvider.AUTO_HEALER_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
 define('two/builderQueue', [
     'two/ready',
     'two/utils',
@@ -3935,12 +4118,12 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.BARRACKS, // 2
 
             // Quest: The Hospital
+            BUILDING_TYPES.HOSPITAL, // 1
             BUILDING_TYPES.HEADQUARTER, // 4
             BUILDING_TYPES.TIMBER_CAMP, // 7
             BUILDING_TYPES.CLAY_PIT, // 7
             BUILDING_TYPES.IRON_MINE, // 7
             BUILDING_TYPES.FARM, // 4
-            BUILDING_TYPES.HOSPITAL, // 1
         ],
         [
             // Quest: Resources
@@ -10086,7 +10269,7 @@ define('two/minimap/ui', [
         windowWrapper = document.querySelector('#wrapper')
         mapWrapper = document.querySelector('#map')
 
-        $button = interfaceOverflow.addMenuButton('Minimapa', 50)
+        $button = interfaceOverflow.addMenuButton('Minimapa', 70)
         $button.addEventListener('click', function () {
             const current = minimap.getMapPosition()
 
@@ -10367,4 +10550,184 @@ require([
     }, 'map')
 })
 
+define('two/mintHelper', [
+    'queues/EventQueue'
+], function(
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let interval = 3000
+	
+    function mintCoins() {
+        let player = modelDataService.getSelectedCharacter()
+        let villages = player.getVillageList()
+        villages.forEach(function(village) {
+            let amountWood = 0
+            let amountClay = 0
+            let amountIron = 0
+            let data = village.data
+            let buildings = data.buildings
+            let academy = buildings.academy
+            let level = academy.level
+            let resources = village.getResources()
+            let computed = resources.getComputed()
+            let wood = computed.wood
+            let clay = computed.clay
+            let iron = computed.iron
+            let villageWood = wood.currentStock
+            let villageClay = clay.currentStock
+            let villageIron = iron.currentStock
+            let woodCost = 28000
+            let clayCost = 30000
+            let ironCost = 25000
+            setTimeout(function() {
+                if (level > 0) {
+                    if (villageWood >= woodCost && villageClay >= clayCost && villageIron >= ironCost) {
+                        amountWood = Math.floor(villageWood / woodCost)
+                        amountClay = Math.floor(villageClay / clayCost)
+                        amountIron = Math.floor(villageIron / ironCost)
+                        if (amountWood <= amountIron && amountWood <= amountClay) {
+                            socketService.emit(routeProvider.MINT_COINS, {
+                                village_id: village.getId(),
+                                amount: amountWood
+                            })
+                            console.log('W wiosce ' + village.getName() + ' wybito ' + amountWood + ' monet.')
+                        } else if (amountClay <= amountIron && amountClay <= amountWood) {
+                            socketService.emit(routeProvider.MINT_COINS, {
+                                village_id: village.getId(),
+                                amount: amountClay
+                            })
+                            console.log('W wiosce ' + village.getName() + ' wybito ' + amountClay + ' monet.')
+                        } else {
+                            socketService.emit(routeProvider.MINT_COINS, {
+                                village_id: village.getId(),
+                                amount: amountIron
+                            })
+                            console.log('W wiosce ' + village.getName() + ' wybito ' + amountIron + ' monet.')
+                        }
+                    } else {
+                        console.log('Za mało surowców żeby wybić monety w wiosce' + village.getName())
+                    }
+                } else {
+                    console.log('W wiosce' + village.getName() + ' brak akademi')
+                }
+            }, interval)
+        })
+        setTimeout(mintCoins, 30000)
+    }
+    let mintHelper = {}
+    mintHelper.init = function() {
+        initialized = true
+    }
+    mintHelper.start = function() {
+        eventQueue.trigger(eventTypeProvider.MINT_HELPER_STARTED)
+        running = true
+        mintCoins()
+    }
+    mintHelper.stop = function() {
+        eventQueue.trigger(eventTypeProvider.MINT_HELPER_STOPPED)
+        running = false
+    }
+    mintHelper.isRunning = function() {
+        return running
+    }
+    mintHelper.isInitialized = function() {
+        return initialized
+    }
+    return mintHelper
+})
+define('two/mintHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        MINT_HELPER_STARTED: 'mint_helper_started',
+        MINT_HELPER_STOPPED: 'mint_helper_stopped'
+    })
+})
+
+define('two/mintHelper/ui', [
+    'two/ui',
+    'two/mintHelper',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    mintHelper,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Mincerz', 90, $filter('i18n')('description', $rootScope.loc.ale, 'mint_helper'))
+        
+        $button.addEventListener('click', function () {
+            if (mintHelper.isRunning()) {
+                mintHelper.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'mint_helper'))
+            } else {
+                mintHelper.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'mint_helper'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.MINT_HELPER_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.MINT_HELPER_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (mintHelper.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.MINT_HELPER_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+
+require([
+    'two/ready',
+    'two/mintHelper',
+    'two/mintHelper/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/mintHelper/events'
+], function(
+    ready,
+    mintHelper,
+    mintHelperInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'mint_helper_active'
+    }
+	
+    if (mintHelper.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        mintHelper.init()
+        mintHelperInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                mintHelper.start()
+            }
+
+            eventQueue.register(eventTypeProvider.AUTO_HELPER_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.AUTO_HELPER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
 })(this)
