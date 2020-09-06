@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 18:30:39 GMT
+ * Sun, 06 Sep 2020 19:45:10 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -681,6 +681,16 @@ define('two/language', [
             "tab_waiting": "Oczekujące",
             "tab_logs": "Logi"
         },
+        "faith_checker": {
+            "title": "Kapelan",
+            "description": "Automatycznie sprawdza kościół/kaplice w prowincjach.",
+            "resources": "W wiosce brak surowców do rozpoczęcia budowy",
+            "full": "W wiosce znajdują się wierni",
+            "chapel": "W wiosce zostanie zbudowana kaplica",
+            "church": "W wiosce zostanie zbudowany kościół",
+            "activated": "Kapelan aktywowany",
+            "deactivated": "Kapelan skończył działanie"
+        },
         "farm_overflow": {
             "title": "Farmer",
             "open_report": "Otwórz raport",
@@ -1137,6 +1147,16 @@ define('two/language', [
             "tab_add": "Dodaj rozkaz",
             "tab_waiting": "Oczekujące",
             "tab_logs": "Logi"
+        },
+        "faith_checker": {
+            "title": "Kapelan",
+            "description": "Automatycznie sprawdza kościół/kaplice w prowincjach.",
+            "resources": "W wiosce brak surowców do rozpoczęcia budowy",
+            "full": "W wiosce znajdują się wierni",
+            "chapel": "W wiosce zostanie zbudowana kaplica",
+            "church": "W wiosce zostanie zbudowany kościół",
+            "activated": "Kapelan aktywowany",
+            "deactivated": "Kapelan skończył działanie"
         },
         "farm_overflow": {
             "title": "Farmer",
@@ -2262,7 +2282,7 @@ define('two/about/ui', [
 
     const init = function () {
         interfaceOverflow.addDivisor(99)
-        const $button = interfaceOverflow.addMenuButton('O mnie', 100)
+        const $button = interfaceOverflow.addMenuButton('O mnie', 190)
 
         $button.addEventListener('click', function () {
             buildWindow()
@@ -6878,6 +6898,270 @@ require([
     }, ['map', 'world_config'])
 })
 
+define('two/faithChecker', [
+    'two/utils',
+    'queues/EventQueue',
+    'Lockr',
+    'conf/buildingTypes',
+    'conf/locationTypes'
+], function(
+    utils,
+    eventQueue,
+    Lockr,
+    BUILDING_TYPES,
+    LOCATION_TYPES
+) {
+    let initialized = false
+    let running = false
+    let getHighestGodsHouseLevel
+    let getMoralBonus
+    let requestVillageProvinceNeighbours
+    let highestChapelLevel
+    let bonus
+	
+    let chapelBlockade = 0
+	
+    getHighestGodsHouseLevel = function getHighestGodsHouseLevel(villages) {
+        let villageIdx,
+            highestLevel = 0,
+            tmpLevel
+
+        for (villageIdx = 0; villageIdx < villages.length; villageIdx++) {
+            tmpLevel = villages[villageIdx].chapel || villages[villageIdx].church
+            if (tmpLevel && (tmpLevel > highestLevel)) {
+                highestLevel = tmpLevel
+            }
+        }
+        return highestLevel
+    }
+	
+    getMoralBonus = function getMoralBonus(level, opt_isChapel) {
+        let bonusLookUp = modelDataService.getWorldConfig().getChurchBonus(),
+            bonusFactor = 0
+        if ((level < 0) || (!opt_isChapel && level > (bonusLookUp.length - 1))) {
+            return 0
+        }
+        if (opt_isChapel) {
+            bonusFactor = modelDataService.getWorldConfig().getChapelBonus()
+        } else {
+            bonusFactor = bonusLookUp[level]
+        }
+        return Math.floor(bonusFactor * 100)
+    }
+	
+    requestVillageProvinceNeighbours = function requestVillageProvinceNeighbours(villageId, callback) {
+        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
+            'village_id': villageId
+        }, callback)
+    }
+
+    function faithInfo() {
+        let player = modelDataService.getSelectedCharacter()
+        let villages = player.getVillageList()
+
+        villages.forEach(function(village) {
+            let villageid = village.data.villageId
+            let isChapel = village.data.buildings.chapel.level
+            let buildingQueue = village.buildingQueue.data.queue
+            let resources = village.getResources()
+            let computed = resources.getComputed()
+            let food = computed.food
+            let wood = computed.wood
+            let clay = computed.clay
+            let iron = computed.iron
+            let villageFood = food.currentStock
+            let villageWood = wood.currentStock
+            let villageClay = clay.currentStock
+            let villageIron = iron.currentStock
+            let foodCost = [0, 5000]
+            let woodCost = [160, 16000]
+            let clayCost = [200, 20000]
+            let ironCost = [50, 5000]
+            if (isChapel == 1) {
+                chapelBlockade = 1
+            }
+
+            requestVillageProvinceNeighbours(villageid, function(responseData) {
+                highestChapelLevel = getHighestGodsHouseLevel(responseData.villages)
+                bonus = getMoralBonus(highestChapelLevel, isChapel === 1)
+                console.log(bonus)
+                if (bonus == 50 && (buildingQueue === undefined || buildingQueue.length == 0)) {
+                    if (chapelBlockade == 1) {
+                        if (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1] && villageFood >= foodCost[1]) {
+                            socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
+                                building: 'church',
+                                village_id: villageid,
+                                location: LOCATION_TYPES.MASS_SCREEN,
+                                premium: false
+                            })
+                            utils.notif('success', $filter('i18n')('church', $rootScope.loc.ale, 'faith_checker'))
+                        } else {
+                            utils.notif('error', $filter('i18n')('resources', $rootScope.loc.ale, 'faith_checker'))
+                        }
+                    } else {
+                        if (villageWood >= woodCost[0] && villageClay >= clayCost[0] && villageIron >= ironCost[0] && villageFood >= foodCost[0]) {
+                            socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
+                                building: 'chapel',
+                                village_id: villageid,
+                                location: LOCATION_TYPES.MASS_SCREEN,
+                                premium: false
+                            })
+                            utils.notif('success', $filter('i18n')('chapel', $rootScope.loc.ale, 'faith_checker'))
+                        } else {
+                            utils.notif('error', $filter('i18n')('resources', $rootScope.loc.ale, 'faith_checker'))
+                        }
+                    }
+                } else if (bonus == 50 && buildingQueue) {
+                    buildingQueue.forEach(function(queue) {
+                        let faithMax = queue.building
+
+                        if ((faithMax != 'chapel' || faithMax != 'church') && chapelBlockade == 0) {
+                            if (villageWood >= woodCost[0] && villageClay >= clayCost[0] && villageIron >= ironCost[0] && villageFood >= foodCost[0]) {
+                                socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
+                                    building: 'chapel',
+                                    village_id: villageid,
+                                    location: LOCATION_TYPES.MASS_SCREEN,
+                                    premium: false
+                                })
+                                utils.notif('success', $filter('i18n')('chapel', $rootScope.loc.ale, 'faith_checker'))
+                            } else {
+                                utils.notif('error', $filter('i18n')('resources', $rootScope.loc.ale, 'faith_checker'))
+                            }
+                        } else if ((faithMax != 'chapel' || faithMax != 'church') && chapelBlockade == 1) {
+                            if (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1] && villageFood >= foodCost[1]) {
+                                socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
+                                    building: 'church',
+                                    village_id: villageid,
+                                    location: LOCATION_TYPES.MASS_SCREEN,
+                                    premium: false
+                                })
+                                utils.notif('success', $filter('i18n')('church', $rootScope.loc.ale, 'faith_checker'))
+                            } else {
+                                utils.notif('error', $filter('i18n')('resources', $rootScope.loc.ale, 'faith_checker'))
+                            }
+                        }
+                    })
+                } else {
+                    utils.notif('success', $filter('i18n')('full', $rootScope.loc.ale, 'faith_checker'))
+                }
+            })
+        })
+    }
+
+    let faithChecker = {}
+    faithChecker.init = function() {
+        initialized = true
+    }
+    faithChecker.start = function() {
+        eventQueue.trigger(eventTypeProvider.FAITH_CHECKER_STARTED)
+        running = true
+        faithInfo()
+    }
+    faithChecker.stop = function() {
+        eventQueue.trigger(eventTypeProvider.FAITH_CHECKER_STOPPED)
+        running = false
+    }
+    faithChecker.isRunning = function() {
+        return running
+    }
+    faithChecker.isInitialized = function() {
+        return initialized
+    }
+    return faithChecker
+})
+define('two/faithChecker/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        FAITH_CHECKER_STARTED: 'faith_checker_started',
+        FAITH_CHECKER_STOPPED: 'faith_checker_stopped'
+    })
+})
+
+define('two/faithChecker/ui', [
+    'two/ui',
+    'two/faithChecker',
+    'two/utils',
+    'queues/eventQueue'
+], function (
+    interfaceOverflow,
+    faithChecker,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Kapelan', 80, $filter('i18n')('description', $rootScope.loc.ale, 'faith_checker'))
+
+        $button.addEventListener('click', function () {
+            if (faithChecker.isRunning()) {
+                faithChecker.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'faith_checker'))
+            } else {
+                faithChecker.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'faith_checker'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.FAITH_CHECKER_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.FAITH_CHECKER_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (faithChecker.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.FAITH_CHECKER_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+
+require([
+    'two/ready',
+    'two/faithChecker',
+    'two/faithChecker/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/faithChecker/events'
+], function(
+    ready,
+    faithChecker,
+    faithCheckerInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'faith_checker_active'
+    }
+	
+    if (faithChecker.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        faithChecker.init()
+        faithCheckerInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                faithChecker.start()
+            }
+
+            eventQueue.register(eventTypeProvider.FAITH_CHECKER_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.FAITH_CHECKER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
 define('two/farmOverflow', [
     'two/Settings',
     'two/farmOverflow/types/errors',
@@ -10269,7 +10553,7 @@ define('two/minimap/ui', [
         windowWrapper = document.querySelector('#wrapper')
         mapWrapper = document.querySelector('#map')
 
-        $button = interfaceOverflow.addMenuButton('Minimapa', 70)
+        $button = interfaceOverflow.addMenuButton('Minimapa', 180)
         $button.addEventListener('click', function () {
             const current = minimap.getMapPosition()
 
@@ -10610,7 +10894,7 @@ define('two/mintHelper', [
                         console.log('Za mało surowców żeby wybić monety w wiosce' + village.getName())
                     }
                 } else {
-                    console.log('W wiosce' + village.getName() + ' brak akademi')
+                    console.log('W wiosce ' + village.getName() + ' brak akademi')
                 }
             }, interval)
         })
