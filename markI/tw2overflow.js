@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 09:42:40 GMT
+ * Sun, 06 Sep 2020 09:46:58 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3383,8 +3383,10 @@ require([
 })
 
 define('two/autoHealer', [
+    'two/utils',
     'queues/EventQueue'
 ], function (
+    utils,
     eventQueue
 ) {
     let initialized = false
@@ -3397,6 +3399,7 @@ define('two/autoHealer', [
         if (!running) {
             return false
         }
+        console.log('Medyk uruchomiony')
 		
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
@@ -3420,6 +3423,7 @@ define('two/autoHealer', [
                 }, index * interval)
             }
         })
+        utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_healer'))
         console.log('Medyk zatrzymany')
         autoHealer.stop()
     }
