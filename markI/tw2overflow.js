@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Sep 2020 19:51:46 GMT
+ * Mon, 07 Sep 2020 19:02:25 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -520,6 +520,12 @@ define('two/language', [
             "issues_suggestions": "Błędy/sugestie",
             "translations": "Tłumaczenia"
         },
+        "alert_sender": {
+            "title": "Wartownik",
+            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw z 'Attacks' w nazwie.",
+            "activated": "Wartownik aktywowany",
+            "deactivated": "Wartownik skończył działanie"
+        },
         "attack_view": {
             "title": "Strażnik",
             "filter_types": "Rodzaj",
@@ -559,6 +565,116 @@ define('two/language', [
             "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
             "activated": "Medyk aktywowany",
             "deactivated": "Medyk skończył działanie"
+        },
+        "battle_calculator": {
+            "title": "Strateg",
+            "checkT.tip": "Liczy koszty produkcji jednostek",
+            "check.tip": "Liczy punkty bojowe dla wybranych jednostek",
+            "check.btn": "Policz",
+            "simulate.tip": "Symuluje bitwe na podstawie wskazanych danych",
+            "simulate.btn": "Symuluj",
+            "calculated": "Obliczono wynik bitwy!",
+            "inserted": "Obliczono wynik bitwy!",
+            "name": "Pełna nazwa szablonu",
+            "id": "Wioska",
+            "wood": "Drewno",
+            "iron": "Żelazo",
+            "clay": "Glina",
+            "food": "Prowiant",
+            "attack": "Siła ataku",
+            "load": "Ładowność",
+            "buildtime": "Czas rekrutacji",
+            "defarc": "Obrona przeciw łucznikom",
+            "definf": "obrona przeciw piechocie",
+            "defcav": "Obrona przeciw kawaleri",
+            "attackarc": "Siła ataku łuczników",
+            "attackinf": "Siła ataku piechoty",
+            "attackcav": "Siła ataku kawaleri",
+            "discipline": "Dyscyplina",
+            "speed": "Prędkość",
+            "battle": "Bitwa",
+            "battle.predamage": "Uszkodzenia wstępne",
+            "battle.header": "Kalkulator bitewny",
+            "battle.killrateA": "Procent strat",
+            "battle.attackBashpoint": "Ofensywne punkty bojowe",
+            "battle.strentghAttack": "Siła bojowa off",
+            "battle.killrateD": "Procent strat",
+            "battle.defenceBashpoint": "Defensywne punkty bojowe",
+            "battle.strentghDefend": "Siła bojowa deff",
+            "battle.attackModifier": "Modyfikator ataku",
+            "battle.defenceModifier": "Modyfikator obrony",
+            "battle.provisions": "Całkowity prowiant",
+            "battle.killedprovisions": "Prowiant stracony",
+            "battle.doublestrength": "Szał berków?",
+            "battle.strongesttype": "Najwięcej wojsk typu",
+            "battle.beds": "Liczba łóżek - uratowanych jednostek",
+            "battle.survivedprovisions": "Prowiant ocalały",
+            "battle.attacker": "Atakujący",
+            "battle.unit": "Jednostka",
+            "battle.amount": "Ilość",
+            "battle.loses": "Straty",
+            "battle.revived": "Uleczone",
+            "battle.survivors": "Ocalałe",
+            "battle.survivorsA": "Ocalałe(z uratowanymi)",
+            "battle.survivorsD": "Ocalałe(bez uratowanych)",
+            "battle.defender": "Obrońca",
+            "battle.damage": "Uszkodzenia taranów",
+            "battle.damageCatapult": "Uszkodzenia katapult",
+            "battle.downgrade": "Mur uszkodzony z poziomu ",
+            "battle.downgradeCatapult": " uszkodzony/a z poziomu ",
+            "battle.to": " do ",
+            "battle.insert": "Wstaw ocalałe jednostki",
+            "battle.insertvillage": "Wstaw z wioski",
+            "battle.insertpreset": "Wstaw z szablonu",
+            "battle.insertV": "Wstaw jednostki z wioski - atakujący",
+            "battle.insertP": "Wstaw jednostki z szablonu - atakujący",
+            "battle.insertVD": "Wstaw jednostki z wioski - broniący",
+            "battle.insertPD": "Wstaw jednostki z szablonu - broniący",
+            "battle.faith": "Wiara",
+            "battle.morale": "Morale",
+            "battle.luck": "Szczęście",
+            "battle.wall": "Mury",
+            "battle.nightbonus": "Bonus nocny",
+            "battle.leader": "Wielki mistrz",
+            "battle.medic": "Medyk",
+            "battle.doctor": "Doktor",
+            "battle.attack-bonus": "Mistrzostwo broni",
+            "battle.iron-walls": "Żelazny mur",
+            "battle.clinique": "Klinika",
+            "battle.hospital": "Szpital",
+            "battle.equip": "Przedmioty rycerza",
+            "battle.halberd": "Halabarda Guan Yu",
+            "battle.longsword": "Długi miecz Paracelsusa",
+            "battle.battleaxe": "Bojowy topór Thorgarda",
+            "battle.longbow": "Łuk Nimroda",
+            "battle.lance": "Lanca Mieszka",
+            "battle.compositebow": "Kompozytowy łuk Nimroda",
+            "battle.banner": "Chorągiew Baptystów",
+            "battle.star": "Gwiazda poranna Karola",
+            "battle.bonfire": "Pochodnia Alethei",
+            "battle.scepter": "Berło Vasca",
+            "battle.target": "Cel katapult",
+            "bunker": "Bunkier",
+            "bunker.header": "Kalkulator optymalnego offa na bunkier",
+            "troops": "Koszt jednostek",
+            "troops.header": "Kalkulator kosztów produkcji jednostek",
+            "troops.th": "Koszty produkcji",
+            "troops.units": "Jednostki",
+            "troops.building": "Budynek",
+            "troops.barracks": "Koszary",
+            "troops.preceptory": "Komturia",
+            "troops.effects": "Efekty",
+            "troops.domination": "Dominacja",
+            "troops.training": "Intensywny trening",
+            "troops.templars": "Zakon Templariuszy",
+            "troops.teutonic": "Zakon Krzyżacki",
+            "troops.none": "Brak",
+            "bashpoints": "Punkty Bojowe",
+            "bashpoints.header": "Kalkulator punktów bojowych",
+            "bashpoints.th": "Punkty bojowe",
+            "bashpoints.attacker": "Jako atakujący",
+            "bashpoints.defender": "Jako obrońca",
+            "bashpoints.killed": "Zniszczone jednostki"
         },
         "builder_queue": {
             "title": "Budowniczy",
@@ -887,6 +1003,13 @@ define('two/language', [
             "activated": "Mincerz aktywowany",
             "deactivated": "Mincerz deaktywowany"
         },
+        "preset_creator": {
+            "title": "Kwatermistrz",
+            "description": "Automatycznie tworzy szablony do rekrutacji, fejków i farmy.",
+            "activated": "Kwatermistrz aktywowany",
+            "done": "Kwatermistrz utworzył szablony",
+            "deactivated": "Kwatermistrz skończył działanie"
+        },
         "common": {
             "start": "Start",
             "started": "Uruchomiony",
@@ -987,6 +1110,12 @@ define('two/language', [
             "issues_suggestions": "Błędy/sugestie",
             "translations": "Tłumaczenia"
         },
+        "alert_sender": {
+            "title": "Goniec",
+            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw z 'Attacks' w nazwie.",
+            "activated": "Goniec aktywowany",
+            "deactivated": "Goniec skończył działanie"
+        },
         "attack_view": {
             "title": "Strażnik",
             "filter_types": "Rodzaj",
@@ -995,7 +1124,7 @@ define('two/language', [
             "filter_show_relocations_tooltip": "Pokaż przeniesienia",
             "filter_incoming_units": "Nadchodzące jednostki",
             "commands_copy_arrival_tooltip": "Kopiuj czas dotarcia.",
-            "commands_copy_backtime_tooltip": "Kopiuj czas powrotu do wioski źródłowej.",
+            "commands_copy_backtime_tooltip": "Kopiuj czas powrotu.",
             "commands_set_remove_tooltip": "Wstaw rozkaz wycofania wojsk przed dotarciem ataku do Kolejki rozkazów.",
             "command_type_tooltip": "Rodzaj",
             "slowest_unit_tooltip": "Najwolniejsza jednostka",
@@ -1027,10 +1156,120 @@ define('two/language', [
             "activated": "Medyk aktywowany",
             "deactivated": "Medyk skończył działanie"
         },
+        "battle_calculator": {
+            "title": "Strateg",
+            "checkT.tip": "Liczy koszty produkcji jednostek",
+            "check.tip": "Liczy punkty bojowe dla wybranych jednostek",
+            "check.btn": "Policz",
+            "simulate.tip": "Symuluje bitwe na podstawie wskazanych danych",
+            "simulate.btn": "Symuluj",
+            "calculated": "Obliczono wynik bitwy!",
+            "inserted": "Obliczono wynik bitwy!",
+            "name": "Pełna nazwa szablonu",
+            "id": "Wioska",
+            "wood": "Drewno",
+            "iron": "Żelazo",
+            "clay": "Glina",
+            "food": "Prowiant",
+            "attack": "Siła ataku",
+            "load": "Ładowność",
+            "buildtime": "Czas rekrutacji",
+            "defarc": "Obrona przeciw łucznikom",
+            "definf": "obrona przeciw piechocie",
+            "defcav": "Obrona przeciw kawaleri",
+            "attackarc": "Siła ataku łuczników",
+            "attackinf": "Siła ataku piechoty",
+            "attackcav": "Siła ataku kawaleri",
+            "discipline": "Dyscyplina",
+            "speed": "Prędkość",
+            "battle": "Bitwa",
+            "battle.predamage": "Uszkodzenia wstępne",
+            "battle.header": "Kalkulator bitewny",
+            "battle.killrateA": "Procent strat",
+            "battle.attackBashpoint": "Ofensywne punkty bojowe",
+            "battle.strentghAttack": "Siła bojowa off",
+            "battle.killrateD": "Procent strat",
+            "battle.defenceBashpoint": "Defensywne punkty bojowe",
+            "battle.strentghDefend": "Siła bojowa deff",
+            "battle.attackModifier": "Modyfikator ataku",
+            "battle.defenceModifier": "Modyfikator obrony",
+            "battle.provisions": "Całkowity prowiant",
+            "battle.killedprovisions": "Prowiant stracony",
+            "battle.doublestrength": "Szał berków?",
+            "battle.strongesttype": "Najwięcej wojsk typu",
+            "battle.beds": "Liczba łóżek - uratowanych jednostek",
+            "battle.survivedprovisions": "Prowiant ocalały",
+            "battle.attacker": "Atakujący",
+            "battle.unit": "Jednostka",
+            "battle.amount": "Ilość",
+            "battle.loses": "Straty",
+            "battle.revived": "Uleczone",
+            "battle.survivors": "Ocalałe",
+            "battle.survivorsA": "Ocalałe(z uratowanymi)",
+            "battle.survivorsD": "Ocalałe(bez uratowanych)",
+            "battle.defender": "Obrońca",
+            "battle.damage": "Uszkodzenia taranów",
+            "battle.damageCatapult": "Uszkodzenia katapult",
+            "battle.downgrade": "Mur uszkodzony z poziomu ",
+            "battle.downgradeCatapult": " uszkodzony/a z poziomu ",
+            "battle.to": " do ",
+            "battle.insert": "Wstaw ocalałe jednostki",
+            "battle.insertvillage": "Wstaw z wioski",
+            "battle.insertpreset": "Wstaw z szablonu",
+            "battle.insertV": "Wstaw jednostki z wioski - atakujący",
+            "battle.insertP": "Wstaw jednostki z szablonu - atakujący",
+            "battle.insertVD": "Wstaw jednostki z wioski - broniący",
+            "battle.insertPD": "Wstaw jednostki z szablonu - broniący",
+            "battle.faith": "Wiara",
+            "battle.morale": "Morale",
+            "battle.luck": "Szczęście",
+            "battle.wall": "Mury",
+            "battle.nightbonus": "Bonus nocny",
+            "battle.leader": "Wielki mistrz",
+            "battle.medic": "Medyk",
+            "battle.doctor": "Doktor",
+            "battle.attack-bonus": "Mistrzostwo broni",
+            "battle.iron-walls": "Żelazny mur",
+            "battle.clinique": "Klinika",
+            "battle.hospital": "Szpital",
+            "battle.equip": "Przedmioty rycerza",
+            "battle.halberd": "Halabarda Guan Yu",
+            "battle.longsword": "Długi miecz Paracelsusa",
+            "battle.battleaxe": "Bojowy topór Thorgarda",
+            "battle.longbow": "Łuk Nimroda",
+            "battle.lance": "Lanca Mieszka",
+            "battle.compositebow": "Kompozytowy łuk Nimroda",
+            "battle.banner": "Chorągiew Baptystów",
+            "battle.star": "Gwiazda poranna Karola",
+            "battle.bonfire": "Pochodnia Alethei",
+            "battle.scepter": "Berło Vasca",
+            "battle.target": "Cel katapult",
+            "bunker": "Bunkier",
+            "bunker.header": "Kalkulator optymalnego offa na bunkier",
+            "troops": "Koszt jednostek",
+            "troops.header": "Kalkulator kosztów produkcji jednostek",
+            "troops.th": "Koszty produkcji",
+            "troops.units": "Jednostki",
+            "troops.building": "Budynek",
+            "troops.barracks": "Koszary",
+            "troops.preceptory": "Komturia",
+            "troops.effects": "Efekty",
+            "troops.domination": "Dominacja",
+            "troops.training": "Intensywny trening",
+            "troops.templars": "Zakon Templariuszy",
+            "troops.teutonic": "Zakon Krzyżacki",
+            "troops.none": "Brak",
+            "bashpoints": "Punkty Bojowe",
+            "bashpoints.header": "Kalkulator punktów bojowych",
+            "bashpoints.th": "Punkty bojowe",
+            "bashpoints.attacker": "Jako atakujący",
+            "bashpoints.defender": "Jako obrońca",
+            "bashpoints.killed": "Zniszczone jednostki"
+        },
         "builder_queue": {
             "title": "Budowniczy",
-            "started": "BuilderQueue Uruchomiony",
-            "stopped": "BuilderQueue Zatrzymany",
+            "started": "Budowniczy Uruchomiony",
+            "stopped": "Budowniczy Zatrzymany",
             "settings": "Ustawienia",
             "settings_village_groups": "Buduj w wioskach z grupy",
             "settings_building_sequence": "Szablon kolejki budowy",
@@ -1084,13 +1323,13 @@ define('two/language', [
         },
         "builder_queue_remove_sequence_modal": {
             "title": "Usuń szablon",
-            "text": "Jesteś pewny, że chcesz usunąć ten szablon? Jeśli ten szablon jest teraz aktywny, inny szablon zostanie wybrany i BuilderQueue zatrzyma się."
+            "text": "Jesteś pewny, że chcesz usunąć ten szablon? Jeśli ten szablon jest teraz aktywny, inny szablon zostanie wybrany i Budowniczy zatrzyma się."
         },
         "command_queue": {
             "title": "Generał",
             "attack": "Atak",
             "support": "Wsparcie",
-            "relocate": "przenieś",
+            "relocate": "Przeniesienie",
             "sent": "wysłany/e",
             "activated": "włączony",
             "deactivated": "wyłączony",
@@ -1113,7 +1352,7 @@ define('two/language', [
             "add_date": "Czas/Data",
             "add_no_village": "Wybierz wioskę...",
             "add_village_search": "Znajdź wioskę...",
-            "add_clear": "wyczyść",
+            "add_clear": "Wyczyść pola",
             "add_insert_preset": "Wybierz szablon",
             "queue_waiting": "Rozkazy",
             "queue_none_added": "Brak dodanych rozkazów.",
@@ -1166,32 +1405,32 @@ define('two/language', [
             "date": "Data",
             "status_time_limit": "Cel jest zbyt daleko",
             "status_command_limit": "Limit poleceń",
-            "status_full_storage": "Magazyn jest pełen",
+            "status_full_storage": "Magazyn jest pełny",
             "status_no_units": "Brak dostępnych jednostek",
             "status_abandoned_conquered": "Porzucone podbicie",
             "status_protected_village": "Cel jest chroniony",
             "status_busy_target": "Cel jest atakowany",
             "status_no_targets": "Brak dostępnych celów",
-            "status_target_cycle_end": "Cykl celów zakończony",
+            "status_target_cycle_end": "Cykl wysyłania zakończony",
             "status_not_allowed_points": "Punkty celu niedozwolone",
             "status_unknown": "Nieznany status",
-            "status_attacking": "Attakuje",
-            "status_waiting_cycle": "Cykl czekania",
+            "status_attacking": "Atakuje",
+            "status_waiting_cycle": "Oczekuje",
             "status_user_stop": "",
             "status_expired_step": "",
             "not_loaded": "Nie załadowany.",
             "ignored_targets": "Ignorowane cele",
             "no_ignored_targets": "Brak ignorowanych",
-            "included_targets": "Zawarte cele",
-            "no_included_targets": "Brak zawartych",
-            "farmer_villages": "Wioski farmy",
+            "included_targets": "Dodatkowe cele",
+            "no_included_targets": "Brak dodatkowych",
+            "farmer_villages": "Wioski farmiące",
             "no_farmer_villages": "Brak wiosek farm",
-            "last_status": "Ostatni status",
+            "last_status": "Status",
             "attacking": "Atakuje.",
             "paused": "Zatrzymany.",
             "command_limit": "Limit 50 ataków osiągnięty, oczekiwanie na powrót wojsk.",
             "last_attack": "Ostatni atak",
-            "village_switch": "Przejście do wioski",
+            "village_switch": "Przejście do wioski %{village}",
             "no_preset": "Brak dostępnych szablonów.",
             "no_selected_village": "Brak dostępnych wiosek.",
             "no_units": "Brak dostępnych jednostek w wiosce, oczekiwanie na powrót wojsk.",
@@ -1202,8 +1441,8 @@ define('two/language', [
             "loading_targets": "Ładowanie celów...",
             "checking_targets": "Sprawdzanie celów...",
             "restarting_commands": "Restartowanie poleceń...",
-            "ignored_village": "dodany do listy pominiętych",
-            "included_village": "dodany do listy zawartych",
+            "ignored_village": "Cel %{target} dodany do listy pominiętych.(straty)",
+            "included_village": "Cel %{target} dodany do listy zawartych",
             "ignored_village_removed": "usunięty z listy ignorowanych",
             "included_village_removed": "usunięty z listy zawartych",
             "priority_target": "dodany do priorytetowych.",
@@ -1214,14 +1453,14 @@ define('two/language', [
             "step_cycle_next": "Lista wiosek się skończyła, następny cykl: %d.",
             "step_cycle_next_no_villages": "Brak wioski do rozpoczęcia cyklu, następny cykl: %d.",
             "full_storage": "Magazyn w wiosce jest pełny",
-            "farm_stopped": "FarmOverflow zatrzymany.",
+            "farm_stopped": "Farmer zatrzymany.",
             "farm_started": "Farmer uruchomiony",
             "groups_presets": "Grupy i szablony",
             "presets": "Szablony",
             "group_ignored": "Pomijaj wioski z grupy",
             "group_include": "Dodaj wioski z grupy",
             "group_only": "Atakuj tylko wioski z grup",
-            "attack_interval": "Przerwa między atakami",
+            "attack_interval": "Przerwa między atakami (sekundy)",
             "preserve_command_slots": "Rezerwuj sloty poleceń",
             "target_single_attack": "Zezwól celom na jeden atak per wioska",
             "target_multiple_farmers": "Zezwól celom otrzymywać ataki z kilku wiosek",
@@ -1237,7 +1476,7 @@ define('two/language', [
             "min_points": "Minimalna liczba punktów",
             "max_points": "Maksymalna liczba punktów",
             "max_travel_time": "Maksymalny czas podróży (minuty)",
-            "logs_limit": "Maksymalna ilość wpisów logów",
+            "logs_limit": "Maksymalna ilość logów",
             "event_attack": "Logi ataków",
             "event_village_change": "Logi zmiany wiosek",
             "event_priority_add": "Logi celów priorytetowych",
@@ -1318,7 +1557,7 @@ define('two/language', [
             "settings_highlight_diplomacy": "Automatycznie podświetl plemienną dyplomację",
             "settings_colors_background": "Tło minimapy",
             "settings_colors_province": "Granica prowincji",
-            "settings_colors_continent": "Granica kontynentu",
+            "settings_colors_continent": "Granica królestwa",
             "settings_colors_quick_highlight": "Szybkie podświetlenie",
             "settings_colors_tribe": "Własne plemie",
             "settings_colors_player": "Własne wioski",
@@ -1354,6 +1593,13 @@ define('two/language', [
             "activated": "Mincerz aktywowany",
             "deactivated": "Mincerz deaktywowany"
         },
+        "preset_creator": {
+            "title": "Kwatermistrz",
+            "description": "Automatycznie tworzy szablony do rekrutacji, fejków i farmy.",
+            "activated": "Kwatermistrz aktywowany",
+            "done": "Kwatermistrz utworzył szablony",
+            "deactivated": "Kwatermistrz skończył działanie"
+        },
         "common": {
             "start": "Start",
             "started": "Uruchomiony",
@@ -1371,7 +1617,7 @@ define('two/language', [
             "building": "Budynek",
             "buildings": "Budynki",
             "level": "Poziom",
-            "registers": "Logi",
+            "registers": "Rejestry",
             "filters": "Filtry",
             "add": "Dodaj",
             "waiting": "Oczekujące",
@@ -1393,7 +1639,7 @@ define('two/language', [
             "selected": "Wybrana",
             "now": "Teraz",
             "costs": "Koszty",
-            "duration": "Czas trwania",
+            "duration": "Czas",
             "points": "Punkty",
             "player": "Gracz",
             "players": "Gracze",
@@ -2321,6 +2567,308 @@ require([
     }, ['map'])
 })
 
+define('two/alertSender', [
+    'queues/EventQueue',
+    'two/queue',
+    'models/CommandModel',
+    'conf/unitTypes'
+], function(
+    eventQueue,
+    Queue,
+    CommandModel,
+    UNIT_TYPES
+) { 
+    let convert
+    var overviewService = injector.get('overviewService')
+    var initialized = false
+    var running = false
+    var globalInfoModel = modelDataService.getSelectedCharacter().getGlobalInfo()
+    var COLUMN_TYPES = {
+        'ORIGIN_VILLAGE': 'origin_village_name',
+        'COMMAND_TYPE': 'command_type',
+        'TARGET_VILLAGE': 'target_village_name',
+        'TIME_COMPLETED': 'time_completed',
+        'COMMAND_PROGRESS': 'command_progress',
+        'ORIGIN_CHARACTER': 'origin_character_name'
+    }
+    var sorting = {
+        reverse: false,
+        column: COLUMN_TYPES.COMMAND_PROGRESS
+    }
+    var player = modelDataService.getSelectedCharacter()
+    var tribe = player.tribeById
+    var tribeId = tribe[0]
+    var villages = player.getVillageList()
+    var villagesIds = []
+    var playerId = player.data.character_id
+    var playerName = player.data.character_name
+    var attacks = []
+    var tribemates = []
+    var UNIT_SPEED_ORDER = [
+        UNIT_TYPES.LIGHT_CAVALRY,
+        UNIT_TYPES.HEAVY_CAVALRY,
+        UNIT_TYPES.AXE,
+        UNIT_TYPES.SWORD,
+        UNIT_TYPES.RAM,
+        UNIT_TYPES.SNOB,
+        UNIT_TYPES.TREBUCHET
+    ]
+
+    function secondsToDaysHHMMSS(totalSeconds) {
+        var returnString = ''
+        var date = new Date(totalSeconds * 1000)
+        convert = date.toLocaleString()
+        returnString = convert
+        return returnString
+    }
+
+    var checkincomingsAttacks = function() {
+        socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
+            tribe: tribeId
+        }, function(data) {
+            var members = data.members
+            for (var i = 0; i < members.length; i++) {
+                tribemates.push(members[i].id)
+            }
+        })
+        villages.forEach(function(village) {
+            villagesIds.push(village.getId())
+        })
+        var incomingCommands = globalInfoModel.getCommandListModel().getIncomingCommands().length
+        var count = incomingCommands > 25 ? incomingCommands : 25
+
+        socketService.emit(routeProvider.OVERVIEW_GET_INCOMING, {
+            'count': count,
+            'offset': 0,
+            'sorting': sorting.column,
+            'reverse': sorting.reverse ? 1 : 0,
+            'groups': [],
+            'command_types': ['attack'],
+            'villages': villagesIds
+        }, sendAlerts)
+        setTimeout(checkincomingsAttacks, 60000)
+    }
+
+    var sendAlerts = function sendAlerts(data) {
+        var alertText = []
+        var commands = data.commands
+        for (var i = 0; i < commands.length; i++) {
+            overviewService.formatCommand(commands[i])
+            if (tribemates.includes(commands[i].origin_character_id)) {
+                console.log('Nadchodzące ruchy wojsk pochodzą od współplemieńca ' + commands[i].origin_character_id + ' Rodzaj ' + commands[i].command_type)
+            } else {
+                if (commands[i].command_type == 'attack') {
+                    if (attacks.includes(commands[i].command_id)) {
+                        console.log('')
+                    } else {
+                        attacks.push(commands[i].command_id)
+                        commands[i].slowestUnit = getSlowestUnit(commands[i])
+                        var timecompleted = commands[i].time_completed
+                        var finalTime = secondsToDaysHHMMSS(timecompleted)
+                        var incomingUnit = ''
+                        var incomingName = ''
+                        if (commands[i].slowestUnit == 'sword') {
+                            incomingName = ' [color=03709d]MIECZNIK[/color]'
+                            incomingUnit = 'sword'
+                        } else if (commands[i].slowestUnit == 'axe') {
+                            incomingName = ' [color=e21f1f]TOPORNIK[/color]'
+                            incomingUnit = 'axe'
+                        } else if (commands[i].slowestUnit == 'ram') {
+                            incomingName = ' [color=730202]TARAN[/color]'
+                            incomingUnit = 'ram'
+                        } else if (commands[i].slowestUnit == 'snob') {
+                            incomingName = ' [color=ffee00]SZLACHCIC[/color]'
+                            incomingUnit = 'snob'
+                        } else if (commands[i].slowestUnit == 'trebuchet') {
+                            incomingName = ' [color=494500]TREBUSZ[/color]'
+                            incomingUnit = 'trebuchet'
+                        } else if (commands[i].slowestUnit == 'light_cavalry') {
+                            incomingName = ' [color=d96a19]LEKKA KAWALERIA[/color]'
+                            incomingUnit = 'light_cavalry'
+                        } else if (commands[i].slowestUnit == 'heavy_cavalry') {
+                            incomingName = ' [color=0111af]CIĘŻKA KAWALERIA[/color]'
+                            incomingUnit = 'heavy_cavalry'
+                        }
+                        alertText.push('[size=large][b]Nadchodzący atak [/b]--- [/size][unit]' + incomingUnit + '[/unit] [size=large][b]' + incomingName + '[/b][/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + commands[i].target_village_id + ']' + commands[i].target_village_name + '[/village][b] Gracz cel: [/b][player=' + playerId + ']' + playerName + '[/player][b] [br]Wioska pochodzenia: [/b][village=' + commands[i].origin_village_id + ']' + commands[i].origin_village_name + '[/village][b] Gracz atakujący: [/b][player=' + commands[i].origin_character_id + ']' + commands[i].origin_character_name + '[/player][/size]')
+                        var message = alertText.join()
+                        if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
+                            if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
+                                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                    message_id: 14378,
+                                    message: message
+                                })
+                            } else {
+                                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                    message_id: 4646,
+                                    message: message
+                                })
+                            }
+                            alertText = []
+                        } else {
+                            if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
+                                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                    message_id: 14379,
+                                    message: message
+                                })
+                            } else {
+                                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                    message_id: 4648,
+                                    message: message
+                                })
+                            }
+                            alertText = []
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    var getSlowestUnit = function(command) {
+        var commandDuration = command.model.duration
+        var units = {}
+        var origin = {
+            x: command.origin_x,
+            y: command.origin_y
+        }
+        var target = {
+            x: command.target_x,
+            y: command.target_y
+        }
+        var travelTimes = []
+
+        UNIT_SPEED_ORDER.forEach(function(unit) {
+            units[unit] = 1
+
+            travelTimes.push({
+                unit: unit,
+                duration: Queue.getTravelTime(origin, target, units, command.command_type, {})
+            })
+        })
+
+        travelTimes = travelTimes.map(function(travelTime) {
+            travelTime.duration = Math.abs(travelTime.duration - commandDuration)
+            return travelTime
+        }).sort(function(a, b) {
+            return a.duration - b.duration
+        })
+
+        return travelTimes[0].unit
+    }
+
+    var alertSender = {}
+    alertSender.init = function() {
+        initialized = true
+    }
+    alertSender.start = function() {
+        eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STARTED)
+        running = true
+        checkincomingsAttacks()
+    }
+    alertSender.stop = function() {
+        eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STOPPED)
+        running = false
+    }
+    alertSender.isRunning = function() {
+        return running
+    }
+    alertSender.isInitialized = function() {
+        return initialized
+    }
+    return alertSender
+})
+define('two/alertSender/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        ALERT_SENDER_STARTED: 'alert_sender_started',
+        ALERT_SENDER_STOPPED: 'alert_sender_stopped'
+    })
+})
+
+define('two/alertSender/ui', [
+    'two/ui',
+    'two/alertSender',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    alertSender,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Wartownik', 130, $filter('i18n')('description', $rootScope.loc.ale, 'alert_sender'))
+
+        $button.addEventListener('click', function () {
+            if (alertSender.isRunning()) {
+                alertSender.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'alert_sender'))
+            } else {
+                alertSender.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'alert_sender'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.ALERT_SENDER_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.ALERT_SENDER_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (alertSender.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+require([
+    'two/ready',
+    'two/alertSender',
+    'two/alertSender/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/alertSender/events',
+], function(
+    ready,
+    alertSender,
+    alertSenderInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'alert_sender_active'
+    }
+	
+    if (alertSender.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        alertSender.init()
+        alertSenderInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                alertSender.start()
+            }
+
+            eventQueue.register(eventTypeProvider.ALERT_SENDER_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.ALERT_SENDER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
 define('two/attackView', [
     'two/ready',
     'two/utils',
@@ -3532,7 +4080,6 @@ define('two/autoHealer/ui', [
 
     return init
 })
-
 require([
     'two/ready',
     'two/autoHealer',
@@ -11009,6 +11556,861 @@ require([
             })
 
             eventQueue.register(eventTypeProvider.AUTO_HELPER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
+define('two/presetCreator', [
+    'queues/EventQueue',
+    'two/utils'
+], function(
+    eventQueue,
+    utils
+) {
+    var initialized = false
+    var running = false
+	
+    var player = modelDataService.getSelectedCharacter()
+    var villages = player.getVillageList()
+    var pikinier = '060504'
+    var miecznik = '060505'
+    var topornik = '06050f'
+    var łucznik = '060506'
+    var lk = '060502'
+    var łk = '060501'
+    var ck = '060503'
+    var partDeff = '05020a'
+    var fullDeff = '05030a'
+    var partOff = '04080a'
+    var fullOff = '040a0a'
+    var fejkpik = '070e04'
+    var fejkmiecz = '070e05'
+    var fejktop = '070e0f'
+    var fejkłuk = '070e06'
+    var fejklk = '070e02'
+    var fejkłk = '070e01'
+    var fejkck = '070e03'
+    var fejktar = '070e07'
+    var fejkkat = '070e0b'
+    var fejktreb = '070e0e'
+    var karetatar = '030d07'
+    var karetakat = '030d0b'
+    var karetatreb = '030d0e'
+
+    function createPresets() {
+        pikinier = typeof pikinier === 'string' ? parseInt(pikinier, 16) : pikinier
+        miecznik = typeof miecznik === 'string' ? parseInt(miecznik, 16) : miecznik
+        topornik = typeof topornik === 'string' ? parseInt(topornik, 16) : topornik
+        łucznik = typeof łucznik === 'string' ? parseInt(łucznik, 16) : łucznik
+        lk = typeof lk === 'string' ? parseInt(lk, 16) : lk
+        łk = typeof łk === 'string' ? parseInt(łk, 16) : łk
+        ck = typeof ck === 'string' ? parseInt(ck, 16) : ck
+        partDeff = typeof partDeff === 'string' ? parseInt(partDeff, 16) : partDeff
+        fullDeff = typeof fullDeff === 'string' ? parseInt(fullDeff, 16) : fullDeff
+        partOff = typeof partOff === 'string' ? parseInt(partOff, 16) : partOff
+        fullOff = typeof fullOff === 'string' ? parseInt(fullOff, 16) : fullOff
+        fejkpik = typeof fejkpik === 'string' ? parseInt(fejkpik, 16) : fejkpik
+        fejkmiecz = typeof fejkmiecz === 'string' ? parseInt(fejkmiecz, 16) : fejkmiecz
+        fejktop = typeof fejktop === 'string' ? parseInt(fejktop, 16) : fejktop
+        fejkłuk = typeof fejkłuk === 'string' ? parseInt(fejkłuk, 16) : fejkłuk
+        fejklk = typeof fejklk === 'string' ? parseInt(fejklk, 16) : fejklk
+        fejkłk = typeof fejkłk === 'string' ? parseInt(fejkłk, 16) : fejkłk
+        fejkck = typeof fejkck === 'string' ? parseInt(fejkck, 16) : fejkck
+        fejktar = typeof fejktar === 'string' ? parseInt(fejktar, 16) : fejktar
+        fejkkat = typeof fejkkat === 'string' ? parseInt(fejkkat, 16) : fejkkat
+        fejktreb = typeof fejktreb === 'string' ? parseInt(fejktreb, 16) : fejktreb
+        karetatar = typeof karetatar === 'string' ? parseInt(karetatar, 16) : karetatar
+        karetakat = typeof karetakat === 'string' ? parseInt(karetakat, 16) : karetakat
+        karetatreb = typeof karetatreb === 'string' ? parseInt(karetatreb, 16) : karetatreb
+
+
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (pik)',
+            icon: pikinier,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 20,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (miecz)',
+            icon: miecznik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 33,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (top)',
+            icon: topornik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 25,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (łuk)',
+            icon: łucznik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 50,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (lk)',
+            icon: lk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 10,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (łk)',
+            icon: łk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 10,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (ck)',
+            icon: ck,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 10,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'PartDeff',
+            icon: partDeff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 180,
+                sword: 140,
+                axe: 0,
+                archer: 100,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'FullDeff',
+            icon: fullDeff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 9000,
+                sword: 7000,
+                axe: 0,
+                archer: 5000,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'PartOff',
+            icon: partOff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 200,
+                archer: 0,
+                light_cavalry: 75,
+                mounted_archer: 87,
+                heavy_cavalry: 0,
+                ram: 15,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'FullOff',
+            icon: fullOff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 4000,
+                archer: 0,
+                light_cavalry: 1500,
+                mounted_archer: 1750,
+                heavy_cavalry: 0,
+                ram: 300,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (pik)',
+            icon: fejkpik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 1,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (miecz)',
+            icon: fejkmiecz,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 1,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (top)',
+            icon: fejktop,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 1,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (łuk)',
+            icon: fejkłuk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 1,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (lk)',
+            icon: fejklk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 1,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (łk)',
+            icon: fejkłk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 1,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (ck)',
+            icon: fejkck,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 1,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (tar)',
+            icon: fejktar,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 1,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (kat)',
+            icon: fejkkat,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 1,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (treb)',
+            icon: fejktreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 1,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })	
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'kareta (tar)',
+            icon: karetatreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 1,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })	
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'kareta (kat)',
+            icon: karetatreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 1,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })	
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'kareta (treb)',
+            icon: karetatreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 1,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })		
+        utils.notif('success', $filter('i18n')('done', $rootScope.loc.ale, 'preset_creator'))
+        utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'preset_creator'))
+        presetCreator.stop()
+    }
+    var presetCreator = {}
+    presetCreator.init = function() {
+        initialized = true
+    }
+    presetCreator.start = function() {
+        eventQueue.trigger(eventTypeProvider.PRESET_CREATOR_STARTED)
+        running = true
+        createPresets()
+    }
+    presetCreator.stop = function() {
+        eventQueue.trigger(eventTypeProvider.PRESET_CREATOR_STOPPED)
+        running = false
+    }
+    presetCreator.isRunning = function() {
+        return running
+    }
+    presetCreator.isInitialized = function() {
+        return initialized
+    }
+    return presetCreator
+})
+define('two/presetCreator/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        PRESET_CREATOR_STARTED: 'preset_creator_started',
+        PRESET_CREATOR_STOPPED: 'preset_creator_stopped'
+    })
+})
+
+define('two/presetCreator/ui', [
+    'two/ui',
+    'two/presetCreator',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    presetCreator,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Wojewoda', 120, $filter('i18n')('description', $rootScope.loc.ale, 'preset_creator'))
+
+        $button.addEventListener('click', function () {
+            if (presetCreator.isRunning()) {
+                presetCreator.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'preset_creator'))
+            } else {
+                presetCreator.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'preset_creator'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.PRESET_CREATOR_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.PRESET_CREATOR_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (presetCreator.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.PRESET_CREATOR_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+
+
+require([
+    'two/ready',
+    'two/presetCreator',
+    'two/presetCreator/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/presetCreator/events',
+], function(
+    ready,
+    presetCreator,
+    presetCreatorInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'preset_creator_active'
+    }
+	
+    if (presetCreator.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        presetCreator.init()
+        presetCreatorInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                presetCreator.start()
+            }
+			
+            eventQueue.register(eventTypeProvider.PRESET_CREATOR_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.PRESET_CREATOR_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
