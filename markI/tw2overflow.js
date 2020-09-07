@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 07 Sep 2020 19:02:25 GMT
+ * Mon, 07 Sep 2020 19:17:04 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -2569,12 +2569,12 @@ require([
 
 define('two/alertSender', [
     'queues/EventQueue',
-    'two/queue',
+    'two/commandQueue',
     'models/CommandModel',
     'conf/unitTypes'
 ], function(
     eventQueue,
-    Queue,
+    commandQueue,
     CommandModel,
     UNIT_TYPES
 ) { 
@@ -2742,7 +2742,7 @@ define('two/alertSender', [
 
             travelTimes.push({
                 unit: unit,
-                duration: Queue.getTravelTime(origin, target, units, command.command_type, {})
+                duration: commandQueue.getTravelTime(origin, target, units, command.command_type, {})
             })
         })
 
