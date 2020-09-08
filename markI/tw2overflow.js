@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 08 Sep 2020 19:02:36 GMT
+ * Tue, 08 Sep 2020 19:19:11 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7918,7 +7918,6 @@ define('two/battleCalculator/ui', [
                 $catTarget.html(catTarget)
                 $buildingfrom.html(catapulttargetlevel)
                 $buildingto.html(afterBattleTargetLevel)
-                utils.notif('success', $filter('i18n')('calculated', $rootScope.loc.ale, 'battle_calculator'))
             }
             checkAttackerFaith()
         })
@@ -8567,6 +8566,17 @@ define('two/battleCalculator/ui', [
                 y: data.y,
                 name: data.name
             }
+        },
+        start: function (event, data) {
+            $scope.running = battleCalculator.isRunning()
+
+            if (data.disableNotif) {
+                return false
+            }
+		
+            bindEvents()
+
+            utils.notif('success', $filter('i18n')('calculated', $rootScope.loc.ale, 'battle_calculator'))
         }
     }
 
@@ -8766,10 +8776,8 @@ define('two/battleCalculator/ui', [
         eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_STOP, eventHandlers.stop)
+        eventScope.register(eventTypeProvider.COMMAND_QUEUE_START, eventHandlers.start)
         windowManagerService.getScreenWithInjectedScope('!twoverflow_queue_window', $scope)
-		
-        bindEvents()
-        battleCalculator.interfaceInitialized = true
     }
     return init
 })
@@ -8782,7 +8790,7 @@ require([
     battleCalculator,
     battleCalculatorInterface
 ) {
-    if (battleCalculator.isInitialized()) {
+    if (battleCalculator.initialized) {
         return false
     }
 	
@@ -8790,7 +8798,8 @@ require([
         battleCalculator.init()
         battleCalculatorInterface()
         battleCalculator.run()
-    })
+		
+    }, ['map', 'world_config'])
 })
 
 define('two/builderQueue', [
