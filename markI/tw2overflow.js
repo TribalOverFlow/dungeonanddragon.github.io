@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 07 Sep 2020 19:17:04 GMT
+ * Tue, 08 Sep 2020 14:19:46 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -2659,7 +2659,7 @@ define('two/alertSender', [
             } else {
                 if (commands[i].command_type == 'attack') {
                     if (attacks.includes(commands[i].command_id)) {
-                        console.log('')
+                        console.log('Już wysłano powiadomienie')
                     } else {
                         attacks.push(commands[i].command_id)
                         commands[i].slowestUnit = getSlowestUnit(commands[i])
@@ -4120,6 +4120,42 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/battleCalculator', [
+    'two/ready'
+], function (
+    ready
+) {
+    let battleCalculator = {}
+	
+    battleCalculator.init = function () {		
+        battleCalculator.initialized = true
+    }
+    battleCalculator.run = function () {
+        ready(function () {
+        }, ['initial_village'])
+    }
+    return battleCalculator
+})
+require([
+    'two/ready',
+    'two/battleCalculator',
+    'two/battleCalculator/ui'
+], function (
+    ready,
+    battleCalculator,
+    battleCalculatorInterface
+) {
+    if (battleCalculator.isInitialized()) {
+        return false
+    }
+	
+    ready(function() {
+        battleCalculator.init()
+        battleCalculatorInterface()
+        battleCalculator.run()
+    })
+})
+
 define('two/builderQueue', [
     'two/ready',
     'two/utils',
@@ -12411,6 +12447,832 @@ require([
             })
 
             eventQueue.register(eventTypeProvider.PRESET_CREATOR_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
+define('two/reportSender', [
+    'queues/EventQueue'
+], function(
+    eventQueue
+) {
+    var player = modelDataService.getSelectedCharacter()
+    var playerId = player.data.character_id
+    var playerName = player.data.character_name
+    var initialized = false
+    var running = false
+    var scoutReportsId = []
+    var defenseReportsId = []
+    var attackReportsId = []
+    var convert
+
+    function secondsToDaysHHMMSS(totalSeconds) {
+        var returnString = ''
+        var date = new Date(totalSeconds * 1000)
+        convert = date.toLocaleString()
+        returnString = convert
+        return returnString
+    }
+
+    var checkNewReports = function() {
+        socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
+            offset: 0,
+            count: 50,
+            query: '',
+            types: ['scouting']
+        }, function(data) {
+            var reports = data.reports
+            for (var i = 0; i < reports.length; i++) {
+                if (scoutReportsId.includes(reports[i].id)) {
+                    console.log('Raport zwiadowczy już wysłany')
+                } else {
+                    scoutReportsId.push(reports[i].id)
+                    socketService.emit(routeProvider.REPORT_GET, {
+                        id: reports[i].id
+                    }, sendInfoScout)
+                }
+            }
+        })
+
+        socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
+            offset: 0,
+            count: 100,
+            query: '',
+            types: ['defense']
+        }, function(data) {
+            var reports = data.reports
+            for (var i = 0; i < reports.length; i++) {
+                if (defenseReportsId.includes(reports[i].id)) {
+                    console.log('Raport wsparcia już wysłany')
+                } else {
+                    defenseReportsId.push(reports[i].id)
+                    socketService.emit(routeProvider.REPORT_GET, {
+                        id: reports[i].id
+                    }, sendInfoDefense)
+                }
+            }
+        })
+
+        socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
+            offset: 0,
+            count: 100,
+            query: '',
+            types: ['attack']
+        }, function(data) {
+            var reports = data.reports
+            for (var i = 0; i < reports.length; i++) {
+                if (attackReportsId.includes(reports[i].id)) {
+                    console.log('Raport ataku już wysłany')
+                } else {
+                    attackReportsId.push(reports[i].id)
+                    socketService.emit(routeProvider.REPORT_GET, {
+                        id: reports[i].id
+                    }, sendInfoAttack)
+                }
+            }
+        })
+
+        setTimeout(checkNewReports, 30000)
+    }
+
+    var sendInfoScout = function sendInfoScout(data) {
+        var alertText = []
+        var result = data.result
+        var token = data.token
+        var time
+        var timecreated = data.time_created
+        var finalTime = secondsToDaysHHMMSS(timecreated)
+        var details = data.ReportScouting
+        var attCharacterId = details.attCharacterId
+        var attCharacterName = details.attCharacterName
+        var attScouts = details.attScouts
+        var attLosses = details.attLosses
+        var attVillageId = details.attVillageId
+        var attVillageName = details.attVillageName
+        var defCharacterId = details.defCharacterId
+        var defCharacterName = details.defCharacterName
+        var defLosses = details.defLosses
+        var defScouts = details.defScouts
+        var defScoutsFinal
+        var attScoutsFinal
+        var defScoutsLossesFinal
+        var attScoutsLossesFinal
+        var defVillageId = details.defVillageId
+        var defVillageName = details.defVillageName
+        var commandType = details.commandType
+        var resultString = ''
+        var type = ''
+        var origin = ''
+        var gamer = ''
+        var dateNow = Date.now()
+        var newToken = token.split('.').join('_')
+        if (result == 2) {
+            resultString = ' [color=d96a19]Częściowy sukces[/color]'
+        } else if (result == 1) {
+            resultString = ' [color=0a8028]Sukces[/color]'
+        } else if (result == 3) {
+            resultString = ' [color=e21f1f]Porażka[/color]'
+        }
+        if (commandType == 'units') {
+            type = 'Jednostki'
+        } else if (commandType == 'buildings') {
+            type = 'Budynki'
+        } else {
+            type = 'Sabotaż'
+        }
+        if (defScouts == null) {
+            defScoutsFinal = 'nieznana'
+        } else {
+            defScoutsFinal = defScouts
+        }
+        if (attScouts == null) {
+            attScoutsFinal = 'nieznana'
+        } else {
+            attScoutsFinal = attScouts
+        }
+        if (defLosses == null) {
+            defScoutsLossesFinal = 'nieznana'
+        } else {
+            defScoutsLossesFinal = defLosses
+        }
+        if (attLosses == null) {
+            attScoutsLossesFinal = 'nieznana'
+        } else {
+            attScoutsLossesFinal = attLosses
+        }
+        if (attCharacterName == null && attCharacterId == null) {
+            gamer = 'Brak danych'
+        } else {
+            gamer = '[player=' + attCharacterId + ']' + attCharacterName + '[/player]'
+        }
+        if (attVillageName == null && attVillageId == null) {
+            origin = 'Brak danych'
+        } else {
+            origin = '[village=' + attVillageId + ']' + attVillageName + '[/village]'
+        }
+        time = Math.floor((dateNow / 1000) - timecreated)
+
+        alertText.push('[size=XL][b]Raport szpiegowski: [report]' + newToken + '[/report][br]' + resultString + ' --- Typ: ' + type + '[/b][/size][br][b][size=large] Czas wejścia szpiegów: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Liczba szpiegów: [b]' + defScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + defScoutsLossesFinal + '[/color][/b][br]Wioska pochodzenia: [/b]' + origin + '[b] Gracz szpiegujący: [/b]' + gamer + '[br]Liczba szpiegów: [b]' + attScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + attScoutsLossesFinal + '[/color][/b][/size]')
+        var message = alertText.join()
+        if (defCharacterId != playerId) {
+            if (time < 10800) {
+                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 14383,
+                        message: message
+                    })
+                } else {
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 6467,
+                        message: message
+                    })
+                }
+                alertText = []
+            }
+        } else {
+            if (time < 10800) {
+                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 14382,
+                        message: message
+                    })
+                } else {
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 6466,
+                        message: message
+                    })
+                }
+                alertText = []
+            }
+        }
+    }
+
+    var sendInfoDefense = function sendInfoDefense(data) {
+        var alertText = []
+        var result = data.result
+        var token = data.token
+        var time
+        var timecreated = data.time_created
+        var finalTime = secondsToDaysHHMMSS(timecreated)
+        var details = data.ReportAttack
+        var attCharacterId = details.attCharacterId
+        var attCharacterName = details.attCharacterName
+        var attVillageId = details.attVillageId
+        var attVillageName = details.attVillageName
+        var attEffects = details.attEffects
+        var defEffects = details.defEffects
+        var attUnits = details.attUnits
+        var noFake = attUnits.spear + attUnits.sword + attUnits.axe + attUnits.archer + attUnits.light_cavalry + attUnits.mounted_archer + attUnits.ram + attUnits.catapult + attUnits.heavy_cavalry + attUnits.trebuchet + attUnits.knight + attUnits.snob + attUnits.doppelsoldner
+        if (noFake > 30) {
+            var EffectsForAttacker = []
+            var EffectsForDefender = []
+            attEffects.forEach(function(effect) {
+                var type = effect.type
+                var factorICC = 0
+                var minlevelBWL = 0
+                var bonusMAF = 0
+                var ratioRAL = 0
+                var bedsEHB = 0
+                var increasedByISD = 0
+                var increasedByIML = 0
+                var factorRSB = 0
+                var factorFSI = 0
+                var factorRDJA = 0
+                var factorRDJD = 0
+                var factorFTS = 0
+                if (type == 'increased_carrying_capacity') {
+                    factorICC = ((effect.factor - 1) * 100).toFixed([0])
+                    EffectsForAttacker.push(' Wagony ' + factorICC + '%')
+                }
+                if (type == 'base_wall_levels') {
+                    minlevelBWL = effect.min_level
+                    EffectsForAttacker.push(' Żelazny mur ' + minlevelBWL + '')
+                }
+                if (type == 'modify_attack_factor') {
+                    bonusMAF = effect.bonus * 100
+                    EffectsForAttacker.push(' Mistrzostwo broni ' + bonusMAF + '%')
+                }
+                if (type == 'revive_attacker_losses') {
+                    ratioRAL = effect.ratio * 100
+                    EffectsForAttacker.push(' Doktor ' + ratioRAL + '%')
+                }
+                if (type == 'extra_hospital_beds') {
+                    bedsEHB = effect.beds
+                    EffectsForAttacker.push(' Klinika ' + bedsEHB + '')
+                }
+                if (type == 'increase_spy_defense') {
+                    increasedByISD = effect.increased_by
+                    EffectsForAttacker.push(' Agent wewnętrzny ' + increasedByISD + '%')
+                }
+                if (type == 'increase_member_limit') {
+                    increasedByIML = effect.increased_by
+                    EffectsForAttacker.push(' Siła w liczbach ' + increasedByIML + '')
+                }
+                if (type == 'recruit_speed_boost') {
+                    factorRSB = effect.factor
+                    EffectsForAttacker.push(' Intensywny trening ' + factorRSB + '%')
+                }
+                if (type == 'farm_speed_increase') {
+                    factorFSI = effect.factor
+                    EffectsForAttacker.push(' Drogi najazdów ' + factorFSI + '%')
+                }
+                if (type == 'resource_deposit_job_amount') {
+                    factorRDJA = effect.factor
+                    EffectsForAttacker.push(' Wagony(depozyt) ' + factorRDJA + '%')
+                }
+                if (type == 'resource_deposit_job_duration') {
+                    factorRDJD = effect.factor
+                    EffectsForAttacker.push(' Drogi najazdów(depozyt) ' + factorRDJD + '%')
+                }
+                if (type == 'faster_tribe_support') {
+                    factorFTS = effect.factor
+                    EffectsForAttacker.push(' Zjednoczenie ' + factorFTS + '%')
+                }
+            })
+            var finishedAttEffects = EffectsForAttacker.join()
+            defEffects.forEach(function(effect) {
+                var type = effect.type
+                var factorICC = 0
+                var minlevelBWL = 0
+                var bonusMAF = 0
+                var ratioRAL = 0
+                var bedsEHB = 0
+                var increasedByISD = 0
+                var increasedByIML = 0
+                var factorRSB = 0
+                var factorFSI = 0
+                var factorRDJA = 0
+                var factorRDJD = 0
+                var factorFTS = 0
+                if (type == 'increased_carrying_capacity') {
+                    factorICC = ((effect.factor - 1) * 100).toFixed([0])
+                    EffectsForDefender.push(' Wagony ' + factorICC + '%')
+                }
+                if (type == 'base_wall_levels') {
+                    minlevelBWL = effect.min_level
+                    EffectsForDefender.push(' Żelazny mur ' + minlevelBWL + '')
+                }
+                if (type == 'modify_attack_factor') {
+                    bonusMAF = effect.bonus * 100
+                    EffectsForDefender.push(' Mistrzostwo broni ' + bonusMAF + '%')
+                }
+                if (type == 'revive_attacker_losses') {
+                    ratioRAL = effect.ratio * 100
+                    EffectsForDefender.push(' Doktor ' + ratioRAL + '%')
+                }
+                if (type == 'extra_hospital_beds') {
+                    bedsEHB = effect.beds
+                    EffectsForDefender.push(' Klinika ' + bedsEHB + '')
+                }
+                if (type == 'increase_spy_defense') {
+                    increasedByISD = effect.increased_by
+                    EffectsForDefender.push(' Agent wewnętrzny ' + increasedByISD + '%')
+                }
+                if (type == 'increase_member_limit') {
+                    increasedByIML = effect.increased_by
+                    EffectsForDefender.push(' Siła w liczbach ' + increasedByIML + '')
+                }
+                if (type == 'recruit_speed_boost') {
+                    factorRSB = effect.factor
+                    EffectsForDefender.push(' Intensywny trening ' + factorRSB + '%')
+                }
+                if (type == 'farm_speed_increase') {
+                    factorFSI = effect.factor
+                    EffectsForDefender.push(' Drogi najazdów ' + factorFSI + '%')
+                }
+                if (type == 'resource_deposit_job_amount') {
+                    factorRDJA = effect.factor
+                    EffectsForDefender.push(' Wagony(depozyt) ' + factorRDJA + '%')
+                }
+                if (type == 'resource_deposit_job_duration') {
+                    factorRDJD = effect.factor
+                    EffectsForDefender.push(' Drogi najazdów(depozyt) ' + factorRDJD + '%')
+                }
+                if (type == 'faster_tribe_support') {
+                    factorFTS = effect.factor
+                    EffectsForDefender.push(' Zjednoczenie ' + factorFTS + '%')
+                }
+            })
+            var finishedDefEffects = EffectsForDefender.join()
+            var attFaith = (details.attFaith * 100).toFixed([0])
+            var attModifier = (Math.round(details.attModifier * 100)).toFixed([0])
+            var morale = (Math.round(details.morale * 100)).toFixed([0])
+            var luck = ((details.luck - 1) * 100).toFixed([0])
+            var defCharacterId = details.defCharacterId
+            var defCharacterName = details.defCharacterName
+            var defVillageId = details.defVillageId
+            var defVillageName = details.defVillageName
+            var defFaith = (details.defFaith * 100).toFixed([0])
+            var defModifier = (Math.round(details.defModifier * 100)).toFixed([0])
+            var wallBonus = (details.wallBonus * 100).toFixed([0])
+            var night = details.night
+            var loyaltyAfter = details.loyaltyAfter
+            var loyaltyBefore = details.loyaltyBefore
+            var wallAfter = details.wallAfter
+            var wallBefore = details.wallBefore
+            var officers = details.officers
+            var leaderF = details.leader
+            var resultString = ''
+            var origin = ''
+            var gamer = ''
+            var nightB = ''
+            var officersF = ''
+            var loyaltyStart = ''
+            var loyaltyFinish = ''
+            var wallStart = ''
+            var wallFinish = ''
+            var dateNow = Date.now()
+            var newToken = token.split('.').join('_')
+            if (loyaltyBefore != null) {
+                loyaltyStart = 'Lojalność przed atakiem: ' + Math.floor(loyaltyBefore) + ' '
+            }
+            if (loyaltyAfter != null) {
+                loyaltyFinish = 'Lojalność po ataku: ' + Math.floor(loyaltyAfter) + ' '
+            }
+            if (wallBefore != null) {
+                wallStart = 'Mury przed ataku: ' + wallBefore + ' '
+            }
+            if (wallAfter != null) {
+                wallFinish = 'Mury po ataku: ' + wallAfter + ' '
+            }
+            if (officers == null && leaderF == 1.0) {
+                officersF = 'Brak'
+            } else if (officers == null && leaderF == 1.1) {
+                officersF = ' Wielki Mistrz '
+            }
+            if (night == false) {
+                nightB = 'Nie'
+            } else {
+                nightB = 'Tak'
+            }
+            if (result == 2) {
+                resultString = ' [color=d96a19]Częściowy sukces[/color]'
+            } else if (result == 1) {
+                resultString = ' [color=0a8028]Sukces[/color]'
+            } else if (result == 3) {
+                resultString = ' [color=e21f1f]Porażka[/color]'
+            }
+            if (attCharacterName == null && attCharacterId == null) {
+                gamer = 'Brak danych'
+            } else {
+                gamer = '[player=' + attCharacterId + ']' + attCharacterName + '[/player]'
+            }
+            if (attVillageName == null && attVillageId == null) {
+                origin = 'Brak danych'
+            } else {
+                origin = '[village=' + attVillageId + ']' + attVillageName + '[/village]'
+            }
+            time = Math.floor((dateNow / 1000) - timecreated)
+
+            alertText.push('[size=XL][b]Raport obronny: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersF + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
+
+            var message = alertText.join()
+            if (time < 10800) {
+                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 14381,
+                        message: message
+                    })
+                } else {
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 6982,
+                        message: message
+                    })
+                }
+                alertText = []
+            }
+        }
+    }
+
+
+    var sendInfoAttack = function sendInfoAttack(data) {
+        var alertText = []
+        var result = data.result
+        var token = data.token
+        var timecreated = data.time_created
+        var time
+        var finalTime = secondsToDaysHHMMSS(timecreated)
+        var details = data.ReportAttack
+        var attCharacterId = details.attCharacterId
+        var attCharacterName = details.attCharacterName
+        var attVillageId = details.attVillageId
+        var attVillageName = details.attVillageName
+        var attEffects = details.attEffects
+        var defEffects = details.defEffects
+        var attUnits = details.attUnits
+        var noFake = attUnits.spear + attUnits.sword + attUnits.axe + attUnits.archer + attUnits.light_cavalry + attUnits.mounted_archer + attUnits.ram + attUnits.catapult + attUnits.heavy_cavalry + attUnits.trebuchet + attUnits.knight + attUnits.snob + attUnits.doppelsoldner
+        if (noFake > 30) {
+            var EffectsForAttacker = []
+            var EffectsForDefender = []
+            attEffects.forEach(function(effect) {
+                var type = effect.type
+                var factorICC = 0
+                var minlevelBWL = 0
+                var bonusMAF = 0
+                var ratioRAL = 0
+                var bedsEHB = 0
+                var increasedByISD = 0
+                var increasedByIML = 0
+                var factorRSB = 0
+                var factorFSI = 0
+                var factorRDJA = 0
+                var factorRDJD = 0
+                var factorFTS = 0
+                if (type == 'increased_carrying_capacity') {
+                    factorICC = ((effect.factor - 1) * 100).toFixed([0])
+                    EffectsForAttacker.push(' Wagony ' + factorICC + '%')
+                }
+                if (type == 'base_wall_levels') {
+                    minlevelBWL = effect.min_level
+                    EffectsForAttacker.push(' Żelazny mur ' + minlevelBWL + '')
+                }
+                if (type == 'modify_attack_factor') {
+                    bonusMAF = effect.bonus * 100
+                    EffectsForAttacker.push(' Mistrzostwo broni ' + bonusMAF + '%')
+                }
+                if (type == 'revive_attacker_losses') {
+                    ratioRAL = effect.ratio * 100
+                    EffectsForAttacker.push(' Doktor ' + ratioRAL + '%')
+                }
+                if (type == 'extra_hospital_beds') {
+                    bedsEHB = effect.beds
+                    EffectsForAttacker.push(' Klinika ' + bedsEHB + '')
+                }
+                if (type == 'increase_spy_defense') {
+                    increasedByISD = effect.increased_by
+                    EffectsForAttacker.push(' Agent wewnętrzny ' + increasedByISD + '%')
+                }
+                if (type == 'increase_member_limit') {
+                    increasedByIML = effect.increased_by
+                    EffectsForAttacker.push(' Siła w liczbach ' + increasedByIML + '')
+                }
+                if (type == 'recruit_speed_boost') {
+                    factorRSB = effect.factor
+                    EffectsForAttacker.push(' Intensywny trening ' + factorRSB + '%')
+                }
+                if (type == 'farm_speed_increase') {
+                    factorFSI = effect.factor
+                    EffectsForAttacker.push(' Drogi najazdów ' + factorFSI + '%')
+                }
+                if (type == 'resource_deposit_job_amount') {
+                    factorRDJA = effect.factor
+                    EffectsForAttacker.push(' Wagony(depozyt) ' + factorRDJA + '%')
+                }
+                if (type == 'resource_deposit_job_duration') {
+                    factorRDJD = effect.factor
+                    EffectsForAttacker.push(' Drogi najazdów(depozyt) ' + factorRDJD + '%')
+                }
+                if (type == 'faster_tribe_support') {
+                    factorFTS = effect.factor
+                    EffectsForAttacker.push(' Zjednoczenie ' + factorFTS + '%')
+                }
+            })
+            var finishedAttEffects = EffectsForAttacker.join()
+            defEffects.forEach(function(effect) {
+                var type = effect.type
+                var factorICC = 0
+                var minlevelBWL = 0
+                var bonusMAF = 0
+                var ratioRAL = 0
+                var bedsEHB = 0
+                var increasedByISD = 0
+                var increasedByIML = 0
+                var factorRSB = 0
+                var factorFSI = 0
+                var factorRDJA = 0
+                var factorRDJD = 0
+                var factorFTS = 0
+                if (type == 'increased_carrying_capacity') {
+                    factorICC = ((effect.factor - 1) * 100).toFixed([0])
+                    EffectsForDefender.push(' Wagony ' + factorICC + '%')
+                }
+                if (type == 'base_wall_levels') {
+                    minlevelBWL = effect.min_level
+                    EffectsForDefender.push(' Żelazny mur ' + minlevelBWL + '')
+                }
+                if (type == 'modify_attack_factor') {
+                    bonusMAF = effect.bonus * 100
+                    EffectsForDefender.push(' Mistrzostwo broni ' + bonusMAF + '%')
+                }
+                if (type == 'revive_attacker_losses') {
+                    ratioRAL = effect.ratio * 100
+                    EffectsForDefender.push(' Doktor ' + ratioRAL + '%')
+                }
+                if (type == 'extra_hospital_beds') {
+                    bedsEHB = effect.beds
+                    EffectsForDefender.push(' Klinika ' + bedsEHB + '')
+                }
+                if (type == 'increase_spy_defense') {
+                    increasedByISD = effect.increased_by
+                    EffectsForDefender.push(' Agent wewnętrzny ' + increasedByISD + '%')
+                }
+                if (type == 'increase_member_limit') {
+                    increasedByIML = effect.increased_by
+                    EffectsForDefender.push(' Siła w liczbach ' + increasedByIML + '')
+                }
+                if (type == 'recruit_speed_boost') {
+                    factorRSB = effect.factor
+                    EffectsForDefender.push(' Intensywny trening ' + factorRSB + '%')
+                }
+                if (type == 'farm_speed_increase') {
+                    factorFSI = effect.factor
+                    EffectsForDefender.push(' Drogi najazdów ' + factorFSI + '%')
+                }
+                if (type == 'resource_deposit_job_amount') {
+                    factorRDJA = effect.factor
+                    EffectsForDefender.push(' Wagony(depozyt) ' + factorRDJA + '%')
+                }
+                if (type == 'resource_deposit_job_duration') {
+                    factorRDJD = effect.factor
+                    EffectsForDefender.push(' Drogi najazdów(depozyt) ' + factorRDJD + '%')
+                }
+                if (type == 'faster_tribe_support') {
+                    factorFTS = effect.factor
+                    EffectsForDefender.push(' Zjednoczenie ' + factorFTS + '%')
+                }
+            })
+            var finishedDefEffects = EffectsForDefender.join()
+            var attFaith = (details.attFaith * 100).toFixed([0])
+            var attModifier = (Math.round(details.attModifier * 100)).toFixed([0])
+            var morale = (Math.round(details.morale * 100)).toFixed([0])
+            var luck = ((details.luck - 1) * 100).toFixed([0])
+            var defCharacterId = details.defCharacterId
+            var defCharacterName = details.defCharacterName
+            var defVillageId = details.defVillageId
+            var defVillageName = details.defVillageName
+            var defFaith = (details.defFaith * 100).toFixed([0])
+            var defModifier = (Math.round(details.defModifier * 100)).toFixed([0])
+            var wallBonus = (details.wallBonus * 100).toFixed([0])
+            var night = details.night
+            var loyaltyAfter = details.loyaltyAfter
+            var loyaltyBefore = details.loyaltyBefore
+            var wallAfter = details.wallAfter
+            var wallBefore = details.wallBefore
+            var officers = details.officers
+            var resultString = ''
+            var origin = ''
+            var gamer = ''
+            var nightB = ''
+            var loyaltyStart = ''
+            var loyaltyFinish = ''
+            var wallStart = ''
+            var wallFinish = ''
+            var officersF = []
+            var officersD
+            var dateNow = Date.now()
+            var newToken = token.split('.').join('_')
+            if (loyaltyBefore != null) {
+                loyaltyStart = 'Lojalność przed atakiem: ' + Math.floor(loyaltyBefore) + ' '
+            }
+            if (loyaltyAfter != null) {
+                loyaltyFinish = 'Lojalność po ataku: ' + Math.floor(loyaltyAfter) + ' '
+            }
+            if (wallBefore != null) {
+                wallStart = 'Mury przed ataku: ' + wallBefore + ' '
+            }
+            if (wallAfter != null) {
+                wallFinish = 'Mury po ataku: ' + wallAfter + ' '
+            }
+            if (officers == null) {
+                officersF.push('Brak')
+            } else {
+                var bastard = details.officers.bastard
+                var leader = details.officers.leader
+                var medic = details.officers.medic
+                var scout = details.officers.scout
+                var loot = details.officers.loot_master
+                var supporter = details.officers.supporter
+                if (bastard == false && leader == false && medic == false && loot == false && scout == false && supporter == false) {
+                    officersF.push('Brak')
+                } else {
+                    if (bastard == true) {
+                        officersF.push(' Oszust ')
+                    } else {
+                        officersF.push('')
+                    }
+                    if (leader == true) {
+                        officersF.push(' Wielki Mistrz ')
+                    } else {
+                        officersF.push('')
+                    }
+                    if (medic == true) {
+                        officersF.push(' Medyk ')
+                    } else {
+                        officersF.push('')
+                    }
+                    if (scout == true) {
+                        officersF.push(' Łowczy ')
+                    } else {
+                        officersF.push('')
+                    }
+                    if (loot == true) {
+                        officersF.push(' Mistrz Łupu ')
+                    } else {
+                        officersF.push('')
+                    }
+                    if (supporter == true) {
+                        officersF.push(' Taktyk ')
+                    } else {
+                        officersF.push('')
+                    }
+                }
+            }
+            if (night == false) {
+                nightB = 'Nie'
+            } else {
+                nightB = 'Tak'
+            }
+            if (result == 2) {
+                resultString = ' [color=d96a19]Częściowy sukces[/color]'
+            } else if (result == 1) {
+                resultString = ' [color=0a8028]Sukces[/color]'
+            } else if (result == 3) {
+                resultString = ' [color=e21f1f]Porażka[/color]'
+            }
+            if (attCharacterName == null && attCharacterId == null) {
+                gamer = 'Brak danych'
+            } else {
+                gamer = '[player=' + attCharacterId + ']' + attCharacterName + '[/player]'
+            }
+            if (attVillageName == null && attVillageId == null) {
+                origin = 'Brak danych'
+            } else {
+                origin = '[village=' + attVillageId + ']' + attVillageName + '[/village]'
+            }
+            time = Math.floor((dateNow / 1000) - timecreated)
+            officersD = officersF.join()
+
+            if (defCharacterName != null) {
+                alertText.push('[size=XL][b]Raport z ataku: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersD + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
+
+                var message = alertText.join()
+                if (time < 10800) {
+                    if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
+                        socketService.emit(routeProvider.MESSAGE_REPLY, {
+                            message_id: 14380,
+                            message: message
+                        })
+                    } else {
+                        socketService.emit(routeProvider.MESSAGE_REPLY, {
+                            message_id: 6983,
+                            message: message
+                        })
+                    }
+                    alertText = []
+                }
+            }
+        }
+    }
+
+    var reportSender = {}
+    reportSender.init = function() {
+        initialized = true
+    }
+    reportSender.start = function() {
+        eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STARTED)
+        running = true
+        checkNewReports()
+    }
+    reportSender.stop = function() {
+        eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STOPPED)
+        running = false
+    }
+    reportSender.isRunning = function() {
+        return running
+    }
+    reportSender.isInitialized = function() {
+        return initialized
+    }
+    return reportSender
+})
+define('two/reportSender/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        REPORT_SENDER_STARTED: 'report_sender_started',
+        REPORT_SENDER_STOPPED: 'report_sender_stopped'
+    })
+})
+
+define('two/reportSender/ui', [
+    'two/ui',
+    'two/reportSender',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    reportSender,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Goniec', 130, $filter('i18n')('description', $rootScope.loc.ale, 'report_sender'))
+
+        $button.addEventListener('click', function () {
+            if (reportSender.isRunning()) {
+                reportSender.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'report_sender'))
+            } else {
+                reportSender.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'report_sender'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.REPORT_SENDER_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.REPORT_SENDER_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (reportSender.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+require([
+    'two/ready',
+    'two/reportSender',
+    'two/reportSender/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/reportSender/events',
+], function(
+    ready,
+    reportSender,
+    reportSenderInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'report_sender_active'
+    }
+	
+    if (reportSender.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        reportSender.init()
+        reportSenderInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                reportSender.start()
+            }
+
+            eventQueue.register(eventTypeProvider.REPORT_SENDER_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.REPORT_SENDER_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
