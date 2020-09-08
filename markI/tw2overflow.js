@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 08 Sep 2020 19:19:11 GMT
+ * Tue, 08 Sep 2020 19:41:46 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -8567,13 +8567,7 @@ define('two/battleCalculator/ui', [
                 name: data.name
             }
         },
-        start: function (event, data) {
-            $scope.running = battleCalculator.isRunning()
-
-            if (data.disableNotif) {
-                return false
-            }
-		
+        start: function () {		
             bindEvents()
 
             utils.notif('success', $filter('i18n')('calculated', $rootScope.loc.ale, 'battle_calculator'))
@@ -8584,7 +8578,6 @@ define('two/battleCalculator/ui', [
         $scope = $rootScope.$new()
         $scope.selectedTab = TAB_TYPES.BATTLE
         $scope.TAB_TYPES = TAB_TYPES	
-        $scope.running = battleCalculator.isRunning()
         $scope.selectTab = selectTab
         $scope.addSelected = addSelected
         $scope.addMapSelected = addMapSelected
