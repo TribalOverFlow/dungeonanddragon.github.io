@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Sep 2020 19:22:22 GMT
+ * Wed, 09 Sep 2020 19:43:32 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -8536,19 +8536,7 @@ define('two/battleCalculator/ui', [
     }
 	
     const eventHandlers = {
-        autoCompleteSelected: function (event, id, data, type) {
-            if (id !== 'battleCalculator_village_search') {
-                return false
-            }
-
-            commandData[type] = {
-                id: data.raw.id,
-                x: data.raw.x,
-                y: data.raw.y,
-                name: data.raw.name
-            }
-
-            $scope.searchQuery[type] = ''
+        autoCompleteSelected: function () {
         },
         onAutoCompleteOrigin: function (data) {
             commandData.origin = {
