@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Sep 2020 19:43:32 GMT
+ * Wed, 09 Sep 2020 19:47:18 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -8583,7 +8583,6 @@ define('two/battleCalculator/ui', [
 		
 
 		
-        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_STOP, eventHandlers.stop)
         eventScope.register(eventTypeProvider.COMMAND_QUEUE_START, eventHandlers.start)
