@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 17:50:29 GMT
+ * Sat, 12 Sep 2020 17:58:07 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4719,69 +4719,73 @@ define('two/battleCalculator/settings/updates', function () {
 })
 
 define('two/battleCalculator/settings/map', [
-    'two/battleCalculator/settings'
+    'two/battleCalculator/settings',
+    'two/battleCalculator/types/church',
+    'two/battleCalculator/types/wall'
 ], function (
-    SETTINGS
+    SETTINGS,
+    BATTLE_CHURCHES,
+    BATTLE_WALLS
 ) {
     return {
         [SETTINGS.BATTLE_CATAPULT_TARGET]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_D1]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_D2]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_D3]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_A]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_D1]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_D2]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_D3]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_A]: {
-            default: [],
-            disabledOption: true,
+            default: false,
+            disabledOption: false,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_A]: {
-            default: [],
-            disabledOption: true,
+            default: BATTLE_CHURCHES.LEVEL_1,
+            disabledOption: false,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_D]: {
-            default: [],
+            default: BATTLE_CHURCHES.LEVEL_1,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_WALL]: {
-            default: [],
-            disabledOption: true,
+            default: BATTLE_WALLS.LEVEL_20,
+            disabledOption: false,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_NIGHT_BONUS]: {
@@ -4801,22 +4805,22 @@ define('two/battleCalculator/settings/map', [
             inputType: 'checkbox'
         },
         [SETTINGS.BATTLE_SKILL_WEAPON_MASTER]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_SKILL_IRON_WALLS]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_SKILL_CLINIQUE]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_HOSPITAL]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
@@ -4833,7 +4837,7 @@ define('two/battleCalculator/settings/map', [
             max: 10
         },
         [SETTINGS.TROOPS_ORDER]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         },
@@ -4842,7 +4846,7 @@ define('two/battleCalculator/settings/map', [
             inputType: 'checkbox'
         },
         [SETTINGS.TROOPS_TRAINING]: {
-            default: [],
+            default: false,
             disabledOption: true,
             inputType: 'select'
         }
