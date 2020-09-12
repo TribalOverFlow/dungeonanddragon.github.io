@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 12:05:11 GMT
+ * Sat, 12 Sep 2020 12:15:21 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4392,6 +4392,7 @@ define('two/battleCalculator/ui', [
         $scope.running = battleCalculator.isRunning()
         $scope.selectedTab = TAB_TYPES.BATTLE
         $scope.settingsMap = SETTINGS_MAP
+		
         $scope.order = Settings.encodeList(TROOPS_ORDER, {
             textObject: 'battleCalculator',
             disabled: false
@@ -4686,7 +4687,7 @@ define('two/battleCalculator/settings/map', [
             disabledOption: true,
             inputType: 'select',
             multiSelect: false,
-            type: 'orders'
+            type: 'order'
         },
         [SETTINGS.TROOPS_DOMINATION]: {
             default: false,
