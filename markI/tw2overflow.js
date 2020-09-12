@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 16:02:53 GMT
+ * Sat, 12 Sep 2020 17:25:22 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -568,10 +568,7 @@ define('two/language', [
         },
         "battle_calculator": {
             "title": "Kalkulator",
-            "checkT.tip": "Liczy koszty produkcji jednostek",
-            "check.tip": "Liczy punkty bojowe dla wybranych jednostek",
             "check.btn": "Przelicz",
-            "simulate.tip": "Symuluje bitwe na podstawie wskazanych danych",
             "simulate.btn": "Symuluj",
             "calculated": "Obliczono wynik bitwy!",
             "inserted": "Obliczono wynik bitwy!",
@@ -678,7 +675,46 @@ define('two/language', [
             "bashpoints.th": "Punkty bojowe",
             "bashpoints.attacker": "Jako atakujący",
             "bashpoints.defender": "Jako obrońca",
-            "bashpoints.killed": "Zniszczone jednostki"
+            "bashpoints.killed": "Zniszczone jednostki",
+            "headquarter": "Ratusz",
+            "barracks": "Koszary",
+            "tavern": "Tawerna",
+            "hospital": "Szpital",
+            "preceptory": "Komturia",
+            "chapel": "Kaplica",
+            "church": "Kościół",
+            "academy": "Akademia",
+            "rally_point": "Plac",
+            "statue": "Piedestał",
+            "market": "Rynek",
+            "timber_camp": "Tartak",
+            "clay_pit": "Kopalnia gliny",
+            "iron_mine": "Huta żelaza",
+            "farm": "Farma",
+            "warehouse": "Magazyn",
+            "wall": "Mur",
+            "none": "Brak",
+            "without": "Brak",
+            "level_1": "1",
+            "level_2": "2",
+            "level_3": "3",
+            "level_4": "4",
+            "level_5": "5",
+            "level_6": "6",
+            "level_7": "7",
+            "level_8": "8",
+            "level_9": "9",
+            "level_10": "10",
+            "level_11": "11",
+            "level_12": "12",
+            "level_13": "13",
+            "level_14": "14",
+            "level_15": "15",
+            "level_16": "16",
+            "level_17": "17",
+            "level_18": "18",
+            "level_19": "19",
+            "level_20": "20"
         },
         "builder_queue": {
             "title": "Budowniczy",
@@ -1168,10 +1204,7 @@ define('two/language', [
         },
         "battle_calculator": {
             "title": "Strateg",
-            "checkT.tip": "Liczy koszty produkcji jednostek",
-            "check.tip": "Liczy punkty bojowe dla wybranych jednostek",
             "check.btn": "Policz",
-            "simulate.tip": "Symuluje bitwe na podstawie wskazanych danych",
             "simulate.btn": "Symuluj",
             "calculated": "Obliczono wynik bitwy!",
             "inserted": "Obliczono wynik bitwy!",
@@ -1278,7 +1311,46 @@ define('two/language', [
             "bashpoints.th": "Punkty bojowe",
             "bashpoints.attacker": "Jako atakujący",
             "bashpoints.defender": "Jako obrońca",
-            "bashpoints.killed": "Zniszczone jednostki"
+            "bashpoints.killed": "Zniszczone jednostki",
+            "headquarter": "Ratusz",
+            "barracks": "Koszary",
+            "tavern": "Tawerna",
+            "hospital": "Szpital",
+            "preceptory": "Komturia",
+            "chapel": "Kaplica",
+            "church": "Kościół",
+            "academy": "Akademia",
+            "rally_point": "Plac",
+            "statue": "Piedestał",
+            "market": "Rynek",
+            "timber_camp": "Tartak",
+            "clay_pit": "Kopalnia gliny",
+            "iron_mine": "Huta żelaza",
+            "farm": "Farma",
+            "warehouse": "Magazyn",
+            "wall": "Mur",
+            "none": "Brak",
+            "without": "Brak",
+            "level_1": "1",
+            "level_2": "2",
+            "level_3": "3",
+            "level_4": "4",
+            "level_5": "5",
+            "level_6": "6",
+            "level_7": "7",
+            "level_8": "8",
+            "level_9": "9",
+            "level_10": "10",
+            "level_11": "11",
+            "level_12": "12",
+            "level_13": "13",
+            "level_14": "14",
+            "level_15": "15",
+            "level_16": "16",
+            "level_17": "17",
+            "level_18": "18",
+            "level_19": "19",
+            "level_20": "20"
         },
         "builder_queue": {
             "title": "Budowniczy",
@@ -4211,24 +4283,23 @@ define('two/battleCalculator', [
 	
     const BATTLE_CAT_TARGET = {
         [B_CAT_TARGET.NONE]: 'none',
-        [B_CAT_TARGET.HEADQUARTER]: 'hq',
-        [B_CAT_TARGET.WAREHOUSE]: 'wh',
-        [B_CAT_TARGET.FARM]: 'fm',
-        [B_CAT_TARGET.RALLY_POINT]: 'rp',
-        [B_CAT_TARGET.STATUE]: 'st',
-        [B_CAT_TARGET.WALL]: 'wl',
-        [B_CAT_TARGET.TAVERN]: 'tv',
-        [B_CAT_TARGET.BARRACKS]: 'bk',
-        [B_CAT_TARGET.PRECEPTORY]: 'pc',
-        [B_CAT_TARGET.HOSPITAL]: 'hp',
-        [B_CAT_TARGET.CLAY_PIT]: 'cp',
-        [B_CAT_TARGET.IRON_MINE]: 'im',
-        [B_CAT_TARGET.TIMBER_CAMP]: 'tc',
-        [B_CAT_TARGET.CHAPEL]: 'cl',
-        [B_CAT_TARGET.CHURCH]: 'cc',
-        [B_CAT_TARGET.MARKET]: 'mt',
-        [B_CAT_TARGET.ACADEMY]: 'aa',
-        [B_CAT_TARGET.HALL_OF_ORDERS]: 'ho'
+        [B_CAT_TARGET.HEADQUARTER]: 'headquarter',
+        [B_CAT_TARGET.WAREHOUSE]: 'warehouse',
+        [B_CAT_TARGET.FARM]: 'farm',
+        [B_CAT_TARGET.RALLY_POINT]: 'rally_point',
+        [B_CAT_TARGET.STATUE]: 'statue',
+        [B_CAT_TARGET.WALL]: 'wall',
+        [B_CAT_TARGET.TAVERN]: 'tavern',
+        [B_CAT_TARGET.BARRACKS]: 'barracks',
+        [B_CAT_TARGET.PRECEPTORY]: 'preceptory',
+        [B_CAT_TARGET.HOSPITAL]: 'hospital',
+        [B_CAT_TARGET.CLAY_PIT]: 'clay_pit',
+        [B_CAT_TARGET.IRON_MINE]: 'iron_mine',
+        [B_CAT_TARGET.TIMBER_CAMP]: 'timber_camp',
+        [B_CAT_TARGET.CHAPEL]: 'chapel',
+        [B_CAT_TARGET.CHURCH]: 'church',
+        [B_CAT_TARGET.MARKET]: 'market',
+        [B_CAT_TARGET.ACADEMY]: 'academy'
     }
 	
     const TROOPS_ORDER_TYPE = {
@@ -4811,66 +4882,65 @@ define('two/battleCalculator/settings/map', [
 define('two/battleCalculator/types/item', [], function () {
     return {
         NONE: 'none',
-        HALBERD_OF_GUAN_YU: 'spear',
-        PARACELSUS_LONGSWORD: 'sword',
-        THORGARDS_BATTLE_AXE: 'axe',
-        NIMRODS_LONGBOW: 'archer',
-        MIESZKOS_LANCE: 'lc',
-        NIMRODS_COMPOSITE_BOW: 'ma',
-        BAPTISTES_BANNER: 'hc',
-        CAROLS_MORNING_STAR: 'ram',
-        ALETHEIAS_BONFIRE: 'catapult',
-        VASCOS_SCEPTER: 'snob'
+        HALBERD_OF_GUAN_YU: 'battle.halberd',
+        PARACELSUS_LONGSWORD: 'battle.longsword',
+        THORGARDS_BATTLE_AXE: 'battle.battleaxe',
+        NIMRODS_LONGBOW: 'battle.longbow',
+        MIESZKOS_LANCE: 'battle.lance',
+        NIMRODS_COMPOSITE_BOW: 'battle.compositebow',
+        BAPTISTES_BANNER: 'battle.banner',
+        CAROLS_MORNING_STAR: 'battle.star',
+        ALETHEIAS_BONFIRE: 'battle.bonfire',
+        VASCOS_SCEPTER: 'battle.scepter'
     }
 })
 
 define('two/battleCalculator/types/level', [], function () {
     return {
-        NONE: 0,
-        LEVEL_1: 1,
-        LEVEL_2: 2,
-        LEVEL_3: 3
+        NONE: 'none',
+        LEVEL_1: 'level_1',
+        LEVEL_2: 'level_2',
+        LEVEL_3: 'level_3'
     }
 })
 
 define('two/battleCalculator/types/catapult-target', [], function () {
     return {
         NONE: 'none',
-        HEADQUARTER: 'hq',
-        WAREHOUSE: 'wh',
-        FARM: 'fm',
-        RALLY_POINT: 'rp',
-        STATUE: 'st',
-        WALL: 'wl',
-        TAVERN: 'tv',
-        BARRACKS: 'bk',
-        PRECEPTORY: 'pc',
-        HOSPITAL: 'hp',
-        CLAY_PIT: 'cp',
-        IRON_MINE: 'im',
-        TIMBER_CAMP: 'tc',
-        CHAPEL: 'cl',
-        CHURCH: 'cc',
-        MARKET: 'mt',
-        ACADEMY: 'aa',
-        HALL_OF_ORDERS: 'ho'
+        HEADQUARTER: 'headquarter',
+        WAREHOUSE: 'warehouse',
+        FARM: 'farm',
+        RALLY_POINT: 'rally_point',
+        STATUE: 'statue',
+        WALL: 'wall',
+        TAVERN: 'tavern',
+        BARRACKS: 'barracks',
+        PRECEPTORY: 'preceptory',
+        HOSPITAL: 'hospital',
+        CLAY_PIT: 'clay_pit',
+        IRON_MINE: 'iron_mine',
+        TIMBER_CAMP: 'timber_camp',
+        CHAPEL: 'chapel',
+        CHURCH: 'church',
+        MARKET: 'market',
+        ACADEMY: 'academy'
     }
 })
 
 define('two/battleCalculator/types/order', [], function () {
     return {
         NONE: 'none',
-        TEUTONIC_ORDER: 'teutonic',
-        TEMPLAR_ORDER: 'templar'
+        TEUTONIC_ORDER: 'troops.teutonic',
+        TEMPLAR_ORDER: 'troops.templars'
     }
 })
 
 define('two/battleCalculator/types/church', [], function () {
     return {
         NO_CHURCH: 'without',
-        LEVEL_1: 'first_level',
-        LEVEL_2: 'second_level',
-        LEVEL_3: 'third_level'
+        LEVEL_1: 'level_1',
+        LEVEL_2: 'level_2',
+        LEVEL_3: 'level_3'
     }
 })
 
@@ -4903,7 +4973,6 @@ define('two/battleCalculator/types/wall', [], function () {
 define('two/battleCalculator/types/weapon-master', [], function () {
     return {
         NO_SKILL: 'without',
-        LEVEL_0: 'level_0',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
@@ -4915,7 +4984,6 @@ define('two/battleCalculator/types/weapon-master', [], function () {
 define('two/battleCalculator/types/iron-walls', [], function () {
     return {
         NO_SKILL: 'without',
-        LEVEL_0: 'level_0',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
@@ -4927,7 +4995,6 @@ define('two/battleCalculator/types/iron-walls', [], function () {
 define('two/battleCalculator/types/clinique', [], function () {
     return {
         NO_SKILL: 'without',
-        LEVEL_0: 'level_0',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
@@ -4944,7 +5011,6 @@ define('two/battleCalculator/types/clinique', [], function () {
 define('two/battleCalculator/types/hospital', [], function () {
     return {
         NO_HOSPITAL: 'without',
-        LEVEL_0: 'level_0',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
