@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 17:58:07 GMT
+ * Sat, 12 Sep 2020 18:04:26 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4770,22 +4770,19 @@ define('two/battleCalculator/settings/map', [
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_A]: {
             default: false,
-            disabledOption: false,
+            disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_A]: {
             default: BATTLE_CHURCHES.LEVEL_1,
-            disabledOption: false,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_D]: {
             default: BATTLE_CHURCHES.LEVEL_1,
-            disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_WALL]: {
             default: BATTLE_WALLS.LEVEL_20,
-            disabledOption: false,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_NIGHT_BONUS]: {
