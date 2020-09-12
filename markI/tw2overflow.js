@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 18:04:26 GMT
+ * Sat, 12 Sep 2020 18:11:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4719,13 +4719,9 @@ define('two/battleCalculator/settings/updates', function () {
 })
 
 define('two/battleCalculator/settings/map', [
-    'two/battleCalculator/settings',
-    'two/battleCalculator/types/church',
-    'two/battleCalculator/types/wall'
+    'two/battleCalculator/settings'
 ], function (
-    SETTINGS,
-    BATTLE_CHURCHES,
-    BATTLE_WALLS
+    SETTINGS
 ) {
     return {
         [SETTINGS.BATTLE_CATAPULT_TARGET]: {
@@ -4774,15 +4770,15 @@ define('two/battleCalculator/settings/map', [
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_A]: {
-            default: BATTLE_CHURCHES.LEVEL_1,
+            default: '1',
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_D]: {
-            default: BATTLE_CHURCHES.LEVEL_1,
+            default: '1',
             inputType: 'select'
         },
         [SETTINGS.BATTLE_WALL]: {
-            default: BATTLE_WALLS.LEVEL_20,
+            default: '20',
             inputType: 'select'
         },
         [SETTINGS.BATTLE_NIGHT_BONUS]: {
