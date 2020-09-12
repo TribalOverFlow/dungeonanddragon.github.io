@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 13:43:30 GMT
+ * Sat, 12 Sep 2020 14:06:49 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4687,7 +4687,7 @@ define('two/battleCalculator/types/church', [], function () {
     }
 })
 
-define('two/battleCalculator/types/walls', [], function () {
+define('two/battleCalculator/types/wall', [], function () {
     return {
         NO_WALL: 'without',
         LEVEL_1: 'level_1',
