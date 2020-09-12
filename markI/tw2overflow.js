@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 14:06:49 GMT
+ * Sat, 12 Sep 2020 14:13:07 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4144,6 +4144,7 @@ define('two/battleCalculator', [
     'two/Settings',
     'two/battleCalculator/settings',
     'two/battleCalculator/settings/map',
+    'two/battleCalculator/settings/updates',
     'two/battleCalculator/types/order',
     'two/battleCalculator/types/wall',
     'two/battleCalculator/types/church',
