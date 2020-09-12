@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 17:25:22 GMT
+ * Sat, 12 Sep 2020 17:50:29 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4261,14 +4261,12 @@ define('two/battleCalculator', [
     }
 	
     const BATTLE_ITEMS_LEVELS = {
-        [B_ITEMS_LEVELS.NONE]: 0,
         [B_ITEMS_LEVELS.LEVEL_1]: 1,
         [B_ITEMS_LEVELS.LEVEL_2]: 2,
         [B_ITEMS_LEVELS.LEVEL_3]: 3
     }
 	
     const BATTLE_ITEMS = {
-        [B_ITEMS.NONE]: 'none',
         [B_ITEMS.HALBERD_OF_GUAN_YU]: 'spear',
         [B_ITEMS.PARACELSUS_LONGSWORD]: 'sword',
         [B_ITEMS.THORGARDS_BATTLE_AXE]: 'axe',
@@ -4282,7 +4280,6 @@ define('two/battleCalculator', [
     }
 	
     const BATTLE_CAT_TARGET = {
-        [B_CAT_TARGET.NONE]: 'none',
         [B_CAT_TARGET.HEADQUARTER]: 'headquarter',
         [B_CAT_TARGET.WAREHOUSE]: 'warehouse',
         [B_CAT_TARGET.FARM]: 'farm',
@@ -4303,7 +4300,6 @@ define('two/battleCalculator', [
     }
 	
     const TROOPS_ORDER_TYPE = {
-        [T_ORDER_TYPE.NONE]: '',
         [T_ORDER_TYPE.TEUTONIC_ORDER]: 'teutonic',
         [T_ORDER_TYPE.TEMPLAR_ORDER]: 'templar'
     }
@@ -4340,7 +4336,6 @@ define('two/battleCalculator', [
     }
 	
     const BATTLE_SKILL_WEAPON_MASTER_LEVEL = {
-        [B_SKILL_WEAPON_MASTER_LEVEL.NO_SKILL]: 0,
         [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_1]: 2,
         [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_2]: 4,
         [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_3]: 6,
@@ -4349,7 +4344,6 @@ define('two/battleCalculator', [
     }
 	
     const BATTLE_SKILL_IRON_WALLS_LEVEL = {
-        [B_SKILL_IRON_WALLS_LEVEL.NO_SKILL]: 0,
         [B_SKILL_IRON_WALLS_LEVEL.LEVEL_1]: 1,
         [B_SKILL_IRON_WALLS_LEVEL.LEVEL_2]: 2,
         [B_SKILL_IRON_WALLS_LEVEL.LEVEL_3]: 3,
@@ -4358,7 +4352,6 @@ define('two/battleCalculator', [
     }
 	
     const BATTLE_SKILL_CLINIQUE_LEVEL = {
-        [B_SKILL_CLINIQUE_LEVEL.NO_SKILL]: 0,
         [B_SKILL_CLINIQUE_LEVEL.LEVEL_1]: 100,
         [B_SKILL_CLINIQUE_LEVEL.LEVEL_2]: 200,
         [B_SKILL_CLINIQUE_LEVEL.LEVEL_3]: 300,
@@ -4372,7 +4365,6 @@ define('two/battleCalculator', [
     }
 	
     const BATTLE_HOSPITAL_LEVEL = {
-        [B_HOSPITAL_LEVEL.NO_HOSPITAL]: 0,
         [B_HOSPITAL_LEVEL.LEVEL_1]: 100,
         [B_HOSPITAL_LEVEL.LEVEL_2]: 129,
         [B_HOSPITAL_LEVEL.LEVEL_3]: 167,
@@ -4386,7 +4378,6 @@ define('two/battleCalculator', [
     }
 	
     const TROOPS_TRAINING_LEVEL = {
-        [T_TRAINING_LEVEL.NO_SKILL]: 0,
         [T_TRAINING_LEVEL.LEVEL_1]: 4,
         [T_TRAINING_LEVEL.LEVEL_2]: 8,
         [T_TRAINING_LEVEL.LEVEL_3]: 12,
@@ -4592,50 +4583,50 @@ define('two/battleCalculator/ui', [
         $scope.settingsMap = SETTINGS_MAP
 		
         $scope.catapulttarget = Settings.encodeList(B_CAT_TARGET, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
 		
         $scope.knightitem = Settings.encodeList(B_ITEMS, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
 		
         $scope.itemlevel = Settings.encodeList(B_ITEMS_LEVELS, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
 		
         $scope.order = Settings.encodeList(T_ORDER_TYPE, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
         $scope.wall = Settings.encodeList(B_WALLS, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
         $scope.church = Settings.encodeList(B_CHURCHES, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
         $scope.weaponmaster = Settings.encodeList(B_SKILL_WEAPON_MASTER_LEVEL, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
         $scope.ironwalls = Settings.encodeList(B_SKILL_IRON_WALLS_LEVEL, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
         $scope.clinique = Settings.encodeList(B_SKILL_CLINIQUE_LEVEL, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
         $scope.hospital = Settings.encodeList(B_HOSPITAL_LEVEL, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
         $scope.training = Settings.encodeList(T_TRAINING_LEVEL, {
-            textObject: 'battleCalculator',
+            textObject: 'battle_calculator',
             disabled: true
         })
 
@@ -4728,90 +4719,68 @@ define('two/battleCalculator/settings/updates', function () {
 })
 
 define('two/battleCalculator/settings/map', [
-    'two/battleCalculator/settings',
-    'two/battleCalculator/types/item',
-    'two/battleCalculator/types/level',
-    'two/battleCalculator/types/catapult-target',
-    'two/battleCalculator/types/church',
-    'two/battleCalculator/types/wall',
-    'two/battleCalculator/types/weapon-master',
-    'two/battleCalculator/types/iron-walls',
-    'two/battleCalculator/types/clinique',
-    'two/battleCalculator/types/hospital',
-    'two/battleCalculator/types/order',
-    'two/battleCalculator/types/training'
+    'two/battleCalculator/settings'
 ], function (
-    SETTINGS,
-    BATTLE_ITEMS,
-    BATTLE_ITEMS_LEVELS,
-    BATTLE_CAT_TARGET,
-    BATTLE_CHURCHES,
-    BATTLE_WALLS,
-    BATTLE_SKILL_WEAPON_MASTER_LEVEL,
-    BATTLE_SKILL_IRON_WALLS_LEVEL,
-    BATTLE_SKILL_CLINIQUE_LEVEL,
-    BATTLE_HOSPITAL_LEVEL,
-    TROOPS_ORDER_TYPE,
-    TROOPS_TRAINING_LEVEL
+    SETTINGS
 ) {
     return {
         [SETTINGS.BATTLE_CATAPULT_TARGET]: {
-            default: BATTLE_CAT_TARGET.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_D1]: {
-            default: BATTLE_ITEMS_LEVELS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_D2]: {
-            default: BATTLE_ITEMS_LEVELS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_D3]: {
-            default: BATTLE_ITEMS_LEVELS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_ITEM_LEVEL_A]: {
-            default: BATTLE_ITEMS_LEVELS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_D1]: {
-            default: BATTLE_ITEMS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_D2]: {
-            default: BATTLE_ITEMS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_D3]: {
-            default: BATTLE_ITEMS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_KNIGHT_ITEM_A]: {
-            default: BATTLE_ITEMS.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_A]: {
-            default: BATTLE_CHURCHES.LEVEL_1,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_CHURCH_D]: {
-            default: BATTLE_CHURCHES.LEVEL_1,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_WALL]: {
-            default: BATTLE_WALLS.NO_WALL,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
@@ -4832,22 +4801,22 @@ define('two/battleCalculator/settings/map', [
             inputType: 'checkbox'
         },
         [SETTINGS.BATTLE_SKILL_WEAPON_MASTER]: {
-            default: BATTLE_SKILL_WEAPON_MASTER_LEVEL.NO_SKILL,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_SKILL_IRON_WALLS]: {
-            default: BATTLE_SKILL_IRON_WALLS_LEVEL.NO_SKILL,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_SKILL_CLINIQUE]: {
-            default: BATTLE_SKILL_CLINIQUE_LEVEL.NO_SKILL,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.BATTLE_HOSPITAL]: {
-            default: BATTLE_HOSPITAL_LEVEL.NO_HOSPITAL,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
@@ -4864,7 +4833,7 @@ define('two/battleCalculator/settings/map', [
             max: 10
         },
         [SETTINGS.TROOPS_ORDER]: {
-            default: TROOPS_ORDER_TYPE.NONE,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         },
@@ -4873,7 +4842,7 @@ define('two/battleCalculator/settings/map', [
             inputType: 'checkbox'
         },
         [SETTINGS.TROOPS_TRAINING]: {
-            default: TROOPS_TRAINING_LEVEL.NO_SKILL,
+            default: [],
             disabledOption: true,
             inputType: 'select'
         }
@@ -4881,7 +4850,6 @@ define('two/battleCalculator/settings/map', [
 })
 define('two/battleCalculator/types/item', [], function () {
     return {
-        NONE: 'none',
         HALBERD_OF_GUAN_YU: 'battle.halberd',
         PARACELSUS_LONGSWORD: 'battle.longsword',
         THORGARDS_BATTLE_AXE: 'battle.battleaxe',
@@ -4897,7 +4865,6 @@ define('two/battleCalculator/types/item', [], function () {
 
 define('two/battleCalculator/types/level', [], function () {
     return {
-        NONE: 'none',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3'
@@ -4906,7 +4873,6 @@ define('two/battleCalculator/types/level', [], function () {
 
 define('two/battleCalculator/types/catapult-target', [], function () {
     return {
-        NONE: 'none',
         HEADQUARTER: 'headquarter',
         WAREHOUSE: 'warehouse',
         FARM: 'farm',
@@ -4929,7 +4895,6 @@ define('two/battleCalculator/types/catapult-target', [], function () {
 
 define('two/battleCalculator/types/order', [], function () {
     return {
-        NONE: 'none',
         TEUTONIC_ORDER: 'troops.teutonic',
         TEMPLAR_ORDER: 'troops.templars'
     }
@@ -4972,7 +4937,6 @@ define('two/battleCalculator/types/wall', [], function () {
 
 define('two/battleCalculator/types/weapon-master', [], function () {
     return {
-        NO_SKILL: 'without',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
@@ -4983,7 +4947,6 @@ define('two/battleCalculator/types/weapon-master', [], function () {
 
 define('two/battleCalculator/types/iron-walls', [], function () {
     return {
-        NO_SKILL: 'without',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
@@ -4994,7 +4957,6 @@ define('two/battleCalculator/types/iron-walls', [], function () {
 
 define('two/battleCalculator/types/clinique', [], function () {
     return {
-        NO_SKILL: 'without',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
@@ -5010,7 +4972,6 @@ define('two/battleCalculator/types/clinique', [], function () {
 
 define('two/battleCalculator/types/hospital', [], function () {
     return {
-        NO_HOSPITAL: 'without',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
@@ -5026,7 +4987,6 @@ define('two/battleCalculator/types/hospital', [], function () {
 
 define('two/battleCalculator/types/training', [], function () {
     return {
-        NO_SKILL: 'without',
         LEVEL_1: 'level_1',
         LEVEL_2: 'level_2',
         LEVEL_3: 'level_3',
