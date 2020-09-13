@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 13 Sep 2020 17:54:05 GMT
+ * Sun, 13 Sep 2020 18:18:55 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3189,7 +3189,10 @@ define('two/armyHelper', [
     let settings
     let armyHelperSettings
 
-    let selectedGroups = []
+    let selectedGroups1 = []
+    let selectedGroups2 = []
+    let selectedGroups3 = []
+    let selectedGroups4 = []
 
     const STORAGE_KEYS = {
         SETTINGS: 'army_helper_settings'
@@ -3213,16 +3216,31 @@ define('two/armyHelper', [
     console.log(BALANCER_UNIT)
 
     const updateGroups = function () {
-        selectedGroups = []
+        selectedGroups1 = []
+        selectedGroups2 = []
+        selectedGroups3 = []
+        selectedGroups4 = []
 
         const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = armyHelperSettings[SETTINGS.GROUPS]
+        const groupsSelectedByTheUser1 = armyHelperSettings[SETTINGS.GROUP1]
+        const groupsSelectedByTheUser2 = armyHelperSettings[SETTINGS.GROUP2]
+        const groupsSelectedByTheUser3 = armyHelperSettings[SETTINGS.GROUP3]
+        const groupsSelectedByTheUser4 = armyHelperSettings[SETTINGS.GROUP4]
 
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
+        groupsSelectedByTheUser1.forEach(function (groupId) {
+            selectedGroups1.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser2.forEach(function (groupId) {
+            selectedGroups2.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser3.forEach(function (groupId) {
+            selectedGroups3.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser4.forEach(function (groupId) {
+            selectedGroups4.push(allGroups[groupId])
         })
 
-        console.log('selectedGroups', selectedGroups)
+        console.log('selectedGroups', selectedGroups1, selectedGroups2, selectedGroups3, selectedGroups4)
     }
 
     const armyHelper = {}
@@ -3255,7 +3273,7 @@ define('two/armyHelper', [
     armyHelper.start = function () {
         running = true
 
-        console.log('selectedGroups', selectedGroups)
+        console.log('selectedGroups', selectedGroups1, selectedGroups2, selectedGroups3, selectedGroups4)
 
         eventQueue.trigger(eventTypeProvider.ARMY_HELPER_START)
     }
@@ -3315,7 +3333,7 @@ define('two/armyHelper/ui', [
     let $button
     
     const TAB_TYPES = {
-        PRESETS: 'pesets',
+        PRESETS: 'presets',
         ARMY: 'army',
         BALANCER: 'balancer'
     }
