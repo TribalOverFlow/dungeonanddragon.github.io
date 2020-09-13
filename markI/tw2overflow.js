@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 13 Sep 2020 13:23:47 GMT
+ * Sun, 13 Sep 2020 16:50:55 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1061,17 +1061,14 @@ define('two/language', [
             "spy": "Akcje Szpiegowskie",
             "recruit": "Auto-Rekrutacja",
             "countermeasures": "Kontrwywiad",
-            "light_cavalry": "LK",
-            "mounted_archer": "ŁK",
-            "heavy_cavalry": "CK",
             "torpedo": "Cel misji szpiegowskich",
             "spyU": "Szpieguj jednostki",
             "spyB": "Szpieguj budynki",
             "spyA": "Efektywne szpiegowanie",
             "spyP": "Szpieguj całego gracza",
             "sabotage": "Sabotuj wioskę",
-            "spyU.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko jednostkach.",
-            "spyB.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko budynkach.",
+            "spyU.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko p jednostkach.",
+            "spyB.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko o budynkach.",
             "sabotage.text": "Wysyła po 3 szpiegów z twoich wiosek na wioskę wskazaną aby dokonać sabotażu na budynkach.",
             "spyA.text": "Wysyła 8-10 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
             "spyP.text": "Wysyła szpiegów z twoich wiosek na wioski gracza aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
@@ -1105,8 +1102,8 @@ define('two/language', [
             "dummies": "Atrapy",
             "dummies.text": "Wybierz jednostkę, która ma posłużyć jako atrapa widoczna dla wrogiego szpiega.",
             "dummies.tip": "Aktywuje Atrapy, uzupełnia wolny prowiant o wybrane jednotski na wszystkich wioskach gdzie są one dostępne.",
-            "dummies.btn": "Aktywuj",
-            "dummies.set": "Atrapy ustawione.",
+            "dummies.btn": "Postaw",
+            "dummies.set": "Atrapy postawione.",
             "exchange": "Wymiana",
             "exchange.text": "Dzięki tej opcji wrogi szpieg pozostawi raport na temat swojej własnej wioski.",
             "exchange.tip": "Aktywuje Wymianę na wszystkich wioskach gdzie jest ona dostępna.",
@@ -1123,6 +1120,36 @@ define('two/language', [
             "logs": "Logi",
             "logs.clear": "Wyczyść logi",
             "logs.noMissions": "Brak wysłanych szpiegów.",
+            "headquarter": "Ratusz",
+            "barracks": "Koszary",
+            "tavern": "Tawerna",
+            "hospital": "Szpital",
+            "preceptory": "Komturia",
+            "chapel": "Kaplica",
+            "church": "Kościół",
+            "academy": "Akademia",
+            "rally_point": "Plac",
+            "statue": "Piedestał",
+            "market": "Rynek",
+            "timber_camp": "Tartak",
+            "clay_pit": "Kopalnia gliny",
+            "iron_mine": "Huta żelaza",
+            "farm": "Farma",
+            "warehouse": "Magazyn",
+            "wall": "Mur",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
             "none": "-- Wyłączona --"
         },
         "spy_recruiter": {
@@ -1773,9 +1800,6 @@ define('two/language', [
             "spy": "Akcje Szpiegowskie",
             "recruit": "Auto-Rekrutacja",
             "countermeasures": "Kontrwywiad",
-            "light_cavalry": "LK",
-            "mounted_archer": "ŁK",
-            "heavy_cavalry": "CK",
             "torpedo": "Cel misji szpiegowskich",
             "spyU": "Szpieguj jednostki",
             "spyB": "Szpieguj budynki",
@@ -1835,6 +1859,36 @@ define('two/language', [
             "logs": "Logi",
             "logs.clear": "Wyczyść logi",
             "logs.noMissions": "Brak wysłanych szpiegów.",
+            "headquarter": "Ratusz",
+            "barracks": "Koszary",
+            "tavern": "Tawerna",
+            "hospital": "Szpital",
+            "preceptory": "Komturia",
+            "chapel": "Kaplica",
+            "church": "Kościół",
+            "academy": "Akademia",
+            "rally_point": "Plac",
+            "statue": "Piedestał",
+            "market": "Rynek",
+            "timber_camp": "Tartak",
+            "clay_pit": "Kopalnia gliny",
+            "iron_mine": "Huta żelaza",
+            "farm": "Farma",
+            "warehouse": "Magazyn",
+            "wall": "Mur",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "LK",
+            "mounted_archer": "ŁK",
+            "heavy_cavalry": "CK",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
             "none": "-- Wyłączona --"
         },
         "spy_recruiter": {
@@ -3113,6 +3167,366 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/armyHelper', [
+    'two/Settings',
+    'two/armyHelper/settings',
+    'two/armyHelper/settings/map',
+    'two/armyHelper/settings/updates',
+    'two/spyMaster/types/unit',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    B_UNIT,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let armyHelperSettings
+
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'army_helper_settings'
+    }
+	
+    const BALANCER_UNIT = {
+        [B_UNIT.SPEAR]: 'spear',
+        [B_UNIT.SWORD]: 'sword',
+        [B_UNIT.AXE]: 'axe',
+        [B_UNIT.ARCHER]: 'archer',
+        [B_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [B_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [B_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [B_UNIT.RAM]: 'ram',
+        [B_UNIT.CATAPULT]: 'catapult',
+        [B_UNIT.TREBUCHET]: 'trebuchet',
+        [B_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
+        [B_UNIT.SNOB]: 'snob',
+        [B_UNIT.KNIGHT]: 'knight'
+    }
+    console.log(BALANCER_UNIT)
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = armyHelperSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const armyHelper = {}
+
+    armyHelper.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            armyHelperSettings = settings.getAll()
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        armyHelperSettings = settings.getAll()
+
+        console.log('all settings', armyHelperSettings)
+
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    armyHelper.start = function () {
+        running = true
+
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_START)
+    }
+
+    armyHelper.stop = function () {
+        running = false
+
+        console.log('armyHelper module stop')
+
+        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_STOP)
+    }
+
+    armyHelper.getSettings = function () {
+        return settings
+    }
+
+    armyHelper.isInitialized = function () {
+        return initialized
+    }
+
+    armyHelper.isRunning = function () {
+        return running
+    }
+
+    return armyHelper
+})
+
+define('two/armyHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        ARMY_HELPER_START: 'army_helper_start',
+        ARMY_HELPER_STOP: 'army_helper_stop'
+    })
+})
+
+define('two/armyHelper/ui', [
+    'two/ui',
+    'two/armyHelper',
+    'two/armyHelper/settings',
+    'two/armyHelper/settings/map',
+    'two/spyMaster/types/unit',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    armyHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    B_UNIT,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        PRESETS: 'pesets',
+        ARMY: 'army',
+        BALANCER: 'balancer'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+        } else {
+            armyHelper.start()
+        }
+    }
+
+    const eventHandlers = {
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
+        }
+    }
+
+    const init = function () {
+        settings = armyHelper.getSettings()
+        $button = interfaceOverflow.addMenuButton('Administrator', 150)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Administrator</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ TAB_TYPES.PRESETS | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ TAB_TYPES.ARMY | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ TAB_TYPES.BALANCER | i18n:loc.ale:'army_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets-all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.all' | i18n:loc.ale:'army_helper' }}<td class=\"item-asignAll\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'asigningAll' | i18n:loc.ale:'army_helper' }}\">{{ 'asign' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets-name' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME1]\"><td class=\"item-name\">{{ 'presets.name' | i18n:loc.ale:'army_helper' }}<td class=\"item-asignName\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'asigningName' | i18n:loc.ale:'army_helper' }}\">{{ 'asign' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"group\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'presets.group' | i18n:loc.ale:'army_helper' }}<td class=\"item-asignGroup\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'asigningGroup' | i18n:loc.ale:'army_helper' }}\">{{ 'asign' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets-ng' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME2]\"><td><div select=\"\" list=\"group\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'presets.ng' | i18n:loc.ale:'army_helper' }}<td class=\"item-asignNG\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'asigningNG' | i18n:loc.ale:'army_helper' }}\">{{ 'asign' | i18n:loc.ale:'army_helper' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'check' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'check.tip' | i18n:loc.ale:'army_helper' }}\">{{ 'check.btn' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.amounts' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'deffensive-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"item-spear-a\"><td class=\"item-spear-o\"><td class=\"item-spear-i\"><td class=\"item-spear-s\"><td class=\"item-spear-r\"><td class=\"item-spear-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"item-sword-a\"><td class=\"item-sword-o\"><td class=\"item-sword-i\"><td class=\"item-sword-s\"><td class=\"item-sword-r\"><td class=\"item-sword-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"item-archer-a\"><td class=\"item-archer-o\"><td class=\"item-archer-i\"><td class=\"item-archer-s\"><td class=\"item-archer-r\"><td class=\"item-archer-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-hc-a\"><td class=\"item-hc-o\"><td class=\"item-hc-i\"><td class=\"item-hc-s\"><td class=\"item-hc-r\"><td class=\"item-hc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"item-trebuchet-a\"><td class=\"item-trebuchet-o\"><td class=\"item-trebuchet-i\"><td class=\"item-trebuchet-s\"><td class=\"item-trebuchet-r\"><td class=\"item-trebuchet-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'offensive-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"item-axe-a\"><td class=\"item-axe-o\"><td class=\"item-axe-i\"><td class=\"item-axe-s\"><td class=\"item-axe-r\"><td class=\"item-axe-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-lc-a\"><td class=\"item-lc-o\"><td class=\"item-lc-i\"><td class=\"item-lc-s\"><td class=\"item-lc-r\"><td class=\"item-lc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"item-ma-a\"><td class=\"item-ma-o\"><td class=\"item-ma-i\"><td class=\"item-ma-s\"><td class=\"item-ma-r\"><td class=\"item-ma-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"item-ram-a\"><td class=\"item-ram-o\"><td class=\"item-ram-i\"><td class=\"item-ram-s\"><td class=\"item-ram-r\"><td class=\"item-ram-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"item-catapult-a\"><td class=\"item-catapult-o\"><td class=\"item-catapult-i\"><td class=\"item-catapult-s\"><td class=\"item-catapult-r\"><td class=\"item-catapult-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"item-berserker-a\"><td class=\"item-berserker-o\"><td class=\"item-berserker-i\"><td class=\"item-berserker-s\"><td class=\"item-berserker-r\"><td class=\"item-berserker-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"item-snob-a\"><td class=\"item-snob-o\"><td class=\"item-snob-i\"><td class=\"item-snob-s\"><td class=\"item-snob-r\"><td class=\"item-snob-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"item-knight-a\"><td class=\"item-knight-o\"><td class=\"item-knight-i\"><td class=\"item-knight-s\"><td class=\"item-knight-r\"><td class=\"item-knight-t\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'balance-all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balance.all' | i18n:loc.ale:'army_helper' }}<td class=\"item-balanceAll\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'balancingAll' | i18n:loc.ale:'army_helper' }}\">{{ 'balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balance-unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'balance.unit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balanceUnit\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'balancingUnit' | i18n:loc.ale:'army_helper' }}\">{{ 'balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balance-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"group\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'balance.group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balanceGroup\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'balancingGroup' | i18n:loc.ale:'army_helper' }}\">{{ 'balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balance-ug' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"group\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'balance.ug' | i18n:loc.ale:'army_helper' }}<td class=\"item-balanceUG\"><span class=\"btn btn-orange addSelected\" tooltip=\"{{ 'balancingUG' | i18n:loc.ale:'army_helper' }}\">{{ 'balance' | i18n:loc.ale:'army_helper' }}</span></table></form></div></div></div></div></div>`)
+        interfaceOverflow.addStyle('#two-army-helper div[select]{float:right}#two-army-helper div[select] .select-handler{line-height:28px}#two-army-helper .range-container{width:250px}#two-army-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:100%}#two-army-helper .addForm1 input{width:100%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px;padding:0 10px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm input{width:100%}#two-army-helper .addForm td{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm span{height:26px;line-height:26px;padding:0 10px}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = armyHelper.isRunning()
+        $scope.selectedTab = TAB_TYPES.PRESETS
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.unit = Settings.encodeList(B_UNIT, {
+            textObject: 'army_helper',
+            disabled: true
+        })
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_army_helper_window', function onDestroy () {
+            console.log('armyHelper window closed')
+        })
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.ARMY_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.ARMY_HELPER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_army_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/armyHelper/settings', [], function () {
+    return {
+        PRESET_NAME1: 'presets',
+        PRESET_NAME2: 'presets',
+        GROUP1: 'group1',
+        GROUP2: 'group2',
+        GROUP3: 'group3',
+        GROUP4: 'group4',
+        UNIT_TYPE1: 'unit_type1',
+        UNIT_TYPE2: 'unit_type2'
+    }
+})
+
+define('two/armyHelper/settings/updates', function () {
+    return {
+        GROUP1: 'group1',
+        GROUP2: 'group2',
+        GROUP3: 'group3',
+        GROUP4: 'group4'
+    }
+})
+
+define('two/armyHelper/settings/map', [
+    'two/armyHelper/settings',
+    'two/armyHelper/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.GROUP1]: {
+            default: [],
+            updates: [
+                UPDATES.GROUP1,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP2]: {
+            default: [],
+            updates: [
+                UPDATES.GROUP2,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP3]: {
+            default: [],
+            updates: [
+                UPDATES.GROUP3,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP4]: {
+            default: [],
+            updates: [
+                UPDATES.GROUP4,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.UNIT_TYPE1]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_TYPE2]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        }
+    }
+})
+
+define('two/armyHelper/types/unit', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+require([
+    'two/ready',
+    'two/armyHelper',
+    'two/armyHelper/ui',
+    'two/armyHelper/events'
+], function (
+    ready,
+    armyHelper,
+    armyHelperInterface
+) {
+    if (armyHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        armyHelper.init()
+        armyHelperInterface()
+    })
+})
+
 define('two/attackView', [
     'two/ready',
     'two/utils',
@@ -14493,7 +14907,7 @@ define('two/spyMaster/ui', [
         settings = spyMaster.getSettings()
         $button = interfaceOverflow.addMenuButton('Zwiadowca', 170)
         $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Zwiadowca</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ TAB_TYPES.SPY | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ TAB_TYPES.COUNTERMEASURES | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spyU' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_UNITS]\"><td class=\"item-name\">{{ 'spyU.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingU' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyB' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_BUILDINGS]\"><td class=\"item-name\">{{ 'spyB.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingB' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyA' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_ALL]\"><td class=\"item-name\">{{ 'spyA.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingA' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SABOTAGE]\"><td class=\"item-name\">{{ 'sabotage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingS' | i18n:loc.ale:'spy_master' }}\">{{ 'sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyP' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_PLAYER]\"><td class=\"item-name\">{{ 'spyP.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingP' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"17%\"><col><col width=\"18%\"><tr><td colspan=\"3\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\"><td class=\"item-name\">{{ 'camouflage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"{{ 'camouflage.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'camouflage.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td colspan=\"3\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"3\"><div select=\"\" list=\"replacement\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'switch.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"{{ 'switch.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'switch.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td colspan=\"3\"><div select=\"\" list=\"dummies\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'dummies.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"{{ 'dummies.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'dummies.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'exchange.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"{{ 'exchange.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'exchange.btn' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'target' | i18n:loc.ale:'spy_master' }}<th>{{ 'type' | i18n:loc.ale:'spy_master' }}<th>{{ 'amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Zwiadowca</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ TAB_TYPES.SPY | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ TAB_TYPES.COUNTERMEASURES | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spyU' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_UNITS]\"><td class=\"item-name\">{{ 'spyU.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingU' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyB' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_BUILDINGS]\"><td class=\"item-name\">{{ 'spyB.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingB' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyA' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_ALL]\"><td class=\"item-name\">{{ 'spyA.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingA' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SABOTAGE]\"><td class=\"item-name\">{{ 'sabotage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingS' | i18n:loc.ale:'spy_master' }}\">{{ 'sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyP' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_PLAYER]\"><td class=\"item-name\">{{ 'spyP.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingP' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"17%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\"><td class=\"item-name\">{{ 'camouflage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"{{ 'camouflage.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'camouflage.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td><div select=\"\" list=\"replacement\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'switch.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"{{ 'switch.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'switch.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"dummies\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'dummies.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"{{ 'dummies.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'dummies.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'exchange.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"{{ 'exchange.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'exchange.btn' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'target' | i18n:loc.ale:'spy_master' }}<th>{{ 'type' | i18n:loc.ale:'spy_master' }}<th>{{ 'amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-spy-master div[select]{float:right}#two-spy-master div[select] .select-handler{line-height:28px}#two-spy-master .range-container{width:250px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-spy-master .textfield-border.fit{width:100%}#two-spy-master .addForm input{width:100%}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px;padding:0 10px}#two-spy-master .spyLog td{text-align:center}#two-spy-master .spyLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-spy-master .spyLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}')
     }
     const buildWindow = function() {
