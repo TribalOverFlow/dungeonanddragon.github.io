@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 13 Sep 2020 16:50:55 GMT
+ * Sun, 13 Sep 2020 17:02:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3385,7 +3385,6 @@ define('two/armyHelper/ui', [
         })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
         eventHandlers.updateGroups()
 
         $scope.selectTab = selectTab
