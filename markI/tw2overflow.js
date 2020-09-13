@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Sep 2020 18:11:24 GMT
+ * Sun, 13 Sep 2020 13:23:47 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1056,6 +1056,82 @@ define('two/language', [
             "activated": "Goniec aktywowany",
             "deactivated": "Goniec skończył działanie"
         },
+        "spy_master": {
+            "title": "Zwiadowca",
+            "spy": "Akcje Szpiegowskie",
+            "recruit": "Auto-Rekrutacja",
+            "countermeasures": "Kontrwywiad",
+            "light_cavalry": "LK",
+            "mounted_archer": "ŁK",
+            "heavy_cavalry": "CK",
+            "torpedo": "Cel misji szpiegowskich",
+            "spyU": "Szpieguj jednostki",
+            "spyB": "Szpieguj budynki",
+            "spyA": "Efektywne szpiegowanie",
+            "spyP": "Szpieguj całego gracza",
+            "sabotage": "Sabotuj wioskę",
+            "spyU.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko jednostkach.",
+            "spyB.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko budynkach.",
+            "sabotage.text": "Wysyła po 3 szpiegów z twoich wiosek na wioskę wskazaną aby dokonać sabotażu na budynkach.",
+            "spyA.text": "Wysyła 8-10 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
+            "spyP.text": "Wysyła szpiegów z twoich wiosek na wioski gracza aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
+            "send": "Wyślij",
+            "sabote": "Sabotuj",
+            "sendingU": "Wszyscy na jednostki",
+            "sendingB": "Wszyscy na budynki",
+            "sendingS": "3 do sabotowania budynków na wrogiej wiosce",
+            "sendingA": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
+            "sendingP": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
+            "entry/id": "Gracz",
+            "entry/vid": "Wioska",
+            "entry/building": "Wpisz budynek",
+            "entry/level": "Wpisz poziom",
+            "entry/unit": "Jednostka",
+            "entry/replacement": "Zamiennik",
+            "recruiting": "Rekrutacja",
+            "recruit.text": "Rekrutuje wszystkich szpiegów na wszystkich wioskach.",
+            "recruit.tip": "xxx",
+            "recruit.btn": "Rekrutuj",
+            "camouflage": "Kamuflaż",
+            "camouflage.text": "Wybierz budynek oraz poziom jaki ma być widoczny dla wrogiego szpiega.",
+            "camouflage.tip": "Zmienia widoczność poziomu wybranego budynku na wszystkich wioskach gdzie jest dostępna opcja kamuflażu",
+            "camouflage.btn": "Kamufluj",
+            "camouflage.set": "Kamuflaż ustawiony.",
+            "switch": "Zamiana broni",
+            "switch.text": "Wybierz typy jednostek które zamienią się bronią by oszukać wrogiego szpiega.",
+            "switch.tip": "Zamienia broń między dwoma typami jednostek na wszystkich wioskach, na których jest to możliwe.",
+            "switch.btn": "Zamień",
+            "switch.set": "Zamiana broni ustawiona.",
+            "dummies": "Atrapy",
+            "dummies.text": "Wybierz jednostkę, która ma posłużyć jako atrapa widoczna dla wrogiego szpiega.",
+            "dummies.tip": "Aktywuje Atrapy, uzupełnia wolny prowiant o wybrane jednotski na wszystkich wioskach gdzie są one dostępne.",
+            "dummies.btn": "Aktywuj",
+            "dummies.set": "Atrapy ustawione.",
+            "exchange": "Wymiana",
+            "exchange.text": "Dzięki tej opcji wrogi szpieg pozostawi raport na temat swojej własnej wioski.",
+            "exchange.tip": "Aktywuje Wymianę na wszystkich wioskach gdzie jest ona dostępna.",
+            "exchange.btn": "Aktywuj",
+            "exchange.set": "Wymiana ustawiona.",
+            "general.stopped": "Zwiadowca zatrzymany",
+            "general.started": "Zwiadowca uruchomiony",
+            "origin": "Wioska źródłowa",
+            "target": "Wioska cel",
+            "type": "Typ",
+            "amount": "Ilość",
+            "date": "Czas wysłania",
+            "clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.clear": "Wyczyść logi",
+            "logs.noMissions": "Brak wysłanych szpiegów.",
+            "none": "-- Wyłączona --"
+        },
+        "spy_recruiter": {
+            "title": "Szpieg",
+            "description": "Automatycznie rekrutuje szpiegów jesli brak na wioskach.",
+            "activated": "Szpieg aktywowany",
+            "deactivated": "Szpieg skończył działanie",
+            "revived": "Szpiedzy dodani do kolejki rekrutacji"
+        },
         "common": {
             "start": "Start",
             "started": "Uruchomiony",
@@ -1203,8 +1279,8 @@ define('two/language', [
             "deactivated": "Medyk skończył działanie"
         },
         "battle_calculator": {
-            "title": "Strateg",
-            "check.btn": "Policz",
+            "title": "Kalkulator",
+            "check.btn": "Przelicz",
             "simulate.btn": "Symuluj",
             "calculated": "Obliczono wynik bitwy!",
             "inserted": "Obliczono wynik bitwy!",
@@ -1296,7 +1372,7 @@ define('two/language', [
             "troops.header": "Kalkulator kosztów produkcji jednostek",
             "troops.th": "Koszty produkcji",
             "troops.units": "Jednostki",
-            "troops.building": "Budynek",
+            "troops.building": "Budynki",
             "troops.barracks": "Koszary",
             "troops.preceptory": "Komturia",
             "troops.effects": "Efekty",
@@ -1688,9 +1764,85 @@ define('two/language', [
         },
         "report_sender": {
             "title": "Goniec",
-            "description": "Automatycznie wysyła raporty z misji szpiegowskich, ataków oaz wsparć.",
+            "description": "Automatycznie wysyła raporty z misji szpiegowskich, ataków oraz wsparć tworząc odpowiednie wiadomości.",
             "activated": "Goniec aktywowany",
             "deactivated": "Goniec skończył działanie"
+        },
+        "spy_master": {
+            "title": "Zwiadowca",
+            "spy": "Akcje Szpiegowskie",
+            "recruit": "Auto-Rekrutacja",
+            "countermeasures": "Kontrwywiad",
+            "light_cavalry": "LK",
+            "mounted_archer": "ŁK",
+            "heavy_cavalry": "CK",
+            "torpedo": "Cel misji szpiegowskich",
+            "spyU": "Szpieguj jednostki",
+            "spyB": "Szpieguj budynki",
+            "spyA": "Efektywne szpiegowanie",
+            "spyP": "Szpieguj całego gracza",
+            "sabotage": "Sabotuj wioskę",
+            "spyU.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko jednostkach.",
+            "spyB.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko budynkach.",
+            "sabotage.text": "Wysyła po 3 szpiegów z twoich wiosek na wioskę wskazaną aby dokonać sabotażu na budynkach.",
+            "spyA.text": "Wysyła 8-10 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
+            "spyP.text": "Wysyła szpiegów z twoich wiosek na wioski gracza aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
+            "send": "Wyślij",
+            "sabote": "Sabotuj",
+            "sendingU": "Wszyscy na jednostki",
+            "sendingB": "Wszyscy na budynki",
+            "sendingS": "3 do sabotowania budynków na wrogiej wiosce",
+            "sendingA": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
+            "sendingP": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
+            "entry/id": "Gracz",
+            "entry/vid": "Wioska",
+            "entry/building": "Wpisz budynek",
+            "entry/level": "Wpisz poziom",
+            "entry/unit": "Jednostka",
+            "entry/replacement": "Zamiennik",
+            "recruiting": "Rekrutacja",
+            "recruit.text": "Rekrutuje wszystkich szpiegów na wszystkich wioskach.",
+            "recruit.tip": "xxx",
+            "recruit.btn": "Rekrutuj",
+            "camouflage": "Kamuflaż",
+            "camouflage.text": "Wybierz budynek oraz poziom jaki ma być widoczny dla wrogiego szpiega.",
+            "camouflage.tip": "Zmienia widoczność poziomu wybranego budynku na wszystkich wioskach gdzie jest dostępna opcja kamuflażu",
+            "camouflage.btn": "Kamufluj",
+            "camouflage.set": "Kamuflaż ustawiony.",
+            "switch": "Zamiana broni",
+            "switch.text": "Wybierz typy jednostek które zamienią się bronią by oszukać wrogiego szpiega.",
+            "switch.tip": "Zamienia broń między dwoma typami jednostek na wszystkich wioskach, na których jest to możliwe.",
+            "switch.btn": "Zamień",
+            "switch.set": "Zamiana broni ustawiona.",
+            "dummies": "Atrapy",
+            "dummies.text": "Wybierz jednostkę, która ma posłużyć jako atrapa widoczna dla wrogiego szpiega.",
+            "dummies.tip": "Aktywuje Atrapy, uzupełnia wolny prowiant o wybrane jednotski na wszystkich wioskach gdzie są one dostępne.",
+            "dummies.btn": "Aktywuj",
+            "dummies.set": "Atrapy ustawione.",
+            "exchange": "Wymiana",
+            "exchange.text": "Dzięki tej opcji wrogi szpieg pozostawi raport na temat swojej własnej wioski.",
+            "exchange.tip": "Aktywuje Wymianę na wszystkich wioskach gdzie jest ona dostępna.",
+            "exchange.btn": "Aktywuj",
+            "exchange.set": "Wymiana ustawiona.",
+            "general.stopped": "Zwiadowca zatrzymany",
+            "general.started": "Zwiadowca uruchomiony",
+            "origin": "Wioska źródłowa",
+            "target": "Wioska cel",
+            "type": "Typ",
+            "amount": "Ilość",
+            "date": "Czas wysłania",
+            "clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.clear": "Wyczyść logi",
+            "logs.noMissions": "Brak wysłanych szpiegów.",
+            "none": "-- Wyłączona --"
+        },
+        "spy_recruiter": {
+            "title": "Szpieg",
+            "description": "Automatycznie rekrutuje szpiegów jesli brak na wioskach.",
+            "activated": "Szpieg aktywowany",
+            "deactivated": "Szpieg skończył działanie",
+            "revived": "Szpiedzy dodani do kolejki rekrutacji"
         },
         "common": {
             "start": "Start",
@@ -3419,6 +3571,7 @@ define('two/attackView/ui', [
 
     const removeTroops = function (command) {
         const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'H:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
         attackView.setCommander(command, formatedDate)
     }
 
@@ -4252,8 +4405,8 @@ define('two/battleCalculator', [
     let initialized = false
     let running = false
     let settings
-    let exampleSettings
-
+    let battleCalculatorSettings
+	
     let selectedPresets = []
 
     const STORAGE_KEYS = {
@@ -4391,7 +4544,7 @@ define('two/battleCalculator', [
         selectedPresets = []
 
         const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = exampleSettings[SETTINGS.PRESETS]
+        const presetsSelectedByTheUser = battleCalculatorSettings[SETTINGS.PRESETS]
 
         presetsSelectedByTheUser.forEach(function (presetId) {
             selectedPresets.push(allPresets[presetId])
@@ -4410,21 +4563,9 @@ define('two/battleCalculator', [
             storageKey: STORAGE_KEYS.SETTINGS
         })
 
-        settings.onChange(function (changes, updates) {
-            exampleSettings = settings.getAll()
+        battleCalculatorSettings = settings.getAll()
 
-            // here you can handle settings that get modified and need
-            // some processing. Useful to not break the script when updated
-            // while running.
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-        })
-
-        exampleSettings = settings.getAll()
-
-        console.log('all settings', exampleSettings)
+        console.log('all settings', battleCalculatorSettings)
 
         ready(function () {
             updatePresets()
@@ -4640,8 +4781,6 @@ define('two/battleCalculator/ui', [
         let eventScope = new EventScope('twoverflow_battle_calculator_window', function onDestroy () {
             console.log('battleCalculator window closed')
         })
-
-        // all those event listeners will be destroyed as soon as the window gets closed
         eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
         eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_START, eventHandlers.start)
@@ -4655,6 +4794,32 @@ define('two/battleCalculator/ui', [
 
 define('two/battleCalculator/settings', [], function () {
     return {
+        BATTLE_SPEAR_D: 'battle_spear_d',
+        BATTLE_SWORD_D: 'battle_sword_d',
+        BATTLE_AXE_D: 'battle_axe_d',
+        BATTLE_ARCHER_D: 'battle_archer_d',
+        BATTLE_LC_D: 'battle_lc_d',
+        BATTLE_MA_D: 'battle_ma_d',
+        BATTLE_HC_D: 'battle_hc_d',
+        BATTLE_RAM_D: 'battle_ram_d',
+        BATTLE_CATAPULT_D: 'battle_catapult_d',
+        BATTLE_DOPPELSOLDNER_D: 'battle_doppelsoldner_d',
+        BATTLE_TREBUCHET_D: 'battle_trebuchet_d',
+        BATTLE_SNOB_D: 'battle_snob_d',
+        BATTLE_KNIGHT_D: 'battle_knight_d',
+        BATTLE_SPEAR_A: 'battle_spear_a',
+        BATTLE_SWORD_A: 'battle_sword_a',
+        BATTLE_AXE_A: 'battle_axe_a',
+        BATTLE_ARCHER_A: 'battle_archer_a',
+        BATTLE_LC_A: 'battle_lc_a',
+        BATTLE_MA_A: 'battle_ma_a',
+        BATTLE_HC_A: 'battle_hc_a',
+        BATTLE_RAM_A: 'battle_ram_a',
+        BATTLE_CATAPULT_A: 'battle_catapult_a',
+        BATTLE_DOPPELSOLDNER_A: 'battle_doppelsoldner_a',
+        BATTLE_TREBUCHET_A: 'battle_trebuchet_a',
+        BATTLE_SNOB_A: 'battle_snob_a',
+        BATTLE_KNIGHT_A: 'battle_knight_a',
         BATTLE_CHURCH_A: 'battle_church_a',
         BATTLE_KNIGHT_ITEM_D1: 'battle_knight_item_d1',
         BATTLE_KNIGHT_ITEM_D2: 'battle_knight_item_d2',
@@ -4665,6 +4830,7 @@ define('two/battleCalculator/settings', [], function () {
         BATTLE_ITEM_LEVEL_D3: 'battle_item_level_d3',
         BATTLE_ITEM_LEVEL_A: 'battle_item_level_a',
         BATTLE_CATAPULT_TARGET: 'battle_catapult_target',
+        BATTLE_TARGET_LEVEL: 'battle_target_level',
         BATTLE_CHURCH_D: 'battle_church_d',
         BATTLE_MORALE: 'battle_morale',
         BATTLE_LUCK: 'battle_luck',
@@ -4713,8 +4879,6 @@ define('two/battleCalculator/settings', [], function () {
 
 define('two/battleCalculator/settings/updates', function () {
     return {
-        MINIMAP: 'minimap',
-        MAP_POSITION: 'map_position'
     }
 })
 
@@ -14128,6 +14292,803 @@ require([
             })
 
             eventQueue.register(eventTypeProvider.REPORT_SENDER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
+define('two/spyMaster', [
+    'two/Settings',
+    'two/spyMaster/settings',
+    'two/spyMaster/settings/map',
+    'two/spyMaster/settings/updates',
+    'two/spyMaster/types/building',
+    'two/spyMaster/types/unit',
+    'two/spyMaster/types/dummies',
+    'two/spyMaster/types/replacement',
+    'two/ready',
+    'queues/EventQueue'
+], function(
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    C_BUILDING,
+    C_UNIT,
+    C_DUMMIES,
+    C_REPLACEMENT,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let spyMasterSettings
+    const STORAGE_KEYS = {
+        SETTINGS: 'spy_master_settings'
+    }
+    const COUNTERMEASURES_BUILDING = {
+        [C_BUILDING.HEADQUARTER]: 'headquarter',
+        [C_BUILDING.WAREHOUSE]: 'warehouse',
+        [C_BUILDING.FARM]: 'farm',
+        [C_BUILDING.RALLY_POINT]: 'rally_point',
+        [C_BUILDING.STATUE]: 'statue',
+        [C_BUILDING.WALL]: 'wall',
+        [C_BUILDING.TAVERN]: 'tavern',
+        [C_BUILDING.BARRACKS]: 'barracks',
+        [C_BUILDING.PRECEPTORY]: 'preceptory',
+        [C_BUILDING.HOSPITAL]: 'hospital',
+        [C_BUILDING.CLAY_PIT]: 'clay_pit',
+        [C_BUILDING.IRON_MINE]: 'iron_mine',
+        [C_BUILDING.TIMBER_CAMP]: 'timber_camp',
+        [C_BUILDING.CHAPEL]: 'chapel',
+        [C_BUILDING.CHURCH]: 'church',
+        [C_BUILDING.MARKET]: 'market',
+        [C_BUILDING.ACADEMY]: 'academy'
+    }
+    const COUNTERMEASURES_REPLACEMENT = {
+        [C_UNIT.SPEAR]: 'spear',
+        [C_UNIT.SWORD]: 'sword',
+        [C_UNIT.AXE]: 'axe',
+        [C_UNIT.ARCHER]: 'archer',
+        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [C_UNIT.RAM]: 'ram',
+        [C_UNIT.CATAPULT]: 'catapult',
+        [C_UNIT.TREBUCHET]: 'trebuchet',
+        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
+        [C_UNIT.SNOB]: 'snob',
+        [C_UNIT.KNIGHT]: 'knight'
+    }
+    const COUNTERMEASURES_DUMMIES = {
+        [C_UNIT.SPEAR]: 'spear',
+        [C_UNIT.SWORD]: 'sword',
+        [C_UNIT.AXE]: 'axe',
+        [C_UNIT.ARCHER]: 'archer',
+        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [C_UNIT.RAM]: 'ram',
+        [C_UNIT.CATAPULT]: 'catapult',
+        [C_UNIT.TREBUCHET]: 'trebuchet',
+        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
+        [C_UNIT.SNOB]: 'snob',
+        [C_UNIT.KNIGHT]: 'knight'
+    }
+    const COUNTERMEASURES_UNIT = {
+        [C_UNIT.SPEAR]: 'spear',
+        [C_UNIT.SWORD]: 'sword',
+        [C_UNIT.AXE]: 'axe',
+        [C_UNIT.ARCHER]: 'archer',
+        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [C_UNIT.RAM]: 'ram',
+        [C_UNIT.CATAPULT]: 'catapult',
+        [C_UNIT.TREBUCHET]: 'trebuchet',
+        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
+        [C_UNIT.SNOB]: 'snob',
+        [C_UNIT.KNIGHT]: 'knight'
+    }
+    console.log(COUNTERMEASURES_UNIT, COUNTERMEASURES_REPLACEMENT, COUNTERMEASURES_BUILDING, COUNTERMEASURES_DUMMIES)
+    const spyMaster = {}
+    spyMaster.init = function() {
+        initialized = true
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+        spyMasterSettings = settings.getAll()
+        console.log('all settings', spyMasterSettings)
+    }
+    spyMaster.start = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
+    }
+    spyMaster.stop = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+    }
+    spyMaster.getSettings = function() {
+        return settings
+    }
+    spyMaster.isInitialized = function() {
+        return initialized
+    }
+    spyMaster.isRunning = function() {
+        return running
+    }
+    return spyMaster
+})
+define('two/spyMaster/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        SPY_MASTER_START: 'spy_master_start',
+        SPY_MASTER_STOP: 'spy_master_stop'
+    })
+})
+
+define('two/spyMaster/ui', [
+    'two/ui',
+    'two/spyMaster',
+    'two/spyMaster/settings',
+    'two/spyMaster/settings/map',
+    'two/spyMaster/types/building',
+    'two/spyMaster/types/unit',
+    'two/spyMaster/types/dummies',
+    'two/spyMaster/types/replacement',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function(
+    interfaceOverflow,
+    spyMaster,
+    SETTINGS,
+    SETTINGS_MAP,
+    C_BUILDING,
+    C_UNIT,
+    C_DUMMIES,
+    C_REPLACEMENT,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let $button
+    const TAB_TYPES = {
+        SPY: 'spy',
+        COUNTERMEASURES: 'countermeasures',
+        LOGS: 'logs'
+    }
+    const selectTab = function(tabType) {
+        $scope.selectedTab = tabType
+    }
+    const saveSettings = function() {
+        settings.setAll(settings.decode($scope.settings))
+        utils.notif('success', 'Settings saved')
+    }
+    const switchState = function() {
+        if (spyMaster.isRunning()) {
+            spyMaster.stop()
+        } else {
+            spyMaster.start()
+        }
+    }
+    const eventHandlers = {
+        start: function() {
+            $scope.running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'spy_master'))
+        },
+        stop: function() {
+            $scope.running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'spy_master'))
+        }
+    }
+    const init = function() {
+        settings = spyMaster.getSettings()
+        $button = interfaceOverflow.addMenuButton('Zwiadowca', 170)
+        $button.addEventListener('click', buildWindow)
+        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Zwiadowca</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ TAB_TYPES.SPY | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ TAB_TYPES.COUNTERMEASURES | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spyU' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_UNITS]\"><td class=\"item-name\">{{ 'spyU.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingU' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyB' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_BUILDINGS]\"><td class=\"item-name\">{{ 'spyB.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingB' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyA' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_ALL]\"><td class=\"item-name\">{{ 'spyA.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingA' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SABOTAGE]\"><td class=\"item-name\">{{ 'sabotage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingS' | i18n:loc.ale:'spy_master' }}\">{{ 'sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyP' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_PLAYER]\"><td class=\"item-name\">{{ 'spyP.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingP' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"17%\"><col><col width=\"18%\"><tr><td colspan=\"3\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\"><td class=\"item-name\">{{ 'camouflage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"{{ 'camouflage.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'camouflage.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td colspan=\"3\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"3\"><div select=\"\" list=\"replacement\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'switch.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"{{ 'switch.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'switch.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td colspan=\"3\"><div select=\"\" list=\"dummies\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'dummies.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"{{ 'dummies.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'dummies.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'exchange.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"{{ 'exchange.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'exchange.btn' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'target' | i18n:loc.ale:'spy_master' }}<th>{{ 'type' | i18n:loc.ale:'spy_master' }}<th>{{ 'amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-spy-master div[select]{float:right}#two-spy-master div[select] .select-handler{line-height:28px}#two-spy-master .range-container{width:250px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-spy-master .textfield-border.fit{width:100%}#two-spy-master .addForm input{width:100%}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px;padding:0 10px}#two-spy-master .spyLog td{text-align:center}#two-spy-master .spyLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-spy-master .spyLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}')
+    }
+    const buildWindow = function() {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = spyMaster.isRunning()
+        $scope.selectedTab = TAB_TYPES.SPY
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.building = Settings.encodeList(C_BUILDING, {
+            textObject: 'spy_master',
+            disabled: true
+        })
+        $scope.unit = Settings.encodeList(C_UNIT, {
+            textObject: 'spy_master',
+            disabled: true
+        })
+        $scope.dummies = Settings.encodeList(C_DUMMIES, {
+            textObject: 'spy_master',
+            disabled: true
+        })
+        $scope.replacement = Settings.encodeList(C_REPLACEMENT, {
+            textObject: 'spy_master',
+            disabled: true
+        })
+        settings.injectScope($scope)
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+        let eventScope = new EventScope('twoverflow_spy_master_window', function onDestroy() {
+            console.log('spyMaster window closed')
+        })
+        eventScope.register(eventTypeProvider.SPY_MASTER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.SPY_MASTER_STOP, eventHandlers.stop)
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_spy_master_window', $scope)
+    }
+    return init
+})
+define('two/spyMaster/settings', [], function () {
+    return {
+        SPY_UNITS: 'spy_units',
+        SPY_BUILDINGS: 'spy_buildings',
+        SPY_ALL: 'spy_all',
+        SABOTAGE: 'sabotage',
+        SPY_PLAYER: 'spy_player',
+        BUILDING: 'building',
+        BUILDING_LEVEL: 'building_level',
+        REPLACEMENT: 'replacement',
+        UNIT: 'unit',
+        DUMMIES: 'dummies'
+        
+    }
+})
+
+define('two/spyMaster/settings/updates', function () {
+    return {
+    }
+})
+
+define('two/spyMaster/settings/map', [
+    'two/spyMaster/settings'
+], function (
+    SETTINGS
+) {
+    return {
+        [SETTINGS.BUILDING]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.REPLACEMENT]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.DUMMIES]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        }
+    }
+})
+
+define('two/spyMaster/types/building', [], function () {
+    return {
+        HEADQUARTER: 'headquarter',
+        WAREHOUSE: 'warehouse',
+        FARM: 'farm',
+        RALLY_POINT: 'rally_point',
+        STATUE: 'statue',
+        WALL: 'wall',
+        TAVERN: 'tavern',
+        BARRACKS: 'barracks',
+        PRECEPTORY: 'preceptory',
+        HOSPITAL: 'hospital',
+        CLAY_PIT: 'clay_pit',
+        IRON_MINE: 'iron_mine',
+        TIMBER_CAMP: 'timber_camp',
+        CHAPEL: 'chapel',
+        CHURCH: 'church',
+        MARKET: 'market',
+        ACADEMY: 'academy'
+    }
+})
+
+define('two/spyMaster/types/unit', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+
+define('two/spyMaster/types/dummies', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+
+define('two/spyMaster/types/replacement', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+require([
+    'two/ready',
+    'two/spyMaster',
+    'two/spyMaster/ui',
+    'two/spyMaster/events'
+], function (
+    ready,
+    spyMaster,
+    spyMasterInterface
+) {
+    if (spyMaster.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        spyMaster.init()
+        spyMasterInterface()
+    }, ['map', 'world_config'])
+})
+
+define('two/spyRecruiter', [
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    utils,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+
+    var recruitSpy = function recruitSpy() {
+        setInterval(function() {
+            var player = modelDataService.getSelectedCharacter()
+            var villages = player.getVillageList()
+            villages.forEach(function(village) {
+                var data = village.data
+                var buildings = data.buildings
+                var tavern = buildings.tavern
+                var level = tavern.level
+                var scoutingInfo = village.scoutingInfo
+                var spies = scoutingInfo.spies
+                var resources = village.getResources()
+                var computed = resources.getComputed()
+                var wood = computed.wood
+                var clay = computed.clay
+                var iron = computed.iron
+                var villageWood = wood.currentStock
+                var villageClay = clay.currentStock
+                var villageIron = iron.currentStock
+                var woodCost = [500, 1000, 2200, 7000, 12000]
+                var clayCost = [500, 800, 2000, 6500, 10000]
+                var ironCost = [500, 1200, 2400, 8000, 18000]
+                if (level < 1) {
+                    console.log('Brak tawerny w wiosce:' +village.getId)
+                } else if (level >= 1 && level < 3) {
+                    spies.forEach(function(spy) {
+                        if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                        }
+                    })
+                    console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                } else if (level >= 3 && level < 6) {
+                    spies.forEach(function(spy) {
+                        if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        }
+                    })
+                } else if (level >= 6 && level < 9) {
+                    spies.forEach(function(spy) {
+                        if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                        }
+                    })
+                } else if (level >= 9 && level < 12) {
+                    spies.forEach(function(spy) {
+                        if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            console.log('spy', 4, 'from village', village.getId(), 'can be recruited')
+                        }
+                    })
+                } else if (level >= 12) {
+                    spies.forEach(function(spy) {
+                        if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 5
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 5
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 5
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 4 && spy.active != true)) {
+                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 5
+                            })
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
+                            console.log('spy', 4, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 1
+                            })
+                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 2
+                            })
+                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 3
+                            })
+                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 4
+                            })
+                            console.log('spy', 4, 'from village', village.getId(), 'can be recruited')
+                        } else if (spy.id == 5 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[5] && villageClay >= clayCost[5] && villageIron >= ironCost[5])) {
+                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                                village_id: village.getId(),
+                                slot: 5
+                            })
+                            console.log('spy', 5, 'from village', village.getId(), 'can be recruited')
+                        }
+                    })
+                }
+            })
+            utils.notif('success',  $filter('i18n')('revived', $rootScope.loc.ale, 'spy_recruiter'))
+        }, 120000)
+    }
+	
+    let spyRecruiter = {}
+    spyRecruiter.init = function() {
+        initialized = true
+    }
+    spyRecruiter.start = function() {
+        eventQueue.trigger(eventTypeProvider.SPY_RECRUITER_STARTED)
+        running = true
+        recruitSpy()
+    }
+    spyRecruiter.stop = function() {
+        eventQueue.trigger(eventTypeProvider.SPY_RECRUITER_STOPPED)
+        running = false
+    }
+    spyRecruiter.isRunning = function() {
+        return running
+    }
+    spyRecruiter.isInitialized = function() {
+        return initialized
+    }
+    return spyRecruiter
+})
+define('two/spyRecruiter/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        SPY_RECRUITER_STARTED: 'spy_recruiter_started',
+        SPY_RECRUITER_STOPPED: 'spy_recruiter_stopped'
+    })
+})
+
+define('two/spyRecruiter/ui', [
+    'two/ui',
+    'two/spyRecruiter',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    spyRecruiter,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Szpieg', 120, $filter('i18n')('description', $rootScope.loc.ale, 'spy_recruiter'))
+        $button.addEventListener('click', function () {
+            if (spyRecruiter.isRunning()) {
+                spyRecruiter.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'spy_recruiter'))
+            } else {
+                spyRecruiter.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'spy_recruiter'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.SPY_RECRUITER_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.SPY_RECRUITER_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (spyRecruiter.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.SPY_RECRUITER_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+
+require([
+    'two/ready',
+    'two/spyRecruiter',
+    'two/spyRecruiter/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/spyRecruiter/events'
+], function(
+    ready,
+    spyRecruiter,
+    spyRecruiterInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'spy_recruiter_active'
+    }
+	
+    if (spyRecruiter.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        spyRecruiter.init()
+        spyRecruiterInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                spyRecruiter.start()
+            }
+
+            eventQueue.register(eventTypeProvider.SPY_RECRUITER_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.SPY_RECRUITER_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
