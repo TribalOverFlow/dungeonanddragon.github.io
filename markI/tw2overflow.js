@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 13 Sep 2020 17:19:22 GMT
+ * Sun, 13 Sep 2020 17:29:50 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3172,7 +3172,7 @@ define('two/armyHelper', [
     'two/armyHelper/settings',
     'two/armyHelper/settings/map',
     'two/armyHelper/settings/updates',
-    'two/spyMaster/types/unit',
+    'two/armyHelper/types/unit',
     'two/ready',
     'queues/EventQueue'
 ], function (
@@ -3295,7 +3295,7 @@ define('two/armyHelper/ui', [
     'two/armyHelper',
     'two/armyHelper/settings',
     'two/armyHelper/settings/map',
-    'two/spyMaster/types/unit',
+    'two/armyHelper/types/unit',
     'two/Settings',
     'two/EventScope',
     'two/utils'
