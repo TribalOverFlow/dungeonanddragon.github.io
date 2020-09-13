@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 13 Sep 2020 17:29:50 GMT
+ * Sun, 13 Sep 2020 17:54:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3421,10 +3421,7 @@ define('two/armyHelper/settings', [], function () {
 
 define('two/armyHelper/settings/updates', function () {
     return {
-        GROUP1: 'group1',
-        GROUP2: 'group2',
-        GROUP3: 'group3',
-        GROUP4: 'group4'
+        GROUPS: 'groups'
     }
 })
 
@@ -3439,41 +3436,41 @@ define('two/armyHelper/settings/map', [
         [SETTINGS.GROUP1]: {
             default: [],
             updates: [
-                UPDATES.GROUP1,
+                UPDATES.GROUPS,
             ],
             disabledOption: true,
             inputType: 'select',
-            multiSelect: true,
+            multiSelect: false,
             type: 'groups'
         },
         [SETTINGS.GROUP2]: {
             default: [],
             updates: [
-                UPDATES.GROUP2,
+                UPDATES.GROUPS,
             ],
             disabledOption: true,
             inputType: 'select',
-            multiSelect: true,
+            multiSelect: false,
             type: 'groups'
         },
         [SETTINGS.GROUP3]: {
             default: [],
             updates: [
-                UPDATES.GROUP3,
+                UPDATES.GROUPS,
             ],
             disabledOption: true,
             inputType: 'select',
-            multiSelect: true,
+            multiSelect: false,
             type: 'groups'
         },
         [SETTINGS.GROUP4]: {
             default: [],
             updates: [
-                UPDATES.GROUP4,
+                UPDATES.GROUPS,
             ],
             disabledOption: true,
             inputType: 'select',
-            multiSelect: true,
+            multiSelect: false,
             type: 'groups'
         },
         [SETTINGS.UNIT_TYPE1]: {
