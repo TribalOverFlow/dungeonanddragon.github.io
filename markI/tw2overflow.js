@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 13 Sep 2020 20:28:47 GMT
+ * Mon, 14 Sep 2020 20:47:27 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -525,6 +525,77 @@ define('two/language', [
             "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw z 'Attacks' w nazwie.",
             "activated": "Wartownik aktywowany",
             "deactivated": "Wartownik skończył działanie"
+        },
+        "army_helper": {
+            "title": "Administrator",
+            "presets": "Szablony",
+            "army": "Wojsko",
+            "balancer": "Balanser",
+            "none": "-- Wyłączona --",
+            "presets-all": "Wszystkie szablony",
+            "presets.all": "Przypisz wszystkie szablony do wszystkich wiosek.",
+            "asigningAll": "Przypisuje wszystkie szablony",
+            "presets-name": "Szablony z nazwą",
+            "entry/name": "Wpisz frazę",
+            "presets.name": "Przypisz szablony zawierające wskazaną frazę do wszystkich wiosek.",
+            "asigningName": "Przypisuje określone szablony",
+            "presets-group": "Szablony do grupy",
+            "entry/group": "Wpisz nazwę grupy",
+            "presets.group": "Przypisz wszystkie szablony do wybranej grupy wiosek.",
+            "asigningGroup": "Przypisuje szablony do wybranej grupy",
+            "presets-ng": "Szablony - zaawansowane przypisywanie",
+            "presets.ng": "Przypisz szablony zawierające wskazaną fraze do wybranej grupy wiosek.",
+            "asigningNG": "Przypisuje określone szablony do wybranej grupy wiosek",
+            "asign": "Przypisz",
+            "check": "Sprawdź ilość jednostek w wioskach",
+            "check.tip": "Zlicza jednostki w wioskach",
+            "check.btn": "Zlicz",
+            "army.amounts": "Wojsko",
+            "unit": "Jednostka",
+            "available": "Dostępne",
+            "own": "Posiadane",
+            "in-town": "W wioskach",
+            "support": "Wsparcie",
+            "recruiting": "Rekrutacja",
+            "total": "Wszystko",
+            "calculated": "Wojsko zliczone!",
+            "assigned": "Szablony przypisane!",
+            "assignedN": "Szablony przypisane wg nazwy!",
+            "assignedG": "Szablony przypisane do grupy wiosek!",
+            "assignedNG": "Szablony przypisane wg nazwy do grupy wiosek!",
+            "deffensive-troops": "Defensywne jednostki",
+            "offensive-troops": "Ofensywne jednostki",
+            "balance-all": "Wszystkie typy wojsk",
+            "balance.all": "Zbalansuj po równo całe swoje wojsko.",
+            "balancingAll": "Balansuje wojsko",
+            "balance-unit": "Jednostka",
+            "balance.unit": "Zbalansuj po równo wojska danego typu.",
+            "balancingUnit": "Balansuje wojsko - jednostka",
+            "balance-group": "Grupa",
+            "balance.group": "Zbalansuj po równo wojska w danej grupie wiosek.",
+            "balancingGroup": "Balansuje wojsko - grupa",
+            "balance-ug": "Grupa/Jednostka",
+            "balance.ug": "Zbalansuj po równo wojska w danej grupie wiosek dany typ jednostki.(np miecznik w grupie Deff)",
+            "balancingUG": "Balansuje wojsko - grupa+jednostka",
+            "balance": "Balansuj",
+            "balanced": "Wojska zbalansowane!",
+            "balancedN": "Wojska zbalansowane wg wskazanego typu!",
+            "balancedG": "Wojska zbalansowane wg wskazanej grupy!",
+            "balancedNG": "Wojska zbalansowane wg typu i w danej grupie!",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
+            "special-troops": "Specjalne jednostki"
         },
         "attack_view": {
             "title": "Strażnik",
@@ -1264,6 +1335,77 @@ define('two/language', [
             "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw z 'Attacks' w nazwie.",
             "activated": "Wartownik aktywowany",
             "deactivated": "Wartownik skończył działanie"
+        },
+        "army_helper": {
+            "title": "Administrator",
+            "presets": "Szablony",
+            "army": "Wojsko",
+            "balancer": "Balanser",
+            "none": "-- Wyłączona --",
+            "presets-all": "Wszystkie szablony",
+            "presets.all": "Przypisz wszystkie szablony do wszystkich wiosek.",
+            "asigningAll": "Przypisuje wszystkie szablony",
+            "presets-name": "Szablony z nazwą",
+            "entry/name": "Wpisz frazę",
+            "presets.name": "Przypisz szablony zawierające wskazaną frazę do wszystkich wiosek.",
+            "asigningName": "Przypisuje określone szablony",
+            "presets-group": "Szablony do grupy",
+            "entry/group": "Wpisz nazwę grupy",
+            "presets.group": "Przypisz wszystkie szablony do wybranej grupy wiosek.",
+            "asigningGroup": "Przypisuje szablony do wybranej grupy",
+            "presets-ng": "Szablony - zaawansowane przypisywanie",
+            "presets.ng": "Przypisz szablony zawierające wskazaną fraze do wybranej grupy wiosek.",
+            "asigningNG": "Przypisuje określone szablony do wybranej grupy wiosek",
+            "asign": "Przypisz",
+            "check": "Sprawdź ilość jednostek w wioskach",
+            "check.tip": "Zlicza jednostki w wioskach",
+            "check.btn": "Zlicz",
+            "army.amounts": "Wojsko",
+            "unit": "Jednostka",
+            "available": "Dostępne",
+            "own": "Posiadane",
+            "in-town": "W wioskach",
+            "support": "Wsparcie",
+            "recruiting": "Rekrutacja",
+            "total": "Wszystko",
+            "calculated": "Wojsko zliczone!",
+            "assigned": "Szablony przypisane!",
+            "assignedN": "Szablony przypisane wg nazwy!",
+            "assignedG": "Szablony przypisane do grupy wiosek!",
+            "assignedNG": "Szablony przypisane wg nazwy do grupy wiosek!",
+            "deffensive-troops": "Defensywne jednostki",
+            "offensive-troops": "Ofensywne jednostki",
+            "balance-all": "Wszystkie typy wojsk",
+            "balance.all": "Zbalansuj po równo całe swoje wojsko.",
+            "balancingAll": "Balansuje wojsko",
+            "balance-unit": "Jednostka",
+            "balance.unit": "Zbalansuj po równo wojska danego typu.",
+            "balancingUnit": "Balansuje wojsko - jednostka",
+            "balance-group": "Grupa",
+            "balance.group": "Zbalansuj po równo wojska w danej grupie wiosek.",
+            "balancingGroup": "Balansuje wojsko - grupa",
+            "balance-ug": "Grupa/Jednostka",
+            "balance.ug": "Zbalansuj po równo wojska w danej grupie wiosek dany typ jednostki.(np miecznik w grupie Deff)",
+            "balancingUG": "Balansuje wojsko - grupa+jednostka",
+            "balance": "Balansuj",
+            "balanced": "Wojska zbalansowane!",
+            "balancedN": "Wojska zbalansowane wg wskazanego typu!",
+            "balancedG": "Wojska zbalansowane wg wskazanej grupy!",
+            "balancedNG": "Wojska zbalansowane wg typu i w danej grupie!",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
+            "special-troops": "Specjalne jednostki"
         },
         "attack_view": {
             "title": "Strażnik",
@@ -13895,6 +14037,993 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/recruitQueue', [
+    'two/Settings',
+    'two/recruitQueue/settings',
+    'two/recruitQueue/settings/map',
+    'two/recruitQueue/settings/updates',
+    'two/recruitQueue/types/unit',
+    'two/ready',
+    'queues/EventQueue'
+], function(
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    RQ_UNIT,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let recruitQueueSettings
+    let selectedPreset1 = []
+    let selectedPreset2 = []
+    let selectedPreset3 = []
+    let selectedPreset4 = []
+    let selectedPreset1_F = []
+    let selectedPreset2_F = []
+    let selectedPreset3_F = []
+    let selectedPreset4_F = []
+    let selectedGroups1 = []
+    let selectedGroups2 = []
+    let selectedGroups3 = []
+    let selectedGroups4 = []
+    let selectedGroups5 = []
+    let selectedGroups6 = []
+    let selectedGroups7 = []
+    let selectedGroups8 = []
+    let selectedGroups9 = []
+    let selectedGroups10 = []
+    let selectedGroups11 = []
+    let selectedGroups12 = []
+    let selectedGroups13 = []
+    let selectedGroups14 = []
+    let selectedGroups15 = []
+    let selectedGroups16 = []
+    let selectedGroups17 = []
+    let selectedGroups18 = []
+    let selectedGroups19 = []
+    let selectedGroups20 = []
+    let selectedGroups21 = []
+    let selectedGroups22 = []
+    let selectedGroups23 = []
+    let selectedGroups24 = []
+    const STORAGE_KEYS = {
+        SETTINGS: 'recruit_queue_settings'
+    }
+    const RECRUIT_UNIT = {
+        [RQ_UNIT.SPEAR]: 'spear',
+        [RQ_UNIT.SWORD]: 'sword',
+        [RQ_UNIT.AXE]: 'axe',
+        [RQ_UNIT.ARCHER]: 'archer',
+        [RQ_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [RQ_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [RQ_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [RQ_UNIT.RAM]: 'ram',
+        [RQ_UNIT.CATAPULT]: 'catapult',
+        [RQ_UNIT.TREBUCHET]: 'trebuchet',
+        [RQ_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
+        [RQ_UNIT.SNOB]: 'snob',
+        [RQ_UNIT.KNIGHT]: 'knight'
+    }
+    console.log(RECRUIT_UNIT)
+    const updatePresets = function() {
+        selectedPreset1 = []
+        selectedPreset2 = []
+        selectedPreset3 = []
+        selectedPreset4 = []
+        selectedPreset1_F = []
+        selectedPreset2_F = []
+        selectedPreset3_F = []
+        selectedPreset4_F = []
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
+        const presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
+        const presetsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.PRESET3]
+        const presetsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.PRESET4]
+        const presetsSelectedByTheUser1_F = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
+        const presetsSelectedByTheUser2_F = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
+        const presetsSelectedByTheUser3_F = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
+        const presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
+        presetsSelectedByTheUser1.forEach(function(presetId) {
+            selectedPreset1.push(allPresets[presetId])
+        })
+        presetsSelectedByTheUser2.forEach(function(presetId) {
+            selectedPreset2.push(allPresets[presetId])
+        })
+        presetsSelectedByTheUser3.forEach(function(presetId) {
+            selectedPreset3.push(allPresets[presetId])
+        })
+        presetsSelectedByTheUser4.forEach(function(presetId) {
+            selectedPreset4.push(allPresets[presetId])
+        })
+        presetsSelectedByTheUser1_F.forEach(function(presetId) {
+            selectedPreset1_F.push(allPresets[presetId])
+        })
+        presetsSelectedByTheUser2_F.forEach(function(presetId) {
+            selectedPreset2_F.push(allPresets[presetId])
+        })
+        presetsSelectedByTheUser3_F.forEach(function(presetId) {
+            selectedPreset3_F.push(allPresets[presetId])
+        })
+        presetsSelectedByTheUser4_F.forEach(function(presetId) {
+            selectedPreset4_F.push(allPresets[presetId])
+        })
+    }
+    const updateGroups = function() {
+        selectedGroups1 = []
+        selectedGroups2 = []
+        selectedGroups3 = []
+        selectedGroups4 = []
+        selectedGroups5 = []
+        selectedGroups6 = []
+        selectedGroups7 = []
+        selectedGroups8 = []
+        selectedGroups9 = []
+        selectedGroups10 = []
+        selectedGroups11 = []
+        selectedGroups12 = []
+        selectedGroups13 = []
+        selectedGroups14 = []
+        selectedGroups15 = []
+        selectedGroups16 = []
+        selectedGroups17 = []
+        selectedGroups18 = []
+        selectedGroups19 = []
+        selectedGroups20 = []
+        selectedGroups21 = []
+        selectedGroups22 = []
+        selectedGroups23 = []
+        selectedGroups24 = []
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.GROUP1]
+        const groupsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.GROUP2]
+        const groupsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.GROUP3]
+        const groupsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.GROUP4]
+        const groupsSelectedByTheUser5 = recruitQueueSettings[SETTINGS.GROUP5]
+        const groupsSelectedByTheUser6 = recruitQueueSettings[SETTINGS.GROUP6]
+        const groupsSelectedByTheUser7 = recruitQueueSettings[SETTINGS.GROUP7]
+        const groupsSelectedByTheUser8 = recruitQueueSettings[SETTINGS.GROUP8]
+        const groupsSelectedByTheUser9 = recruitQueueSettings[SETTINGS.GROUP9]
+        const groupsSelectedByTheUser10 = recruitQueueSettings[SETTINGS.GROUP10]
+        const groupsSelectedByTheUser11 = recruitQueueSettings[SETTINGS.GROUP11]
+        const groupsSelectedByTheUser12 = recruitQueueSettings[SETTINGS.GROUP12]
+        const groupsSelectedByTheUser13 = recruitQueueSettings[SETTINGS.GROUP13]
+        const groupsSelectedByTheUser14 = recruitQueueSettings[SETTINGS.GROUP14]
+        const groupsSelectedByTheUser15 = recruitQueueSettings[SETTINGS.GROUP15]
+        const groupsSelectedByTheUser16 = recruitQueueSettings[SETTINGS.GROUP16]
+        const groupsSelectedByTheUser17 = recruitQueueSettings[SETTINGS.GROUP17]
+        const groupsSelectedByTheUser18 = recruitQueueSettings[SETTINGS.GROUP18]
+        const groupsSelectedByTheUser19 = recruitQueueSettings[SETTINGS.GROUP19]
+        const groupsSelectedByTheUser20 = recruitQueueSettings[SETTINGS.GROUP20]
+        const groupsSelectedByTheUser21 = recruitQueueSettings[SETTINGS.GROUP21]
+        const groupsSelectedByTheUser22 = recruitQueueSettings[SETTINGS.GROUP22]
+        const groupsSelectedByTheUser23 = recruitQueueSettings[SETTINGS.GROUP23]
+        const groupsSelectedByTheUser24 = recruitQueueSettings[SETTINGS.GROUP24]
+        groupsSelectedByTheUser1.forEach(function(groupId) {
+            selectedGroups1.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser2.forEach(function(groupId) {
+            selectedGroups2.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser3.forEach(function(groupId) {
+            selectedGroups3.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser4.forEach(function(groupId) {
+            selectedGroups4.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser5.forEach(function(groupId) {
+            selectedGroups5.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser6.forEach(function(groupId) {
+            selectedGroups6.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser7.forEach(function(groupId) {
+            selectedGroups7.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser8.forEach(function(groupId) {
+            selectedGroups8.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser9.forEach(function(groupId) {
+            selectedGroups9.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser10.forEach(function(groupId) {
+            selectedGroups10.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser11.forEach(function(groupId) {
+            selectedGroups11.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser12.forEach(function(groupId) {
+            selectedGroups12.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser13.forEach(function(groupId) {
+            selectedGroups13.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser14.forEach(function(groupId) {
+            selectedGroups14.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser15.forEach(function(groupId) {
+            selectedGroups15.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser16.forEach(function(groupId) {
+            selectedGroups16.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser17.forEach(function(groupId) {
+            selectedGroups17.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser18.forEach(function(groupId) {
+            selectedGroups18.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser19.forEach(function(groupId) {
+            selectedGroups19.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser20.forEach(function(groupId) {
+            selectedGroups20.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser21.forEach(function(groupId) {
+            selectedGroups21.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser22.forEach(function(groupId) {
+            selectedGroups22.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser23.forEach(function(groupId) {
+            selectedGroups23.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser24.forEach(function(groupId) {
+            selectedGroups24.push(allGroups[groupId])
+        })
+    }
+    const recruitQueue = {}
+    recruitQueue.init = function() {
+        initialized = true
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+        settings.onChange(function(changes, updates) {
+            recruitQueueSettings = settings.getAll()
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+        recruitQueueSettings = settings.getAll()
+        console.log('all settings', recruitQueueSettings)
+        ready(function() {
+            updatePresets()
+        }, 'presets')
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+    recruitQueue.start = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.recruit_queue_START)
+    }
+    recruitQueue.stop = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.recruit_queue_STOP)
+    }
+    recruitQueue.getSettings = function() {
+        return settings
+    }
+    recruitQueue.isInitialized = function() {
+        return initialized
+    }
+    recruitQueue.isRunning = function() {
+        return running
+    }
+    return recruitQueue
+})
+define('two/recruitQueue/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        RECRUIT_QUEUE_START: 'recruit_queue_start',
+        RECRUIT_QUEUE_STOP: 'recruit_queue_stop'
+    })
+})
+
+define('two/recruitQueue/ui', [
+    'two/ui',
+    'two/recruitQueue',
+    'two/recruitQueue/settings',
+    'two/recruitQueue/settings/map',
+    'two/recruitQueue/types/unit',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    recruitQueue,
+    SETTINGS,
+    SETTINGS_MAP,
+    RQ_UNIT,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        PRESETS: 'presets',
+        OWN: 'own',
+        LOGS: 'logs'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (recruitQueue.isRunning()) {
+            recruitQueue.stop()
+        } else {
+            recruitQueue.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = recruitQueue.getSettings()
+        $button = interfaceOverflow.addMenuButton('Kapitan', 160)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Kapitan</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ TAB_TYPES.PRESETS | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ TAB_TYPES.OWN | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'recruit.presets' | i18n:loc.ale:'recruit_queue' }}</h5>><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"32%\"><col><col><thead><tr><th>{{ 'group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'preset' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presetfinal' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET1_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4_FINAL]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'recruit.own' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"35%\"><col width=\"40%\"><col><col><thead><tr><th>{{ 'group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'started' | i18n:loc.ale:'recruit_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearP()\">{{ 'clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"switchP()\">{{ 'start' | i18n:loc.ale:'recruit_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearO()\">{{ 'clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"switchO()\">{{ 'start' | i18n:loc.ale:'recruit_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'clearL' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-recruit-queue div[select]{float:right}#two-recruit-queue div[select] .select-handler{line-height:28px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .recruitLog td{text-align:center}#two-recruit-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .noRecruits td{height:26px;text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}#two-recruit-queue .dataUnit1{width:120px}#two-recruit-queue .dataUnit1 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit2{width:120px}#two-recruit-queue .dataUnit2 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit3{width:120px}#two-recruit-queue .dataUnit3 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit4{width:120px}#two-recruit-queue .dataUnit4 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit5{width:120px}#two-recruit-queue .dataUnit5 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit6{width:120px}#two-recruit-queue .dataUnit6 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit7{width:120px}#two-recruit-queue .dataUnit7 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit8{width:120px}#two-recruit-queue .dataUnit8 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit9{width:120px}#two-recruit-queue .dataUnit9 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit10{width:120px}#two-recruit-queue .dataUnit10 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit11{width:120px}#two-recruit-queue .dataUnit11 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit12{width:120px}#two-recruit-queue .dataUnit12 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit13{width:120px}#two-recruit-queue .dataUnit13 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit14{width:120px}#two-recruit-queue .dataUnit14 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit15{width:120px}#two-recruit-queue .dataUnit15 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit16{width:120px}#two-recruit-queue .dataUnit16 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit17{width:120px}#two-recruit-queue .dataUnit17 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit18{width:120px}#two-recruit-queue .dataUnit18 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit19{width:120px}#two-recruit-queue .dataUnit19 .custom-select-handler{text-align:center}#two-recruit-queue .dataUnit20{width:120px}#two-recruit-queue .dataUnit20 .custom-select-handler{text-align:center}#two-recruit-queue .custom-select{width:240px}#two-recruit-queue .preset1{width:175px}#two-recruit-queue .preset2{width:175px}#two-recruit-queue .preset3{width:175px}#two-recruit-queue .preset4{width:175px}#two-recruit-queue .group1{width:175px}#two-recruit-queue .group2{width:175px}#two-recruit-queue .group3{width:175px}#two-recruit-queue .group4{width:175px}#two-recruit-queue .group5{width:175px}#two-recruit-queue .group6{width:175px}#two-recruit-queue .group7{width:175px}#two-recruit-queue .group8{width:175px}#two-recruit-queue .group9{width:175px}#two-recruit-queue .group10{width:175px}#two-recruit-queue .group11{width:175px}#two-recruit-queue .group12{width:175px}#two-recruit-queue .group13{width:175px}#two-recruit-queue .group14{width:175px}#two-recruit-queue .group15{width:175px}#two-recruit-queue .group16{width:175px}#two-recruit-queue .group17{width:175px}#two-recruit-queue .group18{width:175px}#two-recruit-queue .group19{width:175px}#two-recruit-queue .group20{width:175px}#two-recruit-queue .group21{width:175px}#two-recruit-queue .group22{width:175px}#two-recruit-queue .group23{width:175px}#two-recruit-queue .group24{width:175px}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = recruitQueue.isRunning()
+        $scope.selectedTab = TAB_TYPES.PRESETS
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.units = Settings.encodeList(RQ_UNIT, {
+            textObject: 'recruit_queue',
+            disabled: true
+        })
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_recruit_queue_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.recruit_queue_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.recruit_queue_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_recruit_queue_window', $scope)
+    }
+
+    return init
+})
+
+define('two/recruitQueue/settings', [], function() {
+    return {
+        GROUP1: 'group1',
+        GROUP2: 'group2',
+        GROUP3: 'group3',
+        GROUP4: 'group4',
+        GROUP5: 'group5',
+        GROUP6: 'group6',
+        GROUP7: 'group7',
+        GROUP8: 'group8',
+        GROUP9: 'group9',
+        GROUP10: 'group10',
+        GROUP11: 'group11',
+        GROUP12: 'group12',
+        GROUP13: 'group13',
+        GROUP14: 'group14',
+        GROUP15: 'group15',
+        GROUP16: 'group16',
+        GROUP17: 'group17',
+        GROUP18: 'group18',
+        GROUP19: 'group19',
+        GROUP20: 'group20',
+        GROUP21: 'group21',
+        GROUP22: 'group22',
+        GROUP23: 'group23',
+        GROUP24: 'group24',
+        UNIT1: 'unit1',
+        UNIT2: 'unit2',
+        UNIT3: 'unit3',
+        UNIT4: 'unit4',
+        UNIT5: 'unit5',
+        UNIT6: 'unit6',
+        UNIT7: 'unit7',
+        UNIT8: 'unit8',
+        UNIT9: 'unit9',
+        UNIT10: 'unit10',
+        UNIT11: 'unit11',
+        UNIT12: 'unit12',
+        UNIT13: 'unit13',
+        UNIT14: 'unit14',
+        UNIT15: 'unit15',
+        UNIT16: 'unit16',
+        UNIT17: 'unit17',
+        UNIT18: 'unit18',
+        UNIT19: 'unit19',
+        UNIT20: 'unit20',
+        AMOUNT1: 'amount1',
+        AMOUNT2: 'amount2',
+        AMOUNT3: 'amount3',
+        AMOUNT4: 'amount4',
+        AMOUNT5: 'amount5',
+        AMOUNT6: 'amount6',
+        AMOUNT7: 'amount7',
+        AMOUNT8: 'amount8',
+        AMOUNT9: 'amount9',
+        AMOUNT10: 'amount10',
+        AMOUNT11: 'amount11',
+        AMOUNT12: 'amount12',
+        AMOUNT13: 'amount13',
+        AMOUNT14: 'amount14',
+        AMOUNT15: 'amount15',
+        AMOUNT16: 'amount16',
+        AMOUNT17: 'amount17',
+        AMOUNT18: 'amount18',
+        AMOUNT19: 'amount19',
+        AMOUNT20: 'amount20',
+        PRESET1: 'preset1',
+        PRESET2: 'preset2',
+        PRESET3: 'preset3',
+        PRESET4: 'preset4',
+        PRESET1_FINAL: 'preset1_final',
+        PRESET2_FINAL: 'preset1_final',
+        PRESET3_FINAL: 'preset1_final',
+        PRESET4_FINAL: 'preset1_final'
+    }
+})
+define('two/recruitQueue/settings/updates', function() {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+define('two/recruitQueue/settings/map', [
+    'two/recruitQueue/settings',
+    'two/recruitQueue/settings/updates'
+], function(
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESET1]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.PRESET2]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.PRESET3]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.PRESET4]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.PRESET1_FINAL]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.PRESET2_FINAL]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.PRESET3_FINAL]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.PRESET4_FINAL]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUP1]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP2]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP3]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP4]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP5]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP6]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP7]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP8]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP9]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP10]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP11]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP12]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP13]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP14]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP15]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP16]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP17]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP18]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP19]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP20]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP21]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP22]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP23]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP24]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.AMOUNT1]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT2]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT3]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT4]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT5]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT6]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT7]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT8]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT9]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT10]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT11]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT12]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT13]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT14]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT15]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT16]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT17]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT18]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT19]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT20]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        }
+    }
+})
+define('two/recruitQueue/types/unit', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+require([
+    'two/ready',
+    'two/recruitQueue',
+    'two/recruitQueue/ui',
+    'two/recruitQueue/events'
+], function (
+    ready,
+    recruitQueue,
+    recruitQueueInterface
+) {
+    if (recruitQueue.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        recruitQueue.init()
+        recruitQueueInterface()
+    })
+})
+
 define('two/reportSender', [
     'queues/EventQueue'
 ], function(
@@ -14771,34 +15900,34 @@ define('two/spyMaster', [
         [C_BUILDING.ACADEMY]: 'academy'
     }
     const COUNTERMEASURES_REPLACEMENT = {
-        [C_UNIT.SPEAR]: 'spear',
-        [C_UNIT.SWORD]: 'sword',
-        [C_UNIT.AXE]: 'axe',
-        [C_UNIT.ARCHER]: 'archer',
-        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [C_UNIT.RAM]: 'ram',
-        [C_UNIT.CATAPULT]: 'catapult',
-        [C_UNIT.TREBUCHET]: 'trebuchet',
-        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [C_UNIT.SNOB]: 'snob',
-        [C_UNIT.KNIGHT]: 'knight'
+        [C_REPLACEMENT.SPEAR]: 'spear',
+        [C_REPLACEMENT.SWORD]: 'sword',
+        [C_REPLACEMENT.AXE]: 'axe',
+        [C_REPLACEMENT.ARCHER]: 'archer',
+        [C_REPLACEMENT.LIGHT_CAVALRY]: 'light_cavalry',
+        [C_REPLACEMENT.MOUNTED_ARCHER]: 'mounted_archer',
+        [C_REPLACEMENT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [C_REPLACEMENT.RAM]: 'ram',
+        [C_REPLACEMENT.CATAPULT]: 'catapult',
+        [C_REPLACEMENT.TREBUCHET]: 'trebuchet',
+        [C_REPLACEMENT.DOPPELSOLDNER]: 'doppelsoldner',
+        [C_REPLACEMENT.SNOB]: 'snob',
+        [C_REPLACEMENT.KNIGHT]: 'knight'
     }
     const COUNTERMEASURES_DUMMIES = {
-        [C_UNIT.SPEAR]: 'spear',
-        [C_UNIT.SWORD]: 'sword',
-        [C_UNIT.AXE]: 'axe',
-        [C_UNIT.ARCHER]: 'archer',
-        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [C_UNIT.RAM]: 'ram',
-        [C_UNIT.CATAPULT]: 'catapult',
-        [C_UNIT.TREBUCHET]: 'trebuchet',
-        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [C_UNIT.SNOB]: 'snob',
-        [C_UNIT.KNIGHT]: 'knight'
+        [C_DUMMIES.SPEAR]: 'spear',
+        [C_DUMMIES.SWORD]: 'sword',
+        [C_DUMMIES.AXE]: 'axe',
+        [C_DUMMIES.ARCHER]: 'archer',
+        [C_DUMMIES.LIGHT_CAVALRY]: 'light_cavalry',
+        [C_DUMMIES.MOUNTED_ARCHER]: 'mounted_archer',
+        [C_DUMMIES.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [C_DUMMIES.RAM]: 'ram',
+        [C_DUMMIES.CATAPULT]: 'catapult',
+        [C_DUMMIES.TREBUCHET]: 'trebuchet',
+        [C_DUMMIES.DOPPELSOLDNER]: 'doppelsoldner',
+        [C_DUMMIES.SNOB]: 'snob',
+        [C_DUMMIES.KNIGHT]: 'knight'
     }
     const COUNTERMEASURES_UNIT = {
         [C_UNIT.SPEAR]: 'spear',
@@ -14917,7 +16046,7 @@ define('two/spyMaster/ui', [
         settings = spyMaster.getSettings()
         $button = interfaceOverflow.addMenuButton('Zwiadowca', 170)
         $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Zwiadowca</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ TAB_TYPES.SPY | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ TAB_TYPES.COUNTERMEASURES | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spyU' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_UNITS]\"><td class=\"item-name\">{{ 'spyU.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingU' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyB' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_BUILDINGS]\"><td class=\"item-name\">{{ 'spyB.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingB' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyA' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_ALL]\"><td class=\"item-name\">{{ 'spyA.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingA' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SABOTAGE]\"><td class=\"item-name\">{{ 'sabotage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingS' | i18n:loc.ale:'spy_master' }}\">{{ 'sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyP' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_PLAYER]\"><td class=\"item-name\">{{ 'spyP.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"{{ 'sendingP' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"17%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\"><td class=\"item-name\">{{ 'camouflage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"{{ 'camouflage.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'camouflage.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td><div select=\"\" list=\"replacement\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'switch.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"{{ 'switch.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'switch.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"dummies\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'dummies.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"{{ 'dummies.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'dummies.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'exchange.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"{{ 'exchange.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'exchange.btn' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'target' | i18n:loc.ale:'spy_master' }}<th>{{ 'type' | i18n:loc.ale:'spy_master' }}<th>{{ 'amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Zwiadowca</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ TAB_TYPES.SPY | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ TAB_TYPES.COUNTERMEASURES | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spyU' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_UNITS]\"><td class=\"item-name\">{{ 'spyU.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingU' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyB' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_BUILDINGS]\"><td class=\"item-name\">{{ 'spyB.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingB' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyA' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_ALL]\"><td class=\"item-name\">{{ 'spyA.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingA' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SABOTAGE]\"><td class=\"item-name\">{{ 'sabotage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingS' | i18n:loc.ale:'spy_master' }}\">{{ 'sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyP' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_PLAYER]\"><td class=\"item-name\">{{ 'spyP.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingP' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"17%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\"><td class=\"item-name\">{{ 'camouflage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'camouflage.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'camouflage.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td><div select=\"\" list=\"replacement\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'switch.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'switch.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'switch.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"dummies\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'dummies.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'dummies.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'dummies.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'exchange.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'exchange.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'exchange.btn' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'target' | i18n:loc.ale:'spy_master' }}<th>{{ 'type' | i18n:loc.ale:'spy_master' }}<th>{{ 'amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-spy-master div[select]{float:right}#two-spy-master div[select] .select-handler{line-height:28px}#two-spy-master .range-container{width:250px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-spy-master .textfield-border.fit{width:100%}#two-spy-master .addForm input{width:100%}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px;padding:0 10px}#two-spy-master .spyLog td{text-align:center}#two-spy-master .spyLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-spy-master .spyLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}')
     }
     const buildWindow = function() {
