@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 17 Sep 2020 19:55:43 GMT
+ * Fri, 18 Sep 2020 08:37:56 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4293,9 +4293,9 @@ define('two/attackView/ui', [
         $button = interfaceOverflow.addMenuButton('Strażnik', 20)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_attack_view_main', `<div id=\"two-attack-view\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Strażnik</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-orange icon-26x26-double-arrow\" ng-click=\"switchWindowSize()\"></a><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap rich-text\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.VILLAGE)\" tooltip=\"\" tooltip-content=\"{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}<tr><td><div ng-repeat=\"unit in ::UNIT_SPEED_ORDER\" class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}\" ng-click=\"toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)\" tooltip=\"\" tooltip-content=\"{{ unit | i18n:loc.ale:'unit_names' }}\"><span class=\"icon-34x34-unit-{{ unit }} icon-bg-black\"></span></div></table></div><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleCommands.length\">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}<table class=\"tbl-border-light commands-table\" ng-show=\"visibleCommands.length\"><col width=\"8%\"><col width=\"14%\"><col><col><col width=\"4%\"><col width=\"15%\"><col width=\"11%\"><thead class=\"sorting\"><tr><th ng-click=\"toggleSorting(COLUMN_TYPES.COMMAND_TYPE)\" tooltip=\"\" tooltip-content=\"{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'command_type' | i18n:loc.ale:'attack_view' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.COMMAND_TYPE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)\">{{ 'player' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)\">{{ 'origin' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)\">{{ 'target' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TARGET_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th tooltip=\"\" tooltip-content=\"{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}<th ng-click=\"toggleSorting(COLUMN_TYPES.TIME_COMPLETED)\">{{ 'arrive' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TIME_COMPLETED\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th>{{ 'actions' | i18n:loc.ale:'attack_view' }}<tbody><tr ng-repeat=\"command in visibleCommands\" class=\"{{ command.command_type }}\" ng-class=\"{'snob': command.slowestUnit === UNIT_TYPES.SNOB}\"><td><span class=\"icon-20x20-{{ command.command_type }}\"></span><td ng-click=\"openCharacterProfile(command.originCharacter.id)\" class=\"character\"><span class=\"name\">{{ command.originCharacter.name }}</span><td ng-class=\"{'selected': command.originVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.originVillage.id)\">{{ command.originVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.originVillage.x, command.originVillage.y)\">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span><td ng-class=\"{'selected': command.targetVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.targetVillage.id)\">{{ command.targetVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.targetVillage.x, command.targetVillage.y)\">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span><td><span class=\"icon-20x20-unit-{{ command.slowestUnit }}\"></span><td><div class=\"progress-wrapper\" tooltip=\"\" tooltip-content=\"{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}\"><div class=\"progress-bar\" ng-style=\"{width: command.model.percent() + '%'}\"></div><div class=\"progress-text\"><span>{{ command.model.countdown() }}</span></div></div><td><a ng-click=\"copyTimeModal(command.time_completed)\" class=\"btn btn-orange size-20x20 icon-20x20-arrivetime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-click=\"copyTimeModal(command.time_completed + (command.time_completed - command.time_start))\" class=\"btn btn-red size-20x20 icon-20x20-backtime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"removeTroops(command)\" class=\"btn btn-orange size-20x20 icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div>`)
+        interfaceOverflow.addTemplate('twoverflow_attack_view_main', `<div id=\"two-attack-view\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Strażnik</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-orange icon-26x26-double-arrow\" ng-click=\"switchWindowSize()\"></a><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap rich-text\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.VILLAGE)\" tooltip=\"\" tooltip-content=\"{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}<tr><td><div ng-repeat=\"unit in ::UNIT_SPEED_ORDER\" class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}\" ng-click=\"toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)\" tooltip=\"\" tooltip-content=\"{{ unit | i18n:loc.ale:'unit_names' }}\"><span class=\"icon-34x34-unit-{{ unit }} icon-bg-black\"></span></div></table></div><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleCommands.length\">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}<table class=\"tbl-border-light commands-table\" ng-show=\"visibleCommands.length\"><col width=\"7%\"><col width=\"15%\"><col><col><col width=\"5%\"><col width=\"13%\"><col width=\"29%\"><thead class=\"sorting\"><tr><th ng-click=\"toggleSorting(COLUMN_TYPES.COMMAND_TYPE)\" tooltip=\"\" tooltip-content=\"{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'command_type' | i18n:loc.ale:'attack_view' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.COMMAND_TYPE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)\">{{ 'player' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)\">{{ 'origin' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)\">{{ 'target' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TARGET_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th tooltip=\"\" tooltip-content=\"{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}<th ng-click=\"toggleSorting(COLUMN_TYPES.TIME_COMPLETED)\">{{ 'arrive' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TIME_COMPLETED\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th>{{ 'actions' | i18n:loc.ale:'attack_view' }}<tbody><tr ng-repeat=\"command in visibleCommands\" class=\"{{ command.command_type }}\" ng-class=\"{'snob': command.slowestUnit === UNIT_TYPES.SNOB}\"><td><span class=\"icon-20x20-{{ command.command_type }}\"></span><td ng-click=\"openCharacterProfile(command.originCharacter.id)\" class=\"character\"><span class=\"name\">{{ command.originCharacter.name }}</span><td ng-class=\"{'selected': command.originVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.originVillage.id)\">{{ command.originVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.originVillage.x, command.originVillage.y)\">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span><td ng-class=\"{'selected': command.targetVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.targetVillage.id)\">{{ command.targetVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.targetVillage.x, command.targetVillage.y)\">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span><td><span class=\"icon-20x20-unit-{{ command.slowestUnit }}\"></span><td><div class=\"progress-wrapper\" tooltip=\"\" tooltip-content=\"{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}\"><div class=\"progress-bar\" ng-style=\"{width: command.model.percent() + '%'}\"></div><div class=\"progress-text\"><span>{{ command.model.countdown() }}</span></div></div><td><a ng-click=\"copyTimeModal(command.time_completed)\" class=\"btn btn-orange size-20x20 icon-20x20-arrivetime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-click=\"copyTimeModal(command.time_completed + (command.time_completed - command.time_start))\" class=\"btn btn-red size-20x20 icon-20x20-backtime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"removeTroops(command)\" class=\"btn btn-orange size-20x20 icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNobleman(command)\" class=\"btn btn-orange size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_nobleman_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNoblemanBig(command)\" class=\"btn btn-red size-20x20 icon-20x20-killBig\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_noblemanBig_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"withdrawArmy(command)\" class=\"btn btn-orange size-20x20 icon-20x20-withdraw\" tooltip=\"\" tooltip-content=\"{{ 'commands_withdraw_army_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"spyVillage(command)\" class=\"btn btn-orange size-20x20 icon-20x20-spy\" tooltip=\"\" tooltip-content=\"{{ 'commands_spy_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div>`)
         interfaceOverflow.addTemplate('twoverflow_attack_view_show_text_modal', `<div id=\"show-text-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ title }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><form ng-submit=\"closeWindow()\"><input class=\"input-border text-center\" ng-model=\"text\"></form></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-green btn-border\" ng-click=\"closeWindow()\">OK</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-attack-view table.commands-table{table-layout:fixed;font-size:13px;margin-bottom:10px}#two-attack-view table.commands-table th{text-align:center;padding:0px}#two-attack-view table.commands-table td{padding:1px 0;min-height:initial;border:none;text-align:center}#two-attack-view table.commands-table tr.attack.snob td{background:#bb8658}#two-attack-view table.commands-table tr.support td,#two-attack-view table.commands-table tr.relocate td{background:#9c9368}#two-attack-view table.commands-table .empty td{height:32px}#two-attack-view table.commands-table .sorting .arrow{margin-top:-4px}#two-attack-view .village .coords{font-size:11px;color:#71471a}#two-attack-view .village .coords:hover{color:#ffde00;text-shadow:0 1px 0 #000}#two-attack-view .village .name:hover{color:#fff;text-shadow:0 1px 0 #000}#two-attack-view .village.selected .name{font-weight:bold}#two-attack-view .character .name:hover{color:#fff;text-shadow:1px 1px 0 #000}#two-attack-view .progress-wrapper{height:20px;margin-bottom:0}#two-attack-view .progress-wrapper .progress-text{position:absolute;width:100%;height:100%;text-align:center;z-index:10;padding:0 5px;line-height:20px;color:#f0ffc9;overflow:hidden}#two-attack-view .filters{height:95px;margin-bottom:10px}#two-attack-view .filters table{width:auto;float:left;margin:5px}#two-attack-view .filters .icon{width:38px;float:left;margin:0 6px}#two-attack-view .filters .icon.active:before{box-shadow:0 0 0 1px #000,-1px -1px 0 2px #ac9c44,0 0 0 3px #ac9c44,0 0 0 4px #000;border-radius:1px;content:"";position:absolute;width:38px;height:38px;left:-1px;top:-1px}#two-attack-view .filters td{padding:6px}#two-attack-view .icon-20x20-backtime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEMklEQVQ4y42US2xUdRTGf3funZn/PHqnnVdpKZZ2RCWBVESgoZogSAKKEEAlGhVNLMGg0QiJKxYudIdoTEyDj8SFGo2seDUGhEQqRHk/UimDpdAptHMr8+jM3Dv35QJbi9KEszzJ+eU753z5JKYuOQGBUpAa2SLiuPgBPBKGrZAPlSlmoQLYk4ekqUCmEHHL0pslRb7fsNwWF8L/DIz5Fanftey0oogBr65rk8HS3WC6jyY8ckfZdNtfWdX++tzGIDMabAJmArte4my/l/c//vaLoFc6jmP3iCqD41B5Mi0BId1Hk+V6ljfEQlvWL2xZoY/lKOTLGCY01tZhVLMkRJEtqzoeyUvSnN70SNZRXC1iUylDVZmszhQiDmbH9Lrgpta4mKPlCjy95D6Wrn8GAKFEEfEmdG2Qowd+4I0XFrUC7+w7eL5sCu8hdL3imaQuYFl6c9l021vjYk7Y72Xjq4/z1IaNCCVKMRckq+moiQDJ2bN48uV3GbnSx9b1ra1l0223LL05AYF/Vw4S80jyonnN6paq5YTe3LyU2rpaYrFpJGfPItlcTzI1H8R8cC38NTFiaojhSzeJJ8KNJ/4YOmP43GsTCmWLiGG5LTUBb2LuzGm3e3Ij3321m5Hey6A0AVAcPjmhQcSbuDyU5sF6e5phuS2yRWQC6Lj4x62h1vjJ3BwjlUoiYn52ffolmUtnuXj4ADu2b7/DFoN9RVQ1gAthx8U/+Sk4LiGAQtFAHzXIajpr16yiu/tX98euzyWAzrc6Abj8+1G0TIZ8uYx/xJpgjANlWfEKqjaZbIlixQQgdDHDyuULWLFisZTVdBJxQTIVA2uQ+qZ6KoU0nhqV09f+QoIxj4ThAWRVJWLZToNXUaarYR8Hdm+iZBic7N5LbmgI0xclERcAFLIVAHRtkFOHjwBwNHNryK9I/bZCXlFVIk6ZuSbukidmR1Z+/cliAHzRBjKjBTq37bz9gEAAgA+2vQjAjb4j9F6pUCga/Hzm5v6A5KRDFkXF1UnWRcRj256d/vam9zrJXT0GwGc7V+ONRwAwtTwAa9bs4ND+PTy8MMW5az7+vJ7lXKZ4IeiVjsuIgaylVxTHxf/S84+u3bh5Mbmrx/D6Y1hjGtaYBjduH9g0RonNSmH4o/T1j9JzeoBixSRbsi9ktNIuRXJ6vFVbA2ypVoiZNuay+qj62r6u1R0ee4i65Iw7rDEOnLegC4CSqwxf18b23C0cFMenF5wKJzLZfLDtuW/4pWt1Ry6XY8/ug8jRB6gN3GI0k6VtXcq9csvqtm2rTyjS+YDkpGXEgLdq/z++EhA2hYjbmMtMx7P8+4/Wbdj64U89/cP5Xlli2HGcUsAnjziulMGxbrheRu4lYH21QjSarvXQoraZbQC/nUoflzwMyx6hVz26MRVkysROQNhQ8XmqQr1XwH/rb2Du69Eebp25AAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-arrivetime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEW0lEQVQ4y4WUWWxUZRiGn7PMnNPOVtvODHQBSlulAUFBoQiEaBHBhCsSFaIhIe6JSyAkRkO8NpErY2KoYuINISkkRFAjEUyAUCQsBSu1BVpKZ2DmTNuZzsyZMz3L70Vbgkjqe/Ul//89//K9eSX+KyUKFcVKQopDxBNoALJE2VXJBUzyBpQA9xG9SA+DbF2vdRxrvqQqLWVHNAkITm8saKo0KBz3hqrqt32WlXkUWHoQZvlpQFbWmLZo//zj7W8ua7JRUoKSz+DOXYVrSZMfjnV/W+mTuvHcs/okIw9DFYAoBCw/DY6QX9yycemer9/p6KiQE7ilIj4vwNXBFIO3M1iFLKta4suNvLUwZzpZTxWZiEvJhMkHgYpf1+cKSazfsnHpnve2rVqYTg2xdvMrPL76JWKNNSxesYB1LyyDiQQ9fWkCmhxzkRuLZTcpVC1lOU4eEDNPDUzitJVc6eUDn6zuSAwl2PDGLqrnx9ECPob6kkxaPiLBEK1LniIaFVz/c4SAJsf6U2ZaEfZwxMOYuaVCJTWypKz68LXV7y6sigWf7thMdfMKkMOgryA2r5pYYwWBaA3FzBhFM8uiRXFOnumn/jGt0SjYl8t+MWzbFABkxSFSdkTTE3F3zkDyBnptw/2J5VMXpwq1gfT1AQ4eOIyi1AHw5II5hCp80bIjmhSHyEyP7Ak0AcFwuIKR/vy/PLVv7156T/1M4u8e9n/1HXqNRnNzjMS9AuGQBlMfF5zxKoA6U2hph5xp0nv+ErX1KVqfXctbH+yk65tOAOa1tolNm56TjIyFNVpmIl8GwBMEHnSzKkuUJUHh8vAYcihMIFQi3hAHZ4T65hq27dyKkbGI1uqS7a/mXO8F+gZGuDZ0j4nClFsU1adj2wrgyq5KTlOlwTOJ8STApVO/Y2VGAJgwSgBEa3VsfzXZZJKLvxyjWC7z8+G3CQf9+FS13nG9ueEwEUBRqmywEfrAvWLF4rqq5fmiwCvcIjuqYCTu8v5nnXQd7+bgoZ/48dduXF8F4ZpaNj0/j60bgly+YLTeNMyUYosxPUhONaBUpeq3K7G7T/Ym2pfWh5ZU1MzBX/0XV/64iVYe4+jR3QD4aqeGaWdylPNjABw9upv9X3R+9GVXwsjmrZQCiJDjOI4scjnTyZZc0ZhKJmM9PcNYlsu4CLJjez3jt65ij45jpZPYhVG8SRNFrcQc7eeZ9evIl9xI96Xh4yqAAaXoJCOW3zuRGjfNwbRob6wNbkkYxTizaDx9B0+pY93rnWdTYxPf+xQ9p0yvCRPciEtJqFpKEfZwyXaupArOYLbM+JK2lS3HDhyRbgwanO6eoPvEaWLxOixLY+WOrrP5onUI4Z2TdMeQZgtYySaGrM6VJVFfmnRjsiwHXEG8KR5p2/fpxjWv7jpyyCd7JxR8v03nY0Fidt2H+z1dcz1LFx7xlctb2gHO9wz1+CS1L2tZSabD4f+Asx7g+a0JbYJJg6lgAPgHUh4QWRIJr4EAAAAASUVORK5CYII=")}')
+        interfaceOverflow.addStyle('#two-attack-view table.commands-table{table-layout:fixed;font-size:13px;margin-bottom:10px}#two-attack-view table.commands-table th{text-align:center;padding:0px}#two-attack-view table.commands-table td{padding:1px 0;min-height:initial;border:none;text-align:center}#two-attack-view table.commands-table tr.attack.snob td{background:#bb8658}#two-attack-view table.commands-table tr.support td{background:#6884ea}#two-attack-view table.commands-table tr.relocate td{background:#afea68}#two-attack-view table.commands-table tr.attack.snob td{background:#ea7d69}#two-attack-view table.commands-table tr.attack.trebuchet td{background:#eab268}#two-attack-view table.commands-table tr.attack.tribemate td{background:#cccccc}#two-attack-view table.commands-table .empty td{height:32px}#two-attack-view table.commands-table .sorting .arrow{margin-top:-4px}#two-attack-view .village .coords{font-size:11px;color:#71471a}#two-attack-view .village .coords:hover{color:#ffde00;text-shadow:0 1px 0 #000}#two-attack-view .village .name:hover{color:#fff;text-shadow:0 1px 0 #000}#two-attack-view .village.selected .name{font-weight:bold}#two-attack-view .character .name:hover{color:#fff;text-shadow:1px 1px 0 #000}#two-attack-view .progress-wrapper{height:20px;margin-bottom:0}#two-attack-view .progress-wrapper .progress-text{position:absolute;width:100%;height:100%;text-align:center;z-index:10;padding:0 5px;line-height:20px;color:#f0ffc9;overflow:hidden}#two-attack-view .filters{height:95px;margin-bottom:10px}#two-attack-view .filters table{width:auto;float:left;margin:5px}#two-attack-view .filters .icon{width:38px;float:left;margin:0 6px}#two-attack-view .filters .icon.active:before{box-shadow:0 0 0 1px #000,-1px -1px 0 2px #ac9c44,0 0 0 3px #ac9c44,0 0 0 4px #000;border-radius:1px;content:"";position:absolute;width:38px;height:38px;left:-1px;top:-1px}#two-attack-view .filters td{padding:6px}#two-attack-view .icon-20x20-backtime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEMklEQVQ4y42US2xUdRTGf3funZn/PHqnnVdpKZZ2RCWBVESgoZogSAKKEEAlGhVNLMGg0QiJKxYudIdoTEyDj8SFGo2seDUGhEQqRHk/UimDpdAptHMr8+jM3Dv35QJbi9KEszzJ+eU753z5JKYuOQGBUpAa2SLiuPgBPBKGrZAPlSlmoQLYk4ekqUCmEHHL0pslRb7fsNwWF8L/DIz5Fanftey0oogBr65rk8HS3WC6jyY8ckfZdNtfWdX++tzGIDMabAJmArte4my/l/c//vaLoFc6jmP3iCqD41B5Mi0BId1Hk+V6ljfEQlvWL2xZoY/lKOTLGCY01tZhVLMkRJEtqzoeyUvSnN70SNZRXC1iUylDVZmszhQiDmbH9Lrgpta4mKPlCjy95D6Wrn8GAKFEEfEmdG2Qowd+4I0XFrUC7+w7eL5sCu8hdL3imaQuYFl6c9l021vjYk7Y72Xjq4/z1IaNCCVKMRckq+moiQDJ2bN48uV3GbnSx9b1ra1l0223LL05AYF/Vw4S80jyonnN6paq5YTe3LyU2rpaYrFpJGfPItlcTzI1H8R8cC38NTFiaojhSzeJJ8KNJ/4YOmP43GsTCmWLiGG5LTUBb2LuzGm3e3Ij3321m5Hey6A0AVAcPjmhQcSbuDyU5sF6e5phuS2yRWQC6Lj4x62h1vjJ3BwjlUoiYn52ffolmUtnuXj4ADu2b7/DFoN9RVQ1gAthx8U/+Sk4LiGAQtFAHzXIajpr16yiu/tX98euzyWAzrc6Abj8+1G0TIZ8uYx/xJpgjANlWfEKqjaZbIlixQQgdDHDyuULWLFisZTVdBJxQTIVA2uQ+qZ6KoU0nhqV09f+QoIxj4ThAWRVJWLZToNXUaarYR8Hdm+iZBic7N5LbmgI0xclERcAFLIVAHRtkFOHjwBwNHNryK9I/bZCXlFVIk6ZuSbukidmR1Z+/cliAHzRBjKjBTq37bz9gEAAgA+2vQjAjb4j9F6pUCga/Hzm5v6A5KRDFkXF1UnWRcRj256d/vam9zrJXT0GwGc7V+ONRwAwtTwAa9bs4ND+PTy8MMW5az7+vJ7lXKZ4IeiVjsuIgaylVxTHxf/S84+u3bh5Mbmrx/D6Y1hjGtaYBjduH9g0RonNSmH4o/T1j9JzeoBixSRbsi9ktNIuRXJ6vFVbA2ypVoiZNuay+qj62r6u1R0ee4i65Iw7rDEOnLegC4CSqwxf18b23C0cFMenF5wKJzLZfLDtuW/4pWt1Ry6XY8/ug8jRB6gN3GI0k6VtXcq9csvqtm2rTyjS+YDkpGXEgLdq/z++EhA2hYjbmMtMx7P8+4/Wbdj64U89/cP5Xlli2HGcUsAnjziulMGxbrheRu4lYH21QjSarvXQoraZbQC/nUoflzwMyx6hVz26MRVkysROQNhQ8XmqQr1XwH/rb2Du69Eebp25AAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-arrivetime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEW0lEQVQ4y4WUWWxUZRiGn7PMnNPOVtvODHQBSlulAUFBoQiEaBHBhCsSFaIhIe6JSyAkRkO8NpErY2KoYuINISkkRFAjEUyAUCQsBSu1BVpKZ2DmTNuZzsyZMz3L70Vbgkjqe/Ul//89//K9eSX+KyUKFcVKQopDxBNoALJE2VXJBUzyBpQA9xG9SA+DbF2vdRxrvqQqLWVHNAkITm8saKo0KBz3hqrqt32WlXkUWHoQZvlpQFbWmLZo//zj7W8ua7JRUoKSz+DOXYVrSZMfjnV/W+mTuvHcs/okIw9DFYAoBCw/DY6QX9yycemer9/p6KiQE7ilIj4vwNXBFIO3M1iFLKta4suNvLUwZzpZTxWZiEvJhMkHgYpf1+cKSazfsnHpnve2rVqYTg2xdvMrPL76JWKNNSxesYB1LyyDiQQ9fWkCmhxzkRuLZTcpVC1lOU4eEDNPDUzitJVc6eUDn6zuSAwl2PDGLqrnx9ECPob6kkxaPiLBEK1LniIaFVz/c4SAJsf6U2ZaEfZwxMOYuaVCJTWypKz68LXV7y6sigWf7thMdfMKkMOgryA2r5pYYwWBaA3FzBhFM8uiRXFOnumn/jGt0SjYl8t+MWzbFABkxSFSdkTTE3F3zkDyBnptw/2J5VMXpwq1gfT1AQ4eOIyi1AHw5II5hCp80bIjmhSHyEyP7Ak0AcFwuIKR/vy/PLVv7156T/1M4u8e9n/1HXqNRnNzjMS9AuGQBlMfF5zxKoA6U2hph5xp0nv+ErX1KVqfXctbH+yk65tOAOa1tolNm56TjIyFNVpmIl8GwBMEHnSzKkuUJUHh8vAYcihMIFQi3hAHZ4T65hq27dyKkbGI1uqS7a/mXO8F+gZGuDZ0j4nClFsU1adj2wrgyq5KTlOlwTOJ8STApVO/Y2VGAJgwSgBEa3VsfzXZZJKLvxyjWC7z8+G3CQf9+FS13nG9ueEwEUBRqmywEfrAvWLF4rqq5fmiwCvcIjuqYCTu8v5nnXQd7+bgoZ/48dduXF8F4ZpaNj0/j60bgly+YLTeNMyUYosxPUhONaBUpeq3K7G7T/Ym2pfWh5ZU1MzBX/0XV/64iVYe4+jR3QD4aqeGaWdylPNjABw9upv9X3R+9GVXwsjmrZQCiJDjOI4scjnTyZZc0ZhKJmM9PcNYlsu4CLJjez3jt65ij45jpZPYhVG8SRNFrcQc7eeZ9evIl9xI96Xh4yqAAaXoJCOW3zuRGjfNwbRob6wNbkkYxTizaDx9B0+pY93rnWdTYxPf+xQ9p0yvCRPciEtJqFpKEfZwyXaupArOYLbM+JK2lS3HDhyRbgwanO6eoPvEaWLxOixLY+WOrrP5onUI4Z2TdMeQZgtYySaGrM6VJVFfmnRjsiwHXEG8KR5p2/fpxjWv7jpyyCd7JxR8v03nY0Fidt2H+z1dcz1LFx7xlctb2gHO9wz1+CS1L2tZSabD4f+Asx7g+a0JbYJJg6lgAPgHUh4QWRIJr4EAAAAASUVORK5CYII=")}#two-attack-view .icon-20x20-spy{background-image:url("https://twxen.innogamescdn.com/img/icons/alpha_907725c8a7.png");background-position:-40px -1130px;height:20px;width:20px}#two-attack-view .icon-20x20-withdraw{background-image:url("https://twxen.innogamescdn.com/img/icons/alpha_907725c8a7.png");background-position:-559px -1130px;height:20px;width:20px}#two-attack-view .icon-20x20-bunker{background-image:url("https://twxen.innogamescdn.com/img/icons/alpha_907725c8a7.png");background-position:-1130px -995px;height:20px;width:20px}#two-attack-view .icon-20x20-kill{background-image:url("https://twxen.innogamescdn.com/img/icons/alpha_907725c8a7.png");background-position:-80px -1130px;height:20px;width:20px}#two-attack-view .icon-20x20-killBig{background-image:url("https://twxen.innogamescdn.com/img/icons/alpha_907725c8a7.png");background-position:-80px -1130px;height:20px;width:20px}')
     }
 
     const buildWindow = function () {
@@ -4872,6 +4872,171 @@ require([
     })
 })
 
+define('two/autoFoundator', [
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    utils,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+	
+    let interval = 3000
+
+    const donateTribe = function () {
+        if (!running) {
+            return false
+        }
+        console.log('Fundator uruchomiony')
+		
+        let player = modelDataService.getSelectedCharacter()
+        let villages = player.getVillageList()
+        villages.forEach(function(village, index) {
+            var resources = village.getResources()
+            var computed = resources.getComputed()
+            var wood = computed.wood
+            var clay = computed.clay
+            var iron = computed.iron
+            var villageWood = wood.currentStock
+            var villageClay = clay.currentStock
+            var villageIron = iron.currentStock
+            var woodCalculated = Math.round(villageWood * 0.02) + 1
+            var ironCalculated = Math.round(villageIron * 0.02) + 1
+            var clayCalculated = Math.round(villageClay * 0.02) + 1
+            setTimeout(function() {
+                socketService.emit(routeProvider.TRIBE_SKILL_DONATE, {
+                    village_id: village.getId(),
+                    crowns: 0,
+                    resources: {
+                        wood: woodCalculated,
+                        clay: clayCalculated,
+                        iron: ironCalculated
+                    }
+                })
+            }, index * Math.random() * interval)
+            console.log('Wykonano darowizne na plemię: ' + village.getName() + ' drewno: ' + woodCalculated + ', glina: ' + clayCalculated + ', żelazo: ' + ironCalculated)
+        })
+        setTimeout(doAgain, 1000)
+    }
+
+    function doAgain() {
+        setTimeout(donateTribe, 3600000)
+    }
+
+    let autoFoundator = {}
+    autoFoundator.init = function() {
+        initialized = true
+    }
+    autoFoundator.start = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
+        running = true
+        donateTribe()
+    }
+    autoFoundator.stop = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STOPPED)
+        running = false
+    }
+    autoFoundator.isRunning = function() {
+        return running
+    }
+    autoFoundator.isInitialized = function() {
+        return initialized
+    }
+    return autoFoundator
+})
+define('two/autoFoundator/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        AUTO_FOUNDATOR_STARTED: 'auto_foundator_started',
+        AUTO_FOUNDATOR_STOPPED: 'auto_foundator_stopped'
+    })
+})
+
+define('two/autoFoundator/ui', [
+    'two/ui',
+    'two/autoFoundator',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    autoFoundator,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton3('Fundator', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
+
+        $button.addEventListener('click', function () {
+            if (autoFoundator.isRunning()) {
+                autoFoundator.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_foundator'))
+            } else {
+                autoFoundator.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_foundator'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (autoFoundator.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+require([
+    'two/ready',
+    'two/autoFoundator',
+    'two/autoFoundator/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/autoFoundator/events'
+], function(
+    ready,
+    autoFoundator,
+    autoFoundatorInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'auto_foundator_active'
+    }
+	
+    if (autoFoundator.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        autoFoundator.init()
+        autoFoundatorInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                autoFoundator.start()
+            }
+
+            eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
 define('two/autoHealer', [
     'two/utils',
     'queues/EventQueue'
@@ -9429,6 +9594,332 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/fakeSender', [
+    'two/Settings',
+    'two/fakeSender/settings',
+    'two/fakeSender/settings/map',
+    'two/fakeSender/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let fakeSenderSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'fake_sender_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = fakeSenderSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = fakeSenderSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const examplePublicFunctions = {}
+
+    examplePublicFunctions.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            fakeSenderSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        fakeSenderSettings = settings.getAll()
+
+        console.log('all settings', fakeSenderSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    examplePublicFunctions.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+    }
+
+    examplePublicFunctions.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
+    }
+
+    examplePublicFunctions.getSettings = function () {
+        return settings
+    }
+
+    examplePublicFunctions.isInitialized = function () {
+        return initialized
+    }
+
+    examplePublicFunctions.isRunning = function () {
+        return running
+    }
+
+    return examplePublicFunctions
+})
+
+define('two/fakeSender/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        FAKE_SENDER_START: 'fake_sender_start',
+        FAKE_SENDER_STOP: 'fake_sender_stop'
+    })
+})
+
+define('two/fakeSender/ui', [
+    'two/ui',
+    'two/fakeSender',
+    'two/fakeSender/settings',
+    'two/fakeSender/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    fakeSender,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (fakeSender.isRunning()) {
+            fakeSender.stop()
+        } else {
+            fakeSender.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = fakeSender.getSettings()
+        $button = interfaceOverflow.addMenuButton('Watażka', 100)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = fakeSender.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_fake_sender_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.FAKE_SENDER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.FAKE_SENDER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_fake_sender_window', $scope)
+    }
+
+    return init
+})
+
+define('two/fakeSender/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/fakeSender/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/fakeSender/settings/map', [
+    'two/fakeSender/settings',
+    'two/fakeSender/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/fakeSender',
+    'two/fakeSender/ui',
+    'two/fakeSender/events'
+], function (
+    ready,
+    fakeSender,
+    fakeSenderInterface
+) {
+    if (fakeSender.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        fakeSender.init()
+        fakeSenderInterface()
+    })
+})
+
 define('two/farmOverflow', [
     'two/Settings',
     'two/farmOverflow/types/errors',
@@ -11549,6 +12040,332 @@ require([
         farmOverflow.init()
         farmOverflowInterface()
     }, ['map', 'presets'])
+})
+
+define('two/marketHelper', [
+    'two/Settings',
+    'two/marketHelper/settings',
+    'two/marketHelper/settings/map',
+    'two/marketHelper/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let marketHelperSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'market_helper_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = marketHelperSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = marketHelperSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const examplePublicFunctions = {}
+
+    examplePublicFunctions.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            marketHelperSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        marketHelperSettings = settings.getAll()
+
+        console.log('all settings', marketHelperSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    examplePublicFunctions.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_START)
+    }
+
+    examplePublicFunctions.stop = function () {
+        running = false
+
+        console.log('marketHelper stop')
+
+        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_STOP)
+    }
+
+    examplePublicFunctions.getSettings = function () {
+        return settings
+    }
+
+    examplePublicFunctions.isInitialized = function () {
+        return initialized
+    }
+
+    examplePublicFunctions.isRunning = function () {
+        return running
+    }
+
+    return examplePublicFunctions
+})
+
+define('two/marketHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        MARKET_HELPER_START: 'market_helper_start',
+        MARKET_HELPER_STOP: 'market_helper_stop'
+    })
+})
+
+define('two/marketHelper/ui', [
+    'two/ui',
+    'two/marketHelper',
+    'two/marketHelper/settings',
+    'two/marketHelper/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    marketHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (marketHelper.isRunning()) {
+            marketHelper.stop()
+        } else {
+            marketHelper.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'marketHelper started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'marketHelper stopped')
+        }
+    }
+
+    const init = function () {
+        settings = marketHelper.getSettings()
+        $button = interfaceOverflow.addMenuButton2('Handlarz', 50)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = marketHelper.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.MARKET_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.MARKET_HELPER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_market_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/marketHelper/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/marketHelper/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/marketHelper/settings/map', [
+    'two/marketHelper/settings',
+    'two/marketHelper/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/marketHelper',
+    'two/marketHelper/ui',
+    'two/marketHelper/events'
+], function (
+    ready,
+    marketHelper,
+    marketHelperInterface
+) {
+    if (marketHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        marketHelper.init()
+        marketHelperInterface()
+    })
 })
 
 define('two/minimap', [
@@ -14063,7 +14880,7 @@ define('two/presetCreator/ui', [
     let $button
 
     const init = function () {
-        $button = interfaceOverflow.addMenuButton3('Wojewoda', 30, $filter('i18n')('description', $rootScope.loc.ale, 'preset_creator'))
+        $button = interfaceOverflow.addMenuButton('Wojewoda', 100, $filter('i18n')('description', $rootScope.loc.ale, 'preset_creator'))
 
         $button.addEventListener('click', function () {
             if (presetCreator.isRunning()) {
@@ -16462,7 +17279,7 @@ define('two/spyRecruiter', [
                 var clayCost = [500, 800, 2000, 6500, 10000]
                 var ironCost = [500, 1200, 2400, 8000, 18000]
                 if (level < 1) {
-                    console.log('Brak tawerny w wiosce:' +village.getId)
+                    console.log('Brak tawerny w wiosce:' + village.getName())
                 } else if (level >= 1 && level < 3) {
                     spies.forEach(function(spy) {
                         if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
@@ -16472,7 +17289,7 @@ define('two/spyRecruiter', [
                             })
                         }
                     })
-                    console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                    console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                 } else if (level >= 3 && level < 6) {
                     spies.forEach(function(spy) {
                         if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
@@ -16480,13 +17297,13 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         }
                     })
                 } else if (level >= 6 && level < 9) {
@@ -16500,26 +17317,26 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 3
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
                         }
                     })
                 } else if (level >= 9 && level < 12) {
@@ -16533,8 +17350,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16544,8 +17361,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16555,8 +17372,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16566,32 +17383,32 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 3
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
                         } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 4
                             })
-                            console.log('spy', 4, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
                         }
                     })
                 } else if (level >= 12) {
@@ -16605,8 +17422,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16616,8 +17433,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16627,8 +17444,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16638,8 +17455,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16649,8 +17466,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16660,8 +17477,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 3
                             })
-                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
                         } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16671,8 +17488,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16682,8 +17499,8 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 3
                             })
-                            console.log('spy', 4, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
                         } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 4 && spy.active != true)) {
                             socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
                                 village_id: village.getId(),
@@ -16693,38 +17510,38 @@ define('two/spyRecruiter', [
                                 village_id: village.getId(),
                                 slot: 4
                             })
-                            console.log('spy', 5, 'from village', village.getId(), 'recruit cancelled')
-                            console.log('spy', 4, 'from village', village.getId(), 'can be recruited')
+                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
                         } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 1
                             })
-                            console.log('spy', 1, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
                         } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 2
                             })
-                            console.log('spy', 2, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
                         } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 3
                             })
-                            console.log('spy', 3, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
                         } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 4
                             })
-                            console.log('spy', 4, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
                         } else if (spy.id == 5 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[5] && villageClay >= clayCost[5] && villageIron >= ironCost[5])) {
                             socketService.emit(routeProvider.SCOUTING_RECRUIT, {
                                 village_id: village.getId(),
                                 slot: 5
                             })
-                            console.log('spy', 5, 'from village', village.getId(), 'can be recruited')
+                            console.log('Dodano do rekrutacji szpiega (slot 5) w wiosce:' + village.getName())
                         }
                     })
                 }
