@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 18 Sep 2020 08:37:56 GMT
+ * Fri, 18 Sep 2020 17:28:13 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3106,6 +3106,332 @@ require([
     }, ['map'])
 })
 
+define('two/activityTool', [
+    'two/Settings',
+    'two/activityTool/settings',
+    'two/activityTool/settings/map',
+    'two/activityTool/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let activityToolSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'activity_tool_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = activityToolSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = activityToolSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const examplePublicFunctions = {}
+
+    examplePublicFunctions.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            activityToolSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        activityToolSettings = settings.getAll()
+
+        console.log('all settings', activityToolSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    examplePublicFunctions.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_START)
+    }
+
+    examplePublicFunctions.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_STOP)
+    }
+
+    examplePublicFunctions.getSettings = function () {
+        return settings
+    }
+
+    examplePublicFunctions.isInitialized = function () {
+        return initialized
+    }
+
+    examplePublicFunctions.isRunning = function () {
+        return running
+    }
+
+    return examplePublicFunctions
+})
+
+define('two/activityTool/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        ACTIVITY_TOOL_START: 'activity_tool_start',
+        ACTIVITY_TOOL_STOP: 'activity_tool_stop'
+    })
+})
+
+define('two/activityTool/ui', [
+    'two/ui',
+    'two/activityTool',
+    'two/activityTool/settings',
+    'two/activityTool/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    activityTool,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (activityTool.isRunning()) {
+            activityTool.stop()
+        } else {
+            activityTool.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = activityTool.getSettings()
+        $button = interfaceOverflow.addMenuButton3('Kwatermistrz', 60)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = activityTool.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_activity_tool_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_activity_tool_window', $scope)
+    }
+
+    return init
+})
+
+define('two/activityTool/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/activityTool/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/activityTool/settings/map', [
+    'two/activityTool/settings',
+    'two/activityTool/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/activityTool',
+    'two/activityTool/ui',
+    'two/activityTool/events'
+], function (
+    ready,
+    activityTool,
+    activityToolInterface
+) {
+    if (activityTool.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        activityTool.init()
+        activityToolInterface()
+    })
+})
+
 define('two/alertSender', [
     'queues/EventQueue',
     'two/commandQueue',
@@ -5190,6 +5516,128 @@ require([
             })
 
             eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
+define('two/autoWithdraw', [
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    utils,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+
+    let autoWithdraw = {}
+    autoWithdraw.init = function() {
+        initialized = true
+    }
+    autoWithdraw.start = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
+        running = true
+    }
+    autoWithdraw.stop = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STOPPED)
+        running = false
+    }
+    autoWithdraw.isRunning = function() {
+        return running
+    }
+    autoWithdraw.isInitialized = function() {
+        return initialized
+    }
+    return autoWithdraw
+})
+define('two/autoWithdraw/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        AUTO_WITHDRAW_STARTED: 'auto_withdraw_started',
+        AUTO_WITHDRAW_STOPPED: 'auto_withdraw_stopped'
+    })
+})
+
+define('two/autoWithdraw/ui', [
+    'two/ui',
+    'two/autoWithdraw',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    autoWithdraw,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Dezerter', 110, $filter('i18n')('description', $rootScope.loc.ale, 'auto_withdraw'))
+
+        $button.addEventListener('click', function () {
+            if (autoWithdraw.isRunning()) {
+                autoWithdraw.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_withdraw'))
+            } else {
+                autoWithdraw.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_withdraw'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (autoWithdraw.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+require([
+    'two/ready',
+    'two/autoWithdraw',
+    'two/autoWithdraw/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/autoWithdraw/events'
+], function(
+    ready,
+    autoWithdraw,
+    autoWithdrawInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'auto_withdraw_active'
+    }
+	
+    if (autoWithdraw.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        autoWithdraw.init()
+        autoWithdrawInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                autoWithdraw.start()
+            }
+
+            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
@@ -12042,6 +12490,332 @@ require([
     }, ['map', 'presets'])
 })
 
+define('two/kingTool', [
+    'two/Settings',
+    'two/kingTool/settings',
+    'two/kingTool/settings/map',
+    'two/kingTool/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let kingToolSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'king_tool_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = kingToolSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = kingToolSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const examplePublicFunctions = {}
+
+    examplePublicFunctions.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            kingToolSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        kingToolSettings = settings.getAll()
+
+        console.log('all settings', kingToolSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    examplePublicFunctions.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_START)
+    }
+
+    examplePublicFunctions.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_STOP)
+    }
+
+    examplePublicFunctions.getSettings = function () {
+        return settings
+    }
+
+    examplePublicFunctions.isInitialized = function () {
+        return initialized
+    }
+
+    examplePublicFunctions.isRunning = function () {
+        return running
+    }
+
+    return examplePublicFunctions
+})
+
+define('two/kingTool/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        KING_TOOL_START: 'king_tool_start',
+        KING_TOOL_STOP: 'king_tool_stop'
+    })
+})
+
+define('two/kingTool/ui', [
+    'two/ui',
+    'two/kingTool',
+    'two/kingTool/settings',
+    'two/kingTool/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    kingTool,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (kingTool.isRunning()) {
+            kingTool.stop()
+        } else {
+            kingTool.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = kingTool.getSettings()
+        $button = interfaceOverflow.addMenuButton3('Marszałek', 90)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = kingTool.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_king_tool_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.KING_TOOL_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.KING_TOOL_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_king_tool_window', $scope)
+    }
+
+    return init
+})
+
+define('two/kingTool/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/kingTool/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/kingTool/settings/map', [
+    'two/kingTool/settings',
+    'two/kingTool/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/kingTool',
+    'two/kingTool/ui',
+    'two/kingTool/events'
+], function (
+    ready,
+    kingTool,
+    kingToolInterface
+) {
+    if (kingTool.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        kingTool.init()
+        kingToolInterface()
+    })
+})
+
 define('two/marketHelper', [
     'two/Settings',
     'two/marketHelper/settings',
@@ -14098,6 +14872,332 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/prankHelper', [
+    'two/Settings',
+    'two/prankHelper/settings',
+    'two/prankHelper/settings/map',
+    'two/prankHelper/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let prankHelperSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'prank_helper_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = prankHelperSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = prankHelperSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const examplePublicFunctions = {}
+
+    examplePublicFunctions.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            prankHelperSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        prankHelperSettings = settings.getAll()
+
+        console.log('all settings', prankHelperSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    examplePublicFunctions.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+    }
+
+    examplePublicFunctions.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
+    }
+
+    examplePublicFunctions.getSettings = function () {
+        return settings
+    }
+
+    examplePublicFunctions.isInitialized = function () {
+        return initialized
+    }
+
+    examplePublicFunctions.isRunning = function () {
+        return running
+    }
+
+    return examplePublicFunctions
+})
+
+define('two/prankHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        PRANK_HELPER_START: 'prank_helper_start',
+        PRANK_HELPER_STOP: 'prank_helper_stop'
+    })
+})
+
+define('two/prankHelper/ui', [
+    'two/ui',
+    'two/prankHelper',
+    'two/prankHelper/settings',
+    'two/prankHelper/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    prankHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (prankHelper.isRunning()) {
+            prankHelper.stop()
+        } else {
+            prankHelper.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = prankHelper.getSettings()
+        $button = interfaceOverflow.addMenuButton3('Błazen', 100)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = prankHelper.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_prank_helper_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.PRANK_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.PRANK_HELPER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_prank_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/prankHelper/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/prankHelper/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/prankHelper/settings/map', [
+    'two/prankHelper/settings',
+    'two/prankHelper/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/prankHelper',
+    'two/prankHelper/ui',
+    'two/prankHelper/events'
+], function (
+    ready,
+    prankHelper,
+    prankHelperInterface
+) {
+    if (prankHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        prankHelper.init()
+        prankHelperInterface()
+    })
+})
+
 define('two/presetCreator', [
     'queues/EventQueue',
     'two/utils'
@@ -16040,6 +17140,332 @@ require([
     })
 })
 
+define('two/reportHelper', [
+    'two/Settings',
+    'two/reportHelper/settings',
+    'two/reportHelper/settings/map',
+    'two/reportHelper/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let reportHelperSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'report_helper_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = reportHelperSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = reportHelperSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const examplePublicFunctions = {}
+
+    examplePublicFunctions.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            reportHelperSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        reportHelperSettings = settings.getAll()
+
+        console.log('all settings', reportHelperSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    examplePublicFunctions.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.REPORT_HELPER_START)
+    }
+
+    examplePublicFunctions.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.REPORT_HELPER_STOP)
+    }
+
+    examplePublicFunctions.getSettings = function () {
+        return settings
+    }
+
+    examplePublicFunctions.isInitialized = function () {
+        return initialized
+    }
+
+    examplePublicFunctions.isRunning = function () {
+        return running
+    }
+
+    return examplePublicFunctions
+})
+
+define('two/reportHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        REPORT_HELPER_START: 'report_helper_start',
+        REPORT_HELPER_STOP: 'report_helper_stop'
+    })
+})
+
+define('two/reportHelper/ui', [
+    'two/ui',
+    'two/reportHelper',
+    'two/reportHelper/settings',
+    'two/reportHelper/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    reportHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (reportHelper.isRunning()) {
+            reportHelper.stop()
+        } else {
+            reportHelper.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = reportHelper.getSettings()
+        $button = interfaceOverflow.addMenuButton3('Skryba', 110)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = reportHelper.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_report_helper_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.REPORT_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.REPORT_HELPER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_report_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/reportHelper/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/reportHelper/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/reportHelper/settings/map', [
+    'two/reportHelper/settings',
+    'two/reportHelper/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/reportHelper',
+    'two/reportHelper/ui',
+    'two/reportHelper/events'
+], function (
+    ready,
+    reportHelper,
+    reportHelperInterface
+) {
+    if (reportHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        reportHelper.init()
+        reportHelperInterface()
+    })
+})
+
 define('two/reportSender', [
     'queues/EventQueue'
 ], function(
@@ -17663,4 +19089,330 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/supportSender', [
+    'two/Settings',
+    'two/supportSender/settings',
+    'two/supportSender/settings/map',
+    'two/supportSender/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let supportSenderSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'support_sender_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = supportSenderSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = supportSenderSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const examplePublicFunctions = {}
+
+    examplePublicFunctions.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            supportSenderSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        supportSenderSettings = settings.getAll()
+
+        console.log('all settings', supportSenderSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    examplePublicFunctions.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_START)
+    }
+
+    examplePublicFunctions.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
+    }
+
+    examplePublicFunctions.getSettings = function () {
+        return settings
+    }
+
+    examplePublicFunctions.isInitialized = function () {
+        return initialized
+    }
+
+    examplePublicFunctions.isRunning = function () {
+        return running
+    }
+
+    return examplePublicFunctions
+})
+
+define('two/supportSender/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        SUPPORT_SENDER_START: 'support_sender_start',
+        SUPPORT_SENDER_STOP: 'support_sender_stop'
+    })
+})
+
+define('two/supportSender/ui', [
+    'two/ui',
+    'two/supportSender',
+    'two/supportSender/settings',
+    'two/supportSender/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    supportSender,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (supportSender.isRunning()) {
+            supportSender.stop()
+        } else {
+            supportSender.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = supportSender.getSettings()
+        $button = interfaceOverflow.addMenuButton('Chorąży', 120)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = supportSender.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_support_sender_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.SUPPORT_SENDER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.SUPPORT_SENDER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_support_sender_window', $scope)
+    }
+
+    return init
+})
+
+define('two/supportSender/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/supportSender/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/supportSender/settings/map', [
+    'two/supportSender/settings',
+    'two/supportSender/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/supportSender',
+    'two/supportSender/ui',
+    'two/supportSender/events'
+], function (
+    ready,
+    supportSender,
+    supportSenderInterface
+) {
+    if (supportSender.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        supportSender.init()
+        supportSenderInterface()
+    })
+})
+
 })(this)
