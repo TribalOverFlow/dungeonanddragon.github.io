@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 19 Sep 2020 19:43:36 GMT
+ * Sat, 19 Sep 2020 19:53:19 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -2916,8 +2916,23 @@ define('two/ui', [
         $div.className = 'divisor'
         $div.style.order = order
         $menu.appendChild($div)
+    }
+    interfaceOverflow.addDivisor2 = function (order) {
+        let $div = document.createElement('div')
+        $div.className = 'divisor'
+        $div.style.order = order
         $menu2.appendChild($div)
+    }
+    interfaceOverflow.addDivisor3 = function (order) {
+        let $div = document.createElement('div')
+        $div.className = 'divisor'
+        $div.style.order = order
         $menu3.appendChild($div)
+    }
+    interfaceOverflow.addDivisor4 = function (order) {
+        let $div = document.createElement('div')
+        $div.className = 'divisor'
+        $div.style.order = order
         $menu4.appendChild($div)
     }
 
@@ -3066,7 +3081,7 @@ define('two/about/ui', [
     }
 
     const init = function () {
-        interfaceOverflow.addDivisor(189)
+        interfaceOverflow.addDivisor4(189)
         const $button = interfaceOverflow.addMenuButton4('O mnie', 190)
 
         $button.addEventListener('click', function () {
@@ -3318,7 +3333,7 @@ define('two/activityTool/ui', [
 
     const init = function () {
         settings = activityTool.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Kwatermistrz', 60)
+        $button = interfaceOverflow.addMenuButton3('Kwatermistrz', 40)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
@@ -5292,7 +5307,7 @@ define('two/autoFoundator/ui', [
     let $button
 
     const init = function () {
-        $button = interfaceOverflow.addMenuButton3('Fundator', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
+        $button = interfaceOverflow.addMenuButton3('Fundator', 30, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
 
         $button.addEventListener('click', function () {
             if (autoFoundator.isRunning()) {
@@ -12703,8 +12718,8 @@ define('two/kingTool/ui', [
 
     const init = function () {
         settings = kingTool.getSettings()
-        interfaceOverflow.addDivisor(91)
-        $button = interfaceOverflow.addMenuButton3('Marszałek', 90)
+        interfaceOverflow.addDivisor3(51)
+        $button = interfaceOverflow.addMenuButton3('Marszałek', 50)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
@@ -15086,7 +15101,7 @@ define('two/prankHelper/ui', [
 
     const init = function () {
         settings = prankHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Błazen', 100)
+        $button = interfaceOverflow.addMenuButton3('Błazen', 60)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
@@ -17356,7 +17371,7 @@ define('two/reportHelper/ui', [
 
     const init = function () {
         settings = reportHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Skryba', 110)
+        $button = interfaceOverflow.addMenuButton3('Skryba', 70)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
@@ -19023,7 +19038,7 @@ define('two/spyRecruiter/ui', [
     let $button
 
     const init = function () {
-        interfaceOverflow.addDivisor(21)
+        interfaceOverflow.addDivisor3(21)
         $button = interfaceOverflow.addMenuButton3('Szpieg', 20, $filter('i18n')('description', $rootScope.loc.ale, 'spy_recruiter'))
         $button.addEventListener('click', function () {
             if (spyRecruiter.isRunning()) {
