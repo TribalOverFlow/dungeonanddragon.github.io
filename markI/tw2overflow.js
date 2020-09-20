@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Sep 2020 21:25:02 GMT
+ * Sun, 20 Sep 2020 21:43:17 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -944,6 +944,7 @@ define('two/language', [
             "fakesend1": "Cele-wioski danego gracza",
             "fakesend2": "Cel-określona wioska",
             "send": "Wyślij",
+            "now": "Teraz",
             "change": "Zmień",
             "interval": "Przedział minutowy (od czasu początkowego w przód)",
             "intervalT": "1-60",
@@ -969,7 +970,20 @@ define('two/language', [
             "logs": "Logi",
             "general.started": "Watażka uruchomiony",
             "general.stopped": "Watażka zatrzymany",
-            "logs.clear": "Wyczyść logi",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
+            "clear.logs": "Wyczyść logi",
             "entry/name": "Nowa nazwa"
         },
         "farm_overflow": {
@@ -1177,13 +1191,11 @@ define('two/language', [
         },
         "recruit_queue": {
             "title": "Kapitan",
-            "logs.clear": "Wyczyść logi",
+            "clearL": "Wyczyść logi",
             "start": "Rekrutuj",
             "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
             "amount": "Ilość",
             "unit": "Jednostka",
-            "entry/amount": "Wpisz ilość",
-            "entry/preset": "Nazwa szablonu",
             "recruit.own": "Rekrutacja wg własnych ustawień",
             "recruit.presets": "Rekrutacja z szablonów",
             "presets": "Szablonowa",
@@ -1207,11 +1219,7 @@ define('two/language', [
             "knight": "Rycerz",
             "general.started": "Kapitan Uruchomiony!",
             "general.stopped": "Kapitan Zatrzymany!",
-            "general.disabled": "--Wyłączona--",
-            "clear": "Wyczyść",
-            "insert.preset": "Wybierz szablon",
-            "insert.group": "Wybierz grupę",
-            "none": "--Wyłączona--"
+            "clear": "Wyczyść"
         },
         "report_sender": {
             "title": "Goniec",
@@ -1846,6 +1854,7 @@ define('two/language', [
             "fakesend1": "Cele-wioski danego gracza",
             "fakesend2": "Cel-określona wioska",
             "send": "Wyślij",
+            "now": "Teraz",
             "change": "Zmień",
             "interval": "Przedział minutowy (od czasu początkowego w przód)",
             "intervalT": "1-60",
@@ -1871,7 +1880,20 @@ define('two/language', [
             "logs": "Logi",
             "general.started": "Watażka uruchomiony",
             "general.stopped": "Watażka zatrzymany",
-            "logs.clear": "Wyczyść logi",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
+            "clear.logs": "Wyczyść logi",
             "entry/name": "Nowa nazwa"
         },
         "farm_overflow": {
@@ -2079,13 +2101,11 @@ define('two/language', [
         },
         "recruit_queue": {
             "title": "Kapitan",
-            "logs.clear": "Wyczyść logi",
+            "clearL": "Wyczyść logi",
             "start": "Rekrutuj",
             "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
             "amount": "Ilość",
             "unit": "Jednostka",
-            "entry/amount": "Wpisz ilość",
-            "entry/preset": "Nazwa szablonu",
             "recruit.own": "Rekrutacja wg własnych ustawień",
             "recruit.presets": "Rekrutacja z szablonów",
             "presets": "Szablonowa",
@@ -2109,11 +2129,7 @@ define('two/language', [
             "knight": "Rycerz",
             "general.started": "Kapitan Uruchomiony!",
             "general.stopped": "Kapitan Zatrzymany!",
-            "general.disabled": "--Wyłączona--",
-            "clear": "Wyczyść",
-            "insert.preset": "Wybierz szablon",
-            "insert.group": "Wybierz grupę",
-            "none": "--Wyłączona--"
+            "clear": "Wyczyść"
         },
         "report_sender": {
             "title": "Goniec",
@@ -15667,7 +15683,7 @@ define('two/recruitQueue/ui', [
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
 
-            utils.notif('success', 'Example module started')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
         },
         stop: function () {
             $scope.running = false
@@ -15675,7 +15691,7 @@ define('two/recruitQueue/ui', [
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
 
-            utils.notif('success', 'Example module stopped')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
         }
     }
 
