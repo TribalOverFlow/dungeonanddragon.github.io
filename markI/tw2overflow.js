@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Sep 2020 21:08:51 GMT
+ * Sun, 20 Sep 2020 21:16:07 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -5374,7 +5374,6 @@ define('two/battleCalculator', [
     let settings
     let battleCalculatorSettings
 	
-    let selectedPresets = []
 
     const STORAGE_KEYS = {
         SETTINGS: 'battle_calculator_settings'
@@ -5507,19 +5506,6 @@ define('two/battleCalculator', [
 	
     console.log(TROOPS_ORDER_TYPE, TROOPS_TRAINING_LEVEL, BATTLE_HOSPITAL_LEVEL, BATTLE_SKILL_CLINIQUE_LEVEL, BATTLE_SKILL_IRON_WALLS_LEVEL, BATTLE_SKILL_WEAPON_MASTER_LEVEL, BATTLE_WALLS, BATTLE_CHURCHES, BATTLE_ITEMS_LEVELS, BATTLE_ITEMS, BATTLE_CAT_TARGET)
 
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = battleCalculatorSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-
-        console.log('selectedPresets', selectedPresets)
-    }
-
     const battleCalculator = {}
 
     battleCalculator.init = function () {
@@ -5534,18 +5520,11 @@ define('two/battleCalculator', [
 
         console.log('all settings', battleCalculatorSettings)
 
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
 
     battleCalculator.start = function () {
         running = true
 
-        console.log('selectedPresets', selectedPresets)
 
         eventQueue.trigger(eventTypeProvider.BATTLE_CALCULATOR_START)
     }
@@ -5621,7 +5600,6 @@ define('two/battleCalculator/ui', [
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
     let $button
     
     const TAB_TYPES = {
@@ -5649,12 +5627,6 @@ define('two/battleCalculator/ui', [
     }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
         start: function () {
             $scope.running = true
 
@@ -5739,7 +5711,6 @@ define('two/battleCalculator/ui', [
         })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
 
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
@@ -5748,8 +5719,6 @@ define('two/battleCalculator/ui', [
         let eventScope = new EventScope('twoverflow_battle_calculator_window', function onDestroy () {
             console.log('battleCalculator window closed')
         })
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_STOP, eventHandlers.stop)
         
