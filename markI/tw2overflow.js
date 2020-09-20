@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Sep 2020 20:00:27 GMT
+ * Sun, 20 Sep 2020 20:39:52 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -10254,16 +10254,12 @@ define('two/fakeSender/ui', [
 
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
         },
         stop: function () {
             $scope.running = false
 
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
         }
     }
 
@@ -10284,7 +10280,7 @@ define('two/fakeSender/ui', [
         $scope.running = fakeSender.isRunning()
         $scope.selectedTab = TAB_TYPES.FAKE
         $scope.settingsMap = SETTINGS_MAP
-        $scope.units = Settings.encodeList(FS_UNIT, {
+        $scope.datatype = Settings.encodeList(FS_DATE, {
             textObject: 'fake_sender',
             disabled: true
         })
@@ -10301,7 +10297,7 @@ define('two/fakeSender/ui', [
         $scope.switchState = switchState
 
         let eventScope = new EventScope('twoverflow_fake_sender_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('fakeSender closed')
         })
 
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
