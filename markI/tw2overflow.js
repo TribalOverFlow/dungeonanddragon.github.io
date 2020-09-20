@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Sep 2020 19:41:45 GMT
+ * Sun, 20 Sep 2020 19:45:52 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -10062,8 +10062,8 @@ define('two/fakeSender', [
     'two/fakeSender/settings',
     'two/fakeSender/settings/map',
     'two/fakeSender/settings/updates',
-    'two/recruitQueue/types/datetype',
-    'two/recruitQueue/types/units',
+    'two/fakeSender/types/datetype',
+    'two/fakeSender/types/units',
     'two/ready',
     'queues/EventQueue'
 ], function (
@@ -10198,8 +10198,8 @@ define('two/fakeSender/ui', [
     'two/fakeSender',
     'two/fakeSender/settings',
     'two/fakeSender/settings/map',
-    'two/recruitQueue/types/datetype',
-    'two/recruitQueue/types/units',
+    'two/fakeSender/types/datetype',
+    'two/fakeSender/types/units',
     'two/Settings',
     'two/EventScope',
     'two/utils'
@@ -10414,7 +10414,7 @@ define('two/fakeSender/types/datetype', [], function () {
     }
 })
 
-define('two/recruitQueue/types/units', [], function () {
+define('two/fakeSender/types/units', [], function () {
     return {
         SPEAR: 'spear',
         SWORD: 'sword',
