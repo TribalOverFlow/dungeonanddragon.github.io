@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Sep 2020 21:43:17 GMT
+ * Mon, 21 Sep 2020 17:43:21 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -926,50 +926,36 @@ define('two/language', [
         },
         "fake_sender": {
             "title": "Watażka",
-            "fake": "Auto fejki",
-            "rename": "Auto przemianowanie",
-            "renamev": "Zmień nazwe wszystkich wiosek",
-            "sended": "Wysłane",
-            "datein": "Czas/Data",
-            "arrive": "Czas dotarcia na cel",
-            "currentDate": "Obecny czas",
-            "out": "Czas wyjścia z twojej wioski",
-            "torpedo": "Cel do fejkowania",
-            "text": "Najpierw utwórz szablon fejkowy z tagiem 'kareta' i przypisz go do wiosek z których chcesz go używać. 4 fejki na wszystkie cele z każdej twojej wioski, maks 40 komend. !Dwa różne szablony karetowe na jednej wiosce, efekt sie dubluje!",
-            "text1": "Najpierw utwórz szablon fejkowy z tagiem 'fejk' i przypisz go do wiosek z których chcesz go używać. 1 fejk na wszystkie cele z każdej twojej wioski, maks 40 komend. !Dwa różne szablony na jednej wiosce efekt sie dubluje!",
-            "text2": "Najpierw utwórz szablon fejkowy z tagiem 'fejk' i przypisz go do wiosek z których chcesz go używać. 1 fejk na wioske cel z każdej twojej wioski.",
-            "text3": "Zdezorientuj wroga zmieniając nazwy wszystkich swoich wiosek na jednakową.",
-            "text4": "Zdezorientuj wroga zmieniając nazwy wszystkich swoich wiosek na jednakową z iteracją rosnącą.",
-            "fakesend": "Fejk-kareta na wioski danego gracza",
-            "fakesend1": "Cele-wioski danego gracza",
-            "fakesend2": "Cel-określona wioska",
-            "send": "Wyślij",
-            "now": "Teraz",
-            "change": "Zmień",
-            "interval": "Przedział minutowy (od czasu początkowego w przód)",
-            "intervalT": "1-60",
-            "intervalP": "Liczba minut",
-            "no-targetP": "Uzupełnij najpierw ID gracza!",
-            "no-targetV": "Uzupełnij najpierw ID wioski!",
-            "no-presets": "Brak szablonów do fejkowania!",
-            "no-villages": "Brak przypisanych wiosek do wskazanego szablonu!",
-            "sending": "Wysyła karete fejkową na 4 różne wioski wroga z każdej twojej wioski(z przypisanym szablonem)-zabiera 16 rozkazów z wioski.",
-            "sending1": "Wysyła jeden atak fejkowy na 6 różnych wioske z każdej twojej wioski(z przypisanym szablonem)-zabiera 6 rozkazów z wioski.",
-            "sending2": "Wysyła jeden atak fejkowy na wskazaną wioskę z kazdej twojej wioski(z przypisanym szablonem)- zabiera 1 rozkaz z wioski.",
-            "renaming": "Zmienia nazwy wszystkich wiosek na nową.",
-            "rename-done": "Przemianowanie w toku",
-            "entry/id": "Gracz",
-            "entry/vid": "Wioska",
-            "origin": "Wioska pochodzenia",
-            "target": "Wioska cel",
-            "preset": "Szablon",
-            "date": "Data",
-            "logs.noFakes": "Brak wykonanych działań",
-            "clear": "Wyczyść",
-            "start": "Start",
+            "fake": "Fejki",
             "logs": "Logi",
+            "send_villages": "Fejki na wskazane cele(maks 10)",
+            "send_player": "Fejki na wszystkie wioski gracza",
+            "send_groups": "Fejki na wioski z danej grupy",
+            "send_tribe": "Fejki na losowe wioski plemienia",
+            "add_no_village": "Znajdź wioskę...",
+            "add_map_selected": "Wybrana wioska z mapy",
+            "add_date": "Czas/Data",
+            "add_current_date_minus": "Zmniejsz czas o 100 milisekund",
+            "add_current_date": "Obecny czas",
+            "add_current_date_plus": "Zwiększ czas o 100 milisekund",
+            "attack_interval": "Przerwa między atakami(sek)",
+            "group": "Grupa/y wiosek własnych",
+            "unit": "Jednostka/i",
+            "type": "Rodzaj fejków",
+            "own_limit": "Limit fajków z własnej wioski",
+            "target_limit": "Maks liczba fejków na cel",
+            "clear": "Wyczyść",
+            "send": "Wyślij",
+            "logs.origin": "Wyczyść",
+            "logs.target": "Wyczyść",
+            "logs.unit": "Jednostka",
+            "logs.type": "Rodzaj",
+            "logs.date": "Wyczyść",
+            "logs.noFakes": "Brak wykonanych działań",
+            "logs.clear": "Wyczyść logi",
             "general.started": "Watażka uruchomiony",
             "general.stopped": "Watażka zatrzymany",
+            "general.saved": "Watażka zatrzymany",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -982,9 +968,7 @@ define('two/language', [
             "doppelsoldner": "Berserker",
             "trebuchet": "Trebusz",
             "snob": "Szlachcic",
-            "knight": "Rycerz",
-            "clear.logs": "Wyczyść logi",
-            "entry/name": "Nowa nazwa"
+            "knight": "Rycerz"
         },
         "farm_overflow": {
             "title": "Farmer",
@@ -1837,49 +1821,35 @@ define('two/language', [
         "fake_sender": {
             "title": "Watażka",
             "fake": "Auto fejki",
-            "rename": "Auto przemianowanie",
-            "renamev": "Zmień nazwe wszystkich wiosek",
-            "sended": "Wysłane",
-            "datein": "Czas/Data",
-            "arrive": "Czas dotarcia na cel",
-            "currentDate": "Obecny czas",
-            "out": "Czas wyjścia z twojej wioski",
-            "torpedo": "Cel do fejkowania",
-            "text": "Najpierw utwórz szablon fejkowy z tagiem 'kareta' i przypisz go do wiosek z których chcesz go używać. 4 fejki na wszystkie cele z każdej twojej wioski, maks 40 komend. !Dwa różne szablony karetowe na jednej wiosce, efekt sie dubluje!",
-            "text1": "Najpierw utwórz szablon fejkowy z tagiem 'fejk' i przypisz go do wiosek z których chcesz go używać. 1 fejk na wszystkie cele z każdej twojej wioski, maks 40 komend. !Dwa różne szablony na jednej wiosce efekt sie dubluje!",
-            "text2": "Najpierw utwórz szablon fejkowy z tagiem 'fejk' i przypisz go do wiosek z których chcesz go używać. 1 fejk na wioske cel z każdej twojej wioski.",
-            "text3": "Zdezorientuj wroga zmieniając nazwy wszystkich swoich wiosek na jednakową.",
-            "text4": "Zdezorientuj wroga zmieniając nazwy wszystkich swoich wiosek na jednakową z iteracją rosnącą.",
-            "fakesend": "Fejk-kareta na wioski danego gracza",
-            "fakesend1": "Cele-wioski danego gracza",
-            "fakesend2": "Cel-określona wioska",
-            "send": "Wyślij",
-            "now": "Teraz",
-            "change": "Zmień",
-            "interval": "Przedział minutowy (od czasu początkowego w przód)",
-            "intervalT": "1-60",
-            "intervalP": "Liczba minut",
-            "no-targetP": "Uzupełnij najpierw ID gracza!",
-            "no-targetV": "Uzupełnij najpierw ID wioski!",
-            "no-presets": "Brak szablonów do fejkowania!",
-            "no-villages": "Brak przypisanych wiosek do wskazanego szablonu!",
-            "sending": "Wysyła karete fejkową na 4 różne wioski wroga z każdej twojej wioski(z przypisanym szablonem)-zabiera 16 rozkazów z wioski.",
-            "sending1": "Wysyła jeden atak fejkowy na 6 różnych wioske z każdej twojej wioski(z przypisanym szablonem)-zabiera 6 rozkazów z wioski.",
-            "sending2": "Wysyła jeden atak fejkowy na wskazaną wioskę z kazdej twojej wioski(z przypisanym szablonem)- zabiera 1 rozkaz z wioski.",
-            "renaming": "Zmienia nazwy wszystkich wiosek na nową.",
-            "rename-done": "Przemianowanie w toku",
-            "entry/id": "Gracz",
-            "entry/vid": "Wioska",
-            "origin": "Wioska pochodzenia",
-            "target": "Wioska cel",
-            "preset": "Szablon",
-            "date": "Data",
-            "logs.noFakes": "Brak wykonanych działań",
-            "clear": "Wyczyść",
-            "start": "Start",
             "logs": "Logi",
+            "send_villages": "Fejki na wskazane cele(maks 10)",
+            "send_player": "Fejki na wszystkie wioski gracza",
+            "send_groups": "Fejki na wioski z danej grupy",
+            "send_tribe": "Fejki na losowe wioski plemienia",
+            "add_no_village": "Znajdź wioskę...",
+            "add_map_selected": "Wybrana wioska z mapy",
+            "add_date": "Czas/Data",
+            "add_current_date_minus": "Zmniejsz czas o 100 milisekund",
+            "add_current_date": "Obecny czas",
+            "add_current_date_plus": "Zwiększ czas o 100 milisekund",
+            "attack_interval": "Przerwa między atakami(sek)",
+            "group": "Grupa/y wiosek własnych",
+            "unit": "Jednostka/i",
+            "type": "Rodzaj fejków",
+            "own_limit": "Limit fajków z własnej wioski",
+            "target_limit": "Maks liczba fejków na cel",
+            "clear": "Wyczyść",
+            "send": "Wyślij",
+            "logs.origin": "Wyczyść",
+            "logs.target": "Wyczyść",
+            "logs.unit": "Jednostka",
+            "logs.type": "Rodzaj",
+            "logs.date": "Wyczyść",
+            "logs.noFakes": "Brak wykonanych działań",
+            "logs.clear": "Wyczyść logi",
             "general.started": "Watażka uruchomiony",
             "general.stopped": "Watażka zatrzymany",
+            "general.saved": "Watażka zatrzymany",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -1892,9 +1862,7 @@ define('two/language', [
             "doppelsoldner": "Berserker",
             "trebuchet": "Trebusz",
             "snob": "Szlachcic",
-            "knight": "Rycerz",
-            "clear.logs": "Wyczyść logi",
-            "entry/name": "Nowa nazwa"
+            "knight": "Rycerz"
         },
         "farm_overflow": {
             "title": "Farmer",
@@ -9905,6 +9873,7 @@ define('two/fakeSender', [
     'two/fakeSender/settings',
     'two/fakeSender/settings/map',
     'two/fakeSender/settings/updates',
+    'two/fakeSender/types/type',
     'two/fakeSender/types/datetype',
     'two/fakeSender/types/units',
     'two/ready',
@@ -9914,6 +9883,7 @@ define('two/fakeSender', [
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
+    FS_TYPE,
     FS_DATE,
     FS_UNIT,
     ready,
@@ -9924,9 +9894,11 @@ define('two/fakeSender', [
     let settings
     let fakeSenderSettings
 
-    let selectedGroups0 = []
-    let selectedGroups1 = []
-    let selectedGroups2 = []
+    let selectedGroups = []
+    let selectedGroupsP = []
+    let selectedGroupsT = []
+    let selectedGroupsG = []
+    let selectedGroupsTarget = []
 
     const STORAGE_KEYS = {
         SETTINGS: 'fake_sender_settings'
@@ -9947,31 +9919,48 @@ define('two/fakeSender', [
         [FS_UNIT.KNIGHT]: 'knight'
     }
 	
-    const SEND_FAKES = {
+    const DATE_TYPE = {
         [FS_DATE.ARRIVE]: 'arrive',
         [FS_DATE.OUT]: 'out'
     }
+	
+    const FAKE_TYPE = {
+        [FS_DATE.ATTACK]: 'attack',
+        [FS_DATE.SUPPORT]: 'support',
+        [FS_DATE.QUATTRO]: 'four',
+        [FS_DATE.FULL]: 'full'
+    }
 
-    console.log(FAKE_UNIT, SEND_FAKES)
+    console.log(FAKE_UNIT, DATE_TYPE, FAKE_TYPE)
 
     const updateGroups = function () {
-        selectedGroups0 = []
-        selectedGroups1 = []
-        selectedGroups2 = []
+        selectedGroups = []
+        selectedGroupsP = []
+        selectedGroupsT = []
+        selectedGroupsG = []
+        selectedGroupsTarget = []
 
         const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser0 = fakeSenderSettings[SETTINGS.GROUP0]
-        const groupsSelectedByTheUser1 = fakeSenderSettings[SETTINGS.GROUP1]
-        const groupsSelectedByTheUser2 = fakeSenderSettings[SETTINGS.GROUP2]
+        const groupsInVillagesFake = fakeSenderSettings[SETTINGS.GROUP]
+        const groupsInPlayerFake = fakeSenderSettings[SETTINGS.GROUPP]
+        const groupsInTribeFake = fakeSenderSettings[SETTINGS.GROUPT]
+        const groupsInGroupFake = fakeSenderSettings[SETTINGS.GROUPG]
+        const targetsGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
 
-        groupsSelectedByTheUser0.forEach(function (groupId) {
-            selectedGroups0.push(allGroups[groupId])
+        groupsInVillagesFake.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
         })
-        groupsSelectedByTheUser1.forEach(function (groupId) {
-            selectedGroups1.push(allGroups[groupId])
+        groupsInPlayerFake.forEach(function (groupId) {
+            selectedGroupsP.push(allGroups[groupId])
         })
-        groupsSelectedByTheUser2.forEach(function (groupId) {
-            selectedGroups2.push(allGroups[groupId])
+        groupsInTribeFake.forEach(function (groupId) {
+            selectedGroupsT.push(allGroups[groupId])
+        })
+        groupsInGroupFake.forEach(function (groupId) {
+            selectedGroupsG.push(allGroups[groupId])
+        })
+        targetsGroups.forEach(function (groupId) {
+            selectedGroupsTarget.push(allGroups[groupId])
         })
     }
 
@@ -9995,7 +9984,7 @@ define('two/fakeSender', [
 
         fakeSenderSettings = settings.getAll()
 
-        console.log('all settings', fakeSenderSettings)
+        console.log('fakeSender settings', fakeSenderSettings)
 
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
@@ -10041,6 +10030,7 @@ define('two/fakeSender/ui', [
     'two/fakeSender',
     'two/fakeSender/settings',
     'two/fakeSender/settings/map',
+    'two/fakeSender/types/type',
     'two/fakeSender/types/datetype',
     'two/fakeSender/types/units',
     'two/Settings',
@@ -10051,6 +10041,7 @@ define('two/fakeSender/ui', [
     fakeSender,
     SETTINGS,
     SETTINGS_MAP,
+    FS_TYPE,
     FS_DATE,
     FS_UNIT,
     Settings,
@@ -10074,7 +10065,7 @@ define('two/fakeSender/ui', [
     const saveSettings = function () {
         settings.setAll(settings.decode($scope.settings))
 
-        utils.notif('success', 'Settings saved')
+        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'fake_sender'))
     }
 
     const switchState = function () {
@@ -10097,12 +10088,14 @@ define('two/fakeSender/ui', [
 
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'fake_sender'))
         },
         stop: function () {
             $scope.running = false
 
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'fake_sender'))
         }
     }
 
@@ -10112,7 +10105,7 @@ define('two/fakeSender/ui', [
         $button = interfaceOverflow.addMenuButton('Watażka', 20)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Watażka</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ TAB_TYPES.FAKE | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fakesend' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"item-name\">{{ 'text' | i18n:loc.ale:'fake_sender' }}<td class=\"item-send\"><span class=\"btn-green btn-border fourOfAKind\" tooltip=\"\" tooltip-content=\"{{ 'sending' | i18n:loc.ale:'fake_sender' }}\">{{ 'send' | i18n:loc.ale:'fake_sender' }}</span><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'datein' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE0]\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange addCurrentDate1\" tooltip=\"\" tooltip-content=\"{{ 'currentDate' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.interval\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'intervalP' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"{{ 'intervalT' | i18n:loc.ale:'fake_sender' }}\"><td class=\"item-name\">{{ 'interval' | i18n:loc.ale:'fake_sender' }}<td><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP0]\" drop-down=\"true\"></div><td><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT0]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'fakesend1' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompleteTarget1\"></div><td class=\"item-name\">{{ 'text1' | i18n:loc.ale:'fake_sender' }}<td class=\"item-send1\"><span class=\"btn-green btn-border fakePlayer\" tooltip=\"\" tooltip-content=\"{{ 'sending1' | i18n:loc.ale:'fake_sender' }}\">{{ 'send' | i18n:loc.ale:'fake_sender' }}</span><tr><td><input ng-model=\"commandData.date1\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'datein' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE1]\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange addCurrentDate2\" tooltip=\"\" tooltip-content=\"{{ 'currentDate' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.interval1\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'intervalP' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"{{ 'intervalT' | i18n:loc.ale:'fake_sender' }}\"><td class=\"item-name\">{{ 'interval' | i18n:loc.ale:'fake_sender' }}<td><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><td><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'fakesend2' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompleteTarget2\"></div><td class=\"item-name\">{{ 'text2' | i18n:loc.ale:'fake_sender' }}<td class=\"item-send2\"><span class=\"btn-green btn-border fakeVillage\" tooltip=\"\" tooltip-content=\"{{ 'sending2' | i18n:loc.ale:'fake_sender' }}\">{{ 'send' | i18n:loc.ale:'fake_sender' }}</span><tr><td><input ng-model=\"commandData.date2\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'datein' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE2]\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange addCurrentDate2\" tooltip=\"\" tooltip-content=\"{{ 'currentDate' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.interval2\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'intervalP' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"{{ 'intervalT' | i18n:loc.ale:'fake_sender' }}\"><td class=\"item-name\">{{ 'interval' | i18n:loc.ale:'fake_sender' }}<td><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><td><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col width=\"25%\"><thead><tr><th>{{ 'origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'preset' | i18n:loc.ale:'fake_sender' }}<th>{{ 'date' | i18n:loc.ale:'fake_sender' }}<tbody class=\"fakerLog\"><tr class=\"noFakes\"><td colspan=\"4\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"\">{{ 'clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'clear.logs' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"5%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><tr><td><span class=\"ff-cell-fix\">{{ 'attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'group' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'unit' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'type' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendVillages\" tooltip=\"\" tooltip-content=\"{{ 'sending_villages' | i18n:loc.ale:'fake_sender' }}\">{{ 'send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"5%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompletePlayer\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><tr><td><span class=\"ff-cell-fix\">{{ 'attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'group' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'unit' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'type' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\" tooltip=\"\" tooltip-content=\"{{ 'sending_player' | i18n:loc.ale:'fake_sender' }}\">{{ 'send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"5%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompleteTribe\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><tr><td><span class=\"ff-cell-fix\">{{ 'attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'group' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'unit' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'type' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendTribe\" tooltip=\"\" tooltip-content=\"{{ 'sending_tribe' | i18n:loc.ale:'fake_sender' }}\">{{ 'send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"5%\"><col><col width=\"18%\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'target_group' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><tr><td><span class=\"ff-cell-fix\">{{ 'attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'group' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'unit' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'type' | i18n:loc.ale:'fake_sender' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendGroups\">{{ 'send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody class=\"fakerLog\"><tr class=\"noFakes\"><td colspan=\"4\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-fake-sender div[select]{float:right}#two-fake-sender div[select] .select-handler{line-height:28px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm input{width:100%}#two-fake-sender .addForm td{text-align:center}#two-fake-sender .addForm span{height:26px;line-height:26px;padding:0 10px}#two-fake-sender .custom-select{width:240px}#two-fake-sender .actions{text-align:center}#two-fake-sender .actions a{height:26px;line-height:26px;padding:0 10px}#two-fake-sender .dateType1{width:200px}#two-fake-sender .dateType1 .custom-select-handler{text-align:left}#two-fake-sender .dateType2{width:200px}#two-fake-sender .dateType2 .custom-select-handler{text-align:left}#two-fake-sender .dateType3{width:200px}#two-fake-sender .dateType3 .custom-select-handler{text-align:left}#two-fake-sender .fakerLog td{text-align:center}#two-fake-sender .fakerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-fake-sender .fakerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-fake-sender table.header-center th{text-align:center}#two-fake-sender .noFakes td{height:26px;text-align:center}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
@@ -10123,6 +10116,10 @@ define('two/fakeSender/ui', [
         $scope.running = fakeSender.isRunning()
         $scope.selectedTab = TAB_TYPES.FAKE
         $scope.settingsMap = SETTINGS_MAP
+        $scope.type = Settings.encodeList(FS_TYPE, {
+            textObject: 'fake_sender',
+            disabled: true
+        })
         $scope.datetype = Settings.encodeList(FS_DATE, {
             textObject: 'fake_sender',
             disabled: true
@@ -10157,15 +10154,31 @@ define('two/fakeSender/ui', [
 
 define('two/fakeSender/settings', [], function () {
     return {
-        DATE_TYPE0: 'date_type0',
-        DATE_TYPE1: 'date_type1',
-        DATE_TYPE2: 'date_type2',
-        GROUP0: 'group0',
-        GROUP1: 'group1',
-        GROUP2: 'group2',
-        UNIT0: 'unit0',
-        UNIT1: 'unit1',
-        UNIT2: 'unit2'
+        COMMAND_INTERVAL: 'interval_villages',
+        COMMAND_INTERVALP: 'interval_player',
+        COMMAND_INTERVALT: 'interval_tribe',
+        COMMAND_INTERVALG: 'interval_groups',
+        GROUP: 'groups_villages',
+        GROUPP: 'groups_player',
+        GROUPT: 'groups_tribe',
+        GROUPG: 'groups_groups',
+        UNIT: 'units_villages',
+        UNITP: 'units_player',
+        UNITT: 'units_tribe',
+        UNITG: 'units_groups',
+        TYPE: 'type_villages',
+        TYPEP: 'type_player',
+        TYPET: 'type_tribe',
+        TYPEG: 'type_groups',
+        LIMIT_OWN: 'limit_own_villages',
+        LIMIT_OWNP: 'limit_own_player',
+        LIMIT_OWNT: 'limit_own_tribe',
+        LIMIT_OWNG: 'limit_own_groups',
+        LIMIT_TARGET: 'limit_target_villages',
+        LIMIT_TARGETP: 'limit_target_player',
+        LIMIT_TARGETT: 'limit_target_tribe',
+        LIMIT_TARGETG: 'limit_target_groups',
+        GROUP_TARGET: 'groups_target'
     }
 })
 
@@ -10183,7 +10196,7 @@ define('two/fakeSender/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.GROUP0]: {
+        [SETTINGS.GROUP]: {
             default: [],
             updates: [
                 UPDATES.GROUPS,
@@ -10193,7 +10206,7 @@ define('two/fakeSender/settings/map', [
             multiSelect: true,
             type: 'groups'
         },
-        [SETTINGS.GROUP1]: {
+        [SETTINGS.GROUPP]: {
             default: [],
             updates: [
                 UPDATES.GROUPS,
@@ -10203,7 +10216,7 @@ define('two/fakeSender/settings/map', [
             multiSelect: true,
             type: 'groups'
         },
-        [SETTINGS.GROUP2]: {
+        [SETTINGS.GROUPT]: {
             default: [],
             updates: [
                 UPDATES.GROUPS,
@@ -10213,35 +10226,137 @@ define('two/fakeSender/settings/map', [
             multiSelect: true,
             type: 'groups'
         },
-        [SETTINGS.DATE_TYPE0]: {
+        [SETTINGS.GROUPG]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP_TARGET]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.TYPE]: {
             default: false,
             disabledOption: true,
             inputType: 'select'
         },
-        [SETTINGS.DATE_TYPE1]: {
+        [SETTINGS.TYPEP]: {
             default: false,
             disabledOption: true,
             inputType: 'select'
         },
-        [SETTINGS.DATE_TYPE2]: {
+        [SETTINGS.TYPET]: {
             default: false,
             disabledOption: true,
             inputType: 'select'
         },
-        [SETTINGS.UNIT0]: {
+        [SETTINGS.TYPEG]: {
             default: false,
             disabledOption: true,
             inputType: 'select'
         },
-        [SETTINGS.UNIT1]: {
+        [SETTINGS.UNIT]: {
             default: false,
             disabledOption: true,
             inputType: 'select'
         },
-        [SETTINGS.UNIT2]: {
+        [SETTINGS.UNITT]: {
             default: false,
             disabledOption: true,
             inputType: 'select'
+        },
+        [SETTINGS.UNITP]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNITG]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.COMMAND_INTERVAL]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.COMMAND_INTERVALP]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.COMMAND_INTERVALT]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.COMMAND_INTERVALG]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.LIMIT_OWN]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_OWNP]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_OWNT]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_OWNG]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_TARGET]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
+        },
+        [SETTINGS.LIMIT_TARGETP]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
+        },
+        [SETTINGS.LIMIT_TARGETT]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
+        },
+        [SETTINGS.LIMIT_TARGETG]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
         }
     }
 })
@@ -10250,6 +10365,15 @@ define('two/fakeSender/types/datetype', [], function () {
     return {
         ARRIVE: 'arrive',
         OUT: 'out'
+    }
+})
+
+define('two/fakeSender/types/type', [], function () {
+    return {
+        ATTACK: 'attack',
+        SUPPORT: 'support',
+        QUATTRO: 'four',
+        FULL: 'full'
     }
 })
 
