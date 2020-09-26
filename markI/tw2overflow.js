@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 26 Sep 2020 06:55:19 GMT
+ * Sat, 26 Sep 2020 07:00:45 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6059,7 +6059,7 @@ define('two/battleCalculator/settings', [], function () {
         BASHPOINTS_SNOB: 'bashpoints_snob',
         BASHPOINTS_DOPPELSOLDNER: 'bashpoints_doppelsoldner',
         BASHPOINTS_TREBUCHET: 'bashpoints_trebuchet',
-        PRESET: 'presets'
+        PRESET: 'preset'
     }
 })
 
