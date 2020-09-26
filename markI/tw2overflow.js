@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 26 Sep 2020 18:37:15 GMT
+ * Sat, 26 Sep 2020 21:26:07 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3255,6 +3255,328 @@ require([
     }, ['map'])
 })
 
+define('two/activityTool', [
+    'two/Settings',
+    'two/activityTool/settings',
+    'two/activityTool/settings/map',
+    'two/activityTool/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let activityToolSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'activity_tool_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = activityToolSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = activityToolSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const activityTool = {}
+
+    activityTool.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            activityToolSettings = settings.getAll()
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        activityToolSettings = settings.getAll()
+
+        console.log('activityTool settings', activityToolSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    activityTool.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_START)
+    }
+
+    activityTool.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_STOP)
+    }
+
+    activityTool.getSettings = function () {
+        return settings
+    }
+
+    activityTool.isInitialized = function () {
+        return initialized
+    }
+
+    activityTool.isRunning = function () {
+        return running
+    }
+
+    return activityTool
+})
+
+define('two/activityTool/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        ACTIVITY_TOOL_START: 'activity_tool_start',
+        ACTIVITY_TOOL_STOP: 'activity_tool_stop'
+    })
+})
+
+define('two/activityTool/ui', [
+    'two/ui',
+    'two/activityTool',
+    'two/activityTool/settings',
+    'two/activityTool/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    activityTool,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (activityTool.isRunning()) {
+            activityTool.stop()
+        } else {
+            activityTool.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = activityTool.getSettings()
+        $button = interfaceOverflow.addMenuButton3('Kwatermistrz', 40)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'activity_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'activity_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'activity_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'activity_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'activity_tool' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'activity_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'activity_tool' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'activity_tool' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-activity-tool div[select]{float:right}#two-activity-tool div[select] .select-handler{line-height:28px}#two-activity-tool .range-container{width:250px}#two-activity-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-activity-tool .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = activityTool.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_activity_tool_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_activity_tool_window', $scope)
+    }
+
+    return init
+})
+
+define('two/activityTool/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/activityTool/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/activityTool/settings/map', [
+    'two/activityTool/settings',
+    'two/activityTool/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/activityTool',
+    'two/activityTool/ui',
+    'two/activityTool/events'
+], function (
+    ready,
+    activityTool,
+    activityToolInterface
+) {
+    if (activityTool.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        activityTool.init()
+        activityToolInterface()
+    })
+})
+
 define('two/alertSender', [
     'queues/EventQueue',
     'two/commandQueue',
@@ -4817,7 +5139,7 @@ define('two/autoCollector/ui', [
     let $button
 
     const init = function () {
-        $button = interfaceOverflow.addMenuButton2('Kolekcjoner', 30, $filter('i18n')('description', $rootScope.loc.ale, 'auto_collector'))
+        $button = interfaceOverflow.addMenuButton2('Kolekcjoner', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_collector'))
         
         $button.addEventListener('click', function () {
             if (autoCollector.isRunning()) {
@@ -5174,7 +5496,8 @@ define('two/autoFoundator/ui', [
     let $button
 
     const init = function () {
-        $button = interfaceOverflow.addMenuButton3('Fundator', 30, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
+        interfaceOverflow.addDivisor3(51)
+        $button = interfaceOverflow.addMenuButton3('Fundator', 50, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
 
         $button.addEventListener('click', function () {
             if (autoFoundator.isRunning()) {
@@ -12591,6 +12914,650 @@ require([
     }, ['map', 'presets'])
 })
 
+define('two/kingTool', [
+    'two/Settings',
+    'two/kingTool/settings',
+    'two/kingTool/settings/map',
+    'two/kingTool/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let kingToolSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'king_tool_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = kingToolSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = kingToolSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const kingTool = {}
+
+    kingTool.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            kingToolSettings = settings.getAll()
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        kingToolSettings = settings.getAll()
+
+        console.log('kingTool settings', kingToolSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    kingTool.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_START)
+    }
+
+    kingTool.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_STOP)
+    }
+
+    kingTool.getSettings = function () {
+        return settings
+    }
+
+    kingTool.isInitialized = function () {
+        return initialized
+    }
+
+    kingTool.isRunning = function () {
+        return running
+    }
+
+    return kingTool
+})
+
+define('two/kingTool/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        KING_TOOL_START: 'king_tool_start',
+        KING_TOOL_STOP: 'king_tool_stop'
+    })
+})
+
+define('two/kingTool/ui', [
+    'two/ui',
+    'two/kingTool',
+    'two/kingTool/settings',
+    'two/kingTool/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    kingTool,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (kingTool.isRunning()) {
+            kingTool.stop()
+        } else {
+            kingTool.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = kingTool.getSettings()
+        $button = interfaceOverflow.addMenuButton3('Marszałek', 30)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'king_tool' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'king_tool' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'king_tool' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'king_tool' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-king-tool div[select]{float:right}#two-king-tool div[select] .select-handler{line-height:28px}#two-king-tool .range-container{width:250px}#two-king-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-king-tool .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = kingTool.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_king_tool_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.KING_TOOL_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.KING_TOOL_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_king_tool_window', $scope)
+    }
+
+    return init
+})
+
+define('two/kingTool/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/kingTool/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/kingTool/settings/map', [
+    'two/kingTool/settings',
+    'two/kingTool/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/kingTool',
+    'two/kingTool/ui',
+    'two/kingTool/events'
+], function (
+    ready,
+    kingTool,
+    kingToolInterface
+) {
+    if (kingTool.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        kingTool.init()
+        kingToolInterface()
+    })
+})
+
+define('two/marketHelper', [
+    'two/Settings',
+    'two/marketHelper/settings',
+    'two/marketHelper/settings/map',
+    'two/marketHelper/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let marketHelperSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'market_helper_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = marketHelperSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = marketHelperSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const marketHelper = {}
+
+    marketHelper.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            marketHelperSettings = settings.getAll()
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        marketHelperSettings = settings.getAll()
+
+        console.log('marketHelper settings', marketHelperSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    marketHelper.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_START)
+    }
+
+    marketHelper.stop = function () {
+        running = false
+
+        console.log('marketHelper stop')
+
+        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_STOP)
+    }
+
+    marketHelper.getSettings = function () {
+        return settings
+    }
+
+    marketHelper.isInitialized = function () {
+        return initialized
+    }
+
+    marketHelper.isRunning = function () {
+        return running
+    }
+
+    return marketHelper
+})
+
+define('two/marketHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        MARKET_HELPER_START: 'market_helper_start',
+        MARKET_HELPER_STOP: 'market_helper_stop'
+    })
+})
+
+define('two/marketHelper/ui', [
+    'two/ui',
+    'two/marketHelper',
+    'two/marketHelper/settings',
+    'two/marketHelper/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    marketHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (marketHelper.isRunning()) {
+            marketHelper.stop()
+        } else {
+            marketHelper.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'marketHelper started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'marketHelper stopped')
+        }
+    }
+
+    const init = function () {
+        settings = marketHelper.getSettings()
+        $button = interfaceOverflow.addMenuButton2('Handlarz', 30)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'market_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'market_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'market_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'market_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'market_helper' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-market-helper div[select]{float:right}#two-market-helper div[select] .select-handler{line-height:28px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = marketHelper.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.MARKET_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.MARKET_HELPER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_market_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/marketHelper/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/marketHelper/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/marketHelper/settings/map', [
+    'two/marketHelper/settings',
+    'two/marketHelper/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/marketHelper',
+    'two/marketHelper/ui',
+    'two/marketHelper/events'
+], function (
+    ready,
+    marketHelper,
+    marketHelperInterface
+) {
+    if (marketHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        marketHelper.init()
+        marketHelperInterface()
+    })
+})
+
 define('two/minimap', [
     'two/minimap/types/actions',
     'two/minimap/types/mapSizes',
@@ -13860,7 +14827,7 @@ define('two/minimap/ui', [
         windowWrapper = document.querySelector('#wrapper')
         mapWrapper = document.querySelector('#map')
 
-        $button = interfaceOverflow.addMenuButton4('Minimapa', 20)
+        $button = interfaceOverflow.addMenuButton4('Minimapa', 30)
         $button.addEventListener('click', function () {
             const current = minimap.getMapPosition()
 
@@ -14249,7 +15216,7 @@ define('two/mintHelper/ui', [
     let $button
 
     const init = function () {
-        $button = interfaceOverflow.addMenuButton2('Mincerz', 40, $filter('i18n')('description', $rootScope.loc.ale, 'mint_helper'))
+        $button = interfaceOverflow.addMenuButton2('Mincerz', 50, $filter('i18n')('description', $rootScope.loc.ale, 'mint_helper'))
         
         $button.addEventListener('click', function () {
             if (mintHelper.isRunning()) {
@@ -14321,6 +15288,326 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/powerHelper', [
+    'two/Settings',
+    'two/powerHelper/settings',
+    'two/powerHelper/settings/map',
+    'two/powerHelper/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let powerHelperSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'power_helper_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = powerHelperSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = powerHelperSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const powerHelper = {}
+
+    powerHelper.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            powerHelperSettings = settings.getAll()
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        powerHelperSettings = settings.getAll()
+
+        console.log('powerHelper settings', powerHelperSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    powerHelper.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.POWER_HELPER_START)
+    }
+
+    powerHelper.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.POWER_HELPER_STOP)
+    }
+
+    powerHelper.getSettings = function () {
+        return settings
+    }
+
+    powerHelper.isInitialized = function () {
+        return initialized
+    }
+
+    powerHelper.isRunning = function () {
+        return running
+    }
+
+    return powerHelper
+})
+
+define('two/powerHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        POWER_HELPER_START: 'power_helper_start',
+        POWER_HELPER_STOP: 'power_helper_stop'
+    })
+})
+
+define('two/powerHelper/ui', [
+    'two/ui',
+    'two/powerHelper',
+    'two/powerHelper/settings',
+    'two/powerHelper/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    powerHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (powerHelper.isRunning()) {
+            powerHelper.stop()
+        } else {
+            powerHelper.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = powerHelper.getSettings()
+        $button = interfaceOverflow.addMenuButton('Obrona', 20)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_power_helper_window', `<div id=\"two-power-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'power_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'power_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'power_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'power_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'power_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'power_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'power_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'power_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'power_helper' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-power-helper div[select]{float:right}#two-power-helper div[select] .select-handler{line-height:28px}#two-power-helper .range-container{width:250px}#two-power-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-power-helper .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = powerHelper.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_power_helper_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.POWER_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.POWER_HELPER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_power_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/powerHelper/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/powerHelper/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/powerHelper/settings/map', [
+    'two/powerHelper/settings',
+    'two/powerHelper/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/powerHelper',
+    'two/powerHelper/ui',
+    'two/powerHelper/events'
+], function (
+    ready,
+    powerHelper,
+    powerHelperInterface
+) {
+    if (powerHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        powerHelper.init()
+        powerHelperInterface()
+    })
+})
+
 define('two/prankHelper', [
     'two/Settings',
     'two/prankHelper/settings',
@@ -14533,12 +15820,11 @@ define('two/prankHelper/ui', [
 
     const init = function () {
         settings = prankHelper.getSettings()
-        interfaceOverflow.addDivisor3(51)
         $button = interfaceOverflow.addMenuButton3('Błazen', 60)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'prank_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'prank_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'prank_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'prank_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'prank_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'prank_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'prank_helper' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-prank-helper div[select]{float:right}#two-prank-helper div[select] .select-handler{line-height:28px}#two-prank-helper .range-container{width:250px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}')
     }
 
     const buildWindow = function () {
@@ -15877,12 +17163,11 @@ define('two/recruitQueue/ui', [
 
     const init = function () {
         settings = recruitQueue.getSettings()
-        interfaceOverflow.addDivisor(81)
         $button = interfaceOverflow.addMenuButton('Kapitan', 80)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tr><th>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET1_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4_FINAL]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'presets.start' | i18n:loc.ale:'recruit_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'own.start' | i18n:loc.ale:'recruit_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-recruit-queue div[select]{text-align:center}#two-recruit-queue div[select] .select-wrapper{height:34px;width:164px;min-width:164px}#two-recruit-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-recruit-queue div[select] .select-wrapper .select-handler{text-align:left;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:160px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .addForm th{text-align:center}#two-recruit-queue .recruitLog td{text-align:center}#two-recruit-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .noRecruits td{height:26px;text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
+        interfaceOverflow.addStyle('#two-recruit-queue div[select]{text-align:center}#two-recruit-queue div[select] .select-wrapper{height:34px;width:164px;min-width:164px}#two-recruit-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-recruit-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:160px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .addForm th{text-align:center}#two-recruit-queue .recruitLog td{text-align:center}#two-recruit-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .noRecruits td{height:26px;text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -16645,9 +17930,9 @@ define('two/reportHelper', [
         console.log('selectedGroups', selectedGroups)
     }
 
-    const examplePublicFunctions = {}
+    const reportHelper = {}
 
-    examplePublicFunctions.init = function () {
+    reportHelper.init = function () {
         initialized = true
 
         settings = new Settings({
@@ -16657,11 +17942,7 @@ define('two/reportHelper', [
 
         settings.onChange(function (changes, updates) {
             reportHelperSettings = settings.getAll()
-
-            // here you can handle settings that get modified and need
-            // some processing. Useful to not break the script when updated
-            // while running.
-
+			
             if (updates[UPDATES.PRESETS]) {
                 updatePresets()
             }
@@ -16673,7 +17954,7 @@ define('two/reportHelper', [
 
         reportHelperSettings = settings.getAll()
 
-        console.log('all settings', reportHelperSettings)
+        console.log('reportHelper settings', reportHelperSettings)
 
         ready(function () {
             updatePresets()
@@ -16686,7 +17967,7 @@ define('two/reportHelper', [
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
 
-    examplePublicFunctions.start = function () {
+    reportHelper.start = function () {
         running = true
 
         console.log('selectedPresets', selectedPresets)
@@ -16695,27 +17976,27 @@ define('two/reportHelper', [
         eventQueue.trigger(eventTypeProvider.REPORT_HELPER_START)
     }
 
-    examplePublicFunctions.stop = function () {
+    reportHelper.stop = function () {
         running = false
 
-        console.log('example module stop')
+        console.log('reportHelper stop')
 
         eventQueue.trigger(eventTypeProvider.REPORT_HELPER_STOP)
     }
 
-    examplePublicFunctions.getSettings = function () {
+    reportHelper.getSettings = function () {
         return settings
     }
 
-    examplePublicFunctions.isInitialized = function () {
+    reportHelper.isInitialized = function () {
         return initialized
     }
 
-    examplePublicFunctions.isRunning = function () {
+    reportHelper.isRunning = function () {
         return running
     }
 
-    return examplePublicFunctions
+    return reportHelper
 })
 
 define('two/reportHelper/events', [], function () {
@@ -16807,8 +18088,8 @@ define('two/reportHelper/ui', [
         $button = interfaceOverflow.addMenuButton3('Skryba', 70)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-example-module\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Example Module</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'example_module' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'example_module' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'example_module' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'example_module' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-example-module div[select]{float:right}#two-example-module div[select] .select-handler{line-height:28px}#two-example-module .range-container{width:250px}#two-example-module .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-example-module .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-report-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'report_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'report_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'report_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'report_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'report_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'report_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'report_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'report_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'report_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'report_helper' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-report-helper div[select]{float:right}#two-report-helper div[select] .select-handler{line-height:28px}#two-report-helper .range-container{width:250px}#two-report-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-report-helper .textfield-border.fit{width:100%}')
     }
 
     const buildWindow = function () {
@@ -16828,7 +18109,7 @@ define('two/reportHelper/ui', [
         $scope.switchState = switchState
 
         let eventScope = new EventScope('twoverflow_report_helper_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('reportHelper window closed')
         })
 
         // all those event listeners will be destroyed as soon as the window gets closed
@@ -17745,6 +19026,329 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/specialQueue', [
+    'two/Settings',
+    'two/specialQueue/settings',
+    'two/specialQueue/settings/map',
+    'two/specialQueue/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let specialQueueSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'special_queue_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = specialQueueSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = specialQueueSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const specialQueue = {}
+
+    specialQueue.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            specialQueueSettings = settings.getAll()
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        specialQueueSettings = settings.getAll()
+
+        console.log('specialQueue settings', specialQueueSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    specialQueue.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_START)
+    }
+
+    specialQueue.stop = function () {
+        running = false
+
+        console.log('specialQueue stop')
+
+        eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_STOP)
+    }
+
+    specialQueue.getSettings = function () {
+        return settings
+    }
+
+    specialQueue.isInitialized = function () {
+        return initialized
+    }
+
+    specialQueue.isRunning = function () {
+        return running
+    }
+
+    return specialQueue
+})
+
+define('two/specialQueue/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        SPECIAL_QUEUE_START: 'special_queue_start',
+        SPECIAL_QUEUE_STOP: 'special_queue_stop'
+    })
+})
+
+define('two/specialQueue/ui', [
+    'two/ui',
+    'two/specialQueue',
+    'two/specialQueue/settings',
+    'two/specialQueue/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    specialQueue,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (specialQueue.isRunning()) {
+            specialQueue.stop()
+        } else {
+            specialQueue.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = specialQueue.getSettings()
+        interfaceOverflow.addDivisor(86)
+        $button = interfaceOverflow.addMenuButton('Weteran', 85)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_special_queue_window', `<div id=\"two-special-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'special_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'special_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'special_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'special_queue' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'special_queue' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'special_queue' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'special_queue' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-special-queue div[select]{float:right}#two-special-queue div[select] .select-handler{line-height:28px}#two-special-queue .range-container{width:250px}#two-special-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-special-queue .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = specialQueue.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_special_queue_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.SPECIAL_QUEUE_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.SPECIAL_QUEUE_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_special_queue_window', $scope)
+    }
+
+    return init
+})
+
+define('two/specialQueue/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/specialQueue/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/specialQueue/settings/map', [
+    'two/specialQueue/settings',
+    'two/specialQueue/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/specialQueue',
+    'two/specialQueue/ui',
+    'two/specialQueue/events'
+], function (
+    ready,
+    specialQueue,
+    specialQueueInterface
+) {
+    if (specialQueue.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        specialQueue.init()
+        specialQueueInterface()
+    })
+})
+
 define('two/spyMaster', [
     'two/Settings',
     'two/spyMaster/settings',
@@ -18449,4 +20053,330 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/supportSender', [
+    'two/Settings',
+    'two/supportSender/settings',
+    'two/supportSender/settings/map',
+    'two/supportSender/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let supportSenderSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'support_sender_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = supportSenderSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = supportSenderSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const supportSender = {}
+
+    supportSender.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            supportSenderSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        supportSenderSettings = settings.getAll()
+
+        console.log('supportSender settings', supportSenderSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    supportSender.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_START)
+    }
+
+    supportSender.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
+    }
+
+    supportSender.getSettings = function () {
+        return settings
+    }
+
+    supportSender.isInitialized = function () {
+        return initialized
+    }
+
+    supportSender.isRunning = function () {
+        return running
+    }
+
+    return supportSender
+})
+
+define('two/supportSender/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        SUPPORT_SENDER_START: 'support_sender_start',
+        SUPPORT_SENDER_STOP: 'support_sender_stop'
+    })
+})
+
+define('two/supportSender/ui', [
+    'two/ui',
+    'two/supportSender',
+    'two/supportSender/settings',
+    'two/supportSender/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    supportSender,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (supportSender.isRunning()) {
+            supportSender.stop()
+        } else {
+            supportSender.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = supportSender.getSettings()
+        $button = interfaceOverflow.addMenuButton('Chorąży', 50)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'support_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'support_sender' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'support_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'support_sender' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'support_sender' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-support-sender div[select]{float:right}#two-support-sender div[select] .select-handler{line-height:28px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = supportSender.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_support_sender_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.SUPPORT_SENDER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.SUPPORT_SENDER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_support_sender_window', $scope)
+    }
+
+    return init
+})
+
+define('two/supportSender/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/supportSender/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/supportSender/settings/map', [
+    'two/supportSender/settings',
+    'two/supportSender/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/supportSender',
+    'two/supportSender/ui',
+    'two/supportSender/events'
+], function (
+    ready,
+    supportSender,
+    supportSenderInterface
+) {
+    if (supportSender.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        supportSender.init()
+        supportSenderInterface()
+    })
+})
+
 })(this)
