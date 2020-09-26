@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 26 Sep 2020 07:00:45 GMT
+ * Sat, 26 Sep 2020 07:07:50 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -5594,6 +5594,7 @@ define('two/battleCalculator', [
     let running = false
     let settings
     let battleCalculatorSettings
+	
     let presetSelected = []
 	
 
@@ -5758,6 +5759,13 @@ define('two/battleCalculator', [
         battleCalculatorSettings = settings.getAll()
 
         console.log('battleCalculator settings', battleCalculatorSettings)
+		
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+		
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
 
     }
 
@@ -6083,6 +6091,7 @@ define('two/battleCalculator/settings/map', [
             ],
             disabledOption: true,
             inputType: 'select',
+            multiSelect: false,
             type: 'presets'
         },
         [SETTINGS.BATTLE_CATAPULT_TARGET]: {
