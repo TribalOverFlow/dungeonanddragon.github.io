@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 26 Sep 2020 07:25:07 GMT
+ * Sat, 26 Sep 2020 15:18:52 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1211,67 +1211,54 @@ define('two/language', [
         "spy_master": {
             "title": "Zwiadowca",
             "spy": "Akcje Szpiegowskie",
-            "recruit": "Auto-Rekrutacja",
+            "spy.units": "Szpieguj jednostki",
+            "spy.building": "Szpieguj budynki",
+            "spy.all": "Szpieguj jednostki i budynki",
+            "spy.sabotage": "Sabotuj wioskę",
+            "spy.player": "Szpieguj całego gracza",
+            "spy.add_village": "Wybierz wioskę...",
+            "spy.no_village": "Nie wybrano wioski",
+            "spy.add_map_selected": "Wybrana wioska z mapy",
+            "spy.no_player": "Nie wybrano gracza",
+            "spy.add_player": "Wybierz gracza...",
+            "spy.selected": "Wybierz",
+            "spy.textunits": "Wysyła szpiegów z twoich wiosek na wybraną wioskę aby zdobyć informacje o jednostkach.",
+            "spy.textbuildings": "Wysyła szpiegów z twoich wiosek na wybraną wioskę aby zdobyć informacje o budynkach.",
+            "spy.textall": "Wysyła szpiegów z twoich wiosek na wybraną wioskę aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki kolejni na jednostki).",
+            "spy.textsabotage": "Wysyła szpiegów z twoich wiosek na wioskę wskazaną aby dokonać sabotażu na budynkach.",
+            "spy.textplayer": "Wysyła szpiegów z twoich wiosek na wioski gracza aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
+            "spy.send": "Wyślij",
+            "spy.sabote": "Sabotuj",
+            "spy.clear": "Wyczyść",
             "countermeasures": "Kontrwywiad",
-            "torpedo": "Cel misji szpiegowskich",
-            "spyU": "Szpieguj jednostki",
-            "spyB": "Szpieguj budynki",
-            "spyA": "Efektywne szpiegowanie",
-            "spyP": "Szpieguj całego gracza",
-            "sabotage": "Sabotuj wioskę",
-            "spyU.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko p jednostkach.",
-            "spyB.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko o budynkach.",
-            "sabotage.text": "Wysyła po 3 szpiegów z twoich wiosek na wioskę wskazaną aby dokonać sabotażu na budynkach.",
-            "spyA.text": "Wysyła 8-10 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
-            "spyP.text": "Wysyła szpiegów z twoich wiosek na wioski gracza aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
-            "send": "Wyślij",
-            "sabote": "Sabotuj",
-            "sendingU": "Wszyscy na jednostki",
-            "sendingB": "Wszyscy na budynki",
-            "sendingS": "3 do sabotowania budynków na wrogiej wiosce",
-            "sendingA": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
-            "sendingP": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
-            "entry/id": "Gracz",
-            "entry/vid": "Wioska",
-            "entry/building": "Wpisz budynek",
-            "entry/level": "Wpisz poziom",
-            "entry/unit": "Jednostka",
-            "entry/replacement": "Zamiennik",
-            "recruiting": "Rekrutacja",
-            "recruit.text": "Rekrutuje wszystkich szpiegów na wszystkich wioskach.",
-            "recruit.tip": "xxx",
-            "recruit.btn": "Rekrutuj",
-            "camouflage": "Kamuflaż",
-            "camouflage.text": "Wybierz budynek oraz poziom jaki ma być widoczny dla wrogiego szpiega.",
-            "camouflage.tip": "Zmienia widoczność poziomu wybranego budynku na wszystkich wioskach gdzie jest dostępna opcja kamuflażu",
-            "camouflage.btn": "Kamufluj",
-            "camouflage.set": "Kamuflaż ustawiony.",
-            "switch": "Zamiana broni",
-            "switch.text": "Wybierz typy jednostek które zamienią się bronią by oszukać wrogiego szpiega.",
-            "switch.tip": "Zamienia broń między dwoma typami jednostek na wszystkich wioskach, na których jest to możliwe.",
-            "switch.btn": "Zamień",
-            "switch.set": "Zamiana broni ustawiona.",
-            "dummies": "Atrapy",
-            "dummies.text": "Wybierz jednostkę, która ma posłużyć jako atrapa widoczna dla wrogiego szpiega.",
-            "dummies.tip": "Aktywuje Atrapy, uzupełnia wolny prowiant o wybrane jednotski na wszystkich wioskach gdzie są one dostępne.",
-            "dummies.btn": "Postaw",
-            "dummies.set": "Atrapy postawione.",
-            "exchange": "Wymiana",
-            "exchange.text": "Dzięki tej opcji wrogi szpieg pozostawi raport na temat swojej własnej wioski.",
-            "exchange.tip": "Aktywuje Wymianę na wszystkich wioskach gdzie jest ona dostępna.",
-            "exchange.btn": "Aktywuj",
-            "exchange.set": "Wymiana ustawiona.",
+            "countermeasures.camouflage": "Kamuflaż",
+            "countermeasures.level": "Wpisz poziom",
+            "countermeasures.textcamouflage": "Wybierz budynek oraz poziom jaki ma być widoczny dla wrogiego szpiega.",
+            "countermeasures.tipcamouflage": "Zmienia widoczność poziomu wybranego budynku na wszystkich wioskach gdzie jest dostępna opcja kamuflażu",
+            "countermeasures.btncamouflage": "Kamufluj",
+            "countermeasures.switch": "Zamiana broni",
+            "countermeasures.textswitch": "Wybierz typy jednostek które zamienią się bronią by oszukać wrogiego szpiega.",
+            "countermeasures.tipswitch": "Zamienia broń między dwoma typami jednostek na wszystkich wioskach, na których jest to możliwe.",
+            "countermeasures.btnswitch": "Zamień",
+            "countermeasures.dummies": "Atrapy",
+            "countermeasures.textdummies": "Wybierz jednostkę, która ma posłużyć jako atrapa widoczna dla wrogiego szpiega.",
+            "countermeasures.tipdummies": "Aktywuje Atrapy, uzupełnia wolny prowiant o wybrane jednostki na wszystkich wioskach gdzie są one dostępne.",
+            "countermeasures.btndummies": "Postaw",
+            "countermeasures.exchange": "Wymiana",
+            "countermeasures.textexchange": "Dzięki tej opcji wrogi szpieg pozostawi raport na temat swojej własnej wioski.",
+            "countermeasures.tipexchange": "Aktywuje Wymianę na wszystkich wioskach gdzie jest ona dostępna.",
+            "countermeasures.btnexchange": "Aktywuj",
+            "countermeasures.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródłowa",
+            "logs.target": "Wioska cel",
+            "logs.type": "Typ",
+            "logs.amount": "Ilość",
+            "logs.date": "Czas wysłania",
+            "logs.noMissions": "Brak wysłanych szpiegów.",
+            "logs.clear": "Wyczyść logi",
             "general.stopped": "Zwiadowca zatrzymany",
             "general.started": "Zwiadowca uruchomiony",
-            "origin": "Wioska źródłowa",
-            "target": "Wioska cel",
-            "type": "Typ",
-            "amount": "Ilość",
-            "date": "Czas wysłania",
-            "clear": "Wyczyść",
-            "logs": "Logi",
-            "logs.clear": "Wyczyść logi",
-            "logs.noMissions": "Brak wysłanych szpiegów.",
             "headquarter": "Ratusz",
             "barracks": "Koszary",
             "tavern": "Tawerna",
@@ -1301,8 +1288,7 @@ define('two/language', [
             "doppelsoldner": "Berserker",
             "trebuchet": "Trebusz",
             "snob": "Szlachcic",
-            "knight": "Rycerz",
-            "none": "-- Wyłączona --"
+            "knight": "Rycerz"
         },
         "spy_recruiter": {
             "title": "Szpieg",
@@ -2102,67 +2088,54 @@ define('two/language', [
         "spy_master": {
             "title": "Zwiadowca",
             "spy": "Akcje Szpiegowskie",
-            "recruit": "Auto-Rekrutacja",
+            "spy.units": "Szpieguj jednostki",
+            "spy.building": "Szpieguj budynki",
+            "spy.all": "Szpieguj jednostki i budynki",
+            "spy.sabotage": "Sabotuj wioskę",
+            "spy.player": "Szpieguj całego gracza",
+            "spy.add_village": "Wybierz wioskę...",
+            "spy.no_village": "Nie wybrano wioski",
+            "spy.add_map_selected": "Wybrana wioska z mapy",
+            "spy.no_player": "Nie wybrano gracza",
+            "spy.add_player": "Wybierz gracza...",
+            "spy.selected": "Wybierz",
+            "spy.textunits": "Wysyła szpiegów z twoich wiosek na wybraną wioskę aby zdobyć informacje o jednostkach.",
+            "spy.textbuildings": "Wysyła szpiegów z twoich wiosek na wybraną wioskę aby zdobyć informacje o budynkach.",
+            "spy.textall": "Wysyła szpiegów z twoich wiosek na wybraną wioskę aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki kolejni na jednostki).",
+            "spy.textsabotage": "Wysyła szpiegów z twoich wiosek na wioskę wskazaną aby dokonać sabotażu na budynkach.",
+            "spy.textplayer": "Wysyła szpiegów z twoich wiosek na wioski gracza aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
+            "spy.send": "Wyślij",
+            "spy.sabote": "Sabotuj",
+            "spy.clear": "Wyczyść",
             "countermeasures": "Kontrwywiad",
-            "torpedo": "Cel misji szpiegowskich",
-            "spyU": "Szpieguj jednostki",
-            "spyB": "Szpieguj budynki",
-            "spyA": "Efektywne szpiegowanie",
-            "spyP": "Szpieguj całego gracza",
-            "sabotage": "Sabotuj wioskę",
-            "spyU.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko p jednostkach.",
-            "spyB.text": "Wysyła 7 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje tylko o budynkach.",
-            "sabotage.text": "Wysyła po 3 szpiegów z twoich wiosek na wioskę wskazaną aby dokonać sabotażu na budynkach.",
-            "spyA.text": "Wysyła 8-10 szpiegów z twoich wiosek na wioskę wskazaną aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
-            "spyP.text": "Wysyła szpiegów z twoich wiosek na wioski gracza aby zdobyć informacje o budynkach oraz jednostkach(pierwsi szpiedzy na budynki ostatni na jednostki).",
-            "send": "Wyślij",
-            "sabote": "Sabotuj",
-            "sendingU": "Wszyscy na jednostki",
-            "sendingB": "Wszyscy na budynki",
-            "sendingS": "3 do sabotowania budynków na wrogiej wiosce",
-            "sendingA": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
-            "sendingP": "Pierwsi na budynki kolejni na jednsotki - największa efektwnosc.",
-            "entry/id": "Gracz",
-            "entry/vid": "Wioska",
-            "entry/building": "Wpisz budynek",
-            "entry/level": "Wpisz poziom",
-            "entry/unit": "Jednostka",
-            "entry/replacement": "Zamiennik",
-            "recruiting": "Rekrutacja",
-            "recruit.text": "Rekrutuje wszystkich szpiegów na wszystkich wioskach.",
-            "recruit.tip": "xxx",
-            "recruit.btn": "Rekrutuj",
-            "camouflage": "Kamuflaż",
-            "camouflage.text": "Wybierz budynek oraz poziom jaki ma być widoczny dla wrogiego szpiega.",
-            "camouflage.tip": "Zmienia widoczność poziomu wybranego budynku na wszystkich wioskach gdzie jest dostępna opcja kamuflażu",
-            "camouflage.btn": "Kamufluj",
-            "camouflage.set": "Kamuflaż ustawiony.",
-            "switch": "Zamiana broni",
-            "switch.text": "Wybierz typy jednostek które zamienią się bronią by oszukać wrogiego szpiega.",
-            "switch.tip": "Zamienia broń między dwoma typami jednostek na wszystkich wioskach, na których jest to możliwe.",
-            "switch.btn": "Zamień",
-            "switch.set": "Zamiana broni ustawiona.",
-            "dummies": "Atrapy",
-            "dummies.text": "Wybierz jednostkę, która ma posłużyć jako atrapa widoczna dla wrogiego szpiega.",
-            "dummies.tip": "Aktywuje Atrapy, uzupełnia wolny prowiant o wybrane jednotski na wszystkich wioskach gdzie są one dostępne.",
-            "dummies.btn": "Postaw",
-            "dummies.set": "Atrapy postawione.",
-            "exchange": "Wymiana",
-            "exchange.text": "Dzięki tej opcji wrogi szpieg pozostawi raport na temat swojej własnej wioski.",
-            "exchange.tip": "Aktywuje Wymianę na wszystkich wioskach gdzie jest ona dostępna.",
-            "exchange.btn": "Aktywuj",
-            "exchange.set": "Wymiana ustawiona.",
+            "countermeasures.camouflage": "Kamuflaż",
+            "countermeasures.level": "Wpisz poziom",
+            "countermeasures.textcamouflage": "Wybierz budynek oraz poziom jaki ma być widoczny dla wrogiego szpiega.",
+            "countermeasures.tipcamouflage": "Zmienia widoczność poziomu wybranego budynku na wszystkich wioskach gdzie jest dostępna opcja kamuflażu",
+            "countermeasures.btncamouflage": "Kamufluj",
+            "countermeasures.switch": "Zamiana broni",
+            "countermeasures.textswitch": "Wybierz typy jednostek które zamienią się bronią by oszukać wrogiego szpiega.",
+            "countermeasures.tipswitch": "Zamienia broń między dwoma typami jednostek na wszystkich wioskach, na których jest to możliwe.",
+            "countermeasures.btnswitch": "Zamień",
+            "countermeasures.dummies": "Atrapy",
+            "countermeasures.textdummies": "Wybierz jednostkę, która ma posłużyć jako atrapa widoczna dla wrogiego szpiega.",
+            "countermeasures.tipdummies": "Aktywuje Atrapy, uzupełnia wolny prowiant o wybrane jednostki na wszystkich wioskach gdzie są one dostępne.",
+            "countermeasures.btndummies": "Postaw",
+            "countermeasures.exchange": "Wymiana",
+            "countermeasures.textexchange": "Dzięki tej opcji wrogi szpieg pozostawi raport na temat swojej własnej wioski.",
+            "countermeasures.tipexchange": "Aktywuje Wymianę na wszystkich wioskach gdzie jest ona dostępna.",
+            "countermeasures.btnexchange": "Aktywuj",
+            "countermeasures.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródłowa",
+            "logs.target": "Wioska cel",
+            "logs.type": "Typ",
+            "logs.amount": "Ilość",
+            "logs.date": "Czas wysłania",
+            "logs.noMissions": "Brak wysłanych szpiegów.",
+            "logs.clear": "Wyczyść logi",
             "general.stopped": "Zwiadowca zatrzymany",
             "general.started": "Zwiadowca uruchomiony",
-            "origin": "Wioska źródłowa",
-            "target": "Wioska cel",
-            "type": "Typ",
-            "amount": "Ilość",
-            "date": "Czas wysłania",
-            "clear": "Wyczyść",
-            "logs": "Logi",
-            "logs.clear": "Wyczyść logi",
-            "logs.noMissions": "Brak wysłanych szpiegów.",
             "headquarter": "Ratusz",
             "barracks": "Koszary",
             "tavern": "Tawerna",
@@ -2192,8 +2165,7 @@ define('two/language', [
             "doppelsoldner": "Berserker",
             "trebuchet": "Trebusz",
             "snob": "Szlachcic",
-            "knight": "Rycerz",
-            "none": "-- Wyłączona --"
+            "knight": "Rycerz"
         },
         "spy_recruiter": {
             "title": "Szpieg",
@@ -5779,7 +5751,7 @@ define('two/battleCalculator', [
     battleCalculator.stop = function () {
         running = false
 
-        console.log('example module stop')
+        console.log('battleCalculator stop')
 
         eventQueue.trigger(eventTypeProvider.BATTLE_CALCULATOR_STOP)
     }
@@ -5887,7 +5859,7 @@ define('two/battleCalculator/ui', [
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
 
-            utils.notif('success', 'Example module started')
+            utils.notif('success', 'battleCalculator started')
         },
         stop: function () {
             $scope.running = false
@@ -5895,7 +5867,7 @@ define('two/battleCalculator/ui', [
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
 
-            utils.notif('success', 'Example module stopped')
+            utils.notif('success', 'battleCalculator stopped')
         }
     }
 
@@ -17776,22 +17748,16 @@ define('two/spyMaster', [
     'two/Settings',
     'two/spyMaster/settings',
     'two/spyMaster/settings/map',
-    'two/spyMaster/settings/updates',
     'two/spyMaster/types/building',
     'two/spyMaster/types/unit',
-    'two/spyMaster/types/dummies',
-    'two/spyMaster/types/replacement',
     'two/ready',
     'queues/EventQueue'
 ], function(
     Settings,
     SETTINGS,
     SETTINGS_MAP,
-    UPDATES,
     C_BUILDING,
     C_UNIT,
-    C_DUMMIES,
-    C_REPLACEMENT,
     ready,
     eventQueue
 ) {
@@ -17821,36 +17787,6 @@ define('two/spyMaster', [
         [C_BUILDING.MARKET]: 'market',
         [C_BUILDING.ACADEMY]: 'academy'
     }
-    const COUNTERMEASURES_REPLACEMENT = {
-        [C_REPLACEMENT.SPEAR]: 'spear',
-        [C_REPLACEMENT.SWORD]: 'sword',
-        [C_REPLACEMENT.AXE]: 'axe',
-        [C_REPLACEMENT.ARCHER]: 'archer',
-        [C_REPLACEMENT.LIGHT_CAVALRY]: 'light_cavalry',
-        [C_REPLACEMENT.MOUNTED_ARCHER]: 'mounted_archer',
-        [C_REPLACEMENT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [C_REPLACEMENT.RAM]: 'ram',
-        [C_REPLACEMENT.CATAPULT]: 'catapult',
-        [C_REPLACEMENT.TREBUCHET]: 'trebuchet',
-        [C_REPLACEMENT.DOPPELSOLDNER]: 'doppelsoldner',
-        [C_REPLACEMENT.SNOB]: 'snob',
-        [C_REPLACEMENT.KNIGHT]: 'knight'
-    }
-    const COUNTERMEASURES_DUMMIES = {
-        [C_DUMMIES.SPEAR]: 'spear',
-        [C_DUMMIES.SWORD]: 'sword',
-        [C_DUMMIES.AXE]: 'axe',
-        [C_DUMMIES.ARCHER]: 'archer',
-        [C_DUMMIES.LIGHT_CAVALRY]: 'light_cavalry',
-        [C_DUMMIES.MOUNTED_ARCHER]: 'mounted_archer',
-        [C_DUMMIES.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [C_DUMMIES.RAM]: 'ram',
-        [C_DUMMIES.CATAPULT]: 'catapult',
-        [C_DUMMIES.TREBUCHET]: 'trebuchet',
-        [C_DUMMIES.DOPPELSOLDNER]: 'doppelsoldner',
-        [C_DUMMIES.SNOB]: 'snob',
-        [C_DUMMIES.KNIGHT]: 'knight'
-    }
     const COUNTERMEASURES_UNIT = {
         [C_UNIT.SPEAR]: 'spear',
         [C_UNIT.SWORD]: 'sword',
@@ -17866,7 +17802,7 @@ define('two/spyMaster', [
         [C_UNIT.SNOB]: 'snob',
         [C_UNIT.KNIGHT]: 'knight'
     }
-    console.log(COUNTERMEASURES_UNIT, COUNTERMEASURES_REPLACEMENT, COUNTERMEASURES_BUILDING, COUNTERMEASURES_DUMMIES)
+    console.log(COUNTERMEASURES_UNIT, COUNTERMEASURES_BUILDING)
     const spyMaster = {}
     spyMaster.init = function() {
         initialized = true
@@ -17875,7 +17811,7 @@ define('two/spyMaster', [
             storageKey: STORAGE_KEYS.SETTINGS
         })
         spyMasterSettings = settings.getAll()
-        console.log('all settings', spyMasterSettings)
+        console.log('spyMaster settings', spyMasterSettings)
     }
     spyMaster.start = function() {
         running = true
@@ -17910,8 +17846,6 @@ define('two/spyMaster/ui', [
     'two/spyMaster/settings/map',
     'two/spyMaster/types/building',
     'two/spyMaster/types/unit',
-    'two/spyMaster/types/dummies',
-    'two/spyMaster/types/replacement',
     'two/Settings',
     'two/EventScope',
     'two/utils'
@@ -17922,8 +17856,6 @@ define('two/spyMaster/ui', [
     SETTINGS_MAP,
     C_BUILDING,
     C_UNIT,
-    C_DUMMIES,
-    C_REPLACEMENT,
     Settings,
     EventScope,
     utils
@@ -17968,7 +17900,7 @@ define('two/spyMaster/ui', [
         settings = spyMaster.getSettings()
         $button = interfaceOverflow.addMenuButton3('Zwiadowca', 10)
         $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>Zwiadowca</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ TAB_TYPES.SPY | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ TAB_TYPES.COUNTERMEASURES | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spyU' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_UNITS]\"><td class=\"item-name\">{{ 'spyU.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingU' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyB' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_BUILDINGS]\"><td class=\"item-name\">{{ 'spyB.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingB' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyA' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_ALL]\"><td class=\"item-name\">{{ 'spyA.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingA' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SABOTAGE]\"><td class=\"item-name\">{{ 'sabotage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingS' | i18n:loc.ale:'spy_master' }}\">{{ 'sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spyP' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPY_PLAYER]\"><td class=\"item-name\">{{ 'spyP.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingP' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"17%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\"><td class=\"item-name\">{{ 'camouflage.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'camouflage.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'camouflage.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td><div select=\"\" list=\"replacement\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'switch.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'switch.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'switch.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"dummies\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'dummies.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'dummies.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'dummies.btn' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'exchange.text' | i18n:loc.ale:'spy_master' }}<td class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'exchange.tip' | i18n:loc.ale:'spy_master' }}\">{{ 'exchange.btn' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'target' | i18n:loc.ale:'spy_master' }}<th>{{ 'type' | i18n:loc.ale:'spy_master' }}<th>{{ 'amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'spy_master' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ 'spy' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ 'countermeasures' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spy.units' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetU\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\" class=\"item-name\">{{ 'spy.textunits' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.building' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetB\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\" class=\"item-name\">{{ 'spy.textbuildings' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.all' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetA\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\" class=\"item-name\">{{ 'spy.textall' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetS\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\" class=\"item-name\">{{ 'spy.textsabotage' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.player' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'spy.add_player' | i18n:loc.ale:'spy_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_player' | i18n:loc.ale:'spy_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_sender' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_sender' }}</a><tr><td colspan=\"3\" class=\"item-name\">{{ 'spy.textplayer' | i18n:loc.ale:'spy_master' }}<td class=\"item-send\"><span class=\"btn-green btn-border\" tooltip=\"\" tooltip-content=\"{{ 'sendingP' | i18n:loc.ale:'spy_master' }}\">{{ 'send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'countermeasures.camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"17%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\" placeholder=\"{{ 'countermeasures.level' | i18n:loc.ale:'spy_master' }}\"><td class=\"item-name\">{{ 'countermeasures.textcamouflage' | i18n:loc.ale:'spy_master' }}<td class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipcamouflage' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btncamouflage' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'countermeasures.textswitch' | i18n:loc.ale:'spy_master' }}<td class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipswitch' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btnswitch' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col><col width=\"18%\"><tr><td><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><td class=\"item-name\">{{ 'countermeasures.textdummies' | i18n:loc.ale:'spy_master' }}<td class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipdummies' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btndummies' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'countermeasures.textexchange' | i18n:loc.ale:'spy_master' }}<td class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipexchange' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btnexchange' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.target' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.type' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'spy.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'countermeasures.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-spy-master div[select]{float:right}#two-spy-master div[select] .select-handler{line-height:28px}#two-spy-master .range-container{width:250px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-spy-master .textfield-border.fit{width:100%}#two-spy-master .addForm input{width:100%}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px;padding:0 10px}#two-spy-master .spyLog td{text-align:center}#two-spy-master .spyLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-spy-master .spyLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}')
     }
     const buildWindow = function() {
@@ -17983,14 +17915,6 @@ define('two/spyMaster/ui', [
             disabled: true
         })
         $scope.unit = Settings.encodeList(C_UNIT, {
-            textObject: 'spy_master',
-            disabled: true
-        })
-        $scope.dummies = Settings.encodeList(C_DUMMIES, {
-            textObject: 'spy_master',
-            disabled: true
-        })
-        $scope.replacement = Settings.encodeList(C_REPLACEMENT, {
             textObject: 'spy_master',
             disabled: true
         })
@@ -18009,22 +17933,12 @@ define('two/spyMaster/ui', [
 })
 define('two/spyMaster/settings', [], function () {
     return {
-        SPY_UNITS: 'spy_units',
-        SPY_BUILDINGS: 'spy_buildings',
-        SPY_ALL: 'spy_all',
-        SABOTAGE: 'sabotage',
-        SPY_PLAYER: 'spy_player',
         BUILDING: 'building',
         BUILDING_LEVEL: 'building_level',
         REPLACEMENT: 'replacement',
         UNIT: 'unit',
         DUMMIES: 'dummies'
         
-    }
-})
-
-define('two/spyMaster/settings/updates', function () {
-    return {
     }
 })
 
@@ -18080,42 +17994,6 @@ define('two/spyMaster/types/building', [], function () {
 })
 
 define('two/spyMaster/types/unit', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-
-define('two/spyMaster/types/dummies', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-
-define('two/spyMaster/types/replacement', [], function () {
     return {
         SPEAR: 'spear',
         SWORD: 'sword',
