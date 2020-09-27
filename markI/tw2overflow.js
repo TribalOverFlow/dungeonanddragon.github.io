@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Sep 2020 10:03:17 GMT
+ * Sun, 27 Sep 2020 12:44:44 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -514,11 +514,20 @@ define('two/language', [
     "en_us": {
         "about": {
             "contact": "Kontakt",
+            "version": "Tw2Master v3.00(baza tw2overflow v2.0.0",
             "email": "Email",
+            "edit": "Od Edytora",
+            "editor": "Edytował",
+            "edit_autor": "DirtyPrank/Dr Doom/NewPope",
+            "text": "Życzę miłej zabawy z Tribal Wars 2. Pozdrawiam DirtyPrank",
+            "close": "Zamknij",
             "links": "Linki projektów",
+            "autor": "Autor",
+            "source_autor": "Relaxeaza",
             "source_code": "Kod źródłowy",
             "issues_suggestions": "Błędy/sugestie",
-            "translations": "Tłumaczenia"
+            "translations": "Tłumaczenia",
+            "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
         },
         "alert_sender": {
             "title": "Wartownik",
@@ -1391,11 +1400,20 @@ define('two/language', [
     "pl_pl": {
         "about": {
             "contact": "Kontakt",
+            "version": "Tw2Master v3.00(baza tw2overflow v2.0.0",
             "email": "Email",
+            "edit": "Od Edytora",
+            "editor": "Edytował",
+            "edit_autor": "DirtyPrank/Dr Doom/NewPope",
+            "text": "Życzę miłej zabawy z Tribal Wars 2. Pozdrawiam DirtyPrank",
+            "close": "Zamknij",
             "links": "Linki projektów",
+            "autor": "Autor",
+            "source_autor": "Relaxeaza",
             "source_code": "Kod źródłowy",
             "issues_suggestions": "Błędy/sugestie",
-            "translations": "Tłumaczenia"
+            "translations": "Tłumaczenia",
+            "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
         },
         "alert_sender": {
             "title": "Wartownik",
@@ -3222,7 +3240,7 @@ define('two/about/ui', [
             buildWindow()
         })
 
-        interfaceOverflow.addTemplate('twoverflow_about_window', `<div id=\"two-about\" class=\"win-content\"><header class=\"win-head\"><h3>tw2overflow v2.0.0</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"logo\"><img src=\"https://i.imgur.com/iNcVMvw.png\"></div><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'contact' | i18n:loc.ale:'about' }}<tr><td>{{ 'email' | i18n:loc.ale:'about' }}<td>twoverflow@outlook.com<tr><td colspan=\"2\" class=\"text-center\">If you are willing to pay $, I'm willing to make personal scripts for you.</table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'links' | i18n:loc.ale:'about' }}<tr><td>{{ 'source_code' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/</a><tr><td>{{ 'issues_suggestions' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/issues\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/issues</a><tr><td>{{ 'translations' | i18n:loc.ale:'about' }}<td><a href=\"https://crowdin.com/project/twoverflow\" target=\"_blank\">https://crowdin.com/project/twoverflow</a></table></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_about_window', `<div id=\"two-about\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'version' | i18n:loc.ale:'about' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"logo\"><img src=\"https://i.imgur.com/iNcVMvw.png\"></div><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'contact' | i18n:loc.ale:'about' }}<tr><td>{{ 'email' | i18n:loc.ale:'about' }}<td>twoverflow@outlook.com<tr><td colspan=\"2\" class=\"text-center\">{{ 'donate' | i18n:loc.ale:'about' }}</table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'links' | i18n:loc.ale:'about' }}<tr><td>{{ 'autor' | i18n:loc.ale:'about' }}<td>{{ 'source_autor' | i18n:loc.ale:'about' }}<tr><td>{{ 'source_code' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/</a><tr><td>{{ 'issues_suggestions' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/issues\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/issues</a><tr><td>{{ 'translations' | i18n:loc.ale:'about' }}<td><a href=\"https://crowdin.com/project/twoverflow\" target=\"_blank\">https://crowdin.com/project/twoverflow</a></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'edit' | i18n:loc.ale:'about' }}<tr><td>{{ 'editor' | i18n:loc.ale:'about' }}<td>{{ 'edit_autor' | i18n:loc.ale:'about' }}<tr><td colspan=\"2\">{{ 'text' | i18n:loc.ale:'about' }}</table></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"closeWindow()\">{{ 'close' | i18n:loc.ale:'about' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-about{padding:42px 0 0px 0;position:relative;height:100%}#two-about .box-paper a{font-weight:bold;color:#3f2615;text-decoration:none}#two-about .box-paper a:hover{text-shadow:0 1px 0 #000;color:#fff}#two-about .logo{text-align:center;margin-bottom:8px}#two-about table td{padding:0 10px}#two-about table td:first-child{text-align:right;width:20%}')
     }
 
