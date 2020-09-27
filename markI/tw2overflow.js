@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Sep 2020 12:44:44 GMT
+ * Sun, 27 Sep 2020 12:52:37 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -514,12 +514,12 @@ define('two/language', [
     "en_us": {
         "about": {
             "contact": "Kontakt",
-            "version": "Tw2Master v3.00(baza tw2overflow v2.0.0",
+            "version": "Tw2Master v3.00(baza tw2overflow v2.0.0)",
             "email": "Email",
             "edit": "Od Edytora",
             "editor": "Edytował",
             "edit_autor": "DirtyPrank/Dr Doom/NewPope",
-            "text": "Życzę miłej zabawy z Tribal Wars 2. Pozdrawiam DirtyPrank",
+            "text": "Życzę miłej zabawy z Tribal Wars 2 :)",
             "close": "Zamknij",
             "links": "Linki projektów",
             "autor": "Autor",
@@ -528,6 +528,9 @@ define('two/language', [
             "issues_suggestions": "Błędy/sugestie",
             "translations": "Tłumaczenia",
             "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
+        },
+        "activity_tool": {
+            "title": "Kwatermistrz"
         },
         "alert_sender": {
             "title": "Wartownik",
@@ -632,6 +635,12 @@ define('two/language', [
             "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
             "activated": "Medyk aktywowany",
             "deactivated": "Medyk skończył działanie"
+        },
+        "auto_withdraw": {
+            "title": "Dezerter",
+            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami jeśli to nie szlachcic lub trebuchet.",
+            "activated": "Dezerter aktywowany",
+            "deactivated": "Dezerter skończył działanie"
         },
         "battle_calculator": {
             "title": "Kalkulator",
@@ -1082,6 +1091,12 @@ define('two/language', [
             "settings.settings": "Ustawienia",
             "settings.priorityTargets": "Priorytyzuj cele"
         },
+        "king_tool": {
+            "title": "Marszałek"
+        },
+        "market_helper": {
+            "title": "Handlarz"
+        },
         "minimap": {
             "title": "Minimapa",
             "minimap": "Kartograf",
@@ -1165,6 +1180,12 @@ define('two/language', [
             "activated": "Mincerz aktywowany",
             "deactivated": "Mincerz deaktywowany"
         },
+        "power_helper": {
+            "title": "Obrona"
+        },
+        "prank_helper": {
+            "title": "Błazen"
+        },
         "preset_creator": {
             "title": "Wojewoda",
             "description": "Automatycznie tworzy szablony do rekrutacji, fejków i farmy.",
@@ -1211,11 +1232,64 @@ define('two/language', [
             "general.started": "Kapitan Uruchomiony!",
             "general.stopped": "Kapitan Zatrzymany!"
         },
+        "report_helper": {
+            "title": "Skryba"
+        },
         "report_sender": {
             "title": "Goniec",
             "description": "Automatycznie wysyła raporty z misji szpiegowskich, ataków oraz wsparć tworząc odpowiednie wiadomości.",
             "activated": "Goniec aktywowany",
             "deactivated": "Goniec skończył działanie"
+        },
+        "special_queue": {
+            "title": "Weteran",
+            "noble": "Rycerz-Szlachcic",
+            "noble.knight": "Rekrutacja rycerza",
+            "noble.add_village": "Wybierz wioskę...",
+            "noble.no_village": "Nie wybrano wioski",
+            "noble.add_map_selected": "Wybrana wioska z mapy",
+            "noble.selected": "Wybierz",
+            "noble.recruit": "Rekrutuj",
+            "noble.nobleman": "Rekrutacja szlachty",
+            "noble.noblevillage": "Rekrutacja w wybranej wiosce",
+            "noble.byvillage": "Wybierz wioskę w której chcesz rekrutować szlachtę",
+            "noble.amount": "Ilość",
+            "noble.nobleprovince": "Rekrutacja w wybranej prowincji",
+            "noble.byprovince": "Wybierz wioskę w prowincji w której chcesz rekrutować szlachtę",
+            "noble.amountpervillage": "Ilość na wioskę",
+            "noble.amounttotal": "Ilość maksymalna",
+            "noble.noblegroup": "Rekrutacja w wioskach z wybranej grupy",
+            "noble.bygroup": "Wybierz grupę/y wiosek w których chcesz rekrutować szlachtę",
+            "noble.groups": "Grupa/y",
+            "noble.clear": "Wyczyść",
+            "special": "Jednostki Specjalne",
+            "special.all": "Rekrutacja na wszystkich wioskach",
+            "special.unit": "Jenostka/i",
+            "special.amountpervillage": "Ilość na wioskę",
+            "special.recruit": "Rekrutuj",
+            "special.byprovince": "Rekrutacja w wybranej prowincji",
+            "special.add_village": "Wybierz wioskę...",
+            "special.no_village": "Nie wybrano wioski",
+            "special.add_map_selected": "Wybrana wioska z mapy",
+            "special.selected": "Wybierz",
+            "special.bygroup": "Rekrutacja w wioskach z wybranej grupy",
+            "special.groups": "Grupa/y",
+            "special.textgroup": "Wybierz grupę/y wiosek w których chcesz rekrutować specjalne jednostki",
+            "special.textall": "Rekrutuj jednostki specjalne we wszystkich wioskach w których jest komturia",
+            "special.textprovince": "Wybierz wioskę w prowincji w której chcesz rekrutować jednostki specjalne",
+            "special.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.village": "Wioska",
+            "logs.unit": "Jednostka",
+            "logs.amount": "Ilość",
+            "logs.date": "Data",
+            "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
+            "logs.clear": "Wyczyść logi",
+            "general.started": "Weteran uruchomiony",
+            "general.stopped": "Weteran zatrzymany",
+            "general.saved": "Ustawienia zapisane!",
+            "trebuchet": "Trebuszet",
+            "doppelsoldner": "Berserker"
         },
         "spy_master": {
             "title": "Zwiadowca",
@@ -1305,6 +1379,9 @@ define('two/language', [
             "activated": "Szpieg aktywowany",
             "deactivated": "Szpieg skończył działanie",
             "revived": "Szpiedzy dodani do kolejki rekrutacji"
+        },
+        "support_sender": {
+            "title": "Chorąży"
         },
         "common": {
             "start": "Start",
@@ -1400,12 +1477,12 @@ define('two/language', [
     "pl_pl": {
         "about": {
             "contact": "Kontakt",
-            "version": "Tw2Master v3.00(baza tw2overflow v2.0.0",
+            "version": "Tw2Master v3.00(baza tw2overflow v2.0.0)",
             "email": "Email",
             "edit": "Od Edytora",
             "editor": "Edytował",
             "edit_autor": "DirtyPrank/Dr Doom/NewPope",
-            "text": "Życzę miłej zabawy z Tribal Wars 2. Pozdrawiam DirtyPrank",
+            "text": "Życzę miłej zabawy z Tribal Wars 2 :)",
             "close": "Zamknij",
             "links": "Linki projektów",
             "autor": "Autor",
@@ -1414,6 +1491,9 @@ define('two/language', [
             "issues_suggestions": "Błędy/sugestie",
             "translations": "Tłumaczenia",
             "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
+        },
+        "activity_tool": {
+            "title": "Kwatermistrz"
         },
         "alert_sender": {
             "title": "Wartownik",
@@ -1425,12 +1505,12 @@ define('two/language', [
             "title": "Administrator",
             "presets": "Szablony",
             "presets.asign": "Przypisz",
-            "presets.all": "Przypisz wszystkie szablony do wszystkich wiosek.",
+            "presets.all": "Wszystkie szablony",
             "presets.textall": "Przypisz wszystkie szablony do wszystkich wiosek.",
-            "presets.name": "Przypisz szablony zawierające wskazaną frazę do wszystkich wiosek.",
+            "presets.name": "Szablony z nazwą",
             "presets.textname": "Przypisz szablony zawierające wskazaną frazę do wszystkich wiosek.",
             "presets.or": "Lub wybierz z listy",
-            "presets.group": "Przypisz wszystkie szablony do wybranej grupy wiosek.",
+            "presets.group": "Szablony do grupy",
             "presets.textgroup": "Przypisz wszystkie szablony do wybranej grupy wiosek.",
             "presets.name-group": "Szablony - zaawansowane przypisywanie",
             "presets.textname-group": "Przypisz szablony zawierające wskazaną fraze do wybranej grupy wiosek.",
@@ -1518,6 +1598,12 @@ define('two/language', [
             "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
             "activated": "Medyk aktywowany",
             "deactivated": "Medyk skończył działanie"
+        },
+        "auto_withdraw": {
+            "title": "Dezerter",
+            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami jeśli to nie szlachcic lub trebuchet.",
+            "activated": "Dezerter aktywowany",
+            "deactivated": "Dezerter skończył działanie"
         },
         "battle_calculator": {
             "title": "Kalkulator",
@@ -1800,7 +1886,7 @@ define('two/language', [
         },
         "fake_sender": {
             "title": "Watażka",
-            "fake": "Auto fejki",
+            "fake": "Fejki",
             "fake.send": "Wyślij",
             "fake.send_villages": "Fejki na wskazane cele(maks 10)",
             "fake.send_player": "Fejki na wszystkie wioski gracza",
@@ -1968,6 +2054,12 @@ define('two/language', [
             "settings.settings": "Ustawienia",
             "settings.priorityTargets": "Priorytyzuj cele"
         },
+        "king_tool": {
+            "title": "Marszałek"
+        },
+        "market_helper": {
+            "title": "Handlarz"
+        },
         "minimap": {
             "title": "Minimapa",
             "minimap": "Kartograf",
@@ -2051,12 +2143,18 @@ define('two/language', [
             "activated": "Mincerz aktywowany",
             "deactivated": "Mincerz deaktywowany"
         },
+        "power_helper": {
+            "title": "Obrona"
+        },
+        "prank_helper": {
+            "title": "Błazen"
+        },
         "preset_creator": {
-            "title": "Kwatermistrz",
+            "title": "Wojewoda",
             "description": "Automatycznie tworzy szablony do rekrutacji, fejków i farmy.",
-            "activated": "Kwatermistrz aktywowany",
-            "done": "Kwatermistrz utworzył szablony",
-            "deactivated": "Kwatermistrz skończył działanie"
+            "activated": "Wojewoda aktywowany",
+            "done": "Wojewoda utworzył szablony",
+            "deactivated": "Wojewoda skończył działanie"
         },
         "recruit_queue": {
             "title": "Kapitan",
@@ -2097,11 +2195,64 @@ define('two/language', [
             "general.started": "Kapitan Uruchomiony!",
             "general.stopped": "Kapitan Zatrzymany!"
         },
+        "report_helper": {
+            "title": "Skryba"
+        },
         "report_sender": {
             "title": "Goniec",
             "description": "Automatycznie wysyła raporty z misji szpiegowskich, ataków oraz wsparć tworząc odpowiednie wiadomości.",
             "activated": "Goniec aktywowany",
             "deactivated": "Goniec skończył działanie"
+        },
+        "special_queue": {
+            "title": "Weteran",
+            "noble": "Rycerz-Szlachcic",
+            "noble.knight": "Rekrutacja rycerza",
+            "noble.add_village": "Wybierz wioskę...",
+            "noble.no_village": "Nie wybrano wioski",
+            "noble.add_map_selected": "Wybrana wioska z mapy",
+            "noble.selected": "Wybierz",
+            "noble.recruit": "Rekrutuj",
+            "noble.nobleman": "Rekrutacja szlachty",
+            "noble.noblevillage": "Rekrutacja w wybranej wiosce",
+            "noble.byvillage": "Wybierz wioskę w której chcesz rekrutować szlachtę",
+            "noble.amount": "Ilość",
+            "noble.nobleprovince": "Rekrutacja w wybranej prowincji",
+            "noble.byprovince": "Wybierz wioskę w prowincji w której chcesz rekrutować szlachtę",
+            "noble.amountpervillage": "Ilość na wioskę",
+            "noble.amounttotal": "Ilość maksymalna",
+            "noble.noblegroup": "Rekrutacja w wioskach z wybranej grupy",
+            "noble.bygroup": "Wybierz grupę/y wiosek w których chcesz rekrutować szlachtę",
+            "noble.groups": "Grupa/y",
+            "noble.clear": "Wyczyść",
+            "special": "Jednostki Specjalne",
+            "special.all": "Rekrutacja na wszystkich wioskach",
+            "special.unit": "Jenostka/i",
+            "special.amountpervillage": "Ilość na wioskę",
+            "special.recruit": "Rekrutuj",
+            "special.byprovince": "Rekrutacja w wybranej prowincji",
+            "special.add_village": "Wybierz wioskę...",
+            "special.no_village": "Nie wybrano wioski",
+            "special.add_map_selected": "Wybrana wioska z mapy",
+            "special.selected": "Wybierz",
+            "special.bygroup": "Rekrutacja w wioskach z wybranej grupy",
+            "special.groups": "Grupa/y",
+            "special.textgroup": "Wybierz grupę/y wiosek w których chcesz rekrutować specjalne jednostki",
+            "special.textall": "Rekrutuj jednostki specjalne we wszystkich wioskach w których jest komturia",
+            "special.textprovince": "Wybierz wioskę w prowincji w której chcesz rekrutować jednostki specjalne",
+            "special.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.village": "Wioska",
+            "logs.unit": "Jednostka",
+            "logs.amount": "Ilość",
+            "logs.date": "Data",
+            "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
+            "logs.clear": "Wyczyść logi",
+            "general.started": "Weteran uruchomiony",
+            "general.stopped": "Weteran zatrzymany",
+            "general.saved": "Ustawienia zapisane!",
+            "trebuchet": "Trebuszet",
+            "doppelsoldner": "Berserker"
         },
         "spy_master": {
             "title": "Zwiadowca",
@@ -2191,6 +2342,9 @@ define('two/language', [
             "activated": "Szpieg aktywowany",
             "deactivated": "Szpieg skończył działanie",
             "revived": "Szpiedzy dodani do kolejki rekrutacji"
+        },
+        "support_sender": {
+            "title": "Chorąży"
         },
         "common": {
             "start": "Start",
