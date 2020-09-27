@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 26 Sep 2020 21:34:12 GMT
+ * Sun, 27 Sep 2020 09:08:52 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -941,7 +941,7 @@ define('two/language', [
             "logs.clear": "Wyczyść logi",
             "general.started": "Watażka uruchomiony",
             "general.stopped": "Watażka zatrzymany",
-            "general.saved": "Watażka zatrzymany",
+            "general.saved": "Ustawienia zapisane!",
             "attack": "atak",
             "support": "wsparcie",
             "four": "kareta",
@@ -1818,7 +1818,7 @@ define('two/language', [
             "logs.clear": "Wyczyść logi",
             "general.started": "Watażka uruchomiony",
             "general.stopped": "Watażka zatrzymany",
-            "general.saved": "Watażka zatrzymany",
+            "general.saved": "Ustawienia zapisane!",
             "attack": "atak",
             "support": "wsparcie",
             "four": "kareta",
@@ -19031,6 +19031,7 @@ define('two/specialQueue', [
     'two/specialQueue/settings',
     'two/specialQueue/settings/map',
     'two/specialQueue/settings/updates',
+    'two/specialQueue/types/units',
     'two/ready',
     'queues/EventQueue'
 ], function (
@@ -19038,6 +19039,7 @@ define('two/specialQueue', [
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
+    SQ_UNIT,
     ready,
     eventQueue
 ) {
@@ -19046,37 +19048,33 @@ define('two/specialQueue', [
     let settings
     let specialQueueSettings
 
-    let selectedPresets = []
-    let selectedGroups = []
+    let selectedGroupNoble = []
+    let selectedGroupSpecial = []
 
     const STORAGE_KEYS = {
         SETTINGS: 'special_queue_settings'
     }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = specialQueueSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-
-        console.log('selectedPresets', selectedPresets)
+    const SPECIAL_UNIT = {
+        [SQ_UNIT.TREBUCHET]: 'trebuchet',
+        [SQ_UNIT.DOPPELSOLDNER]: 'doppelsoldner'
     }
+    console.log(SPECIAL_UNIT)
 
     const updateGroups = function () {
-        selectedGroups = []
+        selectedGroupNoble = []
+        selectedGroupSpecial = []
 
         const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = specialQueueSettings[SETTINGS.GROUPS]
+        const groupsSelectedByTheUserNoble = specialQueueSettings[SETTINGS.GROUPNOBLE]
+        const groupsSelectedByTheUserSpecial = specialQueueSettings[SETTINGS.GROUPSPECIAL]
 
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
+        groupsSelectedByTheUserNoble.forEach(function (groupId) {
+            selectedGroupNoble.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUserSpecial.forEach(function (groupId) {
+            selectedGroupSpecial.push(allGroups[groupId])
         })
 
-        console.log('selectedGroups', selectedGroups)
     }
 
     const specialQueue = {}
@@ -19092,10 +19090,6 @@ define('two/specialQueue', [
         settings.onChange(function (changes, updates) {
             specialQueueSettings = settings.getAll()
 
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
@@ -19105,12 +19099,6 @@ define('two/specialQueue', [
 
         console.log('specialQueue settings', specialQueueSettings)
 
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
@@ -19119,16 +19107,11 @@ define('two/specialQueue', [
     specialQueue.start = function () {
         running = true
 
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
-
         eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_START)
     }
 
     specialQueue.stop = function () {
         running = false
-
-        console.log('specialQueue stop')
 
         eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_STOP)
     }
@@ -19160,6 +19143,7 @@ define('two/specialQueue/ui', [
     'two/specialQueue',
     'two/specialQueue/settings',
     'two/specialQueue/settings/map',
+    'two/specialQueue/types/units',
     'two/Settings',
     'two/EventScope',
     'two/utils'
@@ -19168,19 +19152,20 @@ define('two/specialQueue/ui', [
     specialQueue,
     SETTINGS,
     SETTINGS_MAP,
+    SQ_UNIT,
     Settings,
     EventScope,
     utils
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
     let groupList = modelDataService.getGroupList()
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        NOBLE: 'noble',
+        SPECIAL: 'special',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -19190,7 +19175,7 @@ define('two/specialQueue/ui', [
     const saveSettings = function () {
         settings.setAll(settings.decode($scope.settings))
 
-        utils.notif('success', 'Settings saved')
+        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'special_queue'))
     }
 
     const switchState = function () {
@@ -19202,12 +19187,6 @@ define('two/specialQueue/ui', [
     }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
         updateGroups: function () {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
@@ -19220,7 +19199,7 @@ define('two/specialQueue/ui', [
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
 
-            utils.notif('success', 'Example module started')
+            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'special_queue'))
         },
         stop: function () {
             $scope.running = false
@@ -19228,7 +19207,7 @@ define('two/specialQueue/ui', [
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
 
-            utils.notif('success', 'Example module stopped')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'special_queue'))
         }
     }
 
@@ -19238,7 +19217,7 @@ define('two/specialQueue/ui', [
         $button = interfaceOverflow.addMenuButton('Weteran', 85)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_special_queue_window', `<div id=\"two-special-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'special_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'special_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'special_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'special_queue' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'special_queue' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'special_queue' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'special_queue' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_special_queue_window', `<div id=\"two-special-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'special_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.NOBLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.NOBLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.NOBLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.NOBLE}\">{{ 'noble' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPECIAL)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPECIAL}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPECIAL}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPECIAL}\">{{ 'special' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'special_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><h5 class=\"twx-section\">{{ 'noble.knight' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.nobleman' | i18n:loc.ale:'special_queue' }}</h5><h5 class=\"twx-section\">{{ 'noble.noblevillage' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byvillage' | i18n:loc.ale:'special_queue' }}</span></tr><td><div auto-complete=\"autoCompleteVillageN\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amount' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.nobleprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageNP\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.noblegroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"20%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.bygroup' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'noble.groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPNOBLE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><h5 class=\"twx-section\">{{ 'special.all' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.byprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillageS\" placeholder=\"{{ 'special.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'special.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'special.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'special.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.bygroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPSPECIAL]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'special_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'special_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'noble.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'special.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'special_queue' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-special-queue div[select]{float:right}#two-special-queue div[select] .select-handler{line-height:28px}#two-special-queue .range-container{width:250px}#two-special-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-special-queue .textfield-border.fit{width:100%}')
     }
 
@@ -19247,11 +19226,14 @@ define('two/specialQueue/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = specialQueue.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.NOBLE
         $scope.settingsMap = SETTINGS_MAP
+        $scope.units = Settings.encodeList(SQ_UNIT, {
+            textObject: 'special_queue',
+            disabled: true
+        })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
         eventHandlers.updateGroups()
 
         $scope.selectTab = selectTab
@@ -19259,12 +19241,9 @@ define('two/specialQueue/ui', [
         $scope.switchState = switchState
 
         let eventScope = new EventScope('twoverflow_special_queue_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('specialQueue window closed')
         })
 
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
@@ -19279,15 +19258,24 @@ define('two/specialQueue/ui', [
 
 define('two/specialQueue/settings', [], function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
+        AMOUNT1: 'amount1',
+        AMOUNT2: 'amount2',
+        AMOUNT3: 'amount3',		
+        AMOUNT4: 'amount4',
+        AMOUNT5: 'amount5',
+        AMOUNT6: 'amount6',
+        AMOUNT7: 'amount7',
+        AMOUNT8: 'amount8',
+        GROUPNOBLE: 'group-noble',
+        GROUPSPECIAL: 'group-special',
+        UNIT1: 'unit-special1',
+        UNIT2: 'unit-special2',
+        UNIT3: 'unit-special3'
     }
 })
 
 define('two/specialQueue/settings/updates', function () {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups'
     }
 })
@@ -19300,17 +19288,7 @@ define('two/specialQueue/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESETS]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.GROUPS]: {
+        [SETTINGS.GROUPNOBLE]: {
             default: [],
             updates: [
                 UPDATES.GROUPS,
@@ -19320,15 +19298,88 @@ define('two/specialQueue/settings/map', [
             multiSelect: true,
             type: 'groups'
         },
-        [SETTINGS.SOME_NUMBER]: {
-            default: 60,
+        [SETTINGS.GROUPSPECIAL]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.AMOUNT1]: {
+            default: 0,
             inputType: 'number',
             min: 0,
-            max: 120
+            max: 240
+        },
+        [SETTINGS.AMOUNT2]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 240
+        },
+        [SETTINGS.AMOUNT3]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 100000
+        },
+        [SETTINGS.AMOUNT4]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 240
+        },
+        [SETTINGS.AMOUNT5]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 100000
+        },
+        [SETTINGS.AMOUNT6]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 4000
+        },
+        [SETTINGS.AMOUNT7]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 4000
+        },
+        [SETTINGS.AMOUNT8]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 4000
+        },
+        [SETTINGS.UNIT1]: {
+            default: false,
+            multiSelect: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT2]: {
+            default: false,
+            multiSelect: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT3]: {
+            default: false,
+            multiSelect: true,
+            inputType: 'select'
         }
     }
 })
 
+define('two/specialQueue/types/units', [], function () {
+    return {
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner'
+    }
+})
 require([
     'two/ready',
     'two/specialQueue',
