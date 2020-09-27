@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Sep 2020 12:52:37 GMT
+ * Sun, 27 Sep 2020 17:31:59 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1184,7 +1184,36 @@ define('two/language', [
             "title": "Obrona"
         },
         "prank_helper": {
-            "title": "Błazen"
+            "title": "Błazen",
+            "rename": "Nazwy wiosek",
+            "rename.all": "Zmień nazwy wszystkich wiosek",
+            "rename.type": "Typ",
+            "rename.prologue": "Prefix",
+            "rename.epilogue": "Sufix",
+            "rename.name": "Wpisz tekst...",
+            "rename.from": "Od",
+            "rename.to": "Do",
+            "rename.char": "Wpisz znak...",
+            "rename.tip": "Litera lub liczba",
+            "rename.clear": "Wyczyść",
+            "rename.start": "Zmień",
+            "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
+            "rename.add_village": "Wybierz wioskę...",
+            "rename.no_village": "Nie wybrano wioski",
+            "rename.add_map_selected": "Wybrana wioska z mapy",
+            "rename.selected": "Wybierz",
+            "rename.group": "Zmień nazwy wiosek w wybranej grupie",
+            "rename.groups": "Grupa/y",
+            "logs": "Logi",
+            "logs.village": "Wioska",
+            "logs.old": "Stara nazwa",
+            "logs.new": "Nowa nazwa",
+            "logs.date": "Data",
+            "logs.noRenames": "Nie zmieniono żadnych nazw wiosek",
+            "logs.clear": "Wyczyść logi",
+            "decrease": "Malejąco/Z-A",
+            "increase": "Rosnąco/A-Z",
+            "random": "Domyślnie"
         },
         "preset_creator": {
             "title": "Wojewoda",
@@ -2147,7 +2176,36 @@ define('two/language', [
             "title": "Obrona"
         },
         "prank_helper": {
-            "title": "Błazen"
+            "title": "Błazen",
+            "rename": "Nazwy wiosek",
+            "rename.all": "Zmień nazwy wszystkich wiosek",
+            "rename.type": "Typ",
+            "rename.prologue": "Prefix",
+            "rename.epilogue": "Sufix",
+            "rename.name": "Wpisz tekst...",
+            "rename.from": "Od",
+            "rename.to": "Do",
+            "rename.char": "Wpisz znak...",
+            "rename.tip": "Litera lub liczba",
+            "rename.clear": "Wyczyść",
+            "rename.start": "Zmień",
+            "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
+            "rename.add_village": "Wybierz wioskę...",
+            "rename.no_village": "Nie wybrano wioski",
+            "rename.add_map_selected": "Wybrana wioska z mapy",
+            "rename.selected": "Wybierz",
+            "rename.group": "Zmień nazwy wiosek w wybranej grupie",
+            "rename.groups": "Grupa/y",
+            "logs": "Logi",
+            "logs.village": "Wioska",
+            "logs.old": "Stara nazwa",
+            "logs.new": "Nowa nazwa",
+            "logs.date": "Data",
+            "logs.noRenames": "Nie zmieniono żadnych nazw wiosek",
+            "logs.clear": "Wyczyść logi",
+            "decrease": "Malejąco/Z-A",
+            "increase": "Rosnąco/A-Z",
+            "random": "Domyślnie"
         },
         "preset_creator": {
             "title": "Wojewoda",
@@ -15785,6 +15843,7 @@ define('two/prankHelper', [
     'two/prankHelper/settings',
     'two/prankHelper/settings/map',
     'two/prankHelper/settings/updates',
+    'two/prankHelper/types/type',
     'two/ready',
     'queues/EventQueue'
 ], function (
@@ -15792,6 +15851,7 @@ define('two/prankHelper', [
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
+    PH_TYPE,
     ready,
     eventQueue
 ) {
@@ -15800,25 +15860,19 @@ define('two/prankHelper', [
     let settings
     let prankHelperSettings
 
-    let selectedPresets = []
     let selectedGroups = []
 
     const STORAGE_KEYS = {
         SETTINGS: 'prank_helper_settings'
     }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = prankHelperSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-
-        console.log('selectedPresets', selectedPresets)
+	
+    const RENAME_TYPE = {
+        [PH_TYPE.INCREASE]: 'increase',
+        [PH_TYPE.DECREASE]: 'decrease',
+        [PH_TYPE.RANDOM]: 'random'
     }
+
+    console.log(RENAME_TYPE)
 
     const updateGroups = function () {
         selectedGroups = []
@@ -15829,13 +15883,11 @@ define('two/prankHelper', [
         groupsSelectedByTheUser.forEach(function (groupId) {
             selectedGroups.push(allGroups[groupId])
         })
-
-        console.log('selectedGroups', selectedGroups)
     }
 
-    const examplePublicFunctions = {}
+    const prankHelper = {}
 
-    examplePublicFunctions.init = function () {
+    prankHelper.init = function () {
         initialized = true
 
         settings = new Settings({
@@ -15846,14 +15898,6 @@ define('two/prankHelper', [
         settings.onChange(function (changes, updates) {
             prankHelperSettings = settings.getAll()
 
-            // here you can handle settings that get modified and need
-            // some processing. Useful to not break the script when updated
-            // while running.
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
@@ -15863,47 +15907,36 @@ define('two/prankHelper', [
 
         console.log('all settings', prankHelperSettings)
 
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
 
-    examplePublicFunctions.start = function () {
+    prankHelper.start = function () {
         running = true
-
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
 
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
     }
 
-    examplePublicFunctions.stop = function () {
+    prankHelper.stop = function () {
         running = false
-
-        console.log('example module stop')
 
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
     }
 
-    examplePublicFunctions.getSettings = function () {
+    prankHelper.getSettings = function () {
         return settings
     }
 
-    examplePublicFunctions.isInitialized = function () {
+    prankHelper.isInitialized = function () {
         return initialized
     }
 
-    examplePublicFunctions.isRunning = function () {
+    prankHelper.isRunning = function () {
         return running
     }
 
-    return examplePublicFunctions
+    return prankHelper
 })
 
 define('two/prankHelper/events', [], function () {
@@ -15918,6 +15951,7 @@ define('two/prankHelper/ui', [
     'two/prankHelper',
     'two/prankHelper/settings',
     'two/prankHelper/settings/map',
+    'two/prankHelper/types/type',
     'two/Settings',
     'two/EventScope',
     'two/utils'
@@ -15926,19 +15960,19 @@ define('two/prankHelper/ui', [
     prankHelper,
     SETTINGS,
     SETTINGS_MAP,
+    PH_TYPE,
     Settings,
     EventScope,
     utils
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
     let groupList = modelDataService.getGroupList()
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        RENAME: 'rename',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -15960,12 +15994,6 @@ define('two/prankHelper/ui', [
     }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
         updateGroups: function () {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
@@ -15995,8 +16023,8 @@ define('two/prankHelper/ui', [
         $button = interfaceOverflow.addMenuButton3('Błazen', 60)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'prank_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'prank_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'prank_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'prank_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'prank_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'prank_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'prank_helper' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-prank-helper div[select]{float:right}#two-prank-helper div[select] .select-handler{line-height:28px}#two-prank-helper .range-container{width:250px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'rename.add_village' | i18n:loc.ale:'prank_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody class=\"renameLog\"><tr class=\"noRenames\"><td colspan=\"4\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .renameLog td{text-align:center}#two-prank-helper .renameLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-prank-helper .renameLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-prank-helper .noRenames td{height:26px;text-align:center}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -16004,11 +16032,14 @@ define('two/prankHelper/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = prankHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.RENAME
         $scope.settingsMap = SETTINGS_MAP
+        $scope.type = Settings.encodeList(PH_TYPE, {
+            textObject: 'prank_helper',
+            disabled: true
+        })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
         eventHandlers.updateGroups()
 
         $scope.selectTab = selectTab
@@ -16019,9 +16050,6 @@ define('two/prankHelper/ui', [
             console.log('example window closed')
         })
 
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
@@ -16036,15 +16064,27 @@ define('two/prankHelper/ui', [
 
 define('two/prankHelper/settings', [], function () {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
+        TYPE1: 'type1',
+        TYPE2: 'type2',
+        TYPE3: 'type3',
+        PROLOGUE1: 'prologue1',
+        PROLOGUE2: 'prologue2',
+        PROLOGUE3: 'prologue3',
+        EPILOGUE1: 'epilogue1',
+        EPILOGUE2: 'epilogue2',
+        EPILOGUE3: 'epilogue3',
+        FROM1: 'from1',
+        FROM2: 'from2',
+        FROM3: 'from3',
+        TO1: 'to1',
+        TO2: 'to2',
+        TO3: 'to3'
     }
 })
 
 define('two/prankHelper/settings/updates', function () {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups'
     }
 })
@@ -16057,16 +16097,6 @@ define('two/prankHelper/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESETS]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
         [SETTINGS.GROUPS]: {
             default: [],
             updates: [
@@ -16077,15 +16107,31 @@ define('two/prankHelper/settings/map', [
             multiSelect: true,
             type: 'groups'
         },
-        [SETTINGS.SOME_NUMBER]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 120
+        [SETTINGS.TYPE1]: {
+            default: false,
+            multiSelect: false,
+            inputType: 'select'
+        },
+        [SETTINGS.TYPE2]: {
+            default: false,
+            multiSelect: false,
+            inputType: 'select'
+        },
+        [SETTINGS.TYPE3]: {
+            default: false,
+            multiSelect: false,
+            inputType: 'select'
         }
     }
 })
 
+define('two/prankHelper/types/type', [], function () {
+    return {
+        INCREASE: 'increase',
+        DECREASE: 'decrease',
+        RANDOM: 'random'
+    }
+})
 require([
     'two/ready',
     'two/prankHelper',
@@ -19389,7 +19435,7 @@ define('two/specialQueue/ui', [
         $button = interfaceOverflow.addMenuButton('Weteran', 85)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_special_queue_window', `<div id=\"two-special-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'special_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.NOBLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.NOBLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.NOBLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.NOBLE}\">{{ 'noble' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPECIAL)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPECIAL}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPECIAL}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPECIAL}\">{{ 'special' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'special_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><h5 class=\"twx-section\">{{ 'noble.knight' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h3 class=\"twx-section\">{{ 'noble.nobleman' | i18n:loc.ale:'special_queue' }}</h3><h5 class=\"twx-section\">{{ 'noble.noblevillage' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byvillage' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageN\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amount' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.nobleprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageNP\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.noblegroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"20%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.bygroup' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'noble.groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPNOBLE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><h5 class=\"twx-section\">{{ 'special.all' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textall' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.byprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageS\" placeholder=\"{{ 'special.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'special.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'special.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'special.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.bygroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textgroup' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPSPECIAL]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'special_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'special_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'noble.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'special.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'special_queue' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_special_queue_window', `<div id=\"two-special-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'special_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.NOBLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.NOBLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.NOBLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.NOBLE}\">{{ 'noble' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPECIAL)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPECIAL}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPECIAL}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPECIAL}\">{{ 'special' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'special_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><h3 class=\"twx-section\">{{ 'noble.knight' | i18n:loc.ale:'special_queue' }}</h3><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h3 class=\"twx-section\">{{ 'noble.nobleman' | i18n:loc.ale:'special_queue' }}</h3><h5 class=\"twx-section\">{{ 'noble.noblevillage' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byvillage' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageN\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amount' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.nobleprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageNP\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.noblegroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"260px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'noble.bygroup' | i18n:loc.ale:'special_queue' }}</span><tr><td><span class=\"ff-cell-fix\">{{ 'noble.groups' | i18n:loc.ale:'special_queue' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPNOBLE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><h5 class=\"twx-section\">{{ 'special.all' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textall' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.byprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageS\" placeholder=\"{{ 'special.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'special.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'special.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'special.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.bygroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textgroup' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPSPECIAL]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'special_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'special_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'noble.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'special.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'special_queue' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-special-queue div[select]{text-align:center}#two-special-queue div[select] .select-wrapper{height:34px}#two-special-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-special-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-special-queue .range-container{width:250px}#two-special-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-special-queue .textfield-border.fit{width:100%}#two-special-queue .addForm td{text-align:left}#two-special-queue .addForm .item-recruit{text-align:center}#two-special-queue .addForm .item-recruit span{height:34px;line-height:34px;text-align:center;width:125px}#two-special-queue .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-special-queue .addForm .actions a{width:100px}#two-special-queue .recruitLog td{text-align:center}#two-special-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-special-queue table.header-center th{text-align:center}#two-special-queue .noRecruits td{height:26px;text-align:center}#two-special-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
