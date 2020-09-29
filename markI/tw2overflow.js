@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Sep 2020 17:47:33 GMT
+ * Tue, 29 Sep 2020 19:42:36 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -539,7 +539,7 @@ define('two/language', [
             "deactivated": "Wartownik skończył działanie"
         },
         "army_helper": {
-            "title": "Administrator",
+            "title": "Hetman",
             "presets": "Szablony",
             "presets.asign": "Przypisz",
             "presets.all": "Wszystkie szablony",
@@ -1181,7 +1181,7 @@ define('two/language', [
             "deactivated": "Mincerz deaktywowany"
         },
         "power_helper": {
-            "title": "Obrona"
+            "title": "Bunkry"
         },
         "prank_helper": {
             "title": "Błazen",
@@ -1411,7 +1411,37 @@ define('two/language', [
             "revived": "Szpiedzy dodani do kolejki rekrutacji"
         },
         "support_sender": {
-            "title": "Chorąży"
+            "title": "Chorąży",
+            "support": "Wsparcia",
+            "support.merge": "Ustwienia działają oddzielnie jak również razem: prowincja+grupa, grupa+dystans",
+            "support.all": "Jeśli nie wybrałeś grupy, prowincji oraz dystansu nastąpi wysyłanie z wszystkich wiosek w których znajdują się wskazane jednostki",
+            "support.byprovince": "Wyślij wsparcia tylko z wybranej prowincji",
+            "support.bygroup": "Wyślij wsparcia tylko z wybranej grupy wiosek",
+            "support.bydistance": "Wyślij wsparcia tylko z pobliskich wiosek",
+            "support.add_village": "Wybierz wioskę...",
+            "support.no_village": "Nie wybrano wioski",
+            "support.add_map_selected": "Wybrana wioska z mapy",
+            "support.selected": "Wybierz",
+            "support.group": "Grupa/y",
+            "support.preset": "Szablon",
+            "support.textpreset": "Lub wybierz szablon z którego zostaną pobrane ilości jednostek defensywnych",
+            "support.distance": "Dystans do wspieranej wioski",
+            "support.spear": "Pikinierzy",
+            "support.sword": "Miecznicy",
+            "support.archer": "Łucznicy",
+            "support.heavycavalry": "Ciężka Kawaleria",
+            "support.trebuchet": "Trebusze",
+            "support.start": "Start",
+            "support.pause": "Pauza",
+            "support.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.origin": "Wioska Źródłowa",
+            "logs.target": "Wioska Cel",
+            "logs.unit": "Jednostka",
+            "logs.amount": "Ilość",
+            "logs.date": "Data",
+            "logs.noSupports": "Nie wysłano żadnych wsparć.",
+            "logs.clear": "Wyczyść logi"
         },
         "common": {
             "start": "Start",
@@ -2404,7 +2434,37 @@ define('two/language', [
             "revived": "Szpiedzy dodani do kolejki rekrutacji"
         },
         "support_sender": {
-            "title": "Chorąży"
+            "title": "Chorąży",
+            "support": "Wsparcia",
+            "support.merge": "Ustwienia działają oddzielnie jak również razem: prowincja+grupa, grupa+dystans",
+            "support.all": "Jeśli nie wybrałeś grupy, prowincji oraz dystansu nastąpi wysyłanie z wszystkich wiosek w których znajdują się wskazane jednostki",
+            "support.byprovince": "Wyślij wsparcia tylko z wybranej prowincji",
+            "support.bygroup": "Wyślij wsparcia tylko z wybranej grupy wiosek",
+            "support.bydistance": "Wyślij wsparcia tylko z pobliskich wiosek",
+            "support.add_village": "Wybierz wioskę...",
+            "support.no_village": "Nie wybrano wioski",
+            "support.add_map_selected": "Wybrana wioska z mapy",
+            "support.selected": "Wybierz",
+            "support.group": "Grupa/y",
+            "support.preset": "Szablon",
+            "support.textpreset": "Lub wybierz szablon z którego zostaną pobrane ilości jednostek defensywnych",
+            "support.distance": "Dystans do wspieranej wioski",
+            "support.spear": "Pikinierzy",
+            "support.sword": "Miecznicy",
+            "support.archer": "Łucznicy",
+            "support.heavycavalry": "Ciężka Kawaleria",
+            "support.trebuchet": "Trebusze",
+            "support.start": "Start",
+            "support.pause": "Pauza",
+            "support.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.origin": "Wioska Źródłowa",
+            "logs.target": "Wioska Cel",
+            "logs.unit": "Jednostka",
+            "logs.amount": "Ilość",
+            "logs.date": "Data",
+            "logs.noSupports": "Nie wysłano żadnych wsparć.",
+            "logs.clear": "Wyczyść logi"
         },
         "common": {
             "start": "Start",
@@ -3695,7 +3755,7 @@ define('two/activityTool/ui', [
 
     const init = function () {
         settings = activityTool.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Kwatermistrz', 40)
+        $button = interfaceOverflow.addMenuButton3('Kwatermistrz', 60)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'activity_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'activity_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'activity_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'activity_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'activity_tool' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'activity_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'activity_tool' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'activity_tool' }}</span></a></ul></footer></div>`)
@@ -4356,7 +4416,7 @@ define('two/armyHelper/ui', [
 
     const init = function () {
         settings = armyHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton('Administrator', 90)
+        $button = interfaceOverflow.addMenuButton('Hetman', 90)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets.name' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'army_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME1]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'army_helper' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.name-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'army_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME2]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'army_helper' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS2]\" drop-down=\"true\"></div></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"item-spear-a\"><td class=\"item-spear-o\"><td class=\"item-spear-i\"><td class=\"item-spear-s\"><td class=\"item-spear-r\"><td class=\"item-spear-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"item-sword-a\"><td class=\"item-sword-o\"><td class=\"item-sword-i\"><td class=\"item-sword-s\"><td class=\"item-sword-r\"><td class=\"item-sword-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"item-archer-a\"><td class=\"item-archer-o\"><td class=\"item-archer-i\"><td class=\"item-archer-s\"><td class=\"item-archer-r\"><td class=\"item-archer-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-hc-a\"><td class=\"item-hc-o\"><td class=\"item-hc-i\"><td class=\"item-hc-s\"><td class=\"item-hc-r\"><td class=\"item-hc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"item-trebuchet-a\"><td class=\"item-trebuchet-o\"><td class=\"item-trebuchet-i\"><td class=\"item-trebuchet-s\"><td class=\"item-trebuchet-r\"><td class=\"item-trebuchet-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"item-axe-a\"><td class=\"item-axe-o\"><td class=\"item-axe-i\"><td class=\"item-axe-s\"><td class=\"item-axe-r\"><td class=\"item-axe-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-lc-a\"><td class=\"item-lc-o\"><td class=\"item-lc-i\"><td class=\"item-lc-s\"><td class=\"item-lc-r\"><td class=\"item-lc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"item-ma-a\"><td class=\"item-ma-o\"><td class=\"item-ma-i\"><td class=\"item-ma-s\"><td class=\"item-ma-r\"><td class=\"item-ma-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"item-ram-a\"><td class=\"item-ram-o\"><td class=\"item-ram-i\"><td class=\"item-ram-s\"><td class=\"item-ram-r\"><td class=\"item-ram-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"item-catapult-a\"><td class=\"item-catapult-o\"><td class=\"item-catapult-i\"><td class=\"item-catapult-s\"><td class=\"item-catapult-r\"><td class=\"item-catapult-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"item-berserker-a\"><td class=\"item-berserker-o\"><td class=\"item-berserker-i\"><td class=\"item-berserker-s\"><td class=\"item-berserker-r\"><td class=\"item-berserker-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"item-snob-a\"><td class=\"item-snob-o\"><td class=\"item-snob-i\"><td class=\"item-snob-s\"><td class=\"item-snob-r\"><td class=\"item-snob-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"item-knight-a\"><td class=\"item-knight-o\"><td class=\"item-knight-i\"><td class=\"item-knight-s\"><td class=\"item-knight-r\"><td class=\"item-knight-t\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
@@ -5728,8 +5788,8 @@ define('two/autoFoundator/ui', [
     let $button
 
     const init = function () {
-        interfaceOverflow.addDivisor3(51)
-        $button = interfaceOverflow.addMenuButton3('Fundator', 50, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
+        interfaceOverflow.addDivisor3(71)
+        $button = interfaceOverflow.addMenuButton3('Fundator', 70, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
 
         $button.addEventListener('click', function () {
             if (autoFoundator.isRunning()) {
@@ -13354,7 +13414,7 @@ define('two/kingTool/ui', [
 
     const init = function () {
         settings = kingTool.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Marszałek', 30)
+        $button = interfaceOverflow.addMenuButton3('Marszałek', 50)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'king_tool' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'king_tool' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'king_tool' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'king_tool' }}</span></a></ul></footer></div>`)
@@ -15727,7 +15787,7 @@ define('two/powerHelper/ui', [
 
     const init = function () {
         settings = powerHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton4('Obrona', 20)
+        $button = interfaceOverflow.addMenuButton4('Bunkry', 20)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_power_helper_window', `<div id=\"two-power-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'power_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'power_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'power_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'power_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'power_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'power_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'power_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'power_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'power_helper' }}</span></a></ul></footer></div>`)
@@ -16022,7 +16082,7 @@ define('two/prankHelper/ui', [
 
     const init = function () {
         settings = prankHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Błazen', 60)
+        $button = interfaceOverflow.addMenuButton3('Błazen', 80)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'rename.add_village' | i18n:loc.ale:'prank_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody class=\"renameLog\"><tr class=\"noRenames\"><td colspan=\"4\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
@@ -16154,6 +16214,331 @@ require([
     ready(function () {
         prankHelper.init()
         prankHelperInterface()
+    })
+})
+
+define('two/presetAsigner', [
+    'two/Settings',
+    'two/presetAsigner/settings',
+    'two/presetAsigner/settings/map',
+    'two/presetAsigner/settings/updates',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let presetAsignerSettings
+
+    let selectedPresets = []
+    let selectedGroups = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'preset_asigner_settings'
+    }
+
+    const updatePresets = function () {
+        selectedPresets = []
+
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = presetAsignerSettings[SETTINGS.PRESETS]
+
+        presetsSelectedByTheUser.forEach(function (presetId) {
+            selectedPresets.push(allPresets[presetId])
+        })
+
+        console.log('selectedPresets', selectedPresets)
+    }
+
+    const updateGroups = function () {
+        selectedGroups = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = presetAsignerSettings[SETTINGS.GROUPS]
+
+        groupsSelectedByTheUser.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+
+        console.log('selectedGroups', selectedGroups)
+    }
+
+    const presetAsigner = {}
+
+    presetAsigner.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            presetAsignerSettings = settings.getAll()
+
+            // here you can handle settings that get modified and need
+            // some processing. Useful to not break the script when updated
+            // while running.
+
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        presetAsignerSettings = settings.getAll()
+
+        console.log('all settings', presetAsignerSettings)
+
+        ready(function () {
+            updatePresets()
+        }, 'presets')
+
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    presetAsigner.start = function () {
+        running = true
+
+        console.log('selectedPresets', selectedPresets)
+        console.log('selectedGroups', selectedGroups)
+
+        eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_START)
+    }
+
+    presetAsigner.stop = function () {
+        running = false
+
+        console.log('example module stop')
+
+        eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_STOP)
+    }
+
+    presetAsigner.getSettings = function () {
+        return settings
+    }
+
+    presetAsigner.isInitialized = function () {
+        return initialized
+    }
+
+    presetAsigner.isRunning = function () {
+        return running
+    }
+
+    return presetAsigner
+})
+
+define('two/presetAsigner/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        PRESET_ASIGNER_START: 'preset_asigner_start',
+        PRESET_ASIGNER_STOP: 'preset_asigner_stop'
+    })
+})
+define('two/presetAsigner/ui', [
+    'two/ui',
+    'two/presetAsigner',
+    'two/presetAsigner/settings',
+    'two/presetAsigner/settings/map',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    presetAsigner,
+    SETTINGS,
+    SETTINGS_MAP,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let presetList = modelDataService.getPresetList()
+    let groupList = modelDataService.getGroupList()
+    let $button
+    
+    const TAB_TYPES = {
+        SETTINGS: 'settings',
+        SOME_VIEW: 'some_view'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (presetAsigner.isRunning()) {
+            presetAsigner.stop()
+        } else {
+            presetAsigner.start()
+        }
+    }
+
+    const eventHandlers = {
+        updatePresets: function () {
+            $scope.presets = Settings.encodeList(presetList.getPresets(), {
+                disabled: false,
+                type: 'presets'
+            })
+        },
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = presetAsigner.getSettings()
+        $button = interfaceOverflow.addMenuButton3('Administrator', 30)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_preset_asigner_window', `<div id=\"two-preset-asigner\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'preset_asigner' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'preset_asigner' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'preset_asigner' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'preset_asigner' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'preset_asigner' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'preset_asigner' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-preset-asigner div[select]{float:right}#two-preset-asigner div[select] .select-handler{line-height:28px}#two-preset-asigner .range-container{width:250px}#two-preset-asigner .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-preset-asigner .textfield-border.fit{width:100%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = presetAsigner.isRunning()
+        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.settingsMap = SETTINGS_MAP
+
+        settings.injectScope($scope)
+        eventHandlers.updatePresets()
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_preset_asigner_window', function onDestroy () {
+            console.log('example window closed')
+        })
+
+        // all those event listeners will be destroyed as soon as the window gets closed
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.PRESET_ASIGNER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.PRESET_ASIGNER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_preset_asigner_window', $scope)
+    }
+
+    return init
+})
+
+define('two/presetAsigner/settings', [], function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups',
+        SOME_NUMBER: 'some_number'
+    }
+})
+
+define('two/presetAsigner/settings/updates', function () {
+    return {
+        PRESETS: 'presets',
+        GROUPS: 'groups'
+    }
+})
+
+define('two/presetAsigner/settings/map', [
+    'two/presetAsigner/settings',
+    'two/presetAsigner/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.PRESETS]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.SOME_NUMBER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 120
+        }
+    }
+})
+
+require([
+    'two/ready',
+    'two/presetAsigner',
+    'two/presetAsigner/ui',
+    'two/presetAsigner/events'
+], function (
+    ready,
+    presetAsigner,
+    presetAsignerInterface
+) {
+    if (presetAsigner.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        presetAsigner.init()
+        presetAsignerInterface()
     })
 })
 
@@ -16939,8 +17324,8 @@ define('two/presetCreator/ui', [
     let $button
 
     const init = function () {
-        interfaceOverflow.addDivisor(101)
-        $button = interfaceOverflow.addMenuButton('Wojewoda', 100, $filter('i18n')('description', $rootScope.loc.ale, 'preset_creator'))
+        interfaceOverflow.addDivisor(41)
+        $button = interfaceOverflow.addMenuButton3('Wojewoda', 40, $filter('i18n')('description', $rootScope.loc.ale, 'preset_creator'))
 
         $button.addEventListener('click', function () {
             if (presetCreator.isRunning()) {
@@ -18308,7 +18693,7 @@ define('two/reportHelper/ui', [
 
     const init = function () {
         settings = reportHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Skryba', 70)
+        $button = interfaceOverflow.addMenuButton3('Skryba', 90)
         $button.addEventListener('click', buildWindow)
 
         interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-report-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'report_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'report_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'report_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'report_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'report_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'report_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'report_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'report_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'report_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'report_helper' }}</span></a></ul></footer></div>`)
@@ -20363,8 +20748,6 @@ define('two/supportSender', [
         presetsSelectedByTheUser.forEach(function (presetId) {
             selectedPresets.push(allPresets[presetId])
         })
-
-        console.log('selectedPresets', selectedPresets)
     }
 
     const updateGroups = function () {
@@ -20376,8 +20759,6 @@ define('two/supportSender', [
         groupsSelectedByTheUser.forEach(function (groupId) {
             selectedGroups.push(allGroups[groupId])
         })
-
-        console.log('selectedGroups', selectedGroups)
     }
 
     const supportSender = {}
@@ -20392,10 +20773,6 @@ define('two/supportSender', [
 
         settings.onChange(function (changes, updates) {
             supportSenderSettings = settings.getAll()
-
-            // here you can handle settings that get modified and need
-            // some processing. Useful to not break the script when updated
-            // while running.
 
             if (updates[UPDATES.PRESETS]) {
                 updatePresets()
@@ -20432,8 +20809,6 @@ define('two/supportSender', [
 
     supportSender.stop = function () {
         running = false
-
-        console.log('example module stop')
 
         eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
     }
@@ -20484,8 +20859,8 @@ define('two/supportSender/ui', [
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        SUPPORT: 'support',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -20542,8 +20917,8 @@ define('two/supportSender/ui', [
         $button = interfaceOverflow.addMenuButton('Chorąży', 50)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'support_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'support_sender' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'support_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'support_sender' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'support_sender' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-support-sender div[select]{float:right}#two-support-sender div[select] .select-handler{line-height:28px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteSupport\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody class=\"supporterLog\"><tr class=\"noSupports\"><td colspan=\"5\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender .supporterLog td{text-align:center}#two-support-sender .supporterLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .supporterLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .noSupports td{height:26px;text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}')
     }
 
     const buildWindow = function () {
@@ -20551,7 +20926,7 @@ define('two/supportSender/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = supportSender.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.SUPPORT
         $scope.settingsMap = SETTINGS_MAP
 
         settings.injectScope($scope)
@@ -20565,9 +20940,7 @@ define('two/supportSender/ui', [
         let eventScope = new EventScope('twoverflow_support_sender_window', function onDestroy () {
             console.log('example window closed')
         })
-
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
@@ -20583,9 +20956,14 @@ define('two/supportSender/ui', [
 
 define('two/supportSender/settings', [], function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
+        DISTANCE: 'distance',
+        PRESET: 'preset',
+        GROUP: 'group',
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        ARCHER: 'archer',
+        TREBUCHET: 'trebuchet',
+        HC: 'group'
     }
 })
 
@@ -20604,17 +20982,17 @@ define('two/supportSender/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESETS]: {
+        [SETTINGS.PRESET]: {
             default: [],
             updates: [
                 UPDATES.PRESETS
             ],
             disabledOption: true,
             inputType: 'select',
-            multiSelect: true,
+            multiSelect: false,
             type: 'presets'
         },
-        [SETTINGS.GROUPS]: {
+        [SETTINGS.GROUP]: {
             default: [],
             updates: [
                 UPDATES.GROUPS,
@@ -20624,11 +21002,41 @@ define('two/supportSender/settings/map', [
             multiSelect: true,
             type: 'groups'
         },
-        [SETTINGS.SOME_NUMBER]: {
+        [SETTINGS.SPEAR]: {
             default: 60,
             inputType: 'number',
             min: 0,
-            max: 120
+            max: 24000
+        },
+        [SETTINGS.SWORD]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.ARCHER]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.HC]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 4000
+        },
+        [SETTINGS.TREBUCHET]: {
+            default: 60,
+            inputType: 'number',
+            min: 0,
+            max: 2400
+        },
+        [SETTINGS.DISTANCE]: {
+            default: 90,
+            inputType: 'number',
+            min: 0,
+            max: 300
         }
     }
 })
