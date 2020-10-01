@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 30 Sep 2020 19:39:51 GMT
+ * Thu, 01 Oct 2020 18:40:30 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -612,11 +612,11 @@ define('two/language', [
             "arrivetime": "Czas dotarcia skopiowany!",
             "backtime": "Czas powrotu skopiowany!",
             "spyorigin": "Szpiedzy wysłani do %{name}!",
-            "commands.tooltip.kill": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN.",
-            "commands.tooltip.killBig": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN.",
-            "commands.tooltip.bunker": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem. Uwaga! robisz to na własną odpowiedzialność.",
-            "commands.tooltip.spy": "Szpieguj wioske źródłową.",
-            "commands.tooltip.withdraw": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
+            "commands_kill_nobleman_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN.",
+            "commands_kill_noblemanBig_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN.",
+            "commands_bunker_village_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem. Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
+            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
         },
         "auto_collector": {
             "title": "Kolekcjoner",
@@ -1413,6 +1413,7 @@ define('two/language', [
         "support_sender": {
             "title": "Chorąży",
             "support": "Wsparcia",
+            "support.units": "Jednostki",
             "support.caution": "Uwaga!",
             "support.header": "Auto Wsparcia",
             "support.target": "Cel do wysłania wsparć",
@@ -1638,11 +1639,11 @@ define('two/language', [
             "arrivetime": "Czas dotarcia skopiowany!",
             "backtime": "Czas powrotu skopiowany!",
             "spyorigin": "Szpiedzy wysłani do %{name}!",
-            "commands.tooltip.kill": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN.",
-            "commands.tooltip.killBig": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN.",
-            "commands.tooltip.bunker": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem. Uwaga! robisz to na własną odpowiedzialność.",
-            "commands.tooltip.spy": "Szpieguj wioske źródłową.",
-            "commands.tooltip.withdraw": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
+            "commands_kill_nobleman_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN.",
+            "commands_kill_noblemanBig_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN.",
+            "commands_bunker_village_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem. Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
+            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
         },
         "auto_collector": {
             "title": "Kolekcjoner",
@@ -2439,6 +2440,7 @@ define('two/language', [
         "support_sender": {
             "title": "Chorąży",
             "support": "Wsparcia",
+            "support.units": "Jednostki",
             "support.caution": "Uwaga!",
             "support.header": "Auto Wsparcia",
             "support.target": "Cel do wysłania wsparć",
@@ -4199,10 +4201,6 @@ define('two/armyHelper', [
     let settings
     let armyHelperSettings
 
-    let byPresetSelected = []
-    let byPresetAndGroupSelected = []
-    let byGroupSelectedGroup = []
-    let byPresetAndGroupSelectedGroup = []
     let byGroupBalance = []
     let byUnitAndGroupBalance = []
 
@@ -4226,41 +4224,15 @@ define('two/armyHelper', [
         [B_UNIT.KNIGHT]: 'knight'
     }
     console.log(BALANCER_UNIT)
-
-    const updatePresets = function () {
-        byPresetSelected = []
-        byPresetAndGroupSelected = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser1 = armyHelperSettings[SETTINGS.PRESETS1]
-        const presetsSelectedByTheUser2 = armyHelperSettings[SETTINGS.PRESETS2]
-
-        presetsSelectedByTheUser1.forEach(function (presetId) {
-            byPresetSelected.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser2.forEach(function (presetId) {
-            byPresetAndGroupSelected.push(allPresets[presetId])
-        })
-    }
 	
     const updateGroups = function () {
-        byGroupSelectedGroup = []
-        byPresetAndGroupSelectedGroup = []
         byGroupBalance = []
         byUnitAndGroupBalance = []
 
         const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser1 = armyHelperSettings[SETTINGS.GROUP1]
-        const groupsSelectedByTheUser2 = armyHelperSettings[SETTINGS.GROUP2]
         const groupsSelectedByTheUser3 = armyHelperSettings[SETTINGS.GROUP3]
         const groupsSelectedByTheUser4 = armyHelperSettings[SETTINGS.GROUP4]
 
-        groupsSelectedByTheUser1.forEach(function (groupId) {
-            byGroupSelectedGroup.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser2.forEach(function (groupId) {
-            byPresetAndGroupSelectedGroup.push(allGroups[groupId])
-        })
         groupsSelectedByTheUser3.forEach(function (groupId) {
             byGroupBalance.push(allGroups[groupId])
         })
@@ -4282,10 +4254,6 @@ define('two/armyHelper', [
         settings.onChange(function (changes, updates) {
             armyHelperSettings = settings.getAll()
 
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
@@ -4295,12 +4263,6 @@ define('two/armyHelper', [
 
         console.log('armyHelper settings', armyHelperSettings)
 
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
@@ -4361,14 +4323,13 @@ define('two/armyHelper/ui', [
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
     let groupList = modelDataService.getGroupList()
     let $button
     
     const TAB_TYPES = {
-        PRESETS: 'presets',
         ARMY: 'army',
-        BALANCER: 'balancer'
+        BALANCER: 'balancer',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -4390,12 +4351,6 @@ define('two/armyHelper/ui', [
     }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
         updateGroups: function () {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
@@ -4425,8 +4380,8 @@ define('two/armyHelper/ui', [
         $button = interfaceOverflow.addMenuButton('Hetman', 90)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets.name' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'army_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME1]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'army_helper' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.name-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'army_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME2]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'army_helper' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS2]\" drop-down=\"true\"></div></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"item-spear-a\"><td class=\"item-spear-o\"><td class=\"item-spear-i\"><td class=\"item-spear-s\"><td class=\"item-spear-r\"><td class=\"item-spear-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"item-sword-a\"><td class=\"item-sword-o\"><td class=\"item-sword-i\"><td class=\"item-sword-s\"><td class=\"item-sword-r\"><td class=\"item-sword-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"item-archer-a\"><td class=\"item-archer-o\"><td class=\"item-archer-i\"><td class=\"item-archer-s\"><td class=\"item-archer-r\"><td class=\"item-archer-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-hc-a\"><td class=\"item-hc-o\"><td class=\"item-hc-i\"><td class=\"item-hc-s\"><td class=\"item-hc-r\"><td class=\"item-hc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"item-trebuchet-a\"><td class=\"item-trebuchet-o\"><td class=\"item-trebuchet-i\"><td class=\"item-trebuchet-s\"><td class=\"item-trebuchet-r\"><td class=\"item-trebuchet-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"item-axe-a\"><td class=\"item-axe-o\"><td class=\"item-axe-i\"><td class=\"item-axe-s\"><td class=\"item-axe-r\"><td class=\"item-axe-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-lc-a\"><td class=\"item-lc-o\"><td class=\"item-lc-i\"><td class=\"item-lc-s\"><td class=\"item-lc-r\"><td class=\"item-lc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"item-ma-a\"><td class=\"item-ma-o\"><td class=\"item-ma-i\"><td class=\"item-ma-s\"><td class=\"item-ma-r\"><td class=\"item-ma-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"item-ram-a\"><td class=\"item-ram-o\"><td class=\"item-ram-i\"><td class=\"item-ram-s\"><td class=\"item-ram-r\"><td class=\"item-ram-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"item-catapult-a\"><td class=\"item-catapult-o\"><td class=\"item-catapult-i\"><td class=\"item-catapult-s\"><td class=\"item-catapult-r\"><td class=\"item-catapult-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"item-berserker-a\"><td class=\"item-berserker-o\"><td class=\"item-berserker-i\"><td class=\"item-berserker-s\"><td class=\"item-berserker-r\"><td class=\"item-berserker-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"item-snob-a\"><td class=\"item-snob-o\"><td class=\"item-snob-i\"><td class=\"item-snob-s\"><td class=\"item-snob-r\"><td class=\"item-snob-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"item-knight-a\"><td class=\"item-knight-o\"><td class=\"item-knight-i\"><td class=\"item-knight-s\"><td class=\"item-knight-r\"><td class=\"item-knight-t\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-asign{text-align:center}#two-army-helper .addForm .item-asign span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}')
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"item-spear-a\"><td class=\"item-spear-o\"><td class=\"item-spear-i\"><td class=\"item-spear-s\"><td class=\"item-spear-r\"><td class=\"item-spear-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"item-sword-a\"><td class=\"item-sword-o\"><td class=\"item-sword-i\"><td class=\"item-sword-s\"><td class=\"item-sword-r\"><td class=\"item-sword-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"item-archer-a\"><td class=\"item-archer-o\"><td class=\"item-archer-i\"><td class=\"item-archer-s\"><td class=\"item-archer-r\"><td class=\"item-archer-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-hc-a\"><td class=\"item-hc-o\"><td class=\"item-hc-i\"><td class=\"item-hc-s\"><td class=\"item-hc-r\"><td class=\"item-hc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"item-trebuchet-a\"><td class=\"item-trebuchet-o\"><td class=\"item-trebuchet-i\"><td class=\"item-trebuchet-s\"><td class=\"item-trebuchet-r\"><td class=\"item-trebuchet-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"item-axe-a\"><td class=\"item-axe-o\"><td class=\"item-axe-i\"><td class=\"item-axe-s\"><td class=\"item-axe-r\"><td class=\"item-axe-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-lc-a\"><td class=\"item-lc-o\"><td class=\"item-lc-i\"><td class=\"item-lc-s\"><td class=\"item-lc-r\"><td class=\"item-lc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"item-ma-a\"><td class=\"item-ma-o\"><td class=\"item-ma-i\"><td class=\"item-ma-s\"><td class=\"item-ma-r\"><td class=\"item-ma-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"item-ram-a\"><td class=\"item-ram-o\"><td class=\"item-ram-i\"><td class=\"item-ram-s\"><td class=\"item-ram-r\"><td class=\"item-ram-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"item-catapult-a\"><td class=\"item-catapult-o\"><td class=\"item-catapult-i\"><td class=\"item-catapult-s\"><td class=\"item-catapult-r\"><td class=\"item-catapult-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"item-berserker-a\"><td class=\"item-berserker-o\"><td class=\"item-berserker-i\"><td class=\"item-berserker-s\"><td class=\"item-berserker-r\"><td class=\"item-berserker-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"item-snob-a\"><td class=\"item-snob-o\"><td class=\"item-snob-i\"><td class=\"item-snob-s\"><td class=\"item-snob-r\"><td class=\"item-snob-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"item-knight-a\"><td class=\"item-knight-o\"><td class=\"item-knight-i\"><td class=\"item-knight-s\"><td class=\"item-knight-r\"><td class=\"item-knight-t\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody class=\"balancerLog\"><tr class=\"noBalances\"><td colspan=\"5\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .balancerLog td{text-align:center}#two-army-helper .balancerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-army-helper .balancerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-army-helper .noBalances td{height:26px;text-align:center}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -4434,7 +4389,7 @@ define('two/armyHelper/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = armyHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.PRESETS
+        $scope.selectedTab = TAB_TYPES.ARMY
         $scope.settingsMap = SETTINGS_MAP
         $scope.unit = Settings.encodeList(B_UNIT, {
             textObject: 'army_helper',
@@ -4442,7 +4397,6 @@ define('two/armyHelper/ui', [
         })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
         eventHandlers.updateGroups()
 
         $scope.selectTab = selectTab
@@ -4452,8 +4406,6 @@ define('two/armyHelper/ui', [
         let eventScope = new EventScope('twoverflow_army_helper_window', function onDestroy () {
             console.log('armyHelper window closed')
         })
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
@@ -4468,12 +4420,6 @@ define('two/armyHelper/ui', [
 
 define('two/armyHelper/settings', [], function () {
     return {
-        PRESETS1: 'presets1',
-        PRESETS2: 'presets2',
-        PRESET_NAME1: 'preset1',
-        PRESET_NAME2: 'preset2',
-        GROUP1: 'group1',
-        GROUP2: 'group2',
         GROUP3: 'group3',
         GROUP4: 'group4',
         UNIT_TYPE1: 'unit_type1',
@@ -4483,7 +4429,6 @@ define('two/armyHelper/settings', [], function () {
 
 define('two/armyHelper/settings/updates', function () {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups'
     }
 })
@@ -4496,46 +4441,6 @@ define('two/armyHelper/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESETS1]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESETS2]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.GROUP1]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP2]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'groups'
-        },
         [SETTINGS.GROUP3]: {
             default: [],
             updates: [
@@ -7886,7 +7791,7 @@ define('two/builderQueue/defaultOrders', [
         ]
     ]
 
-    defaultSequences['Full Village'] = [
+    defaultSequences['Pełna rozbudowa'] = [
         [
             BUILDING_TYPES.HOSPITAL, // 2
             BUILDING_TYPES.HOSPITAL, // 3
@@ -7945,16 +7850,457 @@ define('two/builderQueue/defaultOrders', [
     ]
 
     Array.prototype.unshift.apply(
-        defaultSequences['Full Village'],
+        defaultSequences['Pełna rozbudowa'],
         defaultSequences['Essential']
     )
 
-    defaultSequences['Essential Without Wall'] =
+    defaultSequences['Essential bez murów'] =
         defaultSequences['Essential'].filter(function (building) {
             return building !== BUILDING_TYPES.WALL
         })
+        
+    defaultSequences['DirtyStyle'] = [
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.RALLY_POINT, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.RALLY_POINT, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.STATUE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.HOSPITAL, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.HEADQUARTER, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.ACADEMY, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.RALLY_POINT, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.STATUE, 
+        BUILDING_TYPES.STATUE, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.BARRACKS, 
+        BUILDING_TYPES.FARM, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.WAREHOUSE, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.RALLY_POINT, 
+        BUILDING_TYPES.STATUE, 
+        BUILDING_TYPES.STATUE, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.MARKET, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.TAVERN, 
+        BUILDING_TYPES.RALLY_POINT, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.TIMBER_CAMP, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.CLAY_PIT, 
+        BUILDING_TYPES.IRON_MINE, 
+        BUILDING_TYPES.WALL, 
+        BUILDING_TYPES.WALL 
+    ]
 
-    defaultSequences['Full Wall'] = [
+    defaultSequences['IrooStyle'] = [
+        BUILDING_TYPES.HEADQUARTER, // 1
+        BUILDING_TYPES.FARM, // 1
+        BUILDING_TYPES.WAREHOUSE, // 1
+        BUILDING_TYPES.RALLY_POINT, // 1
+        BUILDING_TYPES.BARRACKS, // 1
+
+        // Quest: The Resources
+        BUILDING_TYPES.TIMBER_CAMP, // 1
+        BUILDING_TYPES.TIMBER_CAMP, // 2
+        BUILDING_TYPES.CLAY_PIT, // 1
+        BUILDING_TYPES.IRON_MINE, // 1
+
+        BUILDING_TYPES.HEADQUARTER, // 2
+        BUILDING_TYPES.RALLY_POINT, // 2
+
+        // Quest: First Steps
+        BUILDING_TYPES.FARM, // 2
+        BUILDING_TYPES.WAREHOUSE, // 2
+
+        // Quest: Laying Down Foundation
+        BUILDING_TYPES.CLAY_PIT, // 2
+        BUILDING_TYPES.IRON_MINE, // 2
+
+        // Quest: More Resources
+        BUILDING_TYPES.TIMBER_CAMP, // 3
+        BUILDING_TYPES.CLAY_PIT, // 3
+        BUILDING_TYPES.IRON_MINE, // 3
+
+        // Quest: Resource Building
+        BUILDING_TYPES.WAREHOUSE, // 3
+        BUILDING_TYPES.TIMBER_CAMP, // 4
+        BUILDING_TYPES.CLAY_PIT, // 4
+        BUILDING_TYPES.IRON_MINE, // 4
+
+        // Quest: Get an Overview
+        BUILDING_TYPES.WAREHOUSE, // 4
+        BUILDING_TYPES.TIMBER_CAMP, // 5
+        BUILDING_TYPES.CLAY_PIT, // 5
+        BUILDING_TYPES.IRON_MINE, // 5
+
+        // Quest: Capital
+        BUILDING_TYPES.FARM, // 3
+        BUILDING_TYPES.WAREHOUSE, // 5
+        BUILDING_TYPES.HEADQUARTER, // 3
+
+        // Quest: The Hero
+        BUILDING_TYPES.STATUE, // 1
+
+        // Quest: Resource Expansions
+        BUILDING_TYPES.TIMBER_CAMP, // 6
+        BUILDING_TYPES.CLAY_PIT, // 6
+        BUILDING_TYPES.IRON_MINE, // 6
+
+        // Quest: Military
+        BUILDING_TYPES.BARRACKS, // 2
+
+        // Quest: The Hospital
+        BUILDING_TYPES.HEADQUARTER, // 4
+        BUILDING_TYPES.TIMBER_CAMP, // 7
+        BUILDING_TYPES.CLAY_PIT, // 7
+        BUILDING_TYPES.IRON_MINE, // 7
+        BUILDING_TYPES.FARM, // 4
+        BUILDING_TYPES.HOSPITAL, // 1
+
+        // Quest: Resources
+        BUILDING_TYPES.TIMBER_CAMP, // 8
+        BUILDING_TYPES.CLAY_PIT, // 8
+        BUILDING_TYPES.IRON_MINE, // 8
+
+        // Quest: The Wall
+        BUILDING_TYPES.WAREHOUSE, // 6
+        BUILDING_TYPES.HEADQUARTER, // 5
+        BUILDING_TYPES.WALL, // 1
+        BUILDING_TYPES.WAREHOUSE, // 7
+        
+        // Quest: Village Improvements
+        BUILDING_TYPES.TIMBER_CAMP, // 9
+        BUILDING_TYPES.CLAY_PIT, // 9
+        BUILDING_TYPES.IRON_MINE, // 9
+        BUILDING_TYPES.TIMBER_CAMP, // 10
+        BUILDING_TYPES.CLAY_PIT, // 10
+        BUILDING_TYPES.IRON_MINE, // 10
+        BUILDING_TYPES.WAREHOUSE, // 8
+        BUILDING_TYPES.FARM, // 5
+
+        // Quest: Hard work
+        BUILDING_TYPES.TIMBER_CAMP, // 11
+        BUILDING_TYPES.CLAY_PIT, // 11
+        BUILDING_TYPES.IRON_MINE, // 11
+        BUILDING_TYPES.TIMBER_CAMP, // 12
+        BUILDING_TYPES.CLAY_PIT, // 12
+        BUILDING_TYPES.IRON_MINE, // 12
+        
+        // Quest: The way of defence
+        BUILDING_TYPES.BARRACKS, // 3
+
+        BUILDING_TYPES.FARM, // 6
+        BUILDING_TYPES.WAREHOUSE, // 7
+        BUILDING_TYPES.FARM, // 7
+        BUILDING_TYPES.WAREHOUSE, // 8
+        BUILDING_TYPES.HEADQUARTER, // 6
+        BUILDING_TYPES.FARM, // 8
+        BUILDING_TYPES.WAREHOUSE, // 9
+        BUILDING_TYPES.MARKET, // 1
+        
+        // Quest: Preparations
+        BUILDING_TYPES.BARRACKS, // 4
+        BUILDING_TYPES.WALL, // 2
+        BUILDING_TYPES.WALL, // 3
+        BUILDING_TYPES.FARM, // 9
+        BUILDING_TYPES.FARM, // 10
+        BUILDING_TYPES.BARRACKS, // 5
+        BUILDING_TYPES.WAREHOUSE, // 11
+        BUILDING_TYPES.FARM, // 11
+        BUILDING_TYPES.BARRACKS, // 6
+        BUILDING_TYPES.WAREHOUSE, // 12
+        BUILDING_TYPES.FARM, // 12
+        BUILDING_TYPES.BARRACKS, // 7
+        BUILDING_TYPES.WAREHOUSE, // 13
+        BUILDING_TYPES.FARM, // 13
+        BUILDING_TYPES.WALL, // 4
+        BUILDING_TYPES.WALL, // 5
+        BUILDING_TYPES.WALL, // 6
+        BUILDING_TYPES.MARKET, // 2
+        BUILDING_TYPES.MARKET, // 3
+        BUILDING_TYPES.MARKET, // 4
+        BUILDING_TYPES.BARRACKS, // 8
+        BUILDING_TYPES.HEADQUARTER, // 6
+        BUILDING_TYPES.BARRACKS, // 9
+        BUILDING_TYPES.HEADQUARTER, // 8
+        BUILDING_TYPES.TAVERN, // 1
+        BUILDING_TYPES.TAVERN, // 2
+        BUILDING_TYPES.TAVERN, // 3
+        BUILDING_TYPES.IRON_MINE, // 13
+        BUILDING_TYPES.IRON_MINE, // 14
+        BUILDING_TYPES.IRON_MINE, // 15
+        BUILDING_TYPES.RALLY_POINT, // 3
+        BUILDING_TYPES.BARRACKS, // 10
+        BUILDING_TYPES.BARRACKS, // 11
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.FARM, // 14
+        BUILDING_TYPES.BARRACKS, // 12
+        BUILDING_TYPES.BARRACKS, // 13
+        BUILDING_TYPES.STATUE, // 2
+        BUILDING_TYPES.WAREHOUSE, // 16
+        BUILDING_TYPES.FARM, // 16
+        BUILDING_TYPES.WAREHOUSE, // 16
+        BUILDING_TYPES.BARRACKS, // 14
+        BUILDING_TYPES.TIMBER_CAMP, // 13
+        BUILDING_TYPES.CLAY_PIT, // 13
+        BUILDING_TYPES.BARRACKS, // 20
+        BUILDING_TYPES.WAREHOUSE, // 23
+        BUILDING_TYPES.FARM, // 28
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.TIMBER_CAMP, // 13
+        BUILDING_TYPES.CLAY_PIT, // 13
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.FARM, // 16
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.TIMBER_CAMP, // 13
+        BUILDING_TYPES.CLAY_PIT, // 13
+        BUILDING_TYPES.CLAY_PIT, // 13
+        BUILDING_TYPES.IRON_MINE, // 15
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.WAREHOUSE, // 16
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.TIMBER_CAMP, // 13
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.ACADEMY // 1
+    ]
+
+    defaultSequences['MuryMax'] = [
         BUILDING_TYPES.WALL,
         BUILDING_TYPES.WALL,
         BUILDING_TYPES.WALL,
@@ -7977,7 +8323,7 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.WALL // 20
     ]
 
-    defaultSequences['Full Farm'] = [
+    defaultSequences['Farma'] = [
         BUILDING_TYPES.FARM,
         BUILDING_TYPES.FARM,
         BUILDING_TYPES.FARM,
@@ -8008,6 +8354,688 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.FARM,
         BUILDING_TYPES.FARM,
         BUILDING_TYPES.FARM // 30
+    ]
+
+    defaultSequences['War Build'] = [
+        BUILDING_TYPES.HEADQUARTER, // 1
+        BUILDING_TYPES.FARM, // 1
+        BUILDING_TYPES.WAREHOUSE, // 1
+        BUILDING_TYPES.RALLY_POINT, // 1
+        BUILDING_TYPES.BARRACKS, // 1
+
+        // Quest: The Resources
+        BUILDING_TYPES.TIMBER_CAMP, // 1
+        BUILDING_TYPES.TIMBER_CAMP, // 2
+        BUILDING_TYPES.CLAY_PIT, // 1
+        BUILDING_TYPES.IRON_MINE, // 1
+
+        BUILDING_TYPES.HEADQUARTER, // 2
+        BUILDING_TYPES.RALLY_POINT, // 2
+
+        // Quest: First Steps
+        BUILDING_TYPES.FARM, // 2
+        BUILDING_TYPES.WAREHOUSE, // 2
+        
+        // Quest: Laying Down Foundation
+        BUILDING_TYPES.CLAY_PIT, // 2
+        BUILDING_TYPES.IRON_MINE, // 2
+
+        // Quest: More Resources
+        BUILDING_TYPES.TIMBER_CAMP, // 3
+        BUILDING_TYPES.CLAY_PIT, // 3
+        BUILDING_TYPES.IRON_MINE, // 3
+        
+        // Quest: Resource Building
+        BUILDING_TYPES.WAREHOUSE, // 3
+        BUILDING_TYPES.TIMBER_CAMP, // 4
+        BUILDING_TYPES.CLAY_PIT, // 4
+        BUILDING_TYPES.IRON_MINE, // 4
+
+        // Quest: Get an Overview
+        BUILDING_TYPES.WAREHOUSE, // 4
+        BUILDING_TYPES.TIMBER_CAMP, // 5
+        BUILDING_TYPES.CLAY_PIT, // 5
+        BUILDING_TYPES.IRON_MINE, // 5
+
+        // Quest: Capital
+        BUILDING_TYPES.FARM, // 3
+        BUILDING_TYPES.WAREHOUSE, // 5
+        BUILDING_TYPES.HEADQUARTER, // 3
+
+        // Quest: The Hero
+        BUILDING_TYPES.STATUE, // 1
+
+        // Quest: Resource Expansions
+        BUILDING_TYPES.TIMBER_CAMP, // 6
+        BUILDING_TYPES.CLAY_PIT, // 6
+        BUILDING_TYPES.IRON_MINE, // 6
+        
+        // Quest: Military
+        BUILDING_TYPES.BARRACKS, // 2
+
+        // Quest: The Hospital
+        BUILDING_TYPES.HEADQUARTER, // 4
+        BUILDING_TYPES.TIMBER_CAMP, // 7
+        BUILDING_TYPES.CLAY_PIT, // 7
+        BUILDING_TYPES.IRON_MINE, // 7
+        BUILDING_TYPES.FARM, // 4
+        BUILDING_TYPES.HOSPITAL, // 1
+
+        // Quest: Resources
+        BUILDING_TYPES.TIMBER_CAMP, // 8
+        BUILDING_TYPES.CLAY_PIT, // 8
+        BUILDING_TYPES.IRON_MINE, // 8
+
+        // Quest: The Wall
+        BUILDING_TYPES.WAREHOUSE, // 6
+        BUILDING_TYPES.HEADQUARTER, // 5
+        BUILDING_TYPES.WALL, // 1
+        
+        // Quest: Village Improvements
+        BUILDING_TYPES.TIMBER_CAMP, // 9
+        BUILDING_TYPES.CLAY_PIT, // 9
+        BUILDING_TYPES.IRON_MINE, // 9
+        BUILDING_TYPES.TIMBER_CAMP, // 10
+        BUILDING_TYPES.CLAY_PIT, // 10
+        BUILDING_TYPES.IRON_MINE, // 10
+        BUILDING_TYPES.FARM, // 5
+
+        // Quest: Hard work
+        BUILDING_TYPES.TIMBER_CAMP, // 11
+        BUILDING_TYPES.CLAY_PIT, // 11
+        BUILDING_TYPES.IRON_MINE, // 11
+        BUILDING_TYPES.TIMBER_CAMP, // 12
+        BUILDING_TYPES.CLAY_PIT, // 12
+        BUILDING_TYPES.IRON_MINE, // 12
+
+        // Quest: The way of defence
+        BUILDING_TYPES.BARRACKS, // 3
+
+        BUILDING_TYPES.FARM, // 6
+        BUILDING_TYPES.WAREHOUSE, // 7
+        BUILDING_TYPES.FARM, // 7
+        BUILDING_TYPES.WAREHOUSE, // 8
+        BUILDING_TYPES.FARM, // 8
+        BUILDING_TYPES.WAREHOUSE, // 9
+        BUILDING_TYPES.WAREHOUSE, // 10
+
+        // Quest: Market Barker
+        BUILDING_TYPES.HEADQUARTER, // 6
+        BUILDING_TYPES.MARKET, // 1
+
+        // Quest: Preparations
+        BUILDING_TYPES.BARRACKS, // 4
+        BUILDING_TYPES.WALL, // 2
+        BUILDING_TYPES.WALL, // 3
+
+        BUILDING_TYPES.FARM, // 9
+        BUILDING_TYPES.FARM, // 10
+
+        BUILDING_TYPES.BARRACKS, // 5
+        BUILDING_TYPES.WAREHOUSE, // 11
+        BUILDING_TYPES.FARM, // 11
+
+        BUILDING_TYPES.BARRACKS, // 6
+        BUILDING_TYPES.WAREHOUSE, // 12
+        BUILDING_TYPES.FARM, // 12
+
+        BUILDING_TYPES.BARRACKS, // 7
+        BUILDING_TYPES.WAREHOUSE, // 13
+        BUILDING_TYPES.FARM, // 13
+
+        BUILDING_TYPES.WALL, // 4
+        BUILDING_TYPES.WALL, // 5
+        BUILDING_TYPES.WALL, // 6
+
+        BUILDING_TYPES.MARKET, // 2
+        BUILDING_TYPES.MARKET, // 3
+        BUILDING_TYPES.MARKET, // 4
+        
+        BUILDING_TYPES.BARRACKS, // 8
+        BUILDING_TYPES.BARRACKS, // 9
+
+        BUILDING_TYPES.HEADQUARTER, // 7
+        BUILDING_TYPES.HEADQUARTER, // 8
+        
+        BUILDING_TYPES.TAVERN, // 1
+        BUILDING_TYPES.TAVERN, // 2
+        BUILDING_TYPES.TAVERN, // 3
+
+        BUILDING_TYPES.RALLY_POINT, // 3
+
+        BUILDING_TYPES.BARRACKS, // 10
+        BUILDING_TYPES.BARRACKS, // 11
+
+        BUILDING_TYPES.WAREHOUSE, // 14
+        BUILDING_TYPES.FARM, // 14
+
+        BUILDING_TYPES.WAREHOUSE, // 15
+        BUILDING_TYPES.FARM, // 15
+
+        BUILDING_TYPES.BARRACKS, // 12
+        BUILDING_TYPES.BARRACKS, // 13
+
+        BUILDING_TYPES.STATUE, // 2
+        BUILDING_TYPES.STATUE, // 3
+
+        BUILDING_TYPES.WALL, // 7
+        BUILDING_TYPES.WALL, // 8
+
+        BUILDING_TYPES.HEADQUARTER, // 9
+        BUILDING_TYPES.HEADQUARTER, // 10
+
+        BUILDING_TYPES.WAREHOUSE, // 16
+        BUILDING_TYPES.FARM, // 16
+        BUILDING_TYPES.FARM, // 17
+
+        BUILDING_TYPES.IRON_MINE, // 13
+        BUILDING_TYPES.IRON_MINE, // 14
+        BUILDING_TYPES.IRON_MINE, // 15
+
+        BUILDING_TYPES.WAREHOUSE, // 17
+
+        BUILDING_TYPES.BARRACKS, // 14
+        BUILDING_TYPES.BARRACKS, // 15
+
+        BUILDING_TYPES.WAREHOUSE, // 18
+        BUILDING_TYPES.FARM, // 18
+
+        BUILDING_TYPES.WALL, // 9
+        BUILDING_TYPES.WALL, // 10
+
+        BUILDING_TYPES.TAVERN, // 4
+        BUILDING_TYPES.TAVERN, // 5
+        BUILDING_TYPES.TAVERN, // 6
+
+        BUILDING_TYPES.MARKET, // 5
+        BUILDING_TYPES.MARKET, // 6
+        BUILDING_TYPES.MARKET, // 7
+
+        BUILDING_TYPES.WAREHOUSE, // 19
+        BUILDING_TYPES.FARM, // 19
+        BUILDING_TYPES.WAREHOUSE, // 20
+        BUILDING_TYPES.FARM, // 20
+        BUILDING_TYPES.WAREHOUSE, // 21
+        BUILDING_TYPES.FARM, // 21
+
+        BUILDING_TYPES.IRON_MINE, // 16
+        BUILDING_TYPES.IRON_MINE, // 17
+        BUILDING_TYPES.IRON_MINE, // 18
+
+        BUILDING_TYPES.RALLY_POINT, // 4
+
+        BUILDING_TYPES.BARRACKS, // 16
+        BUILDING_TYPES.BARRACKS, // 17
+
+        BUILDING_TYPES.FARM, // 22
+        BUILDING_TYPES.FARM, // 23
+        BUILDING_TYPES.FARM, // 24
+        BUILDING_TYPES.FARM, // 25
+
+        BUILDING_TYPES.WAREHOUSE, // 22
+        BUILDING_TYPES.WAREHOUSE, // 23
+
+        BUILDING_TYPES.HEADQUARTER, // 11
+        BUILDING_TYPES.HEADQUARTER, // 12
+
+        BUILDING_TYPES.STATUE, // 4
+        BUILDING_TYPES.STATUE, // 5
+
+        BUILDING_TYPES.FARM, // 26
+        BUILDING_TYPES.BARRACKS, // 18
+
+        BUILDING_TYPES.HEADQUARTER, // 14
+        BUILDING_TYPES.HEADQUARTER, // 15
+
+        BUILDING_TYPES.FARM, // 27
+        BUILDING_TYPES.BARRACKS, // 19
+
+        BUILDING_TYPES.HEADQUARTER, // 15
+        BUILDING_TYPES.HEADQUARTER, // 16
+
+        BUILDING_TYPES.BARRACKS, // 20
+
+        BUILDING_TYPES.HEADQUARTER, // 17
+        BUILDING_TYPES.HEADQUARTER, // 18
+        BUILDING_TYPES.HEADQUARTER, // 19
+        BUILDING_TYPES.HEADQUARTER, // 20
+
+        BUILDING_TYPES.ACADEMY, // 1
+        
+        BUILDING_TYPES.HEADQUARTER, // 21
+        BUILDING_TYPES.HEADQUARTER, // 22
+        BUILDING_TYPES.HEADQUARTER, // 23
+        BUILDING_TYPES.HEADQUARTER, // 24
+        BUILDING_TYPES.HEADQUARTER, // 25
+        
+        BUILDING_TYPES.PRECEPTORY, // 1
+
+        BUILDING_TYPES.FARM, // 28
+        BUILDING_TYPES.WAREHOUSE, // 23
+        BUILDING_TYPES.WAREHOUSE, // 24
+        BUILDING_TYPES.WAREHOUSE, // 25
+
+        BUILDING_TYPES.MARKET, // 8
+        BUILDING_TYPES.MARKET, // 9
+        BUILDING_TYPES.MARKET, // 10
+
+        BUILDING_TYPES.TIMBER_CAMP, // 13
+        BUILDING_TYPES.CLAY_PIT, // 13
+        BUILDING_TYPES.IRON_MINE, // 19
+
+        BUILDING_TYPES.TIMBER_CAMP, // 14
+        BUILDING_TYPES.CLAY_PIT, // 14
+        BUILDING_TYPES.TIMBER_CAMP, // 15
+        BUILDING_TYPES.CLAY_PIT, // 15
+
+        BUILDING_TYPES.TIMBER_CAMP, // 16
+        BUILDING_TYPES.TIMBER_CAMP, // 17
+
+        BUILDING_TYPES.WALL, // 11
+        BUILDING_TYPES.WALL, // 12
+
+        BUILDING_TYPES.MARKET, // 11
+        BUILDING_TYPES.MARKET, // 12
+        BUILDING_TYPES.MARKET, // 13
+
+        BUILDING_TYPES.TIMBER_CAMP, // 18
+        BUILDING_TYPES.CLAY_PIT, // 16
+        BUILDING_TYPES.TIMBER_CAMP, // 19
+        BUILDING_TYPES.CLAY_PIT, // 17
+
+        BUILDING_TYPES.TAVERN, // 7
+        BUILDING_TYPES.TAVERN, // 8
+        BUILDING_TYPES.TAVERN, // 9
+
+        BUILDING_TYPES.WALL, // 13
+        BUILDING_TYPES.WALL, // 14
+
+        BUILDING_TYPES.TIMBER_CAMP, // 20
+        BUILDING_TYPES.CLAY_PIT, // 18
+        BUILDING_TYPES.IRON_MINE, // 20
+
+        BUILDING_TYPES.TIMBER_CAMP, // 21
+        BUILDING_TYPES.CLAY_PIT, // 19
+        BUILDING_TYPES.IRON_MINE, // 21
+
+        BUILDING_TYPES.BARRACKS, // 21
+        BUILDING_TYPES.BARRACKS, // 22
+        BUILDING_TYPES.BARRACKS, // 23
+
+        BUILDING_TYPES.FARM, // 29
+        BUILDING_TYPES.WAREHOUSE, // 26
+        BUILDING_TYPES.WAREHOUSE, // 27
+
+        BUILDING_TYPES.TAVERN, // 10
+        BUILDING_TYPES.TAVERN, // 11
+        BUILDING_TYPES.TAVERN, // 12
+
+        BUILDING_TYPES.TIMBER_CAMP, // 22
+        BUILDING_TYPES.CLAY_PIT, // 20
+        BUILDING_TYPES.IRON_MINE, // 22
+
+        BUILDING_TYPES.CLAY_PIT, // 21
+        BUILDING_TYPES.CLAY_PIT, // 22
+
+        BUILDING_TYPES.BARRACKS, // 24
+        BUILDING_TYPES.BARRACKS, // 25
+
+        BUILDING_TYPES.FARM, // 30
+        BUILDING_TYPES.WAREHOUSE, // 28
+        BUILDING_TYPES.WAREHOUSE, // 29
+
+        BUILDING_TYPES.WALL, // 15
+        BUILDING_TYPES.WALL, // 16
+        BUILDING_TYPES.WALL, // 17
+        BUILDING_TYPES.WALL, // 18
+
+        BUILDING_TYPES.TAVERN, // 13
+        BUILDING_TYPES.TAVERN, // 14
+
+        BUILDING_TYPES.RALLY_POINT, // 5
+
+        BUILDING_TYPES.WALL, // 19
+        BUILDING_TYPES.WALL, // 20
+    ]
+    
+    defaultSequences['KomturiaMax'] = [
+        BUILDING_TYPES.HEADQUARTER, // 21
+        BUILDING_TYPES.HEADQUARTER, // 22
+        BUILDING_TYPES.HEADQUARTER, // 23
+        BUILDING_TYPES.HEADQUARTER, // 24
+        BUILDING_TYPES.HEADQUARTER, // 25
+        BUILDING_TYPES.HEADQUARTER, // 21
+        BUILDING_TYPES.HEADQUARTER, // 22
+        BUILDING_TYPES.HEADQUARTER, // 23
+        BUILDING_TYPES.HEADQUARTER, // 24
+        BUILDING_TYPES.HEADQUARTER, // 25
+        BUILDING_TYPES.HEADQUARTER, // 21
+        BUILDING_TYPES.HEADQUARTER, // 22
+        BUILDING_TYPES.HEADQUARTER, // 23
+        BUILDING_TYPES.HEADQUARTER, // 24
+        BUILDING_TYPES.HEADQUARTER, // 25
+        BUILDING_TYPES.HEADQUARTER, // 21
+        BUILDING_TYPES.HEADQUARTER, // 22
+        BUILDING_TYPES.HEADQUARTER, // 23
+        BUILDING_TYPES.HEADQUARTER, // 24
+        BUILDING_TYPES.HEADQUARTER, // 25
+        BUILDING_TYPES.HEADQUARTER, // 21
+        BUILDING_TYPES.HEADQUARTER, // 22
+        BUILDING_TYPES.HEADQUARTER, // 23
+        BUILDING_TYPES.HEADQUARTER, // 24
+        BUILDING_TYPES.HEADQUARTER, // 25
+
+        BUILDING_TYPES.PRECEPTORY, // 1
+        BUILDING_TYPES.PRECEPTORY, // 2
+        BUILDING_TYPES.PRECEPTORY, // 3
+        BUILDING_TYPES.PRECEPTORY, // 4
+        BUILDING_TYPES.PRECEPTORY, // 5
+        BUILDING_TYPES.PRECEPTORY, // 6
+        BUILDING_TYPES.PRECEPTORY, // 7
+        BUILDING_TYPES.PRECEPTORY, // 8
+        BUILDING_TYPES.PRECEPTORY, // 9
+        BUILDING_TYPES.PRECEPTORY // 10
+    ]
+    
+    defaultSequences['RynekMax'] = [
+        BUILDING_TYPES.MARKET, // 14
+        BUILDING_TYPES.MARKET, // 14
+        BUILDING_TYPES.MARKET, // 15
+        BUILDING_TYPES.MARKET, // 16
+        BUILDING_TYPES.MARKET, // 17
+        BUILDING_TYPES.MARKET, // 18
+        BUILDING_TYPES.MARKET, // 19
+        BUILDING_TYPES.MARKET, // 20
+        BUILDING_TYPES.MARKET, // 21
+        BUILDING_TYPES.MARKET, // 22
+        BUILDING_TYPES.MARKET, // 23
+        BUILDING_TYPES.MARKET, // 24
+        BUILDING_TYPES.MARKET, // 25
+        BUILDING_TYPES.MARKET, // 14
+        BUILDING_TYPES.MARKET, // 15
+        BUILDING_TYPES.MARKET, // 16
+        BUILDING_TYPES.MARKET, // 17
+        BUILDING_TYPES.MARKET, // 18
+        BUILDING_TYPES.MARKET, // 19
+        BUILDING_TYPES.MARKET, // 20
+        BUILDING_TYPES.MARKET, // 21
+        BUILDING_TYPES.MARKET, // 22
+        BUILDING_TYPES.MARKET, // 23
+        BUILDING_TYPES.MARKET, // 24
+        BUILDING_TYPES.MARKET, // 25
+    ]
+    
+    defaultSequences['KoszarMax'] = [
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS
+    ]
+    
+    defaultSequences['SzpitalMax'] = [
+        BUILDING_TYPES.HOSPITAL, // 1
+        BUILDING_TYPES.HOSPITAL, // 2
+        BUILDING_TYPES.HOSPITAL, // 3
+        BUILDING_TYPES.HOSPITAL, // 4
+        BUILDING_TYPES.HOSPITAL, // 5
+        BUILDING_TYPES.HOSPITAL, // 6
+        BUILDING_TYPES.HOSPITAL, // 7
+        BUILDING_TYPES.HOSPITAL, // 8
+        BUILDING_TYPES.HOSPITAL, // 9
+        BUILDING_TYPES.HOSPITAL // 10
+    ]
+    
+    defaultSequences['FARM-K'] = [
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.ACADEMY,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE
+    ]
+
+    defaultSequences['EkoMax'] = [
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE
     ]
 
     return parseSequences(defaultSequences)
@@ -16243,37 +17271,45 @@ define('two/presetAsigner', [
     let settings
     let presetAsignerSettings
 
-    let selectedPresets = []
-    let selectedGroups = []
+    let byPresetSelected = []
+    let byPresetAndGroupSelected = []
+    let byGroupSelectedGroup = []
+    let byPresetAndGroupSelectedGroup = []
 
     const STORAGE_KEYS = {
         SETTINGS: 'preset_asigner_settings'
     }
-
+	
     const updatePresets = function () {
-        selectedPresets = []
+        byPresetSelected = []
+        byPresetAndGroupSelected = []
 
         const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = presetAsignerSettings[SETTINGS.PRESETS]
+        const presetsSelectedByTheUser1 = presetAsignerSettings[SETTINGS.PRESETS1]
+        const presetsSelectedByTheUser2 = presetAsignerSettings[SETTINGS.PRESETS2]
 
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
+        presetsSelectedByTheUser1.forEach(function (presetId) {
+            byPresetSelected.push(allPresets[presetId])
         })
-
-        console.log('selectedPresets', selectedPresets)
+        presetsSelectedByTheUser2.forEach(function (presetId) {
+            byPresetAndGroupSelected.push(allPresets[presetId])
+        })
     }
-
+	
     const updateGroups = function () {
-        selectedGroups = []
+        byGroupSelectedGroup = []
+        byPresetAndGroupSelectedGroup = []
 
         const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = presetAsignerSettings[SETTINGS.GROUPS]
+        const groupsSelectedByTheUser1 = presetAsignerSettings[SETTINGS.GROUP1]
+        const groupsSelectedByTheUser2 = presetAsignerSettings[SETTINGS.GROUP2]
 
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
+        groupsSelectedByTheUser1.forEach(function (groupId) {
+            byGroupSelectedGroup.push(allGroups[groupId])
         })
-
-        console.log('selectedGroups', selectedGroups)
+        groupsSelectedByTheUser2.forEach(function (groupId) {
+            byPresetAndGroupSelectedGroup.push(allGroups[groupId])
+        })
     }
 
     const presetAsigner = {}
@@ -16289,10 +17325,6 @@ define('two/presetAsigner', [
         settings.onChange(function (changes, updates) {
             presetAsignerSettings = settings.getAll()
 
-            // here you can handle settings that get modified and need
-            // some processing. Useful to not break the script when updated
-            // while running.
-
             if (updates[UPDATES.PRESETS]) {
                 updatePresets()
             }
@@ -16304,7 +17336,7 @@ define('two/presetAsigner', [
 
         presetAsignerSettings = settings.getAll()
 
-        console.log('all settings', presetAsignerSettings)
+        console.log('presetAsigner settings', presetAsignerSettings)
 
         ready(function () {
             updatePresets()
@@ -16320,16 +17352,13 @@ define('two/presetAsigner', [
     presetAsigner.start = function () {
         running = true
 
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
-
         eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_START)
     }
 
     presetAsigner.stop = function () {
         running = false
 
-        console.log('example module stop')
+        console.log('presetAsigner stop')
 
         eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_STOP)
     }
@@ -16379,8 +17408,8 @@ define('two/presetAsigner/ui', [
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        PRESETS: 'presets',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -16437,8 +17466,8 @@ define('two/presetAsigner/ui', [
         $button = interfaceOverflow.addMenuButton3('Administrator', 30)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_preset_asigner_window', `<div id=\"two-preset-asigner\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'preset_asigner' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'exmaple_module' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'preset_asigner' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'preset_asigner' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'preset_asigner' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'preset_asigner' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">some view</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'preset_asigner' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-preset-asigner div[select]{float:right}#two-preset-asigner div[select] .select-handler{line-height:28px}#two-preset-asigner .range-container{width:250px}#two-preset-asigner .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-preset-asigner .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_preset_asigner_window', `<div id=\"two-preset-asigner\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'preset_asigner' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'preset_asigner' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'preset_asigner' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets.name' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'army_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME1]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'army_helper' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.name-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'army_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME2]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'army_helper' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS2]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col width=\"30%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.preset' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.group' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.date' | i18n:loc.ale:'preset_asigner' }}<tbody class=\"asignerLog\"><tr class=\"noAsigns\"><td colspan=\"5\">{{ 'logs.noAsigns' | i18n:loc.ale:'preset_asigner' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-preset-asigner div[select] .select-wrapper{height:34px}#two-preset-asigner div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-preset-asigner div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-preset-asigner .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-preset-asigner .textfield-border.fit{width:33%}#two-preset-asigner .addForm .item-asign{text-align:center}#two-preset-asigner .addForm .item-asign span{height:30px;text-align:center;line-height:30px;width:115px}#two-preset-asigner .addForm td{text-align:left}#two-preset-asigner .addForm td .sel{text-align:center}#two-preset-asigner .addForm td.center{text-align:center}#two-preset-asigner .addForm th{text-align:center;padding:0px}#two-preset-asigner .asignerLog td{text-align:center}#two-preset-asigner .asignerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-preset-asigner .asignerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-preset-asigner .noAsigns td{height:26px;text-align:center}#two-preset-asigner .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -16446,7 +17475,7 @@ define('two/presetAsigner/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = presetAsigner.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.PRESETS
         $scope.settingsMap = SETTINGS_MAP
 
         settings.injectScope($scope)
@@ -16458,11 +17487,10 @@ define('two/presetAsigner/ui', [
         $scope.switchState = switchState
 
         let eventScope = new EventScope('twoverflow_preset_asigner_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('presetAsigner closed')
         })
 
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
@@ -16478,9 +17506,12 @@ define('two/presetAsigner/ui', [
 
 define('two/presetAsigner/settings', [], function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
+        PRESETS1: 'presets1',
+        PRESETS2: 'presets2',
+        PRESET_NAME1: 'preset1',
+        PRESET_NAME2: 'preset2',
+        GROUP1: 'group1',
+        GROUP2: 'group2'
     }
 })
 
@@ -16499,7 +17530,7 @@ define('two/presetAsigner/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESETS]: {
+        [SETTINGS.PRESETS1]: {
             default: [],
             updates: [
                 UPDATES.PRESETS
@@ -16509,21 +17540,35 @@ define('two/presetAsigner/settings/map', [
             multiSelect: true,
             type: 'presets'
         },
-        [SETTINGS.GROUPS]: {
+        [SETTINGS.PRESETS2]: {
+            default: [],
+            updates: [
+                UPDATES.PRESETS
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'presets'
+        },
+        [SETTINGS.GROUP1]: {
             default: [],
             updates: [
                 UPDATES.GROUPS,
             ],
             disabledOption: true,
             inputType: 'select',
-            multiSelect: true,
+            multiSelect: false,
             type: 'groups'
         },
-        [SETTINGS.SOME_NUMBER]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 120
+        [SETTINGS.GROUP2]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: false,
+            type: 'groups'
         }
     }
 })
