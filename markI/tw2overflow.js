@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 03 Oct 2020 19:14:07 GMT
+ * Sun, 04 Oct 2020 14:20:04 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1091,7 +1091,118 @@ define('two/language', [
             "title": "Marszałek"
         },
         "market_helper": {
-            "title": "Handlarz"
+            "title": "Handlarz",
+            "trade": "Handel",
+            "trade.villages": "Automatyzacja handlu",
+            "trade.origin": "Handluj we wskazanej wiosce",
+            "trade.province": "Handluj w wioskach we wskazanej prowincji",
+            "trade.add_village": "",
+            "trade.no_village": "",
+            "trade.add_map_selected": "",
+            "trade.selected": "",
+            "trade.group": "Handluj w wioskach ze wskazanej grupy",
+            "trade.groups": "Grupa/y",
+            "trade.in": "Jakie surowce kupujesz?",
+            "trade.out": "Jakie surowce sprzedajesz?",
+            "trade.wood": "Drewno",
+            "trade.clay": "Glina",
+            "trade.iron": "Żelazo",
+            "trade.min": "Minimalna wartość surowców, która ma pozostać na wiosce/kach",
+            "trade.miscelanous": "Pozostałe ustawienia",
+            "trade.distance": "Maksymalna odległość transportu",
+            "trade.individual": "Maksymalna wartość jednorazowej transakcji",
+            "trade.proritize": "Priorytyzuj najlepsze oferty (więcej dostjesz niż dajesz)",
+            "trade.full": "Pomijaj oferty z surowcem którego masz pełny magazyn",
+            "trade.advanced": "Zbieraj surowce na określony cel",
+            "trade.building": "Budynek",
+            "trade.level": "Poziom",
+            "trade.unit": "Jednostka",
+            "trade.amount": "Ilość",
+            "trade.coins": "Monety",
+            "trade.clear": "Wyczyść",
+            "instant_trade": "Handel z NPC",
+            "instant_trade.automation": "Automatyzacja handlu z NPC",
+            "instant_trade.origin": "Handluj we wskazanej wiosce",
+            "instant_trade.add_village": "",
+            "instant_trade.no_village": "",
+            "instant_trade.add_map_selected": "",
+            "instant_trade.selected": "",
+            "instant_trade.in": "Jakie surowce kupujesz?",
+            "instant_trade.out": "Jakie surowce sprzedajesz?",
+            "instant_trade.wood": "Drewno",
+            "instant_trade.clay": "Glina",
+            "instant_trade.iron": "Żelazo",
+            "instant_trade.min": "Minimalna wartość surowców, która ma pozostać na wiosce",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródło",
+            "logs.target": "Wioska cel",
+            "logs.resource_in": "Kupiony surowiec",
+            "logs.amount_in": "Ilość",
+            "logs.resource_out": "Sprzedany surowiec",
+            "logs.amount_out": "Ilość",
+            "logs.date": "Data",
+            "logs.noTrades": "Nie wykonano żadnych transakcji",
+            "logs.clear": "Wyczyść logi",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
+            "headquarter": "Ratusz",
+            "barracks": "Koszary",
+            "tavern": "Tawerna",
+            "hospital": "Szpital",
+            "preceptory": "Komturia",
+            "chapel": "Kaplica",
+            "church": "Kościół",
+            "academy": "Akademia",
+            "rally_point": "Plac",
+            "statue": "Piedestał",
+            "market": "Rynek",
+            "timber_camp": "Tartak",
+            "clay_pit": "Kopalnia gliny",
+            "iron_mine": "Huta żelaza",
+            "farm": "Farma",
+            "warehouse": "Magazyn",
+            "wall": "Mur",
+            "level_1": "1",
+            "level_2": "2",
+            "level_3": "3",
+            "level_4": "4",
+            "level_5": "5",
+            "level_6": "6",
+            "level_7": "7",
+            "level_8": "8",
+            "level_9": "9",
+            "level_10": "10",
+            "level_11": "11",
+            "level_12": "12",
+            "level_13": "13",
+            "level_14": "14",
+            "level_15": "15",
+            "level_16": "16",
+            "level_17": "17",
+            "level_18": "18",
+            "level_19": "19",
+            "level_20": "20",
+            "level_21": "21",
+            "level_22": "22",
+            "level_23": "23",
+            "level_24": "24",
+            "level_25": "25",
+            "level_26": "26",
+            "level_27": "27",
+            "level_28": "28",
+            "level_29": "29",
+            "level_30": "30"
         },
         "minimap": {
             "title": "Minimapa",
@@ -2173,7 +2284,118 @@ define('two/language', [
             "title": "Marszałek"
         },
         "market_helper": {
-            "title": "Handlarz"
+            "title": "Handlarz",
+            "trade": "Handel",
+            "trade.villages": "Automatyzacja handlu",
+            "trade.origin": "Handluj we wskazanej wiosce",
+            "trade.province": "Handluj w wioskach we wskazanej prowincji",
+            "trade.add_village": "",
+            "trade.no_village": "",
+            "trade.add_map_selected": "",
+            "trade.selected": "",
+            "trade.group": "Handluj w wioskach ze wskazanej grupy",
+            "trade.groups": "Grupa/y",
+            "trade.in": "Jakie surowce kupujesz?",
+            "trade.out": "Jakie surowce sprzedajesz?",
+            "trade.wood": "Drewno",
+            "trade.clay": "Glina",
+            "trade.iron": "Żelazo",
+            "trade.min": "Minimalna wartość surowców, która ma pozostać na wiosce/kach",
+            "trade.miscelanous": "Pozostałe ustawienia",
+            "trade.distance": "Maksymalna odległość transportu",
+            "trade.individual": "Maksymalna wartość jednorazowej transakcji",
+            "trade.proritize": "Priorytyzuj najlepsze oferty (więcej dostjesz niż dajesz)",
+            "trade.full": "Pomijaj oferty z surowcem którego masz pełny magazyn",
+            "trade.advanced": "Zbieraj surowce na określony cel",
+            "trade.building": "Budynek",
+            "trade.level": "Poziom",
+            "trade.unit": "Jednostka",
+            "trade.amount": "Ilość",
+            "trade.coins": "Monety",
+            "trade.clear": "Wyczyść",
+            "instant_trade": "Handel z NPC",
+            "instant_trade.automation": "Automatyzacja handlu z NPC",
+            "instant_trade.origin": "Handluj we wskazanej wiosce",
+            "instant_trade.add_village": "",
+            "instant_trade.no_village": "",
+            "instant_trade.add_map_selected": "",
+            "instant_trade.selected": "",
+            "instant_trade.in": "Jakie surowce kupujesz?",
+            "instant_trade.out": "Jakie surowce sprzedajesz?",
+            "instant_trade.wood": "Drewno",
+            "instant_trade.clay": "Glina",
+            "instant_trade.iron": "Żelazo",
+            "instant_trade.min": "Minimalna wartość surowców, która ma pozostać na wiosce",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródło",
+            "logs.target": "Wioska cel",
+            "logs.resource_in": "Kupiony surowiec",
+            "logs.amount_in": "Ilość",
+            "logs.resource_out": "Sprzedany surowiec",
+            "logs.amount_out": "Ilość",
+            "logs.date": "Data",
+            "logs.noTrades": "Nie wykonano żadnych transakcji",
+            "logs.clear": "Wyczyść logi",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "doppelsoldner": "Berserker",
+            "trebuchet": "Trebusz",
+            "snob": "Szlachcic",
+            "knight": "Rycerz",
+            "headquarter": "Ratusz",
+            "barracks": "Koszary",
+            "tavern": "Tawerna",
+            "hospital": "Szpital",
+            "preceptory": "Komturia",
+            "chapel": "Kaplica",
+            "church": "Kościół",
+            "academy": "Akademia",
+            "rally_point": "Plac",
+            "statue": "Piedestał",
+            "market": "Rynek",
+            "timber_camp": "Tartak",
+            "clay_pit": "Kopalnia gliny",
+            "iron_mine": "Huta żelaza",
+            "farm": "Farma",
+            "warehouse": "Magazyn",
+            "wall": "Mur",
+            "level_1": "1",
+            "level_2": "2",
+            "level_3": "3",
+            "level_4": "4",
+            "level_5": "5",
+            "level_6": "6",
+            "level_7": "7",
+            "level_8": "8",
+            "level_9": "9",
+            "level_10": "10",
+            "level_11": "11",
+            "level_12": "12",
+            "level_13": "13",
+            "level_14": "14",
+            "level_15": "15",
+            "level_16": "16",
+            "level_17": "17",
+            "level_18": "18",
+            "level_19": "19",
+            "level_20": "20",
+            "level_21": "21",
+            "level_22": "22",
+            "level_23": "23",
+            "level_24": "24",
+            "level_25": "25",
+            "level_26": "26",
+            "level_27": "27",
+            "level_28": "28",
+            "level_29": "29",
+            "level_30": "30"
         },
         "minimap": {
             "title": "Minimapa",
@@ -8410,7 +8632,7 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.ACADEMY // 1
     ]
 
-    defaultSequences['MuryMax'] = [
+    defaultSequences['Mury'] = [
         BUILDING_TYPES.WALL,
         BUILDING_TYPES.WALL,
         BUILDING_TYPES.WALL,
@@ -8808,7 +9030,7 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.WALL, // 20
     ]
     
-    defaultSequences['KomturiaMax'] = [
+    defaultSequences['Komturia'] = [
         BUILDING_TYPES.HEADQUARTER, // 21
         BUILDING_TYPES.HEADQUARTER, // 22
         BUILDING_TYPES.HEADQUARTER, // 23
@@ -8847,7 +9069,7 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.PRECEPTORY // 10
     ]
     
-    defaultSequences['RynekMax'] = [
+    defaultSequences['Rynek'] = [
         BUILDING_TYPES.MARKET, // 14
         BUILDING_TYPES.MARKET, // 14
         BUILDING_TYPES.MARKET, // 15
@@ -8875,7 +9097,7 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.MARKET, // 25
     ]
     
-    defaultSequences['KoszarMax'] = [
+    defaultSequences['Koszary'] = [
         BUILDING_TYPES.BARRACKS,
         BUILDING_TYPES.BARRACKS,
         BUILDING_TYPES.BARRACKS,
@@ -8903,7 +9125,7 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.BARRACKS
     ]
     
-    defaultSequences['SzpitalMax'] = [
+    defaultSequences['Szpital'] = [
         BUILDING_TYPES.HOSPITAL, // 1
         BUILDING_TYPES.HOSPITAL, // 2
         BUILDING_TYPES.HOSPITAL, // 3
@@ -9025,7 +9247,7 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.WAREHOUSE
     ]
 
-    defaultSequences['EkoMax'] = [
+    defaultSequences['Eko'] = [
         BUILDING_TYPES.WAREHOUSE,
         BUILDING_TYPES.TIMBER_CAMP,
         BUILDING_TYPES.TIMBER_CAMP,
@@ -14677,6 +14899,9 @@ define('two/marketHelper', [
     'two/marketHelper/settings',
     'two/marketHelper/settings/map',
     'two/marketHelper/settings/updates',
+    'two/marketHelper/types/buildings',
+    'two/marketHelper/types/level',
+    'two/marketHelper/types/units',
     'two/ready',
     'queues/EventQueue'
 ], function (
@@ -14684,6 +14909,9 @@ define('two/marketHelper', [
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
+    MH_BUILDINGS,
+    MH_LEVEL,
+    MH_UNITS,
     ready,
     eventQueue
 ) {
@@ -14692,25 +14920,81 @@ define('two/marketHelper', [
     let settings
     let marketHelperSettings
 
-    let selectedPresets = []
     let selectedGroups = []
 
     const STORAGE_KEYS = {
         SETTINGS: 'market_helper_settings'
     }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = marketHelperSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-
-        console.log('selectedPresets', selectedPresets)
+    const PRESERVE_UNITS = {
+        [MH_UNITS.SPEAR]: 'spear',
+        [MH_UNITS.SWORD]: 'sword',
+        [MH_UNITS.AXE]: 'axe',
+        [MH_UNITS.ARCHER]: 'archer',
+        [MH_UNITS.LIGHT_CAVALRY]: 'light_cavalry',
+        [MH_UNITS.MOUNTED_ARCHER]: 'mounted_archer',
+        [MH_UNITS.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [MH_UNITS.RAM]: 'ram',
+        [MH_UNITS.CATAPULT]: 'catapult',
+        [MH_UNITS.TREBUCHET]: 'trebuchet',
+        [MH_UNITS.DOPPELSOLDNER]: 'doppelsoldner',
+        [MH_UNITS.SNOB]: 'snob',
+        [MH_UNITS.KNIGHT]: 'knight'
     }
+	
+    const PRESERVE_BUILDINGS = {
+        [MH_BUILDINGS.HEADQUARTER]: 'headquarter',
+        [MH_BUILDINGS.WAREHOUSE]: 'warehouse',
+        [MH_BUILDINGS.FARM]: 'farm',
+        [MH_BUILDINGS.RALLY_POINT]: 'rally_point',
+        [MH_BUILDINGS.STATUE]: 'statue',
+        [MH_BUILDINGS.WALL]: 'wall',
+        [MH_BUILDINGS.TAVERN]: 'tavern',
+        [MH_BUILDINGS.BARRACKS]: 'barracks',
+        [MH_BUILDINGS.PRECEPTORY]: 'preceptory',
+        [MH_BUILDINGS.HOSPITAL]: 'hospital',
+        [MH_BUILDINGS.CLAY_PIT]: 'clay_pit',
+        [MH_BUILDINGS.IRON_MINE]: 'iron_mine',
+        [MH_BUILDINGS.TIMBER_CAMP]: 'timber_camp',
+        [MH_BUILDINGS.CHAPEL]: 'chapel',
+        [MH_BUILDINGS.CHURCH]: 'church',
+        [MH_BUILDINGS.MARKET]: 'market',
+        [MH_BUILDINGS.ACADEMY]: 'academy'
+    }
+	
+    const BUILDING_LEVEL = {
+        [MH_LEVEL.LEVEL_1]: 1,
+        [MH_LEVEL.LEVEL_2]: 2,
+        [MH_LEVEL.LEVEL_3]: 3,
+        [MH_LEVEL.LEVEL_4]: 4,
+        [MH_LEVEL.LEVEL_5]: 5,
+        [MH_LEVEL.LEVEL_6]: 6,
+        [MH_LEVEL.LEVEL_7]: 7,
+        [MH_LEVEL.LEVEL_8]: 8,
+        [MH_LEVEL.LEVEL_9]: 9,
+        [MH_LEVEL.LEVEL_10]: 10,
+        [MH_LEVEL.LEVEL_11]: 11,
+        [MH_LEVEL.LEVEL_12]: 12,
+        [MH_LEVEL.LEVEL_13]: 13,
+        [MH_LEVEL.LEVEL_14]: 14,
+        [MH_LEVEL.LEVEL_15]: 15,
+        [MH_LEVEL.LEVEL_16]: 16,
+        [MH_LEVEL.LEVEL_17]: 17,
+        [MH_LEVEL.LEVEL_18]: 18,
+        [MH_LEVEL.LEVEL_19]: 19,
+        [MH_LEVEL.LEVEL_20]: 20,
+        [MH_LEVEL.LEVEL_21]: 21,
+        [MH_LEVEL.LEVEL_22]: 22,
+        [MH_LEVEL.LEVEL_23]: 23,
+        [MH_LEVEL.LEVEL_24]: 24,
+        [MH_LEVEL.LEVEL_25]: 25,
+        [MH_LEVEL.LEVEL_26]: 26,
+        [MH_LEVEL.LEVEL_27]: 27,
+        [MH_LEVEL.LEVEL_28]: 28,
+        [MH_LEVEL.LEVEL_29]: 29,
+        [MH_LEVEL.LEVEL_30]: 30
+    }
+	
+    console.log(BUILDING_LEVEL, PRESERVE_BUILDINGS, PRESERVE_UNITS)
 
     const updateGroups = function () {
         selectedGroups = []
@@ -14738,10 +15022,6 @@ define('two/marketHelper', [
         settings.onChange(function (changes, updates) {
             marketHelperSettings = settings.getAll()
 
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
@@ -14751,12 +15031,6 @@ define('two/marketHelper', [
 
         console.log('marketHelper settings', marketHelperSettings)
 
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
@@ -14765,7 +15039,6 @@ define('two/marketHelper', [
     marketHelper.start = function () {
         running = true
 
-        console.log('selectedPresets', selectedPresets)
         console.log('selectedGroups', selectedGroups)
 
         eventQueue.trigger(eventTypeProvider.MARKET_HELPER_START)
@@ -14806,6 +15079,9 @@ define('two/marketHelper/ui', [
     'two/marketHelper',
     'two/marketHelper/settings',
     'two/marketHelper/settings/map',
+    'two/marketHelper/types/buildings',
+    'two/marketHelper/types/level',
+    'two/marketHelper/types/units',
     'two/Settings',
     'two/EventScope',
     'two/utils'
@@ -14814,19 +15090,22 @@ define('two/marketHelper/ui', [
     marketHelper,
     SETTINGS,
     SETTINGS_MAP,
+    MH_BUILDINGS,
+    MH_LEVEL,
+    MH_UNITS,
     Settings,
     EventScope,
     utils
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
     let groupList = modelDataService.getGroupList()
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        TRADE: 'trade',
+        INSTANT_TRADE: 'instant_trade',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -14846,14 +15125,16 @@ define('two/marketHelper/ui', [
             marketHelper.start()
         }
     }
+	
+    const switchStateI = function () {
+        if (marketHelper.isRunning()) {
+            marketHelper.stop()
+        } else {
+            marketHelper.start()
+        }
+    }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
         updateGroups: function () {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
@@ -14883,8 +15164,8 @@ define('two/marketHelper/ui', [
         $button = interfaceOverflow.addMenuButton2('Handlarz', 30)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'market_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'market_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'market_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'market_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'market_helper' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-market-helper div[select]{float:right}#two-market-helper div[select] .select-handler{line-height:28px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"3\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"3\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"3\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"3\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"3\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"3\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><tr><th colspan=\"3\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><tr><th colspan=\"3\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"3\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"3\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody class=\"traderLog\"><tr class=\"noTrades\"><td colspan=\"7\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchStateI()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-market-helper div[select]{text-align:center}#two-market-helper div[select] .select-wrapper{height:34px}#two-market-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-market-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}#two-market-helper .traderLog td{text-align:center}#two-market-helper .traderLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper .traderLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper table.header-center th{text-align:center}#two-market-helper .noTrades td{height:26px;text-align:center}#two-market-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -14892,24 +15173,34 @@ define('two/marketHelper/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = marketHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.TRADE
         $scope.settingsMap = SETTINGS_MAP
+		
+        $scope.level = Settings.encodeList(MH_LEVEL, {
+            textObject: 'market_helper',
+            disabled: true
+        })
+        $scope.units = Settings.encodeList(MH_UNITS, {
+            textObject: 'market_helper',
+            disabled: true
+        })
+        $scope.buildings = Settings.encodeList(MH_BUILDINGS, {
+            textObject: 'market_helper',
+            disabled: true
+        })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
         eventHandlers.updateGroups()
 
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
         $scope.switchState = switchState
+        $scope.switchStateI = switchStateI
 
         let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('marketHelper closed')
         })
 
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
@@ -14924,15 +15215,39 @@ define('two/marketHelper/ui', [
 
 define('two/marketHelper/settings', [], function () {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
+        WOOD_IN: 'wood_in',
+        WOOD_OUT: 'wood_out',
+        WOOD_MIN: 'wood_min',
+        WOOD_IN_I: 'wood_in_i',
+        WOOD_OUT_I: 'wood_out_i',
+        WOOD_MIN_I: 'wood_min_i',
+        CLAY_IN: 'clay_in',
+        CLAY_OUT: 'clay_out',
+        CLAY_MIN: 'clay_min',
+        CLAY_IN_I: 'clay_in_i',
+        CLAY_OUT_I: 'clay_out_i',
+        CLAY_MIN_I: 'clay_min_i',
+        IRON_IN: 'iron_in',
+        IRON_OUT: 'iron_out',
+        IRON_MIN: 'iron_min',
+        IRON_IN_I: 'iron_in_i',
+        IRON_OUT_I: 'iron_out_i',
+        IRON_MIN_I: 'iron_min_i',
+        DISTANCE: 'distance',
+        INDIVIDUAL: 'individual',
+        PRIORITIZE: 'prioritize',
+        FULL: 'full',
+        BUILDINGS: 'buildings',
+        LEVEL: 'level',
+        UNITS: 'units',
+        AMOUNT: 'amount',
+        COINS: 'coins'
     }
 })
 
 define('two/marketHelper/settings/updates', function () {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups'
     }
 })
@@ -14945,16 +15260,6 @@ define('two/marketHelper/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESETS]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
         [SETTINGS.GROUPS]: {
             default: [],
             updates: [
@@ -14965,15 +15270,236 @@ define('two/marketHelper/settings/map', [
             multiSelect: true,
             type: 'groups'
         },
-        [SETTINGS.SOME_NUMBER]: {
-            default: 60,
+        [SETTINGS.WOOD_IN]: {
+            default: 1000,
             inputType: 'number',
-            min: 0,
-            max: 120
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.WOOD_OUT]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.WOOD_MIN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.WOOD_IN_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.WOOD_OUT_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.WOOD_MIN_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_IN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_OUT]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_MIN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_IN_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_OUT_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_MIN_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_IN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_OUT]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_MIN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_IN_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_OUT_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_MIN_I]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.AMOUNT]: {
+            default: 100,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.UNITS]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.BUILDINGS]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.LEVEL]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.FULL]: {
+            default: false,
+            inputType: 'checkbox'
+        },
+        [SETTINGS.COINS]: {
+            default: false,
+            inputType: 'checkbox'
+        },
+        [SETTINGS.PRIORITIZE]: {
+            default: false,
+            inputType: 'checkbox'
+        },
+        [SETTINGS.INDIVIDUAL]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 235000
+        },
+        [SETTINGS.DISTANCE]: {
+            default: 90,
+            inputType: 'number',
+            min: 1,
+            max: 300
         }
     }
 })
 
+define('two/marketHelper/types/units', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+
+define('two/marketHelper/types/buildings', [], function () {
+    return {
+        HEADQUARTER: 'headquarter',
+        WAREHOUSE: 'warehouse',
+        FARM: 'farm',
+        RALLY_POINT: 'rally_point',
+        STATUE: 'statue',
+        WALL: 'wall',
+        TAVERN: 'tavern',
+        BARRACKS: 'barracks',
+        PRECEPTORY: 'preceptory',
+        HOSPITAL: 'hospital',
+        CLAY_PIT: 'clay_pit',
+        IRON_MINE: 'iron_mine',
+        TIMBER_CAMP: 'timber_camp',
+        CHAPEL: 'chapel',
+        CHURCH: 'church',
+        MARKET: 'market',
+        ACADEMY: 'academy'
+    }
+})
+
+define('two/marketHelper/types/level', [], function () {
+    return {
+        LEVEL_1: 'level_1',
+        LEVEL_2: 'level_2',
+        LEVEL_3: 'level_3',
+        LEVEL_4: 'level_4',
+        LEVEL_5: 'level_5',
+        LEVEL_6: 'level_6',
+        LEVEL_7: 'level_7',
+        LEVEL_8: 'level_8',
+        LEVEL_9: 'level_9',
+        LEVEL_10: 'level_10',
+        LEVEL_11: 'level_11',
+        LEVEL_12: 'level_12',
+        LEVEL_13: 'level_13',
+        LEVEL_14: 'level_14',
+        LEVEL_15: 'level_15',
+        LEVEL_16: 'level_16',
+        LEVEL_17: 'level_17',
+        LEVEL_18: 'level_18',
+        LEVEL_19: 'level_19',
+        LEVEL_20: 'level_20',
+        LEVEL_21: 'level_21',
+        LEVEL_22: 'level_22',
+        LEVEL_23: 'level_23',
+        LEVEL_24: 'level_24',
+        LEVEL_25: 'level_25',
+        LEVEL_26: 'level_26',
+        LEVEL_27: 'level_27',
+        LEVEL_28: 'level_28',
+        LEVEL_29: 'level_29',
+        LEVEL_30: 'level_30'
+    }
+})
 require([
     'two/ready',
     'two/marketHelper',
@@ -16914,7 +17440,7 @@ define('two/powerHelper/ui', [
         $button = interfaceOverflow.addMenuButton4('Bunkry', 20)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_power_helper_window', `<div id=\"two-power-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'power_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.POWERS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.POWERS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.POWERS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.POWERS}\">{{ 'powers' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BUNKER}\">{{ 'bunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BEATBUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BEATBUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BEATBUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BEATBUNKER}\">{{ 'beatbunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.POWERS\"><h5 class=\"twx-section\">{{ 'power-troops' | i18n:loc.ale:'power_helper' }}</h5><p>Do obliczeń przyjęto jedną zagrodę Off równą 21480 prowiantu oraz 14 zagród Deff równych 300720 prowiantu.<form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><col><tr><th><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td class=\"headD\" rowspan=\"12\">J<br>e<br>d<br>n<br>o<br>s<br>t<br>k<br>a<br><br>D<br>e<br>f<br>e<br>n<br>s<br>y<br>w<br>n<br>a<td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td>0,483<td>1,909<td>4,610<td class=\"yellow\">7,546<td class=\"blue\">1,172<td class=\"orange\">9,919<td>0,015<td>2,668<td class=\"blue\">0,790<td class=\"red\">15,272<td>0,314<td>5,399<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"blue\">0,148<td class=\"blue\">0,585<td class=\"blue\">1,413<td class=\"sky\">1,452<td class=\"orange\">31,636<td class=\"sky\">1,909<td>0,003<td>0,513<td class=\"yellow\">21,343<td class=\"blue\">4,680<td>0,060<td class=\"blue\">1,655<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td>18,223<td>7,546<td class=\"orange\">31,636<td>9,919<td>0,015<td>2,668<td class=\"yellow\">21,343<td class=\"red\">60,368<td>0,314<td class=\"yellow\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td class=\"yellow\">18,223<td class=\"blue\">0,513<td class=\"sky\">2,152<td class=\"blue\">0,675<td class=\"sky\">0,001<td class=\"sky\">0,182<td class=\"sky\">1,452<td class=\"red\">60,368<td class=\"blue\">0,021<td class=\"orange\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td>2,940<td>11,617<td class=\"yellow\">28,057<td>11,617<td>11,185<td>15,273<td>0,024<td>4,107<td>7,546<td class=\"red\">92,942<td>0,483<td class=\"orange\">32,858<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td>2,669<td>10,546<td class=\"yellow\">25,467<td>7,545<td class=\"yellow\">24,066<td>9,919<td>0,015<td>2,669<td>16,236<td class=\"red\">84,367<td>0,314<td class=\"orange\">29,827<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td>7,545<td>29,828<td class=\"yellow\">72,034<td>29,828<td>11,185<td>39,211<td>0,060<td>10,546<td>7,545<td class=\"red\">100,000<td>1,240<td class=\"orange\">100,000<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td>1,365<td>5,400<td>13,041<td>5,400<td class=\"orange\">22,636<td>7,098<td>0,011<td>1,910<td class=\"yellow\">15,273<td class=\"red\">43,195<td>0,223<td class=\"yellow\">15,271<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"sky\">0,313<td class=\"sky\">1,239<td class=\"yellow-sky\">2,995<td class=\"sky\">1,452<td>2,568<td class=\"sky\">1,909<td>0,002<td>0,513<td>1,734<td class=\"red-sky\">9,920<td class=\"sky\">0,060<td class=\"orange\">3,507<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td>0,888<td>3,508<td>8,470<td class=\"yellow\">9,920<td>5,197<td class=\"orange\">13,039<td>0,020<td>3,508<td>3,508<td class=\"red\">28,057<td>0,413<td class=\"yellow\">9,919<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td>0,675<td>2,667<td class=\"yellow\">6,444<td>2,667<td>2,830<td>3,508<td class=\"blue\">0,000<td class=\"blue\">0,000<td>1,909<td class=\"red\">21,342<td>0,110<td class=\"orange\">7,545</table></form><h5 class=\"twx-section\">{{ 'power-deff' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headD\" colspan=\"12\">J e d n o s t k a D e f e n s y w n a<tr><td><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,166<td>5,520<td>11,133<td>4,911<td>11,428<td>11,752<td>28,093<td>7,966<td class=\"blue\">1,481<td>5,308<td class=\"sky\">2,578<tr><td class=\"off\">{{ 'offensive-units' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,964<td>6,188<td>13,967<td>7,096<td>15,251<td>15,327<td>38,839<td>9,994<td class=\"blue\">1,916<td>6,692<td class=\"sky\">3,388</table></form><h5 class=\"twx-section\">{{ 'power-off' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td>1,895<td>7,490<td class=\"yellow\">18,089<td>7,772<td>13,297<td>10,216<td>0,015<td>2,662<td>8,971<td class=\"orange\">22,606<td>0,323<td class=\"red\">47,319<tr><td class=\"deff\">{{ 'defensive-units' | i18n:loc.ale:'power_helper' }}<td>0,706<td>2,789<td>6,737<td>2,726<td class=\"orange\">8,072<td>3,584<td>0,004<td>0,775<td>5,446<td class=\"yellow\">7,890<td>0,113<td class=\"red\">22,316</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BUNKER\"><h5 class=\"twx-section\">{{ 'deffense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><tr><td colspan=\"2\" class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span><tr><td class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\"></span><span class=\"unitname\"> {{ 'fullfarm.set' | i18n:loc.ale:'power_helper' }}</span><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-fullfarm\" tooltip=\"{{ 'compariser' | i18n:loc.ale:'fullfarm' }}\"><input id=\"settings-fullfarm\" data-setting=\"fullfarm\" type=\"checkbox\"></label></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.defender' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearD-amount\" class=\"spearD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordD-amount\" class=\"swordD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeD-amount\" class=\"axeD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerD-amount\" class=\"archerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcD-amount\" class=\"lcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maD-amount\" class=\"maD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcD-amount\" class=\"hcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramD-amount\" class=\"ramD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultD-amount\" class=\"catapultD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerD-amount\" class=\"berserkerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetD-amount\" class=\"trebuchetD-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearD\"><input id=\"settings-spearD\" data-setting=\"spearD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordD\"><input id=\"settings-swordD\" data-setting=\"swordD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerD\"><input id=\"settings-archerD\" data-setting=\"archerD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcD\"><input id=\"settings-hcD\" data-setting=\"hcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetD\"><input id=\"settings-trebuchetD\" data-setting=\"trebuchetD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeD\"><input id=\"settings-axeD\" data-setting=\"axeD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcD\"><input id=\"settings-lcD\" data-setting=\"lcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maD\"><input id=\"settings-maD\" data-setting=\"maD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramD\"><input id=\"settings-ramD\" data-setting=\"ramD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultD\"><input id=\"settings-catapultD\" data-setting=\"catapultD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerD\"><input id=\"settings-berserkerD\" data-setting=\"berserkerD\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.WALL]\" drop-down=\"true\"></div><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span><span class=\"unitname\"> {{ 'battle.iron-walls' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.IRON_WALL]\" drop-down=\"true\"></div></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.off' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BEATBUNKER\"><h5 class=\"twx-section\">{{ 'offense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check2\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.attacker' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div height=\"30px\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearA-amount\" class=\"spearA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordA-amount\" class=\"swordA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeA-amount\" class=\"axeA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerA-amount\" class=\"archerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcA-amount\" class=\"lcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maA-amount\" class=\"maA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcA-amount\" class=\"hcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramA-amount\" class=\"ramA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultA-amount\" class=\"catapultA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerA-amount\" class=\"berserkerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetA-amount\" class=\"trebuchetA-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col width=\"60px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeA\"><input id=\"settings-axeA\" data-setting=\"axeA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcA\"><input id=\"settings-lcA\" data-setting=\"lcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maA\"><input id=\"settings-maA\" data-setting=\"maA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramA\"><input id=\"settings-ramA\" data-setting=\"ramA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultA\"><input id=\"settings-catapultA\" data-setting=\"catapultA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerA\"><input id=\"settings-berserkerA\" data-setting=\"berserkerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearA\"><input id=\"settings-spearA\" data-setting=\"spearA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordA\"><input id=\"settings-swordA\" data-setting=\"swordA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerA\"><input id=\"settings-archerA\" data-setting=\"archerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcA\"><input id=\"settings-hcA\" data-setting=\"hcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetA\"><input id=\"settings-trebuchetA\" data-setting=\"trebuchetA\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"{{ 'simulator' | i18n:loc.ale:'food' }}\"></span><span class=\"unitname\"> {{ 'provisions' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\" class=\"item-input\"><input class=\"textfield-border\" id=\"provisions\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}\"></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.deff' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td colspan=\"1\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"1\" class=\"item-input\"><input class=\"textfield-border\" id=\"wallBB\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'level' | i18n:loc.ale:'power_helper' }}\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_power_helper_window', `<div id=\"two-power-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'power_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.POWERS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.POWERS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.POWERS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.POWERS}\">{{ 'powers' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BUNKER}\">{{ 'bunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BEATBUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BEATBUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BEATBUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BEATBUNKER}\">{{ 'beatbunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.POWERS\"><h5 class=\"twx-section\">{{ 'power-troops' | i18n:loc.ale:'power_helper' }}</h5><p>Do obliczeń przyjęto jedną zagrodę Off równą 21480 prowiantu oraz 14 zagród Deff równych 300720 prowiantu.<form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><col><tr><th><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td class=\"headD\" rowspan=\"12\">J<br>e<br>d<br>n<br>o<br>s<br>t<br>k<br>a<br><br>D<br>e<br>f<br>e<br>n<br>s<br>y<br>w<br>n<br>a<td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td>0,483<td>1,909<td>4,610<td class=\"yellow\">7,546<td class=\"blue\">1,172<td class=\"orange\">9,919<td>0,015<td>2,668<td class=\"blue\">0,790<td class=\"red\">15,272<td>0,314<td>5,399<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"blue\">0,148<td class=\"blue\">0,585<td class=\"blue\">1,413<td class=\"sky\">1,452<td class=\"orange\">31,636<td class=\"sky\">1,909<td>0,003<td>0,513<td class=\"yellow\">21,343<td class=\"blue\">4,680<td>0,060<td class=\"blue\">1,655<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td>18,223<td>7,546<td class=\"orange\">31,636<td>9,919<td>0,015<td>2,668<td class=\"yellow\">21,343<td class=\"red\">60,368<td>0,314<td class=\"yellow\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td class=\"yellow\">18,223<td class=\"blue\">0,513<td class=\"sky\">2,152<td class=\"blue\">0,675<td class=\"sky\">0,001<td class=\"sky\">0,182<td class=\"sky\">1,452<td class=\"red\">60,368<td class=\"blue\">0,021<td class=\"orange\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td>2,940<td>11,617<td class=\"yellow\">28,057<td>11,617<td>11,185<td>15,273<td>0,024<td>4,107<td>7,546<td class=\"red\">92,942<td>0,483<td class=\"orange\">32,858<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td>2,669<td>10,546<td class=\"yellow\">25,467<td>7,545<td class=\"yellow\">24,066<td>9,919<td>0,015<td>2,669<td>16,236<td class=\"red\">84,367<td>0,314<td class=\"orange\">29,827<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td>7,545<td>29,828<td class=\"yellow\">72,034<td>29,828<td>11,185<td>39,211<td>0,060<td>10,546<td>7,545<td class=\"red\">100,000<td>1,240<td class=\"orange\">100,000<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td>1,365<td>5,400<td>13,041<td>5,400<td class=\"orange\">22,636<td>7,098<td>0,011<td>1,910<td class=\"yellow\">15,273<td class=\"red\">43,195<td>0,223<td class=\"yellow\">15,271<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"sky\">0,313<td class=\"sky\">1,239<td class=\"yellow-sky\">2,995<td class=\"sky\">1,452<td>2,568<td class=\"sky\">1,909<td>0,002<td>0,513<td>1,734<td class=\"red-sky\">9,920<td class=\"sky\">0,060<td class=\"orange\">3,507<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td>0,888<td>3,508<td>8,470<td class=\"yellow\">9,920<td>5,197<td class=\"orange\">13,039<td>0,020<td>3,508<td>3,508<td class=\"red\">28,057<td>0,413<td class=\"yellow\">9,919<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td>0,675<td>2,667<td class=\"yellow\">6,444<td>2,667<td>2,830<td>3,508<td class=\"blue\">0,000<td class=\"blue\">0,000<td>1,909<td class=\"red\">21,342<td>0,110<td class=\"orange\">7,545</table></form><h5 class=\"twx-section\">{{ 'power-deff' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headD\" colspan=\"12\">J e d n o s t k a D e f e n s y w n a<tr><td><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,166<td>5,520<td>11,133<td>4,911<td>11,428<td>11,752<td>28,093<td>7,966<td class=\"blue\">1,481<td>5,308<td class=\"sky\">2,578<tr><td class=\"off\">{{ 'offensive-units' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,964<td>6,188<td>13,967<td>7,096<td>15,251<td>15,327<td>38,839<td>9,994<td class=\"blue\">1,916<td>6,692<td class=\"sky\">3,388</table></form><h5 class=\"twx-section\">{{ 'power-off' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td>1,895<td>7,490<td class=\"yellow\">18,089<td>7,772<td>13,297<td>10,216<td>0,015<td>2,662<td>8,971<td class=\"orange\">22,606<td>0,323<td class=\"red\">47,319<tr><td class=\"deff\">{{ 'defensive-units' | i18n:loc.ale:'power_helper' }}<td>0,706<td>2,789<td>6,737<td>2,726<td class=\"orange\">8,072<td>3,584<td>0,004<td>0,775<td>5,446<td class=\"yellow\">7,890<td>0,113<td class=\"red\">22,316</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BUNKER\"><h5 class=\"twx-section\">{{ 'deffense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><tr><td colspan=\"2\" class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span><tr><td class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\"></span><span class=\"unitname\"> {{ 'fullfarm.set' | i18n:loc.ale:'power_helper' }}</span><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-fullfarm\" tooltip=\"{{ 'compariser' | i18n:loc.ale:'fullfarm' }}\"><input id=\"settings-fullfarm\" data-setting=\"fullfarm\" type=\"checkbox\"></label></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.defender' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearD-amount\" class=\"spearD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordD-amount\" class=\"swordD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeD-amount\" class=\"axeD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerD-amount\" class=\"archerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcD-amount\" class=\"lcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maD-amount\" class=\"maD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcD-amount\" class=\"hcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramD-amount\" class=\"ramD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultD-amount\" class=\"catapultD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerD-amount\" class=\"berserkerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetD-amount\" class=\"trebuchetD-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearD\"><input id=\"settings-spearD\" data-setting=\"spearD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordD\"><input id=\"settings-swordD\" data-setting=\"swordD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerD\"><input id=\"settings-archerD\" data-setting=\"archerD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcD\"><input id=\"settings-hcD\" data-setting=\"hcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetD\"><input id=\"settings-trebuchetD\" data-setting=\"trebuchetD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeD\"><input id=\"settings-axeD\" data-setting=\"axeD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcD\"><input id=\"settings-lcD\" data-setting=\"lcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maD\"><input id=\"settings-maD\" data-setting=\"maD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramD\"><input id=\"settings-ramD\" data-setting=\"ramD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultD\"><input id=\"settings-catapultD\" data-setting=\"catapultD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerD\"><input id=\"settings-berserkerD\" data-setting=\"berserkerD\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.WALL]\" drop-down=\"true\"></div><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span><span class=\"unitname\"> {{ 'battle.iron-walls' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.IRON_WALL]\" drop-down=\"true\"></div></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.off' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BEATBUNKER\"><h5 class=\"twx-section\">{{ 'offense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check2\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.attacker' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div height=\"30px\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearA-amount\" class=\"spearA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordA-amount\" class=\"swordA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeA-amount\" class=\"axeA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerA-amount\" class=\"archerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcA-amount\" class=\"lcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maA-amount\" class=\"maA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcA-amount\" class=\"hcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramA-amount\" class=\"ramA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultA-amount\" class=\"catapultA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerA-amount\" class=\"berserkerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetA-amount\" class=\"trebuchetA-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeA\"><input id=\"settings-axeA\" data-setting=\"axeA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcA\"><input id=\"settings-lcA\" data-setting=\"lcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maA\"><input id=\"settings-maA\" data-setting=\"maA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramA\"><input id=\"settings-ramA\" data-setting=\"ramA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultA\"><input id=\"settings-catapultA\" data-setting=\"catapultA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerA\"><input id=\"settings-berserkerA\" data-setting=\"berserkerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearA\"><input id=\"settings-spearA\" data-setting=\"spearA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordA\"><input id=\"settings-swordA\" data-setting=\"swordA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerA\"><input id=\"settings-archerA\" data-setting=\"archerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcA\"><input id=\"settings-hcA\" data-setting=\"hcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetA\"><input id=\"settings-trebuchetA\" data-setting=\"trebuchetA\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"{{ 'simulator' | i18n:loc.ale:'food' }}\"></span><span class=\"unitname\"> {{ 'provisions' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\" class=\"item-input\"><input class=\"textfield-border\" id=\"provisions\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}\"></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.deff' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td colspan=\"1\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"1\" class=\"item-input\"><input class=\"textfield-border\" id=\"wallBB\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'level' | i18n:loc.ale:'power_helper' }}\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-power-helper div[select]{text-align:center}#two-power-helper div[select] .select-wrapper{height:34px}#two-power-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-power-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-power-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-power-helper .textfield-border.fit{width:100%}#two-power-helper .addForm1 td{text-align:left;line-height:34px}#two-power-helper .addForm1 th{text-align:center;padding:0px}#two-power-helper .addForm1 span{height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm1 input{height:34px;line-height:26px;color:#000;font-size:14px;background:url(data:image/png;base64,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) top left #b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:213px}#two-power-helper .addForm .table{border-spacing:1px;border-collapse:separate;box-shadow:0 0 0 2px rgba(124,54,0,0.4);width:100%;background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .table th{background:url(data:image/png;base64,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);text-align:center;min-height:26px;line-height:26px;color:#fff3d0;font-size:14px;font-weight:normal;padding-left:5px;border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table td{border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table tr nth-child(odd) td{background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .table_vertical td:nth-child(odd){background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .center-34x{text-align:center;line-height:34px}#two-power-helper .addForm span{text-align:center;height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm2 td{text-align:center;height:34px;line-height:34px}#two-power-helper .addForm2 td input{text-align:center}#two-power-helper .addForm2 .center{text-align:left;height:34px;line-height:34px}#two-power-helper .addForm2 th{text-align:center;height:34px;line-height:34px;padding:0px}#two-power-helper .addForm2 span{text-align:center;height:26px;line-height:26px}#two-power-helper .addForm2 .headD{color:#0000ff}#two-power-helper .addForm2 .headO{color:#ff0000}#two-power-helper .addForm2 .sky{background-color:#7ec0ee}#two-power-helper .addForm2 .blue{background-color:#425EFF}#two-power-helper .addForm2 .red{background-color:#FF6666}#two-power-helper .addForm2 .yellow{background-color:#FFFC5E}#two-power-helper .addForm2 .orange{background-color:#FF8D42}#two-power-helper .addForm2 .off{background-color:#f98985}#two-power-helper .addForm2 .deff{background-color:#86b3f9}#two-power-helper .addForm2 .offx2{background-color:#980000}#two-power-helper .addForm2 .all{background-color:#4FBC5C}#two-power-helper .addForm2 .red-sky{background-color:#FF6666;color:#7ec0ee}#two-power-helper .addForm2 .yellow-sky{background-color:#FFFC5E;color:#7ec0ee}#two-power-helper .addForm2 .item-check{text-align:center}#two-power-helper .addForm2 .item-check span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .addForm2 .item-check2{text-align:center}#two-power-helper .addForm2 .item-check2 span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .unit-input-simulator{height:34px;line-height:26px;color:#fff;font-size:14px;background:#b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:80px;float:right;border:none;float:none;width:100%}#two-power-helper .icon-120x120-skill-iron_walls{zoom:.283333}#two-power-helper .icon-120x120-skill-iron_walls:before{-moz-transform:scale(.283333)}')
     }
 
