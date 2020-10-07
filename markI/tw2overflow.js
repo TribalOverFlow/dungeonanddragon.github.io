@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 04 Oct 2020 19:24:04 GMT
+ * Wed, 07 Oct 2020 19:22:43 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1111,7 +1111,7 @@ define('two/language', [
             "trade.miscelanous": "Pozostałe ustawienia",
             "trade.distance": "Maksymalna odległość transportu",
             "trade.individual": "Maksymalna wartość jednorazowej transakcji",
-            "trade.proritize": "Priorytyzuj najlepsze oferty (więcej dostjesz niż dajesz)",
+            "trade.proritize": "Priorytyzuj najlepsze oferty (więcej dostajesz niż dajesz)",
             "trade.full": "Pomijaj oferty z surowcem którego masz pełny magazyn",
             "trade.advanced": "Zbieraj surowce na określony cel",
             "trade.building": "Budynek",
@@ -1383,6 +1383,28 @@ define('two/language', [
             "increase": "Rosnąco/A-Z",
             "random": "Domyślnie"
         },
+        "preset_asigner": {
+            "title": "Administrator",
+            "presets": "Szablony",
+            "presets.asign": "Przypisz",
+            "presets.all": "Wszystkie szablony",
+            "presets.textall": "Przypisz wszystkie szablony do wszystkich wiosek.",
+            "presets.name": "Szablony z nazwą",
+            "presets.textname": "Przypisz szablony zawierające wskazaną frazę do wszystkich wiosek.",
+            "presets.or": "Lub wybierz z listy",
+            "presets.group": "Szablony do grupy",
+            "presets.textgroup": "Przypisz wszystkie szablony do wybranej grupy wiosek.",
+            "presets.name-group": "Szablony - zaawansowane przypisywanie",
+            "presets.textname-group": "Przypisz szablony zawierające wskazaną fraze do wybranej grupy wiosek.",
+            "presets.name-placeholder": "Wpisz frazę",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródłowa",
+            "logs.preset": "Szablon",
+            "logs.group": "Grupa",
+            "logs.date": "Data",
+            "logs.noAsigns": "Nie przypisano żadnych szablonów",
+            "logs.clear": "Wyczyść logi"
+        },
         "preset_creator": {
             "title": "Wojewoda",
             "description": "Automatycznie tworzy szablony do rekrutacji, fejków i farmy.",
@@ -1430,7 +1452,58 @@ define('two/language', [
             "general.stopped": "Kapitan Zatrzymany!"
         },
         "report_helper": {
-            "title": "Skryba"
+            "title": "Skryba",
+            "reports": "Sprzątacz raportów",
+            "reports.deletebyvillage": "Usuń raporty związane z wybraną wioską",
+            "reports.add_village": "Wybierz wioskę...",
+            "reports.no_village": "Nie wybrano wioski",
+            "reports.add_map_selected": "Wybrana wioska z mapy",
+            "reports.selected": "Wybierz",
+            "reports.deletebyplayer": "Usuń raporty związane z wybranym graczem",
+            "reports.add_player": "Wybierz gracza...",
+            "reports.no_player": "Nie wybrano gracza",
+            "reports.deletebytribe": "Usuń raporty związane z wybranym plemieniem",
+            "reports.add_tribe": "Wybierz plemię...",
+            "reports.no_tribe": "Nie wybrano plemienia",
+            "reports.deletebyprovince": "Usuń raporty związane z wybraną prowincją",
+            "reports.advanced": "Ustawienia zaawansowane",
+            "reports.type": "Typ",
+            "reports.result": "Wynik",
+            "reports.sort": "Rodzaj",
+            "reports.make-favourite": "Oznacz jako ulubione",
+            "reports.amount": "Ilość",
+            "reports.save": "Zapisz",
+            "reports.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródłowa",
+            "logs.target": "Wioska cel",
+            "logs.type": "Typ",
+            "logs.result": "Wynik",
+            "logs.sort": "Rodzaj",
+            "logs.what": "Akcja",
+            "logs.date": "Data",
+            "logs.clear": "Wyczyść logi",
+            "logs.noReports": "Nie oznaczono/usunięto żadnych raportów",
+            "general.pause": "Pauza",
+            "general.start": "Start",
+            "win": "Wygrana",
+            "losses": "Straty",
+            "defeat": "Porażka",
+            "all": "Wszystkie",
+            "farm": "Z farmy",
+            "fake": "Fejki",
+            "farm_fake": "Z farmy oraz fejki",
+            "favourite": "Ulubione",
+            "without_favourite": "Bez ulubionych",
+            "attack": "Atak",
+            "defense": "Obrona",
+            "trade": "Handel",
+            "system": "System",
+            "achievements": "Osiągnięcia",
+            "spy_in": "Szpiegowskie(własne)",
+            "spy_out": "Szpiegowskie(obce)",
+            "support_out": "Wsparcie(wysłane)",
+            "support_in": "Wsparcie(otrzymane)"
         },
         "report_sender": {
             "title": "Goniec",
@@ -1733,7 +1806,7 @@ define('two/language', [
             "deactivated": "Wartownik skończył działanie"
         },
         "army_helper": {
-            "title": "Administrator",
+            "title": "Hetman",
             "army": "Wojsko",
             "army.header": "Sprawdź ilość jednostek w wioskach",
             "army.check": "Zlicz",
@@ -2145,7 +2218,7 @@ define('two/language', [
             "logs.unit": "Jednostka",
             "logs.type": "Rodzaj",
             "logs.date": "Czas wysłania",
-            "logs.noFakes": "Brak wykonanych działań",
+            "logs.noFakes": "Nie wysłano żadnych fejków",
             "logs.clear": "Wyczyść logi",
             "general.started": "Watażka uruchomiony",
             "general.stopped": "Watażka zatrzymany",
@@ -2228,9 +2301,9 @@ define('two/language', [
             "farm_started": "Farmer uruchomiony",
             "groups_presets": "Grupy i szablony",
             "presets": "Szablony",
-            "group_ignored": "Pomijaj wioski z grupy",
-            "group_include": "Dodaj wioski z grupy",
-            "group_only": "Atakuj tylko wioski z grup",
+            "group_ignored": "Pomijaj wioski z grupy (cele, aktywuj by opcja Pomijaj jeśli straty działała)",
+            "group_include": "Dodaj wioski z grupy (np wioski jakiegoś gracza)",
+            "group_only": "Atakuj tylko z wiosek z grup (twoje wioski)",
             "attack_interval": "Przerwa między atakami (sekundy)",
             "preserve_command_slots": "Rezerwuj sloty poleceń",
             "target_single_attack": "Zezwól celom na jeden atak per wioska",
@@ -2305,7 +2378,7 @@ define('two/language', [
             "trade.miscelanous": "Pozostałe ustawienia",
             "trade.distance": "Maksymalna odległość transportu",
             "trade.individual": "Maksymalna wartość jednorazowej transakcji",
-            "trade.proritize": "Priorytyzuj najlepsze oferty (więcej dostjesz niż dajesz)",
+            "trade.proritize": "Priorytyzuj najlepsze oferty (więcej dostajesz niż dajesz)",
             "trade.full": "Pomijaj oferty z surowcem którego masz pełny magazyn",
             "trade.advanced": "Zbieraj surowce na określony cel",
             "trade.building": "Budynek",
@@ -2483,7 +2556,7 @@ define('two/language', [
             "deactivated": "Mincerz deaktywowany"
         },
         "power_helper": {
-            "title": "Obrona",
+            "title": "Bunkry",
             "powers": "Siły jednostek",
             "bunker": "Postaw Bunkier",
             "beatbunker": "Rozwal Bunkier",
@@ -2577,6 +2650,28 @@ define('two/language', [
             "increase": "Rosnąco/A-Z",
             "random": "Domyślnie"
         },
+        "preset_asigner": {
+            "title": "Administrator",
+            "presets": "Szablony",
+            "presets.asign": "Przypisz",
+            "presets.all": "Wszystkie szablony",
+            "presets.textall": "Przypisz wszystkie szablony do wszystkich wiosek.",
+            "presets.name": "Szablony z nazwą",
+            "presets.textname": "Przypisz szablony zawierające wskazaną frazę do wszystkich wiosek.",
+            "presets.or": "Lub wybierz z listy",
+            "presets.group": "Szablony do grupy",
+            "presets.textgroup": "Przypisz wszystkie szablony do wybranej grupy wiosek.",
+            "presets.name-group": "Szablony - zaawansowane przypisywanie",
+            "presets.textname-group": "Przypisz szablony zawierające wskazaną fraze do wybranej grupy wiosek.",
+            "presets.name-placeholder": "Wpisz frazę",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródłowa",
+            "logs.preset": "Szablon",
+            "logs.group": "Grupa",
+            "logs.date": "Data",
+            "logs.noAsigns": "Nie przypisano żadnych szablonów",
+            "logs.clear": "Wyczyść logi"
+        },
         "preset_creator": {
             "title": "Wojewoda",
             "description": "Automatycznie tworzy szablony do rekrutacji, fejków i farmy.",
@@ -2624,7 +2719,58 @@ define('two/language', [
             "general.stopped": "Kapitan Zatrzymany!"
         },
         "report_helper": {
-            "title": "Skryba"
+            "title": "Skryba",
+            "reports": "Sprzątacz raportów",
+            "reports.deletebyvillage": "Usuń raporty związane z wybraną wioską",
+            "reports.add_village": "Wybierz wioskę...",
+            "reports.no_village": "Nie wybrano wioski",
+            "reports.add_map_selected": "Wybrana wioska z mapy",
+            "reports.selected": "Wybierz",
+            "reports.deletebyplayer": "Usuń raporty związane z wybranym graczem",
+            "reports.add_player": "Wybierz gracza...",
+            "reports.no_player": "Nie wybrano gracza",
+            "reports.deletebytribe": "Usuń raporty związane z wybranym plemieniem",
+            "reports.add_tribe": "Wybierz plemię...",
+            "reports.no_tribe": "Nie wybrano plemienia",
+            "reports.deletebyprovince": "Usuń raporty związane z wybraną prowincją",
+            "reports.advanced": "Ustawienia zaawansowane",
+            "reports.type": "Typ",
+            "reports.result": "Wynik",
+            "reports.sort": "Rodzaj",
+            "reports.make-favourite": "Oznacz jako ulubione",
+            "reports.amount": "Ilość",
+            "reports.save": "Zapisz",
+            "reports.clear": "Wyczyść",
+            "logs": "Logi",
+            "logs.origin": "Wioska źródłowa",
+            "logs.target": "Wioska cel",
+            "logs.type": "Typ",
+            "logs.result": "Wynik",
+            "logs.sort": "Rodzaj",
+            "logs.what": "Akcja",
+            "logs.date": "Data",
+            "logs.clear": "Wyczyść logi",
+            "logs.noReports": "Nie oznaczono/usunięto żadnych raportów",
+            "general.pause": "Pauza",
+            "general.start": "Start",
+            "win": "Wygrana",
+            "losses": "Straty",
+            "defeat": "Porażka",
+            "all": "Wszystkie",
+            "farm": "Z farmy",
+            "fake": "Fejki",
+            "farm_fake": "Z farmy oraz fejki",
+            "favourite": "Ulubione",
+            "without_favourite": "Bez ulubionych",
+            "attack": "Atak",
+            "defense": "Obrona",
+            "trade": "Handel",
+            "system": "System",
+            "achievements": "Osiągnięcia",
+            "spy_in": "Szpiegowskie(własne)",
+            "spy_out": "Szpiegowskie(obce)",
+            "support_out": "Wsparcie(wysłane)",
+            "support_in": "Wsparcie(otrzymane)"
         },
         "report_sender": {
             "title": "Goniec",
@@ -15166,7 +15312,7 @@ define('two/marketHelper/ui', [
         $button = interfaceOverflow.addMenuButton2('Handlarz', 30)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody class=\"traderLog\"><tr class=\"noTrades\"><td colspan=\"7\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchStateI()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody class=\"traderLog\"><tr class=\"noTrades\"><td colspan=\"7\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchStateI()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-market-helper div[select]{text-align:center}#two-market-helper div[select] .select-wrapper{height:34px}#two-market-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-market-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-market-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-market-helper .actions a{width:100px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}#two-market-helper .traderLog td{text-align:center}#two-market-helper .traderLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper .traderLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper table.header-center th{text-align:center}#two-market-helper .noTrades td{height:26px;text-align:center}#two-market-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
@@ -20172,6 +20318,9 @@ define('two/reportHelper', [
     'two/reportHelper/settings',
     'two/reportHelper/settings/map',
     'two/reportHelper/settings/updates',
+    'two/reportHelper/types/type',
+    'two/reportHelper/types/result',
+    'two/reportHelper/types/sort',
     'two/ready',
     'queues/EventQueue'
 ], function (
@@ -20179,6 +20328,9 @@ define('two/reportHelper', [
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
+    RH_TYPE,
+    RH_RESULT,
+    RH_SORT,
     ready,
     eventQueue
 ) {
@@ -20187,38 +20339,38 @@ define('two/reportHelper', [
     let settings
     let reportHelperSettings
 
-    let selectedPresets = []
-    let selectedGroups = []
-
     const STORAGE_KEYS = {
         SETTINGS: 'report_helper_settings'
     }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = reportHelperSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-
-        console.log('selectedPresets', selectedPresets)
+	
+    const REPORT_TYPE = {
+        [RH_TYPE.ATTACK]: 'attack',
+        [RH_TYPE.DEFENSE]: 'defense',
+        [RH_TYPE.SUPPORT_IN]: 'support_in',
+        [RH_TYPE.SUPPORT_OUT]: 'support_out',
+        [RH_TYPE.TRADE]: 'trade',
+        [RH_TYPE.SPY_IN]: 'spy_in',
+        [RH_TYPE.SPY_OUT]: 'spy_out',
+        [RH_TYPE.ACHIEVEMENTS]: 'achievements',
+        [RH_TYPE.SYSTEM]: 'system'
     }
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = reportHelperSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-
-        console.log('selectedGroups', selectedGroups)
+	
+    const REPORT_RESULT = {
+        [RH_RESULT.WIN]: 'win',
+        [RH_RESULT.LOSSES]: 'losses',
+        [RH_RESULT.DEFEAT]: 'defeat'
     }
+	
+    const REPORT_SORT = {
+        [RH_SORT.ALL]: 'all',
+        [RH_SORT.FARM]: 'farm',
+        [RH_SORT.FAKE]: 'fake',
+        [RH_SORT.FAVOURITE]: 'favourite',
+        [RH_SORT.WITHOUT_FAVOURITE]: 'without_favourite',
+        [RH_SORT.FARM_FAKE]: 'farm_fake'
+    }
+	
+    console.log(REPORT_RESULT, REPORT_SORT, REPORT_TYPE)
 
     const reportHelper = {}
 
@@ -20230,38 +20382,17 @@ define('two/reportHelper', [
             storageKey: STORAGE_KEYS.SETTINGS
         })
 
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function () {
             reportHelperSettings = settings.getAll()
-			
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
         })
 
         reportHelperSettings = settings.getAll()
 
         console.log('reportHelper settings', reportHelperSettings)
-
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
 
     reportHelper.start = function () {
         running = true
-
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
 
         eventQueue.trigger(eventTypeProvider.REPORT_HELPER_START)
     }
@@ -20301,6 +20432,9 @@ define('two/reportHelper/ui', [
     'two/reportHelper',
     'two/reportHelper/settings',
     'two/reportHelper/settings/map',
+    'two/reportHelper/types/type',
+    'two/reportHelper/types/result',
+    'two/reportHelper/types/sort',
     'two/Settings',
     'two/EventScope',
     'two/utils'
@@ -20309,19 +20443,20 @@ define('two/reportHelper/ui', [
     reportHelper,
     SETTINGS,
     SETTINGS_MAP,
+    RH_TYPE,
+    RH_RESULT,
+    RH_SORT,
     Settings,
     EventScope,
     utils
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
-    let groupList = modelDataService.getGroupList()
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        REPORTS: 'reports',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -20343,18 +20478,6 @@ define('two/reportHelper/ui', [
     }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
         start: function () {
             $scope.running = true
 
@@ -20378,8 +20501,8 @@ define('two/reportHelper/ui', [
         $button = interfaceOverflow.addMenuButton3('Skryba', 90)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-report-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'report_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'report_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'report_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'report_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'report_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'report_helper' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'report_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'report_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'report_helper' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'report_helper' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-report-helper div[select]{float:right}#two-report-helper div[select] .select-handler{line-height:28px}#two-report-helper .range-container{width:250px}#two-report-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-report-helper .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-report-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'report_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.REPORTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.REPORTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.REPORTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.REPORTS}\">{{ 'reports' | i18n:loc.ale:'report_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'report_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.REPORTS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'reports.deletebyvillage' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'reports.add_village' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_village' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebyplayer' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'reports.add_player' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_player' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebytribe' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'reports.add_tribe' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_tribe' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebyprovince' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'reports.add_village' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_village' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.advanced' | i18n:loc.ale:'report_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.type' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.result' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"result\" selected=\"settings[SETTINGS.RESULT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.sort' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"sort\" selected=\"settings[SETTINGS.SORT]\" drop-down=\"true\"></div><tr><th colspan=\"3\">{{ 'reports.make-favourite' | i18n:loc.ale:'report_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.type' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE_FAVOURITE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.result' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"result\" selected=\"settings[SETTINGS.RESULT_FAVOURITE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.amount' | i18n:loc.ale:'report_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.type' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.result' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.sort' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.what' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'report_helper' }}<tbody class=\"reportLog\"><tr class=\"noReports\"><td colspan=\"6\">{{ 'logs.noReports' | i18n:loc.ale:'report_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.REPORTS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'reports.clear' | i18n:loc.ale:'report_helper' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'reports.save' | i18n:loc.ale:'report_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'report_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'report_helper' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'report_helper' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-report-helper div[select]{text-align:right}#two-report-helper div[select] .select-wrapper{height:34px}#two-report-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-report-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-report-helper .range-container{width:250px}#two-report-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-report-helper .textfield-border.fit{width:100%}#two-report-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-report-helper .actions a{width:100px}#two-report-helper .reportLog td{text-align:center}#two-report-helper .reportLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-report-helper .reportLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-report-helper .noReports td{height:26px;text-align:center}#two-report-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -20387,13 +20510,23 @@ define('two/reportHelper/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = reportHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.REPORTS
         $scope.settingsMap = SETTINGS_MAP
+        $scope.type = Settings.encodeList(RH_TYPE, {
+            textObject: 'report_helper',
+            disabled: true
+        })
+        $scope.result = Settings.encodeList(RH_RESULT, {
+            textObject: 'report_helper',
+            disabled: true
+        })
+        $scope.sort = Settings.encodeList(RH_SORT, {
+            textObject: 'report_helper',
+            disabled: true
+        })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
-
+		
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
         $scope.switchState = switchState
@@ -20401,13 +20534,6 @@ define('two/reportHelper/ui', [
         let eventScope = new EventScope('twoverflow_report_helper_window', function onDestroy () {
             console.log('reportHelper window closed')
         })
-
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.REPORT_HELPER_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.REPORT_HELPER_STOP, eventHandlers.stop)
         
@@ -20419,56 +20545,92 @@ define('two/reportHelper/ui', [
 
 define('two/reportHelper/settings', [], function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
+        TYPE: 'type',
+        TYPE_FAVOURITE: 'type-favourite',
+        RESULT: 'result',
+        RESULT_FAVOURITE: 'result-favourite',
+        SORT: 'sort',
+        AMOUNT: 'amount'
     }
 })
 
 define('two/reportHelper/settings/updates', function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups'
     }
 })
 
 define('two/reportHelper/settings/map', [
-    'two/reportHelper/settings',
-    'two/reportHelper/settings/updates'
+    'two/reportHelper/settings'
 ], function (
-    SETTINGS,
-    UPDATES
+    SETTINGS
 ) {
     return {
-        [SETTINGS.PRESETS]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
+        [SETTINGS.TYPE]: {
+            default: false,
             disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
+            inputType: 'select'
         },
-        [SETTINGS.GROUPS]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
+        [SETTINGS.TYPE_FAVOURITE]: {
+            default: false,
             disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
+            inputType: 'select'
         },
-        [SETTINGS.SOME_NUMBER]: {
-            default: 60,
+        [SETTINGS.RESULT]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.RESULT_FAVOURITE]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.SORT]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.AMOUNT]: {
+            default: 100,
             inputType: 'number',
-            min: 0,
-            max: 120
-        }
+            min: 5,
+            max: 1000000
+        },
     }
 })
 
+define('two/reportHelper/types/type', [], function () {
+    return {
+        ATTACK: 'attack',
+        DEFENSE: 'defense',
+        SUPPORT_IN: 'support_in',
+        SUPPORT_OUT: 'support_out',
+        TRADE: 'trade',
+        SPY_IN: 'spy_in',
+        SPY_OUT: 'spy_out',
+        ACHIEVEMENTS: 'achievements',
+        SYSTEM: 'system'
+    }
+})
+
+define('two/reportHelper/types/result', [], function () {
+    return {
+        WIN: 'win',
+        LOSSES: 'losses',
+        DEFEAT: 'defeat'
+    }
+})
+
+define('two/reportHelper/types/sort', [], function () {
+    return {
+        ALL: 'all',
+        FARM: 'farm',
+        FAKE: 'fake',
+        FAVOURITE: 'favourite',
+        WITHOUT_FAVOURITE: 'without_favourite',
+        FARM_AND_FAKE: 'farm_and_fake'
+    }
+})
 require([
     'two/ready',
     'two/reportHelper',
