@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 09 Oct 2020 19:32:57 GMT
+ * Sun, 11 Oct 2020 16:25:57 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1101,7 +1101,46 @@ define('two/language', [
             "settings.priorityTargets": "Priorytyzuj cele"
         },
         "king_tool": {
-            "title": "Marszałek"
+            "title": "Marszałek",
+            "tribe": "Plemie",
+            "tribe.set": "Ustaw",
+            "tribe.display": "Ogólny design plemienia",
+            "tribe.edit-name": "Nazwa",
+            "tribe.edit-description": "Opis",
+            "tribe.edit-emblem": "Godło",
+            "tribe.change-name": "Zmień nazwę",
+            "tribe.change-description": "Zmień opis",
+            "tribe.change-emblem": "Zmień godło",
+            "tribe.aplication": "Podania",
+            "tribe.aplication-type": "Typ podań",
+            "tribe.minimum-points": "Minimalna liczba punktów",
+            "tribe.clear": "Wyczyść",
+            "tribe.save": "Zapisz",
+            "skills": "Skile",
+            "skills.head": "Automatyzacja umiejętności plemiennych",
+            "skills.sequence": "Schemat przydzielania punktów",
+            "skills.manage": "Przydzielaj",
+            "skills.description": "Po aktywowaniu opcji umiejętności będą przydzialne automatycznie wg schematu, gdy tylko pojawi się nie wykorzystany punkt.",
+            "skills.position": "Lp.",
+            "skills.skill": "Umiejętność",
+            "skills.noSequence": "Nie wybrano żadnego schematu przydzielania punktów.",
+            "skills.date": "Data",
+            "skills.noSkills": "Nie przydzielono punktów do żadnych umiejętności.",
+            "skills.save": "Zapisz",
+            "skills.clear": "Wyczyść",
+            "skills.clear-logs": "Wyczyść logi",
+            "forum": "Forum",
+            "forum.head": "Tworzenie Forum",
+            "forum.head-text": "Tworzy sprecyzowane przez doświadczonych graczy forum",
+            "forum.create": "Utwórz",
+            "forum.description": "Wątki które zostaną utworzone:",
+            "anyone": "Otwarta dla wszystkich",
+            "closed": "Zamknięta",
+            "aplication": "Tylko aplikacje",
+            "war": "Wojenny",
+            "balanced": "Zbalansowany",
+            "loot": "Łupy",
+            "numbers": "Liczba członków"
         },
         "market_helper": {
             "title": "Handlarz",
@@ -1700,6 +1739,12 @@ define('two/language', [
             "logs.noSupports": "Nie wysłano żadnych wsparć.",
             "logs.clear": "Wyczyść logi"
         },
+        "tutorial_helper": {
+            "title": "Giermek",
+            "description": "Automatycznie wykonuje zadania z tutoriala.",
+            "activated": "Giermek aktywowany",
+            "deactivated": "Giermek skończył działanie"
+        },
         "common": {
             "start": "Start",
             "started": "Uruchomiony",
@@ -1799,7 +1844,7 @@ define('two/language', [
             "edit": "Od Edytora",
             "editor": "Edytował",
             "edit_autor": "DirtyPrank/Dr Doom/NewPope",
-            "text": "Życzę miłej zabawy z Tribal Wars 2 :)",
+            "text": "Życzymy miłej zabawy z Tribal Wars 2 :)",
             "close": "Zamknij",
             "links": "Linki projektów",
             "autor": "Autor",
@@ -2381,7 +2426,46 @@ define('two/language', [
             "settings.priorityTargets": "Priorytyzuj cele"
         },
         "king_tool": {
-            "title": "Marszałek"
+            "title": "Marszałek",
+            "tribe": "Plemie",
+            "tribe.set": "Ustaw",
+            "tribe.display": "Ogólny design plemienia",
+            "tribe.edit-name": "Nazwa",
+            "tribe.edit-description": "Opis",
+            "tribe.edit-emblem": "Godło",
+            "tribe.change-name": "Zmień nazwę",
+            "tribe.change-description": "Zmień opis",
+            "tribe.change-emblem": "Zmień godło",
+            "tribe.aplication": "Podania",
+            "tribe.aplication-type": "Typ podań",
+            "tribe.minimum-points": "Minimalna liczba punktów",
+            "tribe.clear": "Wyczyść",
+            "tribe.save": "Zapisz",
+            "skills": "Skile",
+            "skills.head": "Automatyzacja umiejętności plemiennych",
+            "skills.sequence": "Schemat przydzielania punktów",
+            "skills.manage": "Przydzielaj",
+            "skills.description": "Po aktywowaniu opcji umiejętności będą przydzialne automatycznie wg schematu, gdy tylko pojawi się nie wykorzystany punkt.",
+            "skills.position": "Lp.",
+            "skills.skill": "Umiejętność",
+            "skills.noSequence": "Nie wybrano żadnego schematu przydzielania punktów.",
+            "skills.date": "Data",
+            "skills.noSkills": "Nie przydzielono punktów do żadnych umiejętności.",
+            "skills.save": "Zapisz",
+            "skills.clear": "Wyczyść",
+            "skills.clear-logs": "Wyczyść logi",
+            "forum": "Forum",
+            "forum.head": "Tworzenie Forum",
+            "forum.head-text": "Tworzy sprecyzowane przez doświadczonych graczy forum",
+            "forum.create": "Utwórz",
+            "forum.description": "Wątki które zostaną utworzone:",
+            "anyone": "Otwarta dla wszystkich",
+            "closed": "Zamknięta",
+            "aplication": "Tylko aplikacje",
+            "war": "Wojenny",
+            "balanced": "Zbalansowany",
+            "loot": "Łupy",
+            "numbers": "Liczba członków"
         },
         "market_helper": {
             "title": "Handlarz",
@@ -2979,6 +3063,12 @@ define('two/language', [
             "logs.date": "Data",
             "logs.noSupports": "Nie wysłano żadnych wsparć.",
             "logs.clear": "Wyczyść logi"
+        },
+        "tutorial_helper": {
+            "title": "Giermek",
+            "description": "Automatycznie wykonuje zadania z tutoriala.",
+            "activated": "Giermek aktywowany",
+            "deactivated": "Giermek skończył działanie"
         },
         "common": {
             "start": "Start",
@@ -14776,14 +14866,16 @@ define('two/kingTool', [
     'two/Settings',
     'two/kingTool/settings',
     'two/kingTool/settings/map',
-    'two/kingTool/settings/updates',
+    'two/kingTool/types/sequence',
+    'two/kingTool/types/aplication',
     'two/ready',
     'queues/EventQueue'
 ], function (
     Settings,
     SETTINGS,
     SETTINGS_MAP,
-    UPDATES,
+    SEQUENCES,
+    APLICATION_TYPE,
     ready,
     eventQueue
 ) {
@@ -14792,39 +14884,25 @@ define('two/kingTool', [
     let settings
     let kingToolSettings
 
-    let selectedPresets = []
-    let selectedGroups = []
-
     const STORAGE_KEYS = {
         SETTINGS: 'king_tool_settings'
     }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = kingToolSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-
-        console.log('selectedPresets', selectedPresets)
+	
+    const ALL_SEQUENCES = {
+        [SEQUENCES.LOOT]: 'loot',
+        [SEQUENCES.NUMBERS]: 'numbers',
+        [SEQUENCES.WAR]: 'war',
+        [SEQUENCES.BALANCED]: 'balanced'
     }
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = kingToolSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-
-        console.log('selectedGroups', selectedGroups)
+	
+    const APLICATION = {
+        [APLICATION_TYPE.ANYONE]: 'anyone',
+        [APLICATION_TYPE.APLICATION]: 'aplication',
+        [APLICATION_TYPE.CLOSED]: 'closed'
     }
-
+	
+    console.log(APLICATION, ALL_SEQUENCES)
+	
     const kingTool = {}
 
     kingTool.init = function () {
@@ -14835,38 +14913,17 @@ define('two/kingTool', [
             storageKey: STORAGE_KEYS.SETTINGS
         })
 
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function () {
             kingToolSettings = settings.getAll()
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
         })
 
         kingToolSettings = settings.getAll()
 
         console.log('kingTool settings', kingToolSettings)
-
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
 
     kingTool.start = function () {
         running = true
-
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
 
         eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_START)
     }
@@ -14874,7 +14931,7 @@ define('two/kingTool', [
     kingTool.stop = function () {
         running = false
 
-        console.log('example module stop')
+        console.log('kingTool stop')
 
         eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_STOP)
     }
@@ -14906,6 +14963,8 @@ define('two/kingTool/ui', [
     'two/kingTool',
     'two/kingTool/settings',
     'two/kingTool/settings/map',
+    'two/kingTool/types/sequence',
+    'two/kingTool/types/aplication',
     'two/Settings',
     'two/EventScope',
     'two/utils'
@@ -14914,19 +14973,20 @@ define('two/kingTool/ui', [
     kingTool,
     SETTINGS,
     SETTINGS_MAP,
+    SEQUENCES,
+    APLICATION_TYPE,
     Settings,
     EventScope,
     utils
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
-    let groupList = modelDataService.getGroupList()
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        TRIBE: 'tribe',
+        SKILLS: 'skills',
+        FORUM: 'forum'
     }
 
     const selectTab = function (tabType) {
@@ -14948,18 +15008,6 @@ define('two/kingTool/ui', [
     }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
         start: function () {
             $scope.running = true
 
@@ -14983,8 +15031,8 @@ define('two/kingTool/ui', [
         $button = interfaceOverflow.addMenuButton3('Marszałek', 50)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'king_tool' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'king_tool' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'king_tool' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'king_tool' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-king-tool div[select]{float:right}#two-king-tool div[select] .select-handler{line-height:28px}#two-king-tool .range-container{width:250px}#two-king-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-king-tool .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRIBE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRIBE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRIBE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRIBE}\">{{ 'tribe' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SKILLS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SKILLS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SKILLS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SKILLS}\">{{ 'skills' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FORUM)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FORUM}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FORUM}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FORUM}\">{{ 'forum' | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><h5 class=\"twx-section\">{{ 'tribe.display' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'tribe.edit-name' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-name\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-name' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-description' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-description\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-description' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-emblem' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-emblem\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-emblem' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.aplication' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'tribe.aplication-type' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"aplication\" selected=\"settings[SETTINGS.APLICATION_TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'tribe.minimum-points' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.POINTS].min\" max=\"settingsMap[SETTINGS.POINTS].max\" value=\"settings[SETTINGS.POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.POINTS]\"><tr><td colspan=\"3\" class=\"item-aplication\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.set' | i18n:loc.ale:'king_tool' }}</span></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><h5 class=\"twx-section\">{{ 'skills.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"50%\"><tr><th colspan=\"2\">{{ 'skills.sequence' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"2\"><div select=\"\" list=\"sequence\" selected=\"settings[SETTINGS.SEQUENCE]\" drop-down=\"true\"></div><tr><td class=\"item-manage\"><span class=\"btn btn-orange addSelected\">{{ 'skills.manage' | i18n:loc.ale:'king_tool' }}</span><tr><td colspan=\"2\">{{ 'skills.description' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.position' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsSequence\"><tr class=\"noSequence\"><td colspan=\"2\">{{ 'skills.noSequence' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.date' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsLog\"><tr class=\"noSkills\"><td colspan=\"2\">{{ 'skills.noSkills' | i18n:loc.ale:'king_tool' }}</table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FORUM\"><h5 class=\"twx-section\">{{ 'forum.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><tr><th>{{ 'forum.head-text' | i18n:loc.ale:'king_tool' }}<tr><td class=\"item-create\"><span class=\"btn btn-orange addSelected\">{{ 'forum.create' | i18n:loc.ale:'king_tool' }}</span><tr><td>{{ 'forum.description' | i18n:loc.ale:'king_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsTribe()\">{{ 'tribe.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearTribe()\">{{ 'tribe.clear' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsSkills()\">{{ 'skills.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearSkills()\">{{ 'skills.clear' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'skills.clear-logs' | i18n:loc.ale:'king_tool' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-king-tool div[select]{text-align:center}#two-king-tool div[select] .select-wrapper{height:34px}#two-king-tool div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-king-tool div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-king-tool .range-container{width:250px}#two-king-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-king-tool .textfield-border.fit{width:100%}#two-king-tool .skillsLog td{text-align:center}#two-king-tool .skillsLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSkills td{height:26px;text-align:center}#two-king-tool .skillsSequence td{text-align:center}#two-king-tool .skillsSequence .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsSequence .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSequence td{height:26px;text-align:center}#two-king-tool .force-26to20{transform:scale(.8);width:20px;height:20px}#two-king-tool .item-name{text-align:center}#two-king-tool .item-name span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-description{text-align:center}#two-king-tool .item-description span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-emblem{text-align:center}#two-king-tool .item-emblem span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-aplication{text-align:center}#two-king-tool .item-aplication span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-manage{text-align:center}#two-king-tool .item-manage span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-create{text-align:center}#two-king-tool .item-create span{height:34px;line-height:34px;text-align:center;width:125px}')
     }
 
     const buildWindow = function () {
@@ -14992,27 +15040,27 @@ define('two/kingTool/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = kingTool.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.TRIBE
         $scope.settingsMap = SETTINGS_MAP
+        $scope.sequence = Settings.encodeList(SEQUENCES, {
+            textObject: 'king_tool',
+            disabled: true
+        })
+        $scope.aplication = Settings.encodeList(APLICATION_TYPE, {
+            textObject: 'king_tool',
+            disabled: true
+        })
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
 
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
         $scope.switchState = switchState
 
         let eventScope = new EventScope('twoverflow_king_tool_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('kingTool closed')
         })
 
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.KING_TOOL_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.KING_TOOL_STOP, eventHandlers.stop)
         
@@ -15024,56 +15072,53 @@ define('two/kingTool/ui', [
 
 define('two/kingTool/settings', [], function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
-    }
-})
-
-define('two/kingTool/settings/updates', function () {
-    return {
-        PRESETS: 'presets',
-        GROUPS: 'groups'
+        SEQUENCE: 'sequence',
+        POINTS: 'points',
+        APLICATION_TYPE: 'aplication_type'
     }
 })
 
 define('two/kingTool/settings/map', [
-    'two/kingTool/settings',
-    'two/kingTool/settings/updates'
+    'two/kingTool/settings'
 ], function (
-    SETTINGS,
-    UPDATES
+    SETTINGS
 ) {
     return {
-        [SETTINGS.PRESETS]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
+        [SETTINGS.SEQUENCE]: {
+            default: false,
             disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
+            inputType: 'select'
         },
-        [SETTINGS.GROUPS]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
+        [SETTINGS.APLICATION_TYPE]: {
+            default: false,
             disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
+            inputType: 'select'
         },
-        [SETTINGS.SOME_NUMBER]: {
-            default: 60,
+        [SETTINGS.POINTS]: {
+            default: 200,
             inputType: 'number',
             min: 0,
-            max: 120
+            max: 10000
         }
     }
 })
 
+define('two/kingTool/types/sequence', [], function () {
+    return {
+        LOOT: 'loot',
+        NUMBERS: 'numbers',
+        WAR: 'war',
+        BALANCED: 'balanced'
+    }
+})
+
+define('two/kingTool/types/aplication', [], function () {
+    return {
+        ANYONE: 'anyone',
+        APLICATION: 'aplication',
+        CLOSED: 'closed'
+    }
+})
 require([
     'two/ready',
     'two/kingTool',
@@ -22957,4 +23002,123 @@ require([
     })
 })
 
+define('two/tutorialHelper', [
+    'queues/EventQueue'
+], function (
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+	
+    let tutorialHelper = {}
+    tutorialHelper.init = function() {
+        initialized = true
+    }
+    tutorialHelper.start = function() {
+        eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STARTED)
+        running = true
+    }
+    tutorialHelper.stop = function() {
+        eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STOPPED)
+        running = false
+    }
+    tutorialHelper.isRunning = function() {
+        return running
+    }
+    tutorialHelper.isInitialized = function() {
+        return initialized
+    }
+    return tutorialHelper
+})
+define('two/tutorialHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        TUTORIAL_HELPER_STARTED: 'tutorial_helper_started',
+        TUTORIAL_HELPER_STOPPED: 'tutorial_helper_stopped'
+    })
+})
+define('two/tutorialHelper/ui', [
+    'two/ui',
+    'two/tutorialHelper',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    tutorialHelper,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton2('Giermek', 60, $filter('i18n')('description', $rootScope.loc.ale, 'tutorial_helper'))
+
+        $button.addEventListener('click', function () {
+            if (tutorialHelper.isRunning()) {
+                tutorialHelper.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'tutorial_helper'))
+            } else {
+                tutorialHelper.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'tutorial_helper'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (tutorialHelper.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+require([
+    'two/ready',
+    'two/tutorialHelper',
+    'two/tutorialHelper/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/tutorialHelper/events'
+], function(
+    ready,
+    tutorialHelper,
+    tutorialHelperInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'tutorial_helper_active'
+    }
+	
+    if (tutorialHelper.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        tutorialHelper.init()
+        tutorialHelperInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                tutorialHelper.start()
+            }
+
+            eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
 })(this)
