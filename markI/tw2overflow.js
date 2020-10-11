@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 11 Oct 2020 16:25:57 GMT
+ * Sun, 11 Oct 2020 17:40:36 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -532,7 +532,21 @@ define('two/language', [
             "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
         },
         "activity_tool": {
-            "title": "Kwatermistrz"
+            "title": "Statystyki",
+            "data": "Dane",
+            "data.dump": "Wybierz opcje wykonania zrzutu danych na twój komputer",
+            "data.players": "Gracze",
+            "data.tribes": "Plemiona",
+            "data.achievements": "Osiągnięcia",
+            "data.save": "Zapisz",
+            "data.reset": "Resetuj",
+            "logs": "Logi",
+            "logs.type": "Co?",
+            "logs.date": "Data",
+            "logs.noDumps": "Nie wykonano żadnych zrzutów danych",
+            "logs.clear": "Wyczyść logi",
+            "general.start": "Start",
+            "general.pause": "Pauza"
         },
         "alert_sender": {
             "title": "Wartownik",
@@ -1857,7 +1871,21 @@ define('two/language', [
             "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
         },
         "activity_tool": {
-            "title": "Kwatermistrz"
+            "title": "Kwatermistrz",
+            "data": "Dane",
+            "data.dump": "Wybierz opcje wykonania zrzutu danych na twój komputer",
+            "data.players": "Gracze",
+            "data.tribes": "Plemiona",
+            "data.achievements": "Osiągnięcia",
+            "data.save": "Zapisz",
+            "data.reset": "Resetuj",
+            "logs": "Logi",
+            "logs.type": "Co?",
+            "logs.date": "Data",
+            "logs.noDumps": "Nie wykonano żadnych zrzutów danych",
+            "logs.clear": "Wyczyść logi",
+            "general.start": "Start",
+            "general.pause": "Pauza"
         },
         "alert_sender": {
             "title": "Wartownik",
@@ -4155,14 +4183,12 @@ define('two/activityTool', [
     'two/Settings',
     'two/activityTool/settings',
     'two/activityTool/settings/map',
-    'two/activityTool/settings/updates',
     'two/ready',
     'queues/EventQueue'
 ], function (
     Settings,
     SETTINGS,
     SETTINGS_MAP,
-    UPDATES,
     ready,
     eventQueue
 ) {
@@ -4171,37 +4197,8 @@ define('two/activityTool', [
     let settings
     let activityToolSettings
 
-    let selectedPresets = []
-    let selectedGroups = []
-
     const STORAGE_KEYS = {
         SETTINGS: 'activity_tool_settings'
-    }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = activityToolSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-
-        console.log('selectedPresets', selectedPresets)
-    }
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = activityToolSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-
-        console.log('selectedGroups', selectedGroups)
     }
 
     const activityTool = {}
@@ -4214,46 +4211,23 @@ define('two/activityTool', [
             storageKey: STORAGE_KEYS.SETTINGS
         })
 
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function () {
             activityToolSettings = settings.getAll()
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
         })
 
         activityToolSettings = settings.getAll()
 
         console.log('activityTool settings', activityToolSettings)
-
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
 
     activityTool.start = function () {
         running = true
-
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
 
         eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_START)
     }
 
     activityTool.stop = function () {
         running = false
-
-        console.log('example module stop')
 
         eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_STOP)
     }
@@ -4299,13 +4273,11 @@ define('two/activityTool/ui', [
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
-    let groupList = modelDataService.getGroupList()
     let $button
     
     const TAB_TYPES = {
-        SETTINGS: 'settings',
-        SOME_VIEW: 'some_view'
+        DATA: 'data',
+        LOGS: 'logs'
     }
 
     const selectTab = function (tabType) {
@@ -4327,18 +4299,6 @@ define('two/activityTool/ui', [
     }
 
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
         start: function () {
             $scope.running = true
 
@@ -4359,11 +4319,11 @@ define('two/activityTool/ui', [
 
     const init = function () {
         settings = activityTool.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Kwatermistrz', 60)
+        $button = interfaceOverflow.addMenuButton4('Statystyki', 40)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SOME_VIEW)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SOME_VIEW}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SOME_VIEW}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SOME_VIEW}\">{{ TAB_TYPES.SOME_VIEW | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'groups' | i18n:loc.ale:'activity_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'activity_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'groups' | i18n:loc.ale:'activity_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'some_number' | i18n:loc.ale:'activity_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SOME_NUMBER].min\" max=\"settingsMap[SETTINGS.SOME_NUMBER].max\" value=\"settings[SETTINGS.SOME_NUMBER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SOME_NUMBER]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><h5 class=\"twx-section\">{{ 'xxxx' | i18n:loc.ale:'activity_tool' }}</h5></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'activity_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SOME_VIEW\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"someViewAction()\">{{ 'some_view_action' | i18n:loc.ale:'activity_tool' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'activity_tool' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-activity-tool div[select]{float:right}#two-activity-tool div[select] .select-handler{line-height:28px}#two-activity-tool .range-container{width:250px}#two-activity-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-activity-tool .textfield-border.fit{width:100%}')
+        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.DATA)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.DATA}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.DATA}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.DATA}\">{{ 'data' | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.DATA\"><h5 class=\"twx-section\">{{ 'data.dump' | i18n:loc.ale:'activity_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"60px\"><col><tr><th colspan=\"3\">{{ 'data.players' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PLAYERS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.tribes' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TRIBES]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.achievements' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ACHIEVEMENTS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col><col width=\"20%\"><thead><tr><th>{{ 'logs.type' | i18n:loc.ale:'activity_tool' }}<th>{{ 'logs.date' | i18n:loc.ale:'activity_tool' }}<tbody class=\"activityLog\"><tr class=\"noDumps\"><td colspan=\"2\">{{ 'logs.noDumps' | i18n:loc.ale:'activity_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.DATA\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'data.save' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"resetSettings()\">{{ 'data.reset' | i18n:loc.ale:'activity_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'activity_tool' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'activity_tool' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-activity-tool div[select]{float:right}#two-activity-tool div[select] .select-handler{line-height:28px}#two-activity-tool .range-container{width:250px}#two-activity-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-activity-tool .textfield-border.fit{width:100%}#two-activity-tool th{text-align:center}#two-activity-tool .activityLog td{text-align:center}#two-activity-tool .activityLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .activityLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .noDumps td{height:26px;text-align:center}#two-activity-tool .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -4371,27 +4331,19 @@ define('two/activityTool/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = activityTool.isRunning()
-        $scope.selectedTab = TAB_TYPES.SETTINGS
+        $scope.selectedTab = TAB_TYPES.DATA
         $scope.settingsMap = SETTINGS_MAP
 
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
 
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
         $scope.switchState = switchState
 
         let eventScope = new EventScope('twoverflow_activity_tool_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('activityTool closed')
         })
 
-        // all those event listeners will be destroyed as soon as the window gets closed
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.ACTIVITY_TOOL_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.ACTIVITY_TOOL_STOP, eventHandlers.stop)
         
@@ -4403,52 +4355,34 @@ define('two/activityTool/ui', [
 
 define('two/activityTool/settings', [], function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups',
-        SOME_NUMBER: 'some_number'
+        PLAYERS: 'players',
+        TRIBES: 'tribes',
+        ACHIEVEMENTS: 'achievements'
     }
 })
 
 define('two/activityTool/settings/updates', function () {
     return {
-        PRESETS: 'presets',
-        GROUPS: 'groups'
     }
 })
 
 define('two/activityTool/settings/map', [
-    'two/activityTool/settings',
-    'two/activityTool/settings/updates'
+    'two/activityTool/settings'
 ], function (
-    SETTINGS,
-    UPDATES
+    SETTINGS
 ) {
     return {
-        [SETTINGS.PRESETS]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
+        [SETTINGS.PLAYERS]: {
+            default: false,
+            inputType: 'checkbox'
         },
-        [SETTINGS.GROUPS]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
+        [SETTINGS.TRIBES]: {
+            default: false,
+            inputType: 'checkbox'
         },
-        [SETTINGS.SOME_NUMBER]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 120
+        [SETTINGS.ACHIEVEMENTS]: {
+            default: false,
+            inputType: 'checkbox'
         }
     }
 })
@@ -15031,8 +14965,8 @@ define('two/kingTool/ui', [
         $button = interfaceOverflow.addMenuButton3('Marszałek', 50)
         $button.addEventListener('click', buildWindow)
 
-        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRIBE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRIBE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRIBE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRIBE}\">{{ 'tribe' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SKILLS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SKILLS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SKILLS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SKILLS}\">{{ 'skills' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FORUM)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FORUM}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FORUM}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FORUM}\">{{ 'forum' | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><h5 class=\"twx-section\">{{ 'tribe.display' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'tribe.edit-name' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-name\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-name' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-description' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-description\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-description' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-emblem' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-emblem\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-emblem' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.aplication' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'tribe.aplication-type' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"aplication\" selected=\"settings[SETTINGS.APLICATION_TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'tribe.minimum-points' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.POINTS].min\" max=\"settingsMap[SETTINGS.POINTS].max\" value=\"settings[SETTINGS.POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.POINTS]\"><tr><td colspan=\"3\" class=\"item-aplication\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.set' | i18n:loc.ale:'king_tool' }}</span></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><h5 class=\"twx-section\">{{ 'skills.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"50%\"><tr><th colspan=\"2\">{{ 'skills.sequence' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"2\"><div select=\"\" list=\"sequence\" selected=\"settings[SETTINGS.SEQUENCE]\" drop-down=\"true\"></div><tr><td class=\"item-manage\"><span class=\"btn btn-orange addSelected\">{{ 'skills.manage' | i18n:loc.ale:'king_tool' }}</span><tr><td colspan=\"2\">{{ 'skills.description' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.position' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsSequence\"><tr class=\"noSequence\"><td colspan=\"2\">{{ 'skills.noSequence' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.date' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsLog\"><tr class=\"noSkills\"><td colspan=\"2\">{{ 'skills.noSkills' | i18n:loc.ale:'king_tool' }}</table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FORUM\"><h5 class=\"twx-section\">{{ 'forum.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><tr><th>{{ 'forum.head-text' | i18n:loc.ale:'king_tool' }}<tr><td class=\"item-create\"><span class=\"btn btn-orange addSelected\">{{ 'forum.create' | i18n:loc.ale:'king_tool' }}</span><tr><td>{{ 'forum.description' | i18n:loc.ale:'king_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsTribe()\">{{ 'tribe.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearTribe()\">{{ 'tribe.clear' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsSkills()\">{{ 'skills.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearSkills()\">{{ 'skills.clear' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'skills.clear-logs' | i18n:loc.ale:'king_tool' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-king-tool div[select]{text-align:center}#two-king-tool div[select] .select-wrapper{height:34px}#two-king-tool div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-king-tool div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-king-tool .range-container{width:250px}#two-king-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-king-tool .textfield-border.fit{width:100%}#two-king-tool .skillsLog td{text-align:center}#two-king-tool .skillsLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSkills td{height:26px;text-align:center}#two-king-tool .skillsSequence td{text-align:center}#two-king-tool .skillsSequence .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsSequence .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSequence td{height:26px;text-align:center}#two-king-tool .force-26to20{transform:scale(.8);width:20px;height:20px}#two-king-tool .item-name{text-align:center}#two-king-tool .item-name span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-description{text-align:center}#two-king-tool .item-description span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-emblem{text-align:center}#two-king-tool .item-emblem span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-aplication{text-align:center}#two-king-tool .item-aplication span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-manage{text-align:center}#two-king-tool .item-manage span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-create{text-align:center}#two-king-tool .item-create span{height:34px;line-height:34px;text-align:center;width:125px}')
+        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRIBE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRIBE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRIBE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRIBE}\">{{ 'tribe' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SKILLS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SKILLS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SKILLS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SKILLS}\">{{ 'skills' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FORUM)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FORUM}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FORUM}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FORUM}\">{{ 'forum' | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><h5 class=\"twx-section\">{{ 'tribe.display' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'tribe.edit-name' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-name\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-name' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-description' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-description\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-description' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-emblem' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-emblem\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-emblem' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.aplication' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'tribe.aplication-type' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"aplication\" selected=\"settings[SETTINGS.APLICATION_TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'tribe.minimum-points' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.POINTS].min\" max=\"settingsMap[SETTINGS.POINTS].max\" value=\"settings[SETTINGS.POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.POINTS]\"><tr><td colspan=\"3\" class=\"item-aplication\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.set' | i18n:loc.ale:'king_tool' }}</span></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><h5 class=\"twx-section\">{{ 'skills.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"50%\"><tr><th colspan=\"2\">{{ 'skills.sequence' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"2\"><div select=\"\" list=\"sequence\" selected=\"settings[SETTINGS.SEQUENCE]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"item-manage\"><span class=\"btn btn-orange addSelected\">{{ 'skills.manage' | i18n:loc.ale:'king_tool' }}</span><tr><td colspan=\"2\">{{ 'skills.description' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.position' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsSequence\"><tr class=\"noSequence\"><td colspan=\"2\">{{ 'skills.noSequence' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.date' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsLog\"><tr class=\"noSkills\"><td colspan=\"2\">{{ 'skills.noSkills' | i18n:loc.ale:'king_tool' }}</table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FORUM\"><h5 class=\"twx-section\">{{ 'forum.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><tr><th>{{ 'forum.head-text' | i18n:loc.ale:'king_tool' }}<tr><td class=\"item-create\"><span class=\"btn btn-orange addSelected\">{{ 'forum.create' | i18n:loc.ale:'king_tool' }}</span><tr><td>{{ 'forum.description' | i18n:loc.ale:'king_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsTribe()\">{{ 'tribe.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearTribe()\">{{ 'tribe.clear' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsSkills()\">{{ 'skills.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearSkills()\">{{ 'skills.clear' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'skills.clear-logs' | i18n:loc.ale:'king_tool' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-king-tool div[select]{text-align:center}#two-king-tool div[select] .select-wrapper{height:34px}#two-king-tool div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-king-tool div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-king-tool .range-container{width:250px}#two-king-tool th{text-align:center}#two-king-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-king-tool .textfield-border.fit{width:100%}#two-king-tool .skillsLog td{text-align:center}#two-king-tool .skillsLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSkills td{height:26px;text-align:center}#two-king-tool .skillsSequence td{text-align:center}#two-king-tool .skillsSequence .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsSequence .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSequence td{height:26px;text-align:center}#two-king-tool .force-26to20{transform:scale(.8);width:20px;height:20px}#two-king-tool .item-name{text-align:center}#two-king-tool .item-name span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-description{text-align:center}#two-king-tool .item-description span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-emblem{text-align:center}#two-king-tool .item-emblem span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-aplication{text-align:center}#two-king-tool .item-aplication span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-manage{text-align:center}#two-king-tool .item-manage span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-create{text-align:center}#two-king-tool .item-create span{height:34px;line-height:34px;text-align:center;width:125px}')
     }
 
     const buildWindow = function () {
