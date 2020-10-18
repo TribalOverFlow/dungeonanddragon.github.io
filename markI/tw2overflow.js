@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 11 Oct 2020 17:49:34 GMT
+ * Sun, 18 Oct 2020 08:00:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -652,7 +652,7 @@ define('two/language', [
         },
         "auto_healer": {
             "title": "Medyk",
-            "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
+            "description": "Przywraca uzdrowione jednostki ze szpitala.",
             "activated": "Medyk aktywowany",
             "deactivated": "Medyk skończył działanie"
         },
@@ -6308,30 +6308,28 @@ require([
 define('two/autoHealer', [
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     utils,
     eventQueue
 ) {
     let initialized = false
     let running = false
-	
-    let interval = 3000
-    let interval1 = 1000
-
-    const healUnits = function () {
+    let interval = 5000
+    let interval1 = 3000
+    const heal = function() {
         if (!running) {
             return false
         }
         console.log('Medyk uruchomiony')
-		
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
         villages.forEach(function(village, index) {
             let hospital = village.hospital
             let patients = hospital.patients
             let healed = patients.healed
+            let units = healed.units
             if (healed.length == 0) {
-                console.log('W wiosce ' + village.getName() + ' brak jednostek do wyleczenia.')
+                console.log('W wiosce ' + village.getName() + ' brak jednostek do wyleczenia')
             } else {
                 setTimeout(function() {
                     healed.forEach(function(heal, index) {
@@ -6341,12 +6339,11 @@ define('two/autoHealer', [
                                 patient_id: heal.id
                             })
                         }, index * interval1)
-                        console.log('W wiosce: ' + village.getName() + ' wyleczono: ' + heal.id)
+                        console.log('W wiosce: ' + village.getName() + ' wyleczono: ' + units)
                     })
                 }, index * interval)
             }
         })
-        utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_healer'))
         console.log('Medyk zatrzymany')
         autoHealer.stop()
     }
@@ -6357,7 +6354,7 @@ define('two/autoHealer', [
     autoHealer.start = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STARTED)
         running = true
-        healUnits()
+        heal()
     }
     autoHealer.stop = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STOPPED)
@@ -6377,24 +6374,21 @@ define('two/autoHealer/events', [], function () {
         AUTO_HEALER_STOPPED: 'auto_healer_stopped'
     })
 })
-
 define('two/autoHealer/ui', [
     'two/ui',
     'two/autoHealer',
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     interfaceOverflow,
     autoHealer,
     utils,
     eventQueue
 ) {
     let $button
-
-    const init = function () {
+    const init = function() {
         $button = interfaceOverflow.addMenuButton('Medyk', 120, $filter('i18n')('description', $rootScope.loc.ale, 'auto_healer'))
-
-        $button.addEventListener('click', function () {
+        $button.addEventListener('click', function() {
             if (autoHealer.isRunning()) {
                 autoHealer.stop()
                 utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_healer'))
@@ -6403,24 +6397,19 @@ define('two/autoHealer/ui', [
                 utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_healer'))
             }
         })
-
-        eventQueue.register(eventTypeProvider.AUTO_HEALER_STARTED, function () {
+        eventQueue.register(eventTypeProvider.AUTO_HEALER_STARTED, function() {
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
         })
-
-        eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function () {
+        eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
         })
-
         if (autoHealer.isRunning()) {
             eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STARTED)
         }
-
         return opener
     }
-
     return init
 })
 require([
@@ -6440,23 +6429,19 @@ require([
     const STORAGE_KEYS = {
         ACTIVE: 'auto_healer_active'
     }
-	
     if (autoHealer.isInitialized()) {
         return false
     }
     ready(function() {
         autoHealer.init()
         autoHealerInterface()
-
         ready(function() {
             if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
                 autoHealer.start()
             }
-
             eventQueue.register(eventTypeProvider.AUTO_HEALER_STARTED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, true)
             })
-
             eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
