@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 15 Nov 2020 21:40:18 GMT
+ * Sun, 15 Nov 2020 22:09:30 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6406,7 +6406,8 @@ define('two/battleCalculator', [
     'two/battleCalculator/types/hospital',
     'two/battleCalculator/types/training',
     'two/ready',
-    'queues/EventQueue'
+    'queues/EventQueue',
+    'Lockr'
 ], function (
     Settings,
     SETTINGS,
@@ -6424,7 +6425,8 @@ define('two/battleCalculator', [
     B_HOSPITAL_LEVEL,
     T_TRAINING_LEVEL,
     ready,
-    eventQueue
+    eventQueue,
+    Lockr
 ) {
     let initialized = false
     let running = false
@@ -6577,6 +6579,12 @@ define('two/battleCalculator', [
             presetSelected.push(allPresets[presetId])
         })
     }
+    const updateBashpointsSpear = function () {
+        const spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
+        console.log(spear)
+
+        Lockr.set(STORAGE_KEYS.SETTINGS, settings)
+    }
     const battleCalculator = {}
 
     battleCalculator.init = function () {
@@ -6591,6 +6599,9 @@ define('two/battleCalculator', [
 
             if (updates[UPDATES.PRESETS]) {
                 updatePresets()
+            }
+            if (updates[UPDATES.BASHPOINTS_SPEAR]) {
+                updateBashpointsSpear()
             }
         })
 
@@ -6608,9 +6619,11 @@ define('two/battleCalculator', [
     }
 	
     battleCalculator.calculateB = function() {
+        const battleCalculatorSettings = settings.getAll()
         const spear = settings.get(SETTINGS.BASHPOINTS_SPEAR)
-        const axe = battleCalculatorSettings[SETTINGS.BASHPOINTS_AXE].value
-        const archer = settings.get(SETTINGS.BASHPOINTS_ARCHER).value
+        const sword = battleCalculatorSettings[SETTINGS.BASHPOINTS_SWORD]
+        const axe = battleCalculatorSettings[SETTINGS.BASHPOINTS_AXE]
+        const archer = battleCalculatorSettings[SETTINGS.BASHPOINTS_ARCHER]
         const lc = battleCalculatorSettings[SETTINGS.BASHPOINTS_LC]
         const ma = battleCalculatorSettings[SETTINGS.BASHPOINTS_MA]
         const hc = battleCalculatorSettings[SETTINGS.BASHPOINTS_HC]
@@ -6620,7 +6633,6 @@ define('two/battleCalculator', [
         const trebuchet = battleCalculatorSettings[SETTINGS.BASHPOINTS_TREBUCHET]
         const snob = battleCalculatorSettings[SETTINGS.BASHPOINTS_SNOB]
         const knight = battleCalculatorSettings[SETTINGS.BASHPOINTS_KNIGHT]
-        const sword = battleCalculatorSettings[SETTINGS.BASHPOINTS_SWORD]
         var pointsAttack = [1, 2, 4, 2, 13, 12, 15, 8, 10, 20, 200, 0, 25]
         var pointsDeff = [4, 5, 1, 5, 5, 6, 23, 4, 12, 40, 200, 25, 10]
         var pointsatt = 0
@@ -7162,6 +7174,7 @@ define('two/battleCalculator/settings', [], function () {
 
 define('two/battleCalculator/settings/updates', function () {
     return {
+        BASHPOINTS_SPEAR: 'bashpoints_spear_update',
         PRESETS: 'presets'
     }
 })
@@ -7285,6 +7298,7 @@ define('two/battleCalculator/settings/map', [
         },
         [SETTINGS.BASHPOINTS_SPEAR]: {
             default: 0,
+            updates: [UPDATES.BASHPOINTS_SPEAR],
             inputType: 'number',
             min: 0,
             max: 1000000
