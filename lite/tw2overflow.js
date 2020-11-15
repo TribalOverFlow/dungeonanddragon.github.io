@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 15 Nov 2020 21:31:36 GMT
+ * Sun, 15 Nov 2020 21:34:32 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7284,6 +7284,24 @@ define('two/battleCalculator/settings/map', [
             max: 25
         },
         [SETTINGS.BASHPOINTS_SPEAR]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 1000000
+        },
+        [SETTINGS.BASHPOINTS_SWORD]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 1000000
+        },
+        [SETTINGS.BASHPOINTS_AXE]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 1000000
+        },
+        [SETTINGS.BASHPOINTS_ARCHER]: {
             default: 0,
             inputType: 'number',
             min: 0,
