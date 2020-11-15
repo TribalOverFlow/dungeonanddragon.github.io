@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 15 Nov 2020 19:25:10 GMT
+ * Sun, 15 Nov 2020 19:29:23 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6627,6 +6627,7 @@ define('two/battleCalculator', [
         let pointsdef = 0
 
         function updateDisplay() {
+            console.log(spear)
             pointsatt = spear * pointsAttack[0] + sword * pointsAttack[1] + axe * pointsAttack[2] + archer * pointsAttack[3] + lc * pointsAttack[4] + ma * pointsAttack[5] + hc * pointsAttack[6] + ram * pointsAttack[7] + catapult * pointsAttack[8] + knight * pointsAttack[9] + snob * pointsAttack[10] + trebuchet * pointsAttack[11] + berserker * pointsAttack[12]
             pointsdef = spear * pointsDeff[0] + sword * pointsDeff[1] + axe * pointsDeff[2] + archer * pointsDeff[3] + lc * pointsDeff[4] + ma * pointsDeff[5] + hc * pointsDeff[6] + ram * pointsDeff[7] + catapult * pointsDeff[8] + knight * pointsDeff[9] + snob * pointsDeff[10] + trebuchet * pointsDeff[11] + berserker * pointsDeff[12]
             setTimeout(showBashpoints, 500)
