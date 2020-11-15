@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 15 Nov 2020 21:34:32 GMT
+ * Sun, 15 Nov 2020 21:37:34 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6609,7 +6609,6 @@ define('two/battleCalculator', [
 	
     battleCalculator.calculateB = function() {
         const spear = settings.get(SETTINGS.BASHPOINTS_SPEAR)
-        const sword = battleCalculatorSettings.get[SETTINGS.BASHPOINTS_SWORD]
         const axe = battleCalculatorSettings[SETTINGS.BASHPOINTS_AXE].value
         const archer = settings.get(SETTINGS.BASHPOINTS_ARCHER).value
         const lc = battleCalculatorSettings[SETTINGS.BASHPOINTS_LC]
@@ -6621,6 +6620,7 @@ define('two/battleCalculator', [
         const trebuchet = battleCalculatorSettings[SETTINGS.BASHPOINTS_TREBUCHET]
         const snob = battleCalculatorSettings[SETTINGS.BASHPOINTS_SNOB]
         const knight = battleCalculatorSettings[SETTINGS.BASHPOINTS_KNIGHT]
+        const sword = battleCalculatorSettings.get[SETTINGS.BASHPOINTS_SWORD]
         var pointsAttack = [1, 2, 4, 2, 13, 12, 15, 8, 10, 20, 200, 0, 25]
         var pointsDeff = [4, 5, 1, 5, 5, 6, 23, 4, 12, 40, 200, 25, 10]
         var pointsatt = 0
