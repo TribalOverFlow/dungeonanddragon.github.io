@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 15 Nov 2020 19:48:17 GMT
+ * Sun, 15 Nov 2020 19:55:33 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6608,7 +6608,7 @@ define('two/battleCalculator', [
     }
 	
     battleCalculator.calculateB = function() {
-        const spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
+        var spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
         const sword = battleCalculatorSettings[SETTINGS.BASHPOINTS_SWORD]
         const axe = battleCalculatorSettings[SETTINGS.BASHPOINTS_AXE]
         const archer = battleCalculatorSettings[SETTINGS.BASHPOINTS_ARCHER]
@@ -7289,7 +7289,6 @@ define('two/battleCalculator/settings/map', [
             max: 25
         },
         [SETTINGS.BASHPOINTS_SPEAR]: {
-            default: 0,
             inputType: 'number'
         },
         [SETTINGS.TROOPS_PRECEPTORY]: {
