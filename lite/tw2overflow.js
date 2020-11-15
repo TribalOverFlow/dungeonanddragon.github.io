@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 15 Nov 2020 20:07:23 GMT
+ * Sun, 15 Nov 2020 21:08:38 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6608,7 +6608,7 @@ define('two/battleCalculator', [
     }
 	
     battleCalculator.calculateB = function() {
-        var spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
+        const spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
         const sword = battleCalculatorSettings[SETTINGS.BASHPOINTS_SWORD]
         const axe = battleCalculatorSettings[SETTINGS.BASHPOINTS_AXE]
         const archer = battleCalculatorSettings[SETTINGS.BASHPOINTS_ARCHER]
@@ -6625,21 +6625,15 @@ define('two/battleCalculator', [
         var pointsDeff = [4, 5, 1, 5, 5, 6, 23, 4, 12, 40, 200, 25, 10]
         var pointsatt = 0
         var pointsdef = 0
-
-        function updateDisplay() {
-            spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR].value
-            console.log(spear)
-            pointsatt = spear * pointsAttack[0] + sword * pointsAttack[1] + axe * pointsAttack[2] + archer * pointsAttack[3] + lc * pointsAttack[4] + ma * pointsAttack[5] + hc * pointsAttack[6] + ram * pointsAttack[7] + catapult * pointsAttack[8] + knight * pointsAttack[9] + snob * pointsAttack[10] + trebuchet * pointsAttack[11] + berserker * pointsAttack[12]
-            pointsdef = spear * pointsDeff[0] + sword * pointsDeff[1] + axe * pointsDeff[2] + archer * pointsDeff[3] + lc * pointsDeff[4] + ma * pointsDeff[5] + hc * pointsDeff[6] + ram * pointsDeff[7] + catapult * pointsDeff[8] + knight * pointsDeff[9] + snob * pointsDeff[10] + trebuchet * pointsDeff[11] + berserker * pointsDeff[12]
-            setTimeout(showBashpoints, 500)
-        }
-
-        function showBashpoints() {
-            console.log(pointsatt, pointsdef)
-            $pointsdef.html(pointsatt)
-            $pointsatt.html(pointsdef)
-        }
-        updateDisplay()
+		
+        console.log(spear)
+		
+        pointsatt = spear * pointsAttack[0] + sword * pointsAttack[1] + axe * pointsAttack[2] + archer * pointsAttack[3] + lc * pointsAttack[4] + ma * pointsAttack[5] + hc * pointsAttack[6] + ram * pointsAttack[7] + catapult * pointsAttack[8] + knight * pointsAttack[9] + snob * pointsAttack[10] + trebuchet * pointsAttack[11] + berserker * pointsAttack[12]
+        pointsdef = spear * pointsDeff[0] + sword * pointsDeff[1] + axe * pointsDeff[2] + archer * pointsDeff[3] + lc * pointsDeff[4] + ma * pointsDeff[5] + hc * pointsDeff[6] + ram * pointsDeff[7] + catapult * pointsDeff[8] + knight * pointsDeff[9] + snob * pointsDeff[10] + trebuchet * pointsDeff[11] + berserker * pointsDeff[12]
+        console.log(pointsatt, pointsdef)
+		
+        $pointsdef.html(pointsatt)
+        $pointsatt.html(pointsdef)
     }
 	
     battleCalculator.simulate = function() {}
