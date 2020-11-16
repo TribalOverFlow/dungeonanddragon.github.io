@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 16 Nov 2020 19:34:39 GMT
+ * Mon, 16 Nov 2020 19:39:29 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6628,8 +6628,8 @@ define('two/battleCalculator', [
         pointsdef = spear * pointsDeff[0] + sword * pointsDeff[1] + axe * pointsDeff[2] + archer * pointsDeff[3] + lc * pointsDeff[4] + ma * pointsDeff[5] + hc * pointsDeff[6] + ram * pointsDeff[7] + catapult * pointsDeff[8] + knight * pointsDeff[9] + snob * pointsDeff[10] + trebuchet * pointsDeff[11] + berserker * pointsDeff[12]
         console.log(pointsatt, pointsdef)
 		
-        document.getElementById('points-def').html = pointsatt
-        document.getElementById('points-att').html = pointsdef
+        document.getElementById('points-def').html(pointsatt)
+        document.getElementById('points-att').html(pointsdef)
     }
 	
     battleCalculator.simulate = function() {}
