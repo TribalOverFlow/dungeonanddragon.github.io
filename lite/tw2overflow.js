@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 17 Nov 2020 19:35:12 GMT
+ * Tue, 17 Nov 2020 19:42:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6984,7 +6984,7 @@ define('two/battleCalculator/ui', [
 
         utils.notif('success', 'Bashpoints Settings saved')
     }
-    const calculateB = function () {
+    const showBashpoints = function () {
         let bashpointsAtt = battleCalculator.getBashpointsAtt()
         let bashpointsDef = battleCalculator.getBashpointsDef()
 		
@@ -7078,9 +7078,10 @@ define('two/battleCalculator/ui', [
         })
         settings.injectScope($scope)
         eventHandlers.updatePresets()
+        showBashpoints()
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
-        $scope.calculateB = calculateB
+        $scope.calculateB = battleCalculator.calculateB
         $scope.showBashpoints = false
         $scope.totalDef = 0
         $scope.totalAtt = 0
