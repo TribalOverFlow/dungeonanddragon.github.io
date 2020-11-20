@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 20 Nov 2020 20:22:55 GMT
+ * Fri, 20 Nov 2020 20:43:20 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -10299,6 +10299,7 @@ define('two/battleCalculator', [
             defCav = spear * def_kav[0] + sword * def_kav[1] + axe * def_kav[2] + archer * def_kav[3] + lc * def_kav[4] + ma * def_kav[5] + hc * def_kav[6] + ram * def_kav[7] + catapult * def_kav[8] + knight * def_kav[9] + snob * def_kav[10] + trebuchet * def_kav[11] + berserker * def_kav[12]
             defArch = spear * def_arc[0] + sword * def_arc[1] + axe * def_arc[2] + archer * def_arc[3] + lc * def_arc[4] + ma * def_arc[5] + hc * def_arc[6] + ram * def_arc[7] + catapult * def_arc[8] + knight * def_arc[9] + snob * def_arc[10] + trebuchet * def_arc[11] + berserker * def_arc[12]
             loadAmount = spear * load[0] + sword * load[1] + axe * load[2] + archer * load[3] + lc * load[4] + ma * load[5] + hc * load[6] + ram * load[7] + catapult * load[8] + knight * load[9] + snob * load[10] + trebuchet * load[11] + berserker * load[12]
+            console.log(buildTime)
             finalTime = secondsToDaysHHMMSS(buildTime)
             attInf = spear * attack[0] + sword * attack[1] + axe * attack[2] + ram * attack[7] + catapult * attack[8] + trebuchet * attack[11] + berserker * attack[12]
             attCav = lc * attack[4] + hc * attack[6] + knight * attack[9]
