@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 20 Nov 2020 20:43:20 GMT
+ * Fri, 20 Nov 2020 21:02:22 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -10143,6 +10143,7 @@ define('two/battleCalculator', [
         const barracks = battleCalculatorSettings[SETTINGS.TROOPS_BARRACKS]
         const preceptory = battleCalculatorSettings[SETTINGS.TROOPS_PRECEPTORY]
         const order = battleCalculatorSettings[SETTINGS.TROOPS_ORDER]
+        const intenseTraining = battleCalculatorSettings[SETTINGS.TROOPS_TRAINING]
         var wood = [50, 30, 60, 80, 125, 250, 200, 300, 320, 0, 40000, 4000, 1200]
         var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
         var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
@@ -10164,7 +10165,7 @@ define('two/battleCalculator', [
         let barracksEffectModifier = 1
         let barracksPreceptoryModifier = 1
         let preceptoryModifier = 1
-        let intenseTraining = 0
+        let intenseTrainingEffect = 0
 
         function checkResearches() {
             if (barracks >= 10 && barracks < 20) {
@@ -10180,8 +10181,20 @@ define('two/battleCalculator', [
         }
 
         function checkTribeEffect() {
-            const intenseTraining = battleCalculatorSettings[SETTINGS.TROOPS_TRAINING]
-            console.log(intenseTraining)
+            if (intenseTraining == 'level_1') {
+                intenseTrainingEffect = 1.04
+            } else if (intenseTraining == 'level_2') {
+                intenseTrainingEffect = 1.08
+            } else if (intenseTraining == 'level_3') {
+                intenseTrainingEffect = 1.12
+            } else if (intenseTraining == 'level_4') {
+                intenseTrainingEffect = 1.16
+            } else if (intenseTraining == 'level_5') {
+                intenseTrainingEffect = 1.20
+            } else {
+                intenseTrainingEffect = 1.00
+            }
+			
             checkPreceptory()
         }
 
@@ -10257,7 +10270,7 @@ define('two/battleCalculator', [
         }
 
         function calculateModifier() {
-            barracksEffectModifier = factor / (effectFactor * intenseTraining)
+            barracksEffectModifier = factor / (effectFactor * intenseTrainingEffect)
             barracksModifier = barracksEffectModifier / researchFactor
             barracksPreceptoryModifier = barracksModifier / preceptoryBonus
             preceptoryModifier = factor / preceptoryBonus
