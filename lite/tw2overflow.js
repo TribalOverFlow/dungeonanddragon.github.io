@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 21 Nov 2020 16:34:31 GMT
+ * Sat, 21 Nov 2020 16:52:38 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -9374,7 +9374,7 @@ define('two/battleCalculator', [
             if (catapultTarget == 'wall') {
                 buildingfrom = wallto
             } else {
-                buildingfrom = parseInt(document.getElementById('buildingLevel').value)
+                buildingfrom = battleCalculatorSettings[SETTINGS.BATTLE_TARGET_LEVEL]
             }
             catapultPowerFinalCalc()
         }
