@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 21 Nov 2020 16:52:38 GMT
+ * Sat, 21 Nov 2020 20:22:45 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6772,7 +6772,7 @@ define('two/battleCalculator', [
         var sworddamount = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_D]
         var trebuchetaamount = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_A]
         var trebuchetdamount = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_D]
-        var wallfrompre = battleCalculatorSettings[SETTINGS.BATTLE_WALL]
+        var wallfrompre = 0
         var wallto = 0
         var archeraamount_losses = 0
         var archeraamount_lossesRound1 = 0
@@ -7314,19 +7314,40 @@ define('two/battleCalculator', [
         var ramPercent = 0
         var largestGroupD = 0
         var availablebeds = 0
+        var attFaithBonus = 0
+        var defFaithBonus = 0
 
         function checkAttackerFaith() {
             faithAttacker = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_A]
+            if (faithAttacker == 'level_1') {
+                attFaithBonus = 100
+            } else if (faithAttacker == 'level_2') {
+                attFaithBonus = 105
+            } else if (faithAttacker == 'level_3') {
+                attFaithBonus = 110
+            } else {
+                attFaithBonus = 50
+            }
             checkDefenderFaith()
         }
 
         function checkDefenderFaith() {
             faithDefender = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_D]
+            if (faithDefender == 'level_1') {
+                defFaithBonus = 100
+            } else if (faithDefender == 'level_2') {
+                defFaithBonus = 105
+            } else if (faithDefender == 'level_3') {
+                defFaithBonus = 110
+            } else {
+                defFaithBonus = 50
+            }
             checkNightBonus()
         }
 
         function checkNightBonus() {
-            if (battleCalculatorSettings[SETTINGS.BATTLE_NIGHT_BONUS].checked) {
+            const nightBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_NIGHT_BONUS]
+            if (nightBonusModifier) {
                 nightBonus = 2
             } else {
                 nightBonus = 1
@@ -7335,7 +7356,8 @@ define('two/battleCalculator', [
         }
 
         function checkLeaderBonus() {
-            if (battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_LEADER].checked) {
+            const leaderBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_LEADER]
+            if (leaderBonusModifier) {
                 leaderBonus = 0.10
             } else {
                 leaderBonus = 0.00
@@ -7344,7 +7366,8 @@ define('two/battleCalculator', [
         }
 
         function checkMedicBonus() {
-            if (battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_MEDIC].checked) {
+            const medicBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_MEDIC]
+            if (medicBonusModifier) {
                 medicBonus = 0.10
             } else {
                 medicBonus = 0.00
@@ -7353,7 +7376,8 @@ define('two/battleCalculator', [
         }
 
         function checkSkillMedic() {
-            if (battleCalculatorSettings[SETTINGS.BATTLE_SKILL_MEDIC].checked) {
+            const medicSkillModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_MEDIC]
+            if (medicSkillModifier) {
                 skillMedic = 0.10
             } else {
                 skillMedic = 0.00
@@ -7362,22 +7386,142 @@ define('two/battleCalculator', [
         }
 
         function checkSkillAttack() {
-            skillAttack = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]
+            const skillAttackModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]
+            if (skillAttackModifier == 'level_1') {
+                skillAttack = 2
+            } else if (skillAttackModifier == 'level_2') {
+                skillAttack = 4
+            } else if (skillAttackModifier == 'level_3') {
+                skillAttack = 6
+            } else if (skillAttackModifier == 'level_4') {
+                skillAttack = 8
+            } else if (skillAttackModifier == 'level_5') {
+                skillAttack = 10
+            } else {
+                skillAttack = 0
+            }
             checkSkillWalls()
         }
 
         function checkSkillWalls() {
-            skillWalls = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_IRON_WALLS]
+            const skillWallsModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_IRON_WALLS]
+            if (skillWallsModifier == 'level_1') {
+                skillWalls = 1
+            } else if (skillWallsModifier == 'level_2') {
+                skillWalls = 2
+            } else if (skillWallsModifier == 'level_3') {
+                skillWalls = 3
+            } else if (skillWallsModifier == 'level_4') {
+                skillWalls = 4
+            } else if (skillWallsModifier == 'level_5') {
+                skillWalls = 5
+            } else {
+                skillWalls = 0
+            }
             checkClinique()
         }
 
         function checkClinique() {
-            skillClinique = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_CLINIQUE]
+            const skillCliniqueModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_CLINIQUE]
+            if (skillCliniqueModifier == 'level_1') {
+                skillClinique = 100
+            } else if (skillCliniqueModifier == 'level_2') {
+                skillClinique = 200
+            } else if (skillCliniqueModifier == 'level_3') {
+                skillClinique = 300
+            } else if (skillCliniqueModifier == 'level_4') {
+                skillClinique = 400
+            } else if (skillCliniqueModifier == 'level_5') {
+                skillClinique = 500
+            } else if (skillCliniqueModifier == 'level_6') {
+                skillClinique = 600
+            } else if (skillCliniqueModifier == 'level_7') {
+                skillClinique = 700
+            } else if (skillCliniqueModifier == 'level_8') {
+                skillClinique = 800
+            } else if (skillCliniqueModifier == 'level_9') {
+                skillClinique = 900
+            } else if (skillCliniqueModifier == 'level_10') {
+                skillClinique = 1000
+            } else {
+                skillClinique = 0
+            }
             checkHospital()
         }
 
         function checkHospital() {
-            hospitalBeds = battleCalculatorSettings[SETTINGS.BATTLE_HOSPITAL]
+            const hospitalBedsAvailable = battleCalculatorSettings[SETTINGS.BATTLE_HOSPITAL]
+            if (hospitalBedsAvailable == 'level_1') {
+                hospitalBeds = 100
+            } else if (hospitalBedsAvailable == 'level_2') {
+                hospitalBeds = 129
+            } else if (hospitalBedsAvailable == 'level_3') {
+                hospitalBeds = 167
+            } else if (hospitalBedsAvailable == 'level_4') {
+                hospitalBeds = 215
+            } else if (hospitalBedsAvailable == 'level_5') {
+                hospitalBeds = 278
+            } else if (hospitalBedsAvailable == 'level_6') {
+                hospitalBeds = 359
+            } else if (hospitalBedsAvailable == 'level_7') {
+                hospitalBeds = 464
+            } else if (hospitalBedsAvailable == 'level_8') {
+                hospitalBeds = 599
+            } else if (hospitalBedsAvailable == 'level_9') {
+                hospitalBeds = 774
+            } else if (hospitalBedsAvailable == 'level_10') {
+                hospitalBeds = 1000
+            } else {
+                hospitalBeds = 0
+            }
+            checkWall()
+        }
+
+        function checkWall() {
+            var wallModifier = battleCalculatorSettings[SETTINGS.BATTLE_WALL]
+            if (wallModifier == 'level_1') {
+                wallfrompre = 1
+            } else if (wallModifier == 'level_2') {
+                wallfrompre = 2
+            } else if (wallModifier == 'level_3') {
+                wallfrompre = 3
+            } else if (wallModifier == 'level_4') {
+                wallfrompre = 4
+            } else if (wallModifier == 'level_5') {
+                wallfrompre = 5
+            } else if (wallModifier == 'level_6') {
+                wallfrompre = 6
+            } else if (wallModifier == 'level_7') {
+                wallfrompre = 7
+            } else if (wallModifier == 'level_8') {
+                wallfrompre = 8
+            } else if (wallModifier == 'level_9') {
+                wallfrompre = 9
+            } else if (wallModifier == 'level_10') {
+                wallfrompre = 10
+            } else if (wallModifier == 'level_11') {
+                wallfrompre = 11
+            } else if (wallModifier == 'level_12') {
+                wallfrompre = 12
+            } else if (wallModifier == 'level_13') {
+                wallfrompre = 13
+            } else if (wallModifier == 'level_14') {
+                wallfrompre = 14
+            } else if (wallModifier == 'level_15') {
+                wallfrompre = 15
+            } else if (wallModifier == 'level_16') {
+                wallfrompre = 16
+            } else if (wallModifier == 'level_17') {
+                wallfrompre = 17
+            } else if (wallModifier == 'level_18') {
+                wallfrompre = 18
+            } else if (wallModifier == 'level_19') {
+                wallfrompre = 19
+            } else if (wallModifier == 'level_20') {
+                wallfrompre = 20
+            } else {
+                wallfrompre = 0
+            }
             checkCatapultTarget()
         }
 
@@ -7400,11 +7544,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusLc1() {
-            if (itemDeff1 == 'lc' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.lance' & levelDeff1 == 'level_1') {
                 DknightItemBonusLc1 = [1.05, 1.10]
-            } else if (itemDeff1 == 'lc' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.lance' & levelDeff1 == 'level_2') {
                 DknightItemBonusLc1 = [1.10, 1.20]
-            } else if (itemDeff1 == 'lc' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.lance' & levelDeff1 == 'level_3') {
                 DknightItemBonusLc1 = [1.20, 1.30]
             } else {
                 DknightItemBonusLc1 = [1, 1]
@@ -7413,11 +7557,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusAxe1() {
-            if (itemDeff1 == 'axe' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.battleaxe' & levelDeff1 == 'level_1') {
                 DknightItemBonusAxe1 = [1.05, 1.10]
-            } else if (itemDeff1 == 'axe' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.battleaxe' & levelDeff1 == 'level_2') {
                 DknightItemBonusAxe1 = [1.10, 1.20]
-            } else if (itemDeff1 == 'axe' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.battleaxe' & levelDeff1 == 'level_3') {
                 DknightItemBonusAxe1 = [1.20, 1.30]
             } else {
                 DknightItemBonusAxe1 = [1, 1]
@@ -7426,11 +7570,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusMa1() {
-            if (itemDeff1 == 'ma' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.compositebow' & levelDeff1 == 'level_1') {
                 DknightItemBonusMa1 = [1.05, 1.10]
-            } else if (itemDeff1 == 'ma' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.compositebow' & levelDeff1 == 'level_2') {
                 DknightItemBonusMa1 = [1.10, 1.20]
-            } else if (itemDeff1 == 'ma' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.compositebow' & levelDeff1 == 'level_3') {
                 DknightItemBonusMa1 = [1.20, 1.30]
             } else {
                 DknightItemBonusMa1 = [1, 1]
@@ -7439,11 +7583,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusSpear1() {
-            if (itemDeff1 == 'spear' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.halberd' & levelDeff1 == 'level_1') {
                 DknightItemBonusSpear1 = [1.10, 1.05]
-            } else if (itemDeff1 == 'spear' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.halberd' & levelDeff1 == 'level_2') {
                 DknightItemBonusSpear1 = [1.20, 1.10]
-            } else if (itemDeff1 == 'spear' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.halberd' & levelDeff1 == 'level_3') {
                 DknightItemBonusSpear1 = [1.30, 1.20]
             } else {
                 DknightItemBonusSpear1 = [1, 1]
@@ -7452,11 +7596,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusSword1() {
-            if (itemDeff1 == 'sword' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.longsword' & levelDeff1 == 'level_1') {
                 DknightItemBonusSword1 = [1.10, 1.05]
-            } else if (itemDeff1 == 'sword' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.longsword' & levelDeff1 == 'level_2') {
                 DknightItemBonusSword1 = [1.20, 1.10]
-            } else if (itemDeff1 == 'sword' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.longsword' & levelDeff1 == 'level_3') {
                 DknightItemBonusSword1 = [1.30, 1.20]
             } else {
                 DknightItemBonusSword1 = [1, 1]
@@ -7465,11 +7609,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusArcher1() {
-            if (itemDeff1 == 'archer' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.longbow' & levelDeff1 == 'level_1') {
                 DknightItemBonusArcher1 = [1.10, 1.05]
-            } else if (itemDeff1 == 'archer' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.longbow' & levelDeff1 == 'level_2') {
                 DknightItemBonusArcher1 = [1.20, 1.10]
-            } else if (itemDeff1 == 'archer' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.longbow' & levelDeff1 == 'level_3') {
                 DknightItemBonusArcher1 = [1.30, 1.20]
             } else {
                 DknightItemBonusArcher1 = [1, 1]
@@ -7478,11 +7622,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusHc1() {
-            if (itemDeff1 == 'hc' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.banner' & levelDeff1 == 'level_1') {
                 DknightItemBonusHc1 = [1.10, 1.10]
-            } else if (itemDeff1 == 'hc' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.banner' & levelDeff1 == 'level_2') {
                 DknightItemBonusHc1 = [1.20, 1.20]
-            } else if (itemDeff1 == 'hc' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.banner' & levelDeff1 == 'level_3') {
                 DknightItemBonusHc1 = [1.30, 1.30]
             } else {
                 DknightItemBonusHc1 = [1, 1]
@@ -7491,11 +7635,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusRam1() {
-            if (itemDeff1 == 'ram' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.star' & levelDeff1 == 'level_1') {
                 DknightItemBonusRam1 = [1.05, 1.25]
-            } else if (itemDeff1 == 'ram' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.star' & levelDeff1 == 'level_2') {
                 DknightItemBonusRam1 = [1.10, 1.50]
-            } else if (itemDeff1 == 'ram' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.star' & levelDeff1 == 'level_3') {
                 DknightItemBonusRam1 = [1.20, 2.00]
             } else {
                 DknightItemBonusRam1 = [1, 1]
@@ -7504,11 +7648,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusCatapult1() {
-            if (itemDeff1 == 'catapult' & levelDeff1 == 1) {
+            if (itemDeff1 == 'battle.bonfire' & levelDeff1 == 'level_1') {
                 DknightItemBonusCatapult1 = [1.05, 1.25]
-            } else if (itemDeff1 == 'catapult' & levelDeff1 == 2) {
+            } else if (itemDeff1 == 'battle.bonfire' & levelDeff1 == 'level_2') {
                 DknightItemBonusCatapult1 = [1.10, 1.50]
-            } else if (itemDeff1 == 'catapult' & levelDeff1 == 3) {
+            } else if (itemDeff1 == 'battle.bonfire' & levelDeff1 == 'level_3') {
                 DknightItemBonusCatapult1 = [1.20, 2.00]
             } else {
                 DknightItemBonusCatapult1 = [1, 1]
@@ -7517,11 +7661,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusLc2() {
-            if (itemDeff2 == 'lc' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.lance' & levelDeff2 == 'level_1') {
                 DknightItemBonusLc2 = [1.05, 1.10]
-            } else if (itemDeff2 == 'lc' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.lance' & levelDeff2 == 'level_2') {
                 DknightItemBonusLc2 = [1.10, 1.20]
-            } else if (itemDeff2 == 'lc' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.lance' & levelDeff2 == 'level_3') {
                 DknightItemBonusLc2 = [1.20, 1.30]
             } else {
                 DknightItemBonusLc2 = [1, 1]
@@ -7530,11 +7674,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusAxe2() {
-            if (itemDeff2 == 'axe' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.battleaxe' & levelDeff2 == 'level_1') {
                 DknightItemBonusAxe2 = [1.05, 1.10]
-            } else if (itemDeff2 == 'axe' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.battleaxe' & levelDeff2 == 'level_2') {
                 DknightItemBonusAxe2 = [1.10, 1.20]
-            } else if (itemDeff2 == 'axe' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.battleaxe' & levelDeff2 == 'level_3') {
                 DknightItemBonusAxe2 = [1.20, 1.30]
             } else {
                 DknightItemBonusAxe2 = [1, 1]
@@ -7543,11 +7687,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusMa2() {
-            if (itemDeff2 == 'ma' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.compositebow' & levelDeff2 == 'level_1') {
                 DknightItemBonusMa2 = [1.05, 1.10]
-            } else if (itemDeff2 == 'ma' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.compositebow' & levelDeff2 == 'level_2') {
                 DknightItemBonusMa2 = [1.10, 1.20]
-            } else if (itemDeff2 == 'ma' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.compositebow' & levelDeff2 == 'level_3') {
                 DknightItemBonusMa2 = [1.20, 1.30]
             } else {
                 DknightItemBonusMa2 = [1, 1]
@@ -7556,11 +7700,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusSpear2() {
-            if (itemDeff2 == 'spear' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.halberd' & levelDeff2 == 'level_1') {
                 DknightItemBonusSpear2 = [1.10, 1.05]
-            } else if (itemDeff2 == 'spear' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.halberd' & levelDeff2 == 'level_2') {
                 DknightItemBonusSpear2 = [1.20, 1.10]
-            } else if (itemDeff2 == 'spear' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.halberd' & levelDeff2 == 'level_3') {
                 DknightItemBonusSpear2 = [1.30, 1.20]
             } else {
                 DknightItemBonusSpear2 = [1, 1]
@@ -7569,11 +7713,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusSword2() {
-            if (itemDeff2 == 'sword' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.longsword' & levelDeff2 == 'level_1') {
                 DknightItemBonusSword2 = [1.10, 1.05]
-            } else if (itemDeff2 == 'sword' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.longsword' & levelDeff2 == 'level_2') {
                 DknightItemBonusSword2 = [1.20, 1.10]
-            } else if (itemDeff2 == 'sword' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.longsword' & levelDeff2 == 'level_3') {
                 DknightItemBonusSword2 = [1.30, 1.20]
             } else {
                 DknightItemBonusSword2 = [1, 1]
@@ -7582,11 +7726,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusArcher2() {
-            if (itemDeff2 == 'archer' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.longbow' & levelDeff2 == 'level_1') {
                 DknightItemBonusArcher2 = [1.10, 1.05]
-            } else if (itemDeff2 == 'archer' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.longbow' & levelDeff2 == 'level_2') {
                 DknightItemBonusArcher2 = [1.20, 1.10]
-            } else if (itemDeff2 == 'archer' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.longbow' & levelDeff2 == 'level_3') {
                 DknightItemBonusArcher2 = [1.30, 1.20]
             } else {
                 DknightItemBonusArcher2 = [1, 1]
@@ -7595,11 +7739,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusHc2() {
-            if (itemDeff2 == 'hc' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.banner' & levelDeff2 == 'level_1') {
                 DknightItemBonusHc2 = [1.10, 1.10]
-            } else if (itemDeff2 == 'hc' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.banner' & levelDeff2 == 'level_2') {
                 DknightItemBonusHc2 = [1.20, 1.20]
-            } else if (itemDeff2 == 'hc' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.banner' & levelDeff2 == 'level_3') {
                 DknightItemBonusHc2 = [1.30, 1.30]
             } else {
                 DknightItemBonusHc2 = [1, 1]
@@ -7608,11 +7752,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusRam2() {
-            if (itemDeff2 == 'ram' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.star' & levelDeff2 == 'level_1') {
                 DknightItemBonusRam2 = [1.05, 1.25]
-            } else if (itemDeff2 == 'ram' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.star' & levelDeff2 == 'level_2') {
                 DknightItemBonusRam2 = [1.10, 1.50]
-            } else if (itemDeff2 == 'ram' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.star' & levelDeff2 == 'level_3') {
                 DknightItemBonusRam2 = [1.20, 2.00]
             } else {
                 DknightItemBonusRam2 = [1, 1]
@@ -7621,11 +7765,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusCatapult2() {
-            if (itemDeff2 == 'catapult' & levelDeff2 == 1) {
+            if (itemDeff2 == 'battle.bonfire' & levelDeff2 == 'level_1') {
                 DknightItemBonusCatapult2 = [1.05, 1.25]
-            } else if (itemDeff2 == 'catapult' & levelDeff2 == 2) {
+            } else if (itemDeff2 == 'battle.bonfire' & levelDeff2 == 'level_2') {
                 DknightItemBonusCatapult2 = [1.10, 1.50]
-            } else if (itemDeff2 == 'catapult' & levelDeff2 == 3) {
+            } else if (itemDeff2 == 'battle.bonfire' & levelDeff2 == 'level_3') {
                 DknightItemBonusCatapult2 = [1.20, 2.00]
             } else {
                 DknightItemBonusCatapult2 = [1, 1]
@@ -7634,11 +7778,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusLc3() {
-            if (itemDeff3 == 'lc' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.lance' & levelDeff3 == 'level_1') {
                 DknightItemBonusLc3 = [1.05, 1.10]
-            } else if (itemDeff3 == 'lc' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.lance' & levelDeff3 == 'level_2') {
                 DknightItemBonusLc3 = [1.10, 1.20]
-            } else if (itemDeff3 == 'lc' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.lance' & levelDeff3 == 'level_3') {
                 DknightItemBonusLc3 = [1.20, 1.30]
             } else {
                 DknightItemBonusLc3 = [1, 1]
@@ -7647,11 +7791,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusAxe3() {
-            if (itemDeff3 == 'axe' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.battleaxe' & levelDeff3 == 'level_1') {
                 DknightItemBonusAxe3 = [1.05, 1.10]
-            } else if (itemDeff3 == 'axe' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.battleaxe' & levelDeff3 == 'level_2') {
                 DknightItemBonusAxe3 = [1.10, 1.20]
-            } else if (itemDeff3 == 'axe' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.battleaxe' & levelDeff3 == 'level_3') {
                 DknightItemBonusAxe3 = [1.20, 1.30]
             } else {
                 DknightItemBonusAxe3 = [1, 1]
@@ -7660,11 +7804,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusMa3() {
-            if (itemDeff3 == 'ma' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.compositebow' & levelDeff3 == 'level_1') {
                 DknightItemBonusMa3 = [1.05, 1.10]
-            } else if (itemDeff3 == 'ma' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.compositebow' & levelDeff3 == 'level_2') {
                 DknightItemBonusMa3 = [1.10, 1.20]
-            } else if (itemDeff3 == 'ma' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.compositebow' & levelDeff3 == 'level_3') {
                 DknightItemBonusMa3 = [1.20, 1.30]
             } else {
                 DknightItemBonusMa3 = [1, 1]
@@ -7673,11 +7817,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusSpear3() {
-            if (itemDeff3 == 'spear' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.halberd' & levelDeff3 == 'level_1') {
                 DknightItemBonusSpear3 = [1.10, 1.05]
-            } else if (itemDeff3 == 'spear' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.halberd' & levelDeff3 == 'level_2') {
                 DknightItemBonusSpear3 = [1.20, 1.10]
-            } else if (itemDeff3 == 'spear' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.halberd' & levelDeff3 == 'level_3') {
                 DknightItemBonusSpear3 = [1.30, 1.20]
             } else {
                 DknightItemBonusSpear3 = [1, 1]
@@ -7686,11 +7830,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusSword3() {
-            if (itemDeff3 == 'sword' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.longsword' & levelDeff3 == 'level_1') {
                 DknightItemBonusSword3 = [1.10, 1.05]
-            } else if (itemDeff3 == 'sword' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.longsword' & levelDeff3 == 'level_2') {
                 DknightItemBonusSword3 = [1.20, 1.10]
-            } else if (itemDeff3 == 'sword' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.longsword' & levelDeff3 == 'level_3') {
                 DknightItemBonusSword3 = [1.30, 1.20]
             } else {
                 DknightItemBonusSword3 = [1, 1]
@@ -7699,11 +7843,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusArcher3() {
-            if (itemDeff3 == 'archer' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.longbow' & levelDeff3 == 'level_1') {
                 DknightItemBonusArcher3 = [1.10, 1.05]
-            } else if (itemDeff3 == 'archer' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.longbow' & levelDeff3 == 'level_2') {
                 DknightItemBonusArcher3 = [1.20, 1.10]
-            } else if (itemDeff3 == 'archer' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.longbow' & levelDeff3 == 'level_3') {
                 DknightItemBonusArcher3 = [1.30, 1.20]
             } else {
                 DknightItemBonusArcher3 = [1, 1]
@@ -7712,11 +7856,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusHc3() {
-            if (itemDeff3 == 'hc' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.banner' & levelDeff3 == 'level_1') {
                 DknightItemBonusHc3 = [1.10, 1.10]
-            } else if (itemDeff3 == 'hc' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.banner' & levelDeff3 == 'level_2') {
                 DknightItemBonusHc3 = [1.20, 1.20]
-            } else if (itemDeff3 == 'hc' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.banner' & levelDeff3 == 'level_3') {
                 DknightItemBonusHc3 = [1.30, 1.30]
             } else {
                 DknightItemBonusHc3 = [1, 1]
@@ -7725,11 +7869,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusRam3() {
-            if (itemDeff3 == 'ram' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.star' & levelDeff3 == 'level_1') {
                 DknightItemBonusRam3 = [1.05, 1.25]
-            } else if (itemDeff3 == 'ram' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.star' & levelDeff3 == 'level_2') {
                 DknightItemBonusRam3 = [1.10, 1.50]
-            } else if (itemDeff3 == 'ram' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.star' & levelDeff3 == 'level_3') {
                 DknightItemBonusRam3 = [1.20, 2.00]
             } else {
                 DknightItemBonusRam3 = [1, 1]
@@ -7738,11 +7882,11 @@ define('two/battleCalculator', [
         }
 
         function DItemBonusCatapult3() {
-            if (itemDeff3 == 'catapult' & levelDeff3 == 1) {
+            if (itemDeff3 == 'battle.bonfire' & levelDeff3 == 'level_1') {
                 DknightItemBonusCatapult3 = [1.05, 1.25]
-            } else if (itemDeff3 == 'catapult' & levelDeff3 == 2) {
+            } else if (itemDeff3 == 'battle.bonfire' & levelDeff3 == 'level_2') {
                 DknightItemBonusCatapult3 = [1.10, 1.50]
-            } else if (itemDeff3 == 'catapult' & levelDeff3 == 3) {
+            } else if (itemDeff3 == 'battle.bonfire' & levelDeff3 == 'level_3') {
                 DknightItemBonusCatapult3 = [1.20, 2.00]
             } else {
                 DknightItemBonusCatapult3 = [1, 1]
@@ -7868,11 +8012,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusLc() {
-            if (itemOff == 'lc' & levelOff == 1) {
+            if (itemOff == 'battle.lance' & levelOff == 'level_1') {
                 knightItemBonusLc = [1.05, 1.10]
-            } else if (itemOff == 'lc' & levelOff == 2) {
+            } else if (itemOff == 'battle.lance' & levelOff == 'level_2') {
                 knightItemBonusLc = [1.10, 1.20]
-            } else if (itemOff == 'lc' & levelOff == 3) {
+            } else if (itemOff == 'battle.lance' & levelOff == 'level_3') {
                 knightItemBonusLc = [1.20, 1.30]
             } else {
                 knightItemBonusLc = [1, 1]
@@ -7881,11 +8025,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusAxe() {
-            if (itemOff == 'axe' & levelOff == 1) {
+            if (itemOff == 'battle.battleaxe' & levelOff == 'level_1') {
                 knightItemBonusAxe = [1.05, 1.10]
-            } else if (itemOff == 'axe' & levelOff == 2) {
+            } else if (itemOff == 'battle.battleaxe' & levelOff == 'level_2') {
                 knightItemBonusAxe = [1.10, 1.20]
-            } else if (itemOff == 'axe' & levelOff == 3) {
+            } else if (itemOff == 'battle.battleaxe' & levelOff == 'level_3') {
                 knightItemBonusAxe = [1.20, 1.30]
             } else {
                 knightItemBonusAxe = [1, 1]
@@ -7894,11 +8038,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusMa() {
-            if (itemOff == 'ma' & levelOff == 1) {
+            if (itemOff == 'battle.compositebow' & levelOff == 'level_1') {
                 knightItemBonusMa = [1.05, 1.10]
-            } else if (itemOff == 'ma' & levelOff == 2) {
+            } else if (itemOff == 'battle.compositebow' & levelOff == 'level_2') {
                 knightItemBonusMa = [1.10, 1.20]
-            } else if (itemOff == 'ma' & levelOff == 3) {
+            } else if (itemOff == 'battle.compositebow' & levelOff == 'level_3') {
                 knightItemBonusMa = [1.20, 1.30]
             } else {
                 knightItemBonusMa = [1, 1]
@@ -7907,11 +8051,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusSpear() {
-            if (itemOff == 'spear' & levelOff == 1) {
+            if (itemOff == 'battle.halberd' & levelOff == 'level_1') {
                 knightItemBonusSpear = [1.10, 1.05]
-            } else if (itemOff == 'spear' & levelOff == 2) {
+            } else if (itemOff == 'battle.halberd' & levelOff == 'level_2') {
                 knightItemBonusSpear = [1.20, 1.10]
-            } else if (itemOff == 'spear' & levelOff == 3) {
+            } else if (itemOff == 'battle.halberd' & levelOff == 'level_3') {
                 knightItemBonusSpear = [1.30, 1.20]
             } else {
                 knightItemBonusSpear = [1, 1]
@@ -7920,11 +8064,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusSword() {
-            if (itemOff == 'sword' & levelOff == 1) {
+            if (itemOff == 'battle.longsword' & levelOff == 'level_1') {
                 knightItemBonusSword = [1.10, 1.05]
-            } else if (itemOff == 'sword' & levelOff == 2) {
+            } else if (itemOff == 'battle.longsword' & levelOff == 'level_2') {
                 knightItemBonusSword = [1.20, 1.10]
-            } else if (itemOff == 'sword' & levelOff == 3) {
+            } else if (itemOff == 'battle.longsword' & levelOff == 'level_3') {
                 knightItemBonusSword = [1.30, 1.20]
             } else {
                 knightItemBonusSword = [1, 1]
@@ -7933,11 +8077,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusArcher() {
-            if (itemOff == 'archer' & levelOff == 1) {
+            if (itemOff == 'battle.longbow' & levelOff == 'level_1') {
                 knightItemBonusArcher = [1.10, 1.05]
-            } else if (itemOff == 'archer' & levelOff == 2) {
+            } else if (itemOff == 'battle.longbow' & levelOff == 'level_2') {
                 knightItemBonusArcher = [1.20, 1.10]
-            } else if (itemOff == 'archer' & levelOff == 3) {
+            } else if (itemOff == 'battle.longbow' & levelOff == 'level_3') {
                 knightItemBonusArcher = [1.30, 1.20]
             } else {
                 knightItemBonusArcher = [1, 1]
@@ -7946,11 +8090,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusHc() {
-            if (itemOff == 'hc' & levelOff == 1) {
+            if (itemOff == 'battle.banner' & levelOff == 'level_1') {
                 knightItemBonusHc = [1.10, 1.10]
-            } else if (itemOff == 'hc' & levelOff == 2) {
+            } else if (itemOff == 'battle.banner' & levelOff == 'level_2') {
                 knightItemBonusHc = [1.20, 1.20]
-            } else if (itemOff == 'hc' & levelOff == 3) {
+            } else if (itemOff == 'battle.banner' & levelOff == 'level_3') {
                 knightItemBonusHc = [1.30, 1.30]
             } else {
                 knightItemBonusHc = [1, 1]
@@ -7959,11 +8103,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusRam() {
-            if (itemOff == 'ram' & levelOff == 1) {
+            if (itemOff == 'battle.star' & levelOff == 'level_1') {
                 knightItemBonusRam = [1.05, 1.25]
-            } else if (itemOff == 'ram' & levelOff == 2) {
+            } else if (itemOff == 'battle.star' & levelOff == 'level_2') {
                 knightItemBonusRam = [1.10, 1.50]
-            } else if (itemOff == 'ram' & levelOff == 3) {
+            } else if (itemOff == 'battle.star' & levelOff == 'level_3') {
                 knightItemBonusRam = [1.20, 2.00]
             } else {
                 knightItemBonusRam = [1, 1]
@@ -7972,11 +8116,11 @@ define('two/battleCalculator', [
         }
 
         function ItemBonusCatapult() {
-            if (itemOff == 'catapult' & levelOff == 1) {
+            if (itemOff == 'battle.bonfire' & levelOff == 'level_1') {
                 knightItemBonusCatapult = [1.05, 1.25]
-            } else if (itemOff == 'catapult' & levelOff == 2) {
+            } else if (itemOff == 'battle.bonfire' & levelOff == 'level_2') {
                 knightItemBonusCatapult = [1.10, 1.50]
-            } else if (itemOff == 'catapult' & levelOff == 3) {
+            } else if (itemOff == 'battle.bonfire' & levelOff == 'level_3') {
                 knightItemBonusCatapult = [1.20, 2.00]
             } else {
                 knightItemBonusCatapult = [1, 1]
@@ -8040,7 +8184,7 @@ define('two/battleCalculator', [
         }
 
         function overalModifierOffCalc() {
-            attackmodifier = Math.round((((faithAttacker / 100) * moral * (1 + lucky)) + (skillAttack / 100) + leaderBonus) * 1000) / 1000
+            attackmodifier = Math.round((((attFaithBonus / 100) * moral * (1 + lucky)) + (skillAttack / 100) + leaderBonus) * 1000) / 1000
             trebuchetModifierCalc()
         }
 
@@ -8072,12 +8216,12 @@ define('two/battleCalculator', [
         }
 
         function itemramsoffeffectCalc() {
-            if (itemOff == 'ram') {
-                if (levelOff == 1) {
+            if (itemOff == 'battle.star') {
+                if (levelOff == 'level_1') {
                     itemramsoffeffect = [1.05, 1.25]
-                } else if (levelOff == 2) {
+                } else if (levelOff == 'level_2') {
                     itemramsoffeffect = [1.10, 1.50]
-                } else if (levelOff == 3) {
+                } else if (levelOff == 'level_3') {
                     itemramsoffeffect = [1.20, 2.00]
                 } else {
                     itemramsoffeffect = [1, 1]
@@ -8168,7 +8312,7 @@ define('two/battleCalculator', [
         }
 
         function overalModifierDefCalc() {
-            defencemodifier = Math.round((((faithDefender / 100) * (1 + battleBonusDef)) * nightBonus) * 1000) / 1000
+            defencemodifier = Math.round((((defFaithBonus / 100) * (1 + battleBonusDef)) * nightBonus) * 1000) / 1000
             catapultaamountfterTrebuchetCalc()
         }
 
@@ -8214,7 +8358,6 @@ define('two/battleCalculator', [
         function totalProvisionsRound1() {
             provisionAttackerRound1Total = spearaamount * food[0] + swordaamount * food[1] + axeaamount * food[2] + archeraamount * food[3] + lcaamount * food[4] + maaamount * food[5] + hcaamount * food[6] + ramsPreRound * food[7] + catapultPreRound * food[8] + knightaamount * food[9] + snobaamount * food[10] + trebuchetaamount * food[11] + berserkeraamount * food[12]
             provisionDefenderRound1Total = speardamount * food[0] + sworddamount * food[1] + axedamount * food[2] + archerdamount * food[3] + lcdamount * food[4] + madamount * food[5] + hcdamount * food[6] + ramdamount * food[7] + catapultdamount * food[8] + knightdamount * food[9] + snobdamount * food[10] + trebuchetdamount * food[11] + berserkerdamount * food[12]
-			
             console.log(provisionDefenderRound1Total, provisionAttackerRound1Total)
             siegeProvisionRound1Calc()
         }
@@ -8269,7 +8412,6 @@ define('two/battleCalculator', [
             } else {
                 lossesPercentRound1Arc = Math.round((provisionAttackerArcRound1 / provisionAttackerRound1Total) * 10000) / 10000
             }
-			
             console.log(lossesPercentRound1Arc)
             survivorsRound1Modified()
         }
@@ -8546,7 +8688,6 @@ define('two/battleCalculator', [
         function survivorsProvisionsRound1Total() {
             survivorsAttackerRound1Total = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + archeraamount_survivorsRound1 * food[3] + lcaamount_survivorsRound1 * food[4] + maaamount_survivorsRound1 * food[5] + hcaamount_survivorsRound1 * food[6] + ramaamount_survivorsRound1 * food[7] + catapultaamount_survivorsRound1 * food[8] + trebuchetaamount_survivorsRound1 * food[11] + berserkeraamount_survivorsRound1 * food[12] + snobaamount_survivorsRound1 * food[10] + knightaamount_survivorsRound1 * food[9]
             survivorsDefenderRound1Total = speardamount_survivorsRound1 * food[0] + sworddamount_survivorsRound1 * food[1] + axedamount_survivorsRound1 * food[2] + archerdamount_survivorsRound1 * food[3] + lcdamount_survivorsRound1 * food[4] + madamount_survivorsRound1 * food[5] + hcdamount_survivorsRound1 * food[6] + ramdamount_survivorsRound1 * food[7] + catapultdamount_survivorsRound1 * food[8] + trebuchetdamount_survivorsRound1 * food[11] + berserkerdamount_survivorsRound1 * food[12] + snobdamount_survivorsRound1 * food[10] + knightdamount_survivorsRound1 * food[9]
-			
             console.log(survivorsAttackerRound1Total, survivorsDefenderRound1Total)
             armyLossesPercentEachRoundCalc()
         }
@@ -8559,7 +8700,6 @@ define('two/battleCalculator', [
             } else {
                 armyLossesPercentEachRound = Math.pow((strentghattack / strentghdefend), (1 / 2) / (strentghdefend / strentghattack))
             }
-			
             console.log(armyLossesPercentEachRound)
             totalProvisionsRound2()
         }
@@ -8567,7 +8707,6 @@ define('two/battleCalculator', [
         function totalProvisionsRound2() {
             provisionAttackerRound2Total = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + archeraamount_survivorsRound1 * food[3] + lcaamount_survivorsRound1 * food[4] + maaamount_survivorsRound1 * food[5] + hcaamount_survivorsRound1 * food[6] + ramaamount_survivorsRound1 * food[7] + catapultaamount_survivorsRound1 * food[8] + knightaamount_survivorsRound1 * food[9] + snobaamount_survivorsRound1 * food[10] + trebuchetaamount_survivorsRound1 * food[11] + berserkeraamount_survivorsRound1 * food[12]
             provisionDefenderRound2Total = speardamount_survivorsRound1 * food[0] + sworddamount_survivorsRound1 * food[1] + axedamount_survivorsRound1 * food[2] + archerdamount_survivorsRound1 * food[3] + lcdamount_survivorsRound1 * food[4] + madamount_survivorsRound1 * food[5] + hcdamount_survivorsRound1 * food[6] + ramdamount_survivorsRound1 * food[7] + catapultdamount_survivorsRound1 * food[8] + knightdamount_survivorsRound1 * food[9] + snobdamount_survivorsRound1 * food[10] + trebuchetdamount_survivorsRound1 * food[11] + berserkerdamount_survivorsRound1 * food[12]
-			
             console.log(provisionDefenderRound2Total, provisionAttackerRound2Total)
             siegeProvisionRound2Calc()
         }
@@ -8905,7 +9044,6 @@ define('two/battleCalculator', [
         function survivorsProvisionsRound2Total() {
             survivorsAttackerRound2Total = spearaamount_survivorsRound2 * food[0] + swordaamount_survivorsRound2 * food[1] + axeaamount_survivorsRound2 * food[2] + archeraamount_survivorsRound2 * food[3] + lcaamount_survivorsRound2 * food[4] + maaamount_survivorsRound2 * food[5] + hcaamount_survivorsRound2 * food[6] + ramaamount_survivorsRound2 * food[7] + catapultaamount_survivorsRound2 * food[8] + trebuchetaamount_survivorsRound2 * food[11] + berserkeraamount_survivorsRound2 * food[12] + snobaamount_survivorsRound2 * food[10] + knightaamount_survivorsRound2 * food[9]
             survivorsDefenderRound2Total = speardamount_survivorsRound2 * food[0] + sworddamount_survivorsRound2 * food[1] + axedamount_survivorsRound2 * food[2] + archerdamount_survivorsRound2 * food[3] + lcdamount_survivorsRound2 * food[4] + madamount_survivorsRound2 * food[5] + hcdamount_survivorsRound2 * food[6] + ramdamount_survivorsRound2 * food[7] + catapultdamount_survivorsRound2 * food[8] + trebuchetdamount_survivorsRound2 * food[11] + berserkerdamount_survivorsRound2 * food[12] + snobdamount_survivorsRound2 * food[10] + knightdamount_survivorsRound2 * food[9]
-			
             console.log(survivorsAttackerRound2Total, survivorsDefenderRound2Total)
             totalProvisionsRound3()
         }
@@ -9068,7 +9206,6 @@ define('two/battleCalculator', [
         function strengthRound3() {
             strengthAttackerRound3 = strengthAttackerInfRound3 + strengthAttackerCavRound3 + strengthAttackerArcRound3
             strengthDefenderRound3 = strengthDefenderInfRound3 + strengthDefenderCavRound3 + strengthDefenderArcRound3
-			
             console.log(strengthDefenderRound3, strengthAttackerRound3)
             killRateRound3defenderInfCalc()
         }
@@ -9251,7 +9388,6 @@ define('two/battleCalculator', [
         function survivorsProvisionsRound3Total() {
             survivorsAttackerRound3Total = spearaamount_survivorsRound3 * food[0] + swordaamount_survivorsRound3 * food[1] + axeaamount_survivorsRound3 * food[2] + archeraamount_survivorsRound3 * food[3] + lcaamount_survivorsRound3 * food[4] + maaamount_survivorsRound3 * food[5] + hcaamount_survivorsRound3 * food[6] + ramaamount_survivorsRound3 * food[7] + catapultaamount_survivorsRound3 * food[8] + trebuchetaamount_survivorsRound3 * food[11] + berserkeraamount_survivorsRound3 * food[12] + snobaamount_survivorsRound3 * food[10] + knightaamount_survivorsRound3 * food[9]
             survivorsDefenderRound3Total = speardsurvived * food[0] + sworddsurvived * food[1] + axedsurvived * food[2] + archerdsurvived * food[3] + lcdsurvived * food[4] + madsurvived * food[5] + hcdsurvived * food[6] + ramdsurvived * food[7] + catapultdsurvived * food[8] + trebuchetdsurvived * food[11] + berserkerdsurvived * food[12] + snobdsurvived * food[10] + knightdsurvived * food[9]
-			
             console.log(survivorsAttackerRound3Total, survivorsDefenderRound3Total)
             afterBattleLosses()
         }
@@ -10171,7 +10307,6 @@ define('two/battleCalculator', [
             } else {
                 intenseTrainingEffect = 1.00
             }
-			
             checkPreceptory()
         }
 
