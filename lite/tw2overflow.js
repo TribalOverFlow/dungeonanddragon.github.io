@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 21 Nov 2020 20:22:45 GMT
+ * Sun, 22 Nov 2020 19:03:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6473,19 +6473,15 @@ define('two/battleCalculator', [
     let snobdsurvived = null
     let knightdamount = null
     let knightdlosses = null
-    let knightdrevived = null
     let knightdsurvived = null
     let ramdamount = null
     let ramdlosses = null
-    let ramdrevived = null
     let ramdsurvived = null
     let catapultdamount = null
     let catapultdlosses = null
-    let catapultdrevived = null
     let catapultdsurvived = null
     let trebuchetdamount = null
     let trebuchetdlosses = null
-    let trebuchetdrevived = null
     let trebuchetdsurvived = null
     let lcdamount = null
     let lcdlosses = null
@@ -6501,66 +6497,64 @@ define('two/battleCalculator', [
     let hcdsurvived = null
     let berserkerdamount = null
     let berserkerdlosses = null
-    let berserkerdrevived = null
     let berserkerdsurvived = null
     let spearaamount = null
     let spearalosses = null
     let speararevived = null
-    let spearasurvived = null
+    let spearasurvivorsRound3 = null
     let swordaamount = null
     let swordalosses = null
     let swordarevived = null
-    let swordasurvived = null
+    let swordasurvivorsRound3 = null
     let axeaamount = null
     let axealosses = null
     let axearevived = null
-    let axeasurvived = null
+    let axeasurvivorsRound3 = null
     let archeraamount = null
     let archeralosses = null
     let archerarevived = null
-    let archerasurvived = null
+    let archerasurvivorsRound3 = null
     let snobaamount = null
     let snobalosses = null
     let snobarevived = null
-    let snobasurvived = null
+    let snobasurvivorsRound3 = null
     let knightaamount = null
     let knightalosses = null
     let knightarevived = null
-    let knightasurvived = null
+    let knightasurvivorsRound3 = null
     let ramaamount = null
     let ramalosses = null
     let ramarevived = null
-    let ramasurvived = null
+    let ramasurvivorsRound3 = null
     let catapultaamount = null
     let catapultalosses = null
     let catapultarevived = null
-    let catapultasurvived = null
+    let catapultasurvivorsRound3 = null
     let trebuchetaamount = null
     let trebuchetalosses = null
     let trebuchetarevived = null
-    let trebuchetasurvived = null
+    let trebuchetasurvivorsRound3 = null
     let lcaamount = null
     let lcalosses = null
     let lcarevived = null
-    let lcasurvived = null
+    let lcasurvivorsRound3 = null
     let maaamount = null
     let maalosses = null
     let maarevived = null
-    let maasurvived = null
+    let maasurvivorsRound3 = null
     let hcaamount = null
     let hcalosses = null
     let hcarevived = null
-    let hcasurvived = null
+    let hcasurvivorsRound3 = null
     let berserkeraamount = null
     let berserkeralosses = null
     let berserkerarevived = null
-    let berserkerasurvived = null
+    let berserkerasurvivorsRound3 = null
     let buildingfrom = null
     let buildingto = null
     let wallfrom = null
     let wallto = null
     let wallfrompre = null
-    let walltopre = null
     let target = null
     let attackprovisions = null
     let defenceprovisions = null
@@ -6584,21 +6578,21 @@ define('two/battleCalculator', [
         SETTINGS: 'battle_calculator_settings'
     }
     const BATTLE_ITEMS_LEVELS = {
-        [B_ITEMS_LEVELS.LEVEL_1]: 1,
-        [B_ITEMS_LEVELS.LEVEL_2]: 2,
-        [B_ITEMS_LEVELS.LEVEL_3]: 3
+        [B_ITEMS_LEVELS.LEVEL_1]: 'level_1',
+        [B_ITEMS_LEVELS.LEVEL_2]: 'level_2',
+        [B_ITEMS_LEVELS.LEVEL_3]: 'level_3'
     }
     const BATTLE_ITEMS = {
-        [B_ITEMS.HALBERD_OF_GUAN_YU]: 'spear',
-        [B_ITEMS.PARACELSUS_LONGSWORD]: 'sword',
-        [B_ITEMS.THORGARDS_BATTLE_AXE]: 'axe',
-        [B_ITEMS.NIMRODS_LONGBOW]: 'archer',
-        [B_ITEMS.MIESZKOS_LANCE]: 'lc',
-        [B_ITEMS.NIMRODS_COMPOSITE_BOW]: 'ma',
-        [B_ITEMS.BAPTISTES_BANNER]: 'hc',
-        [B_ITEMS.CAROLS_MORNING_STAR]: 'ram',
-        [B_ITEMS.ALETHEIAS_BONFIRE]: 'catapult',
-        [B_ITEMS.VASCOS_SCEPTER]: 'snob'
+        [B_ITEMS.HALBERD_OF_GUAN_YU]: 'battle.halberd',
+        [B_ITEMS.PARACELSUS_LONGSWORD]: 'battle.longsword',
+        [B_ITEMS.THORGARDS_BATTLE_AXE]: 'battle.battleax',
+        [B_ITEMS.NIMRODS_LONGBOW]: 'battle.longbow',
+        [B_ITEMS.MIESZKOS_LANCE]: 'battle.lance',
+        [B_ITEMS.NIMRODS_COMPOSITE_BOW]: 'battle.compositebow',
+        [B_ITEMS.BAPTISTES_BANNER]: 'battle.banner',
+        [B_ITEMS.CAROLS_MORNING_STAR]: 'battle.star',
+        [B_ITEMS.ALETHEIAS_BONFIRE]: 'battle.bonfire',
+        [B_ITEMS.VASCOS_SCEPTER]: 'battle.scepter'
     }
     const BATTLE_CAT_TARGET = {
         [B_CAT_TARGET.HEADQUARTER]: 'headquarter',
@@ -6620,71 +6614,71 @@ define('two/battleCalculator', [
         [B_CAT_TARGET.ACADEMY]: 'academy'
     }
     const BATTLE_CHURCHES = {
-        [B_CHURCHES.NO_CHURCH]: 50,
-        [B_CHURCHES.LEVEL_1]: 100,
-        [B_CHURCHES.LEVEL_2]: 105,
-        [B_CHURCHES.LEVEL_3]: 110
+        [B_CHURCHES.NO_CHURCH]: 'without',
+        [B_CHURCHES.LEVEL_1]: 'level_1',
+        [B_CHURCHES.LEVEL_2]: 'level_2',
+        [B_CHURCHES.LEVEL_3]: 'level_3'
     }
     const BATTLE_WALLS = {
-        [B_WALLS.NO_WALL]: 0,
-        [B_WALLS.LEVEL_1]: 5,
-        [B_WALLS.LEVEL_2]: 10,
-        [B_WALLS.LEVEL_3]: 15,
-        [B_WALLS.LEVEL_4]: 20,
-        [B_WALLS.LEVEL_5]: 25,
-        [B_WALLS.LEVEL_6]: 30,
-        [B_WALLS.LEVEL_7]: 35,
-        [B_WALLS.LEVEL_8]: 40,
-        [B_WALLS.LEVEL_9]: 45,
-        [B_WALLS.LEVEL_10]: 50,
-        [B_WALLS.LEVEL_11]: 55,
-        [B_WALLS.LEVEL_12]: 60,
-        [B_WALLS.LEVEL_13]: 65,
-        [B_WALLS.LEVEL_14]: 70,
-        [B_WALLS.LEVEL_15]: 75,
-        [B_WALLS.LEVEL_16]: 80,
-        [B_WALLS.LEVEL_17]: 85,
-        [B_WALLS.LEVEL_18]: 90,
-        [B_WALLS.LEVEL_19]: 95,
-        [B_WALLS.LEVEL_20]: 100
+        [B_WALLS.NO_WALL]: 'without',
+        [B_WALLS.LEVEL_1]: 'level_1',
+        [B_WALLS.LEVEL_2]: 'level_2',
+        [B_WALLS.LEVEL_3]: 'level_3',
+        [B_WALLS.LEVEL_4]: 'level_4',
+        [B_WALLS.LEVEL_5]: 'level_5',
+        [B_WALLS.LEVEL_6]: 'level_6',
+        [B_WALLS.LEVEL_7]: 'level_7',
+        [B_WALLS.LEVEL_8]: 'level_8',
+        [B_WALLS.LEVEL_9]: 'level_9',
+        [B_WALLS.LEVEL_10]: 'level_10',
+        [B_WALLS.LEVEL_11]: 'level_11',
+        [B_WALLS.LEVEL_12]: 'level_12',
+        [B_WALLS.LEVEL_13]: 'level_13',
+        [B_WALLS.LEVEL_14]: 'level_14',
+        [B_WALLS.LEVEL_15]: 'level_15',
+        [B_WALLS.LEVEL_16]: 'level_16',
+        [B_WALLS.LEVEL_17]: 'level_17',
+        [B_WALLS.LEVEL_18]: 'level_18',
+        [B_WALLS.LEVEL_19]: 'level_19',
+        [B_WALLS.LEVEL_20]: 'level_20'
     }
     const BATTLE_SKILL_WEAPON_MASTER_LEVEL = {
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_1]: 2,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_2]: 4,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_3]: 6,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_4]: 8,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_5]: 10
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_1]: 'level_1',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_2]: 'level_2',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_3]: 'level_3',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_4]: 'level_4',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_5]: 'level_5'
     }
     const BATTLE_SKILL_IRON_WALLS_LEVEL = {
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_1]: 1,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_2]: 2,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_3]: 3,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_4]: 4,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_5]: 5
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_1]: 'level_1',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_2]: 'level_2',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_3]: 'level_3',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_4]: 'level_4',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_5]: 'level_5'
     }
     const BATTLE_SKILL_CLINIQUE_LEVEL = {
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_1]: 100,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_2]: 200,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_3]: 300,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_4]: 400,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_5]: 500,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_6]: 600,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_7]: 700,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_8]: 800,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_9]: 900,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_10]: 1000
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_1]: 'level_1',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_2]: 'level_2',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_3]: 'level_3',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_4]: 'level_4',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_5]: 'level_5',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_6]: 'level_6',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_7]: 'level_7',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_8]: 'level_8',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_9]: 'level_9',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_10]: 'level_10'
     }
     const BATTLE_HOSPITAL_LEVEL = {
-        [B_HOSPITAL_LEVEL.LEVEL_1]: 100,
-        [B_HOSPITAL_LEVEL.LEVEL_2]: 129,
-        [B_HOSPITAL_LEVEL.LEVEL_3]: 167,
-        [B_HOSPITAL_LEVEL.LEVEL_4]: 215,
-        [B_HOSPITAL_LEVEL.LEVEL_5]: 278,
-        [B_HOSPITAL_LEVEL.LEVEL_6]: 359,
-        [B_HOSPITAL_LEVEL.LEVEL_7]: 464,
-        [B_HOSPITAL_LEVEL.LEVEL_8]: 599,
-        [B_HOSPITAL_LEVEL.LEVEL_9]: 774,
-        [B_HOSPITAL_LEVEL.LEVEL_10]: 1000
+        [B_HOSPITAL_LEVEL.LEVEL_1]: 'level_1',
+        [B_HOSPITAL_LEVEL.LEVEL_2]: 'level_2',
+        [B_HOSPITAL_LEVEL.LEVEL_3]: 'level_3',
+        [B_HOSPITAL_LEVEL.LEVEL_4]: 'level_4',
+        [B_HOSPITAL_LEVEL.LEVEL_5]: 'level_5',
+        [B_HOSPITAL_LEVEL.LEVEL_6]: 'level_6',
+        [B_HOSPITAL_LEVEL.LEVEL_7]: 'level_7',
+        [B_HOSPITAL_LEVEL.LEVEL_8]: 'level_8',
+        [B_HOSPITAL_LEVEL.LEVEL_9]: 'level_9',
+        [B_HOSPITAL_LEVEL.LEVEL_10]: 'level_10'
     }
     console.log(BATTLE_HOSPITAL_LEVEL, BATTLE_SKILL_CLINIQUE_LEVEL, BATTLE_SKILL_IRON_WALLS_LEVEL, BATTLE_SKILL_WEAPON_MASTER_LEVEL, BATTLE_WALLS, BATTLE_CHURCHES, BATTLE_ITEMS_LEVELS, BATTLE_ITEMS, BATTLE_CAT_TARGET)
     const updatePresets = function() {
@@ -6743,132 +6737,112 @@ define('two/battleCalculator', [
         var def_arc = [10, 30, 10, 60, 30, 50, 180, 20, 100, 150, 100, 200, 50]
         var attack = [10, 25, 45, 25, 130, 150, 150, 2, 100, 150, 30, 30, 300]
         var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
-        var archeraamount = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_A]
-        var archerdamount = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_D]
-        var axeaamount = battleCalculatorSettings[SETTINGS.BATTLE_AXE_A]
-        var axedamount = battleCalculatorSettings[SETTINGS.BATTLE_AXE_D]
-        var berserkeraamount = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_A]
-        var berserkerdamount = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_D]
-        var catapultaamount = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_A]
-        var catapultdamount = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_D]
-        var buildingfrom = battleCalculatorSettings[SETTINGS.BATTLE_TARGET_LEVEL]
-        var hcaamount = battleCalculatorSettings[SETTINGS.BATTLE_HC_A]
-        var hcdamount = battleCalculatorSettings[SETTINGS.BATTLE_HC_D]
-        var knightaamount = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_A]
-        var knightdamount = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_D]
-        var lcaamount = battleCalculatorSettings[SETTINGS.BATTLE_LC_A]
-        var lcdamount = battleCalculatorSettings[SETTINGS.BATTLE_LC_D]
-        var luck = battleCalculatorSettings[SETTINGS.BATTLE_LUCK]
-        var maaamount = battleCalculatorSettings[SETTINGS.BATTLE_MA_A]
-        var madamount = battleCalculatorSettings[SETTINGS.BATTLE_MA_D]
-        var morale = battleCalculatorSettings[SETTINGS.BATTLE_MORALE]
-        var ramaamount = battleCalculatorSettings[SETTINGS.BATTLE_RAM_A]
-        var ramdamount = battleCalculatorSettings[SETTINGS.BATTLE_RAM_D]
-        var snobaamount = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_A]
-        var snobdamount = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_D]
-        var spearaamount = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_A]
-        var speardamount = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_D]
-        var swordaamount = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_A]
-        var sworddamount = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_D]
-        var trebuchetaamount = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_A]
-        var trebuchetdamount = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_D]
-        var wallfrompre = 0
-        var wallto = 0
-        var archeraamount_losses = 0
-        var archeraamount_lossesRound1 = 0
-        var archeraamount_lossesRound2 = 0
-        var archeraamount_lossesRound3 = 0
-        var archeraamount_survivorsRound1 = 0
-        var archeraamount_survivorsRound2 = 0
-        var archeraamount_survivorsRound3 = 0
-        var archerdlosses = 0
+        const archeraamount = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_A]
+        const archerdamount = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_D]
+        const axeaamount = battleCalculatorSettings[SETTINGS.BATTLE_AXE_A]
+        const axedamount = battleCalculatorSettings[SETTINGS.BATTLE_AXE_D]
+        const berserkeraamount = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_A]
+        const berserkerdamount = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_D]
+        const catapultaamount = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_A]
+        const catapultdamount = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_D]
+        const hcaamount = battleCalculatorSettings[SETTINGS.BATTLE_HC_A]
+        const hcdamount = battleCalculatorSettings[SETTINGS.BATTLE_HC_D]
+        const knightaamount = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_A]
+        const knightdamount = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_D]
+        const lcaamount = battleCalculatorSettings[SETTINGS.BATTLE_LC_A]
+        const lcdamount = battleCalculatorSettings[SETTINGS.BATTLE_LC_D]
+        const maaamount = battleCalculatorSettings[SETTINGS.BATTLE_MA_A]
+        const madamount = battleCalculatorSettings[SETTINGS.BATTLE_MA_D]
+        const ramaamount = battleCalculatorSettings[SETTINGS.BATTLE_RAM_A]
+        const ramdamount = battleCalculatorSettings[SETTINGS.BATTLE_RAM_D]
+        const snobaamount = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_A]
+        const snobdamount = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_D]
+        const spearaamount = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_A]
+        const speardamount = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_D]
+        const swordaamount = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_A]
+        const sworddamount = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_D]
+        const trebuchetaamount = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_A]
+        const trebuchetdamount = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_D]
+        const morale = battleCalculatorSettings[SETTINGS.BATTLE_MORALE]
+        const luck = battleCalculatorSettings[SETTINGS.BATTLE_LUCK]
+        var archeralossesRound1 = 0
+        var archeralossesRound2 = 0
+        var archeralossesRound3 = 0
+        var archerasurvivorsRound1 = 0
+        var archerasurvivorsRound2 = 0
         var archerdlossesRound1 = 0
         var archerdlossesRound2 = 0
         var archerdlossesRound3 = 0
-        var archerdamount_survivorsRound1 = 0
-        var archerdamount_survivorsRound1ModifiedArc = 0
-        var archerdamount_survivorsRound1ModifiedCav = 0
-        var archerdamount_survivorsRound1ModifiedInf = 0
-        var archerdamount_survivorsRound2 = 0
-        var archerdamount_survivorsRound2ModifiedArc = 0
-        var archerdamount_survivorsRound2ModifiedCav = 0
-        var archerdamount_survivorsRound2ModifiedInf = 0
-        var archerdsurvived = 0
+        var archerdsurvivorsRound1 = 0
+        var archerdsurvivorsRound1ModifiedArc = 0
+        var archerdsurvivorsRound1ModifiedCav = 0
+        var archerdsurvivorsRound1ModifiedInf = 0
+        var archerdsurvivorsRound2 = 0
+        var archerdsurvivorsRound2ModifiedArc = 0
+        var archerdsurvivorsRound2ModifiedCav = 0
+        var archerdsurvivorsRound2ModifiedInf = 0
         var archerdsurvivedModifiedArc = 0
         var archerdsurvivedModifiedCav = 0
         var archerdsurvivedModifiedInf = 0
         var armyLossesPercentEachRound = 0
-        var attackprovisions = 0
-        var axeaamount_losses = 0
-        var axeaamount_lossesRound1 = 0
-        var axeaamount_lossesRound2 = 0
-        var axeaamount_lossesRound3 = 0
-        var axeaamount_survivorsRound1 = 0
-        var axeaamount_survivorsRound2 = 0
-        var axeaamount_survivorsRound3 = 0
-        var axedlosses = 0
+        var axealossesRound1 = 0
+        var axealossesRound2 = 0
+        var axealossesRound3 = 0
+        var axeasurvivorsRound1 = 0
+        var axeasurvivorsRound2 = 0
         var axedlossesRound1 = 0
         var axedlossesRound2 = 0
         var axedlossesRound3 = 0
-        var axedamount_survivorsRound1 = 0
-        var axedamount_survivorsRound1ModifiedArc = 0
-        var axedamount_survivorsRound1ModifiedCav = 0
-        var axedamount_survivorsRound1ModifiedInf = 0
-        var axedamount_survivorsRound2 = 0
-        var axedamount_survivorsRound2ModifiedArc = 0
-        var axedamount_survivorsRound2ModifiedCav = 0
-        var axedamount_survivorsRound2ModifiedInf = 0
-        var axedsurvived = 0
+        var axedsurvivorsRound1 = 0
+        var axedsurvivorsRound1ModifiedArc = 0
+        var axedsurvivorsRound1ModifiedCav = 0
+        var axedsurvivorsRound1ModifiedInf = 0
+        var axedsurvivorsRound2 = 0
+        var axedsurvivorsRound2ModifiedArc = 0
+        var axedsurvivorsRound2ModifiedCav = 0
+        var axedsurvivorsRound2ModifiedInf = 0
         var axedsurvivedModifiedArc = 0
         var axedsurvivedModifiedCav = 0
         var axedsurvivedModifiedInf = 0
         var baseDefenseModifier = 0
         var battleBonusDef = 0
         var battleBonusOff = 0
-        var berserkeraamount_losses = 0
-        var berserkeraamount_lossesRound1 = 0
-        var berserkeraamount_lossesRound2 = 0
-        var berserkeraamount_lossesRound3 = 0
-        var berserkeraamount_survivorsRound1 = 0
-        var berserkeraamount_survivorsRound2 = 0
-        var berserkeraamount_survivorsRound3 = 0
-        var berserkerdlosses = 0
+        var berserkeralossesRound1 = 0
+        var berserkeralossesRound2 = 0
+        var berserkeralossesRound3 = 0
+        var berserkerasurvivorsRound1 = 0
+        var berserkerasurvivorsRound2 = 0
         var berserkerdlossesRound1 = 0
         var berserkerdlossesRound2 = 0
         var berserkerdlossesRound3 = 0
-        var berserkerdamount_survivorsRound1 = 0
-        var berserkerdamount_survivorsRound1ModifiedArc = 0
-        var berserkerdamount_survivorsRound1ModifiedCav = 0
-        var berserkerdamount_survivorsRound1ModifiedInf = 0
-        var berserkerdamount_survivorsRound2 = 0
-        var berserkerdamount_survivorsRound2ModifiedArc = 0
-        var berserkerdamount_survivorsRound2ModifiedCav = 0
-        var berserkerdamount_survivorsRound2ModifiedInf = 0
-        var berserkerdsurvived = 0
+        var berserkerdsurvivorsRound1 = 0
+        var berserkerdsurvivorsRound1ModifiedArc = 0
+        var berserkerdsurvivorsRound1ModifiedCav = 0
+        var berserkerdsurvivorsRound1ModifiedInf = 0
+        var berserkerdsurvivorsRound2 = 0
+        var berserkerdsurvivorsRound2ModifiedArc = 0
+        var berserkerdsurvivorsRound2ModifiedCav = 0
+        var berserkerdsurvivorsRound2ModifiedInf = 0
         var berserkerdsurvivedModifiedArc = 0
         var berserkerdsurvivedModifiedCav = 0
         var berserkerdsurvivedModifiedInf = 0
-        var catapultaamount_losses = 0
-        var catapultaamount_lossesRound1 = 0
-        var catapultaamount_lossesRound2 = 0
-        var catapultaamount_lossesRound3 = 0
-        var catapultaamount_survivorsRound1 = 0
-        var catapultaamount_survivorsRound2 = 0
-        var catapultaamount_survivorsRound3 = 0
+        var catapultalossesRound1 = 0
+        var catapultalossesRound2 = 0
+        var catapultalossesRound3 = 0
+        var catapultasurvivorsRound1 = 0
+        var catapultasurvivorsRound2 = 0
         var catapultaamountfterTrebuchet = 0
-        var catapultdlosses = 0
         var catapultdlossesRound1 = 0
         var catapultdlossesRound2 = 0
         var catapultdlossesRound3 = 0
-        var catapultdamount_survivorsRound1 = 0
-        var catapultdamount_survivorsRound1ModifiedArc = 0
-        var catapultdamount_survivorsRound1ModifiedCav = 0
-        var catapultdamount_survivorsRound1ModifiedInf = 0
-        var catapultdamount_survivorsRound2 = 0
-        var catapultdamount_survivorsRound2ModifiedArc = 0
-        var catapultdamount_survivorsRound2ModifiedCav = 0
-        var catapultdamount_survivorsRound2ModifiedInf = 0
-        var catapultdsurvived = 0
+        var catapultdsurvivorsRound1 = 0
+        var catapultdsurvivorsRound1ModifiedArc = 0
+        var catapultdsurvivorsRound1ModifiedCav = 0
+        var catapultdsurvivorsRound1ModifiedInf = 0
+        var catapultdsurvivorsRound2 = 0
+        var catapultdsurvivorsRound2ModifiedArc = 0
+        var catapultdsurvivorsRound2ModifiedCav = 0
+        var catapultdsurvivorsRound2ModifiedInf = 0
         var catapultdsurvivedModifiedArc = 0
         var catapultdsurvivedModifiedCav = 0
         var catapultdsurvivedModifiedInf = 0
@@ -6877,7 +6851,6 @@ define('two/battleCalculator', [
         var catapultPowerFinal = 0
         var catapultPreRound = 0
         var catapultTarget = 0
-        var defenceprovisions = 0
         var deffprovision = 0
         var DknightItemBonusArcher = [1, 1]
         var DknightItemBonusArcher1 = [1, 1]
@@ -6915,31 +6888,26 @@ define('two/battleCalculator', [
         var DknightItemBonusSword1 = [1, 1]
         var DknightItemBonusSword2 = [1, 1]
         var DknightItemBonusSword3 = [1, 1]
-        var doublestrength = 0
         var faithAttacker = 0
         var faithDefender = 0
         var finalTargetLevel = 0
         var finalWalls = 0
-        var hcaamount_losses = 0
-        var hcaamount_lossesRound1 = 0
-        var hcaamount_lossesRound2 = 0
-        var hcaamount_lossesRound3 = 0
-        var hcaamount_survivorsRound1 = 0
-        var hcaamount_survivorsRound2 = 0
-        var hcaamount_survivorsRound3 = 0
-        var hcdlosses = 0
+        var hcalossesRound1 = 0
+        var hcalossesRound2 = 0
+        var hcalossesRound3 = 0
+        var hcasurvivorsRound1 = 0
+        var hcasurvivorsRound2 = 0
         var hcdlossesRound1 = 0
         var hcdlossesRound2 = 0
         var hcdlossesRound3 = 0
-        var hcdamount_survivorsRound1 = 0
-        var hcdamount_survivorsRound1ModifiedArc = 0
-        var hcdamount_survivorsRound1ModifiedCav = 0
-        var hcdamount_survivorsRound1ModifiedInf = 0
-        var hcdamount_survivorsRound2 = 0
-        var hcdamount_survivorsRound2ModifiedArc = 0
-        var hcdamount_survivorsRound2ModifiedCav = 0
-        var hcdamount_survivorsRound2ModifiedInf = 0
-        var hcdsurvived = 0
+        var hcdsurvivorsRound1 = 0
+        var hcdsurvivorsRound1ModifiedArc = 0
+        var hcdsurvivorsRound1ModifiedCav = 0
+        var hcdsurvivorsRound1ModifiedInf = 0
+        var hcdsurvivorsRound2 = 0
+        var hcdsurvivorsRound2ModifiedArc = 0
+        var hcdsurvivorsRound2ModifiedCav = 0
+        var hcdsurvivorsRound2ModifiedInf = 0
         var hcdsurvivedModifiedArc = 0
         var hcdsurvivedModifiedCav = 0
         var hcdsurvivedModifiedInf = 0
@@ -6970,26 +6938,22 @@ define('two/battleCalculator', [
         var killRateRound3defenderArc = 0
         var killRateRound3defenderCav = 0
         var killRateRound3defenderInf = 0
-        var knightaamount_losses = 0
-        var knightaamount_lossesRound1 = 0
-        var knightaamount_lossesRound2 = 0
-        var knightaamount_lossesRound3 = 0
-        var knightaamount_survivorsRound1 = 0
-        var knightaamount_survivorsRound2 = 0
-        var knightaamount_survivorsRound3 = 0
-        var knightdlosses = 0
+        var knightalossesRound1 = 0
+        var knightalossesRound2 = 0
+        var knightalossesRound3 = 0
+        var knightasurvivorsRound1 = 0
+        var knightasurvivorsRound2 = 0
         var knightdlossesRound1 = 0
         var knightdlossesRound2 = 0
         var knightdlossesRound3 = 0
-        var knightdamount_survivorsRound1 = 0
-        var knightdamount_survivorsRound1ModifiedArc = 0
-        var knightdamount_survivorsRound1ModifiedCav = 0
-        var knightdamount_survivorsRound1ModifiedInf = 0
-        var knightdamount_survivorsRound2 = 0
-        var knightdamount_survivorsRound2ModifiedArc = 0
-        var knightdamount_survivorsRound2ModifiedCav = 0
-        var knightdamount_survivorsRound2ModifiedInf = 0
-        var knightdsurvived = 0
+        var knightdsurvivorsRound1 = 0
+        var knightdsurvivorsRound1ModifiedArc = 0
+        var knightdsurvivorsRound1ModifiedCav = 0
+        var knightdsurvivorsRound1ModifiedInf = 0
+        var knightdsurvivorsRound2 = 0
+        var knightdsurvivorsRound2ModifiedArc = 0
+        var knightdsurvivorsRound2ModifiedCav = 0
+        var knightdsurvivorsRound2ModifiedInf = 0
         var knightdsurvivedModifiedArc = 0
         var knightdsurvivedModifiedCav = 0
         var knightdsurvivedModifiedInf = 0
@@ -7021,26 +6985,22 @@ define('two/battleCalculator', [
         var kRR3dcBaseR1 = 0
         var kRR3diBaseR1 = 0
         var largestGroup = 0
-        var lcaamount_losses = 0
-        var lcaamount_lossesRound1 = 0
-        var lcaamount_lossesRound2 = 0
-        var lcaamount_lossesRound3 = 0
-        var lcaamount_survivorsRound1 = 0
-        var lcaamount_survivorsRound2 = 0
-        var lcaamount_survivorsRound3 = 0
-        var lcdlosses = 0
+        var lcalossesRound1 = 0
+        var lcalossesRound2 = 0
+        var lcalossesRound3 = 0
+        var lcasurvivorsRound1 = 0
+        var lcasurvivorsRound2 = 0
         var lcdlossesRound1 = 0
         var lcdlossesRound2 = 0
         var lcdlossesRound3 = 0
-        var lcdamount_survivorsRound1 = 0
-        var lcdamount_survivorsRound1ModifiedArc = 0
-        var lcdamount_survivorsRound1ModifiedCav = 0
-        var lcdamount_survivorsRound1ModifiedInf = 0
-        var lcdamount_survivorsRound2 = 0
-        var lcdamount_survivorsRound2ModifiedArc = 0
-        var lcdamount_survivorsRound2ModifiedCav = 0
-        var lcdamount_survivorsRound2ModifiedInf = 0
-        var lcdsurvived = 0
+        var lcdsurvivorsRound1 = 0
+        var lcdsurvivorsRound1ModifiedArc = 0
+        var lcdsurvivorsRound1ModifiedCav = 0
+        var lcdsurvivorsRound1ModifiedInf = 0
+        var lcdsurvivorsRound2 = 0
+        var lcdsurvivorsRound2ModifiedArc = 0
+        var lcdsurvivorsRound2ModifiedCav = 0
+        var lcdsurvivorsRound2ModifiedInf = 0
         var lcdsurvivedModifiedArc = 0
         var lcdsurvivedModifiedCav = 0
         var lcdsurvivedModifiedInf = 0
@@ -7064,29 +7024,23 @@ define('two/battleCalculator', [
         var lossesPercentRound3Arc = 0
         var lossesPercentRound3Cav = 0
         var lossesPercentRound3Inf = 0
-        var attackkilledprovisions = 0
-        var defencekilledprovisions = 0
         var lucky = 0
-        var maaamount_losses = 0
-        var maaamount_lossesRound1 = 0
-        var maaamount_lossesRound2 = 0
-        var maaamount_lossesRound3 = 0
-        var maaamount_survivorsRound1 = 0
-        var maaamount_survivorsRound2 = 0
-        var maaamount_survivorsRound3 = 0
-        var madlosses = 0
+        var maalossesRound1 = 0
+        var maalossesRound2 = 0
+        var maalossesRound3 = 0
+        var maasurvivorsRound1 = 0
+        var maasurvivorsRound2 = 0
         var madlossesRound1 = 0
         var madlossesRound2 = 0
         var madlossesRound3 = 0
-        var madamount_survivorsRound1 = 0
-        var madamount_survivorsRound1ModifiedArc = 0
-        var madamount_survivorsRound1ModifiedCav = 0
-        var madamount_survivorsRound1ModifiedInf = 0
-        var madamount_survivorsRound2 = 0
-        var madamount_survivorsRound2ModifiedArc = 0
-        var madamount_survivorsRound2ModifiedCav = 0
-        var madamount_survivorsRound2ModifiedInf = 0
-        var madsurvived = 0
+        var madsurvivorsRound1 = 0
+        var madsurvivorsRound1ModifiedArc = 0
+        var madsurvivorsRound1ModifiedCav = 0
+        var madsurvivorsRound1ModifiedInf = 0
+        var madsurvivorsRound2 = 0
+        var madsurvivorsRound2ModifiedArc = 0
+        var madsurvivorsRound2ModifiedCav = 0
+        var madsurvivorsRound2ModifiedInf = 0
         var madsurvivedModifiedArc = 0
         var madsurvivedModifiedCav = 0
         var madsurvivedModifiedInf = 0
@@ -7095,8 +7049,6 @@ define('two/battleCalculator', [
         var moral = 0
         var nightBonus = 1
         var offprovision = 0
-        var defencemodifier = 0
-        var attackmodifier = 0
         var preBaseDefenseModifier = 0
         var provisionAttackerArcRound1 = 0
         var provisionAttackerArcRound2 = 0
@@ -7123,27 +7075,23 @@ define('two/battleCalculator', [
         var provisionDefenderRound2Total = 0
         var provisionDefenderRound3Total = 0
         var provisionmodifier = 0
-        var ramaamount_losses = 0
-        var ramaamount_lossesRound1 = 0
-        var ramaamount_lossesRound2 = 0
-        var ramaamount_lossesRound3 = 0
-        var ramaamount_survivorsRound1 = 0
-        var ramaamount_survivorsRound2 = 0
-        var ramaamount_survivorsRound3 = 0
+        var ramalossesRound1 = 0
+        var ramalossesRound2 = 0
+        var ramalossesRound3 = 0
+        var ramasurvivorsRound1 = 0
+        var ramasurvivorsRound2 = 0
         var ramaamountfterTrebuchet = 0
-        var ramdlosses = 0
         var ramdlossesRound1 = 0
         var ramdlossesRound2 = 0
         var ramdlossesRound3 = 0
-        var ramdamount_survivorsRound1 = 0
-        var ramdamount_survivorsRound1ModifiedArc = 0
-        var ramdamount_survivorsRound1ModifiedCav = 0
-        var ramdamount_survivorsRound1ModifiedInf = 0
-        var ramdamount_survivorsRound2 = 0
-        var ramdamount_survivorsRound2ModifiedArc = 0
-        var ramdamount_survivorsRound2ModifiedCav = 0
-        var ramdamount_survivorsRound2ModifiedInf = 0
-        var ramdsurvived = 0
+        var ramdsurvivorsRound1 = 0
+        var ramdsurvivorsRound1ModifiedArc = 0
+        var ramdsurvivorsRound1ModifiedCav = 0
+        var ramdsurvivorsRound1ModifiedInf = 0
+        var ramdsurvivorsRound2 = 0
+        var ramdsurvivorsRound2ModifiedArc = 0
+        var ramdsurvivorsRound2ModifiedCav = 0
+        var ramdsurvivorsRound2ModifiedInf = 0
         var ramdsurvivedModifiedArc = 0
         var ramdsurvivedModifiedCav = 0
         var ramdsurvivedModifiedInf = 0
@@ -7163,49 +7111,41 @@ define('two/battleCalculator', [
         var skillClinique = 0
         var skillMedic = 0
         var skillWalls = 0
-        var snobaamount_losses = 0
-        var snobaamount_lossesRound1 = 0
-        var snobaamount_lossesRound2 = 0
-        var snobaamount_lossesRound3 = 0
-        var snobaamount_survivorsRound1 = 0
-        var snobaamount_survivorsRound2 = 0
-        var snobaamount_survivorsRound3 = 0
-        var snobdlosses = 0
+        var snobalossesRound1 = 0
+        var snobalossesRound2 = 0
+        var snobalossesRound3 = 0
+        var snobasurvivorsRound1 = 0
+        var snobasurvivorsRound2 = 0
         var snobdlossesRound1 = 0
         var snobdlossesRound2 = 0
         var snobdlossesRound3 = 0
-        var snobdamount_survivorsRound1 = 0
-        var snobdamount_survivorsRound1ModifiedArc = 0
-        var snobdamount_survivorsRound1ModifiedCav = 0
-        var snobdamount_survivorsRound1ModifiedInf = 0
-        var snobdamount_survivorsRound2 = 0
-        var snobdamount_survivorsRound2ModifiedArc = 0
-        var snobdamount_survivorsRound2ModifiedCav = 0
-        var snobdamount_survivorsRound2ModifiedInf = 0
-        var snobdsurvived = 0
+        var snobdsurvivorsRound1 = 0
+        var snobdsurvivorsRound1ModifiedArc = 0
+        var snobdsurvivorsRound1ModifiedCav = 0
+        var snobdsurvivorsRound1ModifiedInf = 0
+        var snobdsurvivorsRound2 = 0
+        var snobdsurvivorsRound2ModifiedArc = 0
+        var snobdsurvivorsRound2ModifiedCav = 0
+        var snobdsurvivorsRound2ModifiedInf = 0
         var snobdsurvivedModifiedArc = 0
         var snobdsurvivedModifiedCav = 0
         var snobdsurvivedModifiedInf = 0
-        var spearaamount_losses = 0
-        var spearaamount_lossesRound1 = 0
-        var spearaamount_lossesRound2 = 0
-        var spearaamount_lossesRound3 = 0
-        var spearaamount_survivorsRound1 = 0
-        var spearaamount_survivorsRound2 = 0
-        var spearaamount_survivorsRound3 = 0
-        var speardlosses = 0
+        var spearalossesRound1 = 0
+        var spearalossesRound2 = 0
+        var spearalossesRound3 = 0
+        var spearasurvivorsRound1 = 0
+        var spearasurvivorsRound2 = 0
         var speardlossesRound1 = 0
         var speardlossesRound2 = 0
         var speardlossesRound3 = 0
-        var speardamount_survivorsRound1 = 0
-        var speardamount_survivorsRound1ModifiedArc = 0
-        var speardamount_survivorsRound1ModifiedCav = 0
-        var speardamount_survivorsRound1ModifiedInf = 0
-        var speardamount_survivorsRound2 = 0
-        var speardamount_survivorsRound2ModifiedArc = 0
-        var speardamount_survivorsRound2ModifiedCav = 0
-        var speardamount_survivorsRound2ModifiedInf = 0
-        var speardsurvived = 0
+        var speardsurvivorsRound1 = 0
+        var speardsurvivorsRound1ModifiedArc = 0
+        var speardsurvivorsRound1ModifiedCav = 0
+        var speardsurvivorsRound1ModifiedInf = 0
+        var speardsurvivorsRound2 = 0
+        var speardsurvivorsRound2ModifiedArc = 0
+        var speardsurvivorsRound2ModifiedCav = 0
+        var speardsurvivorsRound2ModifiedInf = 0
         var speardsurvivedModifiedArc = 0
         var speardsurvivedModifiedCav = 0
         var speardsurvivedModifiedInf = 0
@@ -7218,7 +7158,6 @@ define('two/battleCalculator', [
         var strengthAttackerInfRound1 = 0
         var strengthAttackerInfRound2 = 0
         var strengthAttackerInfRound3 = 0
-        var strentghattack = 0
         var strengthAttackerRound2 = 0
         var strengthAttackerRound3 = 0
         var strengthBaseAttackerArcRound1 = 0
@@ -7248,7 +7187,6 @@ define('two/battleCalculator', [
         var strengthDefenderInfRound1 = 0
         var strengthDefenderInfRound2 = 0
         var strengthDefenderInfRound3 = 0
-        var strentghdefend = 0
         var strengthDefenderRound2 = 0
         var strengthDefenderRound3 = 0
         var survivorsAttackerRound1Total = 0
@@ -7257,63 +7195,53 @@ define('two/battleCalculator', [
         var survivorsDefenderRound1Total = 0
         var survivorsDefenderRound2Total = 0
         var survivorsDefenderRound3Total = 0
-        var swordaamount_losses = 0
-        var swordaamount_lossesRound1 = 0
-        var swordaamount_lossesRound2 = 0
-        var swordaamount_lossesRound3 = 0
-        var swordaamount_survivorsRound1 = 0
-        var swordaamount_survivorsRound2 = 0
-        var swordaamount_survivorsRound3 = 0
-        var sworddlosses = 0
+        var swordalossesRound1 = 0
+        var swordalossesRound2 = 0
+        var swordalossesRound3 = 0
+        var swordasurvivorsRound1 = 0
+        var swordasurvivorsRound2 = 0
         var sworddlossesRound1 = 0
         var sworddlossesRound2 = 0
         var sworddlossesRound3 = 0
-        var sworddamount_survivorsRound1 = 0
-        var sworddamount_survivorsRound1ModifiedArc = 0
-        var sworddamount_survivorsRound1ModifiedCav = 0
-        var sworddamount_survivorsRound1ModifiedInf = 0
-        var sworddamount_survivorsRound2 = 0
-        var sworddamount_survivorsRound2ModifiedArc = 0
-        var sworddamount_survivorsRound2ModifiedCav = 0
-        var sworddamount_survivorsRound2ModifiedInf = 0
-        var sworddsurvived = 0
+        var sworddsurvivorsRound1 = 0
+        var sworddsurvivorsRound1ModifiedArc = 0
+        var sworddsurvivorsRound1ModifiedCav = 0
+        var sworddsurvivorsRound1ModifiedInf = 0
+        var sworddsurvivorsRound2 = 0
+        var sworddsurvivorsRound2ModifiedArc = 0
+        var sworddsurvivorsRound2ModifiedCav = 0
+        var sworddsurvivorsRound2ModifiedInf = 0
         var sworddsurvivedModifiedArc = 0
         var sworddsurvivedModifiedCav = 0
         var sworddsurvivedModifiedInf = 0
-        var trebuchetaamount_losses = 0
-        var trebuchetaamount_lossesRound1 = 0
-        var trebuchetaamount_lossesRound2 = 0
-        var trebuchetaamount_lossesRound3 = 0
-        var trebuchetaamount_survivorsRound1 = 0
-        var trebuchetaamount_survivorsRound2 = 0
-        var trebuchetaamount_survivorsRound3 = 0
+        var trebuchetalossesRound1 = 0
+        var trebuchetalossesRound2 = 0
+        var trebuchetalossesRound3 = 0
+        var trebuchetasurvivorsRound1 = 0
+        var trebuchetasurvivorsRound2 = 0
         var trebuchetCModifier = 0
-        var trebuchetdlosses = 0
         var trebuchetdlossesRound1 = 0
         var trebuchetdlossesRound2 = 0
         var trebuchetdlossesRound3 = 0
-        var trebuchetdamount_survivorsRound1 = 0
-        var trebuchetdamount_survivorsRound1ModifiedArc = 0
-        var trebuchetdamount_survivorsRound1ModifiedCav = 0
-        var trebuchetdamount_survivorsRound1ModifiedInf = 0
-        var trebuchetdamount_survivorsRound2 = 0
-        var trebuchetdamount_survivorsRound2ModifiedArc = 0
-        var trebuchetdamount_survivorsRound2ModifiedCav = 0
-        var trebuchetdamount_survivorsRound2ModifiedInf = 0
-        var trebuchetdsurvived = 0
+        var trebuchetdsurvivorsRound1 = 0
+        var trebuchetdsurvivorsRound1ModifiedArc = 0
+        var trebuchetdsurvivorsRound1ModifiedCav = 0
+        var trebuchetdsurvivorsRound1ModifiedInf = 0
+        var trebuchetdsurvivorsRound2 = 0
+        var trebuchetdsurvivorsRound2ModifiedArc = 0
+        var trebuchetdsurvivorsRound2ModifiedCav = 0
+        var trebuchetdsurvivorsRound2ModifiedInf = 0
         var trebuchetdsurvivedModifiedArc = 0
         var trebuchetdsurvivedModifiedCav = 0
         var trebuchetdsurvivedModifiedInf = 0
         var trebuchetModifier = 0
         var walladamagepreround = 0
-        var wallfrom = 0
         var wallpower = 0
         var wallpreround = 0
         var sumSiege = 0
         var catapultPercent = 0
         var ramPercent = 0
         var largestGroupD = 0
-        var availablebeds = 0
         var attFaithBonus = 0
         var defFaithBonus = 0
 
@@ -8417,60 +8345,60 @@ define('two/battleCalculator', [
         }
 
         function survivorsRound1Modified() {
-            speardamount_survivorsRound1ModifiedInf = Math.round(speardamount * lossesPercentRound1Inf)
-            speardamount_survivorsRound1ModifiedCav = Math.round(speardamount * lossesPercentRound1Cav)
-            speardamount_survivorsRound1ModifiedArc = speardamount - speardamount_survivorsRound1ModifiedCav - speardamount_survivorsRound1ModifiedInf
-            sworddamount_survivorsRound1ModifiedInf = Math.round(sworddamount * lossesPercentRound1Inf)
-            sworddamount_survivorsRound1ModifiedCav = Math.round(sworddamount * lossesPercentRound1Cav)
-            sworddamount_survivorsRound1ModifiedArc = sworddamount - sworddamount_survivorsRound1ModifiedCav - sworddamount_survivorsRound1ModifiedInf
-            axedamount_survivorsRound1ModifiedInf = Math.round(axedamount * lossesPercentRound1Inf)
-            axedamount_survivorsRound1ModifiedCav = Math.round(axedamount * lossesPercentRound1Cav)
-            axedamount_survivorsRound1ModifiedArc = axedamount - axedamount_survivorsRound1ModifiedCav - axedamount_survivorsRound1ModifiedInf
-            archerdamount_survivorsRound1ModifiedInf = Math.round(archerdamount * lossesPercentRound1Inf)
-            archerdamount_survivorsRound1ModifiedCav = Math.round(archerdamount * lossesPercentRound1Cav)
-            archerdamount_survivorsRound1ModifiedArc = archerdamount - archerdamount_survivorsRound1ModifiedCav - archerdamount_survivorsRound1ModifiedInf
-            lcdamount_survivorsRound1ModifiedInf = Math.round(lcdamount * lossesPercentRound1Inf)
-            lcdamount_survivorsRound1ModifiedCav = Math.round(lcdamount * lossesPercentRound1Cav)
-            lcdamount_survivorsRound1ModifiedArc = lcdamount - lcdamount_survivorsRound1ModifiedCav - lcdamount_survivorsRound1ModifiedInf
-            madamount_survivorsRound1ModifiedInf = Math.round(madamount * lossesPercentRound1Inf)
-            madamount_survivorsRound1ModifiedCav = Math.round(madamount * lossesPercentRound1Cav)
-            madamount_survivorsRound1ModifiedArc = madamount - madamount_survivorsRound1ModifiedCav - madamount_survivorsRound1ModifiedInf
-            hcdamount_survivorsRound1ModifiedInf = Math.round(hcdamount * lossesPercentRound1Inf)
-            hcdamount_survivorsRound1ModifiedCav = Math.round(hcdamount * lossesPercentRound1Cav)
-            hcdamount_survivorsRound1ModifiedArc = hcdamount - hcdamount_survivorsRound1ModifiedCav - hcdamount_survivorsRound1ModifiedInf
-            ramdamount_survivorsRound1ModifiedInf = Math.round(ramdamount * lossesPercentRound1Inf)
-            ramdamount_survivorsRound1ModifiedCav = Math.round(ramdamount * lossesPercentRound1Cav)
-            ramdamount_survivorsRound1ModifiedArc = ramdamount - ramdamount_survivorsRound1ModifiedCav - ramdamount_survivorsRound1ModifiedInf
-            catapultdamount_survivorsRound1ModifiedInf = Math.round(catapultdamount * lossesPercentRound1Inf)
-            catapultdamount_survivorsRound1ModifiedCav = Math.round(catapultdamount * lossesPercentRound1Cav)
-            catapultdamount_survivorsRound1ModifiedArc = catapultdamount - catapultdamount_survivorsRound1ModifiedCav - catapultdamount_survivorsRound1ModifiedInf
-            snobdamount_survivorsRound1ModifiedInf = Math.round(snobdamount * lossesPercentRound1Inf)
-            snobdamount_survivorsRound1ModifiedCav = Math.round(snobdamount * lossesPercentRound1Cav)
-            snobdamount_survivorsRound1ModifiedArc = snobdamount - snobdamount_survivorsRound1ModifiedCav - snobdamount_survivorsRound1ModifiedInf
-            trebuchetdamount_survivorsRound1ModifiedInf = Math.round(trebuchetdamount * lossesPercentRound1Inf)
-            trebuchetdamount_survivorsRound1ModifiedCav = Math.round(trebuchetdamount * lossesPercentRound1Cav)
-            trebuchetdamount_survivorsRound1ModifiedArc = trebuchetdamount - trebuchetdamount_survivorsRound1ModifiedCav - trebuchetdamount_survivorsRound1ModifiedInf
-            berserkerdamount_survivorsRound1ModifiedInf = Math.round(berserkerdamount * lossesPercentRound1Inf)
-            berserkerdamount_survivorsRound1ModifiedCav = Math.round(berserkerdamount * lossesPercentRound1Cav)
-            berserkerdamount_survivorsRound1ModifiedArc = berserkerdamount - berserkerdamount_survivorsRound1ModifiedCav - berserkerdamount_survivorsRound1ModifiedInf
-            knightdamount_survivorsRound1ModifiedInf = Math.round(knightdamount * lossesPercentRound1Inf)
-            knightdamount_survivorsRound1ModifiedCav = Math.round(knightdamount * lossesPercentRound1Cav)
-            knightdamount_survivorsRound1ModifiedArc = knightdamount - knightdamount_survivorsRound1ModifiedCav - knightdamount_survivorsRound1ModifiedInf
+            speardsurvivorsRound1ModifiedInf = Math.round(speardamount * lossesPercentRound1Inf)
+            speardsurvivorsRound1ModifiedCav = Math.round(speardamount * lossesPercentRound1Cav)
+            speardsurvivorsRound1ModifiedArc = speardamount - speardsurvivorsRound1ModifiedCav - speardsurvivorsRound1ModifiedInf
+            sworddsurvivorsRound1ModifiedInf = Math.round(sworddamount * lossesPercentRound1Inf)
+            sworddsurvivorsRound1ModifiedCav = Math.round(sworddamount * lossesPercentRound1Cav)
+            sworddsurvivorsRound1ModifiedArc = sworddamount - sworddsurvivorsRound1ModifiedCav - sworddsurvivorsRound1ModifiedInf
+            axedsurvivorsRound1ModifiedInf = Math.round(axedamount * lossesPercentRound1Inf)
+            axedsurvivorsRound1ModifiedCav = Math.round(axedamount * lossesPercentRound1Cav)
+            axedsurvivorsRound1ModifiedArc = axedamount - axedsurvivorsRound1ModifiedCav - axedsurvivorsRound1ModifiedInf
+            archerdsurvivorsRound1ModifiedInf = Math.round(archerdamount * lossesPercentRound1Inf)
+            archerdsurvivorsRound1ModifiedCav = Math.round(archerdamount * lossesPercentRound1Cav)
+            archerdsurvivorsRound1ModifiedArc = archerdamount - archerdsurvivorsRound1ModifiedCav - archerdsurvivorsRound1ModifiedInf
+            lcdsurvivorsRound1ModifiedInf = Math.round(lcdamount * lossesPercentRound1Inf)
+            lcdsurvivorsRound1ModifiedCav = Math.round(lcdamount * lossesPercentRound1Cav)
+            lcdsurvivorsRound1ModifiedArc = lcdamount - lcdsurvivorsRound1ModifiedCav - lcdsurvivorsRound1ModifiedInf
+            madsurvivorsRound1ModifiedInf = Math.round(madamount * lossesPercentRound1Inf)
+            madsurvivorsRound1ModifiedCav = Math.round(madamount * lossesPercentRound1Cav)
+            madsurvivorsRound1ModifiedArc = madamount - madsurvivorsRound1ModifiedCav - madsurvivorsRound1ModifiedInf
+            hcdsurvivorsRound1ModifiedInf = Math.round(hcdamount * lossesPercentRound1Inf)
+            hcdsurvivorsRound1ModifiedCav = Math.round(hcdamount * lossesPercentRound1Cav)
+            hcdsurvivorsRound1ModifiedArc = hcdamount - hcdsurvivorsRound1ModifiedCav - hcdsurvivorsRound1ModifiedInf
+            ramdsurvivorsRound1ModifiedInf = Math.round(ramdamount * lossesPercentRound1Inf)
+            ramdsurvivorsRound1ModifiedCav = Math.round(ramdamount * lossesPercentRound1Cav)
+            ramdsurvivorsRound1ModifiedArc = ramdamount - ramdsurvivorsRound1ModifiedCav - ramdsurvivorsRound1ModifiedInf
+            catapultdsurvivorsRound1ModifiedInf = Math.round(catapultdamount * lossesPercentRound1Inf)
+            catapultdsurvivorsRound1ModifiedCav = Math.round(catapultdamount * lossesPercentRound1Cav)
+            catapultdsurvivorsRound1ModifiedArc = catapultdamount - catapultdsurvivorsRound1ModifiedCav - catapultdsurvivorsRound1ModifiedInf
+            snobdsurvivorsRound1ModifiedInf = Math.round(snobdamount * lossesPercentRound1Inf)
+            snobdsurvivorsRound1ModifiedCav = Math.round(snobdamount * lossesPercentRound1Cav)
+            snobdsurvivorsRound1ModifiedArc = snobdamount - snobdsurvivorsRound1ModifiedCav - snobdsurvivorsRound1ModifiedInf
+            trebuchetdsurvivorsRound1ModifiedInf = Math.round(trebuchetdamount * lossesPercentRound1Inf)
+            trebuchetdsurvivorsRound1ModifiedCav = Math.round(trebuchetdamount * lossesPercentRound1Cav)
+            trebuchetdsurvivorsRound1ModifiedArc = trebuchetdamount - trebuchetdsurvivorsRound1ModifiedCav - trebuchetdsurvivorsRound1ModifiedInf
+            berserkerdsurvivorsRound1ModifiedInf = Math.round(berserkerdamount * lossesPercentRound1Inf)
+            berserkerdsurvivorsRound1ModifiedCav = Math.round(berserkerdamount * lossesPercentRound1Cav)
+            berserkerdsurvivorsRound1ModifiedArc = berserkerdamount - berserkerdsurvivorsRound1ModifiedCav - berserkerdsurvivorsRound1ModifiedInf
+            knightdsurvivorsRound1ModifiedInf = Math.round(knightdamount * lossesPercentRound1Inf)
+            knightdsurvivorsRound1ModifiedCav = Math.round(knightdamount * lossesPercentRound1Cav)
+            knightdsurvivorsRound1ModifiedArc = knightdamount - knightdsurvivorsRound1ModifiedCav - knightdsurvivorsRound1ModifiedInf
             provisionDefenderRound1()
         }
 
         function provisionDefenderRound1() {
-            provisionDefenderInfRound1 = speardamount_survivorsRound1ModifiedInf * food[0] + sworddamount_survivorsRound1ModifiedInf * food[1] + axedamount_survivorsRound1ModifiedInf * food[2] + berserkerdamount_survivorsRound1ModifiedInf * food[12] + snobdamount_survivorsRound1ModifiedInf * food[10] + lcdamount_survivorsRound1ModifiedInf * food[4] + hcdamount_survivorsRound1ModifiedInf * food[6] + archerdamount_survivorsRound1ModifiedInf * food[3] + madamount_survivorsRound1ModifiedInf * food[5] + ramdamount_survivorsRound1ModifiedInf * food[7] + catapultdamount_survivorsRound1ModifiedInf * food[8] + trebuchetdamount_survivorsRound1ModifiedInf * food[11] + knightdamount_survivorsRound1ModifiedInf * food[9]
-            provisionDefenderCavRound1 = speardamount_survivorsRound1ModifiedCav * food[0] + sworddamount_survivorsRound1ModifiedCav * food[1] + axedamount_survivorsRound1ModifiedCav * food[2] + berserkerdamount_survivorsRound1ModifiedCav * food[12] + snobdamount_survivorsRound1ModifiedCav * food[10] + lcdamount_survivorsRound1ModifiedCav * food[4] + hcdamount_survivorsRound1ModifiedCav * food[6] + archerdamount_survivorsRound1ModifiedCav * food[3] + madamount_survivorsRound1ModifiedCav * food[5] + ramdamount_survivorsRound1ModifiedCav * food[7] + catapultdamount_survivorsRound1ModifiedCav * food[8] + trebuchetdamount_survivorsRound1ModifiedCav * food[11] + knightdamount_survivorsRound1ModifiedCav * food[9]
-            provisionDefenderArcRound1 = speardamount_survivorsRound1ModifiedArc * food[0] + sworddamount_survivorsRound1ModifiedArc * food[1] + axedamount_survivorsRound1ModifiedArc * food[2] + berserkerdamount_survivorsRound1ModifiedArc * food[12] + snobdamount_survivorsRound1ModifiedArc * food[10] + lcdamount_survivorsRound1ModifiedArc * food[4] + hcdamount_survivorsRound1ModifiedArc * food[6] + archerdamount_survivorsRound1ModifiedArc * food[3] + madamount_survivorsRound1ModifiedArc * food[5] + ramdamount_survivorsRound1ModifiedArc * food[7] + catapultdamount_survivorsRound1ModifiedArc * food[8] + trebuchetdamount_survivorsRound1ModifiedArc * food[11] + knightdamount_survivorsRound1ModifiedArc * food[9]
+            provisionDefenderInfRound1 = speardsurvivorsRound1ModifiedInf * food[0] + sworddsurvivorsRound1ModifiedInf * food[1] + axedsurvivorsRound1ModifiedInf * food[2] + berserkerdsurvivorsRound1ModifiedInf * food[12] + snobdsurvivorsRound1ModifiedInf * food[10] + lcdsurvivorsRound1ModifiedInf * food[4] + hcdsurvivorsRound1ModifiedInf * food[6] + archerdsurvivorsRound1ModifiedInf * food[3] + madsurvivorsRound1ModifiedInf * food[5] + ramdsurvivorsRound1ModifiedInf * food[7] + catapultdsurvivorsRound1ModifiedInf * food[8] + trebuchetdsurvivorsRound1ModifiedInf * food[11] + knightdsurvivorsRound1ModifiedInf * food[9]
+            provisionDefenderCavRound1 = speardsurvivorsRound1ModifiedCav * food[0] + sworddsurvivorsRound1ModifiedCav * food[1] + axedsurvivorsRound1ModifiedCav * food[2] + berserkerdsurvivorsRound1ModifiedCav * food[12] + snobdsurvivorsRound1ModifiedCav * food[10] + lcdsurvivorsRound1ModifiedCav * food[4] + hcdsurvivorsRound1ModifiedCav * food[6] + archerdsurvivorsRound1ModifiedCav * food[3] + madsurvivorsRound1ModifiedCav * food[5] + ramdsurvivorsRound1ModifiedCav * food[7] + catapultdsurvivorsRound1ModifiedCav * food[8] + trebuchetdsurvivorsRound1ModifiedCav * food[11] + knightdsurvivorsRound1ModifiedCav * food[9]
+            provisionDefenderArcRound1 = speardsurvivorsRound1ModifiedArc * food[0] + sworddsurvivorsRound1ModifiedArc * food[1] + axedsurvivorsRound1ModifiedArc * food[2] + berserkerdsurvivorsRound1ModifiedArc * food[12] + snobdsurvivorsRound1ModifiedArc * food[10] + lcdsurvivorsRound1ModifiedArc * food[4] + hcdsurvivorsRound1ModifiedArc * food[6] + archerdsurvivorsRound1ModifiedArc * food[3] + madsurvivorsRound1ModifiedArc * food[5] + ramdsurvivorsRound1ModifiedArc * food[7] + catapultdsurvivorsRound1ModifiedArc * food[8] + trebuchetdsurvivorsRound1ModifiedArc * food[11] + knightdsurvivorsRound1ModifiedArc * food[9]
             console.log(provisionDefenderArcRound1, provisionDefenderCavRound1, provisionDefenderInfRound1)
             strengthBaseDefenderAllRound1()
         }
 
         function strengthBaseDefenderAllRound1() {
-            strengthBaseDefenderInfRound1 = speardamount_survivorsRound1ModifiedInf * def_inf[0] * DknightItemBonusSpear[0] + sworddamount_survivorsRound1ModifiedInf * def_inf[1] * DknightItemBonusSword[0] + axedamount_survivorsRound1ModifiedInf * def_inf[2] * DknightItemBonusAxe[0] + berserkerdamount_survivorsRound1ModifiedInf * def_inf[12] + snobdamount_survivorsRound1ModifiedInf * def_inf[10] + lcdamount_survivorsRound1ModifiedInf * def_inf[4] * DknightItemBonusLc[0] + hcdamount_survivorsRound1ModifiedInf * def_inf[6] * DknightItemBonusHc[0] + archerdamount_survivorsRound1ModifiedInf * def_inf[3] * DknightItemBonusArcher[0] + madamount_survivorsRound1ModifiedInf * def_inf[5] * DknightItemBonusMa[0] + ramdamount_survivorsRound1ModifiedInf * def_inf[7] * DknightItemBonusRam[0] + catapultdamount_survivorsRound1ModifiedInf * def_inf[8] * DknightItemBonusCatapult[0] + trebuchetdamount_survivorsRound1ModifiedInf * def_inf[11] + knightdamount_survivorsRound1ModifiedInf * def_inf[9]
-            strengthBaseDefenderCavRound1 = speardamount_survivorsRound1ModifiedCav * def_kav[0] * DknightItemBonusSpear[0] + sworddamount_survivorsRound1ModifiedCav * def_kav[1] * DknightItemBonusSword[0] + axedamount_survivorsRound1ModifiedCav * def_kav[2] * DknightItemBonusAxe[0] + berserkerdamount_survivorsRound1ModifiedCav * def_kav[12] + snobdamount_survivorsRound1ModifiedCav * def_kav[10] + lcdamount_survivorsRound1ModifiedCav * def_kav[4] * DknightItemBonusLc[0] + hcdamount_survivorsRound1ModifiedCav * def_kav[6] * DknightItemBonusHc[0] + archerdamount_survivorsRound1ModifiedCav * def_kav[3] * DknightItemBonusArcher[0] + madamount_survivorsRound1ModifiedCav * def_kav[5] * DknightItemBonusMa[0] + ramdamount_survivorsRound1ModifiedCav * def_kav[7] * DknightItemBonusRam[0] + catapultdamount_survivorsRound1ModifiedCav * def_kav[8] * DknightItemBonusCatapult[0] + trebuchetdamount_survivorsRound1ModifiedCav * def_kav[11] + knightdamount_survivorsRound1ModifiedCav * def_kav[9]
-            strengthBaseDefenderArcRound1 = speardamount_survivorsRound1ModifiedArc * def_arc[0] * DknightItemBonusSpear[0] + sworddamount_survivorsRound1ModifiedArc * def_arc[1] * DknightItemBonusSword[0] + axedamount_survivorsRound1ModifiedArc * def_arc[2] * DknightItemBonusAxe[0] + berserkerdamount_survivorsRound1ModifiedArc * def_arc[12] + snobdamount_survivorsRound1ModifiedArc * def_arc[10] + lcdamount_survivorsRound1ModifiedArc * def_arc[4] * DknightItemBonusLc[0] + hcdamount_survivorsRound1ModifiedArc * def_arc[6] * DknightItemBonusHc[0] + archerdamount_survivorsRound1ModifiedArc * def_arc[3] * DknightItemBonusArcher[0] + madamount_survivorsRound1ModifiedArc * def_arc[5] * DknightItemBonusMa[0] + ramdamount_survivorsRound1ModifiedArc * def_arc[7] * DknightItemBonusRam[0] + catapultdamount_survivorsRound1ModifiedArc * def_arc[8] * DknightItemBonusCatapult[0] + trebuchetdamount_survivorsRound1ModifiedArc * def_arc[11] + knightdamount_survivorsRound1ModifiedArc * def_arc[9]
+            strengthBaseDefenderInfRound1 = speardsurvivorsRound1ModifiedInf * def_inf[0] * DknightItemBonusSpear[0] + sworddsurvivorsRound1ModifiedInf * def_inf[1] * DknightItemBonusSword[0] + axedsurvivorsRound1ModifiedInf * def_inf[2] * DknightItemBonusAxe[0] + berserkerdsurvivorsRound1ModifiedInf * def_inf[12] + snobdsurvivorsRound1ModifiedInf * def_inf[10] + lcdsurvivorsRound1ModifiedInf * def_inf[4] * DknightItemBonusLc[0] + hcdsurvivorsRound1ModifiedInf * def_inf[6] * DknightItemBonusHc[0] + archerdsurvivorsRound1ModifiedInf * def_inf[3] * DknightItemBonusArcher[0] + madsurvivorsRound1ModifiedInf * def_inf[5] * DknightItemBonusMa[0] + ramdsurvivorsRound1ModifiedInf * def_inf[7] * DknightItemBonusRam[0] + catapultdsurvivorsRound1ModifiedInf * def_inf[8] * DknightItemBonusCatapult[0] + trebuchetdsurvivorsRound1ModifiedInf * def_inf[11] + knightdsurvivorsRound1ModifiedInf * def_inf[9]
+            strengthBaseDefenderCavRound1 = speardsurvivorsRound1ModifiedCav * def_kav[0] * DknightItemBonusSpear[0] + sworddsurvivorsRound1ModifiedCav * def_kav[1] * DknightItemBonusSword[0] + axedsurvivorsRound1ModifiedCav * def_kav[2] * DknightItemBonusAxe[0] + berserkerdsurvivorsRound1ModifiedCav * def_kav[12] + snobdsurvivorsRound1ModifiedCav * def_kav[10] + lcdsurvivorsRound1ModifiedCav * def_kav[4] * DknightItemBonusLc[0] + hcdsurvivorsRound1ModifiedCav * def_kav[6] * DknightItemBonusHc[0] + archerdsurvivorsRound1ModifiedCav * def_kav[3] * DknightItemBonusArcher[0] + madsurvivorsRound1ModifiedCav * def_kav[5] * DknightItemBonusMa[0] + ramdsurvivorsRound1ModifiedCav * def_kav[7] * DknightItemBonusRam[0] + catapultdsurvivorsRound1ModifiedCav * def_kav[8] * DknightItemBonusCatapult[0] + trebuchetdsurvivorsRound1ModifiedCav * def_kav[11] + knightdsurvivorsRound1ModifiedCav * def_kav[9]
+            strengthBaseDefenderArcRound1 = speardsurvivorsRound1ModifiedArc * def_arc[0] * DknightItemBonusSpear[0] + sworddsurvivorsRound1ModifiedArc * def_arc[1] * DknightItemBonusSword[0] + axedsurvivorsRound1ModifiedArc * def_arc[2] * DknightItemBonusAxe[0] + berserkerdsurvivorsRound1ModifiedArc * def_arc[12] + snobdsurvivorsRound1ModifiedArc * def_arc[10] + lcdsurvivorsRound1ModifiedArc * def_arc[4] * DknightItemBonusLc[0] + hcdsurvivorsRound1ModifiedArc * def_arc[6] * DknightItemBonusHc[0] + archerdsurvivorsRound1ModifiedArc * def_arc[3] * DknightItemBonusArcher[0] + madsurvivorsRound1ModifiedArc * def_arc[5] * DknightItemBonusMa[0] + ramdsurvivorsRound1ModifiedArc * def_arc[7] * DknightItemBonusRam[0] + catapultdsurvivorsRound1ModifiedArc * def_arc[8] * DknightItemBonusCatapult[0] + trebuchetdsurvivorsRound1ModifiedArc * def_arc[11] + knightdsurvivorsRound1ModifiedArc * def_arc[9]
             siegeStrengthRound1Calc()
         }
 
@@ -8605,89 +8533,89 @@ define('two/battleCalculator', [
         }
 
         function lossesRound1() {
-            speardlossesRound1 = Math.round(-speardamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-speardamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-speardamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            sworddlossesRound1 = Math.round(-sworddamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-sworddamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-sworddamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            axedlossesRound1 = Math.round(-axedamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-axedamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-axedamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            archerdlossesRound1 = Math.round(-archerdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-archerdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-archerdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            lcdlossesRound1 = Math.round(-lcdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-lcdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-lcdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            madlossesRound1 = Math.round(-madamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-madamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-madamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            hcdlossesRound1 = Math.round(-hcdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-hcdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-hcdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            ramdlossesRound1 = Math.round(-ramdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-ramdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-ramdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            catapultdlossesRound1 = Math.round(-catapultdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-catapultdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-catapultdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            trebuchetdlossesRound1 = Math.round(-trebuchetdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-trebuchetdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-trebuchetdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            berserkerdlossesRound1 = Math.round(-berserkerdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-berserkerdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-berserkerdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            knightdlossesRound1 = Math.round(-knightdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-knightdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-knightdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            snobdlossesRound1 = Math.round(-snobdamount_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-snobdamount_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-snobdamount_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
-            spearaamount_lossesRound1 = Math.round(-spearaamount * killRateRound1attackerInf + 0.000001)
-            swordaamount_lossesRound1 = Math.round(-swordaamount * killRateRound1attackerInf + 0.000001)
-            axeaamount_lossesRound1 = Math.round(-axeaamount * killRateRound1attackerInf + 0.000001)
-            berserkeraamount_lossesRound1 = Math.round(-berserkeraamount * killRateRound1attackerInf + 0.000001)
-            archeraamount_lossesRound1 = Math.round(-archeraamount * killRateRound1attackerArc + 0.000001)
-            maaamount_lossesRound1 = Math.round(-maaamount * killRateRound1attackerArc + 0.000001)
-            lcaamount_lossesRound1 = Math.round(-lcaamount * killRateRound1attackerCav + 0.000001)
-            hcaamount_lossesRound1 = Math.round(-hcaamount * killRateRound1attackerCav + 0.000001)
+            speardlossesRound1 = Math.round(-speardsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-speardsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-speardsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            sworddlossesRound1 = Math.round(-sworddsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-sworddsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-sworddsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            axedlossesRound1 = Math.round(-axedsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-axedsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-axedsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            archerdlossesRound1 = Math.round(-archerdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-archerdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-archerdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            lcdlossesRound1 = Math.round(-lcdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-lcdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-lcdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            madlossesRound1 = Math.round(-madsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-madsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-madsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            hcdlossesRound1 = Math.round(-hcdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-hcdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-hcdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            ramdlossesRound1 = Math.round(-ramdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-ramdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-ramdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            catapultdlossesRound1 = Math.round(-catapultdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-catapultdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-catapultdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            trebuchetdlossesRound1 = Math.round(-trebuchetdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-trebuchetdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-trebuchetdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            berserkerdlossesRound1 = Math.round(-berserkerdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-berserkerdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-berserkerdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            knightdlossesRound1 = Math.round(-knightdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-knightdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-knightdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            snobdlossesRound1 = Math.round(-snobdsurvivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-snobdsurvivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-snobdsurvivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            spearalossesRound1 = Math.round(-spearaamount * killRateRound1attackerInf + 0.000001)
+            swordalossesRound1 = Math.round(-swordaamount * killRateRound1attackerInf + 0.000001)
+            axealossesRound1 = Math.round(-axeaamount * killRateRound1attackerInf + 0.000001)
+            berserkeralossesRound1 = Math.round(-berserkeraamount * killRateRound1attackerInf + 0.000001)
+            archeralossesRound1 = Math.round(-archeraamount * killRateRound1attackerArc + 0.000001)
+            maalossesRound1 = Math.round(-maaamount * killRateRound1attackerArc + 0.000001)
+            lcalossesRound1 = Math.round(-lcaamount * killRateRound1attackerCav + 0.000001)
+            hcalossesRound1 = Math.round(-hcaamount * killRateRound1attackerCav + 0.000001)
             if (largestGroup == 'cav') {
-                ramaamount_lossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerCav + 0.000001)
-                catapultaamount_lossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerCav + 0.000001)
-                trebuchetaamount_lossesRound1 = Math.round(-trebuchetaamount * killRateRound1attackerCav + 0.000001)
-                knightaamount_lossesRound1 = Math.round(-knightaamount * killRateRound1attackerCav + 0.000001)
-                snobaamount_lossesRound1 = Math.round(-snobaamount * killRateRound1attackerCav + 0.000001)
+                ramalossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerCav + 0.000001)
+                catapultalossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerCav + 0.000001)
+                trebuchetalossesRound1 = Math.round(-trebuchetaamount * killRateRound1attackerCav + 0.000001)
+                knightalossesRound1 = Math.round(-knightaamount * killRateRound1attackerCav + 0.000001)
+                snobalossesRound1 = Math.round(-snobaamount * killRateRound1attackerCav + 0.000001)
             } else if (largestGroup == 'inf') {
-                ramaamount_lossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerInf + 0.000001)
-                catapultaamount_lossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerInf + 0.000001)
-                trebuchetaamount_lossesRound1 = Math.round(-trebuchetaamount * killRateRound1attackerInf + 0.000001)
-                knightaamount_lossesRound1 = Math.round(-knightaamount * killRateRound1attackerInf + 0.000001)
-                snobaamount_lossesRound1 = Math.round(-snobaamount * killRateRound1attackerInf + 0.000001)
+                ramalossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerInf + 0.000001)
+                catapultalossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerInf + 0.000001)
+                trebuchetalossesRound1 = Math.round(-trebuchetaamount * killRateRound1attackerInf + 0.000001)
+                knightalossesRound1 = Math.round(-knightaamount * killRateRound1attackerInf + 0.000001)
+                snobalossesRound1 = Math.round(-snobaamount * killRateRound1attackerInf + 0.000001)
             } else if (largestGroup == 'arc') {
-                ramaamount_lossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerArc + 0.000001)
-                catapultaamount_lossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerArc + 0.000001)
-                trebuchetaamount_lossesRound1 = Math.round(-trebuchetaamount * killRateRound1attackerArc + 0.000001)
-                knightaamount_lossesRound1 = Math.round(-knightaamount * killRateRound1attackerArc + 0.000001)
-                snobaamount_lossesRound1 = Math.round(-snobaamount * killRateRound1attackerArc + 0.000001)
+                ramalossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerArc + 0.000001)
+                catapultalossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerArc + 0.000001)
+                trebuchetalossesRound1 = Math.round(-trebuchetaamount * killRateRound1attackerArc + 0.000001)
+                knightalossesRound1 = Math.round(-knightaamount * killRateRound1attackerArc + 0.000001)
+                snobalossesRound1 = Math.round(-snobaamount * killRateRound1attackerArc + 0.000001)
             }
             afterFirstStageSurvivors()
         }
 
         function afterFirstStageSurvivors() {
-            spearaamount_survivorsRound1 = spearaamount + spearaamount_lossesRound1
-            swordaamount_survivorsRound1 = swordaamount + swordaamount_lossesRound1
-            axeaamount_survivorsRound1 = axeaamount + axeaamount_lossesRound1
-            archeraamount_survivorsRound1 = archeraamount + archeraamount_lossesRound1
-            lcaamount_survivorsRound1 = lcaamount + lcaamount_lossesRound1
-            maaamount_survivorsRound1 = maaamount + maaamount_lossesRound1
-            hcaamount_survivorsRound1 = hcaamount + hcaamount_lossesRound1
-            ramaamount_survivorsRound1 = ramsPreRound + ramaamount_lossesRound1
-            catapultaamount_survivorsRound1 = catapultPreRound + catapultaamount_lossesRound1
-            trebuchetaamount_survivorsRound1 = trebuchetaamount + trebuchetaamount_lossesRound1
-            berserkeraamount_survivorsRound1 = berserkeraamount + berserkeraamount_lossesRound1
-            snobaamount_survivorsRound1 = snobaamount + snobaamount_lossesRound1
-            knightaamount_survivorsRound1 = knightaamount + knightaamount_lossesRound1
-            speardamount_survivorsRound1 = speardamount + speardlossesRound1
-            sworddamount_survivorsRound1 = sworddamount + sworddlossesRound1
-            axedamount_survivorsRound1 = axedamount + axedlossesRound1
-            archerdamount_survivorsRound1 = archerdamount + archerdlossesRound1
-            lcdamount_survivorsRound1 = lcdamount + lcdlossesRound1
-            madamount_survivorsRound1 = madamount + madlossesRound1
-            hcdamount_survivorsRound1 = hcdamount + hcdlossesRound1
-            ramdamount_survivorsRound1 = ramdamount + ramdlossesRound1
-            catapultdamount_survivorsRound1 = catapultdamount + catapultdlossesRound1
-            trebuchetdamount_survivorsRound1 = trebuchetdamount + trebuchetdlossesRound1
-            berserkerdamount_survivorsRound1 = berserkerdamount + berserkerdlossesRound1
-            snobdamount_survivorsRound1 = snobdamount + snobdlossesRound1
-            knightdamount_survivorsRound1 = knightdamount + knightdlossesRound1
+            spearasurvivorsRound1 = spearaamount + spearalossesRound1
+            swordasurvivorsRound1 = swordaamount + swordalossesRound1
+            axeasurvivorsRound1 = axeaamount + axealossesRound1
+            archerasurvivorsRound1 = archeraamount + archeralossesRound1
+            lcasurvivorsRound1 = lcaamount + lcalossesRound1
+            maasurvivorsRound1 = maaamount + maalossesRound1
+            hcasurvivorsRound1 = hcaamount + hcalossesRound1
+            ramasurvivorsRound1 = ramsPreRound + ramalossesRound1
+            catapultasurvivorsRound1 = catapultPreRound + catapultalossesRound1
+            trebuchetasurvivorsRound1 = trebuchetaamount + trebuchetalossesRound1
+            berserkerasurvivorsRound1 = berserkeraamount + berserkeralossesRound1
+            snobasurvivorsRound1 = snobaamount + snobalossesRound1
+            knightasurvivorsRound1 = knightaamount + knightalossesRound1
+            speardsurvivorsRound1 = speardamount + speardlossesRound1
+            sworddsurvivorsRound1 = sworddamount + sworddlossesRound1
+            axedsurvivorsRound1 = axedamount + axedlossesRound1
+            archerdsurvivorsRound1 = archerdamount + archerdlossesRound1
+            lcdsurvivorsRound1 = lcdamount + lcdlossesRound1
+            madsurvivorsRound1 = madamount + madlossesRound1
+            hcdsurvivorsRound1 = hcdamount + hcdlossesRound1
+            ramdsurvivorsRound1 = ramdamount + ramdlossesRound1
+            catapultdsurvivorsRound1 = catapultdamount + catapultdlossesRound1
+            trebuchetdsurvivorsRound1 = trebuchetdamount + trebuchetdlossesRound1
+            berserkerdsurvivorsRound1 = berserkerdamount + berserkerdlossesRound1
+            snobdsurvivorsRound1 = snobdamount + snobdlossesRound1
+            knightdsurvivorsRound1 = knightdamount + knightdlossesRound1
             lossesProvisionsRound1Total()
         }
 
         function lossesProvisionsRound1Total() {
-            lossesAttackerRound1Total = spearaamount_lossesRound1 * food[0] + swordaamount_lossesRound1 * food[1] + axeaamount_lossesRound1 * food[2] + archeraamount_lossesRound1 * food[3] + lcaamount_lossesRound1 * food[4] + maaamount_lossesRound1 * food[5] + hcaamount_lossesRound1 * food[6] + ramaamount_lossesRound1 * food[7] + catapultaamount_lossesRound1 * food[8] + knightaamount_lossesRound1 * food[9] + snobaamount_lossesRound1 * food[10] + trebuchetaamount_lossesRound1 * food[11] + berserkeraamount_lossesRound1 * food[12]
+            lossesAttackerRound1Total = spearalossesRound1 * food[0] + swordalossesRound1 * food[1] + axealossesRound1 * food[2] + archeralossesRound1 * food[3] + lcalossesRound1 * food[4] + maalossesRound1 * food[5] + hcalossesRound1 * food[6] + ramalossesRound1 * food[7] + catapultalossesRound1 * food[8] + knightalossesRound1 * food[9] + snobalossesRound1 * food[10] + trebuchetalossesRound1 * food[11] + berserkeralossesRound1 * food[12]
             lossesDefenderRound1Total = speardlossesRound1 * food[0] + sworddlossesRound1 * food[1] + axedlossesRound1 * food[2] + archerdlossesRound1 * food[3] + lcdlossesRound1 * food[4] + madlossesRound1 * food[5] + hcdlossesRound1 * food[6] + ramdlossesRound1 * food[7] + catapultdlossesRound1 * food[8] + knightdlossesRound1 * food[9] + snobdlossesRound1 * food[10] + trebuchetdlossesRound1 * food[11] + berserkerdlossesRound1 * food[12]
             console.log(lossesAttackerRound1Total, lossesDefenderRound1Total)
             survivorsProvisionsRound1Total()
         }
 
         function survivorsProvisionsRound1Total() {
-            survivorsAttackerRound1Total = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + archeraamount_survivorsRound1 * food[3] + lcaamount_survivorsRound1 * food[4] + maaamount_survivorsRound1 * food[5] + hcaamount_survivorsRound1 * food[6] + ramaamount_survivorsRound1 * food[7] + catapultaamount_survivorsRound1 * food[8] + trebuchetaamount_survivorsRound1 * food[11] + berserkeraamount_survivorsRound1 * food[12] + snobaamount_survivorsRound1 * food[10] + knightaamount_survivorsRound1 * food[9]
-            survivorsDefenderRound1Total = speardamount_survivorsRound1 * food[0] + sworddamount_survivorsRound1 * food[1] + axedamount_survivorsRound1 * food[2] + archerdamount_survivorsRound1 * food[3] + lcdamount_survivorsRound1 * food[4] + madamount_survivorsRound1 * food[5] + hcdamount_survivorsRound1 * food[6] + ramdamount_survivorsRound1 * food[7] + catapultdamount_survivorsRound1 * food[8] + trebuchetdamount_survivorsRound1 * food[11] + berserkerdamount_survivorsRound1 * food[12] + snobdamount_survivorsRound1 * food[10] + knightdamount_survivorsRound1 * food[9]
+            survivorsAttackerRound1Total = spearasurvivorsRound1 * food[0] + swordasurvivorsRound1 * food[1] + axeasurvivorsRound1 * food[2] + archerasurvivorsRound1 * food[3] + lcasurvivorsRound1 * food[4] + maasurvivorsRound1 * food[5] + hcasurvivorsRound1 * food[6] + ramasurvivorsRound1 * food[7] + catapultasurvivorsRound1 * food[8] + trebuchetasurvivorsRound1 * food[11] + berserkerasurvivorsRound1 * food[12] + snobasurvivorsRound1 * food[10] + knightasurvivorsRound1 * food[9]
+            survivorsDefenderRound1Total = speardsurvivorsRound1 * food[0] + sworddsurvivorsRound1 * food[1] + axedsurvivorsRound1 * food[2] + archerdsurvivorsRound1 * food[3] + lcdsurvivorsRound1 * food[4] + madsurvivorsRound1 * food[5] + hcdsurvivorsRound1 * food[6] + ramdsurvivorsRound1 * food[7] + catapultdsurvivorsRound1 * food[8] + trebuchetdsurvivorsRound1 * food[11] + berserkerdsurvivorsRound1 * food[12] + snobdsurvivorsRound1 * food[10] + knightdsurvivorsRound1 * food[9]
             console.log(survivorsAttackerRound1Total, survivorsDefenderRound1Total)
             armyLossesPercentEachRoundCalc()
         }
@@ -8705,34 +8633,34 @@ define('two/battleCalculator', [
         }
 
         function totalProvisionsRound2() {
-            provisionAttackerRound2Total = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + archeraamount_survivorsRound1 * food[3] + lcaamount_survivorsRound1 * food[4] + maaamount_survivorsRound1 * food[5] + hcaamount_survivorsRound1 * food[6] + ramaamount_survivorsRound1 * food[7] + catapultaamount_survivorsRound1 * food[8] + knightaamount_survivorsRound1 * food[9] + snobaamount_survivorsRound1 * food[10] + trebuchetaamount_survivorsRound1 * food[11] + berserkeraamount_survivorsRound1 * food[12]
-            provisionDefenderRound2Total = speardamount_survivorsRound1 * food[0] + sworddamount_survivorsRound1 * food[1] + axedamount_survivorsRound1 * food[2] + archerdamount_survivorsRound1 * food[3] + lcdamount_survivorsRound1 * food[4] + madamount_survivorsRound1 * food[5] + hcdamount_survivorsRound1 * food[6] + ramdamount_survivorsRound1 * food[7] + catapultdamount_survivorsRound1 * food[8] + knightdamount_survivorsRound1 * food[9] + snobdamount_survivorsRound1 * food[10] + trebuchetdamount_survivorsRound1 * food[11] + berserkerdamount_survivorsRound1 * food[12]
+            provisionAttackerRound2Total = spearasurvivorsRound1 * food[0] + swordasurvivorsRound1 * food[1] + axeasurvivorsRound1 * food[2] + archerasurvivorsRound1 * food[3] + lcasurvivorsRound1 * food[4] + maasurvivorsRound1 * food[5] + hcasurvivorsRound1 * food[6] + ramasurvivorsRound1 * food[7] + catapultasurvivorsRound1 * food[8] + knightasurvivorsRound1 * food[9] + snobasurvivorsRound1 * food[10] + trebuchetasurvivorsRound1 * food[11] + berserkerasurvivorsRound1 * food[12]
+            provisionDefenderRound2Total = speardsurvivorsRound1 * food[0] + sworddsurvivorsRound1 * food[1] + axedsurvivorsRound1 * food[2] + archerdsurvivorsRound1 * food[3] + lcdsurvivorsRound1 * food[4] + madsurvivorsRound1 * food[5] + hcdsurvivorsRound1 * food[6] + ramdsurvivorsRound1 * food[7] + catapultdsurvivorsRound1 * food[8] + knightdsurvivorsRound1 * food[9] + snobdsurvivorsRound1 * food[10] + trebuchetdsurvivorsRound1 * food[11] + berserkerdsurvivorsRound1 * food[12]
             console.log(provisionDefenderRound2Total, provisionAttackerRound2Total)
             siegeProvisionRound2Calc()
         }
 
         function siegeProvisionRound2Calc() {
-            siegeProvisionRound2 = ramaamount_survivorsRound1 * food[7] + catapultaamount_survivorsRound1 * food[8] + trebuchetaamount_survivorsRound1 * food[11] + knightaamount_survivorsRound1 * food[9]
+            siegeProvisionRound2 = ramasurvivorsRound1 * food[7] + catapultasurvivorsRound1 * food[8] + trebuchetasurvivorsRound1 * food[11] + knightasurvivorsRound1 * food[9]
             provisionAttackerAllRound2()
         }
 
         function provisionAttackerAllRound2() {
             if (largestGroup == 'cav') {
-                provisionAttackerCavRound2 = lcaamount_survivorsRound1 * food[4] + hcaamount_survivorsRound1 * food[6] + siegeProvisionRound2
-                provisionAttackerInfRound2 = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + berserkeraamount_survivorsRound1 * food[12] + snobaamount_survivorsRound1 * food[10]
-                provisionAttackerArcRound2 = archeraamount_survivorsRound1 * food[3] + maaamount_survivorsRound1 * food[5]
+                provisionAttackerCavRound2 = lcasurvivorsRound1 * food[4] + hcasurvivorsRound1 * food[6] + siegeProvisionRound2
+                provisionAttackerInfRound2 = spearasurvivorsRound1 * food[0] + swordasurvivorsRound1 * food[1] + axeasurvivorsRound1 * food[2] + berserkerasurvivorsRound1 * food[12] + snobasurvivorsRound1 * food[10]
+                provisionAttackerArcRound2 = archerasurvivorsRound1 * food[3] + maasurvivorsRound1 * food[5]
             } else if (largestGroup == 'inf') {
-                provisionAttackerInfRound2 = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + berserkeraamount_survivorsRound1 * food[12] + snobaamount_survivorsRound1 * food[10] + siegeProvisionRound2
-                provisionAttackerCavRound2 = lcaamount_survivorsRound1 * food[4] + hcaamount_survivorsRound1 * food[6]
-                provisionAttackerArcRound2 = archeraamount_survivorsRound1 * food[3] + maaamount_survivorsRound1 * food[5]
+                provisionAttackerInfRound2 = spearasurvivorsRound1 * food[0] + swordasurvivorsRound1 * food[1] + axeasurvivorsRound1 * food[2] + berserkerasurvivorsRound1 * food[12] + snobasurvivorsRound1 * food[10] + siegeProvisionRound2
+                provisionAttackerCavRound2 = lcasurvivorsRound1 * food[4] + hcasurvivorsRound1 * food[6]
+                provisionAttackerArcRound2 = archerasurvivorsRound1 * food[3] + maasurvivorsRound1 * food[5]
             } else if (largestGroup == 'arc') {
-                provisionAttackerInfRound2 = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + berserkeraamount_survivorsRound1 * food[12] + snobaamount_survivorsRound1 * food[10]
-                provisionAttackerCavRound2 = lcaamount_survivorsRound1 * food[4] + hcaamount_survivorsRound1 * food[6]
-                provisionAttackerArcRound2 = archeraamount_survivorsRound1 * food[3] + maaamount_survivorsRound1 * food[5] + siegeProvisionRound2
+                provisionAttackerInfRound2 = spearasurvivorsRound1 * food[0] + swordasurvivorsRound1 * food[1] + axeasurvivorsRound1 * food[2] + berserkerasurvivorsRound1 * food[12] + snobasurvivorsRound1 * food[10]
+                provisionAttackerCavRound2 = lcasurvivorsRound1 * food[4] + hcasurvivorsRound1 * food[6]
+                provisionAttackerArcRound2 = archerasurvivorsRound1 * food[3] + maasurvivorsRound1 * food[5] + siegeProvisionRound2
             } else {
-                provisionAttackerInfRound2 = spearaamount_survivorsRound1 * food[0] + swordaamount_survivorsRound1 * food[1] + axeaamount_survivorsRound1 * food[2] + berserkeraamount_survivorsRound1 * food[12] + snobaamount_survivorsRound1 * food[10]
-                provisionAttackerCavRound2 = lcaamount_survivorsRound1 * food[4] + hcaamount_survivorsRound1 * food[6]
-                provisionAttackerArcRound2 = archeraamount_survivorsRound1 * food[3] + maaamount_survivorsRound1 * food[5]
+                provisionAttackerInfRound2 = spearasurvivorsRound1 * food[0] + swordasurvivorsRound1 * food[1] + axeasurvivorsRound1 * food[2] + berserkerasurvivorsRound1 * food[12] + snobasurvivorsRound1 * food[10]
+                provisionAttackerCavRound2 = lcasurvivorsRound1 * food[4] + hcasurvivorsRound1 * food[6]
+                provisionAttackerArcRound2 = archerasurvivorsRound1 * food[3] + maasurvivorsRound1 * food[5]
             }
             lossesPercentRound2InfCalc()
         }
@@ -8766,85 +8694,85 @@ define('two/battleCalculator', [
         }
 
         function survivorsRound2Modified() {
-            speardamount_survivorsRound2ModifiedInf = Math.round(speardamount_survivorsRound1 * lossesPercentRound2Inf)
-            speardamount_survivorsRound2ModifiedCav = Math.round(speardamount_survivorsRound1 * lossesPercentRound2Cav)
-            speardamount_survivorsRound2ModifiedArc = speardamount_survivorsRound1 - speardamount_survivorsRound2ModifiedCav - speardamount_survivorsRound2ModifiedInf
-            sworddamount_survivorsRound2ModifiedInf = Math.round(sworddamount_survivorsRound1 * lossesPercentRound2Inf)
-            sworddamount_survivorsRound2ModifiedCav = Math.round(sworddamount_survivorsRound1 * lossesPercentRound2Cav)
-            sworddamount_survivorsRound2ModifiedArc = sworddamount_survivorsRound1 - sworddamount_survivorsRound2ModifiedCav - sworddamount_survivorsRound2ModifiedInf
-            axedamount_survivorsRound2ModifiedInf = Math.round(axedamount_survivorsRound1 * lossesPercentRound2Inf)
-            axedamount_survivorsRound2ModifiedCav = Math.round(axedamount_survivorsRound1 * lossesPercentRound2Cav)
-            axedamount_survivorsRound2ModifiedArc = axedamount_survivorsRound1 - axedamount_survivorsRound2ModifiedCav - axedamount_survivorsRound2ModifiedInf
-            archerdamount_survivorsRound2ModifiedInf = Math.round(archerdamount_survivorsRound1 * lossesPercentRound2Inf)
-            archerdamount_survivorsRound2ModifiedCav = Math.round(archerdamount_survivorsRound1 * lossesPercentRound2Cav)
-            archerdamount_survivorsRound2ModifiedArc = archerdamount_survivorsRound1 - archerdamount_survivorsRound2ModifiedCav - archerdamount_survivorsRound2ModifiedInf
-            lcdamount_survivorsRound2ModifiedInf = Math.round(lcdamount_survivorsRound1 * lossesPercentRound2Inf)
-            lcdamount_survivorsRound2ModifiedCav = Math.round(lcdamount_survivorsRound1 * lossesPercentRound2Cav)
-            lcdamount_survivorsRound2ModifiedArc = lcdamount_survivorsRound1 - lcdamount_survivorsRound2ModifiedCav - lcdamount_survivorsRound2ModifiedInf
-            madamount_survivorsRound2ModifiedInf = Math.round(madamount_survivorsRound1 * lossesPercentRound2Inf)
-            madamount_survivorsRound2ModifiedCav = Math.round(madamount_survivorsRound1 * lossesPercentRound2Cav)
-            madamount_survivorsRound2ModifiedArc = madamount_survivorsRound1 - madamount_survivorsRound2ModifiedCav - madamount_survivorsRound2ModifiedInf
-            hcdamount_survivorsRound2ModifiedInf = Math.round(hcdamount_survivorsRound1 * lossesPercentRound2Inf)
-            hcdamount_survivorsRound2ModifiedCav = Math.round(hcdamount_survivorsRound1 * lossesPercentRound2Cav)
-            hcdamount_survivorsRound2ModifiedArc = hcdamount_survivorsRound1 - hcdamount_survivorsRound2ModifiedCav - hcdamount_survivorsRound2ModifiedInf
-            ramdamount_survivorsRound2ModifiedInf = Math.round(ramdamount_survivorsRound1 * lossesPercentRound2Inf)
-            ramdamount_survivorsRound2ModifiedCav = Math.round(ramdamount_survivorsRound1 * lossesPercentRound2Cav)
-            ramdamount_survivorsRound2ModifiedArc = ramdamount_survivorsRound1 - ramdamount_survivorsRound2ModifiedCav - ramdamount_survivorsRound2ModifiedInf
-            catapultdamount_survivorsRound2ModifiedInf = Math.round(catapultdamount_survivorsRound1 * lossesPercentRound2Inf)
-            catapultdamount_survivorsRound2ModifiedCav = Math.round(catapultdamount_survivorsRound1 * lossesPercentRound2Cav)
-            catapultdamount_survivorsRound2ModifiedArc = catapultdamount_survivorsRound1 - catapultdamount_survivorsRound2ModifiedCav - catapultdamount_survivorsRound2ModifiedInf
-            snobdamount_survivorsRound2ModifiedInf = Math.round(snobdamount_survivorsRound1 * lossesPercentRound2Inf)
-            snobdamount_survivorsRound2ModifiedCav = Math.round(snobdamount_survivorsRound1 * lossesPercentRound2Cav)
-            snobdamount_survivorsRound2ModifiedArc = snobdamount_survivorsRound1 - snobdamount_survivorsRound2ModifiedCav - snobdamount_survivorsRound2ModifiedInf
-            trebuchetdamount_survivorsRound2ModifiedInf = Math.round(trebuchetdamount_survivorsRound1 * lossesPercentRound2Inf)
-            trebuchetdamount_survivorsRound2ModifiedCav = Math.round(trebuchetdamount_survivorsRound1 * lossesPercentRound2Cav)
-            trebuchetdamount_survivorsRound2ModifiedArc = trebuchetdamount_survivorsRound1 - trebuchetdamount_survivorsRound2ModifiedCav - trebuchetdamount_survivorsRound2ModifiedInf
-            berserkerdamount_survivorsRound2ModifiedInf = Math.round(berserkerdamount_survivorsRound1 * lossesPercentRound2Inf)
-            berserkerdamount_survivorsRound2ModifiedCav = Math.round(berserkerdamount_survivorsRound1 * lossesPercentRound2Cav)
-            berserkerdamount_survivorsRound2ModifiedArc = berserkerdamount_survivorsRound1 - berserkerdamount_survivorsRound2ModifiedCav - berserkerdamount_survivorsRound2ModifiedInf
-            knightdamount_survivorsRound2ModifiedInf = Math.round(knightdamount_survivorsRound1 * lossesPercentRound2Inf)
-            knightdamount_survivorsRound2ModifiedCav = Math.round(knightdamount_survivorsRound1 * lossesPercentRound2Cav)
-            knightdamount_survivorsRound2ModifiedArc = knightdamount_survivorsRound1 - knightdamount_survivorsRound2ModifiedCav - knightdamount_survivorsRound2ModifiedInf
+            speardsurvivorsRound2ModifiedInf = Math.round(speardsurvivorsRound1 * lossesPercentRound2Inf)
+            speardsurvivorsRound2ModifiedCav = Math.round(speardsurvivorsRound1 * lossesPercentRound2Cav)
+            speardsurvivorsRound2ModifiedArc = speardsurvivorsRound1 - speardsurvivorsRound2ModifiedCav - speardsurvivorsRound2ModifiedInf
+            sworddsurvivorsRound2ModifiedInf = Math.round(sworddsurvivorsRound1 * lossesPercentRound2Inf)
+            sworddsurvivorsRound2ModifiedCav = Math.round(sworddsurvivorsRound1 * lossesPercentRound2Cav)
+            sworddsurvivorsRound2ModifiedArc = sworddsurvivorsRound1 - sworddsurvivorsRound2ModifiedCav - sworddsurvivorsRound2ModifiedInf
+            axedsurvivorsRound2ModifiedInf = Math.round(axedsurvivorsRound1 * lossesPercentRound2Inf)
+            axedsurvivorsRound2ModifiedCav = Math.round(axedsurvivorsRound1 * lossesPercentRound2Cav)
+            axedsurvivorsRound2ModifiedArc = axedsurvivorsRound1 - axedsurvivorsRound2ModifiedCav - axedsurvivorsRound2ModifiedInf
+            archerdsurvivorsRound2ModifiedInf = Math.round(archerdsurvivorsRound1 * lossesPercentRound2Inf)
+            archerdsurvivorsRound2ModifiedCav = Math.round(archerdsurvivorsRound1 * lossesPercentRound2Cav)
+            archerdsurvivorsRound2ModifiedArc = archerdsurvivorsRound1 - archerdsurvivorsRound2ModifiedCav - archerdsurvivorsRound2ModifiedInf
+            lcdsurvivorsRound2ModifiedInf = Math.round(lcdsurvivorsRound1 * lossesPercentRound2Inf)
+            lcdsurvivorsRound2ModifiedCav = Math.round(lcdsurvivorsRound1 * lossesPercentRound2Cav)
+            lcdsurvivorsRound2ModifiedArc = lcdsurvivorsRound1 - lcdsurvivorsRound2ModifiedCav - lcdsurvivorsRound2ModifiedInf
+            madsurvivorsRound2ModifiedInf = Math.round(madsurvivorsRound1 * lossesPercentRound2Inf)
+            madsurvivorsRound2ModifiedCav = Math.round(madsurvivorsRound1 * lossesPercentRound2Cav)
+            madsurvivorsRound2ModifiedArc = madsurvivorsRound1 - madsurvivorsRound2ModifiedCav - madsurvivorsRound2ModifiedInf
+            hcdsurvivorsRound2ModifiedInf = Math.round(hcdsurvivorsRound1 * lossesPercentRound2Inf)
+            hcdsurvivorsRound2ModifiedCav = Math.round(hcdsurvivorsRound1 * lossesPercentRound2Cav)
+            hcdsurvivorsRound2ModifiedArc = hcdsurvivorsRound1 - hcdsurvivorsRound2ModifiedCav - hcdsurvivorsRound2ModifiedInf
+            ramdsurvivorsRound2ModifiedInf = Math.round(ramdsurvivorsRound1 * lossesPercentRound2Inf)
+            ramdsurvivorsRound2ModifiedCav = Math.round(ramdsurvivorsRound1 * lossesPercentRound2Cav)
+            ramdsurvivorsRound2ModifiedArc = ramdsurvivorsRound1 - ramdsurvivorsRound2ModifiedCav - ramdsurvivorsRound2ModifiedInf
+            catapultdsurvivorsRound2ModifiedInf = Math.round(catapultdsurvivorsRound1 * lossesPercentRound2Inf)
+            catapultdsurvivorsRound2ModifiedCav = Math.round(catapultdsurvivorsRound1 * lossesPercentRound2Cav)
+            catapultdsurvivorsRound2ModifiedArc = catapultdsurvivorsRound1 - catapultdsurvivorsRound2ModifiedCav - catapultdsurvivorsRound2ModifiedInf
+            snobdsurvivorsRound2ModifiedInf = Math.round(snobdsurvivorsRound1 * lossesPercentRound2Inf)
+            snobdsurvivorsRound2ModifiedCav = Math.round(snobdsurvivorsRound1 * lossesPercentRound2Cav)
+            snobdsurvivorsRound2ModifiedArc = snobdsurvivorsRound1 - snobdsurvivorsRound2ModifiedCav - snobdsurvivorsRound2ModifiedInf
+            trebuchetdsurvivorsRound2ModifiedInf = Math.round(trebuchetdsurvivorsRound1 * lossesPercentRound2Inf)
+            trebuchetdsurvivorsRound2ModifiedCav = Math.round(trebuchetdsurvivorsRound1 * lossesPercentRound2Cav)
+            trebuchetdsurvivorsRound2ModifiedArc = trebuchetdsurvivorsRound1 - trebuchetdsurvivorsRound2ModifiedCav - trebuchetdsurvivorsRound2ModifiedInf
+            berserkerdsurvivorsRound2ModifiedInf = Math.round(berserkerdsurvivorsRound1 * lossesPercentRound2Inf)
+            berserkerdsurvivorsRound2ModifiedCav = Math.round(berserkerdsurvivorsRound1 * lossesPercentRound2Cav)
+            berserkerdsurvivorsRound2ModifiedArc = berserkerdsurvivorsRound1 - berserkerdsurvivorsRound2ModifiedCav - berserkerdsurvivorsRound2ModifiedInf
+            knightdsurvivorsRound2ModifiedInf = Math.round(knightdsurvivorsRound1 * lossesPercentRound2Inf)
+            knightdsurvivorsRound2ModifiedCav = Math.round(knightdsurvivorsRound1 * lossesPercentRound2Cav)
+            knightdsurvivorsRound2ModifiedArc = knightdsurvivorsRound1 - knightdsurvivorsRound2ModifiedCav - knightdsurvivorsRound2ModifiedInf
             provisionDefenderRound2()
         }
 
         function provisionDefenderRound2() {
-            provisionDefenderInfRound2 = speardamount_survivorsRound2ModifiedInf * food[0] + sworddamount_survivorsRound2ModifiedInf * food[1] + axedamount_survivorsRound2ModifiedInf * food[2] + berserkerdamount_survivorsRound2ModifiedInf * food[12] + snobdamount_survivorsRound2ModifiedInf * food[10] + lcdamount_survivorsRound2ModifiedInf * food[4] + hcdamount_survivorsRound2ModifiedInf * food[6] + archerdamount_survivorsRound2ModifiedInf * food[3] + madamount_survivorsRound2ModifiedInf * food[5] + ramdamount_survivorsRound2ModifiedInf * food[7] + catapultdamount_survivorsRound2ModifiedInf * food[8] + trebuchetdamount_survivorsRound2ModifiedInf * food[11] + knightdamount_survivorsRound2ModifiedInf * food[9]
-            provisionDefenderCavRound2 = speardamount_survivorsRound2ModifiedCav * food[0] + sworddamount_survivorsRound2ModifiedCav * food[1] + axedamount_survivorsRound2ModifiedCav * food[2] + berserkerdamount_survivorsRound2ModifiedCav * food[12] + snobdamount_survivorsRound2ModifiedCav * food[10] + lcdamount_survivorsRound2ModifiedCav * food[4] + hcdamount_survivorsRound2ModifiedCav * food[6] + archerdamount_survivorsRound2ModifiedCav * food[3] + madamount_survivorsRound2ModifiedCav * food[5] + ramdamount_survivorsRound2ModifiedCav * food[7] + catapultdamount_survivorsRound2ModifiedCav * food[8] + trebuchetdamount_survivorsRound2ModifiedCav * food[11] + knightdamount_survivorsRound2ModifiedCav * food[9]
-            provisionDefenderArcRound2 = speardamount_survivorsRound2ModifiedArc * food[0] + sworddamount_survivorsRound2ModifiedArc * food[1] + axedamount_survivorsRound2ModifiedArc * food[2] + berserkerdamount_survivorsRound2ModifiedArc * food[12] + snobdamount_survivorsRound2ModifiedArc * food[10] + lcdamount_survivorsRound2ModifiedArc * food[4] + hcdamount_survivorsRound2ModifiedArc * food[6] + archerdamount_survivorsRound2ModifiedArc * food[3] + madamount_survivorsRound2ModifiedArc * food[5] + ramdamount_survivorsRound2ModifiedArc * food[7] + catapultdamount_survivorsRound2ModifiedArc * food[8] + trebuchetdamount_survivorsRound2ModifiedArc * food[11] + knightdamount_survivorsRound2ModifiedArc * food[9]
+            provisionDefenderInfRound2 = speardsurvivorsRound2ModifiedInf * food[0] + sworddsurvivorsRound2ModifiedInf * food[1] + axedsurvivorsRound2ModifiedInf * food[2] + berserkerdsurvivorsRound2ModifiedInf * food[12] + snobdsurvivorsRound2ModifiedInf * food[10] + lcdsurvivorsRound2ModifiedInf * food[4] + hcdsurvivorsRound2ModifiedInf * food[6] + archerdsurvivorsRound2ModifiedInf * food[3] + madsurvivorsRound2ModifiedInf * food[5] + ramdsurvivorsRound2ModifiedInf * food[7] + catapultdsurvivorsRound2ModifiedInf * food[8] + trebuchetdsurvivorsRound2ModifiedInf * food[11] + knightdsurvivorsRound2ModifiedInf * food[9]
+            provisionDefenderCavRound2 = speardsurvivorsRound2ModifiedCav * food[0] + sworddsurvivorsRound2ModifiedCav * food[1] + axedsurvivorsRound2ModifiedCav * food[2] + berserkerdsurvivorsRound2ModifiedCav * food[12] + snobdsurvivorsRound2ModifiedCav * food[10] + lcdsurvivorsRound2ModifiedCav * food[4] + hcdsurvivorsRound2ModifiedCav * food[6] + archerdsurvivorsRound2ModifiedCav * food[3] + madsurvivorsRound2ModifiedCav * food[5] + ramdsurvivorsRound2ModifiedCav * food[7] + catapultdsurvivorsRound2ModifiedCav * food[8] + trebuchetdsurvivorsRound2ModifiedCav * food[11] + knightdsurvivorsRound2ModifiedCav * food[9]
+            provisionDefenderArcRound2 = speardsurvivorsRound2ModifiedArc * food[0] + sworddsurvivorsRound2ModifiedArc * food[1] + axedsurvivorsRound2ModifiedArc * food[2] + berserkerdsurvivorsRound2ModifiedArc * food[12] + snobdsurvivorsRound2ModifiedArc * food[10] + lcdsurvivorsRound2ModifiedArc * food[4] + hcdsurvivorsRound2ModifiedArc * food[6] + archerdsurvivorsRound2ModifiedArc * food[3] + madsurvivorsRound2ModifiedArc * food[5] + ramdsurvivorsRound2ModifiedArc * food[7] + catapultdsurvivorsRound2ModifiedArc * food[8] + trebuchetdsurvivorsRound2ModifiedArc * food[11] + knightdsurvivorsRound2ModifiedArc * food[9]
             console.log(provisionDefenderArcRound2, provisionDefenderCavRound2, provisionDefenderInfRound2)
             strengthBaseDefenderAllRound2()
         }
 
         function strengthBaseDefenderAllRound2() {
-            strengthBaseDefenderInfRound2 = speardamount_survivorsRound2ModifiedInf * def_inf[0] * DknightItemBonusSpear[0] + sworddamount_survivorsRound2ModifiedInf * def_inf[1] * DknightItemBonusSword[0] + axedamount_survivorsRound2ModifiedInf * def_inf[2] * DknightItemBonusAxe[0] + berserkerdamount_survivorsRound2ModifiedInf * def_inf[12] + snobdamount_survivorsRound2ModifiedInf * def_inf[10] + lcdamount_survivorsRound2ModifiedInf * def_inf[4] * DknightItemBonusLc[0] + hcdamount_survivorsRound2ModifiedInf * def_inf[6] * DknightItemBonusHc[0] + archerdamount_survivorsRound2ModifiedInf * def_inf[3] * DknightItemBonusArcher[0] + madamount_survivorsRound2ModifiedInf * def_inf[5] * DknightItemBonusMa[0] + ramdamount_survivorsRound2ModifiedInf * def_inf[7] * DknightItemBonusRam[0] + catapultdamount_survivorsRound2ModifiedInf * def_inf[8] * DknightItemBonusCatapult[0] + trebuchetdamount_survivorsRound2ModifiedInf * def_inf[11] + knightdamount_survivorsRound2ModifiedInf * def_inf[9]
-            strengthBaseDefenderCavRound2 = speardamount_survivorsRound2ModifiedCav * def_kav[0] * DknightItemBonusSpear[0] + sworddamount_survivorsRound2ModifiedCav * def_kav[1] * DknightItemBonusSword[0] + axedamount_survivorsRound2ModifiedCav * def_kav[2] * DknightItemBonusAxe[0] + berserkerdamount_survivorsRound2ModifiedCav * def_kav[12] + snobdamount_survivorsRound2ModifiedCav * def_kav[10] + lcdamount_survivorsRound2ModifiedCav * def_kav[4] * DknightItemBonusLc[0] + hcdamount_survivorsRound2ModifiedCav * def_kav[6] * DknightItemBonusHc[0] + archerdamount_survivorsRound2ModifiedCav * def_kav[3] * DknightItemBonusArcher[0] + madamount_survivorsRound2ModifiedCav * def_kav[5] * DknightItemBonusMa[0] + ramdamount_survivorsRound2ModifiedCav * def_kav[7] * DknightItemBonusRam[0] + catapultdamount_survivorsRound2ModifiedCav * def_kav[8] * DknightItemBonusCatapult[0] + trebuchetdamount_survivorsRound2ModifiedCav * def_kav[11] + knightdamount_survivorsRound2ModifiedCav * def_kav[9]
-            strengthBaseDefenderArcRound2 = speardamount_survivorsRound2ModifiedArc * def_arc[0] * DknightItemBonusSpear[0] + sworddamount_survivorsRound2ModifiedArc * def_arc[1] * DknightItemBonusSword[0] + axedamount_survivorsRound2ModifiedArc * def_arc[2] * DknightItemBonusAxe[0] + berserkerdamount_survivorsRound2ModifiedArc * def_arc[12] + snobdamount_survivorsRound2ModifiedArc * def_arc[10] + lcdamount_survivorsRound2ModifiedArc * def_arc[4] * DknightItemBonusLc[0] + hcdamount_survivorsRound2ModifiedArc * def_arc[6] * DknightItemBonusHc[0] + archerdamount_survivorsRound2ModifiedArc * def_arc[3] * DknightItemBonusArcher[0] + madamount_survivorsRound2ModifiedArc * def_arc[5] * DknightItemBonusMa[0] + ramdamount_survivorsRound2ModifiedArc * def_arc[7] * DknightItemBonusRam[0] + catapultdamount_survivorsRound2ModifiedArc * def_arc[8] * DknightItemBonusCatapult[0] + trebuchetdamount_survivorsRound2ModifiedArc * def_arc[11] + knightdamount_survivorsRound2ModifiedArc * def_arc[9]
+            strengthBaseDefenderInfRound2 = speardsurvivorsRound2ModifiedInf * def_inf[0] * DknightItemBonusSpear[0] + sworddsurvivorsRound2ModifiedInf * def_inf[1] * DknightItemBonusSword[0] + axedsurvivorsRound2ModifiedInf * def_inf[2] * DknightItemBonusAxe[0] + berserkerdsurvivorsRound2ModifiedInf * def_inf[12] + snobdsurvivorsRound2ModifiedInf * def_inf[10] + lcdsurvivorsRound2ModifiedInf * def_inf[4] * DknightItemBonusLc[0] + hcdsurvivorsRound2ModifiedInf * def_inf[6] * DknightItemBonusHc[0] + archerdsurvivorsRound2ModifiedInf * def_inf[3] * DknightItemBonusArcher[0] + madsurvivorsRound2ModifiedInf * def_inf[5] * DknightItemBonusMa[0] + ramdsurvivorsRound2ModifiedInf * def_inf[7] * DknightItemBonusRam[0] + catapultdsurvivorsRound2ModifiedInf * def_inf[8] * DknightItemBonusCatapult[0] + trebuchetdsurvivorsRound2ModifiedInf * def_inf[11] + knightdsurvivorsRound2ModifiedInf * def_inf[9]
+            strengthBaseDefenderCavRound2 = speardsurvivorsRound2ModifiedCav * def_kav[0] * DknightItemBonusSpear[0] + sworddsurvivorsRound2ModifiedCav * def_kav[1] * DknightItemBonusSword[0] + axedsurvivorsRound2ModifiedCav * def_kav[2] * DknightItemBonusAxe[0] + berserkerdsurvivorsRound2ModifiedCav * def_kav[12] + snobdsurvivorsRound2ModifiedCav * def_kav[10] + lcdsurvivorsRound2ModifiedCav * def_kav[4] * DknightItemBonusLc[0] + hcdsurvivorsRound2ModifiedCav * def_kav[6] * DknightItemBonusHc[0] + archerdsurvivorsRound2ModifiedCav * def_kav[3] * DknightItemBonusArcher[0] + madsurvivorsRound2ModifiedCav * def_kav[5] * DknightItemBonusMa[0] + ramdsurvivorsRound2ModifiedCav * def_kav[7] * DknightItemBonusRam[0] + catapultdsurvivorsRound2ModifiedCav * def_kav[8] * DknightItemBonusCatapult[0] + trebuchetdsurvivorsRound2ModifiedCav * def_kav[11] + knightdsurvivorsRound2ModifiedCav * def_kav[9]
+            strengthBaseDefenderArcRound2 = speardsurvivorsRound2ModifiedArc * def_arc[0] * DknightItemBonusSpear[0] + sworddsurvivorsRound2ModifiedArc * def_arc[1] * DknightItemBonusSword[0] + axedsurvivorsRound2ModifiedArc * def_arc[2] * DknightItemBonusAxe[0] + berserkerdsurvivorsRound2ModifiedArc * def_arc[12] + snobdsurvivorsRound2ModifiedArc * def_arc[10] + lcdsurvivorsRound2ModifiedArc * def_arc[4] * DknightItemBonusLc[0] + hcdsurvivorsRound2ModifiedArc * def_arc[6] * DknightItemBonusHc[0] + archerdsurvivorsRound2ModifiedArc * def_arc[3] * DknightItemBonusArcher[0] + madsurvivorsRound2ModifiedArc * def_arc[5] * DknightItemBonusMa[0] + ramdsurvivorsRound2ModifiedArc * def_arc[7] * DknightItemBonusRam[0] + catapultdsurvivorsRound2ModifiedArc * def_arc[8] * DknightItemBonusCatapult[0] + trebuchetdsurvivorsRound2ModifiedArc * def_arc[11] + knightdsurvivorsRound2ModifiedArc * def_arc[9]
             siegeStrengthRound2Calc()
         }
 
         function siegeStrengthRound2Calc() {
-            siegeStrengthRound2 = ramaamount_survivorsRound1 * attack[7] * knightItemBonusRam[1] + catapultaamount_survivorsRound1 * attack[8] * knightItemBonusCatapult[1] + trebuchetaamount_survivorsRound1 * attack[11] + knightaamount_survivorsRound1 * attack[9]
+            siegeStrengthRound2 = ramasurvivorsRound1 * attack[7] * knightItemBonusRam[1] + catapultasurvivorsRound1 * attack[8] * knightItemBonusCatapult[1] + trebuchetasurvivorsRound1 * attack[11] + knightasurvivorsRound1 * attack[9]
             strengthBaseAttackerAllRound2()
         }
 
         function strengthBaseAttackerAllRound2() {
             if (largestGroup == 'cav') {
-                strengthBaseAttackerCavRound2 = lcaamount_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound1 * attack[6] * knightItemBonusHc[1] + siegeStrengthRound2
-                strengthBaseAttackerInfRound2 = spearaamount_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound1 * attack[12] * doublestrength + snobaamount_survivorsRound1 * attack[10]
-                strengthBaseAttackerArcRound2 = archeraamount_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound1 * attack[5] * knightItemBonusMa[1]
+                strengthBaseAttackerCavRound2 = lcasurvivorsRound1 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound1 * attack[6] * knightItemBonusHc[1] + siegeStrengthRound2
+                strengthBaseAttackerInfRound2 = spearasurvivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound1 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound1 * attack[12] * doublestrength + snobasurvivorsRound1 * attack[10]
+                strengthBaseAttackerArcRound2 = archerasurvivorsRound1 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound1 * attack[5] * knightItemBonusMa[1]
             } else if (largestGroup == 'inf') {
-                strengthBaseAttackerInfRound2 = spearaamount_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound1 * attack[12] * doublestrength + snobaamount_survivorsRound1 * attack[10] + siegeStrengthRound2
-                strengthBaseAttackerCavRound2 = lcaamount_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound1 * attack[6] * knightItemBonusHc[1]
-                strengthBaseAttackerArcRound2 = archeraamount_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound1 * attack[5] * knightItemBonusMa[1]
+                strengthBaseAttackerInfRound2 = spearasurvivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound1 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound1 * attack[12] * doublestrength + snobasurvivorsRound1 * attack[10] + siegeStrengthRound2
+                strengthBaseAttackerCavRound2 = lcasurvivorsRound1 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound1 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound2 = archerasurvivorsRound1 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound1 * attack[5] * knightItemBonusMa[1]
             } else if (largestGroup == 'arc') {
-                strengthBaseAttackerInfRound2 = spearaamount_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound1 * attack[12] * doublestrength + snobaamount_survivorsRound1 * attack[10]
-                strengthBaseAttackerCavRound2 = lcaamount_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound1 * attack[6] * knightItemBonusHc[1]
-                strengthBaseAttackerArcRound2 = archeraamount_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound1 * attack[5] * knightItemBonusMa[1] + siegeStrengthRound2
+                strengthBaseAttackerInfRound2 = spearasurvivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound1 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound1 * attack[12] * doublestrength + snobasurvivorsRound1 * attack[10]
+                strengthBaseAttackerCavRound2 = lcasurvivorsRound1 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound1 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound2 = archerasurvivorsRound1 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound1 * attack[5] * knightItemBonusMa[1] + siegeStrengthRound2
             } else {
-                strengthBaseAttackerInfRound2 = spearaamount_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound1 * attack[12] * doublestrength + snobaamount_survivorsRound1 * attack[10]
-                strengthBaseAttackerCavRound2 = lcaamount_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound1 * attack[6] * knightItemBonusHc[1]
-                strengthBaseAttackerArcRound2 = archeraamount_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound1 * attack[5] * knightItemBonusMa[1]
+                strengthBaseAttackerInfRound2 = spearasurvivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound1 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound1 * attack[12] * doublestrength + snobasurvivorsRound1 * attack[10]
+                strengthBaseAttackerCavRound2 = lcasurvivorsRound1 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound1 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound2 = archerasurvivorsRound1 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound1 * attack[5] * knightItemBonusMa[1]
             }
             strengthRound2partly()
         }
@@ -8955,128 +8883,128 @@ define('two/battleCalculator', [
         }
 
         function lossesRound2() {
-            speardlossesRound2 = Math.round(-speardamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-speardamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-speardamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            sworddlossesRound2 = Math.round(-sworddamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-sworddamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-sworddamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            axedlossesRound2 = Math.round(-axedamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-axedamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-axedamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            archerdlossesRound2 = Math.round(-archerdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-archerdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-archerdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            lcdlossesRound2 = Math.round(-lcdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-lcdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-lcdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            madlossesRound2 = Math.round(-madamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-madamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-madamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            hcdlossesRound2 = Math.round(-hcdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-hcdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-hcdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            ramdlossesRound2 = Math.round(-ramdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-ramdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-ramdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            catapultdlossesRound2 = Math.round(-catapultdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-catapultdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-catapultdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            trebuchetdlossesRound2 = Math.round(-trebuchetdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-trebuchetdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-trebuchetdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            berserkerdlossesRound2 = Math.round(-berserkerdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-berserkerdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-berserkerdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            knightdlossesRound2 = Math.round(-knightdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-knightdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-knightdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            snobdlossesRound2 = Math.round(-snobdamount_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-snobdamount_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-snobdamount_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
-            spearaamount_lossesRound2 = Math.round(-spearaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
-            swordaamount_lossesRound2 = Math.round(-swordaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
-            axeaamount_lossesRound2 = Math.round(-axeaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
-            berserkeraamount_lossesRound2 = Math.round(-berserkeraamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
-            archeraamount_lossesRound2 = Math.round(-archeraamount_survivorsRound1 * killRateRound2attackerArc + 0.000001)
-            maaamount_lossesRound2 = Math.round(-maaamount_survivorsRound1 * killRateRound2attackerArc + 0.000001)
-            lcaamount_lossesRound2 = Math.round(-lcaamount_survivorsRound1 * killRateRound2attackerCav + 0.000001)
-            hcaamount_lossesRound2 = Math.round(-hcaamount_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+            speardlossesRound2 = Math.round(-speardsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-speardsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-speardsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            sworddlossesRound2 = Math.round(-sworddsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-sworddsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-sworddsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            axedlossesRound2 = Math.round(-axedsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-axedsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-axedsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            archerdlossesRound2 = Math.round(-archerdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-archerdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-archerdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            lcdlossesRound2 = Math.round(-lcdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-lcdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-lcdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            madlossesRound2 = Math.round(-madsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-madsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-madsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            hcdlossesRound2 = Math.round(-hcdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-hcdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-hcdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            ramdlossesRound2 = Math.round(-ramdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-ramdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-ramdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            catapultdlossesRound2 = Math.round(-catapultdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-catapultdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-catapultdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            trebuchetdlossesRound2 = Math.round(-trebuchetdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-trebuchetdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-trebuchetdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            berserkerdlossesRound2 = Math.round(-berserkerdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-berserkerdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-berserkerdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            knightdlossesRound2 = Math.round(-knightdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-knightdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-knightdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            snobdlossesRound2 = Math.round(-snobdsurvivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-snobdsurvivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-snobdsurvivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            spearalossesRound2 = Math.round(-spearasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
+            swordalossesRound2 = Math.round(-swordasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
+            axealossesRound2 = Math.round(-axeasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
+            berserkeralossesRound2 = Math.round(-berserkerasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
+            archeralossesRound2 = Math.round(-archerasurvivorsRound1 * killRateRound2attackerArc + 0.000001)
+            maalossesRound2 = Math.round(-maasurvivorsRound1 * killRateRound2attackerArc + 0.000001)
+            lcalossesRound2 = Math.round(-lcasurvivorsRound1 * killRateRound2attackerCav + 0.000001)
+            hcalossesRound2 = Math.round(-hcasurvivorsRound1 * killRateRound2attackerCav + 0.000001)
             if (largestGroup == 'cav') {
-                ramaamount_lossesRound2 = Math.round(-ramaamount_survivorsRound1 * killRateRound2attackerCav + 0.000001)
-                catapultaamount_lossesRound2 = Math.round(-catapultaamount_survivorsRound1 * killRateRound2attackerCav + 0.000001)
-                trebuchetaamount_lossesRound2 = Math.round(-trebuchetaamount_survivorsRound1 * killRateRound2attackerCav + 0.000001)
-                knightaamount_lossesRound2 = Math.round(-knightaamount_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+                ramalossesRound2 = Math.round(-ramasurvivorsRound1 * killRateRound2attackerCav + 0.000001)
+                catapultalossesRound2 = Math.round(-catapultasurvivorsRound1 * killRateRound2attackerCav + 0.000001)
+                trebuchetalossesRound2 = Math.round(-trebuchetasurvivorsRound1 * killRateRound2attackerCav + 0.000001)
+                knightalossesRound2 = Math.round(-knightasurvivorsRound1 * killRateRound2attackerCav + 0.000001)
             } else if (largestGroup == 'inf') {
-                ramaamount_lossesRound2 = Math.round(-ramaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
-                catapultaamount_lossesRound2 = Math.round(-catapultaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
-                trebuchetaamount_lossesRound2 = Math.round(-trebuchetaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
-                knightaamount_lossesRound2 = Math.round(-knightaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+                ramalossesRound2 = Math.round(-ramasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
+                catapultalossesRound2 = Math.round(-catapultasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
+                trebuchetalossesRound2 = Math.round(-trebuchetasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
+                knightalossesRound2 = Math.round(-knightasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
             } else if (largestGroup == 'arc') {
-                ramaamount_lossesRound2 = Math.round(-ramaamount_survivorsRound1 * killRateRound2attackerArc + 0.000001)
-                catapultaamount_lossesRound2 = Math.round(-catapultaamount_survivorsRound1 * killRateRound2attackerArc + 0.000001)
-                trebuchetaamount_lossesRound2 = Math.round(-trebuchetaamount_survivorsRound1 * killRateRound2attackerArc + 0.000001)
-                knightaamount_lossesRound2 = Math.round(-knightaamount_survivorsRound1 * killRateRound2attackerArc + 0.000001)
+                ramalossesRound2 = Math.round(-ramasurvivorsRound1 * killRateRound2attackerArc + 0.000001)
+                catapultalossesRound2 = Math.round(-catapultasurvivorsRound1 * killRateRound2attackerArc + 0.000001)
+                trebuchetalossesRound2 = Math.round(-trebuchetasurvivorsRound1 * killRateRound2attackerArc + 0.000001)
+                knightalossesRound2 = Math.round(-knightasurvivorsRound1 * killRateRound2attackerArc + 0.000001)
             }
             lossesSnobRound2()
         }
 
         function lossesSnobRound2() {
-            if ((snobaamount_survivorsRound1 * 100) == provisionAttackerInfRound2) {
-                snobaamount_lossesRound2 = 0
+            if ((snobasurvivorsRound1 * 100) == provisionAttackerInfRound2) {
+                snobalossesRound2 = 0
             } else {
-                snobaamount_lossesRound2 = Math.round(-snobaamount_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+                snobalossesRound2 = Math.round(-snobasurvivorsRound1 * killRateRound2attackerInf + 0.000001)
             }
             afterSecondStageSurvivors()
         }
 
         function afterSecondStageSurvivors() {
-            spearaamount_survivorsRound2 = spearaamount_survivorsRound1 + spearaamount_lossesRound2
-            swordaamount_survivorsRound2 = swordaamount_survivorsRound1 + swordaamount_lossesRound2
-            axeaamount_survivorsRound2 = axeaamount_survivorsRound1 + axeaamount_lossesRound2
-            archeraamount_survivorsRound2 = archeraamount_survivorsRound1 + archeraamount_lossesRound2
-            lcaamount_survivorsRound2 = lcaamount_survivorsRound1 + lcaamount_lossesRound2
-            maaamount_survivorsRound2 = maaamount_survivorsRound1 + maaamount_lossesRound2
-            hcaamount_survivorsRound2 = hcaamount_survivorsRound1 + hcaamount_lossesRound2
-            ramaamount_survivorsRound2 = ramaamount_survivorsRound1 + ramaamount_lossesRound2
-            catapultaamount_survivorsRound2 = catapultaamount_survivorsRound1 + catapultaamount_lossesRound2
-            trebuchetaamount_survivorsRound2 = trebuchetaamount_survivorsRound1 + trebuchetaamount_lossesRound2
-            berserkeraamount_survivorsRound2 = berserkeraamount_survivorsRound1 + berserkeraamount_lossesRound2
-            snobaamount_survivorsRound2 = snobaamount_survivorsRound1 + snobaamount_lossesRound2
-            knightaamount_survivorsRound2 = knightaamount_survivorsRound1 + knightaamount_lossesRound2
-            speardamount_survivorsRound2 = speardamount_survivorsRound1 + speardlossesRound2
-            sworddamount_survivorsRound2 = sworddamount_survivorsRound1 + sworddlossesRound2
-            axedamount_survivorsRound2 = axedamount_survivorsRound1 + axedlossesRound2
-            archerdamount_survivorsRound2 = archerdamount_survivorsRound1 + archerdlossesRound2
-            lcdamount_survivorsRound2 = lcdamount_survivorsRound1 + lcdlossesRound2
-            madamount_survivorsRound2 = madamount_survivorsRound1 + madlossesRound2
-            hcdamount_survivorsRound2 = hcdamount_survivorsRound1 + hcdlossesRound2
-            ramdamount_survivorsRound2 = ramdamount_survivorsRound1 + ramdlossesRound2
-            catapultdamount_survivorsRound2 = catapultdamount_survivorsRound1 + catapultdlossesRound2
-            trebuchetdamount_survivorsRound2 = trebuchetdamount_survivorsRound1 + trebuchetdlossesRound2
-            berserkerdamount_survivorsRound2 = berserkerdamount_survivorsRound1 + berserkerdlossesRound2
-            snobdamount_survivorsRound2 = snobdamount_survivorsRound1 + snobdlossesRound2
-            knightdamount_survivorsRound2 = knightdamount_survivorsRound1 + knightdlossesRound2
+            spearasurvivorsRound2 = spearasurvivorsRound1 + spearalossesRound2
+            swordasurvivorsRound2 = swordasurvivorsRound1 + swordalossesRound2
+            axeasurvivorsRound2 = axeasurvivorsRound1 + axealossesRound2
+            archerasurvivorsRound2 = archerasurvivorsRound1 + archeralossesRound2
+            lcasurvivorsRound2 = lcasurvivorsRound1 + lcalossesRound2
+            maasurvivorsRound2 = maasurvivorsRound1 + maalossesRound2
+            hcasurvivorsRound2 = hcasurvivorsRound1 + hcalossesRound2
+            ramasurvivorsRound2 = ramasurvivorsRound1 + ramalossesRound2
+            catapultasurvivorsRound2 = catapultasurvivorsRound1 + catapultalossesRound2
+            trebuchetasurvivorsRound2 = trebuchetasurvivorsRound1 + trebuchetalossesRound2
+            berserkerasurvivorsRound2 = berserkerasurvivorsRound1 + berserkeralossesRound2
+            snobasurvivorsRound2 = snobasurvivorsRound1 + snobalossesRound2
+            knightasurvivorsRound2 = knightasurvivorsRound1 + knightalossesRound2
+            speardsurvivorsRound2 = speardsurvivorsRound1 + speardlossesRound2
+            sworddsurvivorsRound2 = sworddsurvivorsRound1 + sworddlossesRound2
+            axedsurvivorsRound2 = axedsurvivorsRound1 + axedlossesRound2
+            archerdsurvivorsRound2 = archerdsurvivorsRound1 + archerdlossesRound2
+            lcdsurvivorsRound2 = lcdsurvivorsRound1 + lcdlossesRound2
+            madsurvivorsRound2 = madsurvivorsRound1 + madlossesRound2
+            hcdsurvivorsRound2 = hcdsurvivorsRound1 + hcdlossesRound2
+            ramdsurvivorsRound2 = ramdsurvivorsRound1 + ramdlossesRound2
+            catapultdsurvivorsRound2 = catapultdsurvivorsRound1 + catapultdlossesRound2
+            trebuchetdsurvivorsRound2 = trebuchetdsurvivorsRound1 + trebuchetdlossesRound2
+            berserkerdsurvivorsRound2 = berserkerdsurvivorsRound1 + berserkerdlossesRound2
+            snobdsurvivorsRound2 = snobdsurvivorsRound1 + snobdlossesRound2
+            knightdsurvivorsRound2 = knightdsurvivorsRound1 + knightdlossesRound2
             lossesProvisionsRound2Total()
         }
 
         function lossesProvisionsRound2Total() {
-            lossesAttackerRound2Total = spearaamount_lossesRound2 * food[0] + swordaamount_lossesRound2 * food[1] + axeaamount_lossesRound2 * food[2] + archeraamount_lossesRound2 * food[3] + lcaamount_lossesRound2 * food[4] + maaamount_lossesRound2 * food[5] + hcaamount_lossesRound2 * food[6] + ramaamount_lossesRound2 * food[7] + catapultaamount_lossesRound2 * food[8] + knightaamount_lossesRound2 * food[9] + snobaamount_lossesRound2 * food[10] + trebuchetaamount_lossesRound2 * food[11] + berserkeraamount_lossesRound2 * food[12]
+            lossesAttackerRound2Total = spearalossesRound2 * food[0] + swordalossesRound2 * food[1] + axealossesRound2 * food[2] + archeralossesRound2 * food[3] + lcalossesRound2 * food[4] + maalossesRound2 * food[5] + hcalossesRound2 * food[6] + ramalossesRound2 * food[7] + catapultalossesRound2 * food[8] + knightalossesRound2 * food[9] + snobalossesRound2 * food[10] + trebuchetalossesRound2 * food[11] + berserkeralossesRound2 * food[12]
             lossesDefenderRound2Total = speardlossesRound2 * food[0] + sworddlossesRound2 * food[1] + axedlossesRound2 * food[2] + archerdlossesRound2 * food[3] + lcdlossesRound2 * food[4] + madlossesRound2 * food[5] + hcdlossesRound2 * food[6] + ramdlossesRound2 * food[7] + catapultdlossesRound2 * food[8] + knightdlossesRound2 * food[9] + snobdlossesRound2 * food[10] + trebuchetdlossesRound2 * food[11] + berserkerdlossesRound2 * food[12]
             console.log(lossesAttackerRound2Total, lossesDefenderRound2Total)
             survivorsProvisionsRound2Total()
         }
 
         function survivorsProvisionsRound2Total() {
-            survivorsAttackerRound2Total = spearaamount_survivorsRound2 * food[0] + swordaamount_survivorsRound2 * food[1] + axeaamount_survivorsRound2 * food[2] + archeraamount_survivorsRound2 * food[3] + lcaamount_survivorsRound2 * food[4] + maaamount_survivorsRound2 * food[5] + hcaamount_survivorsRound2 * food[6] + ramaamount_survivorsRound2 * food[7] + catapultaamount_survivorsRound2 * food[8] + trebuchetaamount_survivorsRound2 * food[11] + berserkeraamount_survivorsRound2 * food[12] + snobaamount_survivorsRound2 * food[10] + knightaamount_survivorsRound2 * food[9]
-            survivorsDefenderRound2Total = speardamount_survivorsRound2 * food[0] + sworddamount_survivorsRound2 * food[1] + axedamount_survivorsRound2 * food[2] + archerdamount_survivorsRound2 * food[3] + lcdamount_survivorsRound2 * food[4] + madamount_survivorsRound2 * food[5] + hcdamount_survivorsRound2 * food[6] + ramdamount_survivorsRound2 * food[7] + catapultdamount_survivorsRound2 * food[8] + trebuchetdamount_survivorsRound2 * food[11] + berserkerdamount_survivorsRound2 * food[12] + snobdamount_survivorsRound2 * food[10] + knightdamount_survivorsRound2 * food[9]
+            survivorsAttackerRound2Total = spearasurvivorsRound2 * food[0] + swordasurvivorsRound2 * food[1] + axeasurvivorsRound2 * food[2] + archerasurvivorsRound2 * food[3] + lcasurvivorsRound2 * food[4] + maasurvivorsRound2 * food[5] + hcasurvivorsRound2 * food[6] + ramasurvivorsRound2 * food[7] + catapultasurvivorsRound2 * food[8] + trebuchetasurvivorsRound2 * food[11] + berserkerasurvivorsRound2 * food[12] + snobasurvivorsRound2 * food[10] + knightasurvivorsRound2 * food[9]
+            survivorsDefenderRound2Total = speardsurvivorsRound2 * food[0] + sworddsurvivorsRound2 * food[1] + axedsurvivorsRound2 * food[2] + archerdsurvivorsRound2 * food[3] + lcdsurvivorsRound2 * food[4] + madsurvivorsRound2 * food[5] + hcdsurvivorsRound2 * food[6] + ramdsurvivorsRound2 * food[7] + catapultdsurvivorsRound2 * food[8] + trebuchetdsurvivorsRound2 * food[11] + berserkerdsurvivorsRound2 * food[12] + snobdsurvivorsRound2 * food[10] + knightdsurvivorsRound2 * food[9]
             console.log(survivorsAttackerRound2Total, survivorsDefenderRound2Total)
             totalProvisionsRound3()
         }
 
         function totalProvisionsRound3() {
-            provisionAttackerRound3Total = spearaamount_survivorsRound2 * food[0] + swordaamount_survivorsRound2 * food[1] + axeaamount_survivorsRound2 * food[2] + archeraamount_survivorsRound2 * food[3] + lcaamount_survivorsRound2 * food[4] + maaamount_survivorsRound2 * food[5] + hcaamount_survivorsRound2 * food[6] + ramaamount_survivorsRound2 * food[7] + catapultaamount_survivorsRound2 * food[8] + knightaamount_survivorsRound2 * food[9] + snobaamount_survivorsRound2 * food[10] + trebuchetaamount_survivorsRound2 * food[11] + berserkeraamount_survivorsRound2 * food[12]
-            provisionDefenderRound3Total = speardamount_survivorsRound2 * food[0] + sworddamount_survivorsRound2 * food[1] + axedamount_survivorsRound2 * food[2] + archerdamount_survivorsRound2 * food[3] + lcdamount_survivorsRound2 * food[4] + madamount_survivorsRound2 * food[5] + hcdamount_survivorsRound2 * food[6] + ramdamount_survivorsRound2 * food[7] + catapultdamount_survivorsRound2 * food[8] + knightdamount_survivorsRound2 * food[9] + snobdamount_survivorsRound2 * food[10] + trebuchetdamount_survivorsRound2 * food[11] + berserkerdamount_survivorsRound2 * food[12]
+            provisionAttackerRound3Total = spearasurvivorsRound2 * food[0] + swordasurvivorsRound2 * food[1] + axeasurvivorsRound2 * food[2] + archerasurvivorsRound2 * food[3] + lcasurvivorsRound2 * food[4] + maasurvivorsRound2 * food[5] + hcasurvivorsRound2 * food[6] + ramasurvivorsRound2 * food[7] + catapultasurvivorsRound2 * food[8] + knightasurvivorsRound2 * food[9] + snobasurvivorsRound2 * food[10] + trebuchetasurvivorsRound2 * food[11] + berserkerasurvivorsRound2 * food[12]
+            provisionDefenderRound3Total = speardsurvivorsRound2 * food[0] + sworddsurvivorsRound2 * food[1] + axedsurvivorsRound2 * food[2] + archerdsurvivorsRound2 * food[3] + lcdsurvivorsRound2 * food[4] + madsurvivorsRound2 * food[5] + hcdsurvivorsRound2 * food[6] + ramdsurvivorsRound2 * food[7] + catapultdsurvivorsRound2 * food[8] + knightdsurvivorsRound2 * food[9] + snobdsurvivorsRound2 * food[10] + trebuchetdsurvivorsRound2 * food[11] + berserkerdsurvivorsRound2 * food[12]
             console.log(provisionDefenderRound3Total, provisionAttackerRound3Total)
             siegeProvisionCalc()
         }
 
         function siegeProvisionCalc() {
-            siegeProvision = ramaamount_survivorsRound2 * food[7] + catapultaamount_survivorsRound2 * food[8] + trebuchetaamount_survivorsRound2 * food[11] + knightaamount_survivorsRound2 * food[9]
+            siegeProvision = ramasurvivorsRound2 * food[7] + catapultasurvivorsRound2 * food[8] + trebuchetasurvivorsRound2 * food[11] + knightasurvivorsRound2 * food[9]
             provisionAttackerAllRound3()
         }
 
         function provisionAttackerAllRound3() {
             if (largestGroup == 'cav') {
-                provisionAttackerCavRound3 = lcaamount_survivorsRound2 * food[4] + hcaamount_survivorsRound2 * food[6] + siegeProvision
-                provisionAttackerInfRound3 = spearaamount_survivorsRound2 * food[0] + swordaamount_survivorsRound2 * food[1] + axeaamount_survivorsRound2 * food[2] + berserkeraamount_survivorsRound2 * food[12] + snobaamount_survivorsRound2 * food[10]
-                provisionAttackerArcRound3 = archeraamount_survivorsRound2 * food[3] + maaamount_survivorsRound2 * food[5]
+                provisionAttackerCavRound3 = lcasurvivorsRound2 * food[4] + hcasurvivorsRound2 * food[6] + siegeProvision
+                provisionAttackerInfRound3 = spearasurvivorsRound2 * food[0] + swordasurvivorsRound2 * food[1] + axeasurvivorsRound2 * food[2] + berserkerasurvivorsRound2 * food[12] + snobasurvivorsRound2 * food[10]
+                provisionAttackerArcRound3 = archerasurvivorsRound2 * food[3] + maasurvivorsRound2 * food[5]
             } else if (largestGroup == 'inf') {
-                provisionAttackerInfRound3 = spearaamount_survivorsRound2 * food[0] + swordaamount_survivorsRound2 * food[1] + axeaamount_survivorsRound2 * food[2] + berserkeraamount_survivorsRound2 * food[12] + snobaamount_survivorsRound2 * food[10] + siegeProvision
-                provisionAttackerCavRound3 = lcaamount_survivorsRound2 * food[4] + hcaamount_survivorsRound2 * food[6]
-                provisionAttackerArcRound3 = archeraamount_survivorsRound2 * food[3] + maaamount_survivorsRound2 * food[5]
+                provisionAttackerInfRound3 = spearasurvivorsRound2 * food[0] + swordasurvivorsRound2 * food[1] + axeasurvivorsRound2 * food[2] + berserkerasurvivorsRound2 * food[12] + snobasurvivorsRound2 * food[10] + siegeProvision
+                provisionAttackerCavRound3 = lcasurvivorsRound2 * food[4] + hcasurvivorsRound2 * food[6]
+                provisionAttackerArcRound3 = archerasurvivorsRound2 * food[3] + maasurvivorsRound2 * food[5]
             } else if (largestGroup == 'arc') {
-                provisionAttackerInfRound3 = spearaamount_survivorsRound2 * food[0] + swordaamount_survivorsRound2 * food[1] + axeaamount_survivorsRound2 * food[2] + berserkeraamount_survivorsRound2 * food[12] + snobaamount_survivorsRound2 * food[10]
-                provisionAttackerCavRound3 = lcaamount_survivorsRound2 * food[4] + hcaamount_survivorsRound2 * food[6]
-                provisionAttackerArcRound3 = archeraamount_survivorsRound2 * food[3] + maaamount_survivorsRound2 * food[5] + siegeProvision
+                provisionAttackerInfRound3 = spearasurvivorsRound2 * food[0] + swordasurvivorsRound2 * food[1] + axeasurvivorsRound2 * food[2] + berserkerasurvivorsRound2 * food[12] + snobasurvivorsRound2 * food[10]
+                provisionAttackerCavRound3 = lcasurvivorsRound2 * food[4] + hcasurvivorsRound2 * food[6]
+                provisionAttackerArcRound3 = archerasurvivorsRound2 * food[3] + maasurvivorsRound2 * food[5] + siegeProvision
             } else {
-                provisionAttackerInfRound3 = spearaamount_survivorsRound2 * food[0] + swordaamount_survivorsRound2 * food[1] + axeaamount_survivorsRound2 * food[2] + berserkeraamount_survivorsRound2 * food[12] + snobaamount_survivorsRound2 * food[10]
-                provisionAttackerCavRound3 = lcaamount_survivorsRound2 * food[4] + hcaamount_survivorsRound2 * food[6]
-                provisionAttackerArcRound3 = archeraamount_survivorsRound2 * food[3] + maaamount_survivorsRound2 * food[5]
+                provisionAttackerInfRound3 = spearasurvivorsRound2 * food[0] + swordasurvivorsRound2 * food[1] + axeasurvivorsRound2 * food[2] + berserkerasurvivorsRound2 * food[12] + snobasurvivorsRound2 * food[10]
+                provisionAttackerCavRound3 = lcasurvivorsRound2 * food[4] + hcasurvivorsRound2 * food[6]
+                provisionAttackerArcRound3 = archerasurvivorsRound2 * food[3] + maasurvivorsRound2 * food[5]
             }
             lossesPercentRound3InfCalc()
         }
@@ -9110,45 +9038,45 @@ define('two/battleCalculator', [
         }
 
         function survivorsRound3Modified() {
-            speardsurvivedModifiedInf = Math.round(speardamount_survivorsRound2 * lossesPercentRound3Inf)
-            speardsurvivedModifiedCav = Math.round(speardamount_survivorsRound2 * lossesPercentRound3Cav)
-            speardsurvivedModifiedArc = speardamount_survivorsRound2 - speardsurvivedModifiedCav - speardsurvivedModifiedInf
-            sworddsurvivedModifiedInf = Math.round(sworddamount_survivorsRound2 * lossesPercentRound3Inf)
-            sworddsurvivedModifiedCav = Math.round(sworddamount_survivorsRound2 * lossesPercentRound3Cav)
-            sworddsurvivedModifiedArc = sworddamount_survivorsRound2 - sworddsurvivedModifiedCav - sworddsurvivedModifiedInf
-            axedsurvivedModifiedInf = Math.round(axedamount_survivorsRound2 * lossesPercentRound3Inf)
-            axedsurvivedModifiedCav = Math.round(axedamount_survivorsRound2 * lossesPercentRound3Cav)
-            axedsurvivedModifiedArc = axedamount_survivorsRound2 - axedsurvivedModifiedCav - axedsurvivedModifiedInf
-            archerdsurvivedModifiedInf = Math.round(archerdamount_survivorsRound2 * lossesPercentRound3Inf)
-            archerdsurvivedModifiedCav = Math.round(archerdamount_survivorsRound2 * lossesPercentRound3Cav)
-            archerdsurvivedModifiedArc = archerdamount_survivorsRound2 - archerdsurvivedModifiedCav - archerdsurvivedModifiedInf
-            lcdsurvivedModifiedInf = Math.round(lcdamount_survivorsRound2 * lossesPercentRound3Inf)
-            lcdsurvivedModifiedCav = Math.round(lcdamount_survivorsRound2 * lossesPercentRound3Cav)
-            lcdsurvivedModifiedArc = lcdamount_survivorsRound2 - lcdsurvivedModifiedCav - lcdsurvivedModifiedInf
-            madsurvivedModifiedInf = Math.round(madamount_survivorsRound2 * lossesPercentRound3Inf)
-            madsurvivedModifiedCav = Math.round(madamount_survivorsRound2 * lossesPercentRound3Cav)
-            madsurvivedModifiedArc = madamount_survivorsRound2 - madsurvivedModifiedCav - madsurvivedModifiedInf
-            hcdsurvivedModifiedInf = Math.round(hcdamount_survivorsRound2 * lossesPercentRound3Inf)
-            hcdsurvivedModifiedCav = Math.round(hcdamount_survivorsRound2 * lossesPercentRound3Cav)
-            hcdsurvivedModifiedArc = hcdamount_survivorsRound2 - hcdsurvivedModifiedCav - hcdsurvivedModifiedInf
-            ramdsurvivedModifiedInf = Math.round(ramdamount_survivorsRound2 * lossesPercentRound3Inf)
-            ramdsurvivedModifiedCav = Math.round(ramdamount_survivorsRound2 * lossesPercentRound3Cav)
-            ramdsurvivedModifiedArc = ramdamount_survivorsRound2 - ramdsurvivedModifiedCav - ramdsurvivedModifiedInf
-            catapultdsurvivedModifiedInf = Math.round(catapultdamount_survivorsRound2 * lossesPercentRound3Inf)
-            catapultdsurvivedModifiedCav = Math.round(catapultdamount_survivorsRound2 * lossesPercentRound3Cav)
-            catapultdsurvivedModifiedArc = catapultdamount_survivorsRound2 - catapultdsurvivedModifiedCav - catapultdsurvivedModifiedInf
-            snobdsurvivedModifiedInf = Math.round(snobdamount_survivorsRound2 * lossesPercentRound3Inf)
-            snobdsurvivedModifiedCav = Math.round(snobdamount_survivorsRound2 * lossesPercentRound3Cav)
-            snobdsurvivedModifiedArc = snobdamount_survivorsRound2 - snobdsurvivedModifiedCav - snobdsurvivedModifiedInf
-            trebuchetdsurvivedModifiedInf = Math.round(trebuchetdamount_survivorsRound2 * lossesPercentRound3Inf)
-            trebuchetdsurvivedModifiedCav = Math.round(trebuchetdamount_survivorsRound2 * lossesPercentRound3Cav)
-            trebuchetdsurvivedModifiedArc = trebuchetdamount_survivorsRound2 - trebuchetdsurvivedModifiedCav - trebuchetdsurvivedModifiedInf
-            berserkerdsurvivedModifiedInf = Math.round(berserkerdamount_survivorsRound2 * lossesPercentRound3Inf)
-            berserkerdsurvivedModifiedCav = Math.round(berserkerdamount_survivorsRound2 * lossesPercentRound3Cav)
-            berserkerdsurvivedModifiedArc = berserkerdamount_survivorsRound2 - berserkerdsurvivedModifiedCav - berserkerdsurvivedModifiedInf
-            knightdsurvivedModifiedInf = Math.round(knightdamount_survivorsRound2 * lossesPercentRound3Inf)
-            knightdsurvivedModifiedCav = Math.round(knightdamount_survivorsRound2 * lossesPercentRound3Cav)
-            knightdsurvivedModifiedArc = knightdamount_survivorsRound2 - knightdsurvivedModifiedCav - knightdsurvivedModifiedInf
+            speardsurvivedModifiedInf = Math.round(speardsurvivorsRound2 * lossesPercentRound3Inf)
+            speardsurvivedModifiedCav = Math.round(speardsurvivorsRound2 * lossesPercentRound3Cav)
+            speardsurvivedModifiedArc = speardsurvivorsRound2 - speardsurvivedModifiedCav - speardsurvivedModifiedInf
+            sworddsurvivedModifiedInf = Math.round(sworddsurvivorsRound2 * lossesPercentRound3Inf)
+            sworddsurvivedModifiedCav = Math.round(sworddsurvivorsRound2 * lossesPercentRound3Cav)
+            sworddsurvivedModifiedArc = sworddsurvivorsRound2 - sworddsurvivedModifiedCav - sworddsurvivedModifiedInf
+            axedsurvivedModifiedInf = Math.round(axedsurvivorsRound2 * lossesPercentRound3Inf)
+            axedsurvivedModifiedCav = Math.round(axedsurvivorsRound2 * lossesPercentRound3Cav)
+            axedsurvivedModifiedArc = axedsurvivorsRound2 - axedsurvivedModifiedCav - axedsurvivedModifiedInf
+            archerdsurvivedModifiedInf = Math.round(archerdsurvivorsRound2 * lossesPercentRound3Inf)
+            archerdsurvivedModifiedCav = Math.round(archerdsurvivorsRound2 * lossesPercentRound3Cav)
+            archerdsurvivedModifiedArc = archerdsurvivorsRound2 - archerdsurvivedModifiedCav - archerdsurvivedModifiedInf
+            lcdsurvivedModifiedInf = Math.round(lcdsurvivorsRound2 * lossesPercentRound3Inf)
+            lcdsurvivedModifiedCav = Math.round(lcdsurvivorsRound2 * lossesPercentRound3Cav)
+            lcdsurvivedModifiedArc = lcdsurvivorsRound2 - lcdsurvivedModifiedCav - lcdsurvivedModifiedInf
+            madsurvivedModifiedInf = Math.round(madsurvivorsRound2 * lossesPercentRound3Inf)
+            madsurvivedModifiedCav = Math.round(madsurvivorsRound2 * lossesPercentRound3Cav)
+            madsurvivedModifiedArc = madsurvivorsRound2 - madsurvivedModifiedCav - madsurvivedModifiedInf
+            hcdsurvivedModifiedInf = Math.round(hcdsurvivorsRound2 * lossesPercentRound3Inf)
+            hcdsurvivedModifiedCav = Math.round(hcdsurvivorsRound2 * lossesPercentRound3Cav)
+            hcdsurvivedModifiedArc = hcdsurvivorsRound2 - hcdsurvivedModifiedCav - hcdsurvivedModifiedInf
+            ramdsurvivedModifiedInf = Math.round(ramdsurvivorsRound2 * lossesPercentRound3Inf)
+            ramdsurvivedModifiedCav = Math.round(ramdsurvivorsRound2 * lossesPercentRound3Cav)
+            ramdsurvivedModifiedArc = ramdsurvivorsRound2 - ramdsurvivedModifiedCav - ramdsurvivedModifiedInf
+            catapultdsurvivedModifiedInf = Math.round(catapultdsurvivorsRound2 * lossesPercentRound3Inf)
+            catapultdsurvivedModifiedCav = Math.round(catapultdsurvivorsRound2 * lossesPercentRound3Cav)
+            catapultdsurvivedModifiedArc = catapultdsurvivorsRound2 - catapultdsurvivedModifiedCav - catapultdsurvivedModifiedInf
+            snobdsurvivedModifiedInf = Math.round(snobdsurvivorsRound2 * lossesPercentRound3Inf)
+            snobdsurvivedModifiedCav = Math.round(snobdsurvivorsRound2 * lossesPercentRound3Cav)
+            snobdsurvivedModifiedArc = snobdsurvivorsRound2 - snobdsurvivedModifiedCav - snobdsurvivedModifiedInf
+            trebuchetdsurvivedModifiedInf = Math.round(trebuchetdsurvivorsRound2 * lossesPercentRound3Inf)
+            trebuchetdsurvivedModifiedCav = Math.round(trebuchetdsurvivorsRound2 * lossesPercentRound3Cav)
+            trebuchetdsurvivedModifiedArc = trebuchetdsurvivorsRound2 - trebuchetdsurvivedModifiedCav - trebuchetdsurvivedModifiedInf
+            berserkerdsurvivedModifiedInf = Math.round(berserkerdsurvivorsRound2 * lossesPercentRound3Inf)
+            berserkerdsurvivedModifiedCav = Math.round(berserkerdsurvivorsRound2 * lossesPercentRound3Cav)
+            berserkerdsurvivedModifiedArc = berserkerdsurvivorsRound2 - berserkerdsurvivedModifiedCav - berserkerdsurvivedModifiedInf
+            knightdsurvivedModifiedInf = Math.round(knightdsurvivorsRound2 * lossesPercentRound3Inf)
+            knightdsurvivedModifiedCav = Math.round(knightdsurvivorsRound2 * lossesPercentRound3Cav)
+            knightdsurvivedModifiedArc = knightdsurvivorsRound2 - knightdsurvivedModifiedCav - knightdsurvivedModifiedInf
             provisionDefenderRound3()
         }
 
@@ -9168,27 +9096,27 @@ define('two/battleCalculator', [
         }
 
         function siegeStrengthCalc() {
-            siegeStrength = ramaamount_survivorsRound2 * attack[7] * knightItemBonusRam[1] + catapultaamount_survivorsRound2 * attack[8] * knightItemBonusCatapult[1] + trebuchetaamount_survivorsRound2 * attack[11] + knightaamount_survivorsRound2 * attack[9]
+            siegeStrength = ramasurvivorsRound2 * attack[7] * knightItemBonusRam[1] + catapultasurvivorsRound2 * attack[8] * knightItemBonusCatapult[1] + trebuchetasurvivorsRound2 * attack[11] + knightasurvivorsRound2 * attack[9]
             strengthBaseAttackerAllRound3()
         }
 
         function strengthBaseAttackerAllRound3() {
             if (largestGroup == 'cav') {
-                strengthBaseAttackerCavRound3 = lcaamount_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound2 * attack[6] * knightItemBonusHc[1] + siegeStrength
-                strengthBaseAttackerInfRound3 = spearaamount_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound2 * attack[12] * doublestrength + snobaamount_survivorsRound2 * attack[10]
-                strengthBaseAttackerArcRound3 = archeraamount_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound2 * attack[5] * knightItemBonusMa[1]
+                strengthBaseAttackerCavRound3 = lcasurvivorsRound2 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound2 * attack[6] * knightItemBonusHc[1] + siegeStrength
+                strengthBaseAttackerInfRound3 = spearasurvivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound2 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound2 * attack[12] * doublestrength + snobasurvivorsRound2 * attack[10]
+                strengthBaseAttackerArcRound3 = archerasurvivorsRound2 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound2 * attack[5] * knightItemBonusMa[1]
             } else if (largestGroup == 'inf') {
-                strengthBaseAttackerInfRound3 = spearaamount_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound2 * attack[12] * doublestrength + snobaamount_survivorsRound2 * attack[10] + siegeStrength
-                strengthBaseAttackerCavRound3 = lcaamount_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound2 * attack[6] * knightItemBonusHc[1]
-                strengthBaseAttackerArcRound3 = archeraamount_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound2 * attack[5] * knightItemBonusMa[1]
+                strengthBaseAttackerInfRound3 = spearasurvivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound2 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound2 * attack[12] * doublestrength + snobasurvivorsRound2 * attack[10] + siegeStrength
+                strengthBaseAttackerCavRound3 = lcasurvivorsRound2 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound2 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound3 = archerasurvivorsRound2 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound2 * attack[5] * knightItemBonusMa[1]
             } else if (largestGroup == 'arc') {
-                strengthBaseAttackerInfRound3 = spearaamount_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound2 * attack[12] * doublestrength + snobaamount_survivorsRound2 * attack[10]
-                strengthBaseAttackerCavRound3 = lcaamount_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound2 * attack[6] * knightItemBonusHc[1]
-                strengthBaseAttackerArcRound3 = archeraamount_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound2 * attack[5] * knightItemBonusMa[1] + siegeStrength
+                strengthBaseAttackerInfRound3 = spearasurvivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound2 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound2 * attack[12] * doublestrength + snobasurvivorsRound2 * attack[10]
+                strengthBaseAttackerCavRound3 = lcasurvivorsRound2 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound2 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound3 = archerasurvivorsRound2 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound2 * attack[5] * knightItemBonusMa[1] + siegeStrength
             } else {
-                strengthBaseAttackerInfRound3 = spearaamount_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordaamount_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeaamount_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkeraamount_survivorsRound2 * attack[12] * doublestrength + snobaamount_survivorsRound2 * attack[10]
-                strengthBaseAttackerCavRound3 = lcaamount_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcaamount_survivorsRound2 * attack[6] * knightItemBonusHc[1]
-                strengthBaseAttackerArcRound3 = archeraamount_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maaamount_survivorsRound2 * attack[5] * knightItemBonusMa[1]
+                strengthBaseAttackerInfRound3 = spearasurvivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordasurvivorsRound2 * attack[1] * knightItemBonusSword[1] + axeasurvivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerasurvivorsRound2 * attack[12] * doublestrength + snobasurvivorsRound2 * attack[10]
+                strengthBaseAttackerCavRound3 = lcasurvivorsRound2 * attack[4] * knightItemBonusLc[1] + hcasurvivorsRound2 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound3 = archerasurvivorsRound2 * attack[3] * knightItemBonusArcher[1] + maasurvivorsRound2 * attack[5] * knightItemBonusMa[1]
             }
             strengthRound3partly()
         }
@@ -9312,100 +9240,100 @@ define('two/battleCalculator', [
             berserkerdlossesRound3 = Math.round(-berserkerdsurvivedModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-berserkerdsurvivedModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-berserkerdsurvivedModifiedArc * killRateRound3defenderArc + 0.000001)
             knightdlossesRound3 = Math.round(-knightdsurvivedModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-knightdsurvivedModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-knightdsurvivedModifiedArc * killRateRound3defenderArc + 0.000001)
             snobdlossesRound3 = Math.round(-snobdsurvivedModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-snobdsurvivedModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-snobdsurvivedModifiedArc * killRateRound3defenderArc + 0.000001)
-            spearaamount_lossesRound3 = Math.round(-spearaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
-            swordaamount_lossesRound3 = Math.round(-swordaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
-            axeaamount_lossesRound3 = Math.round(-axeaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
-            berserkeraamount_lossesRound3 = Math.round(-berserkeraamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
-            archeraamount_lossesRound3 = Math.round(-archeraamount_survivorsRound2 * killRateRound3attackerArc + 0.000001)
-            maaamount_lossesRound3 = Math.round(-maaamount_survivorsRound2 * killRateRound3attackerArc + 0.000001)
-            lcaamount_lossesRound3 = Math.round(-lcaamount_survivorsRound2 * killRateRound3attackerCav + 0.000001)
-            hcaamount_lossesRound3 = Math.round(-hcaamount_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+            spearalossesRound3 = Math.round(-spearasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
+            swordalossesRound3 = Math.round(-swordasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
+            axealossesRound3 = Math.round(-axeasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
+            berserkeralossesRound3 = Math.round(-berserkerasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
+            archeralossesRound3 = Math.round(-archerasurvivorsRound2 * killRateRound3attackerArc + 0.000001)
+            maalossesRound3 = Math.round(-maasurvivorsRound2 * killRateRound3attackerArc + 0.000001)
+            lcalossesRound3 = Math.round(-lcasurvivorsRound2 * killRateRound3attackerCav + 0.000001)
+            hcalossesRound3 = Math.round(-hcasurvivorsRound2 * killRateRound3attackerCav + 0.000001)
             if (largestGroup == 'cav') {
-                ramaamount_lossesRound3 = Math.round(-ramaamount_survivorsRound2 * killRateRound3attackerCav + 0.000001)
-                catapultaamount_lossesRound3 = Math.round(-catapultaamount_survivorsRound2 * killRateRound3attackerCav + 0.000001)
-                trebuchetaamount_lossesRound3 = Math.round(-trebuchetaamount_survivorsRound2 * killRateRound3attackerCav + 0.000001)
-                knightaamount_lossesRound3 = Math.round(-knightaamount_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+                ramalossesRound3 = Math.round(-ramasurvivorsRound2 * killRateRound3attackerCav + 0.000001)
+                catapultalossesRound3 = Math.round(-catapultasurvivorsRound2 * killRateRound3attackerCav + 0.000001)
+                trebuchetalossesRound3 = Math.round(-trebuchetasurvivorsRound2 * killRateRound3attackerCav + 0.000001)
+                knightalossesRound3 = Math.round(-knightasurvivorsRound2 * killRateRound3attackerCav + 0.000001)
             } else if (largestGroup == 'inf') {
-                ramaamount_lossesRound3 = Math.round(-ramaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
-                catapultaamount_lossesRound3 = Math.round(-catapultaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
-                trebuchetaamount_lossesRound3 = Math.round(-trebuchetaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
-                knightaamount_lossesRound3 = Math.round(-knightaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+                ramalossesRound3 = Math.round(-ramasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
+                catapultalossesRound3 = Math.round(-catapultasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
+                trebuchetalossesRound3 = Math.round(-trebuchetasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
+                knightalossesRound3 = Math.round(-knightasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
             } else if (largestGroup == 'arc') {
-                ramaamount_lossesRound3 = Math.round(-ramaamount_survivorsRound2 * killRateRound3attackerArc + 0.000001)
-                catapultaamount_lossesRound3 = Math.round(-catapultaamount_survivorsRound2 * killRateRound3attackerArc + 0.000001)
-                trebuchetaamount_lossesRound3 = Math.round(-trebuchetaamount_survivorsRound2 * killRateRound3attackerArc + 0.000001)
-                knightaamount_lossesRound3 = Math.round(-knightaamount_survivorsRound2 * killRateRound3attackerArc + 0.000001)
+                ramalossesRound3 = Math.round(-ramasurvivorsRound2 * killRateRound3attackerArc + 0.000001)
+                catapultalossesRound3 = Math.round(-catapultasurvivorsRound2 * killRateRound3attackerArc + 0.000001)
+                trebuchetalossesRound3 = Math.round(-trebuchetasurvivorsRound2 * killRateRound3attackerArc + 0.000001)
+                knightalossesRound3 = Math.round(-knightasurvivorsRound2 * killRateRound3attackerArc + 0.000001)
             }
             lossesSnobRound3()
         }
 
         function lossesSnobRound3() {
-            if ((snobaamount_survivorsRound2 * 100) == provisionAttackerInfRound3) {
-                snobaamount_lossesRound3 = 0
+            if ((snobasurvivorsRound2 * 100) == provisionAttackerInfRound3) {
+                snobalossesRound3 = 0
             } else {
-                snobaamount_lossesRound3 = Math.round(-snobaamount_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+                snobalossesRound3 = Math.round(-snobasurvivorsRound2 * killRateRound3attackerInf + 0.000001)
             }
             afterBattleSurvivors()
         }
 
         function afterBattleSurvivors() {
-            spearaamount_survivorsRound3 = spearaamount_survivorsRound2 + spearaamount_lossesRound3
-            swordaamount_survivorsRound3 = swordaamount_survivorsRound2 + swordaamount_lossesRound3
-            axeaamount_survivorsRound3 = axeaamount_survivorsRound2 + axeaamount_lossesRound3
-            archeraamount_survivorsRound3 = archeraamount_survivorsRound2 + archeraamount_lossesRound3
-            lcaamount_survivorsRound3 = lcaamount_survivorsRound2 + lcaamount_lossesRound3
-            maaamount_survivorsRound3 = maaamount_survivorsRound2 + maaamount_lossesRound3
-            hcaamount_survivorsRound3 = hcaamount_survivorsRound2 + hcaamount_lossesRound3
-            ramaamount_survivorsRound3 = ramaamount_survivorsRound2 + ramaamount_lossesRound3
-            catapultaamount_survivorsRound3 = catapultaamount_survivorsRound2 + catapultaamount_lossesRound3
-            trebuchetaamount_survivorsRound3 = trebuchetaamount_survivorsRound2 + trebuchetaamount_lossesRound3
-            berserkeraamount_survivorsRound3 = berserkeraamount_survivorsRound2 + berserkeraamount_lossesRound3
-            snobaamount_survivorsRound3 = snobaamount_survivorsRound2 + snobaamount_lossesRound3
-            knightaamount_survivorsRound3 = knightaamount_survivorsRound2 + knightaamount_lossesRound3
-            speardsurvived = speardamount_survivorsRound2 + speardlossesRound3
-            sworddsurvived = sworddamount_survivorsRound2 + sworddlossesRound3
-            axedsurvived = axedamount_survivorsRound2 + axedlossesRound3
-            archerdsurvived = archerdamount_survivorsRound2 + archerdlossesRound3
-            lcdsurvived = lcdamount_survivorsRound2 + lcdlossesRound3
-            madsurvived = madamount_survivorsRound2 + madlossesRound3
-            hcdsurvived = hcdamount_survivorsRound2 + hcdlossesRound3
-            ramdsurvived = ramdamount_survivorsRound2 + ramdlossesRound3
-            catapultdsurvived = catapultdamount_survivorsRound2 + catapultdlossesRound3
-            trebuchetdsurvived = trebuchetdamount_survivorsRound2 + trebuchetdlossesRound3
-            berserkerdsurvived = berserkerdamount_survivorsRound2 + berserkerdlossesRound3
-            snobdsurvived = snobdamount_survivorsRound2 + snobdlossesRound3
-            knightdsurvived = knightdamount_survivorsRound2 + knightdlossesRound3
+            spearasurvivorsRound3 = spearasurvivorsRound2 + spearalossesRound3
+            swordasurvivorsRound3 = swordasurvivorsRound2 + swordalossesRound3
+            axeasurvivorsRound3 = axeasurvivorsRound2 + axealossesRound3
+            archerasurvivorsRound3 = archerasurvivorsRound2 + archeralossesRound3
+            lcasurvivorsRound3 = lcasurvivorsRound2 + lcalossesRound3
+            maasurvivorsRound3 = maasurvivorsRound2 + maalossesRound3
+            hcasurvivorsRound3 = hcasurvivorsRound2 + hcalossesRound3
+            ramasurvivorsRound3 = ramasurvivorsRound2 + ramalossesRound3
+            catapultasurvivorsRound3 = catapultasurvivorsRound2 + catapultalossesRound3
+            trebuchetasurvivorsRound3 = trebuchetasurvivorsRound2 + trebuchetalossesRound3
+            berserkerasurvivorsRound3 = berserkerasurvivorsRound2 + berserkeralossesRound3
+            snobasurvivorsRound3 = snobasurvivorsRound2 + snobalossesRound3
+            knightasurvivorsRound3 = knightasurvivorsRound2 + knightalossesRound3
+            speardsurvived = speardsurvivorsRound2 + speardlossesRound3
+            sworddsurvived = sworddsurvivorsRound2 + sworddlossesRound3
+            axedsurvived = axedsurvivorsRound2 + axedlossesRound3
+            archerdsurvived = archerdsurvivorsRound2 + archerdlossesRound3
+            lcdsurvived = lcdsurvivorsRound2 + lcdlossesRound3
+            madsurvived = madsurvivorsRound2 + madlossesRound3
+            hcdsurvived = hcdsurvivorsRound2 + hcdlossesRound3
+            ramdsurvived = ramdsurvivorsRound2 + ramdlossesRound3
+            catapultdsurvived = catapultdsurvivorsRound2 + catapultdlossesRound3
+            trebuchetdsurvived = trebuchetdsurvivorsRound2 + trebuchetdlossesRound3
+            berserkerdsurvived = berserkerdsurvivorsRound2 + berserkerdlossesRound3
+            snobdsurvived = snobdsurvivorsRound2 + snobdlossesRound3
+            knightdsurvived = knightdsurvivorsRound2 + knightdlossesRound3
             lossesProvisionsRound3Total()
         }
 
         function lossesProvisionsRound3Total() {
-            lossesAttackerRound3Total = spearaamount_lossesRound3 * food[0] + swordaamount_lossesRound3 * food[1] + axeaamount_lossesRound3 * food[2] + archeraamount_lossesRound3 * food[3] + lcaamount_lossesRound3 * food[4] + maaamount_lossesRound3 * food[5] + hcaamount_lossesRound3 * food[6] + ramaamount_lossesRound3 * food[7] + catapultaamount_lossesRound3 * food[8] + knightaamount_lossesRound3 * food[9] + snobaamount_lossesRound3 * food[10] + trebuchetaamount_lossesRound3 * food[11] + berserkeraamount_lossesRound3 * food[12]
+            lossesAttackerRound3Total = spearalossesRound3 * food[0] + swordalossesRound3 * food[1] + axealossesRound3 * food[2] + archeralossesRound3 * food[3] + lcalossesRound3 * food[4] + maalossesRound3 * food[5] + hcalossesRound3 * food[6] + ramalossesRound3 * food[7] + catapultalossesRound3 * food[8] + knightalossesRound3 * food[9] + snobalossesRound3 * food[10] + trebuchetalossesRound3 * food[11] + berserkeralossesRound3 * food[12]
             lossesDefenderRound3Total = speardlossesRound3 * food[0] + sworddlossesRound3 * food[1] + axedlossesRound3 * food[2] + archerdlossesRound3 * food[3] + lcdlossesRound3 * food[4] + madlossesRound3 * food[5] + hcdlossesRound3 * food[6] + ramdlossesRound3 * food[7] + catapultdlossesRound3 * food[8] + knightdlossesRound3 * food[9] + snobdlossesRound3 * food[10] + trebuchetdlossesRound3 * food[11] + berserkerdlossesRound3 * food[12]
             console.log(lossesAttackerRound3Total, lossesDefenderRound3Total)
             survivorsProvisionsRound3Total()
         }
 
         function survivorsProvisionsRound3Total() {
-            survivorsAttackerRound3Total = spearaamount_survivorsRound3 * food[0] + swordaamount_survivorsRound3 * food[1] + axeaamount_survivorsRound3 * food[2] + archeraamount_survivorsRound3 * food[3] + lcaamount_survivorsRound3 * food[4] + maaamount_survivorsRound3 * food[5] + hcaamount_survivorsRound3 * food[6] + ramaamount_survivorsRound3 * food[7] + catapultaamount_survivorsRound3 * food[8] + trebuchetaamount_survivorsRound3 * food[11] + berserkeraamount_survivorsRound3 * food[12] + snobaamount_survivorsRound3 * food[10] + knightaamount_survivorsRound3 * food[9]
+            survivorsAttackerRound3Total = spearasurvivorsRound3 * food[0] + swordasurvivorsRound3 * food[1] + axeasurvivorsRound3 * food[2] + archerasurvivorsRound3 * food[3] + lcasurvivorsRound3 * food[4] + maasurvivorsRound3 * food[5] + hcasurvivorsRound3 * food[6] + ramasurvivorsRound3 * food[7] + catapultasurvivorsRound3 * food[8] + trebuchetasurvivorsRound3 * food[11] + berserkerasurvivorsRound3 * food[12] + snobasurvivorsRound3 * food[10] + knightasurvivorsRound3 * food[9]
             survivorsDefenderRound3Total = speardsurvived * food[0] + sworddsurvived * food[1] + axedsurvived * food[2] + archerdsurvived * food[3] + lcdsurvived * food[4] + madsurvived * food[5] + hcdsurvived * food[6] + ramdsurvived * food[7] + catapultdsurvived * food[8] + trebuchetdsurvived * food[11] + berserkerdsurvived * food[12] + snobdsurvived * food[10] + knightdsurvived * food[9]
             console.log(survivorsAttackerRound3Total, survivorsDefenderRound3Total)
             afterBattleLosses()
         }
 
         function afterBattleLosses() {
-            spearaamount_losses = -spearaamount + spearaamount_survivorsRound3
-            swordaamount_losses = -swordaamount + swordaamount_survivorsRound3
-            axeaamount_losses = -axeaamount + axeaamount_survivorsRound3
-            archeraamount_losses = -archeraamount + archeraamount_survivorsRound3
-            lcaamount_losses = -lcaamount + lcaamount_survivorsRound3
-            maaamount_losses = -maaamount + maaamount_survivorsRound3
-            hcaamount_losses = -hcaamount + hcaamount_survivorsRound3
-            ramaamount_losses = -ramaamount + ramaamount_survivorsRound3
-            catapultaamount_losses = -catapultaamount + catapultaamount_survivorsRound3
-            trebuchetaamount_losses = -trebuchetaamount + trebuchetaamount_survivorsRound3
-            berserkeraamount_losses = -berserkeraamount + berserkeraamount_survivorsRound3
-            snobaamount_losses = -snobaamount + snobaamount_survivorsRound3
-            knightaamount_losses = -knightaamount + knightaamount_survivorsRound3
+            spearalosses = -spearaamount + spearasurvivorsRound3
+            swordalosses = -swordaamount + swordasurvivorsRound3
+            axealosses = -axeaamount + axeasurvivorsRound3
+            archeralosses = -archeraamount + archerasurvivorsRound3
+            lcalosses = -lcaamount + lcasurvivorsRound3
+            maalosses = -maaamount + maasurvivorsRound3
+            hcalosses = -hcaamount + hcasurvivorsRound3
+            ramalosses = -ramaamount + ramasurvivorsRound3
+            catapultalosses = -catapultaamount + catapultasurvivorsRound3
+            trebuchetalosses = -trebuchetaamount + trebuchetasurvivorsRound3
+            berserkeralosses = -berserkeraamount + berserkerasurvivorsRound3
+            snobalosses = -snobaamount + snobasurvivorsRound3
+            knightalosses = -knightaamount + knightasurvivorsRound3
             speardlosses = -speardamount + speardsurvived
             sworddlosses = -sworddamount + sworddsurvived
             axedlosses = -axedamount + axedsurvived
@@ -9423,10 +9351,10 @@ define('two/battleCalculator', [
         }
 
         function ramPowerFinalCalc() {
-            if (ramaamount_survivorsRound3 == 0) {
+            if (ramasurvivorsRound3 == 0) {
                 ramPowerFinal = 0
             } else {
-                ramPowerFinal = ramaamount_survivorsRound3 * attackmodifier * itemramsoffeffect[1]
+                ramPowerFinal = ramasurvivorsRound3 * attackmodifier * itemramsoffeffect[1]
             }
             hitpointslevelwallsfinalCalc()
         }
@@ -9516,10 +9444,10 @@ define('two/battleCalculator', [
         }
 
         function catapultPowerFinalCalc() {
-            if (catapultaamount_survivorsRound3 == 0 || buildingfrom == 0) {
+            if (catapultasurvivorsRound3 == 0 || buildingfrom == 0) {
                 catapultPowerFinal = 0
             } else {
-                catapultPowerFinal = catapultaamount_survivorsRound3 * attackmodifier * knightItemBonusCatapult[1]
+                catapultPowerFinal = catapultasurvivorsRound3 * attackmodifier * knightItemBonusCatapult[1]
             }
             hitpointslevelTargetfinalCalc()
         }
@@ -10104,14 +10032,14 @@ define('two/battleCalculator', [
         }
 
         function provisionsLosses() {
-            attackkilledprovisions = spearaamount_losses * food[0] + swordaamount_losses * food[1] + axeaamount_losses * food[2] + archeraamount_losses * food[3] + lcaamount_losses * food[4] + maaamount_losses * food[5] + hcaamount_losses * food[6] + ramaamount_losses * food[7] + catapultaamount_losses * food[8] + knightaamount_losses * food[9] + snobaamount_losses * food[10] + trebuchetaamount_losses * food[11] + berserkeraamount_losses * food[12]
+            attackkilledprovisions = spearalosses * food[0] + swordalosses * food[1] + axealosses * food[2] + archeralosses * food[3] + lcalosses * food[4] + maalosses * food[5] + hcalosses * food[6] + ramalosses * food[7] + catapultalosses * food[8] + knightalosses * food[9] + snobalosses * food[10] + trebuchetalosses * food[11] + berserkeralosses * food[12]
             defencekilledprovisions = speardlosses * food[0] + sworddlosses * food[1] + axedlosses * food[2] + archerdlosses * food[3] + lcdlosses * food[4] + madlosses * food[5] + hcdlosses * food[6] + ramdlosses * food[7] + catapultdlosses * food[8] + knightdlosses * food[9] + snobdlosses * food[10] + trebuchetdlosses * food[11] + berserkerdlosses * food[12]
             bashpoints()
         }
 
         function bashpoints() {
             attackbashpoint = speardlosses * pointsDeff[0] + sworddlosses * pointsDeff[1] + axedlosses * pointsDeff[2] + archerdlosses * pointsDeff[3] + lcdlosses * pointsDeff[4] + madlosses * pointsDeff[5] + hcdlosses * pointsDeff[6] + ramdlosses * pointsDeff[7] + catapultdlosses * pointsDeff[8] + knightdlosses * pointsDeff[9] + snobdlosses * pointsDeff[10] + trebuchetdlosses * pointsDeff[11] + berserkerdlosses * pointsDeff[12]
-            defencebashpoint = spearaamount_losses * pointsAttack[0] + swordaamount_losses * pointsAttack[1] + axeaamount_losses * pointsAttack[2] + archeraamount_losses * pointsAttack[3] + lcaamount_losses * pointsAttack[4] + maaamount_losses * pointsAttack[5] + hcaamount_losses * pointsAttack[6] + ramaamount_losses * pointsAttack[7] + catapultaamount_losses * pointsAttack[8] + knightaamount_losses * pointsAttack[9] + snobaamount_losses * pointsAttack[10] + trebuchetaamount_losses * pointsAttack[11] + berserkeraamount_losses * pointsAttack[12]
+            defencebashpoint = spearalosses * pointsAttack[0] + swordalosses * pointsAttack[1] + axealosses * pointsAttack[2] + archeralosses * pointsAttack[3] + lcalosses * pointsAttack[4] + maalosses * pointsAttack[5] + hcalosses * pointsAttack[6] + ramalosses * pointsAttack[7] + catapultalosses * pointsAttack[8] + knightalosses * pointsAttack[9] + snobalosses * pointsAttack[10] + trebuchetalosses * pointsAttack[11] + berserkeralosses * pointsAttack[12]
             losessPercentFinalAttacker()
         }
 
@@ -10167,19 +10095,19 @@ define('two/battleCalculator', [
         }
 
         function revivedA() {
-            speararevived = Math.round(spearaamount_losses * (medicBonus + skillMedic))
-            swordarevived = Math.round(swordaamount_losses * (medicBonus + skillMedic))
-            axearevived = Math.round(axeaamount_losses * (medicBonus + skillMedic))
-            archerarevived = Math.round(archeraamount_losses * (medicBonus + skillMedic))
-            lcarevived = Math.round(lcaamount_losses * (medicBonus + skillMedic))
-            maarevived = Math.round(maaamount_losses * (medicBonus + skillMedic))
-            hcarevived = Math.round(hcaamount_losses * (medicBonus + skillMedic))
-            ramarevived = Math.round(ramaamount_losses * (medicBonus + skillMedic))
-            catapultarevived = Math.round(catapultaamount_losses * (medicBonus + skillMedic))
-            snobarevived = Math.round(snobaamount_losses * (medicBonus + skillMedic))
-            knightarevived = Math.round(knightaamount_losses * (medicBonus + skillMedic))
-            trebuchetarevived = Math.round(trebuchetaamount_losses * (medicBonus + skillMedic))
-            berserkerarevived = Math.round(berserkeraamount_losses * (medicBonus + skillMedic))
+            speararevived = Math.round(spearalosses * (medicBonus + skillMedic))
+            swordarevived = Math.round(swordalosses * (medicBonus + skillMedic))
+            axearevived = Math.round(axealosses * (medicBonus + skillMedic))
+            archerarevived = Math.round(archeralosses * (medicBonus + skillMedic))
+            lcarevived = Math.round(lcalosses * (medicBonus + skillMedic))
+            maarevived = Math.round(maalosses * (medicBonus + skillMedic))
+            hcarevived = Math.round(hcalosses * (medicBonus + skillMedic))
+            ramarevived = Math.round(ramalosses * (medicBonus + skillMedic))
+            catapultarevived = Math.round(catapultalosses * (medicBonus + skillMedic))
+            snobarevived = Math.round(snobalosses * (medicBonus + skillMedic))
+            knightarevived = Math.round(knightalosses * (medicBonus + skillMedic))
+            trebuchetarevived = Math.round(trebuchetalosses * (medicBonus + skillMedic))
+            berserkerarevived = Math.round(berserkeralosses * (medicBonus + skillMedic))
             revivedD()
         }
 
@@ -10518,7 +10446,7 @@ define('two/battleCalculator', [
         return wallfrompre
     }
     battleCalculator.getWalltopre = function() {
-        return walltopre
+        return wallfrom
     }
     battleCalculator.getDefencemodifier = function() {
         return defencemodifier
@@ -10640,9 +10568,6 @@ define('two/battleCalculator', [
     battleCalculator.getKnightdLosses = function() {
         return knightdlosses
     }
-    battleCalculator.getKnightdRevived = function() {
-        return knightdrevived
-    }
     battleCalculator.getKnightdSurvived = function() {
         return knightdsurvived
     }
@@ -10651,9 +10576,6 @@ define('two/battleCalculator', [
     }
     battleCalculator.getRamdLosses = function() {
         return ramdlosses
-    }
-    battleCalculator.getRamdRevived = function() {
-        return ramdrevived
     }
     battleCalculator.getRamdSurvived = function() {
         return ramdsurvived
@@ -10664,9 +10586,6 @@ define('two/battleCalculator', [
     battleCalculator.getCatapultdLosses = function() {
         return catapultdlosses
     }
-    battleCalculator.getCatapultdRevived = function() {
-        return catapultdrevived
-    }
     battleCalculator.getCatapultdSurvived = function() {
         return catapultdsurvived
     }
@@ -10675,9 +10594,6 @@ define('two/battleCalculator', [
     }
     battleCalculator.getTrebuchetdLosses = function() {
         return trebuchetdlosses
-    }
-    battleCalculator.getTrebuchetdRevived = function() {
-        return trebuchetdrevived
     }
     battleCalculator.getTrebuchetdSurvived = function() {
         return trebuchetdsurvived
@@ -10724,9 +10640,6 @@ define('two/battleCalculator', [
     battleCalculator.getBerserkerdLosses = function() {
         return berserkerdlosses
     }
-    battleCalculator.getBerserkerdRevived = function() {
-        return berserkerdrevived
-    }
     battleCalculator.getBerserkerdSurvived = function() {
         return berserkerdsurvived
     }
@@ -10740,7 +10653,7 @@ define('two/battleCalculator', [
         return speararevived
     }
     battleCalculator.getSpearaSurvived = function() {
-        return spearasurvived
+        return spearasurvivorsRound3
     }
     battleCalculator.getSwordaAmount = function() {
         return swordaamount
@@ -10752,7 +10665,7 @@ define('two/battleCalculator', [
         return swordarevived
     }
     battleCalculator.getSwordaSurvived = function() {
-        return swordasurvived
+        return swordasurvivorsRound3
     }
     battleCalculator.getAxeaAmount = function() {
         return axeaamount
@@ -10764,7 +10677,7 @@ define('two/battleCalculator', [
         return axearevived
     }
     battleCalculator.getAxeaSurvived = function() {
-        return axeasurvived
+        return axeasurvivorsRound3
     }
     battleCalculator.getArcheraAmount = function() {
         return archeraamount
@@ -10776,7 +10689,7 @@ define('two/battleCalculator', [
         return archerarevived
     }
     battleCalculator.getArcheraSurvived = function() {
-        return archerasurvived
+        return archerasurvivorsRound3
     }
     battleCalculator.getSnobaAmount = function() {
         return snobaamount
@@ -10788,7 +10701,7 @@ define('two/battleCalculator', [
         return snobarevived
     }
     battleCalculator.getSnobaSurvived = function() {
-        return snobasurvived
+        return snobasurvivorsRound3
     }
     battleCalculator.getKnightaAmount = function() {
         return knightaamount
@@ -10800,7 +10713,7 @@ define('two/battleCalculator', [
         return knightarevived
     }
     battleCalculator.getKnightaSurvived = function() {
-        return knightasurvived
+        return knightasurvivorsRound3
     }
     battleCalculator.getRamaAmount = function() {
         return ramaamount
@@ -10812,7 +10725,7 @@ define('two/battleCalculator', [
         return ramarevived
     }
     battleCalculator.getRamaSurvived = function() {
-        return ramasurvived
+        return ramasurvivorsRound3
     }
     battleCalculator.getCatapultaAmount = function() {
         return catapultaamount
@@ -10824,7 +10737,7 @@ define('two/battleCalculator', [
         return catapultarevived
     }
     battleCalculator.getCatapultaSurvived = function() {
-        return catapultasurvived
+        return catapultasurvivorsRound3
     }
     battleCalculator.getTrebuchetaAmount = function() {
         return trebuchetaamount
@@ -10836,7 +10749,7 @@ define('two/battleCalculator', [
         return trebuchetarevived
     }
     battleCalculator.getTrebuchetaSurvived = function() {
-        return trebuchetasurvived
+        return trebuchetasurvivorsRound3
     }
     battleCalculator.getLcaAmount = function() {
         return lcaamount
@@ -10848,7 +10761,7 @@ define('two/battleCalculator', [
         return lcarevived
     }
     battleCalculator.getLcaSurvived = function() {
-        return lcasurvived
+        return lcasurvivorsRound3
     }
     battleCalculator.getMaaAmount = function() {
         return maaamount
@@ -10860,7 +10773,7 @@ define('two/battleCalculator', [
         return maarevived
     }
     battleCalculator.getMaaSurvived = function() {
-        return maasurvived
+        return maasurvivorsRound3
     }
     battleCalculator.getHcaAmount = function() {
         return hcaamount
@@ -10872,7 +10785,7 @@ define('two/battleCalculator', [
         return hcarevived
     }
     battleCalculator.getHcaSurvived = function() {
-        return hcasurvived
+        return hcasurvivorsRound3
     }
     battleCalculator.getBerserkeraAmount = function() {
         return berserkeraamount
@@ -10884,7 +10797,7 @@ define('two/battleCalculator', [
         return berserkerarevived
     }
     battleCalculator.getBerserkeraSurvived = function() {
-        return berserkerasurvived
+        return berserkerasurvivorsRound3
     }
     return battleCalculator
 })
@@ -10975,127 +10888,128 @@ define('two/battleCalculator/ui', [
         let wallto = battleCalculator.getWallto()
         let wallfrompre = battleCalculator.getWallfrompre()
         let walltopre = battleCalculator.getWalltopre()
-        let defenceModifier = battleCalculator.getDefencemodifier()
+        let defenceModifier = battleCalculator.getDefencemodifier() * 100
         let defenceProvisions = battleCalculator.getDefenceprovisions()
         let strentghDefend = battleCalculator.getStrentghdefend()
-        let defenceBashpoint = battleCalculator.getDefencebashpoint()
-        let defenceKilledProvisions = battleCalculator.getDefencekilledprovisions()
+        let defenceBashpoint = -battleCalculator.getDefencebashpoint()
+        let defenceKilledProvisions = -battleCalculator.getDefencekilledprovisions()
         let strongestTypeDef = battleCalculator.getStrongesttypedef()
-        let killrateD = battleCalculator.getKillrated()
+        let killrateD = battleCalculator.getKillrated() * 100
         let defenceSurvivedProvisions = battleCalculator.getDefencesurvivedprovisions()
         let availableBeds = battleCalculator.getAvailablebeds()
-        let attackModifier = battleCalculator.getAttackmodifier()
+        let attackModifier = battleCalculator.getAttackmodifier() * 100
         let attackProvisions = battleCalculator.getAttackprovisions()
         let strentghAttack = battleCalculator.getStrentghattack()
-        let attackBashpoint = battleCalculator.getAttackbashpoint()
-        let attackKilledProvisions = battleCalculator.getAttackkilledprovisions()
+        let attackBashpoint = -battleCalculator.getAttackbashpoint()
+        let attackKilledProvisions = -battleCalculator.getAttackkilledprovisions()
         let strongestTypeOff = battleCalculator.getStrongesttypeoff()
-        let killrateA = battleCalculator.getKillratea()
+        let killrateA = battleCalculator.getKillratea() * 100
         let attackSurvivedProvisions = battleCalculator.getAttacksurvivedprovisions()
         let doubleStrength = battleCalculator.getDoublestrength()
+		
         let spearDamount = battleCalculator.getSpeardAmount()
-        let spearDlosses = battleCalculator.getSpeardLosses()
+        let spearDlosses = -battleCalculator.getSpeardLosses()
         let spearDrevived = battleCalculator.getSpeardRevived()
         let spearDsurvived = battleCalculator.getSpeardSurvived()
         let swordDamount = battleCalculator.getSworddAmount()
-        let swordDlosses = battleCalculator.getSworddLosses()
+        let swordDlosses = -battleCalculator.getSworddLosses()
         let swordDrevived = battleCalculator.getSworddRevived()
         let swordDsurvived = battleCalculator.getSworddSurvived()
         let axeDamount = battleCalculator.getAxedAmount()
-        let axeDlosses = battleCalculator.getAxedLosses()
+        let axeDlosses = -battleCalculator.getAxedLosses()
         let axeDrevived = battleCalculator.getAxedRevived()
         let axeDsurvived = battleCalculator.getAxedSurvived()
         let archerDamount = battleCalculator.getArcherdAmount()
-        let archerDlosses = battleCalculator.getArcherdLosses()
+        let archerDlosses = -battleCalculator.getArcherdLosses()
         let archerDrevived = battleCalculator.getArcherdRevived()
         let archerDsurvived = battleCalculator.getArcherdSurvived()
         let snobDamount = battleCalculator.getSnobdAmount()
-        let snobDlosses = battleCalculator.getSnobdLosses()
-        let snobDrevived = battleCalculator.getSnobdRevived()
+        let snobDlosses = -battleCalculator.getSnobdLosses()
+        let snobDrevived = 0
         let snobDsurvived = battleCalculator.getSnobdSurvived()
         let knightDamount = battleCalculator.getKnightdAmount()
-        let knightDlosses = battleCalculator.getKnightdLosses()
-        let knightDrevived = battleCalculator.getKnightdRevived()
+        let knightDlosses = -battleCalculator.getKnightdLosses()
+        let knightDrevived = 0
         let knightDsurvived = battleCalculator.getKnightdSurvived()
         let ramDamount = battleCalculator.getRamdAmount()
-        let ramDlosses = battleCalculator.getRamdLosses()
-        let ramDrevived = battleCalculator.getRamdRevived()
+        let ramDlosses = -battleCalculator.getRamdLosses()
+        let ramDrevived = 0
         let ramDsurvived = battleCalculator.getRamdSurvived()
         let catapultDamount = battleCalculator.getCatapultdAmount()
-        let catapultDlosses = battleCalculator.getCatapultdLosses()
-        let catapultDrevived = battleCalculator.getCatapultdRevived()
+        let catapultDlosses = -battleCalculator.getCatapultdLosses()
+        let catapultDrevived = 0
         let catapultDsurvived = battleCalculator.getCatapultdSurvived()
         let trebuchetDamount = battleCalculator.getTrebuchetdAmount()
-        let trebuchetDlosses = battleCalculator.getTrebuchetdLosses()
-        let trebuchetDrevived = battleCalculator.getTrebuchetdRevived()
+        let trebuchetDlosses = -battleCalculator.getTrebuchetdLosses()
+        let trebuchetDrevived = 0
         let trebuchetDsurvived = battleCalculator.getTrebuchetdSurvived()
         let lcDamount = battleCalculator.getLcdAmount()
-        let lcDlosses = battleCalculator.getLcdLosses()
+        let lcDlosses = -battleCalculator.getLcdLosses()
         let lcDrevived = battleCalculator.getLcdRevived()
         let lcDsurvived = battleCalculator.getLcdSurvived()
         let maDamount = battleCalculator.getMadAmount()
-        let maDlosses = battleCalculator.getMadLosses()
+        let maDlosses = -battleCalculator.getMadLosses()
         let maDrevived = battleCalculator.getMadRevived()
         let maDsurvived = battleCalculator.getMadSurvived()
         let hcDamount = battleCalculator.getHcdAmount()
-        let hcDlosses = battleCalculator.getHcdLosses()
+        let hcDlosses = -battleCalculator.getHcdLosses()
         let hcDrevived = battleCalculator.getHcdRevived()
         let hcDsurvived = battleCalculator.getHcdSurvived()
         let berserkerDamount = battleCalculator.getBerserkerdAmount()
-        let berserkerDlosses = battleCalculator.getBerserkerdLosses()
-        let berserkerDrevived = battleCalculator.getBerserkerdRevived()
+        let berserkerDlosses = -battleCalculator.getBerserkerdLosses()
+        let berserkerDrevived = 0
         let berserkerDsurvived = battleCalculator.getBerserkerdSurvived()
         let spearAamount = battleCalculator.getSpearaAmount()
-        let spearAlosses = battleCalculator.getSpearaLosses()
-        let spearArevived = battleCalculator.getSpearaRevived()
+        let spearAlosses = -battleCalculator.getSpearaLosses()
+        let spearArevived = -battleCalculator.getSpearaRevived()
         let spearAsurvived = battleCalculator.getSpearaSurvived()
         let swordAamount = battleCalculator.getSwordaAmount()
-        let swordAlosses = battleCalculator.getSwordaLosses()
-        let swordArevived = battleCalculator.getSwordaRevived()
+        let swordAlosses = -battleCalculator.getSwordaLosses()
+        let swordArevived = -battleCalculator.getSwordaRevived()
         let swordAsurvived = battleCalculator.getSwordaSurvived()
         let axeAamount = battleCalculator.getAxeaAmount()
-        let axeAlosses = battleCalculator.getAxeaLosses()
-        let axeArevived = battleCalculator.getAxeaRevived()
+        let axeAlosses = -battleCalculator.getAxeaLosses()
+        let axeArevived = -battleCalculator.getAxeaRevived()
         let axeAsurvived = battleCalculator.getAxeaSurvived()
         let archerAamount = battleCalculator.getArcheraAmount()
-        let archerAlosses = battleCalculator.getArcheraLosses()
-        let archerArevived = battleCalculator.getArcheraRevived()
+        let archerAlosses = -battleCalculator.getArcheraLosses()
+        let archerArevived = -battleCalculator.getArcheraRevived()
         let archerAsurvived = battleCalculator.getArcheraSurvived()
         let snobAamount = battleCalculator.getSnobaAmount()
-        let snobAlosses = battleCalculator.getSnobaLosses()
-        let snobArevived = battleCalculator.getSnobaRevived()
+        let snobAlosses = -battleCalculator.getSnobaLosses()
+        let snobArevived = -battleCalculator.getSnobaRevived()
         let snobAsurvived = battleCalculator.getSnobaSurvived()
         let knightAamount = battleCalculator.getKnightaAmount()
-        let knightAlosses = battleCalculator.getKnightaLosses()
-        let knightArevived = battleCalculator.getKnightaRevived()
+        let knightAlosses = -battleCalculator.getKnightaLosses()
+        let knightArevived = -battleCalculator.getKnightaRevived()
         let knightAsurvived = battleCalculator.getKnightaSurvived()
         let ramAamount = battleCalculator.getRamaAmount()
-        let ramAlosses = battleCalculator.getRamaLosses()
-        let ramArevived = battleCalculator.getRamaRevived()
+        let ramAlosses = -battleCalculator.getRamaLosses()
+        let ramArevived = -battleCalculator.getRamaRevived()
         let ramAsurvived = battleCalculator.getRamaSurvived()
         let catapultAamount = battleCalculator.getCatapultaAmount()
-        let catapultAlosses = battleCalculator.getCatapultaLosses()
-        let catapultArevived = battleCalculator.getCatapultaRevived()
+        let catapultAlosses = -battleCalculator.getCatapultaLosses()
+        let catapultArevived = -battleCalculator.getCatapultaRevived()
         let catapultAsurvived = battleCalculator.getCatapultaSurvived()
         let trebuchetAamount = battleCalculator.getTrebuchetaAmount()
-        let trebuchetAlosses = battleCalculator.getTrebuchetaLosses()
-        let trebuchetArevived = battleCalculator.getTrebuchetaRevived()
+        let trebuchetAlosses = -battleCalculator.getTrebuchetaLosses()
+        let trebuchetArevived = -battleCalculator.getTrebuchetaRevived()
         let trebuchetAsurvived = battleCalculator.getTrebuchetaSurvived()
         let lcAamount = battleCalculator.getLcaAmount()
-        let lcAlosses = battleCalculator.getLcaLosses()
-        let lcArevived = battleCalculator.getLcaRevived()
+        let lcAlosses = -battleCalculator.getLcaLosses()
+        let lcArevived = -battleCalculator.getLcaRevived()
         let lcAsurvived = battleCalculator.getLcaSurvived()
         let maAamount = battleCalculator.getMaaAmount()
-        let maAlosses = battleCalculator.getMaaLosses()
-        let maArevived = battleCalculator.getMaaRevived()
+        let maAlosses = -battleCalculator.getMaaLosses()
+        let maArevived = -battleCalculator.getMaaRevived()
         let maAsurvived = battleCalculator.getMaaSurvived()
         let hcAamount = battleCalculator.getHcaAmount()
-        let hcAlosses = battleCalculator.getHcaLosses()
-        let hcArevived = battleCalculator.getHcaRevived()
+        let hcAlosses = -battleCalculator.getHcaLosses()
+        let hcArevived = -battleCalculator.getHcaRevived()
         let hcAsurvived = battleCalculator.getHcaSurvived()
         let berserkerAamount = battleCalculator.getBerserkeraAmount()
-        let berserkerAlosses = battleCalculator.getBerserkeraLosses()
-        let berserkerArevived = battleCalculator.getBerserkeraRevived()
+        let berserkerAlosses = -battleCalculator.getBerserkeraLosses()
+        let berserkerArevived = -battleCalculator.getBerserkeraRevived()
         let berserkerAsurvived = battleCalculator.getBerserkeraSurvived()
         $scope.spearDamount = spearDamount
         $scope.spearDlosses = spearDlosses
