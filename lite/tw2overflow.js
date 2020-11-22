@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 22 Nov 2020 19:03:48 GMT
+ * Sun, 22 Nov 2020 19:15:47 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -11115,45 +11115,31 @@ define('two/battleCalculator/ui', [
         $scope.berserkerAlosses = berserkerAlosses
         $scope.berserkerArevived = berserkerArevived
         $scope.berserkerAsurvived = berserkerAsurvived
-        if (target) {
-            $scope.target = target
-            $scope.buildingfrom = buildingfrom
-            $scope.buildingto = buildingto
-        }
-        if (wallfrom) {
-            $scope.wallfrom = wallfrom
-            $scope.wallto = wallto
-        }
-        if (wallfrompre) {
-            $scope.wallfrompre = wallfrompre
-            $scope.walltopre = walltopre
-        }
-        if (defenceModifier) {
-            $scope.defenceModifier = defenceModifier
-            $scope.defenceProvisions = defenceProvisions
-            $scope.strentghDefend = strentghDefend
-            $scope.defenceBashpoint = defenceBashpoint
-            $scope.defenceKilledProvisions = defenceKilledProvisions
-            $scope.strongestTypeDef = strongestTypeDef
-            $scope.killrateD = killrateD
-            $scope.defenceSurvivedProvisions = defenceSurvivedProvisions
-        }
-        if (attackModifier) {
-            $scope.attackModifier = attackModifier
-            $scope.attackProvisions = attackProvisions
-            $scope.strentghAttack = strentghAttack
-            $scope.attackBashpoint = attackBashpoint
-            $scope.attackKilledProvisions = attackKilledProvisions
-            $scope.strongestTypeOff = strongestTypeOff
-            $scope.killrateA = killrateA
-            $scope.attackSurvivedProvisions = attackSurvivedProvisions
-        }
-        if (doubleStrength) {
-            $scope.doubleStrength = doubleStrength
-        }
-        if (availableBeds) {
-            $scope.availableBeds = availableBeds
-        }
+        $scope.availableBeds = availableBeds
+        $scope.target = target
+        $scope.buildingfrom = buildingfrom
+        $scope.buildingto = buildingto
+        $scope.wallfrom = wallfrom
+        $scope.wallto = wallto
+        $scope.wallfrompre = wallfrompre
+        $scope.walltopre = walltopre
+        $scope.defenceModifier = defenceModifier
+        $scope.defenceProvisions = defenceProvisions
+        $scope.strentghDefend = strentghDefend
+        $scope.defenceBashpoint = defenceBashpoint
+        $scope.defenceKilledProvisions = defenceKilledProvisions
+        $scope.strongestTypeDef = strongestTypeDef
+        $scope.killrateD = killrateD
+        $scope.defenceSurvivedProvisions = defenceSurvivedProvisions
+        $scope.attackModifier = attackModifier
+        $scope.attackProvisions = attackProvisions
+        $scope.strentghAttack = strentghAttack
+        $scope.attackBashpoint = attackBashpoint
+        $scope.attackKilledProvisions = attackKilledProvisions
+        $scope.strongestTypeOff = strongestTypeOff
+        $scope.killrateA = killrateA
+        $scope.attackSurvivedProvisions = attackSurvivedProvisions
+        $scope.doubleStrength = doubleStrength
     }
     const showTroops = function() {
         settings.setAll(settings.decode($scope.settings))
