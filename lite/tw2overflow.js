@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 23 Nov 2020 19:37:12 GMT
+ * Mon, 23 Nov 2020 20:11:27 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -11326,12 +11326,10 @@ define('two/battleCalculator/ui', [
             disabled: true
         })
         $scope.wall = Settings.encodeList(B_WALLS, {
-            textObject: 'battle_calculator',
-            disabled: true
+            textObject: 'battle_calculator'
         })
         $scope.church = Settings.encodeList(B_CHURCHES, {
-            textObject: 'battle_calculator',
-            disabled: true
+            textObject: 'battle_calculator'
         })
         $scope.weaponmaster = Settings.encodeList(B_SKILL_WEAPON_MASTER_LEVEL, {
             textObject: 'battle_calculator',
