@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 23 Nov 2020 18:27:36 GMT
+ * Mon, 23 Nov 2020 19:37:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7358,6 +7358,7 @@ define('two/battleCalculator', [
             } else {
                 attFaithBonus = 50
             }
+            console.log(attFaithBonus)
             checkDefenderFaith()
         }
 
@@ -7371,6 +7372,7 @@ define('two/battleCalculator', [
             } else {
                 defFaithBonus = 50
             }
+            console.log(defFaithBonus)
             checkNightBonus()
         }
 
@@ -7380,6 +7382,7 @@ define('two/battleCalculator', [
             } else {
                 nightBonus = 1
             }
+            console.log(nightBonus)
             checkLeaderBonus()
         }
 
@@ -7389,6 +7392,7 @@ define('two/battleCalculator', [
             } else {
                 leaderBonus = 0.00
             }
+            console.log(leaderBonus)
             checkMedicBonus()
         }
 
@@ -7398,6 +7402,7 @@ define('two/battleCalculator', [
             } else {
                 medicBonus = 0.00
             }
+            console.log(medicBonus)
             checkSkillMedic()
         }
 
@@ -7407,6 +7412,7 @@ define('two/battleCalculator', [
             } else {
                 skillMedic = 0.00
             }
+            console.log(skillMedic)
             checkSkillAttack()
         }
 
@@ -7424,6 +7430,7 @@ define('two/battleCalculator', [
             } else {
                 skillAttack = 0
             }
+            console.log(skillAttack)
             checkSkillWalls()
         }
 
@@ -7441,6 +7448,7 @@ define('two/battleCalculator', [
             } else {
                 skillWalls = 0
             }
+            console.log(skillWalls)
             checkClinique()
         }
 
@@ -7468,6 +7476,7 @@ define('two/battleCalculator', [
             } else {
                 skillClinique = 0
             }
+            console.log(skillClinique)
             checkHospital()
         }
 
@@ -7495,6 +7504,7 @@ define('two/battleCalculator', [
             } else {
                 hospitalBeds = 0
             }
+            console.log(hospitalBeds)
             checkWall()
         }
 
@@ -7542,6 +7552,7 @@ define('two/battleCalculator', [
             } else {
                 wall = 0
             }
+            console.log(wall)
             DItemBonusLc1()
         }
 
@@ -7555,6 +7566,7 @@ define('two/battleCalculator', [
             } else {
                 DknightItemBonusLc1 = [1, 1]
             }
+            console.log(DknightItemBonusLc1)
             DItemBonusAxe1()
         }
 
@@ -7568,6 +7580,7 @@ define('two/battleCalculator', [
             } else {
                 DknightItemBonusAxe1 = [1, 1]
             }
+            console.log(DknightItemBonusAxe1)
             DItemBonusMa1()
         }
 
@@ -7581,6 +7594,7 @@ define('two/battleCalculator', [
             } else {
                 DknightItemBonusMa1 = [1, 1]
             }
+            console.log(DknightItemBonusMa1)
             DItemBonusSpear1()
         }
 
@@ -7594,6 +7608,7 @@ define('two/battleCalculator', [
             } else {
                 DknightItemBonusSpear1 = [1, 1]
             }
+            console.log(DknightItemBonusSpear1)
             DItemBonusSword1()
         }
 
@@ -8133,6 +8148,7 @@ define('two/battleCalculator', [
         function provisions() {
             attackerprovision = spearA * food[0] + swordA * food[1] + axeA * food[2] + archerA * food[3] + lcA * food[4] + maA * food[5] + hcA * food[6] + ramA * food[7] + catapultA * food[8] + knightA * food[9] + snobA * food[10] + trebuchetA * food[11] + berserkerA * food[12]
             defenderprovision = spearD * food[0] + swordD * food[1] + axeD * food[2] + archerD * food[3] + lcD * food[4] + maD * food[5] + hcD * food[6] + ramD * food[7] + catapultD * food[8] + knightD * food[9] + snobD * food[10] + trebuchetD * food[11] + berserkerD * food[12]
+            console.log('Prowiant:' + attackerprovision, defenderprovision)
             doubleStrength()
         }
 
@@ -8176,6 +8192,7 @@ define('two/battleCalculator', [
                     provisionmodifier = offprovision / deffprovision
                 }
             }
+            console.log(provisionmodifier)
             baseThings()
         }
 
