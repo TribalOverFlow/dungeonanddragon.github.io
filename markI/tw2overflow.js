@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 18 Oct 2020 08:00:05 GMT
+ * Tue, 24 Nov 2020 19:41:55 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -535,7 +535,7 @@ define('two/language', [
             "title": "Statystyki",
             "data": "Dane",
             "data.attention": "Ważne informacje",
-            "data.description": "Narzędzie to tworzy pliki które można wczytać w programie Tw2-Statistics (by DirtyPrank). Po wykonaniu zrzutów umieść je w folderze Dane. Uwaga! Akcje te wymagają dobrej jakości komputera w innym wypadku potrwa to bardzo długo.",
+            "data.text": "Narzędzie to tworzy pliki które można wczytać w programie Tw2-Statistics (by DirtyPrank). Po wykonaniu zrzutów umieść je w folderze Dane. Uwaga! Akcje te wymagają dobrej jakości komputera w innym wypadku potrwa to bardzo długo.",
             "data.dump": "Wybierz opcje wykonania zrzutu danych na twój komputer",
             "data.players": "Gracze",
             "data.tribes": "Plemiona",
@@ -547,6 +547,12 @@ define('two/language', [
             "logs.date": "Data",
             "logs.noDumps": "Nie wykonano żadnych zrzutów danych",
             "logs.clear": "Wyczyść logi",
+            "general.saved": "Ustawienia zapisane (Statystyki).",
+            "general.reseted": "Ustawienia zresetowane (Statystyki).",
+            "general.logs-cleared": "Logi wyczyszczone (Statystyki).",
+            "general.description": "Zapisuje dane plemion, graczy i osiągnięć do plików potrzebnych do programu Tw2-Statistics",
+            "general.started": "Moduł Statystyki rozpoczął działanie.",
+            "general.stopped": "Moduł Statystyki zakończył działanie.",
             "general.start": "Start",
             "general.pause": "Pauza"
         },
@@ -640,7 +646,7 @@ define('two/language', [
         },
         "auto_collector": {
             "title": "Kolekcjoner",
-            "description": "Automatyczny kolekcjoner depozytu/drugiej wioski.",
+            "description": "Wykonuje zadania drugiej wioski oraz zbiera nagrody z depozytu.",
             "activated": "Kolekcjoner aktywowany",
             "deactivated": "Kolekcjoner deaktywowany"
         },
@@ -860,7 +866,8 @@ define('two/language', [
             "empty_sequence": "Pusty szablon",
             "duration": "Czas",
             "info.header": "Tytuł",
-            "info.content": "Zawartość"
+            "info.content": "Zawartość",
+            "general.description": "Wznosi budynki w wioskach wg określonego szablonu"
         },
         "builder_queue_add_building_modal": {
             "title": "Dodaj nowy budynek"
@@ -1047,8 +1054,8 @@ define('two/language', [
             "loading_targets": "Ładowanie celów...",
             "checking_targets": "Sprawdzanie celów...",
             "restarting_commands": "Restartowanie poleceń...",
-            "ignored_village": "Cel %{target} dodany do listy pominiętych.(straty)",
-            "included_village": "Cel %{target} dodany do listy zawartych",
+            "ignored_village": "Cel dodany do listy pominiętych.(straty)",
+            "included_village": "Cel dodany do listy zawartych",
             "ignored_village_removed": "usunięty z listy ignorowanych",
             "included_village_removed": "usunięty z listy zawartych",
             "priority_target": "dodany do priorytetowych.",
@@ -1333,22 +1340,12 @@ define('two/language', [
             "settings_colors_barbarian": "Wioski barbarzyńskie",
             "settings_colors_view_reference": "Wskaźnik obecnej pozycji",
             "settings_reset": "Ustawienia zresetowane",
-            "tooltip_village": "Wioska",
-            "tooltip_village_points": "Punkty wioski",
-            "tooltip_player": "Nazwa gracza",
-            "tooltip_player_points": "Punkty gracza",
-            "tooltip_tribe": "Plemię",
-            "tooltip_tribe_points": "Punkty plemienia",
-            "tooltip_province": "Prowincja",
-            "no_highlights": "Brak utworzonych podświetleń",
+            "no_highlights": "Nie utworzono podświetleń",
             "reset_confirm_title": "Resetuj ustawienia",
             "reset_confirm_text": "Wszystkie ustawienia zostaną przywrócone do domyślnych.",
             "reset_confirm_highlights_text": "Jak również wszystkie podświetlenia zostaną usunięte.",
             "default_village_colors_info": "Informacje o domyślnych kolorach wiosek",
-            "entry/id": "Wioska/gracz/plemie",
-            "tooltip.village-id": "Id wioski",
-            "tooltip.player-id": "Id gracza",
-            "tooltip.tribe-id": "Id plemienia"
+            "general.description": "Służy do kolorowania plemion graczy z pomocą wielu różnych funkcji"
         },
         "mint_helper": {
             "title": "Mincerz",
@@ -1757,7 +1754,7 @@ define('two/language', [
         },
         "tutorial_helper": {
             "title": "Giermek",
-            "description": "Automatycznie wykonuje zadania z tutoriala.",
+            "description": "Wykonuje zadania z tutoriala.",
             "activated": "Giermek aktywowany",
             "deactivated": "Giermek skończył działanie"
         },
@@ -1876,7 +1873,7 @@ define('two/language', [
             "title": "Kwatermistrz",
             "data": "Dane",
             "data.attention": "Ważne informacje",
-            "data.description": "Narzędzie to tworzy pliki które można wczytać w programie Tw2-Statistics (by DirtyPrank). Po wykonaniu zrzutów umieść je w folderze Dane. Uwaga! Akcje te wymagają dobrej jakości komputera w innym wypadku potrwa to bardzo długo.",
+            "data.text": "Narzędzie to tworzy pliki które można wczytać w programie Tw2-Statistics (by DirtyPrank). Po wykonaniu zrzutów umieść je w folderze Dane. Uwaga! Akcje te wymagają dobrej jakości komputera w innym wypadku potrwa to bardzo długo.",
             "data.dump": "Wybierz opcje wykonania zrzutu danych na twój komputer",
             "data.players": "Gracze",
             "data.tribes": "Plemiona",
@@ -1888,6 +1885,12 @@ define('two/language', [
             "logs.date": "Data",
             "logs.noDumps": "Nie wykonano żadnych zrzutów danych",
             "logs.clear": "Wyczyść logi",
+            "general.saved": "Ustawienia zapisane (Statystyki).",
+            "general.reseted": "Ustawienia zresetowane (Statystyki).",
+            "general.logs-cleared": "Logi wyczyszczone (Statystyki).",
+            "general.description": "Zapisuje dane plemion, graczy i osiągnięć do plików potrzebnych do programu Tw2-Statistics",
+            "general.started": "Moduł Statystyki rozpoczął działanie.",
+            "general.stopped": "Moduł Statystyki zakończył działanie.",
             "general.start": "Start",
             "general.pause": "Pauza"
         },
@@ -2201,7 +2204,8 @@ define('two/language', [
             "empty_sequence": "Pusty szablon",
             "duration": "Czas",
             "info.header": "Tytuł",
-            "info.content": "Zawartość"
+            "info.content": "Zawartość",
+            "general.description": "Wznosi budynki w wioskach wg określonego szablonu"
         },
         "builder_queue_add_building_modal": {
             "title": "Dodaj nowy budynek"
@@ -2674,22 +2678,12 @@ define('two/language', [
             "settings_colors_barbarian": "Wioski barbarzyńskie",
             "settings_colors_view_reference": "Wskaźnik obecnej pozycji",
             "settings_reset": "Ustawienia zresetowane",
-            "tooltip_village": "Wioska",
-            "tooltip_village_points": "Punkty wioski",
-            "tooltip_player": "Nazwa gracza",
-            "tooltip_player_points": "Punkty gracza",
-            "tooltip_tribe": "Plemię",
-            "tooltip_tribe_points": "Punkty plemienia",
-            "tooltip_province": "Prowincja",
             "no_highlights": "Brak utworzonych podświetleń",
             "reset_confirm_title": "Resetuj ustawienia",
             "reset_confirm_text": "Wszystkie ustawienia zostaną przywrócone do domyślnych.",
             "reset_confirm_highlights_text": "Jak również wszystkie podświetlenia zostaną usunięte.",
             "default_village_colors_info": "Informacje o domyślnych kolorach wiosek",
-            "entry/id": "Wioska/gracz/plemie",
-            "tooltip.village-id": "Id wioski",
-            "tooltip.player-id": "Id gracza",
-            "tooltip.tribe-id": "Id plemienia"
+            "general.description": "Służy do kolorowania plemion graczy z pomocą wielu różnych funkcji"
         },
         "mint_helper": {
             "title": "Mincerz",
@@ -4189,7 +4183,7 @@ define('two/activityTool', [
     'two/activityTool/settings/map',
     'two/ready',
     'queues/EventQueue'
-], function (
+], function(
     Settings,
     SETTINGS,
     SETTINGS_MAP,
@@ -4200,64 +4194,47 @@ define('two/activityTool', [
     let running = false
     let settings
     let activityToolSettings
-
     const STORAGE_KEYS = {
         SETTINGS: 'activity_tool_settings'
     }
-
     const activityTool = {}
-
-    activityTool.init = function () {
+    activityTool.init = function() {
         initialized = true
-
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function () {
+        settings.onChange(function() {
             activityToolSettings = settings.getAll()
         })
-
         activityToolSettings = settings.getAll()
-
-        console.log('activityTool settings', activityToolSettings)
+        console.log('Statystyki - ustawienia', activityToolSettings)
     }
-
-    activityTool.start = function () {
+    activityTool.start = function() {
         running = true
-
         eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_START)
     }
-
-    activityTool.stop = function () {
+    activityTool.stop = function() {
         running = false
-
         eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_STOP)
     }
-
-    activityTool.getSettings = function () {
+    activityTool.getSettings = function() {
         return settings
     }
-
-    activityTool.isInitialized = function () {
+    activityTool.isInitialized = function() {
         return initialized
     }
-
-    activityTool.isRunning = function () {
+    activityTool.isRunning = function() {
         return running
     }
-
     return activityTool
 })
-
 define('two/activityTool/events', [], function () {
     angular.extend(eventTypeProvider, {
         ACTIVITY_TOOL_START: 'activity_tool_start',
         ACTIVITY_TOOL_STOP: 'activity_tool_stop'
     })
 })
-
 define('two/activityTool/ui', [
     'two/ui',
     'two/activityTool',
@@ -4266,7 +4243,7 @@ define('two/activityTool/ui', [
     'two/Settings',
     'two/EventScope',
     'two/utils'
-], function (
+], function(
     interfaceOverflow,
     activityTool,
     SETTINGS,
@@ -4278,101 +4255,86 @@ define('two/activityTool/ui', [
     let $scope
     let settings
     let $button
-    
     const TAB_TYPES = {
         DATA: 'data',
         LOGS: 'logs'
     }
-
-    const selectTab = function (tabType) {
+    const selectTab = function(tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
+    const saveSettings = function() {
         settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
+        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'activity_tool'))
     }
-
-    const switchState = function () {
+    const resetSettings = function() {
+        utils.notif('success', $filter('i18n')('general.reseted', $rootScope.loc.ale, 'activity_tool'))
+    }
+    const clearLogs = function() {
+        utils.notif('success', $filter('i18n')('general.logs-cleared', $rootScope.loc.ale, 'activity_tool'))
+    }
+    const switchState = function() {
         if (activityTool.isRunning()) {
             activityTool.stop()
         } else {
             activityTool.start()
         }
     }
-
     const eventHandlers = {
-        start: function () {
+        start: function() {
             $scope.running = true
-
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
+            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'activity_tool'))
         },
-        stop: function () {
+        stop: function() {
             $scope.running = false
-
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'activity_tool'))
         }
     }
-
-    const init = function () {
+    const init = function() {
         settings = activityTool.getSettings()
-        $button = interfaceOverflow.addMenuButton4('Statystyki', 40)
+        $button = interfaceOverflow.addMenuButton4('Statystyki', 40, $filter('i18n')('general.description', $rootScope.loc.ale, 'activity_tool'))
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.DATA)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.DATA}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.DATA}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.DATA}\">{{ 'data' | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.DATA\"><h5 class=\"twx-section\">{{ 'data.dump' | i18n:loc.ale:'activity_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"303px\"><col width=\"60px\"><col><tr><th colspan=\"3\">{{ 'data.players' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PLAYERS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.tribes' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TRIBES]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.achievements' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ACHIEVEMENTS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.attention' | i18n:loc.ale:'activity_tool' }}<tr><td colspan=\"3\">{{ 'data.description' | i18n:loc.ale:'activity_tool' }}</table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col><col width=\"20%\"><thead><tr><th>{{ 'logs.type' | i18n:loc.ale:'activity_tool' }}<th>{{ 'logs.date' | i18n:loc.ale:'activity_tool' }}<tbody class=\"activityLog\"><tr class=\"noDumps\"><td colspan=\"2\">{{ 'logs.noDumps' | i18n:loc.ale:'activity_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.DATA\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'data.save' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"resetSettings()\">{{ 'data.reset' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'activity_tool' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'activity_tool' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-activity-tool div[select]{float:right}#two-activity-tool div[select] .select-handler{line-height:28px}#two-activity-tool .range-container{width:250px}#two-activity-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-activity-tool .textfield-border.fit{width:100%}#two-activity-tool th{text-align:center}#two-activity-tool .activityLog td{text-align:center}#two-activity-tool .activityLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .activityLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .noDumps td{height:26px;text-align:center}#two-activity-tool .force-26to20{transform:scale(.8);width:20px;height:20px}')
+        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.DATA)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.DATA}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.DATA}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.DATA}\">{{ 'data' | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.DATA\"><h5 class=\"twx-section\">{{ 'data.dump' | i18n:loc.ale:'activity_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"303px\"><col width=\"60px\"><col><tr><th colspan=\"3\">{{ 'data.players' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PLAYERS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.tribes' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TRIBES]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.achievements' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ACHIEVEMENTS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.attention' | i18n:loc.ale:'activity_tool' }}<tr><td colspan=\"3\">{{ 'data.text' | i18n:loc.ale:'activity_tool' }}</table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col><col width=\"20%\"><thead><tr><th>{{ 'logs.type' | i18n:loc.ale:'activity_tool' }}<th>{{ 'logs.date' | i18n:loc.ale:'activity_tool' }}<tbody class=\"activityLog\"><tr class=\"noDumps\"><td colspan=\"2\">{{ 'logs.noDumps' | i18n:loc.ale:'activity_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.DATA\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'data.save' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"resetSettings()\">{{ 'data.reset' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'activity_tool' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'activity_tool' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-activity-tool .range-container{width:250px}#two-activity-tool th{text-align:center}#two-activity-tool .activityLog td{text-align:center}#two-activity-tool .activityLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .activityLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .noDumps td{height:26px;text-align:center}#two-activity-tool .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = activityTool.isRunning()
         $scope.selectedTab = TAB_TYPES.DATA
         $scope.settingsMap = SETTINGS_MAP
-
         settings.injectScope($scope)
-
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
+        $scope.resetSettings = resetSettings
+        $scope.clearLogs = clearLogs
         $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_activity_tool_window', function onDestroy () {
-            console.log('activityTool closed')
+        let eventScope = new EventScope('twoverflow_activity_tool_window', function onDestroy() {
+            console.log('Statystyki - zamknięto moduł')
         })
-
         eventScope.register(eventTypeProvider.ACTIVITY_TOOL_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.ACTIVITY_TOOL_STOP, eventHandlers.stop)
-        
         windowManagerService.getScreenWithInjectedScope('!twoverflow_activity_tool_window', $scope)
     }
-
     return init
 })
-
-define('two/activityTool/settings', [], function () {
+define('two/activityTool/settings', [], function() {
     return {
         PLAYERS: 'players',
         TRIBES: 'tribes',
         ACHIEVEMENTS: 'achievements'
     }
 })
-
-define('two/activityTool/settings/updates', function () {
-    return {
-    }
+define('two/activityTool/settings/updates', function() {
+    return {}
 })
-
 define('two/activityTool/settings/map', [
     'two/activityTool/settings'
-], function (
+], function(
     SETTINGS
 ) {
     return {
@@ -4390,13 +4352,12 @@ define('two/activityTool/settings/map', [
         }
     }
 })
-
 require([
     'two/ready',
     'two/activityTool',
     'two/activityTool/ui',
     'two/activityTool/events'
-], function (
+], function(
     ready,
     activityTool,
     activityToolInterface
@@ -4404,13 +4365,11 @@ require([
     if (activityTool.isInitialized()) {
         return false
     }
-
-    ready(function () {
+    ready(function() {
         activityTool.init()
         activityToolInterface()
     })
 })
-
 define('two/alertSender', [
     'queues/EventQueue',
     'two/commandQueue',
@@ -5678,181 +5637,95 @@ require([
 
 define('two/autoCollector', [
     'queues/EventQueue'
-], function (
+], function(
     eventQueue
 ) {
     let initialized = false
     let running = false
-
-    /**
-     * Permite que o evento RESOURCE_DEPOSIT_JOB_COLLECTIBLE seja executado
-     * apenas uma vez.
-     */
     let recall = true
-
-    /**
-     * Next automatic reroll setTimeout ID.
-     */
     let nextUpdateId = 0
-
-    /**
-     * Inicia um trabalho.
-     *
-     * @param {Object} job - Dados do trabalho
-     */
-    const startJob = function (job) {
+    const startJob = function(job) {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_START_JOB, {
             job_id: job.id
         })
     }
-
-    /**
-     * Coleta um trabalho.
-     *
-     * @param {Object} job - Dados do trabalho
-     */
-    const finalizeJob = function (job) {
+    const finalizeJob = function(job) {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_COLLECT, {
             job_id: job.id,
             village_id: modelDataService.getSelectedVillage().getId()
         })
     }
-
-    /**
-     * Força a atualização das informações do depósito.
-     */
-    const updateDepositInfo = function () {
+    const updateDepositInfo = function() {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {})
     }
-
-    /**
-     * Faz a analise dos trabalhos sempre que um evento relacionado ao depósito
-     * é disparado.
-     */
-    const analyse = function () {
+    const analyse = function() {
         if (!running) {
             return false
         }
-
         let data = modelDataService.getSelectedCharacter().getResourceDeposit()
-
         if (!data) {
             return false
         }
-
         if (data.getCurrentJob()) {
             return false
         }
-
         let collectible = data.getCollectibleJobs()
-
         if (collectible) {
             return finalizeJob(collectible.shift())
         }
-
         let ready = data.getReadyJobs()
-
         if (ready) {
             return startJob(getFastestJob(ready))
         }
     }
-
-    /**
-     * Obtem o trabalho de menor duração.
-     *
-     * @param {Array} jobs - Lista de trabalhos prontos para serem iniciados.
-     */
-    const getFastestJob = function (jobs) {
-        const sorted = jobs.sort(function (a, b) {
+    const getFastestJob = function(jobs) {
+        const sorted = jobs.sort(function(a, b) {
             return a.duration - b.duration
         })
-
         return sorted[0]
     }
-
-    /**
-     * Atualiza o timeout para que seja forçado a atualização das informações
-     * do depósito quando for resetado.
-     * Motivo: só é chamado automaticamente quando um milestone é resetado,
-     * e não o diário.
-     * 
-     * @param {Object} data - Os dados recebidos de RESOURCE_DEPOSIT_INFO
-     */
-    const rerollUpdater = function (data) {
+    const rerollUpdater = function(data) {
         const timeLeft = data.time_next_reset * 1000 - Date.now() + 1000
-
         clearTimeout(nextUpdateId)
         nextUpdateId = setTimeout(updateDepositInfo, timeLeft)
     }
-
-    /**
-     * Métodos públicos do AutoCollector.
-     *
-     * @type {Object}
-     */
     let autoCollector = {}
-
-    /**
-     * Inicializa o AutoDepois, configura os eventos.
-     */
-    autoCollector.init = function () {
+    autoCollector.init = function() {
         initialized = true
-
-        $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOB_COLLECTIBLE, function () {
+        $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOB_COLLECTIBLE, function() {
             if (!recall || !running) {
                 return false
             }
-
             recall = false
-
-            setTimeout(function () {
+            setTimeout(function() {
                 recall = true
                 analyse()
             }, 1500)
         })
-
         $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOBS_REROLLED, analyse)
         $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOB_COLLECTED, analyse)
-        $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_INFO, function (event, data) {
+        $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_INFO, function(event, data) {
             analyse()
             rerollUpdater(data)
         })
     }
-
-    /**
-     * Inicia a analise dos trabalhos.
-     */
-    autoCollector.start = function () {
+    autoCollector.start = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_COLLECTOR_STARTED)
         running = true
         analyse()
     }
-
-    /**
-     * Para a analise dos trabalhos.
-     */
-    autoCollector.stop = function () {
+    autoCollector.stop = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_COLLECTOR_STOPPED)
         running = false
     }
-
-    /**
-     * Retorna se o modulo está em funcionamento.
-     */
-    autoCollector.isRunning = function () {
+    autoCollector.isRunning = function() {
         return running
     }
-
-    /**
-     * Retorna se o modulo está inicializado.
-     */
-    autoCollector.isInitialized = function () {
+    autoCollector.isInitialized = function() {
         return initialized
     }
-
     return autoCollector
 })
-
 define('two/autoCollector/events', [], function () {
     angular.extend(eventTypeProvider, {
         AUTO_COLLECTOR_STARTED: 'auto_collector_started',
@@ -5861,24 +5734,21 @@ define('two/autoCollector/events', [], function () {
         AUTO_COLLECTOR_SECONDVILLAGE_STOPPED: 'auto_collector_secondvillage_stopped'
     })
 })
-
 define('two/autoCollector/ui', [
     'two/ui',
     'two/autoCollector',
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     interfaceOverflow,
     autoCollector,
     utils,
     eventQueue
 ) {
     let $button
-
-    const init = function () {
+    const init = function() {
         $button = interfaceOverflow.addMenuButton2('Kolekcjoner', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_collector'))
-        
-        $button.addEventListener('click', function () {
+        $button.addEventListener('click', function() {
             if (autoCollector.isRunning()) {
                 autoCollector.stop()
                 autoCollector.secondVillage.stop()
@@ -5889,34 +5759,28 @@ define('two/autoCollector/ui', [
                 utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_collector'))
             }
         })
-
-        eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STARTED, function () {
+        eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STARTED, function() {
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
         })
-
-        eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STOPPED, function () {
+        eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STOPPED, function() {
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
         })
-
         if (autoCollector.isRunning()) {
             eventQueue.trigger(eventTypeProvider.AUTO_COLLECTOR_STARTED)
         }
-
         return opener
     }
-
     return init
 })
-
 define('two/autoCollector/secondVillage', [
     'two/autoCollector',
     'two/utils',
     'queues/EventQueue',
     'helper/time',
     'models/SecondVillageModel'
-], function (
+], function(
     autoCollector,
     utils,
     eventQueue,
@@ -5927,10 +5791,8 @@ define('two/autoCollector/secondVillage', [
     let running = false
     let allFinished = false
     let secondVillageService = injector.get('secondVillageService')
-
-    const getRunningJob = function (jobs) {
+    const getRunningJob = function(jobs) {
         const now = Date.now()
-
         for (let id in jobs) {
             if (jobs[id].time_started && jobs[id].time_completed) {
                 if (now < $timeHelper.server2ClientTime(jobs[id].time_completed)) {
@@ -5938,13 +5800,10 @@ define('two/autoCollector/secondVillage', [
                 }
             }
         }
-
         return false
     }
-
-    const getCollectibleJob = function (jobs) {
+    const getCollectibleJob = function(jobs) {
         const now = Date.now()
-
         for (let id in jobs) {
             if (jobs[id].time_started && jobs[id].time_completed) {
                 if ((now >= $timeHelper.server2ClientTime(jobs[id].time_completed)) && !jobs[id].collected) {
@@ -5952,135 +5811,104 @@ define('two/autoCollector/secondVillage', [
                 }
             }
         }
-
         return false
     }
-
-    const finalizeJob = function (jobId) {
+    const finalizeJob = function(jobId) {
         socketService.emit(routeProvider.SECOND_VILLAGE_COLLECT_JOB_REWARD, {
             village_id: modelDataService.getSelectedVillage().getId(),
             job_id: jobId
         })
     }
-
-    const startJob = function (job, callback) {
+    const startJob = function(job, callback) {
         socketService.emit(routeProvider.SECOND_VILLAGE_START_JOB, {
             village_id: modelDataService.getSelectedVillage().getId(),
             job_id: job.id
         }, callback)
     }
-
-    const getFirstJob = function (jobs) {
+    const getFirstJob = function(jobs) {
         let jobId = false
-
-        utils.each(jobs, function (id) {
+        utils.each(jobs, function(id) {
             jobId = id
             return false
         })
-
         return jobId
     }
-
-    const updateSecondVillageInfo = function (callback) {
-        socketService.emit(routeProvider.SECOND_VILLAGE_GET_INFO, {}, function (data) {
+    const updateSecondVillageInfo = function(callback) {
+        socketService.emit(routeProvider.SECOND_VILLAGE_GET_INFO, {}, function(data) {
             if (secondVillageService.hasFinishedLastJob(data.jobs)) {
                 allFinished = true
                 socketService.emit(routeProvider.SECOND_VILLAGE_FINISH_VILLAGE)
                 secondVillageCollector.stop()
-            } else{
+            } else {
                 let model = new SecondVillageModel(data)
                 modelDataService.getSelectedCharacter().setSecondVillage(model)
                 callback()
             }
         })
     }
-
-    const updateAndAnalyse = function () {
+    const updateAndAnalyse = function() {
         updateSecondVillageInfo(analyse)
     }
-
-    const analyse = function () {
+    const analyse = function() {
         let secondVillage = modelDataService.getSelectedCharacter().getSecondVillage()
-
         if (!running || !secondVillage || !secondVillage.isAvailable()) {
             return false
         }
-
         const current = getRunningJob(secondVillage.data.jobs)
-
         if (current) {
             const completed = $timeHelper.server2ClientTime(current.time_completed)
             const nextRun = completed - Date.now() + 1000
-
             setTimeout(updateAndAnalyse, nextRun)
-
             return false
         }
-
         const collectible = getCollectibleJob(secondVillage.data.jobs)
-        
         if (collectible) {
             return finalizeJob(collectible)
         }
-
         const currentDayJobs = secondVillageService.getCurrentDayJobs(secondVillage.data.jobs, secondVillage.data.day)
         const collectedJobs = secondVillageService.getCollectedJobs(secondVillage.data.jobs)
         const resources = modelDataService.getSelectedVillage().getResources().getResources()
         const availableJobs = secondVillageService.getAvailableJobs(currentDayJobs, collectedJobs, resources, [])
-
         if (availableJobs) {
             const firstJob = getFirstJob(availableJobs)
-
-            startJob(firstJob, function () {
+            startJob(firstJob, function() {
                 const job = availableJobs[firstJob]
-
                 if (job) {
                     setTimeout(updateAndAnalyse, (job.duration * 1000) + 1000)
                 } else {
                     setTimeout(updateAndAnalyse, 60 * 1000)
                 }
-
             })
         }
     }
-
     let secondVillageCollector = {}
-
-    secondVillageCollector.start = function () {
+    secondVillageCollector.start = function() {
         if (!initialized || allFinished) {
             return false
         }
-
         eventQueue.trigger(eventTypeProvider.AUTO_COLLECTOR_SECONDVILLAGE_STARTED)
         running = true
         updateAndAnalyse()
     }
-
-    secondVillageCollector.stop = function () {
+    secondVillageCollector.stop = function() {
         if (!initialized) {
             return false
         }
-
         eventQueue.trigger(eventTypeProvider.AUTO_COLLECTOR_SECONDVILLAGE_STOPPED)
         running = false
     }
-
-    secondVillageCollector.isRunning = function () {
+    secondVillageCollector.isRunning = function() {
         return running
     }
-
-    secondVillageCollector.isInitialized = function () {
+    secondVillageCollector.isInitialized = function() {
         return initialized
     }
-
-    secondVillageCollector.init = function () {
+    secondVillageCollector.init = function() {
         if (!secondVillageService.isFeatureActive()) {
             return false
         }
-
         initialized = true
-
-        socketService.emit(routeProvider.SECOND_VILLAGE_GET_INFO, {}, function (data) {
+        socketService.emit(routeProvider.SECOND_VILLAGE_GET_INFO, {}, function(data) {
             if (secondVillageService.hasFinishedLastJob(data.jobs)) {
                 allFinished = true
                 socketService.emit(routeProvider.SECOND_VILLAGE_FINISH_VILLAGE)
@@ -6090,10 +5918,8 @@ define('two/autoCollector/secondVillage', [
             }
         })
     }
-
     autoCollector.secondVillage = secondVillageCollector
 })
-
 require([
     'two/ready',
     'two/autoCollector',
@@ -6102,7 +5928,7 @@ require([
     'queues/EventQueue',
     'two/autoCollector/secondVillage',
     'two/autoCollector/events'
-], function (
+], function(
     ready,
     autoCollector,
     autoCollectorInterface,
@@ -6112,33 +5938,27 @@ require([
     const STORAGE_KEYS = {
         ACTIVE: 'auto_collector_active'
     }
-
     if (autoCollector.isInitialized()) {
         return false
     }
-
-    ready(function () {
+    ready(function() {
         autoCollector.init()
         autoCollector.secondVillage.init()
         autoCollectorInterface()
-        
-        ready(function () {
+        ready(function() {
             if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
                 autoCollector.start()
                 autoCollector.secondVillage.start()
             }
-
-            eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STARTED, function () {
+            eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STARTED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, true)
             })
-
-            eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STOPPED, function () {
+            eventQueue.register(eventTypeProvider.AUTO_COLLECTOR_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
     })
 })
-
 define('two/autoFoundator', [
     'two/utils',
     'queues/EventQueue'
@@ -6327,7 +6147,6 @@ define('two/autoHealer', [
             let hospital = village.hospital
             let patients = hospital.patients
             let healed = patients.healed
-            let units = healed.units
             if (healed.length == 0) {
                 console.log('W wiosce ' + village.getName() + ' brak jednostek do wyleczenia')
             } else {
@@ -6339,7 +6158,7 @@ define('two/autoHealer', [
                                 patient_id: heal.id
                             })
                         }, index * interval1)
-                        console.log('W wiosce: ' + village.getName() + ' wyleczono: ' + units)
+                        console.log('W wiosce: ' + village.getName() + ' wyleczono: ' + healed.units)
                     })
                 }, index * interval)
             }
@@ -6588,7 +6407,7 @@ define('two/battleCalculator', [
     'two/battleCalculator/types/training',
     'two/ready',
     'queues/EventQueue'
-], function (
+], function(
     Settings,
     SETTINGS,
     SETTINGS_MAP,
@@ -6611,33 +6430,169 @@ define('two/battleCalculator', [
     let running = false
     let settings
     let battleCalculatorSettings
-	
     let presetSelected = []
-	
-
+    // Bashpoints
+    let pointsatt = null
+    let pointsdef = null
+    // Troops
+    let woodAmount = null
+    let clayAmount = null
+    let ironAmount = null
+    let foodAmount = null
+    let loadAmount = null
+    let attInf = null
+    let attCav = null
+    let attArc = null
+    let defInf = null
+    let defCav = null
+    let defArch = null
+    let attackPower = null
+    let disciplinePercent = null
+    let travelTime = null
+    let finalTime = null
+    // Battle		
+    let spearD = null
+    let swordD = null
+    let axeD = null
+    let archerD = null
+    let snobD = null
+    let knightD = null
+    let ramD = null
+    let catapultD = null
+    let trebuchetD = null
+    let lcD = null
+    let maD = null
+    let hcD = null
+    let berserkerD = null
+    let spearD_losses = null
+    let swordD_losses = null
+    let axeD_losses = null
+    let archerD_losses = null
+    let snobD_losses = null
+    let knightD_losses = null
+    let ramD_losses = null
+    let catapultD_losses = null
+    let trebuchetD_losses = null
+    let lcD_losses = null
+    let maD_losses = null
+    let hcD_losses = null
+    let berserkerD_losses = null
+    let spearDrevived = null
+    let swordDrevived = null
+    let axeDrevived = null
+    let archerDrevived = null
+    let lcDrevived = null
+    let maDrevived = null
+    let hcDrevived = null
+    let spearD_survivorsRound3 = null
+    let swordD_survivorsRound3 = null
+    let axeD_survivorsRound3 = null
+    let archerD_survivorsRound3 = null
+    let snobD_survivorsRound3 = null
+    let knightD_survivorsRound3 = null
+    let ramD_survivorsRound3 = null
+    let catapultD_survivorsRound3 = null
+    let trebuchetD_survivorsRound3 = null
+    let lcD_survivorsRound3 = null
+    let maD_survivorsRound3 = null
+    let hcD_survivorsRound3 = null
+    let berserkerD_survivorsRound3 = null
+    let spearA = null
+    let swordA = null
+    let axeA = null
+    let archerA = null
+    let snobA = null
+    let knightA = null
+    let ramA = null
+    let catapultA = null
+    let trebuchetA = null
+    let lcA = null
+    let maA = null
+    let hcA = null
+    let berserkerA = null
+    let spearA_losses = null
+    let swordA_losses = null
+    let axeA_losses = null
+    let archerA_losses = null
+    let snobA_losses = null
+    let knightA_losses = null
+    let ramA_losses = null
+    let catapultA_losses = null
+    let trebuchetA_losses = null
+    let lcA_losses = null
+    let maA_losses = null
+    let hcA_losses = null
+    let berserkerA_losses = null
+    let spearArevived = null
+    let swordArevived = null
+    let axeArevived = null
+    let archerArevived = null
+    let snobArevived = null
+    let knightArevived = null
+    let ramArevived = null
+    let catapultArevived = null
+    let trebuchetArevived = null
+    let lcArevived = null
+    let maArevived = null
+    let hcArevived = null
+    let berserkerArevived = null
+    let spearA_survivorsRound3 = null
+    let swordA_survivorsRound3 = null
+    let axeA_survivorsRound3 = null
+    let archerA_survivorsRound3 = null
+    let snobA_survivorsRound3 = null
+    let knightA_survivorsRound3 = null
+    let ramA_survivorsRound3 = null
+    let catapultA_survivorsRound3 = null
+    let trebuchetA_survivorsRound3 = null
+    let lcA_survivorsRound3 = null
+    let maA_survivorsRound3 = null
+    let hcA_survivorsRound3 = null
+    let berserkerA_survivorsRound3 = null
+    let catTarget = null
+    let catapulttargetlevel = null
+    let afterBattleTargetLevel = null
+    let wallAfterPreround = null
+    let afterRamAttackPastBattle = null
+    let wall = null
+    let overalModifierDef = null
+    let defenderprovision = null
+    let strengthDefenderRound1 = null
+    let bashpointsDefender = null
+    let lossesprovisionD = null
+    let showD = null
+    let killratioDefender = null
+    let survivedProvisionD = null
+    let beds = null
+    let overalModifierOff = null
+    let attackerprovision = null
+    let strengthAttackerRound1 = null
+    let bashpointsAttacker = null
+    let lossesprovisionA = null
+    let showA = null
+    let killratioAttacker = null
+    let survivedProvisionA = null
+    let doubleStrengthBonus = null
     const STORAGE_KEYS = {
         SETTINGS: 'battle_calculator_settings'
     }
-	
     const BATTLE_ITEMS_LEVELS = {
-        [B_ITEMS_LEVELS.LEVEL_1]: 1,
-        [B_ITEMS_LEVELS.LEVEL_2]: 2,
-        [B_ITEMS_LEVELS.LEVEL_3]: 3
+        [B_ITEMS_LEVELS.LEVEL_1]: 'level_1',
+        [B_ITEMS_LEVELS.LEVEL_2]: 'level_2',
+        [B_ITEMS_LEVELS.LEVEL_3]: 'level_3'
     }
-	
     const BATTLE_ITEMS = {
-        [B_ITEMS.HALBERD_OF_GUAN_YU]: 'spear',
-        [B_ITEMS.PARACELSUS_LONGSWORD]: 'sword',
-        [B_ITEMS.THORGARDS_BATTLE_AXE]: 'axe',
-        [B_ITEMS.NIMRODS_LONGBOW]: 'archer',
-        [B_ITEMS.MIESZKOS_LANCE]: 'lc',
-        [B_ITEMS.NIMRODS_COMPOSITE_BOW]: 'ma',
-        [B_ITEMS.BAPTISTES_BANNER]: 'hc',
-        [B_ITEMS.CAROLS_MORNING_STAR]: 'ram',
-        [B_ITEMS.ALETHEIAS_BONFIRE]: 'catapult',
-        [B_ITEMS.VASCOS_SCEPTER]: 'snob'
+        [B_ITEMS.HALBERD_OF_GUAN_YU]: 'battle.halberd',
+        [B_ITEMS.PARACELSUS_LONGSWORD]: 'battle.longsword',
+        [B_ITEMS.THORGARDS_BATTLE_AXE]: 'battle.battleax',
+        [B_ITEMS.NIMRODS_LONGBOW]: 'battle.longbow',
+        [B_ITEMS.MIESZKOS_LANCE]: 'battle.lance',
+        [B_ITEMS.NIMRODS_COMPOSITE_BOW]: 'battle.compositebow',
+        [B_ITEMS.BAPTISTES_BANNER]: 'battle.banner',
+        [B_ITEMS.CAROLS_MORNING_STAR]: 'battle.star',
+        [B_ITEMS.ALETHEIAS_BONFIRE]: 'battle.bonfire',
+        [B_ITEMS.VASCOS_SCEPTER]: 'battle.scepter'
     }
-	
     const BATTLE_CAT_TARGET = {
         [B_CAT_TARGET.HEADQUARTER]: 'headquarter',
         [B_CAT_TARGET.WAREHOUSE]: 'warehouse',
@@ -6657,165 +6612,4226 @@ define('two/battleCalculator', [
         [B_CAT_TARGET.MARKET]: 'market',
         [B_CAT_TARGET.ACADEMY]: 'academy'
     }
-	
-    const TROOPS_ORDER_TYPE = {
-        [T_ORDER_TYPE.TEUTONIC_ORDER]: 'teutonic',
-        [T_ORDER_TYPE.TEMPLAR_ORDER]: 'templar'
-    }
-	
     const BATTLE_CHURCHES = {
-        [B_CHURCHES.NO_CHURCH]: 50,
-        [B_CHURCHES.LEVEL_1]: 100,
-        [B_CHURCHES.LEVEL_2]: 105,
-        [B_CHURCHES.LEVEL_3]: 110
+        [B_CHURCHES.NO_CHURCH]: 'without',
+        [B_CHURCHES.LEVEL_1]: 'level_1',
+        [B_CHURCHES.LEVEL_2]: 'level_2',
+        [B_CHURCHES.LEVEL_3]: 'level_3'
     }
-	
     const BATTLE_WALLS = {
-        [B_WALLS.NO_WALL]: 0,
-        [B_WALLS.LEVEL_1]: 5,
-        [B_WALLS.LEVEL_2]: 10,
-        [B_WALLS.LEVEL_3]: 15,
-        [B_WALLS.LEVEL_4]: 20,
-        [B_WALLS.LEVEL_5]: 25,
-        [B_WALLS.LEVEL_6]: 30,
-        [B_WALLS.LEVEL_7]: 35,
-        [B_WALLS.LEVEL_8]: 40,
-        [B_WALLS.LEVEL_9]: 45,
-        [B_WALLS.LEVEL_10]: 50,
-        [B_WALLS.LEVEL_11]: 55,
-        [B_WALLS.LEVEL_12]: 60,
-        [B_WALLS.LEVEL_13]: 65,
-        [B_WALLS.LEVEL_14]: 70,
-        [B_WALLS.LEVEL_15]: 75,
-        [B_WALLS.LEVEL_16]: 80,
-        [B_WALLS.LEVEL_17]: 85,
-        [B_WALLS.LEVEL_18]: 90,
-        [B_WALLS.LEVEL_19]: 95,
-        [B_WALLS.LEVEL_20]: 100
+        [B_WALLS.NO_WALL]: 'without',
+        [B_WALLS.LEVEL_1]: 'level_1',
+        [B_WALLS.LEVEL_2]: 'level_2',
+        [B_WALLS.LEVEL_3]: 'level_3',
+        [B_WALLS.LEVEL_4]: 'level_4',
+        [B_WALLS.LEVEL_5]: 'level_5',
+        [B_WALLS.LEVEL_6]: 'level_6',
+        [B_WALLS.LEVEL_7]: 'level_7',
+        [B_WALLS.LEVEL_8]: 'level_8',
+        [B_WALLS.LEVEL_9]: 'level_9',
+        [B_WALLS.LEVEL_10]: 'level_10',
+        [B_WALLS.LEVEL_11]: 'level_11',
+        [B_WALLS.LEVEL_12]: 'level_12',
+        [B_WALLS.LEVEL_13]: 'level_13',
+        [B_WALLS.LEVEL_14]: 'level_14',
+        [B_WALLS.LEVEL_15]: 'level_15',
+        [B_WALLS.LEVEL_16]: 'level_16',
+        [B_WALLS.LEVEL_17]: 'level_17',
+        [B_WALLS.LEVEL_18]: 'level_18',
+        [B_WALLS.LEVEL_19]: 'level_19',
+        [B_WALLS.LEVEL_20]: 'level_20'
     }
-	
     const BATTLE_SKILL_WEAPON_MASTER_LEVEL = {
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_1]: 2,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_2]: 4,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_3]: 6,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_4]: 8,
-        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_5]: 10
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_1]: 'level_1',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_2]: 'level_2',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_3]: 'level_3',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_4]: 'level_4',
+        [B_SKILL_WEAPON_MASTER_LEVEL.LEVEL_5]: 'level_5'
     }
-	
     const BATTLE_SKILL_IRON_WALLS_LEVEL = {
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_1]: 1,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_2]: 2,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_3]: 3,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_4]: 4,
-        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_5]: 5
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_1]: 'level_1',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_2]: 'level_2',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_3]: 'level_3',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_4]: 'level_4',
+        [B_SKILL_IRON_WALLS_LEVEL.LEVEL_5]: 'level_5'
     }
-	
     const BATTLE_SKILL_CLINIQUE_LEVEL = {
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_1]: 100,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_2]: 200,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_3]: 300,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_4]: 400,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_5]: 500,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_6]: 600,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_7]: 700,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_8]: 800,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_9]: 900,
-        [B_SKILL_CLINIQUE_LEVEL.LEVEL_10]: 1000
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_1]: 'level_1',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_2]: 'level_2',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_3]: 'level_3',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_4]: 'level_4',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_5]: 'level_5',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_6]: 'level_6',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_7]: 'level_7',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_8]: 'level_8',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_9]: 'level_9',
+        [B_SKILL_CLINIQUE_LEVEL.LEVEL_10]: 'level_10'
     }
-	
     const BATTLE_HOSPITAL_LEVEL = {
-        [B_HOSPITAL_LEVEL.LEVEL_1]: 100,
-        [B_HOSPITAL_LEVEL.LEVEL_2]: 129,
-        [B_HOSPITAL_LEVEL.LEVEL_3]: 167,
-        [B_HOSPITAL_LEVEL.LEVEL_4]: 215,
-        [B_HOSPITAL_LEVEL.LEVEL_5]: 278,
-        [B_HOSPITAL_LEVEL.LEVEL_6]: 359,
-        [B_HOSPITAL_LEVEL.LEVEL_7]: 464,
-        [B_HOSPITAL_LEVEL.LEVEL_8]: 599,
-        [B_HOSPITAL_LEVEL.LEVEL_9]: 774,
-        [B_HOSPITAL_LEVEL.LEVEL_10]: 1000
+        [B_HOSPITAL_LEVEL.LEVEL_1]: 'level_1',
+        [B_HOSPITAL_LEVEL.LEVEL_2]: 'level_2',
+        [B_HOSPITAL_LEVEL.LEVEL_3]: 'level_3',
+        [B_HOSPITAL_LEVEL.LEVEL_4]: 'level_4',
+        [B_HOSPITAL_LEVEL.LEVEL_5]: 'level_5',
+        [B_HOSPITAL_LEVEL.LEVEL_6]: 'level_6',
+        [B_HOSPITAL_LEVEL.LEVEL_7]: 'level_7',
+        [B_HOSPITAL_LEVEL.LEVEL_8]: 'level_8',
+        [B_HOSPITAL_LEVEL.LEVEL_9]: 'level_9',
+        [B_HOSPITAL_LEVEL.LEVEL_10]: 'level_10'
     }
-	
-    const TROOPS_TRAINING_LEVEL = {
-        [T_TRAINING_LEVEL.LEVEL_1]: 4,
-        [T_TRAINING_LEVEL.LEVEL_2]: 8,
-        [T_TRAINING_LEVEL.LEVEL_3]: 12,
-        [T_TRAINING_LEVEL.LEVEL_4]: 16,
-        [T_TRAINING_LEVEL.LEVEL_5]: 20
-    }
-	
-    console.log(TROOPS_ORDER_TYPE, TROOPS_TRAINING_LEVEL, BATTLE_HOSPITAL_LEVEL, BATTLE_SKILL_CLINIQUE_LEVEL, BATTLE_SKILL_IRON_WALLS_LEVEL, BATTLE_SKILL_WEAPON_MASTER_LEVEL, BATTLE_WALLS, BATTLE_CHURCHES, BATTLE_ITEMS_LEVELS, BATTLE_ITEMS, BATTLE_CAT_TARGET)
-
-    const updatePresets = function () {
+    console.log(BATTLE_HOSPITAL_LEVEL, BATTLE_SKILL_CLINIQUE_LEVEL, BATTLE_SKILL_IRON_WALLS_LEVEL, BATTLE_SKILL_WEAPON_MASTER_LEVEL, BATTLE_WALLS, BATTLE_CHURCHES, BATTLE_ITEMS_LEVELS, BATTLE_ITEMS, BATTLE_CAT_TARGET)
+    const updatePresets = function() {
         presetSelected = []
-
         const allPresets = modelDataService.getPresetList().getPresets()
         const presetsSelectedByTheUser = battleCalculatorSettings[SETTINGS.PRESET]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
+        presetsSelectedByTheUser.forEach(function(presetId) {
             presetSelected.push(allPresets[presetId])
         })
     }
     const battleCalculator = {}
-
-    battleCalculator.init = function () {
+    battleCalculator.init = function() {
         initialized = true
-
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function(changes, updates) {
             battleCalculatorSettings = settings.getAll()
-
             if (updates[UPDATES.PRESETS]) {
                 updatePresets()
             }
         })
-
         battleCalculatorSettings = settings.getAll()
-
         console.log('battleCalculator settings', battleCalculatorSettings)
-		
-        ready(function () {
+        ready(function() {
             updatePresets()
         }, 'presets')
-		
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-
     }
+    battleCalculator.calculateB = function() {
+        const spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
+        const sword = battleCalculatorSettings[SETTINGS.BASHPOINTS_SWORD]
+        const axe = battleCalculatorSettings[SETTINGS.BASHPOINTS_AXE]
+        const archer = battleCalculatorSettings[SETTINGS.BASHPOINTS_ARCHER]
+        const lc = battleCalculatorSettings[SETTINGS.BASHPOINTS_LC]
+        const ma = battleCalculatorSettings[SETTINGS.BASHPOINTS_MA]
+        const hc = battleCalculatorSettings[SETTINGS.BASHPOINTS_HC]
+        const ram = battleCalculatorSettings[SETTINGS.BASHPOINTS_RAM]
+        const catapult = battleCalculatorSettings[SETTINGS.BASHPOINTS_CATAPULT]
+        const berserker = battleCalculatorSettings[SETTINGS.BASHPOINTS_DOPPELSOLDNER]
+        const trebuchet = battleCalculatorSettings[SETTINGS.BASHPOINTS_TREBUCHET]
+        const snob = battleCalculatorSettings[SETTINGS.BASHPOINTS_SNOB]
+        const knight = battleCalculatorSettings[SETTINGS.BASHPOINTS_KNIGHT]
+        var pointsAttack = [1, 2, 4, 2, 13, 12, 15, 8, 10, 20, 200, 0, 25]
+        var pointsDeff = [4, 5, 1, 5, 5, 6, 23, 4, 12, 40, 200, 25, 10]
+        pointsatt = spear * pointsAttack[0] + sword * pointsAttack[1] + axe * pointsAttack[2] + archer * pointsAttack[3] + lc * pointsAttack[4] + ma * pointsAttack[5] + hc * pointsAttack[6] + ram * pointsAttack[7] + catapult * pointsAttack[8] + knight * pointsAttack[9] + snob * pointsAttack[10] + trebuchet * pointsAttack[11] + berserker * pointsAttack[12]
+        pointsdef = spear * pointsDeff[0] + sword * pointsDeff[1] + axe * pointsDeff[2] + archer * pointsDeff[3] + lc * pointsDeff[4] + ma * pointsDeff[5] + hc * pointsDeff[6] + ram * pointsDeff[7] + catapult * pointsDeff[8] + knight * pointsDeff[9] + snob * pointsDeff[10] + trebuchet * pointsDeff[11] + berserker * pointsDeff[12]
+    }
+    battleCalculator.simulate = function() {
+        var pointsAttack = [1, 2, 4, 2, 13, 12, 15, 8, 10, 20, 200, 0, 25]
+        var pointsDeff = [4, 5, 1, 5, 5, 6, 23, 4, 12, 40, 200, 25, 10]
+        var def_inf = [25, 55, 10, 10, 30, 40, 200, 20, 100, 250, 100, 200, 100]
+        var def_kav = [45, 5, 5, 30, 40, 30, 160, 50, 50, 400, 50, 250, 100]
+        var def_arc = [10, 30, 10, 60, 30, 50, 180, 20, 100, 150, 100, 200, 50]
+        var attack = [10, 25, 45, 25, 130, 150, 150, 2, 100, 150, 30, 30, 300]
+        var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
+        var faithAttacker = 0
+        var faithDefender = 0
+        var nightBonusModifier = 0
+        var leaderBonusModifier = 0
+        var medicBonusModifier = 0
+        var medicSkillModifier = 0
+        var skillAttackModifier = 0
+        var wallModifier = 0
+        var skillWallsModifier = 0
+        var skillCliniqueModifier = 0
+        var hospitalBedsAvailable = 0
+        var catapultTarget = 0
+        var itemDeff1 = 0
+        var itemDeff2 = 0
+        var itemDeff3 = 0
+        var itemOff = 0
+        var levelDeff1 = 0
+        var levelDeff2 = 0
+        var levelDeff3 = 0
+        var levelOff = 0
+        var morale = 0
+        var luck = 0
+        var archerA_lossesRound1 = 0
+        var archerA_lossesRound2 = 0
+        var archerA_lossesRound3 = 0
+        var archerA_survivorsRound1 = 0
+        var archerA_survivorsRound2 = 0
+        var archerD_lossesRound1 = 0
+        var archerD_lossesRound2 = 0
+        var archerD_lossesRound3 = 0
+        var archerD_survivorsRound1 = 0
+        var archerD_survivorsRound1ModifiedArc = 0
+        var archerD_survivorsRound1ModifiedCav = 0
+        var archerD_survivorsRound1ModifiedInf = 0
+        var archerD_survivorsRound2 = 0
+        var archerD_survivorsRound2ModifiedArc = 0
+        var archerD_survivorsRound2ModifiedCav = 0
+        var archerD_survivorsRound2ModifiedInf = 0
+        var archerD_survivorsRound3ModifiedArc = 0
+        var archerD_survivorsRound3ModifiedCav = 0
+        var archerD_survivorsRound3ModifiedInf = 0
+        var armyLossesPercentEachRound = 0
+        var axeA_lossesRound1 = 0
+        var axeA_lossesRound2 = 0
+        var axeA_lossesRound3 = 0
+        var axeA_survivorsRound1 = 0
+        var axeA_survivorsRound2 = 0
+        var axeD_lossesRound1 = 0
+        var axeD_lossesRound2 = 0
+        var axeD_lossesRound3 = 0
+        var axeD_survivorsRound1 = 0
+        var axeD_survivorsRound1ModifiedArc = 0
+        var axeD_survivorsRound1ModifiedCav = 0
+        var axeD_survivorsRound1ModifiedInf = 0
+        var axeD_survivorsRound2 = 0
+        var axeD_survivorsRound2ModifiedArc = 0
+        var axeD_survivorsRound2ModifiedCav = 0
+        var axeD_survivorsRound2ModifiedInf = 0
+        var axeD_survivorsRound3ModifiedArc = 0
+        var axeD_survivorsRound3ModifiedCav = 0
+        var axeD_survivorsRound3ModifiedInf = 0
+        var baseDefenseModifier = 0
+        var battleBonusDef = 0
+        var battleBonusOff = 0
+        var berserkerA_lossesRound1 = 0
+        var berserkerA_lossesRound2 = 0
+        var berserkerA_lossesRound3 = 0
+        var berserkerA_survivorsRound1 = 0
+        var berserkerA_survivorsRound2 = 0
+        var berserkerD_lossesRound1 = 0
+        var berserkerD_lossesRound2 = 0
+        var berserkerD_lossesRound3 = 0
+        var berserkerD_survivorsRound1 = 0
+        var berserkerD_survivorsRound1ModifiedArc = 0
+        var berserkerD_survivorsRound1ModifiedCav = 0
+        var berserkerD_survivorsRound1ModifiedInf = 0
+        var berserkerD_survivorsRound2 = 0
+        var berserkerD_survivorsRound2ModifiedArc = 0
+        var berserkerD_survivorsRound2ModifiedCav = 0
+        var berserkerD_survivorsRound2ModifiedInf = 0
+        var berserkerD_survivorsRound3ModifiedArc = 0
+        var berserkerD_survivorsRound3ModifiedCav = 0
+        var berserkerD_survivorsRound3ModifiedInf = 0
+        var catapultA_lossesRound1 = 0
+        var catapultA_lossesRound2 = 0
+        var catapultA_lossesRound3 = 0
+        var catapultA_survivorsRound1 = 0
+        var catapultA_survivorsRound2 = 0
+        var catapultAfterTrebuchet = 0
+        var catapultD_lossesRound1 = 0
+        var catapultD_lossesRound2 = 0
+        var catapultD_lossesRound3 = 0
+        var catapultD_survivorsRound1 = 0
+        var catapultD_survivorsRound1ModifiedArc = 0
+        var catapultD_survivorsRound1ModifiedCav = 0
+        var catapultD_survivorsRound1ModifiedInf = 0
+        var catapultD_survivorsRound2 = 0
+        var catapultD_survivorsRound2ModifiedArc = 0
+        var catapultD_survivorsRound2ModifiedCav = 0
+        var catapultD_survivorsRound2ModifiedInf = 0
+        var catapultD_survivorsRound3ModifiedArc = 0
+        var catapultD_survivorsRound3ModifiedCav = 0
+        var catapultD_survivorsRound3ModifiedInf = 0
+        var catapultDamageHitpoint = 0
+        var catapultDemolition = 0
+        var catapultPowerFinal = 0
+        var catapultPreRound = 0
+        var deffprovision = 0
+        var DknightItemBonusArcher = [1, 1]
+        var DknightItemBonusArcher1 = [1, 1]
+        var DknightItemBonusArcher2 = [1, 1]
+        var DknightItemBonusArcher3 = [1, 1]
+        var DknightItemBonusAxe = [1, 1]
+        var DknightItemBonusAxe1 = [1, 1]
+        var DknightItemBonusAxe2 = [1, 1]
+        var DknightItemBonusAxe3 = [1, 1]
+        var DknightItemBonusCatapult = [1, 1]
+        var DknightItemBonusCatapult1 = [1, 1]
+        var DknightItemBonusCatapult2 = [1, 1]
+        var DknightItemBonusCatapult3 = [1, 1]
+        var DknightItemBonusHc = [1, 1]
+        var DknightItemBonusHc1 = [1, 1]
+        var DknightItemBonusHc2 = [1, 1]
+        var DknightItemBonusHc3 = [1, 1]
+        var DknightItemBonusLc = [1, 1]
+        var DknightItemBonusLc1 = [1, 1]
+        var DknightItemBonusLc2 = [1, 1]
+        var DknightItemBonusLc3 = [1, 1]
+        var DknightItemBonusMa = [1, 1]
+        var DknightItemBonusMa1 = [1, 1]
+        var DknightItemBonusMa2 = [1, 1]
+        var DknightItemBonusMa3 = [1, 1]
+        var DknightItemBonusRam = [1, 1]
+        var DknightItemBonusRam1 = [1, 1]
+        var DknightItemBonusRam2 = [1, 1]
+        var DknightItemBonusRam3 = [1, 1]
+        var DknightItemBonusSpear = [1, 1]
+        var DknightItemBonusSpear1 = [1, 1]
+        var DknightItemBonusSpear2 = [1, 1]
+        var DknightItemBonusSpear3 = [1, 1]
+        var DknightItemBonusSword = [1, 1]
+        var DknightItemBonusSword1 = [1, 1]
+        var DknightItemBonusSword2 = [1, 1]
+        var DknightItemBonusSword3 = [1, 1]
+        var finalTargetLevel = 0
+        var finalWalls = 0
+        var hcA_lossesRound1 = 0
+        var hcA_lossesRound2 = 0
+        var hcA_lossesRound3 = 0
+        var hcA_survivorsRound1 = 0
+        var hcA_survivorsRound2 = 0
+        var hcD_lossesRound1 = 0
+        var hcD_lossesRound2 = 0
+        var hcD_lossesRound3 = 0
+        var hcD_survivorsRound1 = 0
+        var hcD_survivorsRound1ModifiedArc = 0
+        var hcD_survivorsRound1ModifiedCav = 0
+        var hcD_survivorsRound1ModifiedInf = 0
+        var hcD_survivorsRound2 = 0
+        var hcD_survivorsRound2ModifiedArc = 0
+        var hcD_survivorsRound2ModifiedCav = 0
+        var hcD_survivorsRound2ModifiedInf = 0
+        var hcD_survivorsRound3ModifiedArc = 0
+        var hcD_survivorsRound3ModifiedCav = 0
+        var hcD_survivorsRound3ModifiedInf = 0
+        var hitpointslevelTargetfinal = 0
+        var hitpointslevelwalls = 0
+        var hitpointslevelwallsfinal = 0
+        var hospitalBeds = 0
+        var itemramsoffeffect = [1, 1]
+        var killRateRound1attackerArc = 0
+        var killRateRound1attackerCav = 0
+        var killRateRound1attackerInf = 0
+        var killRateRound1defenderArc = 0
+        var killRateRound1defenderCav = 0
+        var killRateRound1defenderInf = 0
+        var killRateRound2attackerArc = 0
+        var killRateRound2attackerCav = 0
+        var killRateRound2attackerInf = 0
+        var killRateRound2defenderArc = 0
+        var killRateRound2defenderCav = 0
+        var killRateRound2defenderInf = 0
+        var killRateRound3attackerArc = 0
+        var killRateRound3attackerCav = 0
+        var killRateRound3attackerInf = 0
+        var killRateRound3defenderArc = 0
+        var killRateRound3defenderCav = 0
+        var killRateRound3defenderInf = 0
+        var knightA_lossesRound1 = 0
+        var knightA_lossesRound2 = 0
+        var knightA_lossesRound3 = 0
+        var knightA_survivorsRound1 = 0
+        var knightA_survivorsRound2 = 0
+        var knightD_lossesRound1 = 0
+        var knightD_lossesRound2 = 0
+        var knightD_lossesRound3 = 0
+        var knightD_survivorsRound1 = 0
+        var knightD_survivorsRound1ModifiedArc = 0
+        var knightD_survivorsRound1ModifiedCav = 0
+        var knightD_survivorsRound1ModifiedInf = 0
+        var knightD_survivorsRound2 = 0
+        var knightD_survivorsRound2ModifiedArc = 0
+        var knightD_survivorsRound2ModifiedCav = 0
+        var knightD_survivorsRound2ModifiedInf = 0
+        var knightD_survivorsRound3ModifiedArc = 0
+        var knightD_survivorsRound3ModifiedCav = 0
+        var knightD_survivorsRound3ModifiedInf = 0
+        var knightItemBonusArcher = [1, 1]
+        var knightItemBonusAxe = [1, 1]
+        var knightItemBonusCatapult = [1, 1]
+        var knightItemBonusHc = [1, 1]
+        var knightItemBonusLc = [1, 1]
+        var knightItemBonusMa = [1, 1]
+        var knightItemBonusRam = [1, 1]
+        var knightItemBonusSpear = [1, 1]
+        var knightItemBonusSword = [1, 1]
+        var kilrateAttackArcherBaseRound3 = 0
+        var kilrateAttackArcherBaseRound1 = 0
+        var kilrateAttackArcherBaseRound2 = 0
+        var kilrateAttackCavalryBaseRound3 = 0
+        var kilrateAttackCavalryBaseRound1 = 0
+        var kilrateAttackCavalryBaseRound2 = 0
+        var kilrateAttackInfantryBaseRound3 = 0
+        var kilrateAttackInfantryBaseRound1 = 0
+        var kilrateAttackInfantryBaseRound2 = 0
+        var kilrateDefendArcherBaseRound3 = 0
+        var kilrateDefendArcherBaseRound1 = 0
+        var kilrateDefendArcherBaseRound2 = 0
+        var kilrateDefendCavalryBaseRound3 = 0
+        var kilrateDefendCavalryBaseRound1 = 0
+        var kilrateDefendCavalryBaseRound2 = 0
+        var kilrateDefendInfantryBaseRound3 = 0
+        var kilrateDefendInfantryBaseRound1 = 0
+        var kilrateDefendInfantryBaseRound2 = 0
+        var largestGroup = 0
+        var lcA_lossesRound1 = 0
+        var lcA_lossesRound2 = 0
+        var lcA_lossesRound3 = 0
+        var lcA_survivorsRound1 = 0
+        var lcA_survivorsRound2 = 0
+        var lcD_lossesRound1 = 0
+        var lcD_lossesRound2 = 0
+        var lcD_lossesRound3 = 0
+        var lcD_survivorsRound1 = 0
+        var lcD_survivorsRound1ModifiedArc = 0
+        var lcD_survivorsRound1ModifiedCav = 0
+        var lcD_survivorsRound1ModifiedInf = 0
+        var lcD_survivorsRound2 = 0
+        var lcD_survivorsRound2ModifiedArc = 0
+        var lcD_survivorsRound2ModifiedCav = 0
+        var lcD_survivorsRound2ModifiedInf = 0
+        var lcD_survivorsRound3ModifiedArc = 0
+        var lcD_survivorsRound3ModifiedCav = 0
+        var lcD_survivorsRound3ModifiedInf = 0
+        var leaderBonus = 0
+        var lossesAttackerRound1Total = 0
+        var lossesAttackerRound2Total = 0
+        var lossesAttackerRound3Total = 0
+        var lossesDefenderRound1Total = 0
+        var lossesDefenderRound2Total = 0
+        var lossesDefenderRound3Total = 0
+        var lossesPercentRound1Arc = 0
+        var lossesPercentRound1Cav = 0
+        var lossesPercentRound1Inf = 0
+        var lossesPercentRound2Arc = 0
+        var lossesPercentRound2Cav = 0
+        var lossesPercentRound2Inf = 0
+        var lossesPercentRound3Arc = 0
+        var lossesPercentRound3Cav = 0
+        var lossesPercentRound3Inf = 0
+        var lucky = 0
+        var maA_lossesRound1 = 0
+        var maA_lossesRound2 = 0
+        var maA_lossesRound3 = 0
+        var maA_survivorsRound1 = 0
+        var maA_survivorsRound2 = 0
+        var maD_lossesRound1 = 0
+        var maD_lossesRound2 = 0
+        var maD_lossesRound3 = 0
+        var maD_survivorsRound1 = 0
+        var maD_survivorsRound1ModifiedArc = 0
+        var maD_survivorsRound1ModifiedCav = 0
+        var maD_survivorsRound1ModifiedInf = 0
+        var maD_survivorsRound2 = 0
+        var maD_survivorsRound2ModifiedArc = 0
+        var maD_survivorsRound2ModifiedCav = 0
+        var maD_survivorsRound2ModifiedInf = 0
+        var maD_survivorsRound3ModifiedArc = 0
+        var maD_survivorsRound3ModifiedCav = 0
+        var maD_survivorsRound3ModifiedInf = 0
+        var medicBonus = 0
+        var modifiedDefenderProvision = 0
+        var moral = 0
+        var nightBonus = 1
+        var offprovision = 0
+        var preBaseDefenseModifier = 0
+        var provisionAttackerArcRound1 = 0
+        var provisionAttackerArcRound2 = 0
+        var provisionAttackerArcRound3 = 0
+        var provisionAttackerCavRound1 = 0
+        var provisionAttackerCavRound2 = 0
+        var provisionAttackerCavRound3 = 0
+        var provisionAttackerInfRound1 = 0
+        var provisionAttackerInfRound2 = 0
+        var provisionAttackerInfRound3 = 0
+        var provisionAttackerRound1Total = 0
+        var provisionAttackerRound2Total = 0
+        var provisionAttackerRound3Total = 0
+        var provisionDefenderArcRound1 = 0
+        var provisionDefenderArcRound2 = 0
+        var provisionDefenderArcRound3 = 0
+        var provisionDefenderCavRound1 = 0
+        var provisionDefenderCavRound2 = 0
+        var provisionDefenderCavRound3 = 0
+        var provisionDefenderInfRound1 = 0
+        var provisionDefenderInfRound2 = 0
+        var provisionDefenderInfRound3 = 0
+        var provisionDefenderRound1Total = 0
+        var provisionDefenderRound2Total = 0
+        var provisionDefenderRound3Total = 0
+        var provisionmodifier = 0
+        var ramA_lossesRound1 = 0
+        var ramA_lossesRound2 = 0
+        var ramA_lossesRound3 = 0
+        var ramA_survivorsRound1 = 0
+        var ramA_survivorsRound2 = 0
+        var ramAfterTrebuchet = 0
+        var ramD_lossesRound1 = 0
+        var ramD_lossesRound2 = 0
+        var ramD_lossesRound3 = 0
+        var ramD_survivorsRound1 = 0
+        var ramD_survivorsRound1ModifiedArc = 0
+        var ramD_survivorsRound1ModifiedCav = 0
+        var ramD_survivorsRound1ModifiedInf = 0
+        var ramD_survivorsRound2 = 0
+        var ramD_survivorsRound2ModifiedArc = 0
+        var ramD_survivorsRound2ModifiedCav = 0
+        var ramD_survivorsRound2ModifiedInf = 0
+        var ramD_survivorsRound3ModifiedArc = 0
+        var ramD_survivorsRound3ModifiedCav = 0
+        var ramD_survivorsRound3ModifiedInf = 0
+        var ramDamageHitpoint = 0
+        var ramDemolition = 0
+        var rampower = 0
+        var ramPowerFinal = 0
+        var ramPreroundProvision = 0
+        var ramsPreRound = 0
+        var siegeProvision = 0
+        var siegeProvisionRound1 = 0
+        var siegeProvisionRound2 = 0
+        var siegeStrength = 0
+        var siegeStrengthRound1 = 0
+        var siegeStrengthRound2 = 0
+        var skillAttack = 0
+        var skillClinique = 0
+        var skillMedic = 0
+        var skillWalls = 0
+        var snobA_lossesRound1 = 0
+        var snobA_lossesRound2 = 0
+        var snobA_lossesRound3 = 0
+        var snobA_survivorsRound1 = 0
+        var snobA_survivorsRound2 = 0
+        var snobD_lossesRound1 = 0
+        var snobD_lossesRound2 = 0
+        var snobD_lossesRound3 = 0
+        var snobD_survivorsRound1 = 0
+        var snobD_survivorsRound1ModifiedArc = 0
+        var snobD_survivorsRound1ModifiedCav = 0
+        var snobD_survivorsRound1ModifiedInf = 0
+        var snobD_survivorsRound2 = 0
+        var snobD_survivorsRound2ModifiedArc = 0
+        var snobD_survivorsRound2ModifiedCav = 0
+        var snobD_survivorsRound2ModifiedInf = 0
+        var snobD_survivorsRound3ModifiedArc = 0
+        var snobD_survivorsRound3ModifiedCav = 0
+        var snobD_survivorsRound3ModifiedInf = 0
+        var spearA_lossesRound1 = 0
+        var spearA_lossesRound2 = 0
+        var spearA_lossesRound3 = 0
+        var spearA_survivorsRound1 = 0
+        var spearA_survivorsRound2 = 0
+        var spearD_lossesRound1 = 0
+        var spearD_lossesRound2 = 0
+        var spearD_lossesRound3 = 0
+        var spearD_survivorsRound1 = 0
+        var spearD_survivorsRound1ModifiedArc = 0
+        var spearD_survivorsRound1ModifiedCav = 0
+        var spearD_survivorsRound1ModifiedInf = 0
+        var spearD_survivorsRound2 = 0
+        var spearD_survivorsRound2ModifiedArc = 0
+        var spearD_survivorsRound2ModifiedCav = 0
+        var spearD_survivorsRound2ModifiedInf = 0
+        var spearD_survivorsRound3ModifiedArc = 0
+        var spearD_survivorsRound3ModifiedCav = 0
+        var spearD_survivorsRound3ModifiedInf = 0
+        var strengthAttackerArcRound1 = 0
+        var strengthAttackerArcRound2 = 0
+        var strengthAttackerArcRound3 = 0
+        var strengthAttackerCavRound1 = 0
+        var strengthAttackerCavRound2 = 0
+        var strengthAttackerCavRound3 = 0
+        var strengthAttackerInfRound1 = 0
+        var strengthAttackerInfRound2 = 0
+        var strengthAttackerInfRound3 = 0
+        var strengthAttackerRound2 = 0
+        var strengthAttackerRound3 = 0
+        var strengthBaseAttackerArcRound1 = 0
+        var strengthBaseAttackerArcRound2 = 0
+        var strengthBaseAttackerArcRound3 = 0
+        var strengthBaseAttackerCavRound1 = 0
+        var strengthBaseAttackerCavRound2 = 0
+        var strengthBaseAttackerCavRound3 = 0
+        var strengthBaseAttackerInfRound1 = 0
+        var strengthBaseAttackerInfRound2 = 0
+        var strengthBaseAttackerInfRound3 = 0
+        var strengthBaseDefenderArcRound1 = 0
+        var strengthBaseDefenderArcRound2 = 0
+        var strengthBaseDefenderArcRound3 = 0
+        var strengthBaseDefenderCavRound1 = 0
+        var strengthBaseDefenderCavRound2 = 0
+        var strengthBaseDefenderCavRound3 = 0
+        var strengthBaseDefenderInfRound1 = 0
+        var strengthBaseDefenderInfRound2 = 0
+        var strengthBaseDefenderInfRound3 = 0
+        var strengthDefenderArcRound1 = 0
+        var strengthDefenderArcRound2 = 0
+        var strengthDefenderArcRound3 = 0
+        var strengthDefenderCavRound1 = 0
+        var strengthDefenderCavRound2 = 0
+        var strengthDefenderCavRound3 = 0
+        var strengthDefenderInfRound1 = 0
+        var strengthDefenderInfRound2 = 0
+        var strengthDefenderInfRound3 = 0
+        var strengthDefenderRound2 = 0
+        var strengthDefenderRound3 = 0
+        var survivorsAttackerRound1Total = 0
+        var survivorsAttackerRound2Total = 0
+        var survivorsAttackerRound3Total = 0
+        var survivorsDefenderRound1Total = 0
+        var survivorsDefenderRound2Total = 0
+        var survivorsDefenderRound3Total = 0
+        var swordA_lossesRound1 = 0
+        var swordA_lossesRound2 = 0
+        var swordA_lossesRound3 = 0
+        var swordA_survivorsRound1 = 0
+        var swordA_survivorsRound2 = 0
+        var swordD_lossesRound1 = 0
+        var swordD_lossesRound2 = 0
+        var swordD_lossesRound3 = 0
+        var swordD_survivorsRound1 = 0
+        var swordD_survivorsRound1ModifiedArc = 0
+        var swordD_survivorsRound1ModifiedCav = 0
+        var swordD_survivorsRound1ModifiedInf = 0
+        var swordD_survivorsRound2 = 0
+        var swordD_survivorsRound2ModifiedArc = 0
+        var swordD_survivorsRound2ModifiedCav = 0
+        var swordD_survivorsRound2ModifiedInf = 0
+        var swordD_survivorsRound3ModifiedArc = 0
+        var swordD_survivorsRound3ModifiedCav = 0
+        var swordD_survivorsRound3ModifiedInf = 0
+        var trebuchetA_lossesRound1 = 0
+        var trebuchetA_lossesRound2 = 0
+        var trebuchetA_lossesRound3 = 0
+        var trebuchetA_survivorsRound1 = 0
+        var trebuchetA_survivorsRound2 = 0
+        var trebuchetCModifier = 0
+        var trebuchetD_lossesRound1 = 0
+        var trebuchetD_lossesRound2 = 0
+        var trebuchetD_lossesRound3 = 0
+        var trebuchetD_survivorsRound1 = 0
+        var trebuchetD_survivorsRound1ModifiedArc = 0
+        var trebuchetD_survivorsRound1ModifiedCav = 0
+        var trebuchetD_survivorsRound1ModifiedInf = 0
+        var trebuchetD_survivorsRound2 = 0
+        var trebuchetD_survivorsRound2ModifiedArc = 0
+        var trebuchetD_survivorsRound2ModifiedCav = 0
+        var trebuchetD_survivorsRound2ModifiedInf = 0
+        var trebuchetD_survivorsRound3ModifiedArc = 0
+        var trebuchetD_survivorsRound3ModifiedCav = 0
+        var trebuchetD_survivorsRound3ModifiedInf = 0
+        var trebuchetModifier = 0
+        var walladamagepreround = 0
+        var wallpower = 0
+        var wallpreround = 0
+        var sumSiege = 0
+        var catapultPercent = 0
+        var ramPercent = 0
+        var largestGroupD = 0
+        var attFaithBonus = 0
+        var defFaithBonus = 0
 
-    battleCalculator.start = function () {
+        function getDataBattle() {
+            faithAttacker = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_A]
+            faithDefender = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_D]
+            nightBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_NIGHT_BONUS]
+            leaderBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_LEADER]
+            medicBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_MEDIC]
+            medicSkillModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_MEDIC]
+            skillAttackModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]
+            wallModifier = battleCalculatorSettings[SETTINGS.BATTLE_WALL]
+            skillWallsModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_IRON_WALLS]
+            skillCliniqueModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_CLINIQUE]
+            hospitalBedsAvailable = battleCalculatorSettings[SETTINGS.BATTLE_HOSPITAL]
+            catTarget = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_TARGET]
+            catapultTarget = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_TARGET]
+            itemDeff1 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D1]
+            itemDeff2 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D2]
+            itemDeff3 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D3]
+            itemOff = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_A]
+            levelDeff1 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D1]
+            levelDeff2 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D2]
+            levelDeff3 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D3]
+            levelOff = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_A]
+            archerA = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_A]
+            archerD = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_D]
+            axeA = battleCalculatorSettings[SETTINGS.BATTLE_AXE_A]
+            axeD = battleCalculatorSettings[SETTINGS.BATTLE_AXE_D]
+            berserkerA = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_A]
+            berserkerD = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_D]
+            catapultA = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_A]
+            catapultD = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_D]
+            hcA = battleCalculatorSettings[SETTINGS.BATTLE_HC_A]
+            hcD = battleCalculatorSettings[SETTINGS.BATTLE_HC_D]
+            knightA = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_A]
+            knightD = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_D]
+            lcA = battleCalculatorSettings[SETTINGS.BATTLE_LC_A]
+            lcD = battleCalculatorSettings[SETTINGS.BATTLE_LC_D]
+            maA = battleCalculatorSettings[SETTINGS.BATTLE_MA_A]
+            maD = battleCalculatorSettings[SETTINGS.BATTLE_MA_D]
+            ramA = battleCalculatorSettings[SETTINGS.BATTLE_RAM_A]
+            ramD = battleCalculatorSettings[SETTINGS.BATTLE_RAM_D]
+            snobA = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_A]
+            snobD = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_D]
+            spearA = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_A]
+            spearD = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_D]
+            swordA = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_A]
+            swordD = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_D]
+            trebuchetA = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_A]
+            trebuchetD = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_D]
+            morale = battleCalculatorSettings[SETTINGS.BATTLE_MORALE]
+            luck = battleCalculatorSettings[SETTINGS.BATTLE_LUCK]
+            console.log(catTarget)
+            checkAttackerFaith()
+        }
+		
+        function checkAttackerFaith() {
+            if (faithAttacker == 'level_1') {
+                attFaithBonus = 100
+            } else if (faithAttacker == 'level_2') {
+                attFaithBonus = 105
+            } else if (faithAttacker == 'level_3') {
+                attFaithBonus = 110
+            } else {
+                attFaithBonus = 50
+            }
+            console.log(attFaithBonus)
+            checkDefenderFaith()
+        }
+
+        function checkDefenderFaith() {
+            if (faithDefender == 'level_1') {
+                defFaithBonus = 100
+            } else if (faithDefender == 'level_2') {
+                defFaithBonus = 105
+            } else if (faithDefender == 'level_3') {
+                defFaithBonus = 110
+            } else {
+                defFaithBonus = 50
+            }
+            console.log(defFaithBonus)
+            checkNightBonus()
+        }
+
+        function checkNightBonus() {
+            if (nightBonusModifier) {
+                nightBonus = 2
+            } else {
+                nightBonus = 1
+            }
+            console.log(nightBonus)
+            checkLeaderBonus()
+        }
+
+        function checkLeaderBonus() {
+            if (leaderBonusModifier) {
+                leaderBonus = 0.10
+            } else {
+                leaderBonus = 0.00
+            }
+            console.log(leaderBonus)
+            checkMedicBonus()
+        }
+
+        function checkMedicBonus() {
+            if (medicBonusModifier) {
+                medicBonus = 0.10
+            } else {
+                medicBonus = 0.00
+            }
+            console.log(medicBonus)
+            checkSkillMedic()
+        }
+
+        function checkSkillMedic() {
+            if (medicSkillModifier) {
+                skillMedic = 0.10
+            } else {
+                skillMedic = 0.00
+            }
+            console.log(skillMedic)
+            checkSkillAttack()
+        }
+
+        function checkSkillAttack() {
+            if (skillAttackModifier == 'level_1') {
+                skillAttack = 2
+            } else if (skillAttackModifier == 'level_2') {
+                skillAttack = 4
+            } else if (skillAttackModifier == 'level_3') {
+                skillAttack = 6
+            } else if (skillAttackModifier == 'level_4') {
+                skillAttack = 8
+            } else if (skillAttackModifier == 'level_5') {
+                skillAttack = 10
+            } else {
+                skillAttack = 0
+            }
+            console.log(skillAttack)
+            checkSkillWalls()
+        }
+
+        function checkSkillWalls() {
+            if (skillWallsModifier == 'level_1') {
+                skillWalls = 1
+            } else if (skillWallsModifier == 'level_2') {
+                skillWalls = 2
+            } else if (skillWallsModifier == 'level_3') {
+                skillWalls = 3
+            } else if (skillWallsModifier == 'level_4') {
+                skillWalls = 4
+            } else if (skillWallsModifier == 'level_5') {
+                skillWalls = 5
+            } else {
+                skillWalls = 0
+            }
+            console.log(skillWalls)
+            checkClinique()
+        }
+
+        function checkClinique() {
+            if (skillCliniqueModifier == 'level_1') {
+                skillClinique = 100
+            } else if (skillCliniqueModifier == 'level_2') {
+                skillClinique = 200
+            } else if (skillCliniqueModifier == 'level_3') {
+                skillClinique = 300
+            } else if (skillCliniqueModifier == 'level_4') {
+                skillClinique = 400
+            } else if (skillCliniqueModifier == 'level_5') {
+                skillClinique = 500
+            } else if (skillCliniqueModifier == 'level_6') {
+                skillClinique = 600
+            } else if (skillCliniqueModifier == 'level_7') {
+                skillClinique = 700
+            } else if (skillCliniqueModifier == 'level_8') {
+                skillClinique = 800
+            } else if (skillCliniqueModifier == 'level_9') {
+                skillClinique = 900
+            } else if (skillCliniqueModifier == 'level_10') {
+                skillClinique = 1000
+            } else {
+                skillClinique = 0
+            }
+            console.log(skillClinique)
+            checkHospital()
+        }
+
+        function checkHospital() {
+            if (hospitalBedsAvailable == 'level_1') {
+                hospitalBeds = 100
+            } else if (hospitalBedsAvailable == 'level_2') {
+                hospitalBeds = 129
+            } else if (hospitalBedsAvailable == 'level_3') {
+                hospitalBeds = 167
+            } else if (hospitalBedsAvailable == 'level_4') {
+                hospitalBeds = 215
+            } else if (hospitalBedsAvailable == 'level_5') {
+                hospitalBeds = 278
+            } else if (hospitalBedsAvailable == 'level_6') {
+                hospitalBeds = 359
+            } else if (hospitalBedsAvailable == 'level_7') {
+                hospitalBeds = 464
+            } else if (hospitalBedsAvailable == 'level_8') {
+                hospitalBeds = 599
+            } else if (hospitalBedsAvailable == 'level_9') {
+                hospitalBeds = 774
+            } else if (hospitalBedsAvailable == 'level_10') {
+                hospitalBeds = 1000
+            } else {
+                hospitalBeds = 0
+            }
+            console.log(hospitalBeds)
+            checkWall()
+        }
+
+        function checkWall() {
+            if (wallModifier == 'level_1') {
+                wall = 1
+            } else if (wallModifier == 'level_2') {
+                wall = 2
+            } else if (wallModifier == 'level_3') {
+                wall = 3
+            } else if (wallModifier == 'level_4') {
+                wall = 4
+            } else if (wallModifier == 'level_5') {
+                wall = 5
+            } else if (wallModifier == 'level_6') {
+                wall = 6
+            } else if (wallModifier == 'level_7') {
+                wall = 7
+            } else if (wallModifier == 'level_8') {
+                wall = 8
+            } else if (wallModifier == 'level_9') {
+                wall = 9
+            } else if (wallModifier == 'level_10') {
+                wall = 10
+            } else if (wallModifier == 'level_11') {
+                wall = 11
+            } else if (wallModifier == 'level_12') {
+                wall = 12
+            } else if (wallModifier == 'level_13') {
+                wall = 13
+            } else if (wallModifier == 'level_14') {
+                wall = 14
+            } else if (wallModifier == 'level_15') {
+                wall = 15
+            } else if (wallModifier == 'level_16') {
+                wall = 16
+            } else if (wallModifier == 'level_17') {
+                wall = 17
+            } else if (wallModifier == 'level_18') {
+                wall = 18
+            } else if (wallModifier == 'level_19') {
+                wall = 19
+            } else if (wallModifier == 'level_20') {
+                wall = 20
+            } else {
+                wall = 0
+            }
+            console.log(wall)
+            DItemBonusLc1()
+        }
+
+        function DItemBonusLc1() {
+            if (itemDeff1 == 'battle.lance' & levelDeff1 == 'level_1') {
+                DknightItemBonusLc1 = [1.05, 1.10]
+            } else if (itemDeff1 == 'battle.lance' & levelDeff1 == 'level_2') {
+                DknightItemBonusLc1 = [1.10, 1.20]
+            } else if (itemDeff1 == 'battle.lance' & levelDeff1 == 'level_3') {
+                DknightItemBonusLc1 = [1.20, 1.30]
+            } else {
+                DknightItemBonusLc1 = [1, 1]
+            }
+            console.log(DknightItemBonusLc1)
+            DItemBonusAxe1()
+        }
+
+        function DItemBonusAxe1() {
+            if (itemDeff1 == 'battle.battleaxe' & levelDeff1 == 'level_1') {
+                DknightItemBonusAxe1 = [1.05, 1.10]
+            } else if (itemDeff1 == 'battle.battleaxe' & levelDeff1 == 'level_2') {
+                DknightItemBonusAxe1 = [1.10, 1.20]
+            } else if (itemDeff1 == 'battle.battleaxe' & levelDeff1 == 'level_3') {
+                DknightItemBonusAxe1 = [1.20, 1.30]
+            } else {
+                DknightItemBonusAxe1 = [1, 1]
+            }
+            console.log(DknightItemBonusAxe1)
+            DItemBonusMa1()
+        }
+
+        function DItemBonusMa1() {
+            if (itemDeff1 == 'battle.compositebow' & levelDeff1 == 'level_1') {
+                DknightItemBonusMa1 = [1.05, 1.10]
+            } else if (itemDeff1 == 'battle.compositebow' & levelDeff1 == 'level_2') {
+                DknightItemBonusMa1 = [1.10, 1.20]
+            } else if (itemDeff1 == 'battle.compositebow' & levelDeff1 == 'level_3') {
+                DknightItemBonusMa1 = [1.20, 1.30]
+            } else {
+                DknightItemBonusMa1 = [1, 1]
+            }
+            console.log(DknightItemBonusMa1)
+            DItemBonusSpear1()
+        }
+
+        function DItemBonusSpear1() {
+            if (itemDeff1 == 'battle.halberd' & levelDeff1 == 'level_1') {
+                DknightItemBonusSpear1 = [1.10, 1.05]
+            } else if (itemDeff1 == 'battle.halberd' & levelDeff1 == 'level_2') {
+                DknightItemBonusSpear1 = [1.20, 1.10]
+            } else if (itemDeff1 == 'battle.halberd' & levelDeff1 == 'level_3') {
+                DknightItemBonusSpear1 = [1.30, 1.20]
+            } else {
+                DknightItemBonusSpear1 = [1, 1]
+            }
+            console.log(DknightItemBonusSpear1)
+            DItemBonusSword1()
+        }
+
+        function DItemBonusSword1() {
+            if (itemDeff1 == 'battle.longsword' & levelDeff1 == 'level_1') {
+                DknightItemBonusSword1 = [1.10, 1.05]
+            } else if (itemDeff1 == 'battle.longsword' & levelDeff1 == 'level_2') {
+                DknightItemBonusSword1 = [1.20, 1.10]
+            } else if (itemDeff1 == 'battle.longsword' & levelDeff1 == 'level_3') {
+                DknightItemBonusSword1 = [1.30, 1.20]
+            } else {
+                DknightItemBonusSword1 = [1, 1]
+            }
+            DItemBonusArcher1()
+        }
+
+        function DItemBonusArcher1() {
+            if (itemDeff1 == 'battle.longbow' & levelDeff1 == 'level_1') {
+                DknightItemBonusArcher1 = [1.10, 1.05]
+            } else if (itemDeff1 == 'battle.longbow' & levelDeff1 == 'level_2') {
+                DknightItemBonusArcher1 = [1.20, 1.10]
+            } else if (itemDeff1 == 'battle.longbow' & levelDeff1 == 'level_3') {
+                DknightItemBonusArcher1 = [1.30, 1.20]
+            } else {
+                DknightItemBonusArcher1 = [1, 1]
+            }
+            DItemBonusHc1()
+        }
+
+        function DItemBonusHc1() {
+            if (itemDeff1 == 'battle.banner' & levelDeff1 == 'level_1') {
+                DknightItemBonusHc1 = [1.10, 1.10]
+            } else if (itemDeff1 == 'battle.banner' & levelDeff1 == 'level_2') {
+                DknightItemBonusHc1 = [1.20, 1.20]
+            } else if (itemDeff1 == 'battle.banner' & levelDeff1 == 'level_3') {
+                DknightItemBonusHc1 = [1.30, 1.30]
+            } else {
+                DknightItemBonusHc1 = [1, 1]
+            }
+            DItemBonusRam1()
+        }
+
+        function DItemBonusRam1() {
+            if (itemDeff1 == 'battle.star' & levelDeff1 == 'level_1') {
+                DknightItemBonusRam1 = [1.05, 1.25]
+            } else if (itemDeff1 == 'battle.star' & levelDeff1 == 'level_2') {
+                DknightItemBonusRam1 = [1.10, 1.50]
+            } else if (itemDeff1 == 'battle.star' & levelDeff1 == 'level_3') {
+                DknightItemBonusRam1 = [1.20, 2.00]
+            } else {
+                DknightItemBonusRam1 = [1, 1]
+            }
+            DItemBonusCatapult1()
+        }
+
+        function DItemBonusCatapult1() {
+            if (itemDeff1 == 'battle.bonfire' & levelDeff1 == 'level_1') {
+                DknightItemBonusCatapult1 = [1.05, 1.25]
+            } else if (itemDeff1 == 'battle.bonfire' & levelDeff1 == 'level_2') {
+                DknightItemBonusCatapult1 = [1.10, 1.50]
+            } else if (itemDeff1 == 'battle.bonfire' & levelDeff1 == 'level_3') {
+                DknightItemBonusCatapult1 = [1.20, 2.00]
+            } else {
+                DknightItemBonusCatapult1 = [1, 1]
+            }
+            DItemBonusLc2()
+        }
+
+        function DItemBonusLc2() {
+            if (itemDeff2 == 'battle.lance' & levelDeff2 == 'level_1') {
+                DknightItemBonusLc2 = [1.05, 1.10]
+            } else if (itemDeff2 == 'battle.lance' & levelDeff2 == 'level_2') {
+                DknightItemBonusLc2 = [1.10, 1.20]
+            } else if (itemDeff2 == 'battle.lance' & levelDeff2 == 'level_3') {
+                DknightItemBonusLc2 = [1.20, 1.30]
+            } else {
+                DknightItemBonusLc2 = [1, 1]
+            }
+            DItemBonusAxe2()
+        }
+
+        function DItemBonusAxe2() {
+            if (itemDeff2 == 'battle.battleaxe' & levelDeff2 == 'level_1') {
+                DknightItemBonusAxe2 = [1.05, 1.10]
+            } else if (itemDeff2 == 'battle.battleaxe' & levelDeff2 == 'level_2') {
+                DknightItemBonusAxe2 = [1.10, 1.20]
+            } else if (itemDeff2 == 'battle.battleaxe' & levelDeff2 == 'level_3') {
+                DknightItemBonusAxe2 = [1.20, 1.30]
+            } else {
+                DknightItemBonusAxe2 = [1, 1]
+            }
+            DItemBonusMa2()
+        }
+
+        function DItemBonusMa2() {
+            if (itemDeff2 == 'battle.compositebow' & levelDeff2 == 'level_1') {
+                DknightItemBonusMa2 = [1.05, 1.10]
+            } else if (itemDeff2 == 'battle.compositebow' & levelDeff2 == 'level_2') {
+                DknightItemBonusMa2 = [1.10, 1.20]
+            } else if (itemDeff2 == 'battle.compositebow' & levelDeff2 == 'level_3') {
+                DknightItemBonusMa2 = [1.20, 1.30]
+            } else {
+                DknightItemBonusMa2 = [1, 1]
+            }
+            DItemBonusSpear2()
+        }
+
+        function DItemBonusSpear2() {
+            if (itemDeff2 == 'battle.halberd' & levelDeff2 == 'level_1') {
+                DknightItemBonusSpear2 = [1.10, 1.05]
+            } else if (itemDeff2 == 'battle.halberd' & levelDeff2 == 'level_2') {
+                DknightItemBonusSpear2 = [1.20, 1.10]
+            } else if (itemDeff2 == 'battle.halberd' & levelDeff2 == 'level_3') {
+                DknightItemBonusSpear2 = [1.30, 1.20]
+            } else {
+                DknightItemBonusSpear2 = [1, 1]
+            }
+            DItemBonusSword2()
+        }
+
+        function DItemBonusSword2() {
+            if (itemDeff2 == 'battle.longsword' & levelDeff2 == 'level_1') {
+                DknightItemBonusSword2 = [1.10, 1.05]
+            } else if (itemDeff2 == 'battle.longsword' & levelDeff2 == 'level_2') {
+                DknightItemBonusSword2 = [1.20, 1.10]
+            } else if (itemDeff2 == 'battle.longsword' & levelDeff2 == 'level_3') {
+                DknightItemBonusSword2 = [1.30, 1.20]
+            } else {
+                DknightItemBonusSword2 = [1, 1]
+            }
+            DItemBonusArcher2()
+        }
+
+        function DItemBonusArcher2() {
+            if (itemDeff2 == 'battle.longbow' & levelDeff2 == 'level_1') {
+                DknightItemBonusArcher2 = [1.10, 1.05]
+            } else if (itemDeff2 == 'battle.longbow' & levelDeff2 == 'level_2') {
+                DknightItemBonusArcher2 = [1.20, 1.10]
+            } else if (itemDeff2 == 'battle.longbow' & levelDeff2 == 'level_3') {
+                DknightItemBonusArcher2 = [1.30, 1.20]
+            } else {
+                DknightItemBonusArcher2 = [1, 1]
+            }
+            DItemBonusHc2()
+        }
+
+        function DItemBonusHc2() {
+            if (itemDeff2 == 'battle.banner' & levelDeff2 == 'level_1') {
+                DknightItemBonusHc2 = [1.10, 1.10]
+            } else if (itemDeff2 == 'battle.banner' & levelDeff2 == 'level_2') {
+                DknightItemBonusHc2 = [1.20, 1.20]
+            } else if (itemDeff2 == 'battle.banner' & levelDeff2 == 'level_3') {
+                DknightItemBonusHc2 = [1.30, 1.30]
+            } else {
+                DknightItemBonusHc2 = [1, 1]
+            }
+            DItemBonusRam2()
+        }
+
+        function DItemBonusRam2() {
+            if (itemDeff2 == 'battle.star' & levelDeff2 == 'level_1') {
+                DknightItemBonusRam2 = [1.05, 1.25]
+            } else if (itemDeff2 == 'battle.star' & levelDeff2 == 'level_2') {
+                DknightItemBonusRam2 = [1.10, 1.50]
+            } else if (itemDeff2 == 'battle.star' & levelDeff2 == 'level_3') {
+                DknightItemBonusRam2 = [1.20, 2.00]
+            } else {
+                DknightItemBonusRam2 = [1, 1]
+            }
+            DItemBonusCatapult2()
+        }
+
+        function DItemBonusCatapult2() {
+            if (itemDeff2 == 'battle.bonfire' & levelDeff2 == 'level_1') {
+                DknightItemBonusCatapult2 = [1.05, 1.25]
+            } else if (itemDeff2 == 'battle.bonfire' & levelDeff2 == 'level_2') {
+                DknightItemBonusCatapult2 = [1.10, 1.50]
+            } else if (itemDeff2 == 'battle.bonfire' & levelDeff2 == 'level_3') {
+                DknightItemBonusCatapult2 = [1.20, 2.00]
+            } else {
+                DknightItemBonusCatapult2 = [1, 1]
+            }
+            DItemBonusLc3()
+        }
+
+        function DItemBonusLc3() {
+            if (itemDeff3 == 'battle.lance' & levelDeff3 == 'level_1') {
+                DknightItemBonusLc3 = [1.05, 1.10]
+            } else if (itemDeff3 == 'battle.lance' & levelDeff3 == 'level_2') {
+                DknightItemBonusLc3 = [1.10, 1.20]
+            } else if (itemDeff3 == 'battle.lance' & levelDeff3 == 'level_3') {
+                DknightItemBonusLc3 = [1.20, 1.30]
+            } else {
+                DknightItemBonusLc3 = [1, 1]
+            }
+            DItemBonusAxe3()
+        }
+
+        function DItemBonusAxe3() {
+            if (itemDeff3 == 'battle.battleaxe' & levelDeff3 == 'level_1') {
+                DknightItemBonusAxe3 = [1.05, 1.10]
+            } else if (itemDeff3 == 'battle.battleaxe' & levelDeff3 == 'level_2') {
+                DknightItemBonusAxe3 = [1.10, 1.20]
+            } else if (itemDeff3 == 'battle.battleaxe' & levelDeff3 == 'level_3') {
+                DknightItemBonusAxe3 = [1.20, 1.30]
+            } else {
+                DknightItemBonusAxe3 = [1, 1]
+            }
+            DItemBonusMa3()
+        }
+
+        function DItemBonusMa3() {
+            if (itemDeff3 == 'battle.compositebow' & levelDeff3 == 'level_1') {
+                DknightItemBonusMa3 = [1.05, 1.10]
+            } else if (itemDeff3 == 'battle.compositebow' & levelDeff3 == 'level_2') {
+                DknightItemBonusMa3 = [1.10, 1.20]
+            } else if (itemDeff3 == 'battle.compositebow' & levelDeff3 == 'level_3') {
+                DknightItemBonusMa3 = [1.20, 1.30]
+            } else {
+                DknightItemBonusMa3 = [1, 1]
+            }
+            DItemBonusSpear3()
+        }
+
+        function DItemBonusSpear3() {
+            if (itemDeff3 == 'battle.halberd' & levelDeff3 == 'level_1') {
+                DknightItemBonusSpear3 = [1.10, 1.05]
+            } else if (itemDeff3 == 'battle.halberd' & levelDeff3 == 'level_2') {
+                DknightItemBonusSpear3 = [1.20, 1.10]
+            } else if (itemDeff3 == 'battle.halberd' & levelDeff3 == 'level_3') {
+                DknightItemBonusSpear3 = [1.30, 1.20]
+            } else {
+                DknightItemBonusSpear3 = [1, 1]
+            }
+            DItemBonusSword3()
+        }
+
+        function DItemBonusSword3() {
+            if (itemDeff3 == 'battle.longsword' & levelDeff3 == 'level_1') {
+                DknightItemBonusSword3 = [1.10, 1.05]
+            } else if (itemDeff3 == 'battle.longsword' & levelDeff3 == 'level_2') {
+                DknightItemBonusSword3 = [1.20, 1.10]
+            } else if (itemDeff3 == 'battle.longsword' & levelDeff3 == 'level_3') {
+                DknightItemBonusSword3 = [1.30, 1.20]
+            } else {
+                DknightItemBonusSword3 = [1, 1]
+            }
+            DItemBonusArcher3()
+        }
+
+        function DItemBonusArcher3() {
+            if (itemDeff3 == 'battle.longbow' & levelDeff3 == 'level_1') {
+                DknightItemBonusArcher3 = [1.10, 1.05]
+            } else if (itemDeff3 == 'battle.longbow' & levelDeff3 == 'level_2') {
+                DknightItemBonusArcher3 = [1.20, 1.10]
+            } else if (itemDeff3 == 'battle.longbow' & levelDeff3 == 'level_3') {
+                DknightItemBonusArcher3 = [1.30, 1.20]
+            } else {
+                DknightItemBonusArcher3 = [1, 1]
+            }
+            DItemBonusHc3()
+        }
+
+        function DItemBonusHc3() {
+            if (itemDeff3 == 'battle.banner' & levelDeff3 == 'level_1') {
+                DknightItemBonusHc3 = [1.10, 1.10]
+            } else if (itemDeff3 == 'battle.banner' & levelDeff3 == 'level_2') {
+                DknightItemBonusHc3 = [1.20, 1.20]
+            } else if (itemDeff3 == 'battle.banner' & levelDeff3 == 'level_3') {
+                DknightItemBonusHc3 = [1.30, 1.30]
+            } else {
+                DknightItemBonusHc3 = [1, 1]
+            }
+            DItemBonusRam3()
+        }
+
+        function DItemBonusRam3() {
+            if (itemDeff3 == 'battle.star' & levelDeff3 == 'level_1') {
+                DknightItemBonusRam3 = [1.05, 1.25]
+            } else if (itemDeff3 == 'battle.star' & levelDeff3 == 'level_2') {
+                DknightItemBonusRam3 = [1.10, 1.50]
+            } else if (itemDeff3 == 'battle.star' & levelDeff3 == 'level_3') {
+                DknightItemBonusRam3 = [1.20, 2.00]
+            } else {
+                DknightItemBonusRam3 = [1, 1]
+            }
+            DItemBonusCatapult3()
+        }
+
+        function DItemBonusCatapult3() {
+            if (itemDeff3 == 'battle.bonfire' & levelDeff3 == 'level_1') {
+                DknightItemBonusCatapult3 = [1.05, 1.25]
+            } else if (itemDeff3 == 'battle.bonfire' & levelDeff3 == 'level_2') {
+                DknightItemBonusCatapult3 = [1.10, 1.50]
+            } else if (itemDeff3 == 'battle.bonfire' & levelDeff3 == 'level_3') {
+                DknightItemBonusCatapult3 = [1.20, 2.00]
+            } else {
+                DknightItemBonusCatapult3 = [1, 1]
+            }
+            DItemBonusLc()
+        }
+
+        function DItemBonusLc() {
+            if (DknightItemBonusLc1[0] >= DknightItemBonusLc2[0] && DknightItemBonusLc1[0] >= DknightItemBonusLc3[0]) {
+                DknightItemBonusLc = DknightItemBonusLc1
+            } else if (DknightItemBonusLc2[0] >= DknightItemBonusLc1[0] && DknightItemBonusLc2[0] >= DknightItemBonusLc3[0]) {
+                DknightItemBonusLc = DknightItemBonusLc2
+            } else if (DknightItemBonusLc3[0] >= DknightItemBonusLc1[0] && DknightItemBonusLc3[0] >= DknightItemBonusLc2[0]) {
+                DknightItemBonusLc = DknightItemBonusLc3
+            } else {
+                DknightItemBonusLc = [1, 1]
+            }
+            DItemBonusAxe()
+        }
+
+        function DItemBonusAxe() {
+            if (DknightItemBonusAxe1[0] >= DknightItemBonusAxe2[0] && DknightItemBonusAxe1[0] >= DknightItemBonusAxe3[0]) {
+                DknightItemBonusAxe = DknightItemBonusAxe1
+            } else if (DknightItemBonusAxe2[0] >= DknightItemBonusAxe1[0] && DknightItemBonusAxe2[0] >= DknightItemBonusAxe3[0]) {
+                DknightItemBonusAxe = DknightItemBonusAxe2
+            } else if (DknightItemBonusAxe3[0] >= DknightItemBonusAxe1[0] && DknightItemBonusAxe3[0] >= DknightItemBonusAxe2[0]) {
+                DknightItemBonusAxe = DknightItemBonusAxe3
+            } else {
+                DknightItemBonusAxe = [1, 1]
+            }
+            DItemBonusMa()
+        }
+
+        function DItemBonusMa() {
+            if (DknightItemBonusMa1[0] >= DknightItemBonusMa2[0] && DknightItemBonusMa1[0] >= DknightItemBonusMa3[0]) {
+                DknightItemBonusMa = DknightItemBonusMa1
+            } else if (DknightItemBonusMa2[0] >= DknightItemBonusMa1[0] && DknightItemBonusMa2[0] >= DknightItemBonusMa3[0]) {
+                DknightItemBonusMa = DknightItemBonusMa2
+            } else if (DknightItemBonusMa3[0] >= DknightItemBonusMa1[0] && DknightItemBonusMa3[0] >= DknightItemBonusMa2[0]) {
+                DknightItemBonusMa = DknightItemBonusMa3
+            } else {
+                DknightItemBonusMa = [1, 1]
+            }
+            DItemBonusHc()
+        }
+
+        function DItemBonusHc() {
+            if (DknightItemBonusHc1[0] >= DknightItemBonusHc2[0] && DknightItemBonusHc1[0] >= DknightItemBonusHc3[0]) {
+                DknightItemBonusHc = DknightItemBonusHc1
+            } else if (DknightItemBonusHc2[0] >= DknightItemBonusHc1[0] && DknightItemBonusHc2[0] >= DknightItemBonusHc3[0]) {
+                DknightItemBonusHc = DknightItemBonusHc2
+            } else if (DknightItemBonusHc3[0] >= DknightItemBonusHc1[0] && DknightItemBonusHc3[0] >= DknightItemBonusHc2[0]) {
+                DknightItemBonusHc = DknightItemBonusHc3
+            } else {
+                DknightItemBonusHc = [1, 1]
+            }
+            DItemBonusRam()
+        }
+
+        function DItemBonusRam() {
+            if (DknightItemBonusRam1[0] >= DknightItemBonusRam2[0] && DknightItemBonusRam1[0] >= DknightItemBonusRam3[0]) {
+                DknightItemBonusRam = DknightItemBonusRam1
+            } else if (DknightItemBonusRam2[0] >= DknightItemBonusRam1[0] && DknightItemBonusRam2[0] >= DknightItemBonusRam3[0]) {
+                DknightItemBonusRam = DknightItemBonusRam2
+            } else if (DknightItemBonusRam3[0] >= DknightItemBonusRam1[0] && DknightItemBonusRam3[0] >= DknightItemBonusRam2[0]) {
+                DknightItemBonusRam = DknightItemBonusRam3
+            } else {
+                DknightItemBonusRam = [1, 1]
+            }
+            DItemBonusCatapult()
+        }
+
+        function DItemBonusCatapult() {
+            if (DknightItemBonusCatapult1[0] >= DknightItemBonusCatapult2[0] && DknightItemBonusCatapult1[0] >= DknightItemBonusCatapult3[0]) {
+                DknightItemBonusCatapult = DknightItemBonusCatapult1
+            } else if (DknightItemBonusCatapult2[0] >= DknightItemBonusCatapult1[0] && DknightItemBonusCatapult2[0] >= DknightItemBonusCatapult3[0]) {
+                DknightItemBonusCatapult = DknightItemBonusCatapult2
+            } else if (DknightItemBonusCatapult3[0] >= DknightItemBonusCatapult1[0] && DknightItemBonusCatapult3[0] >= DknightItemBonusCatapult2[0]) {
+                DknightItemBonusCatapult = DknightItemBonusCatapult3
+            } else {
+                DknightItemBonusCatapult = [1, 1]
+            }
+            DItemBonusSpear()
+        }
+
+        function DItemBonusSpear() {
+            if (DknightItemBonusSpear1[0] >= DknightItemBonusSpear2[0] && DknightItemBonusSpear1[0] >= DknightItemBonusSpear3[0]) {
+                DknightItemBonusSpear = DknightItemBonusSpear1
+            } else if (DknightItemBonusSpear2[0] >= DknightItemBonusSpear1[0] && DknightItemBonusSpear2[0] >= DknightItemBonusSpear3[0]) {
+                DknightItemBonusSpear = DknightItemBonusSpear2
+            } else if (DknightItemBonusSpear3[0] >= DknightItemBonusSpear1[0] && DknightItemBonusSpear3[0] >= DknightItemBonusSpear2[0]) {
+                DknightItemBonusSpear = DknightItemBonusSpear3
+            } else {
+                DknightItemBonusSpear = [1, 1]
+            }
+            DItemBonusSword()
+        }
+
+        function DItemBonusSword() {
+            if (DknightItemBonusSword1[0] >= DknightItemBonusSword2[0] && DknightItemBonusSword1[0] >= DknightItemBonusSword3[0]) {
+                DknightItemBonusSword = DknightItemBonusSword1
+            } else if (DknightItemBonusSword2[0] >= DknightItemBonusSword1[0] && DknightItemBonusSword2[0] >= DknightItemBonusSword3[0]) {
+                DknightItemBonusSword = DknightItemBonusSword2
+            } else if (DknightItemBonusSword3[0] >= DknightItemBonusSword1[0] && DknightItemBonusSword3[0] >= DknightItemBonusSword2[0]) {
+                DknightItemBonusSword = DknightItemBonusSword3
+            } else {
+                DknightItemBonusSword = [1, 1]
+            }
+            DItemBonusArcher()
+        }
+
+        function DItemBonusArcher() {
+            if (DknightItemBonusArcher1[0] >= DknightItemBonusArcher2[0] && DknightItemBonusArcher1[0] >= DknightItemBonusArcher3[0]) {
+                DknightItemBonusArcher = DknightItemBonusArcher1
+            } else if (DknightItemBonusArcher2[0] >= DknightItemBonusArcher1[0] && DknightItemBonusArcher2[0] >= DknightItemBonusArcher3[0]) {
+                DknightItemBonusArcher = DknightItemBonusArcher2
+            } else if (DknightItemBonusArcher3[0] >= DknightItemBonusArcher1[0] && DknightItemBonusArcher3[0] >= DknightItemBonusArcher2[0]) {
+                DknightItemBonusArcher = DknightItemBonusArcher3
+            } else {
+                DknightItemBonusArcher = [1, 1]
+            }
+            ItemBonusLc()
+        }
+
+        function ItemBonusLc() {
+            if (itemOff == 'battle.lance' & levelOff == 'level_1') {
+                knightItemBonusLc = [1.05, 1.10]
+            } else if (itemOff == 'battle.lance' & levelOff == 'level_2') {
+                knightItemBonusLc = [1.10, 1.20]
+            } else if (itemOff == 'battle.lance' & levelOff == 'level_3') {
+                knightItemBonusLc = [1.20, 1.30]
+            } else {
+                knightItemBonusLc = [1, 1]
+            }
+            ItemBonusAxe()
+        }
+
+        function ItemBonusAxe() {
+            if (itemOff == 'battle.battleaxe' & levelOff == 'level_1') {
+                knightItemBonusAxe = [1.05, 1.10]
+            } else if (itemOff == 'battle.battleaxe' & levelOff == 'level_2') {
+                knightItemBonusAxe = [1.10, 1.20]
+            } else if (itemOff == 'battle.battleaxe' & levelOff == 'level_3') {
+                knightItemBonusAxe = [1.20, 1.30]
+            } else {
+                knightItemBonusAxe = [1, 1]
+            }
+            ItemBonusMa()
+        }
+
+        function ItemBonusMa() {
+            if (itemOff == 'battle.compositebow' & levelOff == 'level_1') {
+                knightItemBonusMa = [1.05, 1.10]
+            } else if (itemOff == 'battle.compositebow' & levelOff == 'level_2') {
+                knightItemBonusMa = [1.10, 1.20]
+            } else if (itemOff == 'battle.compositebow' & levelOff == 'level_3') {
+                knightItemBonusMa = [1.20, 1.30]
+            } else {
+                knightItemBonusMa = [1, 1]
+            }
+            ItemBonusSpear()
+        }
+
+        function ItemBonusSpear() {
+            if (itemOff == 'battle.halberd' & levelOff == 'level_1') {
+                knightItemBonusSpear = [1.10, 1.05]
+            } else if (itemOff == 'battle.halberd' & levelOff == 'level_2') {
+                knightItemBonusSpear = [1.20, 1.10]
+            } else if (itemOff == 'battle.halberd' & levelOff == 'level_3') {
+                knightItemBonusSpear = [1.30, 1.20]
+            } else {
+                knightItemBonusSpear = [1, 1]
+            }
+            ItemBonusSword()
+        }
+
+        function ItemBonusSword() {
+            if (itemOff == 'battle.longsword' & levelOff == 'level_1') {
+                knightItemBonusSword = [1.10, 1.05]
+            } else if (itemOff == 'battle.longsword' & levelOff == 'level_2') {
+                knightItemBonusSword = [1.20, 1.10]
+            } else if (itemOff == 'battle.longsword' & levelOff == 'level_3') {
+                knightItemBonusSword = [1.30, 1.20]
+            } else {
+                knightItemBonusSword = [1, 1]
+            }
+            ItemBonusArcher()
+        }
+
+        function ItemBonusArcher() {
+            if (itemOff == 'battle.longbow' & levelOff == 'level_1') {
+                knightItemBonusArcher = [1.10, 1.05]
+            } else if (itemOff == 'battle.longbow' & levelOff == 'level_2') {
+                knightItemBonusArcher = [1.20, 1.10]
+            } else if (itemOff == 'battle.longbow' & levelOff == 'level_3') {
+                knightItemBonusArcher = [1.30, 1.20]
+            } else {
+                knightItemBonusArcher = [1, 1]
+            }
+            ItemBonusHc()
+        }
+
+        function ItemBonusHc() {
+            if (itemOff == 'battle.banner' & levelOff == 'level_1') {
+                knightItemBonusHc = [1.10, 1.10]
+            } else if (itemOff == 'battle.banner' & levelOff == 'level_2') {
+                knightItemBonusHc = [1.20, 1.20]
+            } else if (itemOff == 'battle.banner' & levelOff == 'level_3') {
+                knightItemBonusHc = [1.30, 1.30]
+            } else {
+                knightItemBonusHc = [1, 1]
+            }
+            ItemBonusRam()
+        }
+
+        function ItemBonusRam() {
+            if (itemOff == 'battle.star' & levelOff == 'level_1') {
+                knightItemBonusRam = [1.05, 1.25]
+            } else if (itemOff == 'battle.star' & levelOff == 'level_2') {
+                knightItemBonusRam = [1.10, 1.50]
+            } else if (itemOff == 'battle.star' & levelOff == 'level_3') {
+                knightItemBonusRam = [1.20, 2.00]
+            } else {
+                knightItemBonusRam = [1, 1]
+            }
+            ItemBonusCatapult()
+        }
+
+        function ItemBonusCatapult() {
+            if (itemOff == 'battle.bonfire' & levelOff == 'level_1') {
+                knightItemBonusCatapult = [1.05, 1.25]
+            } else if (itemOff == 'battle.bonfire' & levelOff == 'level_2') {
+                knightItemBonusCatapult = [1.10, 1.50]
+            } else if (itemOff == 'battle.bonfire' & levelOff == 'level_3') {
+                knightItemBonusCatapult = [1.20, 2.00]
+            } else {
+                knightItemBonusCatapult = [1, 1]
+            }
+            provisions()
+        }
+
+        function provisions() {
+            attackerprovision = spearA * food[0] + swordA * food[1] + axeA * food[2] + archerA * food[3] + lcA * food[4] + maA * food[5] + hcA * food[6] + ramA * food[7] + catapultA * food[8] + knightA * food[9] + snobA * food[10] + trebuchetA * food[11] + berserkerA * food[12]
+            defenderprovision = spearD * food[0] + swordD * food[1] + axeD * food[2] + archerD * food[3] + lcD * food[4] + maD * food[5] + hcD * food[6] + ramD * food[7] + catapultD * food[8] + knightD * food[9] + snobD * food[10] + trebuchetD * food[11] + berserkerD * food[12]
+            console.log('Prowiant:' + attackerprovision, defenderprovision)
+            doubleStrength()
+        }
+
+        function doubleStrength() {
+            if (attackerprovision * 2 <= defenderprovision) {
+                doubleStrengthBonus = 2
+            } else {
+                doubleStrengthBonus = 1
+            }
+            offprovisionCalc()
+        }
+
+        function offprovisionCalc() {
+            ramPreroundProvision = ramA * 5
+            offprovision = attackerprovision - ramPreroundProvision
+            preBaseDefenseModifierCalc()
+        }
+
+        function preBaseDefenseModifierCalc() {
+            if (wall == 0) {
+                preBaseDefenseModifier = 0
+            } else {
+                preBaseDefenseModifier = Math.round(Math.pow(1.2515, (wall - 1)) * 20)
+            }
+            deffprovisionCalc()
+        }
+
+        function deffprovisionCalc() {
+            modifiedDefenderProvision = preBaseDefenseModifier + snobD * 100
+            deffprovision = defenderprovision + modifiedDefenderProvision
+            provisionmodifierCalc()
+        }
+
+        function provisionmodifierCalc() {
+            if (offprovision == 0 || deffprovision == 0) {
+                provisionmodifier = 0
+            } else {
+                if ((offprovision / deffprovision) > 1) {
+                    provisionmodifier = 1
+                } else {
+                    provisionmodifier = offprovision / deffprovision
+                }
+            }
+            console.log(provisionmodifier)
+            baseThings()
+        }
+
+        function baseThings() {
+            moral = morale / 100
+            lucky = luck / 100
+            overalModifierOffCalc()
+        }
+
+        function overalModifierOffCalc() {
+            overalModifierOff = Math.round((((attFaithBonus / 100) * moral * (1 + lucky)) + (skillAttack / 100) + leaderBonus) * 1000) / 1000
+            trebuchetModifierCalc()
+        }
+
+        function trebuchetModifierCalc() {
+            sumSiege = ramA + catapultA
+            catapultPercent = catapultA / sumSiege
+            ramPercent = ramA / sumSiege
+            trebuchetCModifier = Math.round(trebuchetD * catapultPercent)
+            trebuchetModifier = Math.round(trebuchetD * ramPercent)
+            ramAfterTrebuchetCalc()
+        }
+
+        function ramAfterTrebuchetCalc() {
+            if (ramA == 0) {
+                ramAfterTrebuchet = 0
+            } else {
+                if (ramA < trebuchetModifier) {
+                    ramAfterTrebuchet = ramA
+                } else {
+                    ramAfterTrebuchet = trebuchetModifier
+                }
+            }
+            ramsPreRoundCalc()
+        }
+
+        function ramsPreRoundCalc() {
+            ramsPreRound = ramA - ramAfterTrebuchet
+            itemramsoffeffectCalc()
+        }
+
+        function itemramsoffeffectCalc() {
+            if (itemOff == 'battle.star') {
+                if (levelOff == 'level_1') {
+                    itemramsoffeffect = [1.05, 1.25]
+                } else if (levelOff == 'level_2') {
+                    itemramsoffeffect = [1.10, 1.50]
+                } else if (levelOff == 'level_3') {
+                    itemramsoffeffect = [1.20, 2.00]
+                } else {
+                    itemramsoffeffect = [1, 1]
+                }
+            } else {
+                itemramsoffeffect = [1, 1]
+            }
+            rampowerCalc()
+        }
+
+        function rampowerCalc() {
+            rampower = ramsPreRound * provisionmodifier * overalModifierOff * itemramsoffeffect[1]
+            hitpointslevelwallsCalc()
+        }
+
+        function hitpointslevelwallsCalc() {
+            if (wall == 20) {
+                hitpointslevelwalls = 18
+            } else if (wall == 19) {
+                hitpointslevelwalls = 17
+            } else if (wall == 18) {
+                hitpointslevelwalls = 15
+            } else if (wall == 17) {
+                hitpointslevelwalls = 14
+            } else if (wall == 16) {
+                hitpointslevelwalls = 13
+            } else if (wall == 15) {
+                hitpointslevelwalls = 11
+            } else if (wall == 14) {
+                hitpointslevelwalls = 10
+            } else if (wall == 13 || wall == 12) {
+                hitpointslevelwalls = 9
+            } else if (wall == 11) {
+                hitpointslevelwalls = 8
+            } else if (wall == 10) {
+                hitpointslevelwalls = 7
+            } else if (wall == 9 || wall == 8) {
+                hitpointslevelwalls = 6
+            } else if (wall == 7 || wall == 6) {
+                hitpointslevelwalls = 5
+            } else if (wall == 5 || wall == 4 || wall == 3) {
+                hitpointslevelwalls = 4
+            } else if (wall == 2 || wall == 1) {
+                hitpointslevelwalls = 3
+            } else {
+                hitpointslevelwalls = 0
+            }
+            wallpowerCalc()
+        }
+
+        function wallpowerCalc() {
+            if (wall == 0) {
+                wallpower = 0
+            } else {
+                wallpower = hitpointslevelwalls * 2
+            }
+            walladamagepreroundCalc()
+        }
+
+        function walladamagepreroundCalc() {
+            if (wall == 0) {
+                walladamagepreround = 0
+            } else {
+                walladamagepreround = (rampower / wallpower)
+            }
+            wallpreroundCalc()
+        }
+
+        function wallpreroundCalc() {
+            if (wall <= skillWalls) {
+                wallpreround = wall
+            } else if ((wall - skillWalls) < walladamagepreround) {
+                if (wall < skillWalls) {
+                    wallpreround = wall
+                } else {
+                    wallpreround = skillWalls
+                }
+            } else {
+                wallpreround = wall - walladamagepreround
+            }
+            battleBonuses()
+        }
+
+        function battleBonuses() {
+            battleBonusOff = Math.round(wallpreround)
+            battleBonusDef = Math.round((battleBonusOff * 0.05) * 1000) / 1000
+            overalModifierDefCalc()
+        }
+
+        function overalModifierDefCalc() {
+            overalModifierDef = Math.round((((defFaithBonus / 100) * (1 + battleBonusDef)) * nightBonus) * 1000) / 1000
+            catapultAfterTrebuchetCalc()
+        }
+
+        function catapultAfterTrebuchetCalc() {
+            if (catapultA == 0) {
+                catapultAfterTrebuchet = 0
+            } else {
+                if (catapultA < trebuchetCModifier) {
+                    catapultAfterTrebuchet = catapultA
+                } else {
+                    catapultAfterTrebuchet = trebuchetCModifier
+                }
+            }
+            catapultPreRoundCalc()
+        }
+
+        function catapultPreRoundCalc() {
+            catapultPreRound = catapultA - catapultAfterTrebuchet
+            baseDefenseModifierCalc()
+        }
+
+        function baseDefenseModifierCalc() {
+            wallAfterPreround = Math.round(wallpreround)
+            if (wallAfterPreround == 0) {
+                baseDefenseModifier = 0
+            } else {
+                baseDefenseModifier = Math.round(Math.pow(1.2515, (wallAfterPreround - 1)) * 20)
+            }
+            largestGroupCalc()
+        }
+
+        function largestGroupCalc() {
+            if ((spearA + swordA + axeA + berserkerA > lcA + hcA) && (spearA + swordA + axeA + berserkerA > archerA + maA)) {
+                largestGroup = 'inf'
+            } else if ((lcA + hcA > spearA + swordA + axeA + berserkerA) && (lcA + hcA > archerA + maA)) {
+                largestGroup = 'cav'
+            } else {
+                largestGroup = 'arc'
+            }
+            totalProvisionsRound1()
+        }
+
+        function totalProvisionsRound1() {
+            provisionAttackerRound1Total = spearA * food[0] + swordA * food[1] + axeA * food[2] + archerA * food[3] + lcA * food[4] + maA * food[5] + hcA * food[6] + ramsPreRound * food[7] + catapultPreRound * food[8] + knightA * food[9] + snobA * food[10] + trebuchetA * food[11] + berserkerA * food[12]
+            provisionDefenderRound1Total = spearD * food[0] + swordD * food[1] + axeD * food[2] + archerD * food[3] + lcD * food[4] + maD * food[5] + hcD * food[6] + ramD * food[7] + catapultD * food[8] + knightD * food[9] + snobD * food[10] + trebuchetD * food[11] + berserkerD * food[12]
+            console.log(provisionAttackerRound1Total, provisionDefenderRound1Total)
+            siegeProvisionRound1Calc()
+        }
+
+        function siegeProvisionRound1Calc() {
+            siegeProvisionRound1 = ramsPreRound * food[7] + catapultPreRound * food[8] + trebuchetA * food[11] + knightA * food[9] + snobA * food[10]
+            provisionAttackerAllRound1()
+        }
+
+        function provisionAttackerAllRound1() {
+            if (largestGroup == 'cav') {
+                provisionAttackerCavRound1 = lcA * food[4] + hcA * food[6] + siegeProvisionRound1
+                provisionAttackerInfRound1 = spearA * food[0] + swordA * food[1] + axeA * food[2] + berserkerA * food[12]
+                provisionAttackerArcRound1 = archerA * food[3] + maA * food[5]
+            } else if (largestGroup == 'inf') {
+                provisionAttackerInfRound1 = spearA * food[0] + swordA * food[1] + axeA * food[2] + berserkerA * food[12] + siegeProvisionRound1
+                provisionAttackerCavRound1 = lcA * food[4] + hcA * food[6]
+                provisionAttackerArcRound1 = archerA * food[3] + maA * food[5]
+            } else if (largestGroup == 'arc') {
+                provisionAttackerInfRound1 = spearA * food[0] + swordA * food[1] + axeA * food[2] + berserkerA * food[12]
+                provisionAttackerCavRound1 = lcA * food[4] + hcA * food[6]
+                provisionAttackerArcRound1 = archerA * food[3] + maA * food[5] + siegeProvisionRound1
+            } else {
+                provisionAttackerInfRound1 = spearA * food[0] + swordA * food[1] + axeA * food[2] + berserkerA * food[12]
+                provisionAttackerCavRound1 = lcA * food[4] + hcA * food[6]
+                provisionAttackerArcRound1 = archerA * food[3] + maA * food[5]
+            }
+            lossesPercentRound1InfCalc()
+        }
+
+        function lossesPercentRound1InfCalc() {
+            if (provisionAttackerInfRound1 == 0) {
+                lossesPercentRound1Inf = 0
+            } else {
+                lossesPercentRound1Inf = Math.round((provisionAttackerInfRound1 / provisionAttackerRound1Total) * 10000) / 10000
+            }
+            lossesPercentRound1CavCalc()
+        }
+
+        function lossesPercentRound1CavCalc() {
+            if (provisionAttackerCavRound1 == 0) {
+                lossesPercentRound1Cav = 0
+            } else {
+                lossesPercentRound1Cav = Math.round((provisionAttackerCavRound1 / provisionAttackerRound1Total) * 10000) / 10000
+            }
+            lossesPercentRound1ArcCalc()
+        }
+
+        function lossesPercentRound1ArcCalc() {
+            if (provisionAttackerArcRound1 == 0) {
+                lossesPercentRound1Arc = 0
+            } else {
+                lossesPercentRound1Arc = Math.round((provisionAttackerArcRound1 / provisionAttackerRound1Total) * 10000) / 10000
+            }
+            console.log(lossesPercentRound1Arc)
+            survivorsRound1Modified()
+        }
+
+        function survivorsRound1Modified() {
+            spearD_survivorsRound1ModifiedInf = Math.round(spearD * lossesPercentRound1Inf)
+            spearD_survivorsRound1ModifiedCav = Math.round(spearD * lossesPercentRound1Cav)
+            spearD_survivorsRound1ModifiedArc = spearD - spearD_survivorsRound1ModifiedCav - spearD_survivorsRound1ModifiedInf
+            swordD_survivorsRound1ModifiedInf = Math.round(swordD * lossesPercentRound1Inf)
+            swordD_survivorsRound1ModifiedCav = Math.round(swordD * lossesPercentRound1Cav)
+            swordD_survivorsRound1ModifiedArc = swordD - swordD_survivorsRound1ModifiedCav - swordD_survivorsRound1ModifiedInf
+            axeD_survivorsRound1ModifiedInf = Math.round(axeD * lossesPercentRound1Inf)
+            axeD_survivorsRound1ModifiedCav = Math.round(axeD * lossesPercentRound1Cav)
+            axeD_survivorsRound1ModifiedArc = axeD - axeD_survivorsRound1ModifiedCav - axeD_survivorsRound1ModifiedInf
+            archerD_survivorsRound1ModifiedInf = Math.round(archerD * lossesPercentRound1Inf)
+            archerD_survivorsRound1ModifiedCav = Math.round(archerD * lossesPercentRound1Cav)
+            archerD_survivorsRound1ModifiedArc = archerD - archerD_survivorsRound1ModifiedCav - archerD_survivorsRound1ModifiedInf
+            lcD_survivorsRound1ModifiedInf = Math.round(lcD * lossesPercentRound1Inf)
+            lcD_survivorsRound1ModifiedCav = Math.round(lcD * lossesPercentRound1Cav)
+            lcD_survivorsRound1ModifiedArc = lcD - lcD_survivorsRound1ModifiedCav - lcD_survivorsRound1ModifiedInf
+            maD_survivorsRound1ModifiedInf = Math.round(maD * lossesPercentRound1Inf)
+            maD_survivorsRound1ModifiedCav = Math.round(maD * lossesPercentRound1Cav)
+            maD_survivorsRound1ModifiedArc = maD - maD_survivorsRound1ModifiedCav - maD_survivorsRound1ModifiedInf
+            hcD_survivorsRound1ModifiedInf = Math.round(hcD * lossesPercentRound1Inf)
+            hcD_survivorsRound1ModifiedCav = Math.round(hcD * lossesPercentRound1Cav)
+            hcD_survivorsRound1ModifiedArc = hcD - hcD_survivorsRound1ModifiedCav - hcD_survivorsRound1ModifiedInf
+            ramD_survivorsRound1ModifiedInf = Math.round(ramD * lossesPercentRound1Inf)
+            ramD_survivorsRound1ModifiedCav = Math.round(ramD * lossesPercentRound1Cav)
+            ramD_survivorsRound1ModifiedArc = ramD - ramD_survivorsRound1ModifiedCav - ramD_survivorsRound1ModifiedInf
+            catapultD_survivorsRound1ModifiedInf = Math.round(catapultD * lossesPercentRound1Inf)
+            catapultD_survivorsRound1ModifiedCav = Math.round(catapultD * lossesPercentRound1Cav)
+            catapultD_survivorsRound1ModifiedArc = catapultD - catapultD_survivorsRound1ModifiedCav - catapultD_survivorsRound1ModifiedInf
+            snobD_survivorsRound1ModifiedInf = Math.round(snobD * lossesPercentRound1Inf)
+            snobD_survivorsRound1ModifiedCav = Math.round(snobD * lossesPercentRound1Cav)
+            snobD_survivorsRound1ModifiedArc = snobD - snobD_survivorsRound1ModifiedCav - snobD_survivorsRound1ModifiedInf
+            trebuchetD_survivorsRound1ModifiedInf = Math.round(trebuchetD * lossesPercentRound1Inf)
+            trebuchetD_survivorsRound1ModifiedCav = Math.round(trebuchetD * lossesPercentRound1Cav)
+            trebuchetD_survivorsRound1ModifiedArc = trebuchetD - trebuchetD_survivorsRound1ModifiedCav - trebuchetD_survivorsRound1ModifiedInf
+            berserkerD_survivorsRound1ModifiedInf = Math.round(berserkerD * lossesPercentRound1Inf)
+            berserkerD_survivorsRound1ModifiedCav = Math.round(berserkerD * lossesPercentRound1Cav)
+            berserkerD_survivorsRound1ModifiedArc = berserkerD - berserkerD_survivorsRound1ModifiedCav - berserkerD_survivorsRound1ModifiedInf
+            knightD_survivorsRound1ModifiedInf = Math.round(knightD * lossesPercentRound1Inf)
+            knightD_survivorsRound1ModifiedCav = Math.round(knightD * lossesPercentRound1Cav)
+            knightD_survivorsRound1ModifiedArc = knightD - knightD_survivorsRound1ModifiedCav - knightD_survivorsRound1ModifiedInf
+            provisionDefenderRound1()
+        }
+
+        function provisionDefenderRound1() {
+            provisionDefenderInfRound1 = spearD_survivorsRound1ModifiedInf * food[0] + swordD_survivorsRound1ModifiedInf * food[1] + axeD_survivorsRound1ModifiedInf * food[2] + berserkerD_survivorsRound1ModifiedInf * food[12] + snobD_survivorsRound1ModifiedInf * food[10] + lcD_survivorsRound1ModifiedInf * food[4] + hcD_survivorsRound1ModifiedInf * food[6] + archerD_survivorsRound1ModifiedInf * food[3] + maD_survivorsRound1ModifiedInf * food[5] + ramD_survivorsRound1ModifiedInf * food[7] + catapultD_survivorsRound1ModifiedInf * food[8] + trebuchetD_survivorsRound1ModifiedInf * food[11] + knightD_survivorsRound1ModifiedInf * food[9]
+            provisionDefenderCavRound1 = spearD_survivorsRound1ModifiedCav * food[0] + swordD_survivorsRound1ModifiedCav * food[1] + axeD_survivorsRound1ModifiedCav * food[2] + berserkerD_survivorsRound1ModifiedCav * food[12] + snobD_survivorsRound1ModifiedCav * food[10] + lcD_survivorsRound1ModifiedCav * food[4] + hcD_survivorsRound1ModifiedCav * food[6] + archerD_survivorsRound1ModifiedCav * food[3] + maD_survivorsRound1ModifiedCav * food[5] + ramD_survivorsRound1ModifiedCav * food[7] + catapultD_survivorsRound1ModifiedCav * food[8] + trebuchetD_survivorsRound1ModifiedCav * food[11] + knightD_survivorsRound1ModifiedCav * food[9]
+            provisionDefenderArcRound1 = spearD_survivorsRound1ModifiedArc * food[0] + swordD_survivorsRound1ModifiedArc * food[1] + axeD_survivorsRound1ModifiedArc * food[2] + berserkerD_survivorsRound1ModifiedArc * food[12] + snobD_survivorsRound1ModifiedArc * food[10] + lcD_survivorsRound1ModifiedArc * food[4] + hcD_survivorsRound1ModifiedArc * food[6] + archerD_survivorsRound1ModifiedArc * food[3] + maD_survivorsRound1ModifiedArc * food[5] + ramD_survivorsRound1ModifiedArc * food[7] + catapultD_survivorsRound1ModifiedArc * food[8] + trebuchetD_survivorsRound1ModifiedArc * food[11] + knightD_survivorsRound1ModifiedArc * food[9]
+            console.log(provisionDefenderArcRound1, provisionDefenderCavRound1, provisionDefenderInfRound1)
+            strengthBaseDefenderAllRound1()
+        }
+
+        function strengthBaseDefenderAllRound1() {
+            strengthBaseDefenderInfRound1 = spearD_survivorsRound1ModifiedInf * def_inf[0] * DknightItemBonusSpear[0] + swordD_survivorsRound1ModifiedInf * def_inf[1] * DknightItemBonusSword[0] + axeD_survivorsRound1ModifiedInf * def_inf[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound1ModifiedInf * def_inf[12] + snobD_survivorsRound1ModifiedInf * def_inf[10] + lcD_survivorsRound1ModifiedInf * def_inf[4] * DknightItemBonusLc[0] + hcD_survivorsRound1ModifiedInf * def_inf[6] * DknightItemBonusHc[0] + archerD_survivorsRound1ModifiedInf * def_inf[3] * DknightItemBonusArcher[0] + maD_survivorsRound1ModifiedInf * def_inf[5] * DknightItemBonusMa[0] + ramD_survivorsRound1ModifiedInf * def_inf[7] * DknightItemBonusRam[0] + catapultD_survivorsRound1ModifiedInf * def_inf[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound1ModifiedInf * def_inf[11] + knightD_survivorsRound1ModifiedInf * def_inf[9]
+            strengthBaseDefenderCavRound1 = spearD_survivorsRound1ModifiedCav * def_kav[0] * DknightItemBonusSpear[0] + swordD_survivorsRound1ModifiedCav * def_kav[1] * DknightItemBonusSword[0] + axeD_survivorsRound1ModifiedCav * def_kav[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound1ModifiedCav * def_kav[12] + snobD_survivorsRound1ModifiedCav * def_kav[10] + lcD_survivorsRound1ModifiedCav * def_kav[4] * DknightItemBonusLc[0] + hcD_survivorsRound1ModifiedCav * def_kav[6] * DknightItemBonusHc[0] + archerD_survivorsRound1ModifiedCav * def_kav[3] * DknightItemBonusArcher[0] + maD_survivorsRound1ModifiedCav * def_kav[5] * DknightItemBonusMa[0] + ramD_survivorsRound1ModifiedCav * def_kav[7] * DknightItemBonusRam[0] + catapultD_survivorsRound1ModifiedCav * def_kav[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound1ModifiedCav * def_kav[11] + knightD_survivorsRound1ModifiedCav * def_kav[9]
+            strengthBaseDefenderArcRound1 = spearD_survivorsRound1ModifiedArc * def_arc[0] * DknightItemBonusSpear[0] + swordD_survivorsRound1ModifiedArc * def_arc[1] * DknightItemBonusSword[0] + axeD_survivorsRound1ModifiedArc * def_arc[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound1ModifiedArc * def_arc[12] + snobD_survivorsRound1ModifiedArc * def_arc[10] + lcD_survivorsRound1ModifiedArc * def_arc[4] * DknightItemBonusLc[0] + hcD_survivorsRound1ModifiedArc * def_arc[6] * DknightItemBonusHc[0] + archerD_survivorsRound1ModifiedArc * def_arc[3] * DknightItemBonusArcher[0] + maD_survivorsRound1ModifiedArc * def_arc[5] * DknightItemBonusMa[0] + ramD_survivorsRound1ModifiedArc * def_arc[7] * DknightItemBonusRam[0] + catapultD_survivorsRound1ModifiedArc * def_arc[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound1ModifiedArc * def_arc[11] + knightD_survivorsRound1ModifiedArc * def_arc[9]
+            siegeStrengthRound1Calc()
+        }
+
+        function siegeStrengthRound1Calc() {
+            siegeStrengthRound1 = ramsPreRound * attack[7] * knightItemBonusRam[1] + catapultPreRound * attack[8] * knightItemBonusCatapult[1] + trebuchetA * attack[11] + knightA * attack[9] + snobA * attack[10]
+            strengthBaseAttackerAllRound1()
+        }
+
+        function strengthBaseAttackerAllRound1() {
+            if (largestGroup == 'cav') {
+                strengthBaseAttackerCavRound1 = lcA * attack[4] * knightItemBonusLc[1] + hcA * attack[6] * knightItemBonusHc[1] + siegeStrengthRound1
+                strengthBaseAttackerInfRound1 = spearA * attack[0] * knightItemBonusSpear[1] + swordA * attack[1] * knightItemBonusSword[1] + axeA * attack[2] * knightItemBonusAxe[1] + berserkerA * attack[12] * doubleStrengthBonus
+                strengthBaseAttackerArcRound1 = archerA * attack[3] * knightItemBonusArcher[1] + maA * attack[5] * knightItemBonusMa[1]
+            } else if (largestGroup == 'inf') {
+                strengthBaseAttackerInfRound1 = spearA * attack[0] * knightItemBonusSpear[1] + swordA * attack[1] * knightItemBonusSword[1] + axeA * attack[2] * knightItemBonusAxe[1] + berserkerA * attack[12] * doubleStrengthBonus + siegeStrengthRound1
+                strengthBaseAttackerCavRound1 = lcA * attack[4] * knightItemBonusLc[1] + hcA * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound1 = archerA * attack[3] * knightItemBonusArcher[1] + maA * attack[5] * knightItemBonusMa[1]
+            } else if (largestGroup == 'arc') {
+                strengthBaseAttackerInfRound1 = spearA * attack[0] * knightItemBonusSpear[1] + swordA * attack[1] * knightItemBonusSword[1] + axeA * attack[2] * knightItemBonusAxe[1] + berserkerA * attack[12] * doubleStrengthBonus
+                strengthBaseAttackerCavRound1 = lcA * attack[4] * knightItemBonusLc[1] + hcA * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound1 = archerA * attack[3] * knightItemBonusArcher[1] + maA * attack[5] * knightItemBonusMa[1] + siegeStrengthRound1
+            } else {
+                strengthBaseAttackerInfRound1 = spearA * attack[0] * knightItemBonusSpear[1] + swordA * attack[1] * knightItemBonusSword[1] + axeA * attack[2] * knightItemBonusAxe[1] + berserkerA * attack[12] * doubleStrengthBonus
+                strengthBaseAttackerCavRound1 = lcA * attack[4] * knightItemBonusLc[1] + hcA * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound1 = archerA * attack[3] * knightItemBonusArcher[1] + maA * attack[5] * knightItemBonusMa[1]
+            }
+            strengthRound1partly()
+        }
+
+        function strengthRound1partly() {
+            strengthAttackerInfRound1 = strengthBaseAttackerInfRound1 * overalModifierOff
+            strengthDefenderInfRound1 = strengthBaseDefenderInfRound1 * overalModifierDef + baseDefenseModifier
+            strengthAttackerCavRound1 = strengthBaseAttackerCavRound1 * overalModifierOff
+            strengthDefenderCavRound1 = strengthBaseDefenderCavRound1 * overalModifierDef + baseDefenseModifier
+            strengthAttackerArcRound1 = strengthBaseAttackerArcRound1 * overalModifierOff
+            strengthDefenderArcRound1 = strengthBaseDefenderArcRound1 * overalModifierDef + baseDefenseModifier
+            strengthRound1()
+        }
+
+        function strengthRound1() {
+            strengthAttackerRound1 = strengthAttackerInfRound1 + strengthAttackerCavRound1 + strengthAttackerArcRound1
+            strengthDefenderRound1 = strengthDefenderInfRound1 + strengthDefenderCavRound1 + strengthDefenderArcRound1
+            console.log(strengthAttackerRound1, strengthDefenderRound1)
+            killRateRound1defenderInfCalc()
+        }
+
+        function killRateRound1defenderInfCalc() {
+            if (strengthAttackerInfRound1 == 0 || strengthDefenderInfRound1 == 0) {
+                kilrateDefendInfantryBaseRound1 = 0
+            } else {
+                if (strengthDefenderInfRound1 <= strengthAttackerInfRound1) {
+                    kilrateDefendInfantryBaseRound1 = 1
+                } else {
+                    kilrateDefendInfantryBaseRound1 = Math.pow((strengthAttackerInfRound1 / strengthDefenderInfRound1), (1 / 2)) / (strengthDefenderInfRound1 / strengthAttackerInfRound1)
+                }
+            }
+            killRateRound1defenderCavCalc()
+        }
+
+        function killRateRound1defenderCavCalc() {
+            if (strengthAttackerCavRound1 == 0 || strengthDefenderCavRound1 == 0) {
+                kilrateDefendCavalryBaseRound1 = 0
+            } else {
+                if (strengthDefenderCavRound1 <= strengthAttackerCavRound1) {
+                    kilrateDefendCavalryBaseRound1 = 1
+                } else {
+                    kilrateDefendCavalryBaseRound1 = Math.pow((strengthAttackerCavRound1 / strengthDefenderCavRound1), (1 / 2)) / (strengthDefenderCavRound1 / strengthAttackerCavRound1)
+                }
+            }
+            killRateRound1defenderArcCalc()
+        }
+
+        function killRateRound1defenderArcCalc() {
+            if (strengthAttackerArcRound1 == 0 || strengthDefenderArcRound1 == 0) {
+                kilrateDefendArcherBaseRound1 = 0
+            } else {
+                if (strengthDefenderArcRound1 <= strengthAttackerArcRound1) {
+                    kilrateDefendArcherBaseRound1 = 1
+                } else {
+                    kilrateDefendArcherBaseRound1 = Math.pow((strengthAttackerArcRound1 / strengthDefenderArcRound1), (1 / 2)) / (strengthDefenderArcRound1 / strengthAttackerArcRound1)
+                }
+            }
+            killRateRound1attackerInfCalc()
+        }
+
+        function killRateRound1attackerInfCalc() {
+            if (strengthAttackerInfRound1 == 0 || strengthDefenderInfRound1 == 0) {
+                kilrateAttackInfantryBaseRound1 = 0
+            } else {
+                if (strengthAttackerInfRound1 <= strengthDefenderInfRound1) {
+                    kilrateAttackInfantryBaseRound1 = 1
+                } else {
+                    kilrateAttackInfantryBaseRound1 = Math.pow((strengthDefenderInfRound1 / strengthAttackerInfRound1), (1 / 2)) / (strengthAttackerInfRound1 / strengthDefenderInfRound1)
+                }
+            }
+            killRateRound1attackerCavCalc()
+        }
+
+        function killRateRound1attackerCavCalc() {
+            if (strengthAttackerCavRound1 == 0 || strengthDefenderCavRound1 == 0) {
+                kilrateAttackCavalryBaseRound1 = 0
+            } else {
+                if (strengthAttackerCavRound1 <= strengthDefenderCavRound1) {
+                    kilrateAttackCavalryBaseRound1 = 1
+                } else {
+                    kilrateAttackCavalryBaseRound1 = Math.pow((strengthDefenderCavRound1 / strengthAttackerCavRound1), (1 / 2)) / (strengthAttackerCavRound1 / strengthDefenderCavRound1)
+                }
+            }
+            killRateRound1attackerArcCalc()
+        }
+
+        function killRateRound1attackerArcCalc() {
+            if (strengthAttackerArcRound1 == 0 || strengthDefenderArcRound1 == 0) {
+                kilrateAttackArcherBaseRound1 = 0
+            } else {
+                if (strengthAttackerArcRound1 <= strengthDefenderArcRound1) {
+                    kilrateAttackArcherBaseRound1 = 1
+                } else {
+                    kilrateAttackArcherBaseRound1 = Math.pow((strengthDefenderArcRound1 / strengthAttackerArcRound1), (1 / 2)) / (strengthAttackerArcRound1 / strengthDefenderArcRound1)
+                }
+            }
+            killRateRound1()
+        }
+
+        function killRateRound1() {
+            killRateRound1attackerInf = Math.round(kilrateAttackInfantryBaseRound1 * 1000000) / 1000000
+            killRateRound1attackerCav = Math.round(kilrateAttackCavalryBaseRound1 * 1000000) / 1000000
+            killRateRound1attackerArc = Math.round(kilrateAttackArcherBaseRound1 * 1000000) / 1000000
+            killRateRound1defenderInf = Math.round(kilrateDefendInfantryBaseRound1 * 1000000) / 1000000
+            killRateRound1defenderCav = Math.round(kilrateDefendCavalryBaseRound1 * 1000000) / 1000000
+            killRateRound1defenderArc = Math.round(kilrateDefendArcherBaseRound1 * 1000000) / 1000000
+            lossesRound1()
+        }
+
+        function lossesRound1() {
+            spearD_lossesRound1 = Math.round(-spearD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-spearD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-spearD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            swordD_lossesRound1 = Math.round(-swordD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-swordD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-swordD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            axeD_lossesRound1 = Math.round(-axeD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-axeD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-axeD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            archerD_lossesRound1 = Math.round(-archerD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-archerD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-archerD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            lcD_lossesRound1 = Math.round(-lcD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-lcD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-lcD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            maD_lossesRound1 = Math.round(-maD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-maD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-maD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            hcD_lossesRound1 = Math.round(-hcD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-hcD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-hcD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            ramD_lossesRound1 = Math.round(-ramD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-ramD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-ramD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            catapultD_lossesRound1 = Math.round(-catapultD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-catapultD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-catapultD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            trebuchetD_lossesRound1 = Math.round(-trebuchetD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-trebuchetD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-trebuchetD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            berserkerD_lossesRound1 = Math.round(-berserkerD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-berserkerD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-berserkerD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            knightD_lossesRound1 = Math.round(-knightD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-knightD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-knightD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            snobD_lossesRound1 = Math.round(-snobD_survivorsRound1ModifiedInf * killRateRound1defenderInf + 0.000001) + Math.round(-snobD_survivorsRound1ModifiedCav * killRateRound1defenderCav + 0.000001) + Math.round(-snobD_survivorsRound1ModifiedArc * killRateRound1defenderArc + 0.000001)
+            spearA_lossesRound1 = Math.round(-spearA * killRateRound1attackerInf + 0.000001)
+            swordA_lossesRound1 = Math.round(-swordA * killRateRound1attackerInf + 0.000001)
+            axeA_lossesRound1 = Math.round(-axeA * killRateRound1attackerInf + 0.000001)
+            berserkerA_lossesRound1 = Math.round(-berserkerA * killRateRound1attackerInf + 0.000001)
+            archerA_lossesRound1 = Math.round(-archerA * killRateRound1attackerArc + 0.000001)
+            maA_lossesRound1 = Math.round(-maA * killRateRound1attackerArc + 0.000001)
+            lcA_lossesRound1 = Math.round(-lcA * killRateRound1attackerCav + 0.000001)
+            hcA_lossesRound1 = Math.round(-hcA * killRateRound1attackerCav + 0.000001)
+            if (largestGroup == 'cav') {
+                ramA_lossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerCav + 0.000001)
+                catapultA_lossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerCav + 0.000001)
+                trebuchetA_lossesRound1 = Math.round(-trebuchetA * killRateRound1attackerCav + 0.000001)
+                knightA_lossesRound1 = Math.round(-knightA * killRateRound1attackerCav + 0.000001)
+                snobA_lossesRound1 = Math.round(-snobA * killRateRound1attackerCav + 0.000001)
+            } else if (largestGroup == 'inf') {
+                ramA_lossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerInf + 0.000001)
+                catapultA_lossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerInf + 0.000001)
+                trebuchetA_lossesRound1 = Math.round(-trebuchetA * killRateRound1attackerInf + 0.000001)
+                knightA_lossesRound1 = Math.round(-knightA * killRateRound1attackerInf + 0.000001)
+                snobA_lossesRound1 = Math.round(-snobA * killRateRound1attackerInf + 0.000001)
+            } else if (largestGroup == 'arc') {
+                ramA_lossesRound1 = Math.round(-ramsPreRound * killRateRound1attackerArc + 0.000001)
+                catapultA_lossesRound1 = Math.round(-catapultPreRound * killRateRound1attackerArc + 0.000001)
+                trebuchetA_lossesRound1 = Math.round(-trebuchetA * killRateRound1attackerArc + 0.000001)
+                knightA_lossesRound1 = Math.round(-knightA * killRateRound1attackerArc + 0.000001)
+                snobA_lossesRound1 = Math.round(-snobA * killRateRound1attackerArc + 0.000001)
+            }
+            afterFirstStageSurvivors()
+        }
+
+        function afterFirstStageSurvivors() {
+            spearA_survivorsRound1 = spearA + spearA_lossesRound1
+            swordA_survivorsRound1 = swordA + swordA_lossesRound1
+            axeA_survivorsRound1 = axeA + axeA_lossesRound1
+            archerA_survivorsRound1 = archerA + archerA_lossesRound1
+            lcA_survivorsRound1 = lcA + lcA_lossesRound1
+            maA_survivorsRound1 = maA + maA_lossesRound1
+            hcA_survivorsRound1 = hcA + hcA_lossesRound1
+            ramA_survivorsRound1 = ramsPreRound + ramA_lossesRound1
+            catapultA_survivorsRound1 = catapultPreRound + catapultA_lossesRound1
+            trebuchetA_survivorsRound1 = trebuchetA + trebuchetA_lossesRound1
+            berserkerA_survivorsRound1 = berserkerA + berserkerA_lossesRound1
+            snobA_survivorsRound1 = snobA + snobA_lossesRound1
+            knightA_survivorsRound1 = knightA + knightA_lossesRound1
+            spearD_survivorsRound1 = spearD + spearD_lossesRound1
+            swordD_survivorsRound1 = swordD + swordD_lossesRound1
+            axeD_survivorsRound1 = axeD + axeD_lossesRound1
+            archerD_survivorsRound1 = archerD + archerD_lossesRound1
+            lcD_survivorsRound1 = lcD + lcD_lossesRound1
+            maD_survivorsRound1 = maD + maD_lossesRound1
+            hcD_survivorsRound1 = hcD + hcD_lossesRound1
+            ramD_survivorsRound1 = ramD + ramD_lossesRound1
+            catapultD_survivorsRound1 = catapultD + catapultD_lossesRound1
+            trebuchetD_survivorsRound1 = trebuchetD + trebuchetD_lossesRound1
+            berserkerD_survivorsRound1 = berserkerD + berserkerD_lossesRound1
+            snobD_survivorsRound1 = snobD + snobD_lossesRound1
+            knightD_survivorsRound1 = knightD + knightD_lossesRound1
+            lossesProvisionsRound1Total()
+        }
+
+        function lossesProvisionsRound1Total() {
+            lossesAttackerRound1Total = spearA_lossesRound1 * food[0] + swordA_lossesRound1 * food[1] + axeA_lossesRound1 * food[2] + archerA_lossesRound1 * food[3] + lcA_lossesRound1 * food[4] + maA_lossesRound1 * food[5] + hcA_lossesRound1 * food[6] + ramA_lossesRound1 * food[7] + catapultA_lossesRound1 * food[8] + knightA_lossesRound1 * food[9] + snobA_lossesRound1 * food[10] + trebuchetA_lossesRound1 * food[11] + berserkerA_lossesRound1 * food[12]
+            lossesDefenderRound1Total = spearD_lossesRound1 * food[0] + swordD_lossesRound1 * food[1] + axeD_lossesRound1 * food[2] + archerD_lossesRound1 * food[3] + lcD_lossesRound1 * food[4] + maD_lossesRound1 * food[5] + hcD_lossesRound1 * food[6] + ramD_lossesRound1 * food[7] + catapultD_lossesRound1 * food[8] + knightD_lossesRound1 * food[9] + snobD_lossesRound1 * food[10] + trebuchetD_lossesRound1 * food[11] + berserkerD_lossesRound1 * food[12]
+            console.log(lossesAttackerRound1Total,lossesDefenderRound1Total)
+            survivorsProvisionsRound1Total()
+        }
+
+        function survivorsProvisionsRound1Total() {
+            survivorsAttackerRound1Total = spearA_survivorsRound1 * food[0] + swordA_survivorsRound1 * food[1] + axeA_survivorsRound1 * food[2] + archerA_survivorsRound1 * food[3] + lcA_survivorsRound1 * food[4] + maA_survivorsRound1 * food[5] + hcA_survivorsRound1 * food[6] + ramA_survivorsRound1 * food[7] + catapultA_survivorsRound1 * food[8] + trebuchetA_survivorsRound1 * food[11] + berserkerA_survivorsRound1 * food[12] + snobA_survivorsRound1 * food[10] + knightA_survivorsRound1 * food[9]
+            survivorsDefenderRound1Total = spearD_survivorsRound1 * food[0] + swordD_survivorsRound1 * food[1] + axeD_survivorsRound1 * food[2] + archerD_survivorsRound1 * food[3] + lcD_survivorsRound1 * food[4] + maD_survivorsRound1 * food[5] + hcD_survivorsRound1 * food[6] + ramD_survivorsRound1 * food[7] + catapultD_survivorsRound1 * food[8] + trebuchetD_survivorsRound1 * food[11] + berserkerD_survivorsRound1 * food[12] + snobD_survivorsRound1 * food[10] + knightD_survivorsRound1 * food[9]
+            console.log(survivorsDefenderRound1Total, survivorsAttackerRound1Total)
+            armyLossesPercentEachRoundCalc()
+        }
+
+        function armyLossesPercentEachRoundCalc() {
+            if (strengthAttackerRound1 == 0 || strengthDefenderRound1 == 0) {
+                armyLossesPercentEachRound = 0
+            } else if (strengthDefenderRound1 <= strengthAttackerRound1) {
+                armyLossesPercentEachRound = 1
+            } else {
+                armyLossesPercentEachRound = Math.pow((strengthAttackerRound1 / strengthDefenderRound1), (1 / 2) / (strengthDefenderRound1 / strengthAttackerRound1))
+            }
+            console.log(armyLossesPercentEachRound)
+            totalProvisionsRound2()
+        }
+
+        function totalProvisionsRound2() {
+            provisionAttackerRound2Total = spearA_survivorsRound1 * food[0] + swordA_survivorsRound1 * food[1] + axeA_survivorsRound1 * food[2] + archerA_survivorsRound1 * food[3] + lcA_survivorsRound1 * food[4] + maA_survivorsRound1 * food[5] + hcA_survivorsRound1 * food[6] + ramA_survivorsRound1 * food[7] + catapultA_survivorsRound1 * food[8] + knightA_survivorsRound1 * food[9] + snobA_survivorsRound1 * food[10] + trebuchetA_survivorsRound1 * food[11] + berserkerA_survivorsRound1 * food[12]
+            provisionDefenderRound2Total = spearD_survivorsRound1 * food[0] + swordD_survivorsRound1 * food[1] + axeD_survivorsRound1 * food[2] + archerD_survivorsRound1 * food[3] + lcD_survivorsRound1 * food[4] + maD_survivorsRound1 * food[5] + hcD_survivorsRound1 * food[6] + ramD_survivorsRound1 * food[7] + catapultD_survivorsRound1 * food[8] + knightD_survivorsRound1 * food[9] + snobD_survivorsRound1 * food[10] + trebuchetD_survivorsRound1 * food[11] + berserkerD_survivorsRound1 * food[12]
+            console.log(provisionAttackerRound2Total, provisionDefenderRound2Total)
+            siegeProvisionRound2Calc()
+        }
+
+        function siegeProvisionRound2Calc() {
+            siegeProvisionRound2 = ramA_survivorsRound1 * food[7] + catapultA_survivorsRound1 * food[8] + trebuchetA_survivorsRound1 * food[11] + knightA_survivorsRound1 * food[9]
+            provisionAttackerAllRound2()
+        }
+
+        function provisionAttackerAllRound2() {
+            if (largestGroup == 'cav') {
+                provisionAttackerCavRound2 = lcA_survivorsRound1 * food[4] + hcA_survivorsRound1 * food[6] + siegeProvisionRound2
+                provisionAttackerInfRound2 = spearA_survivorsRound1 * food[0] + swordA_survivorsRound1 * food[1] + axeA_survivorsRound1 * food[2] + berserkerA_survivorsRound1 * food[12] + snobA_survivorsRound1 * food[10]
+                provisionAttackerArcRound2 = archerA_survivorsRound1 * food[3] + maA_survivorsRound1 * food[5]
+            } else if (largestGroup == 'inf') {
+                provisionAttackerInfRound2 = spearA_survivorsRound1 * food[0] + swordA_survivorsRound1 * food[1] + axeA_survivorsRound1 * food[2] + berserkerA_survivorsRound1 * food[12] + snobA_survivorsRound1 * food[10] + siegeProvisionRound2
+                provisionAttackerCavRound2 = lcA_survivorsRound1 * food[4] + hcA_survivorsRound1 * food[6]
+                provisionAttackerArcRound2 = archerA_survivorsRound1 * food[3] + maA_survivorsRound1 * food[5]
+            } else if (largestGroup == 'arc') {
+                provisionAttackerInfRound2 = spearA_survivorsRound1 * food[0] + swordA_survivorsRound1 * food[1] + axeA_survivorsRound1 * food[2] + berserkerA_survivorsRound1 * food[12] + snobA_survivorsRound1 * food[10]
+                provisionAttackerCavRound2 = lcA_survivorsRound1 * food[4] + hcA_survivorsRound1 * food[6]
+                provisionAttackerArcRound2 = archerA_survivorsRound1 * food[3] + maA_survivorsRound1 * food[5] + siegeProvisionRound2
+            } else {
+                provisionAttackerInfRound2 = spearA_survivorsRound1 * food[0] + swordA_survivorsRound1 * food[1] + axeA_survivorsRound1 * food[2] + berserkerA_survivorsRound1 * food[12] + snobA_survivorsRound1 * food[10]
+                provisionAttackerCavRound2 = lcA_survivorsRound1 * food[4] + hcA_survivorsRound1 * food[6]
+                provisionAttackerArcRound2 = archerA_survivorsRound1 * food[3] + maA_survivorsRound1 * food[5]
+            }
+            lossesPercentRound2InfCalc()
+        }
+
+        function lossesPercentRound2InfCalc() {
+            if (provisionAttackerInfRound2 == 0) {
+                lossesPercentRound2Inf = 0
+            } else {
+                lossesPercentRound2Inf = Math.round((provisionAttackerInfRound2 / provisionAttackerRound2Total) * 10000) / 10000
+            }
+            lossesPercentRound2CavCalc()
+        }
+
+        function lossesPercentRound2CavCalc() {
+            if (provisionAttackerCavRound2 == 0) {
+                lossesPercentRound2Cav = 0
+            } else {
+                lossesPercentRound2Cav = Math.round((provisionAttackerCavRound2 / provisionAttackerRound2Total) * 10000) / 10000
+            }
+            lossesPercentRound2ArcCalc()
+        }
+
+        function lossesPercentRound2ArcCalc() {
+            if (provisionAttackerArcRound2 == 0) {
+                lossesPercentRound2Arc = 0
+            } else {
+                lossesPercentRound2Arc = Math.round((provisionAttackerArcRound2 / provisionAttackerRound2Total) * 10000) / 10000
+            }
+            console.log(lossesPercentRound2Arc)
+            survivorsRound2Modified()
+        }
+
+        function survivorsRound2Modified() {
+            spearD_survivorsRound2ModifiedInf = Math.round(spearD_survivorsRound1 * lossesPercentRound2Inf)
+            spearD_survivorsRound2ModifiedCav = Math.round(spearD_survivorsRound1 * lossesPercentRound2Cav)
+            spearD_survivorsRound2ModifiedArc = spearD_survivorsRound1 - spearD_survivorsRound2ModifiedCav - spearD_survivorsRound2ModifiedInf
+            swordD_survivorsRound2ModifiedInf = Math.round(swordD_survivorsRound1 * lossesPercentRound2Inf)
+            swordD_survivorsRound2ModifiedCav = Math.round(swordD_survivorsRound1 * lossesPercentRound2Cav)
+            swordD_survivorsRound2ModifiedArc = swordD_survivorsRound1 - swordD_survivorsRound2ModifiedCav - swordD_survivorsRound2ModifiedInf
+            axeD_survivorsRound2ModifiedInf = Math.round(axeD_survivorsRound1 * lossesPercentRound2Inf)
+            axeD_survivorsRound2ModifiedCav = Math.round(axeD_survivorsRound1 * lossesPercentRound2Cav)
+            axeD_survivorsRound2ModifiedArc = axeD_survivorsRound1 - axeD_survivorsRound2ModifiedCav - axeD_survivorsRound2ModifiedInf
+            archerD_survivorsRound2ModifiedInf = Math.round(archerD_survivorsRound1 * lossesPercentRound2Inf)
+            archerD_survivorsRound2ModifiedCav = Math.round(archerD_survivorsRound1 * lossesPercentRound2Cav)
+            archerD_survivorsRound2ModifiedArc = archerD_survivorsRound1 - archerD_survivorsRound2ModifiedCav - archerD_survivorsRound2ModifiedInf
+            lcD_survivorsRound2ModifiedInf = Math.round(lcD_survivorsRound1 * lossesPercentRound2Inf)
+            lcD_survivorsRound2ModifiedCav = Math.round(lcD_survivorsRound1 * lossesPercentRound2Cav)
+            lcD_survivorsRound2ModifiedArc = lcD_survivorsRound1 - lcD_survivorsRound2ModifiedCav - lcD_survivorsRound2ModifiedInf
+            maD_survivorsRound2ModifiedInf = Math.round(maD_survivorsRound1 * lossesPercentRound2Inf)
+            maD_survivorsRound2ModifiedCav = Math.round(maD_survivorsRound1 * lossesPercentRound2Cav)
+            maD_survivorsRound2ModifiedArc = maD_survivorsRound1 - maD_survivorsRound2ModifiedCav - maD_survivorsRound2ModifiedInf
+            hcD_survivorsRound2ModifiedInf = Math.round(hcD_survivorsRound1 * lossesPercentRound2Inf)
+            hcD_survivorsRound2ModifiedCav = Math.round(hcD_survivorsRound1 * lossesPercentRound2Cav)
+            hcD_survivorsRound2ModifiedArc = hcD_survivorsRound1 - hcD_survivorsRound2ModifiedCav - hcD_survivorsRound2ModifiedInf
+            ramD_survivorsRound2ModifiedInf = Math.round(ramD_survivorsRound1 * lossesPercentRound2Inf)
+            ramD_survivorsRound2ModifiedCav = Math.round(ramD_survivorsRound1 * lossesPercentRound2Cav)
+            ramD_survivorsRound2ModifiedArc = ramD_survivorsRound1 - ramD_survivorsRound2ModifiedCav - ramD_survivorsRound2ModifiedInf
+            catapultD_survivorsRound2ModifiedInf = Math.round(catapultD_survivorsRound1 * lossesPercentRound2Inf)
+            catapultD_survivorsRound2ModifiedCav = Math.round(catapultD_survivorsRound1 * lossesPercentRound2Cav)
+            catapultD_survivorsRound2ModifiedArc = catapultD_survivorsRound1 - catapultD_survivorsRound2ModifiedCav - catapultD_survivorsRound2ModifiedInf
+            snobD_survivorsRound2ModifiedInf = Math.round(snobD_survivorsRound1 * lossesPercentRound2Inf)
+            snobD_survivorsRound2ModifiedCav = Math.round(snobD_survivorsRound1 * lossesPercentRound2Cav)
+            snobD_survivorsRound2ModifiedArc = snobD_survivorsRound1 - snobD_survivorsRound2ModifiedCav - snobD_survivorsRound2ModifiedInf
+            trebuchetD_survivorsRound2ModifiedInf = Math.round(trebuchetD_survivorsRound1 * lossesPercentRound2Inf)
+            trebuchetD_survivorsRound2ModifiedCav = Math.round(trebuchetD_survivorsRound1 * lossesPercentRound2Cav)
+            trebuchetD_survivorsRound2ModifiedArc = trebuchetD_survivorsRound1 - trebuchetD_survivorsRound2ModifiedCav - trebuchetD_survivorsRound2ModifiedInf
+            berserkerD_survivorsRound2ModifiedInf = Math.round(berserkerD_survivorsRound1 * lossesPercentRound2Inf)
+            berserkerD_survivorsRound2ModifiedCav = Math.round(berserkerD_survivorsRound1 * lossesPercentRound2Cav)
+            berserkerD_survivorsRound2ModifiedArc = berserkerD_survivorsRound1 - berserkerD_survivorsRound2ModifiedCav - berserkerD_survivorsRound2ModifiedInf
+            knightD_survivorsRound2ModifiedInf = Math.round(knightD_survivorsRound1 * lossesPercentRound2Inf)
+            knightD_survivorsRound2ModifiedCav = Math.round(knightD_survivorsRound1 * lossesPercentRound2Cav)
+            knightD_survivorsRound2ModifiedArc = knightD_survivorsRound1 - knightD_survivorsRound2ModifiedCav - knightD_survivorsRound2ModifiedInf
+            provisionDefenderRound2()
+        }
+
+        function provisionDefenderRound2() {
+            provisionDefenderInfRound2 = spearD_survivorsRound2ModifiedInf * food[0] + swordD_survivorsRound2ModifiedInf * food[1] + axeD_survivorsRound2ModifiedInf * food[2] + berserkerD_survivorsRound2ModifiedInf * food[12] + snobD_survivorsRound2ModifiedInf * food[10] + lcD_survivorsRound2ModifiedInf * food[4] + hcD_survivorsRound2ModifiedInf * food[6] + archerD_survivorsRound2ModifiedInf * food[3] + maD_survivorsRound2ModifiedInf * food[5] + ramD_survivorsRound2ModifiedInf * food[7] + catapultD_survivorsRound2ModifiedInf * food[8] + trebuchetD_survivorsRound2ModifiedInf * food[11] + knightD_survivorsRound2ModifiedInf * food[9]
+            provisionDefenderCavRound2 = spearD_survivorsRound2ModifiedCav * food[0] + swordD_survivorsRound2ModifiedCav * food[1] + axeD_survivorsRound2ModifiedCav * food[2] + berserkerD_survivorsRound2ModifiedCav * food[12] + snobD_survivorsRound2ModifiedCav * food[10] + lcD_survivorsRound2ModifiedCav * food[4] + hcD_survivorsRound2ModifiedCav * food[6] + archerD_survivorsRound2ModifiedCav * food[3] + maD_survivorsRound2ModifiedCav * food[5] + ramD_survivorsRound2ModifiedCav * food[7] + catapultD_survivorsRound2ModifiedCav * food[8] + trebuchetD_survivorsRound2ModifiedCav * food[11] + knightD_survivorsRound2ModifiedCav * food[9]
+            provisionDefenderArcRound2 = spearD_survivorsRound2ModifiedArc * food[0] + swordD_survivorsRound2ModifiedArc * food[1] + axeD_survivorsRound2ModifiedArc * food[2] + berserkerD_survivorsRound2ModifiedArc * food[12] + snobD_survivorsRound2ModifiedArc * food[10] + lcD_survivorsRound2ModifiedArc * food[4] + hcD_survivorsRound2ModifiedArc * food[6] + archerD_survivorsRound2ModifiedArc * food[3] + maD_survivorsRound2ModifiedArc * food[5] + ramD_survivorsRound2ModifiedArc * food[7] + catapultD_survivorsRound2ModifiedArc * food[8] + trebuchetD_survivorsRound2ModifiedArc * food[11] + knightD_survivorsRound2ModifiedArc * food[9]
+            console.log(provisionDefenderArcRound2, provisionDefenderCavRound2, provisionDefenderInfRound2)
+            strengthBaseDefenderAllRound2()
+        }
+
+        function strengthBaseDefenderAllRound2() {
+            strengthBaseDefenderInfRound2 = spearD_survivorsRound2ModifiedInf * def_inf[0] * DknightItemBonusSpear[0] + swordD_survivorsRound2ModifiedInf * def_inf[1] * DknightItemBonusSword[0] + axeD_survivorsRound2ModifiedInf * def_inf[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound2ModifiedInf * def_inf[12] + snobD_survivorsRound2ModifiedInf * def_inf[10] + lcD_survivorsRound2ModifiedInf * def_inf[4] * DknightItemBonusLc[0] + hcD_survivorsRound2ModifiedInf * def_inf[6] * DknightItemBonusHc[0] + archerD_survivorsRound2ModifiedInf * def_inf[3] * DknightItemBonusArcher[0] + maD_survivorsRound2ModifiedInf * def_inf[5] * DknightItemBonusMa[0] + ramD_survivorsRound2ModifiedInf * def_inf[7] * DknightItemBonusRam[0] + catapultD_survivorsRound2ModifiedInf * def_inf[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound2ModifiedInf * def_inf[11] + knightD_survivorsRound2ModifiedInf * def_inf[9]
+            strengthBaseDefenderCavRound2 = spearD_survivorsRound2ModifiedCav * def_kav[0] * DknightItemBonusSpear[0] + swordD_survivorsRound2ModifiedCav * def_kav[1] * DknightItemBonusSword[0] + axeD_survivorsRound2ModifiedCav * def_kav[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound2ModifiedCav * def_kav[12] + snobD_survivorsRound2ModifiedCav * def_kav[10] + lcD_survivorsRound2ModifiedCav * def_kav[4] * DknightItemBonusLc[0] + hcD_survivorsRound2ModifiedCav * def_kav[6] * DknightItemBonusHc[0] + archerD_survivorsRound2ModifiedCav * def_kav[3] * DknightItemBonusArcher[0] + maD_survivorsRound2ModifiedCav * def_kav[5] * DknightItemBonusMa[0] + ramD_survivorsRound2ModifiedCav * def_kav[7] * DknightItemBonusRam[0] + catapultD_survivorsRound2ModifiedCav * def_kav[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound2ModifiedCav * def_kav[11] + knightD_survivorsRound2ModifiedCav * def_kav[9]
+            strengthBaseDefenderArcRound2 = spearD_survivorsRound2ModifiedArc * def_arc[0] * DknightItemBonusSpear[0] + swordD_survivorsRound2ModifiedArc * def_arc[1] * DknightItemBonusSword[0] + axeD_survivorsRound2ModifiedArc * def_arc[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound2ModifiedArc * def_arc[12] + snobD_survivorsRound2ModifiedArc * def_arc[10] + lcD_survivorsRound2ModifiedArc * def_arc[4] * DknightItemBonusLc[0] + hcD_survivorsRound2ModifiedArc * def_arc[6] * DknightItemBonusHc[0] + archerD_survivorsRound2ModifiedArc * def_arc[3] * DknightItemBonusArcher[0] + maD_survivorsRound2ModifiedArc * def_arc[5] * DknightItemBonusMa[0] + ramD_survivorsRound2ModifiedArc * def_arc[7] * DknightItemBonusRam[0] + catapultD_survivorsRound2ModifiedArc * def_arc[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound2ModifiedArc * def_arc[11] + knightD_survivorsRound2ModifiedArc * def_arc[9]
+            siegeStrengthRound2Calc()
+        }
+
+        function siegeStrengthRound2Calc() {
+            siegeStrengthRound2 = ramA_survivorsRound1 * attack[7] * knightItemBonusRam[1] + catapultA_survivorsRound1 * attack[8] * knightItemBonusCatapult[1] + trebuchetA_survivorsRound1 * attack[11] + knightA_survivorsRound1 * attack[9]
+            strengthBaseAttackerAllRound2()
+        }
+
+        function strengthBaseAttackerAllRound2() {
+            if (largestGroup == 'cav') {
+                strengthBaseAttackerCavRound2 = lcA_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound1 * attack[6] * knightItemBonusHc[1] + siegeStrengthRound2
+                strengthBaseAttackerInfRound2 = spearA_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound1 * attack[12] * doubleStrengthBonus + snobA_survivorsRound1 * attack[10]
+                strengthBaseAttackerArcRound2 = archerA_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound1 * attack[5] * knightItemBonusMa[1]
+            } else if (largestGroup == 'inf') {
+                strengthBaseAttackerInfRound2 = spearA_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound1 * attack[12] * doubleStrengthBonus + snobA_survivorsRound1 * attack[10] + siegeStrengthRound2
+                strengthBaseAttackerCavRound2 = lcA_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound1 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound2 = archerA_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound1 * attack[5] * knightItemBonusMa[1]
+            } else if (largestGroup == 'arc') {
+                strengthBaseAttackerInfRound2 = spearA_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound1 * attack[12] * doubleStrengthBonus + snobA_survivorsRound1 * attack[10]
+                strengthBaseAttackerCavRound2 = lcA_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound1 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound2 = archerA_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound1 * attack[5] * knightItemBonusMa[1] + siegeStrengthRound2
+            } else {
+                strengthBaseAttackerInfRound2 = spearA_survivorsRound1 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound1 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound1 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound1 * attack[12] * doubleStrengthBonus + snobA_survivorsRound1 * attack[10]
+                strengthBaseAttackerCavRound2 = lcA_survivorsRound1 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound1 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound2 = archerA_survivorsRound1 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound1 * attack[5] * knightItemBonusMa[1]
+            }
+            strengthRound2partly()
+        }
+
+        function strengthRound2partly() {
+            strengthAttackerInfRound2 = strengthBaseAttackerInfRound2 * overalModifierOff
+            strengthDefenderInfRound2 = strengthBaseDefenderInfRound2 * overalModifierDef
+            strengthAttackerCavRound2 = strengthBaseAttackerCavRound2 * overalModifierOff
+            strengthDefenderCavRound2 = strengthBaseDefenderCavRound2 * overalModifierDef
+            strengthAttackerArcRound2 = strengthBaseAttackerArcRound2 * overalModifierOff
+            strengthDefenderArcRound2 = strengthBaseDefenderArcRound2 * overalModifierDef
+            strengthRound2()
+        }
+
+        function strengthRound2() {
+            strengthAttackerRound2 = strengthAttackerInfRound2 + strengthAttackerCavRound2 + strengthAttackerArcRound2
+            strengthDefenderRound2 = strengthDefenderInfRound2 + strengthDefenderCavRound2 + strengthDefenderArcRound2
+            console.log(strengthAttackerRound2, strengthDefenderRound2)
+            killRateRound2defenderInfCalc()
+        }
+
+        function killRateRound2defenderInfCalc() {
+            if (strengthAttackerInfRound2 == 0 || strengthDefenderInfRound2 == 0) {
+                kilrateDefendInfantryBaseRound2 = 0
+            } else {
+                if (strengthDefenderInfRound2 <= strengthAttackerInfRound2) {
+                    kilrateDefendInfantryBaseRound2 = 1
+                } else {
+                    kilrateDefendInfantryBaseRound2 = Math.pow((strengthAttackerInfRound2 / strengthDefenderInfRound2), (1 / 2)) / (strengthDefenderInfRound2 / strengthAttackerInfRound2)
+                }
+            }
+            killRateRound2defenderCavCalc()
+        }
+
+        function killRateRound2defenderCavCalc() {
+            if (strengthAttackerCavRound2 == 0 || strengthDefenderCavRound2 == 0) {
+                kilrateDefendCavalryBaseRound2 = 0
+            } else {
+                if (strengthDefenderCavRound2 <= strengthAttackerCavRound2) {
+                    kilrateDefendCavalryBaseRound2 = 1
+                } else {
+                    kilrateDefendCavalryBaseRound2 = Math.pow((strengthAttackerCavRound2 / strengthDefenderCavRound2), (1 / 2)) / (strengthDefenderCavRound2 / strengthAttackerCavRound2)
+                }
+            }
+            killRateRound2defenderArcCalc()
+        }
+
+        function killRateRound2defenderArcCalc() {
+            if (strengthAttackerArcRound2 == 0 || strengthDefenderArcRound2 == 0) {
+                kilrateDefendArcherBaseRound2 = 0
+            } else {
+                if (strengthDefenderArcRound2 <= strengthAttackerArcRound2) {
+                    kilrateDefendArcherBaseRound2 = 1
+                } else {
+                    kilrateDefendArcherBaseRound2 = Math.pow((strengthAttackerArcRound2 / strengthDefenderArcRound2), (1 / 2)) / (strengthDefenderArcRound2 / strengthAttackerArcRound2)
+                }
+            }
+            killRateRound2attackerInfCalc()
+        }
+
+        function killRateRound2attackerInfCalc() {
+            if (strengthAttackerInfRound2 == 0 || strengthDefenderInfRound2 == 0) {
+                kilrateAttackInfantryBaseRound2 = 0
+            } else {
+                if (strengthAttackerInfRound2 <= strengthDefenderInfRound2) {
+                    kilrateAttackInfantryBaseRound2 = 1
+                } else {
+                    kilrateAttackInfantryBaseRound2 = Math.pow((strengthDefenderInfRound2 / strengthAttackerInfRound2), (1 / 2)) / (strengthAttackerInfRound2 / strengthDefenderInfRound2)
+                }
+            }
+            killRateRound2attackerCavCalc()
+        }
+
+        function killRateRound2attackerCavCalc() {
+            if (strengthAttackerCavRound2 == 0 || strengthDefenderCavRound2 == 0) {
+                kilrateAttackCavalryBaseRound2 = 0
+            } else {
+                if (strengthAttackerCavRound2 <= strengthDefenderCavRound2) {
+                    kilrateAttackCavalryBaseRound2 = 1
+                } else {
+                    kilrateAttackCavalryBaseRound2 = Math.pow((strengthDefenderCavRound2 / strengthAttackerCavRound2), (1 / 2)) / (strengthAttackerCavRound2 / strengthDefenderCavRound2)
+                }
+            }
+            killRateRound2attackerArcCalc()
+        }
+
+        function killRateRound2attackerArcCalc() {
+            if (strengthAttackerArcRound2 == 0 || strengthDefenderArcRound2 == 0) {
+                kilrateAttackArcherBaseRound2 = 0
+            } else {
+                if (strengthAttackerArcRound2 <= strengthDefenderArcRound2) {
+                    kilrateAttackArcherBaseRound2 = 1
+                } else {
+                    kilrateAttackArcherBaseRound2 = Math.pow((strengthDefenderArcRound2 / strengthAttackerArcRound2), (1 / 2)) / (strengthAttackerArcRound2 / strengthDefenderArcRound2)
+                }
+            }
+            killRateRound2()
+        }
+
+        function killRateRound2() {
+            killRateRound2attackerInf = Math.round(kilrateAttackInfantryBaseRound2 * 1000000) / 1000000
+            killRateRound2attackerCav = Math.round(kilrateAttackCavalryBaseRound2 * 1000000) / 1000000
+            killRateRound2attackerArc = Math.round(kilrateAttackArcherBaseRound2 * 1000000) / 1000000
+            killRateRound2defenderInf = Math.round(kilrateDefendInfantryBaseRound2 * 1000000) / 1000000
+            killRateRound2defenderCav = Math.round(kilrateDefendCavalryBaseRound2 * 1000000) / 1000000
+            killRateRound2defenderArc = Math.round(kilrateDefendArcherBaseRound2 * 1000000) / 1000000
+            lossesRound2()
+        }
+
+        function lossesRound2() {
+            spearD_lossesRound2 = Math.round(-spearD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-spearD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-spearD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            swordD_lossesRound2 = Math.round(-swordD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-swordD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-swordD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            axeD_lossesRound2 = Math.round(-axeD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-axeD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-axeD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            archerD_lossesRound2 = Math.round(-archerD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-archerD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-archerD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            lcD_lossesRound2 = Math.round(-lcD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-lcD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-lcD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            maD_lossesRound2 = Math.round(-maD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-maD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-maD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            hcD_lossesRound2 = Math.round(-hcD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-hcD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-hcD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            ramD_lossesRound2 = Math.round(-ramD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-ramD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-ramD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            catapultD_lossesRound2 = Math.round(-catapultD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-catapultD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-catapultD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            trebuchetD_lossesRound2 = Math.round(-trebuchetD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-trebuchetD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-trebuchetD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            berserkerD_lossesRound2 = Math.round(-berserkerD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-berserkerD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-berserkerD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            knightD_lossesRound2 = Math.round(-knightD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-knightD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-knightD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            snobD_lossesRound2 = Math.round(-snobD_survivorsRound2ModifiedInf * killRateRound2defenderInf + 0.000001) + Math.round(-snobD_survivorsRound2ModifiedCav * killRateRound2defenderCav + 0.000001) + Math.round(-snobD_survivorsRound2ModifiedArc * killRateRound2defenderArc + 0.000001)
+            spearA_lossesRound2 = Math.round(-spearA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+            swordA_lossesRound2 = Math.round(-swordA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+            axeA_lossesRound2 = Math.round(-axeA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+            berserkerA_lossesRound2 = Math.round(-berserkerA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+            archerA_lossesRound2 = Math.round(-archerA_survivorsRound1 * killRateRound2attackerArc + 0.000001)
+            maA_lossesRound2 = Math.round(-maA_survivorsRound1 * killRateRound2attackerArc + 0.000001)
+            lcA_lossesRound2 = Math.round(-lcA_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+            hcA_lossesRound2 = Math.round(-hcA_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+            if (largestGroup == 'cav') {
+                ramA_lossesRound2 = Math.round(-ramA_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+                catapultA_lossesRound2 = Math.round(-catapultA_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+                trebuchetA_lossesRound2 = Math.round(-trebuchetA_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+                knightA_lossesRound2 = Math.round(-knightA_survivorsRound1 * killRateRound2attackerCav + 0.000001)
+            } else if (largestGroup == 'inf') {
+                ramA_lossesRound2 = Math.round(-ramA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+                catapultA_lossesRound2 = Math.round(-catapultA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+                trebuchetA_lossesRound2 = Math.round(-trebuchetA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+                knightA_lossesRound2 = Math.round(-knightA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+            } else if (largestGroup == 'arc') {
+                ramA_lossesRound2 = Math.round(-ramA_survivorsRound1 * killRateRound2attackerArc + 0.000001)
+                catapultA_lossesRound2 = Math.round(-catapultA_survivorsRound1 * killRateRound2attackerArc + 0.000001)
+                trebuchetA_lossesRound2 = Math.round(-trebuchetA_survivorsRound1 * killRateRound2attackerArc + 0.000001)
+                knightA_lossesRound2 = Math.round(-knightA_survivorsRound1 * killRateRound2attackerArc + 0.000001)
+            }
+            lossesSnobRound2()
+        }
+
+        function lossesSnobRound2() {
+            if ((snobA_survivorsRound1 * 100) == provisionAttackerInfRound2) {
+                snobA_lossesRound2 = 0
+            } else {
+                snobA_lossesRound2 = Math.round(-snobA_survivorsRound1 * killRateRound2attackerInf + 0.000001)
+            }
+            afterSecondStageSurvivors()
+        }
+
+        function afterSecondStageSurvivors() {
+            spearA_survivorsRound2 = spearA_survivorsRound1 + spearA_lossesRound2
+            swordA_survivorsRound2 = swordA_survivorsRound1 + swordA_lossesRound2
+            axeA_survivorsRound2 = axeA_survivorsRound1 + axeA_lossesRound2
+            archerA_survivorsRound2 = archerA_survivorsRound1 + archerA_lossesRound2
+            lcA_survivorsRound2 = lcA_survivorsRound1 + lcA_lossesRound2
+            maA_survivorsRound2 = maA_survivorsRound1 + maA_lossesRound2
+            hcA_survivorsRound2 = hcA_survivorsRound1 + hcA_lossesRound2
+            ramA_survivorsRound2 = ramA_survivorsRound1 + ramA_lossesRound2
+            catapultA_survivorsRound2 = catapultA_survivorsRound1 + catapultA_lossesRound2
+            trebuchetA_survivorsRound2 = trebuchetA_survivorsRound1 + trebuchetA_lossesRound2
+            berserkerA_survivorsRound2 = berserkerA_survivorsRound1 + berserkerA_lossesRound2
+            snobA_survivorsRound2 = snobA_survivorsRound1 + snobA_lossesRound2
+            knightA_survivorsRound2 = knightA_survivorsRound1 + knightA_lossesRound2
+            spearD_survivorsRound2 = spearD_survivorsRound1 + spearD_lossesRound2
+            swordD_survivorsRound2 = swordD_survivorsRound1 + swordD_lossesRound2
+            axeD_survivorsRound2 = axeD_survivorsRound1 + axeD_lossesRound2
+            archerD_survivorsRound2 = archerD_survivorsRound1 + archerD_lossesRound2
+            lcD_survivorsRound2 = lcD_survivorsRound1 + lcD_lossesRound2
+            maD_survivorsRound2 = maD_survivorsRound1 + maD_lossesRound2
+            hcD_survivorsRound2 = hcD_survivorsRound1 + hcD_lossesRound2
+            ramD_survivorsRound2 = ramD_survivorsRound1 + ramD_lossesRound2
+            catapultD_survivorsRound2 = catapultD_survivorsRound1 + catapultD_lossesRound2
+            trebuchetD_survivorsRound2 = trebuchetD_survivorsRound1 + trebuchetD_lossesRound2
+            berserkerD_survivorsRound2 = berserkerD_survivorsRound1 + berserkerD_lossesRound2
+            snobD_survivorsRound2 = snobD_survivorsRound1 + snobD_lossesRound2
+            knightD_survivorsRound2 = knightD_survivorsRound1 + knightD_lossesRound2
+            lossesProvisionsRound2Total()
+        }
+
+        function lossesProvisionsRound2Total() {
+            lossesAttackerRound2Total = spearA_lossesRound2 * food[0] + swordA_lossesRound2 * food[1] + axeA_lossesRound2 * food[2] + archerA_lossesRound2 * food[3] + lcA_lossesRound2 * food[4] + maA_lossesRound2 * food[5] + hcA_lossesRound2 * food[6] + ramA_lossesRound2 * food[7] + catapultA_lossesRound2 * food[8] + knightA_lossesRound2 * food[9] + snobA_lossesRound2 * food[10] + trebuchetA_lossesRound2 * food[11] + berserkerA_lossesRound2 * food[12]
+            lossesDefenderRound2Total = spearD_lossesRound2 * food[0] + swordD_lossesRound2 * food[1] + axeD_lossesRound2 * food[2] + archerD_lossesRound2 * food[3] + lcD_lossesRound2 * food[4] + maD_lossesRound2 * food[5] + hcD_lossesRound2 * food[6] + ramD_lossesRound2 * food[7] + catapultD_lossesRound2 * food[8] + knightD_lossesRound2 * food[9] + snobD_lossesRound2 * food[10] + trebuchetD_lossesRound2 * food[11] + berserkerD_lossesRound2 * food[12]
+            console.log(lossesAttackerRound2Total,lossesDefenderRound2Total)
+            survivorsProvisionsRound2Total()
+        }
+
+        function survivorsProvisionsRound2Total() {
+            survivorsAttackerRound2Total = spearA_survivorsRound2 * food[0] + swordA_survivorsRound2 * food[1] + axeA_survivorsRound2 * food[2] + archerA_survivorsRound2 * food[3] + lcA_survivorsRound2 * food[4] + maA_survivorsRound2 * food[5] + hcA_survivorsRound2 * food[6] + ramA_survivorsRound2 * food[7] + catapultA_survivorsRound2 * food[8] + trebuchetA_survivorsRound2 * food[11] + berserkerA_survivorsRound2 * food[12] + snobA_survivorsRound2 * food[10] + knightA_survivorsRound2 * food[9]
+            survivorsDefenderRound2Total = spearD_survivorsRound2 * food[0] + swordD_survivorsRound2 * food[1] + axeD_survivorsRound2 * food[2] + archerD_survivorsRound2 * food[3] + lcD_survivorsRound2 * food[4] + maD_survivorsRound2 * food[5] + hcD_survivorsRound2 * food[6] + ramD_survivorsRound2 * food[7] + catapultD_survivorsRound2 * food[8] + trebuchetD_survivorsRound2 * food[11] + berserkerD_survivorsRound2 * food[12] + snobD_survivorsRound2 * food[10] + knightD_survivorsRound2 * food[9]
+            console.log(survivorsDefenderRound2Total, survivorsAttackerRound2Total)
+            totalProvisionsRound3()
+        }
+
+        function totalProvisionsRound3() {
+            provisionAttackerRound3Total = spearA_survivorsRound2 * food[0] + swordA_survivorsRound2 * food[1] + axeA_survivorsRound2 * food[2] + archerA_survivorsRound2 * food[3] + lcA_survivorsRound2 * food[4] + maA_survivorsRound2 * food[5] + hcA_survivorsRound2 * food[6] + ramA_survivorsRound2 * food[7] + catapultA_survivorsRound2 * food[8] + knightA_survivorsRound2 * food[9] + snobA_survivorsRound2 * food[10] + trebuchetA_survivorsRound2 * food[11] + berserkerA_survivorsRound2 * food[12]
+            provisionDefenderRound3Total = spearD_survivorsRound2 * food[0] + swordD_survivorsRound2 * food[1] + axeD_survivorsRound2 * food[2] + archerD_survivorsRound2 * food[3] + lcD_survivorsRound2 * food[4] + maD_survivorsRound2 * food[5] + hcD_survivorsRound2 * food[6] + ramD_survivorsRound2 * food[7] + catapultD_survivorsRound2 * food[8] + knightD_survivorsRound2 * food[9] + snobD_survivorsRound2 * food[10] + trebuchetD_survivorsRound2 * food[11] + berserkerD_survivorsRound2 * food[12]
+            console.log(provisionAttackerRound3Total, provisionDefenderRound3Total)
+            siegeProvisionCalc()
+        }
+
+        function siegeProvisionCalc() {
+            siegeProvision = ramA_survivorsRound2 * food[7] + catapultA_survivorsRound2 * food[8] + trebuchetA_survivorsRound2 * food[11] + knightA_survivorsRound2 * food[9]
+            provisionAttackerAllRound3()
+        }
+
+        function provisionAttackerAllRound3() {
+            if (largestGroup == 'cav') {
+                provisionAttackerCavRound3 = lcA_survivorsRound2 * food[4] + hcA_survivorsRound2 * food[6] + siegeProvision
+                provisionAttackerInfRound3 = spearA_survivorsRound2 * food[0] + swordA_survivorsRound2 * food[1] + axeA_survivorsRound2 * food[2] + berserkerA_survivorsRound2 * food[12] + snobA_survivorsRound2 * food[10]
+                provisionAttackerArcRound3 = archerA_survivorsRound2 * food[3] + maA_survivorsRound2 * food[5]
+            } else if (largestGroup == 'inf') {
+                provisionAttackerInfRound3 = spearA_survivorsRound2 * food[0] + swordA_survivorsRound2 * food[1] + axeA_survivorsRound2 * food[2] + berserkerA_survivorsRound2 * food[12] + snobA_survivorsRound2 * food[10] + siegeProvision
+                provisionAttackerCavRound3 = lcA_survivorsRound2 * food[4] + hcA_survivorsRound2 * food[6]
+                provisionAttackerArcRound3 = archerA_survivorsRound2 * food[3] + maA_survivorsRound2 * food[5]
+            } else if (largestGroup == 'arc') {
+                provisionAttackerInfRound3 = spearA_survivorsRound2 * food[0] + swordA_survivorsRound2 * food[1] + axeA_survivorsRound2 * food[2] + berserkerA_survivorsRound2 * food[12] + snobA_survivorsRound2 * food[10]
+                provisionAttackerCavRound3 = lcA_survivorsRound2 * food[4] + hcA_survivorsRound2 * food[6]
+                provisionAttackerArcRound3 = archerA_survivorsRound2 * food[3] + maA_survivorsRound2 * food[5] + siegeProvision
+            } else {
+                provisionAttackerInfRound3 = spearA_survivorsRound2 * food[0] + swordA_survivorsRound2 * food[1] + axeA_survivorsRound2 * food[2] + berserkerA_survivorsRound2 * food[12] + snobA_survivorsRound2 * food[10]
+                provisionAttackerCavRound3 = lcA_survivorsRound2 * food[4] + hcA_survivorsRound2 * food[6]
+                provisionAttackerArcRound3 = archerA_survivorsRound2 * food[3] + maA_survivorsRound2 * food[5]
+            }
+            lossesPercentRound3InfCalc()
+        }
+
+        function lossesPercentRound3InfCalc() {
+            if (provisionAttackerInfRound3 == 0) {
+                lossesPercentRound3Inf = 0
+            } else {
+                lossesPercentRound3Inf = Math.round((provisionAttackerInfRound3 / provisionAttackerRound3Total) * 10000) / 10000
+            }
+            lossesPercentRound3CavCalc()
+        }
+
+        function lossesPercentRound3CavCalc() {
+            if (provisionAttackerCavRound3 == 0) {
+                lossesPercentRound3Cav = 0
+            } else {
+                lossesPercentRound3Cav = Math.round((provisionAttackerCavRound3 / provisionAttackerRound3Total) * 10000) / 10000
+            }
+            lossesPercentRound3ArcCalc()
+        }
+
+        function lossesPercentRound3ArcCalc() {
+            if (provisionAttackerArcRound3 == 0) {
+                lossesPercentRound3Arc = 0
+            } else {
+                lossesPercentRound3Arc = Math.round((provisionAttackerArcRound3 / provisionAttackerRound3Total) * 10000) / 10000
+            }
+            console.log(lossesPercentRound3Arc)
+            survivorsRound3Modified()
+        }
+
+        function survivorsRound3Modified() {
+            spearD_survivorsRound3ModifiedInf = Math.round(spearD_survivorsRound2 * lossesPercentRound3Inf)
+            spearD_survivorsRound3ModifiedCav = Math.round(spearD_survivorsRound2 * lossesPercentRound3Cav)
+            spearD_survivorsRound3ModifiedArc = spearD_survivorsRound2 - spearD_survivorsRound3ModifiedCav - spearD_survivorsRound3ModifiedInf
+            swordD_survivorsRound3ModifiedInf = Math.round(swordD_survivorsRound2 * lossesPercentRound3Inf)
+            swordD_survivorsRound3ModifiedCav = Math.round(swordD_survivorsRound2 * lossesPercentRound3Cav)
+            swordD_survivorsRound3ModifiedArc = swordD_survivorsRound2 - swordD_survivorsRound3ModifiedCav - swordD_survivorsRound3ModifiedInf
+            axeD_survivorsRound3ModifiedInf = Math.round(axeD_survivorsRound2 * lossesPercentRound3Inf)
+            axeD_survivorsRound3ModifiedCav = Math.round(axeD_survivorsRound2 * lossesPercentRound3Cav)
+            axeD_survivorsRound3ModifiedArc = axeD_survivorsRound2 - axeD_survivorsRound3ModifiedCav - axeD_survivorsRound3ModifiedInf
+            archerD_survivorsRound3ModifiedInf = Math.round(archerD_survivorsRound2 * lossesPercentRound3Inf)
+            archerD_survivorsRound3ModifiedCav = Math.round(archerD_survivorsRound2 * lossesPercentRound3Cav)
+            archerD_survivorsRound3ModifiedArc = archerD_survivorsRound2 - archerD_survivorsRound3ModifiedCav - archerD_survivorsRound3ModifiedInf
+            lcD_survivorsRound3ModifiedInf = Math.round(lcD_survivorsRound2 * lossesPercentRound3Inf)
+            lcD_survivorsRound3ModifiedCav = Math.round(lcD_survivorsRound2 * lossesPercentRound3Cav)
+            lcD_survivorsRound3ModifiedArc = lcD_survivorsRound2 - lcD_survivorsRound3ModifiedCav - lcD_survivorsRound3ModifiedInf
+            maD_survivorsRound3ModifiedInf = Math.round(maD_survivorsRound2 * lossesPercentRound3Inf)
+            maD_survivorsRound3ModifiedCav = Math.round(maD_survivorsRound2 * lossesPercentRound3Cav)
+            maD_survivorsRound3ModifiedArc = maD_survivorsRound2 - maD_survivorsRound3ModifiedCav - maD_survivorsRound3ModifiedInf
+            hcD_survivorsRound3ModifiedInf = Math.round(hcD_survivorsRound2 * lossesPercentRound3Inf)
+            hcD_survivorsRound3ModifiedCav = Math.round(hcD_survivorsRound2 * lossesPercentRound3Cav)
+            hcD_survivorsRound3ModifiedArc = hcD_survivorsRound2 - hcD_survivorsRound3ModifiedCav - hcD_survivorsRound3ModifiedInf
+            ramD_survivorsRound3ModifiedInf = Math.round(ramD_survivorsRound2 * lossesPercentRound3Inf)
+            ramD_survivorsRound3ModifiedCav = Math.round(ramD_survivorsRound2 * lossesPercentRound3Cav)
+            ramD_survivorsRound3ModifiedArc = ramD_survivorsRound2 - ramD_survivorsRound3ModifiedCav - ramD_survivorsRound3ModifiedInf
+            catapultD_survivorsRound3ModifiedInf = Math.round(catapultD_survivorsRound2 * lossesPercentRound3Inf)
+            catapultD_survivorsRound3ModifiedCav = Math.round(catapultD_survivorsRound2 * lossesPercentRound3Cav)
+            catapultD_survivorsRound3ModifiedArc = catapultD_survivorsRound2 - catapultD_survivorsRound3ModifiedCav - catapultD_survivorsRound3ModifiedInf
+            snobD_survivorsRound3ModifiedInf = Math.round(snobD_survivorsRound2 * lossesPercentRound3Inf)
+            snobD_survivorsRound3ModifiedCav = Math.round(snobD_survivorsRound2 * lossesPercentRound3Cav)
+            snobD_survivorsRound3ModifiedArc = snobD_survivorsRound2 - snobD_survivorsRound3ModifiedCav - snobD_survivorsRound3ModifiedInf
+            trebuchetD_survivorsRound3ModifiedInf = Math.round(trebuchetD_survivorsRound2 * lossesPercentRound3Inf)
+            trebuchetD_survivorsRound3ModifiedCav = Math.round(trebuchetD_survivorsRound2 * lossesPercentRound3Cav)
+            trebuchetD_survivorsRound3ModifiedArc = trebuchetD_survivorsRound2 - trebuchetD_survivorsRound3ModifiedCav - trebuchetD_survivorsRound3ModifiedInf
+            berserkerD_survivorsRound3ModifiedInf = Math.round(berserkerD_survivorsRound2 * lossesPercentRound3Inf)
+            berserkerD_survivorsRound3ModifiedCav = Math.round(berserkerD_survivorsRound2 * lossesPercentRound3Cav)
+            berserkerD_survivorsRound3ModifiedArc = berserkerD_survivorsRound2 - berserkerD_survivorsRound3ModifiedCav - berserkerD_survivorsRound3ModifiedInf
+            knightD_survivorsRound3ModifiedInf = Math.round(knightD_survivorsRound2 * lossesPercentRound3Inf)
+            knightD_survivorsRound3ModifiedCav = Math.round(knightD_survivorsRound2 * lossesPercentRound3Cav)
+            knightD_survivorsRound3ModifiedArc = knightD_survivorsRound2 - knightD_survivorsRound3ModifiedCav - knightD_survivorsRound3ModifiedInf
+            provisionDefenderRound3()
+        }
+
+        function provisionDefenderRound3() {
+            provisionDefenderInfRound3 = spearD_survivorsRound3ModifiedInf * food[0] + swordD_survivorsRound3ModifiedInf * food[1] + axeD_survivorsRound3ModifiedInf * food[2] + berserkerD_survivorsRound3ModifiedInf * food[12] + snobD_survivorsRound3ModifiedInf * food[10] + lcD_survivorsRound3ModifiedInf * food[4] + hcD_survivorsRound3ModifiedInf * food[6] + archerD_survivorsRound3ModifiedInf * food[3] + maD_survivorsRound3ModifiedInf * food[5] + ramD_survivorsRound3ModifiedInf * food[7] + catapultD_survivorsRound3ModifiedInf * food[8] + trebuchetD_survivorsRound3ModifiedInf * food[11] + knightD_survivorsRound3ModifiedInf * food[9]
+            provisionDefenderCavRound3 = spearD_survivorsRound3ModifiedCav * food[0] + swordD_survivorsRound3ModifiedCav * food[1] + axeD_survivorsRound3ModifiedCav * food[2] + berserkerD_survivorsRound3ModifiedCav * food[12] + snobD_survivorsRound3ModifiedCav * food[10] + lcD_survivorsRound3ModifiedCav * food[4] + hcD_survivorsRound3ModifiedCav * food[6] + archerD_survivorsRound3ModifiedCav * food[3] + maD_survivorsRound3ModifiedCav * food[5] + ramD_survivorsRound3ModifiedCav * food[7] + catapultD_survivorsRound3ModifiedCav * food[8] + trebuchetD_survivorsRound3ModifiedCav * food[11] + knightD_survivorsRound3ModifiedCav * food[9]
+            provisionDefenderArcRound3 = spearD_survivorsRound3ModifiedArc * food[0] + swordD_survivorsRound3ModifiedArc * food[1] + axeD_survivorsRound3ModifiedArc * food[2] + berserkerD_survivorsRound3ModifiedArc * food[12] + snobD_survivorsRound3ModifiedArc * food[10] + lcD_survivorsRound3ModifiedArc * food[4] + hcD_survivorsRound3ModifiedArc * food[6] + archerD_survivorsRound3ModifiedArc * food[3] + maD_survivorsRound3ModifiedArc * food[5] + ramD_survivorsRound3ModifiedArc * food[7] + catapultD_survivorsRound3ModifiedArc * food[8] + trebuchetD_survivorsRound3ModifiedArc * food[11] + knightD_survivorsRound3ModifiedArc * food[9]
+            console.log(provisionDefenderArcRound3, provisionDefenderCavRound3, provisionDefenderInfRound3)
+            strengthBaseDefenderAllRound3()
+        }
+
+        function strengthBaseDefenderAllRound3() {
+            strengthBaseDefenderInfRound3 = spearD_survivorsRound3ModifiedInf * def_inf[0] * DknightItemBonusSpear[0] + swordD_survivorsRound3ModifiedInf * def_inf[1] * DknightItemBonusSword[0] + axeD_survivorsRound3ModifiedInf * def_inf[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound3ModifiedInf * def_inf[12] + snobD_survivorsRound3ModifiedInf * def_inf[10] + lcD_survivorsRound3ModifiedInf * def_inf[4] * DknightItemBonusLc[0] + hcD_survivorsRound3ModifiedInf * def_inf[6] * DknightItemBonusHc[0] + archerD_survivorsRound3ModifiedInf * def_inf[3] * DknightItemBonusArcher[0] + maD_survivorsRound3ModifiedInf * def_inf[5] * DknightItemBonusMa[0] + ramD_survivorsRound3ModifiedInf * def_inf[7] * DknightItemBonusRam[0] + catapultD_survivorsRound3ModifiedInf * def_inf[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound3ModifiedInf * def_inf[11] + knightD_survivorsRound3ModifiedInf * def_inf[9]
+            strengthBaseDefenderCavRound3 = spearD_survivorsRound3ModifiedCav * def_kav[0] * DknightItemBonusSpear[0] + swordD_survivorsRound3ModifiedCav * def_kav[1] * DknightItemBonusSword[0] + axeD_survivorsRound3ModifiedCav * def_kav[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound3ModifiedCav * def_kav[12] + snobD_survivorsRound3ModifiedCav * def_kav[10] + lcD_survivorsRound3ModifiedCav * def_kav[4] * DknightItemBonusLc[0] + hcD_survivorsRound3ModifiedCav * def_kav[6] * DknightItemBonusHc[0] + archerD_survivorsRound3ModifiedCav * def_kav[3] * DknightItemBonusArcher[0] + maD_survivorsRound3ModifiedCav * def_kav[5] * DknightItemBonusMa[0] + ramD_survivorsRound3ModifiedCav * def_kav[7] * DknightItemBonusRam[0] + catapultD_survivorsRound3ModifiedCav * def_kav[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound3ModifiedCav * def_kav[11] + knightD_survivorsRound3ModifiedCav * def_kav[9]
+            strengthBaseDefenderArcRound3 = spearD_survivorsRound3ModifiedArc * def_arc[0] * DknightItemBonusSpear[0] + swordD_survivorsRound3ModifiedArc * def_arc[1] * DknightItemBonusSword[0] + axeD_survivorsRound3ModifiedArc * def_arc[2] * DknightItemBonusAxe[0] + berserkerD_survivorsRound3ModifiedArc * def_arc[12] + snobD_survivorsRound3ModifiedArc * def_arc[10] + lcD_survivorsRound3ModifiedArc * def_arc[4] * DknightItemBonusLc[0] + hcD_survivorsRound3ModifiedArc * def_arc[6] * DknightItemBonusHc[0] + archerD_survivorsRound3ModifiedArc * def_arc[3] * DknightItemBonusArcher[0] + maD_survivorsRound3ModifiedArc * def_arc[5] * DknightItemBonusMa[0] + ramD_survivorsRound3ModifiedArc * def_arc[7] * DknightItemBonusRam[0] + catapultD_survivorsRound3ModifiedArc * def_arc[8] * DknightItemBonusCatapult[0] + trebuchetD_survivorsRound3ModifiedArc * def_arc[11] + knightD_survivorsRound3ModifiedArc * def_arc[9]
+            siegeStrengthCalc()
+        }
+
+        function siegeStrengthCalc() {
+            siegeStrength = ramA_survivorsRound2 * attack[7] * knightItemBonusRam[1] + catapultA_survivorsRound2 * attack[8] * knightItemBonusCatapult[1] + trebuchetA_survivorsRound2 * attack[11] + knightA_survivorsRound2 * attack[9]
+            strengthBaseAttackerAllRound3()
+        }
+
+        function strengthBaseAttackerAllRound3() {
+            if (largestGroup == 'cav') {
+                strengthBaseAttackerCavRound3 = lcA_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound2 * attack[6] * knightItemBonusHc[1] + siegeStrength
+                strengthBaseAttackerInfRound3 = spearA_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound2 * attack[12] * doubleStrengthBonus + snobA_survivorsRound2 * attack[10]
+                strengthBaseAttackerArcRound3 = archerA_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound2 * attack[5] * knightItemBonusMa[1]
+            } else if (largestGroup == 'inf') {
+                strengthBaseAttackerInfRound3 = spearA_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound2 * attack[12] * doubleStrengthBonus + snobA_survivorsRound2 * attack[10] + siegeStrength
+                strengthBaseAttackerCavRound3 = lcA_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound2 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound3 = archerA_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound2 * attack[5] * knightItemBonusMa[1]
+            } else if (largestGroup == 'arc') {
+                strengthBaseAttackerInfRound3 = spearA_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound2 * attack[12] * doubleStrengthBonus + snobA_survivorsRound2 * attack[10]
+                strengthBaseAttackerCavRound3 = lcA_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound2 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound3 = archerA_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound2 * attack[5] * knightItemBonusMa[1] + siegeStrength
+            } else {
+                strengthBaseAttackerInfRound3 = spearA_survivorsRound2 * attack[0] * knightItemBonusSpear[1] + swordA_survivorsRound2 * attack[1] * knightItemBonusSword[1] + axeA_survivorsRound2 * attack[2] * knightItemBonusAxe[1] + berserkerA_survivorsRound2 * attack[12] * doubleStrengthBonus + snobA_survivorsRound2 * attack[10]
+                strengthBaseAttackerCavRound3 = lcA_survivorsRound2 * attack[4] * knightItemBonusLc[1] + hcA_survivorsRound2 * attack[6] * knightItemBonusHc[1]
+                strengthBaseAttackerArcRound3 = archerA_survivorsRound2 * attack[3] * knightItemBonusArcher[1] + maA_survivorsRound2 * attack[5] * knightItemBonusMa[1]
+            }
+            strengthRound3partly()
+        }
+
+        function strengthRound3partly() {
+            strengthAttackerInfRound3 = strengthBaseAttackerInfRound3 * overalModifierOff
+            strengthDefenderInfRound3 = strengthBaseDefenderInfRound3 * overalModifierDef
+            strengthAttackerCavRound3 = strengthBaseAttackerCavRound3 * overalModifierOff
+            strengthDefenderCavRound3 = strengthBaseDefenderCavRound3 * overalModifierDef
+            strengthAttackerArcRound3 = strengthBaseAttackerArcRound3 * overalModifierOff
+            strengthDefenderArcRound3 = strengthBaseDefenderArcRound3 * overalModifierDef
+            strengthRound3()
+        }
+
+        function strengthRound3() {
+            strengthAttackerRound3 = strengthAttackerInfRound3 + strengthAttackerCavRound3 + strengthAttackerArcRound3
+            strengthDefenderRound3 = strengthDefenderInfRound3 + strengthDefenderCavRound3 + strengthDefenderArcRound3
+            console.log(strengthAttackerRound3, strengthDefenderRound3)
+            killRateRound3defenderInfCalc()
+        }
+
+        function killRateRound3defenderInfCalc() {
+            if (strengthAttackerInfRound3 == 0 || strengthDefenderInfRound3 == 0) {
+                kilrateDefendInfantryBaseRound3 = 0
+            } else {
+                if (strengthDefenderInfRound3 <= strengthAttackerInfRound3) {
+                    kilrateDefendInfantryBaseRound3 = 1
+                } else {
+                    kilrateDefendInfantryBaseRound3 = Math.pow((strengthAttackerInfRound3 / strengthDefenderInfRound3), (1 / 2)) / (strengthDefenderInfRound3 / strengthAttackerInfRound3)
+                }
+            }
+            killRateRound3defenderCavCalc()
+        }
+
+        function killRateRound3defenderCavCalc() {
+            if (strengthAttackerCavRound3 == 0 || strengthDefenderCavRound3 == 0) {
+                kilrateDefendCavalryBaseRound3 = 0
+            } else {
+                if (strengthDefenderCavRound3 <= strengthAttackerCavRound3) {
+                    kilrateDefendCavalryBaseRound3 = 1
+                } else {
+                    kilrateDefendCavalryBaseRound3 = Math.pow((strengthAttackerCavRound3 / strengthDefenderCavRound3), (1 / 2)) / (strengthDefenderCavRound3 / strengthAttackerCavRound3)
+                }
+            }
+            killRateRound3defenderArcCalc()
+        }
+
+        function killRateRound3defenderArcCalc() {
+            if (strengthAttackerArcRound3 == 0 || strengthDefenderArcRound3 == 0) {
+                kilrateDefendArcherBaseRound3 = 0
+            } else {
+                if (strengthDefenderArcRound3 <= strengthAttackerArcRound3) {
+                    kilrateDefendArcherBaseRound3 = 1
+                } else {
+                    kilrateDefendArcherBaseRound3 = Math.pow((strengthAttackerArcRound3 / strengthDefenderArcRound3), (1 / 2)) / (strengthDefenderArcRound3 / strengthAttackerArcRound3)
+                }
+            }
+            killRateRound3attackerInfCalc()
+        }
+
+        function killRateRound3attackerInfCalc() {
+            if (strengthAttackerInfRound3 == 0 || strengthDefenderInfRound3 == 0) {
+                kilrateAttackInfantryBaseRound3 = 0
+            } else {
+                if (strengthAttackerInfRound3 <= strengthDefenderInfRound3) {
+                    kilrateAttackInfantryBaseRound3 = 1
+                } else {
+                    kilrateAttackInfantryBaseRound3 = Math.pow((strengthDefenderInfRound3 / strengthAttackerInfRound3), (1 / 2)) / (strengthAttackerInfRound3 / strengthDefenderInfRound3)
+                }
+            }
+            killRateRound3attackerCavCalc()
+        }
+
+        function killRateRound3attackerCavCalc() {
+            if (strengthAttackerCavRound3 == 0 || strengthDefenderCavRound3 == 0) {
+                kilrateAttackCavalryBaseRound3 = 0
+            } else {
+                if (strengthAttackerCavRound3 <= strengthDefenderCavRound3) {
+                    kilrateAttackCavalryBaseRound3 = 1
+                } else {
+                    kilrateAttackCavalryBaseRound3 = Math.pow((strengthDefenderCavRound3 / strengthAttackerCavRound3), (1 / 2)) / (strengthAttackerCavRound3 / strengthDefenderCavRound3)
+                }
+            }
+            killRateRound3attackerArcCalc()
+        }
+
+        function killRateRound3attackerArcCalc() {
+            if (strengthAttackerArcRound3 == 0 || strengthDefenderArcRound3 == 0) {
+                kilrateAttackArcherBaseRound3 = 0
+            } else {
+                if (strengthAttackerArcRound3 <= strengthDefenderArcRound3) {
+                    kilrateAttackArcherBaseRound3 = 1
+                } else {
+                    kilrateAttackArcherBaseRound3 = Math.pow((strengthDefenderArcRound3 / strengthAttackerArcRound3), (1 / 2)) / (strengthAttackerArcRound3 / strengthDefenderArcRound3)
+                }
+            }
+            killRateRound3()
+        }
+
+        function killRateRound3() {
+            killRateRound3attackerInf = Math.round(kilrateAttackInfantryBaseRound3 * 1000000) / 1000000
+            killRateRound3attackerCav = Math.round(kilrateAttackCavalryBaseRound3 * 1000000) / 1000000
+            killRateRound3attackerArc = Math.round(kilrateAttackArcherBaseRound3 * 1000000) / 1000000
+            killRateRound3defenderInf = Math.round(kilrateDefendInfantryBaseRound3 * 1000000) / 1000000
+            killRateRound3defenderCav = Math.round(kilrateDefendCavalryBaseRound3 * 1000000) / 1000000
+            killRateRound3defenderArc = Math.round(kilrateDefendArcherBaseRound3 * 1000000) / 1000000
+            lossesRound3()
+        }
+
+        function lossesRound3() {
+            spearD_lossesRound3 = Math.round(-spearD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-spearD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-spearD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            swordD_lossesRound3 = Math.round(-swordD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-swordD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-swordD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            axeD_lossesRound3 = Math.round(-axeD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-axeD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-axeD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            archerD_lossesRound3 = Math.round(-archerD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-archerD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-archerD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            lcD_lossesRound3 = Math.round(-lcD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-lcD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-lcD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            maD_lossesRound3 = Math.round(-maD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-maD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-maD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            hcD_lossesRound3 = Math.round(-hcD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-hcD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-hcD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            ramD_lossesRound3 = Math.round(-ramD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-ramD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-ramD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            catapultD_lossesRound3 = Math.round(-catapultD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-catapultD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-catapultD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            trebuchetD_lossesRound3 = Math.round(-trebuchetD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-trebuchetD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-trebuchetD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            berserkerD_lossesRound3 = Math.round(-berserkerD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-berserkerD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-berserkerD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            knightD_lossesRound3 = Math.round(-knightD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-knightD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-knightD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            snobD_lossesRound3 = Math.round(-snobD_survivorsRound3ModifiedInf * killRateRound3defenderInf + 0.000001) + Math.round(-snobD_survivorsRound3ModifiedCav * killRateRound3defenderCav + 0.000001) + Math.round(-snobD_survivorsRound3ModifiedArc * killRateRound3defenderArc + 0.000001)
+            spearA_lossesRound3 = Math.round(-spearA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+            swordA_lossesRound3 = Math.round(-swordA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+            axeA_lossesRound3 = Math.round(-axeA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+            berserkerA_lossesRound3 = Math.round(-berserkerA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+            archerA_lossesRound3 = Math.round(-archerA_survivorsRound2 * killRateRound3attackerArc + 0.000001)
+            maA_lossesRound3 = Math.round(-maA_survivorsRound2 * killRateRound3attackerArc + 0.000001)
+            lcA_lossesRound3 = Math.round(-lcA_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+            hcA_lossesRound3 = Math.round(-hcA_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+            if (largestGroup == 'cav') {
+                ramA_lossesRound3 = Math.round(-ramA_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+                catapultA_lossesRound3 = Math.round(-catapultA_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+                trebuchetA_lossesRound3 = Math.round(-trebuchetA_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+                knightA_lossesRound3 = Math.round(-knightA_survivorsRound2 * killRateRound3attackerCav + 0.000001)
+            } else if (largestGroup == 'inf') {
+                ramA_lossesRound3 = Math.round(-ramA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+                catapultA_lossesRound3 = Math.round(-catapultA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+                trebuchetA_lossesRound3 = Math.round(-trebuchetA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+                knightA_lossesRound3 = Math.round(-knightA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+            } else if (largestGroup == 'arc') {
+                ramA_lossesRound3 = Math.round(-ramA_survivorsRound2 * killRateRound3attackerArc + 0.000001)
+                catapultA_lossesRound3 = Math.round(-catapultA_survivorsRound2 * killRateRound3attackerArc + 0.000001)
+                trebuchetA_lossesRound3 = Math.round(-trebuchetA_survivorsRound2 * killRateRound3attackerArc + 0.000001)
+                knightA_lossesRound3 = Math.round(-knightA_survivorsRound2 * killRateRound3attackerArc + 0.000001)
+            }
+            lossesSnobRound3()
+        }
+
+        function lossesSnobRound3() {
+            if ((snobA_survivorsRound2 * 100) == provisionAttackerInfRound3) {
+                snobA_lossesRound3 = 0
+            } else {
+                snobA_lossesRound3 = Math.round(-snobA_survivorsRound2 * killRateRound3attackerInf + 0.000001)
+            }
+            afterBattleSurvivors()
+        }
+
+        function afterBattleSurvivors() {
+            spearA_survivorsRound3 = spearA_survivorsRound2 + spearA_lossesRound3
+            swordA_survivorsRound3 = swordA_survivorsRound2 + swordA_lossesRound3
+            axeA_survivorsRound3 = axeA_survivorsRound2 + axeA_lossesRound3
+            archerA_survivorsRound3 = archerA_survivorsRound2 + archerA_lossesRound3
+            lcA_survivorsRound3 = lcA_survivorsRound2 + lcA_lossesRound3
+            maA_survivorsRound3 = maA_survivorsRound2 + maA_lossesRound3
+            hcA_survivorsRound3 = hcA_survivorsRound2 + hcA_lossesRound3
+            ramA_survivorsRound3 = ramA_survivorsRound2 + ramA_lossesRound3
+            catapultA_survivorsRound3 = catapultA_survivorsRound2 + catapultA_lossesRound3
+            trebuchetA_survivorsRound3 = trebuchetA_survivorsRound2 + trebuchetA_lossesRound3
+            berserkerA_survivorsRound3 = berserkerA_survivorsRound2 + berserkerA_lossesRound3
+            snobA_survivorsRound3 = snobA_survivorsRound2 + snobA_lossesRound3
+            knightA_survivorsRound3 = knightA_survivorsRound2 + knightA_lossesRound3
+            spearD_survivorsRound3 = spearD_survivorsRound2 + spearD_lossesRound3
+            swordD_survivorsRound3 = swordD_survivorsRound2 + swordD_lossesRound3
+            axeD_survivorsRound3 = axeD_survivorsRound2 + axeD_lossesRound3
+            archerD_survivorsRound3 = archerD_survivorsRound2 + archerD_lossesRound3
+            lcD_survivorsRound3 = lcD_survivorsRound2 + lcD_lossesRound3
+            maD_survivorsRound3 = maD_survivorsRound2 + maD_lossesRound3
+            hcD_survivorsRound3 = hcD_survivorsRound2 + hcD_lossesRound3
+            ramD_survivorsRound3 = ramD_survivorsRound2 + ramD_lossesRound3
+            catapultD_survivorsRound3 = catapultD_survivorsRound2 + catapultD_lossesRound3
+            trebuchetD_survivorsRound3 = trebuchetD_survivorsRound2 + trebuchetD_lossesRound3
+            berserkerD_survivorsRound3 = berserkerD_survivorsRound2 + berserkerD_lossesRound3
+            snobD_survivorsRound3 = snobD_survivorsRound2 + snobD_lossesRound3
+            knightD_survivorsRound3 = knightD_survivorsRound2 + knightD_lossesRound3
+            lossesProvisionsRound3Total()
+        }
+
+        function lossesProvisionsRound3Total() {
+            lossesAttackerRound3Total = spearA_lossesRound3 * food[0] + swordA_lossesRound3 * food[1] + axeA_lossesRound3 * food[2] + archerA_lossesRound3 * food[3] + lcA_lossesRound3 * food[4] + maA_lossesRound3 * food[5] + hcA_lossesRound3 * food[6] + ramA_lossesRound3 * food[7] + catapultA_lossesRound3 * food[8] + knightA_lossesRound3 * food[9] + snobA_lossesRound3 * food[10] + trebuchetA_lossesRound3 * food[11] + berserkerA_lossesRound3 * food[12]
+            lossesDefenderRound3Total = spearD_lossesRound3 * food[0] + swordD_lossesRound3 * food[1] + axeD_lossesRound3 * food[2] + archerD_lossesRound3 * food[3] + lcD_lossesRound3 * food[4] + maD_lossesRound3 * food[5] + hcD_lossesRound3 * food[6] + ramD_lossesRound3 * food[7] + catapultD_lossesRound3 * food[8] + knightD_lossesRound3 * food[9] + snobD_lossesRound3 * food[10] + trebuchetD_lossesRound3 * food[11] + berserkerD_lossesRound3 * food[12]
+            console.log(lossesAttackerRound3Total,lossesDefenderRound3Total)
+            survivorsProvisionsRound3Total()
+        }
+
+        function survivorsProvisionsRound3Total() {
+            survivorsAttackerRound3Total = spearA_survivorsRound3 * food[0] + swordA_survivorsRound3 * food[1] + axeA_survivorsRound3 * food[2] + archerA_survivorsRound3 * food[3] + lcA_survivorsRound3 * food[4] + maA_survivorsRound3 * food[5] + hcA_survivorsRound3 * food[6] + ramA_survivorsRound3 * food[7] + catapultA_survivorsRound3 * food[8] + trebuchetA_survivorsRound3 * food[11] + berserkerA_survivorsRound3 * food[12] + snobA_survivorsRound3 * food[10] + knightA_survivorsRound3 * food[9]
+            survivorsDefenderRound3Total = spearD_survivorsRound3 * food[0] + swordD_survivorsRound3 * food[1] + axeD_survivorsRound3 * food[2] + archerD_survivorsRound3 * food[3] + lcD_survivorsRound3 * food[4] + maD_survivorsRound3 * food[5] + hcD_survivorsRound3 * food[6] + ramD_survivorsRound3 * food[7] + catapultD_survivorsRound3 * food[8] + trebuchetD_survivorsRound3 * food[11] + berserkerD_survivorsRound3 * food[12] + snobD_survivorsRound3 * food[10] + knightD_survivorsRound3 * food[9]
+            console.log(survivorsDefenderRound3Total, survivorsAttackerRound3Total)
+            afterBattleLosses()
+        }
+
+        function afterBattleLosses() {
+            spearA_losses = -spearA + spearA_survivorsRound3
+            swordA_losses = -swordA + swordA_survivorsRound3
+            axeA_losses = -axeA + axeA_survivorsRound3
+            archerA_losses = -archerA + archerA_survivorsRound3
+            lcA_losses = -lcA + lcA_survivorsRound3
+            maA_losses = -maA + maA_survivorsRound3
+            hcA_losses = -hcA + hcA_survivorsRound3
+            ramA_losses = -ramA + ramA_survivorsRound3
+            catapultA_losses = -catapultA + catapultA_survivorsRound3
+            trebuchetA_losses = -trebuchetA + trebuchetA_survivorsRound3
+            berserkerA_losses = -berserkerA + berserkerA_survivorsRound3
+            snobA_losses = -snobA + snobA_survivorsRound3
+            knightA_losses = -knightA + knightA_survivorsRound3
+            spearD_losses = -spearD + spearD_survivorsRound3
+            swordD_losses = -swordD + swordD_survivorsRound3
+            axeD_losses = -axeD + axeD_survivorsRound3
+            archerD_losses = -archerD + archerD_survivorsRound3
+            lcD_losses = -lcD + lcD_survivorsRound3
+            maD_losses = -maD + maD_survivorsRound3
+            hcD_losses = -hcD + hcD_survivorsRound3
+            ramD_losses = -ramD + ramD_survivorsRound3
+            catapultD_losses = -catapultD + catapultD_survivorsRound3
+            trebuchetD_losses = -trebuchetD + trebuchetD_survivorsRound3
+            berserkerD_losses = -berserkerD + berserkerD_survivorsRound3
+            snobD_losses = -snobD + snobD_survivorsRound3
+            knightD_losses = -knightD + knightD_survivorsRound3
+            ramPowerFinalCalc()
+        }
+
+        function ramPowerFinalCalc() {
+            if (ramA_survivorsRound3 == 0) {
+                ramPowerFinal = 0
+            } else {
+                ramPowerFinal = ramA_survivorsRound3 * overalModifierOff * itemramsoffeffect[1]
+            }
+            hitpointslevelwallsfinalCalc()
+        }
+
+        function hitpointslevelwallsfinalCalc() {
+            if (wallAfterPreround == 20) {
+                hitpointslevelwallsfinal = 18
+            } else if (wallAfterPreround == 19) {
+                hitpointslevelwallsfinal = 17
+            } else if (wallAfterPreround == 18) {
+                hitpointslevelwallsfinal = 15
+            } else if (wallAfterPreround == 17) {
+                hitpointslevelwallsfinal = 14
+            } else if (wallAfterPreround == 16) {
+                hitpointslevelwallsfinal = 13
+            } else if (wallAfterPreround == 15) {
+                hitpointslevelwallsfinal = 11
+            } else if (wallAfterPreround == 14) {
+                hitpointslevelwallsfinal = 10
+            } else if (wallAfterPreround == 13 || wallAfterPreround == 12) {
+                hitpointslevelwallsfinal = 9
+            } else if (wallAfterPreround == 11) {
+                hitpointslevelwallsfinal = 8
+            } else if (wallAfterPreround == 10) {
+                hitpointslevelwallsfinal = 7
+            } else if (wallAfterPreround == 9 || wallAfterPreround == 8) {
+                hitpointslevelwallsfinal = 6
+            } else if (wallAfterPreround == 7 || wallAfterPreround == 6) {
+                hitpointslevelwallsfinal = 5
+            } else if (wallAfterPreround == 5 || wallAfterPreround == 4 || wallAfterPreround == 3) {
+                hitpointslevelwallsfinal = 4
+            } else if (wallAfterPreround == 2 || wallAfterPreround == 1) {
+                hitpointslevelwallsfinal = 3
+            } else {
+                hitpointslevelwallsfinal = 0
+            }
+            ramDamageHitpointCalc()
+        }
+
+        function ramDamageHitpointCalc() {
+            if (battleBonusDef == 0) {
+                ramDamageHitpoint = 0
+            } else {
+                ramDamageHitpoint = hitpointslevelwallsfinal * 2
+            }
+            ramDemolitionCalc()
+        }
+
+        function ramDemolitionCalc() {
+            if (ramPowerFinal == 0 || ramDamageHitpoint == 0) {
+                ramDemolition = 0
+            } else {
+                ramDemolition = -ramPowerFinal / ramDamageHitpoint
+            }
+            finalWallsCalc()
+        }
+
+        function finalWallsCalc() {
+            if (wallAfterPreround <= skillWalls) {
+                finalWalls = wallAfterPreround
+            } else {
+                if (wallAfterPreround - skillWalls < -ramDemolition) {
+                    if (wallAfterPreround < skillWalls) {
+                        finalWalls = wallAfterPreround
+                    } else {
+                        finalWalls = skillWalls
+                    }
+                } else {
+                    finalWalls = wallAfterPreround + ramDemolition
+                }
+            }
+            afterRamAttackPastBattleCalc()
+        }
+
+        function afterRamAttackPastBattleCalc() {
+            afterRamAttackPastBattle = Math.round(finalWalls)
+            targetLevel()
+        }
+
+        function targetLevel() {
+            if (catapultTarget == 'wall') {
+                catapulttargetlevel = afterRamAttackPastBattle
+            } else {
+                catapulttargetlevel = battleCalculatorSettings[SETTINGS.BATTLE_TARGET_LEVEL]
+            }
+            catapultPowerFinalCalc()
+        }
+
+        function catapultPowerFinalCalc() {
+            if (catapultA_survivorsRound3 == 0 || catapulttargetlevel == 0) {
+                catapultPowerFinal = 0
+            } else {
+                catapultPowerFinal = catapultA_survivorsRound3 * overalModifierOff * knightItemBonusCatapult[1]
+            }
+            hitpointslevelTargetfinalCalc()
+        }
+
+        function hitpointslevelTargetfinalCalc() {
+            if (catapultTarget == 'headquarter') {
+                if (catapulttargetlevel == 30) {
+                    hitpointslevelTargetfinal = 72
+                } else if (catapulttargetlevel == 29) {
+                    hitpointslevelTargetfinal = 65
+                } else if (catapulttargetlevel == 28) {
+                    hitpointslevelTargetfinal = 59
+                } else if (catapulttargetlevel == 27) {
+                    hitpointslevelTargetfinal = 54
+                } else if (catapulttargetlevel == 26) {
+                    hitpointslevelTargetfinal = 50
+                } else if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 45
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 41
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 36
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 33
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 30
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 26
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 23
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'wall') {
+                if (afterRamAttackPastBattle == 20) {
+                    hitpointslevelTargetfinal = 18
+                } else if (afterRamAttackPastBattle == 19) {
+                    hitpointslevelTargetfinal = 17
+                } else if (afterRamAttackPastBattle == 18) {
+                    hitpointslevelTargetfinal = 15
+                } else if (afterRamAttackPastBattle == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (afterRamAttackPastBattle == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (afterRamAttackPastBattle == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (afterRamAttackPastBattle == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (afterRamAttackPastBattle == 13 || afterRamAttackPastBattle == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (afterRamAttackPastBattle == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (afterRamAttackPastBattle == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (afterRamAttackPastBattle == 9 || afterRamAttackPastBattle == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (afterRamAttackPastBattle == 7 || afterRamAttackPastBattle == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (afterRamAttackPastBattle == 5 || afterRamAttackPastBattle == 4 || afterRamAttackPastBattle == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (afterRamAttackPastBattle == 2 || afterRamAttackPastBattle == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'tavern') {
+                if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'hospital') {
+                if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'satue') {
+                if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'rally_point') {
+                if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'church') {
+                if (catapulttargetlevel == 3 || catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 800
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'academy') {
+                if (catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 500
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'preceptory') {
+                if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 71
+                } else if (catapulttargetlevel == 9) {
+                    hitpointslevelTargetfinal = 43
+                } else if (catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 39
+                } else if (catapulttargetlevel == 7) {
+                    hitpointslevelTargetfinal = 35
+                } else if (catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 32
+                } else if (catapulttargetlevel == 5) {
+                    hitpointslevelTargetfinal = 29
+                } else if (catapulttargetlevel == 4) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 24
+                } else if (catapulttargetlevel == 2) {
+                    hitpointslevelTargetfinal = 22
+                } else if (catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 20
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'barracks') {
+                if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 30
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 24
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 22
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 20
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 18
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 17
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 15
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'market') {
+                if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 30
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 24
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 22
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 20
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 18
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 17
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 15
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'warehouse') {
+                if (catapulttargetlevel == 30) {
+                    hitpointslevelTargetfinal = 48
+                } else if (catapulttargetlevel == 29) {
+                    hitpointslevelTargetfinal = 43
+                } else if (catapulttargetlevel == 28) {
+                    hitpointslevelTargetfinal = 39
+                } else if (catapulttargetlevel == 27) {
+                    hitpointslevelTargetfinal = 36
+                } else if (catapulttargetlevel == 26) {
+                    hitpointslevelTargetfinal = 33
+                } else if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 30
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 24
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 22
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 20
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 18
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 17
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 15
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'timber_camp') {
+                if (catapulttargetlevel == 30) {
+                    hitpointslevelTargetfinal = 48
+                } else if (catapulttargetlevel == 29) {
+                    hitpointslevelTargetfinal = 43
+                } else if (catapulttargetlevel == 28) {
+                    hitpointslevelTargetfinal = 39
+                } else if (catapulttargetlevel == 27) {
+                    hitpointslevelTargetfinal = 36
+                } else if (catapulttargetlevel == 26) {
+                    hitpointslevelTargetfinal = 33
+                } else if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 30
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 24
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 22
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 20
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 18
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 17
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 15
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'clay_pit') {
+                if (catapulttargetlevel == 30) {
+                    hitpointslevelTargetfinal = 48
+                } else if (catapulttargetlevel == 29) {
+                    hitpointslevelTargetfinal = 43
+                } else if (catapulttargetlevel == 28) {
+                    hitpointslevelTargetfinal = 39
+                } else if (catapulttargetlevel == 27) {
+                    hitpointslevelTargetfinal = 36
+                } else if (catapulttargetlevel == 26) {
+                    hitpointslevelTargetfinal = 33
+                } else if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 30
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 24
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 22
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 20
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 18
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 17
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 15
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'iron_mine') {
+                if (catapulttargetlevel == 30) {
+                    hitpointslevelTargetfinal = 48
+                } else if (catapulttargetlevel == 29) {
+                    hitpointslevelTargetfinal = 43
+                } else if (catapulttargetlevel == 28) {
+                    hitpointslevelTargetfinal = 39
+                } else if (catapulttargetlevel == 27) {
+                    hitpointslevelTargetfinal = 36
+                } else if (catapulttargetlevel == 26) {
+                    hitpointslevelTargetfinal = 33
+                } else if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 30
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 27
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 24
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 22
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 20
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 18
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 17
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 15
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 13 || catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 9 || catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 7 || catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 5
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 4
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 3
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else if (catapultTarget == 'farm') {
+                if (catapulttargetlevel == 30) {
+                    hitpointslevelTargetfinal = 79
+                } else if (catapulttargetlevel == 29) {
+                    hitpointslevelTargetfinal = 72
+                } else if (catapulttargetlevel == 28) {
+                    hitpointslevelTargetfinal = 66
+                } else if (catapulttargetlevel == 27) {
+                    hitpointslevelTargetfinal = 60
+                } else if (catapulttargetlevel == 26) {
+                    hitpointslevelTargetfinal = 54
+                } else if (catapulttargetlevel == 25) {
+                    hitpointslevelTargetfinal = 49
+                } else if (catapulttargetlevel == 24) {
+                    hitpointslevelTargetfinal = 45
+                } else if (catapulttargetlevel == 23) {
+                    hitpointslevelTargetfinal = 41
+                } else if (catapulttargetlevel == 22) {
+                    hitpointslevelTargetfinal = 37
+                } else if (catapulttargetlevel == 21) {
+                    hitpointslevelTargetfinal = 34
+                } else if (catapulttargetlevel == 20) {
+                    hitpointslevelTargetfinal = 31
+                } else if (catapulttargetlevel == 19) {
+                    hitpointslevelTargetfinal = 28
+                } else if (catapulttargetlevel == 18) {
+                    hitpointslevelTargetfinal = 25
+                } else if (catapulttargetlevel == 17) {
+                    hitpointslevelTargetfinal = 23
+                } else if (catapulttargetlevel == 16) {
+                    hitpointslevelTargetfinal = 21
+                } else if (catapulttargetlevel == 15) {
+                    hitpointslevelTargetfinal = 19
+                } else if (catapulttargetlevel == 14) {
+                    hitpointslevelTargetfinal = 17
+                } else if (catapulttargetlevel == 13) {
+                    hitpointslevelTargetfinal = 16
+                } else if (catapulttargetlevel == 12) {
+                    hitpointslevelTargetfinal = 14
+                } else if (catapulttargetlevel == 11) {
+                    hitpointslevelTargetfinal = 13
+                } else if (catapulttargetlevel == 10) {
+                    hitpointslevelTargetfinal = 12
+                } else if (catapulttargetlevel == 9) {
+                    hitpointslevelTargetfinal = 11
+                } else if (catapulttargetlevel == 8) {
+                    hitpointslevelTargetfinal = 10
+                } else if (catapulttargetlevel == 7) {
+                    hitpointslevelTargetfinal = 9
+                } else if (catapulttargetlevel == 6) {
+                    hitpointslevelTargetfinal = 8
+                } else if (catapulttargetlevel == 5 || catapulttargetlevel == 4) {
+                    hitpointslevelTargetfinal = 7
+                } else if (catapulttargetlevel == 2 || catapulttargetlevel == 3) {
+                    hitpointslevelTargetfinal = 6
+                } else if (catapulttargetlevel == 1) {
+                    hitpointslevelTargetfinal = 5
+                } else {
+                    hitpointslevelTargetfinal = 0
+                }
+            } else {
+                hitpointslevelTargetfinal = 0
+            }
+            catapultDamageHitpointCalc()
+        }
+
+        function catapultDamageHitpointCalc() {
+            if (catapulttargetlevel == 0) {
+                catapultDamageHitpoint = 0
+            } else {
+                catapultDamageHitpoint = hitpointslevelTargetfinal * overalModifierDef
+            }
+            catapultDemolitionCalc()
+        }
+
+        function catapultDemolitionCalc() {
+            if (catapultPowerFinal == 0 || catapultDamageHitpoint == 0) {
+                catapultDemolition = 0
+            } else {
+                catapultDemolition = -catapultPowerFinal / catapultDamageHitpoint
+            }
+            finalTargetLevelCalc()
+        }
+
+        function finalTargetLevelCalc() {
+            if (catapultTarget == 'wall') {
+                if (finalWalls <= skillWalls) {
+                    finalTargetLevel = finalWalls
+                } else {
+                    if (finalWalls - skillWalls < -catapultDemolition) {
+                        if (finalWalls < skillWalls) {
+                            finalTargetLevel = finalWalls
+                        } else {
+                            finalTargetLevel = skillWalls
+                        }
+                    } else {
+                        finalTargetLevel = finalWalls + catapultDemolition
+                    }
+                }
+            } else {
+                if ((catapultDemolition + catapulttargetlevel) <= 0) {
+                    finalTargetLevel = 0
+                } else {
+                    finalTargetLevel = catapultDemolition + catapulttargetlevel
+                }
+            }
+            afterCatAttackPastBattle()
+        }
+
+        function afterCatAttackPastBattle() {
+            afterBattleTargetLevel = Math.round(finalTargetLevel)
+            console.log(afterBattleTargetLevel)
+            provisionsLosses()
+        }
+
+        function provisionsLosses() {
+            lossesprovisionA = spearA_losses * food[0] + swordA_losses * food[1] + axeA_losses * food[2] + archerA_losses * food[3] + lcA_losses * food[4] + maA_losses * food[5] + hcA_losses * food[6] + ramA_losses * food[7] + catapultA_losses * food[8] + knightA_losses * food[9] + snobA_losses * food[10] + trebuchetA_losses * food[11] + berserkerA_losses * food[12]
+            lossesprovisionD = spearD_losses * food[0] + swordD_losses * food[1] + axeD_losses * food[2] + archerD_losses * food[3] + lcD_losses * food[4] + maD_losses * food[5] + hcD_losses * food[6] + ramD_losses * food[7] + catapultD_losses * food[8] + knightD_losses * food[9] + snobD_losses * food[10] + trebuchetD_losses * food[11] + berserkerD_losses * food[12]
+            bashpoints()
+        }
+
+        function bashpoints() {
+            bashpointsAttacker = spearD_losses * pointsDeff[0] + swordD_losses * pointsDeff[1] + axeD_losses * pointsDeff[2] + archerD_losses * pointsDeff[3] + lcD_losses * pointsDeff[4] + maD_losses * pointsDeff[5] + hcD_losses * pointsDeff[6] + ramD_losses * pointsDeff[7] + catapultD_losses * pointsDeff[8] + knightD_losses * pointsDeff[9] + snobD_losses * pointsDeff[10] + trebuchetD_losses * pointsDeff[11] + berserkerD_losses * pointsDeff[12]
+            bashpointsDefender = spearA_losses * pointsAttack[0] + swordA_losses * pointsAttack[1] + axeA_losses * pointsAttack[2] + archerA_losses * pointsAttack[3] + lcA_losses * pointsAttack[4] + maA_losses * pointsAttack[5] + hcA_losses * pointsAttack[6] + ramA_losses * pointsAttack[7] + catapultA_losses * pointsAttack[8] + knightA_losses * pointsAttack[9] + snobA_losses * pointsAttack[10] + trebuchetA_losses * pointsAttack[11] + berserkerA_losses * pointsAttack[12]
+            console.log(bashpointsAttacker, bashpointsDefender)
+            losessPercentFinalAttacker()
+        }
+
+        function losessPercentFinalAttacker() {
+            if (attackerprovision == 0 || lossesprovisionA == 0) {
+                killratioAttacker = 0
+            } else {
+                killratioAttacker = Math.round((-lossesprovisionA / attackerprovision) * 1000) / 1000
+            }
+            console.log(killratioAttacker)
+            largestGroupDCalc()
+        }
+
+        function largestGroupDCalc() {
+            if ((spearD + swordD + axeD + berserkerD > lcD + hcD) && (spearD + swordD + axeD + berserkerD > archerD + maD)) {
+                largestGroupD = 'inf'
+            } else if ((lcD + hcD > spearD + swordD + axeD + berserkerD) && (lcD + hcD > archerD + maD)) {
+                largestGroupD = 'cav'
+            } else {
+                largestGroupD = 'arc'
+            }
+            showLargestGroup()
+        }
+
+        function showLargestGroup() {
+            if (largestGroup == 'inf') {
+                showA = 'piechota'
+            } else if (largestGroup == 'cav') {
+                showA = 'kawaleria'
+            } else {
+                showA = 'łucznicy'
+            }
+            console.log(showA)
+            showLargestGroupD()
+        }
+
+        function showLargestGroupD() {
+            if (largestGroupD == 'inf') {
+                showD = 'piechota'
+            } else if (largestGroupD == 'cav') {
+                showD = 'kawaleria'
+            } else {
+                showD = 'łucznicy'
+            }
+            console.log(showD)
+            losessPercentFinalDefender()
+        }
+
+        function losessPercentFinalDefender() {
+            if (defenderprovision == 0 || lossesprovisionD == 0) {
+                killratioDefender = 0
+            } else {
+                killratioDefender = Math.round((-lossesprovisionD / defenderprovision) * 1000) / 1000
+            }
+            console.log(killratioDefender)
+            revivedA()
+        }
+
+        function revivedA() {
+            spearArevived = Math.round(spearA_losses * (medicBonus + skillMedic))
+            swordArevived = Math.round(swordA_losses * (medicBonus + skillMedic))
+            axeArevived = Math.round(axeA_losses * (medicBonus + skillMedic))
+            archerArevived = Math.round(archerA_losses * (medicBonus + skillMedic))
+            lcArevived = Math.round(lcA_losses * (medicBonus + skillMedic))
+            maArevived = Math.round(maA_losses * (medicBonus + skillMedic))
+            hcArevived = Math.round(hcA_losses * (medicBonus + skillMedic))
+            ramArevived = Math.round(ramA_losses * (medicBonus + skillMedic))
+            catapultArevived = Math.round(catapultA_losses * (medicBonus + skillMedic))
+            snobArevived = Math.round(snobA_losses * (medicBonus + skillMedic))
+            knightArevived = Math.round(knightA_losses * (medicBonus + skillMedic))
+            trebuchetArevived = Math.round(trebuchetA_losses * (medicBonus + skillMedic))
+            berserkerArevived = Math.round(berserkerA_losses * (medicBonus + skillMedic))
+            console.log(spearArevived, swordArevived, axeArevived, archerArevived, lcArevived, maArevived, hcArevived, ramArevived, catapultArevived, snobArevived, knightArevived, trebuchetArevived, berserkerArevived)
+            revivedD()
+        }
+
+        function revivedD() {
+            beds = hospitalBeds + skillClinique
+            if (hospitalBeds == 0) {
+                spearDrevived = 0
+                swordDrevived = 0
+                axeDrevived = 0
+                archerDrevived = 0
+                lcDrevived = 0
+                maDrevived = 0
+                hcDrevived = 0
+            } else if (hospitalBeds < 1000) {
+                if (beds <= ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) / 2)) {
+                    spearDrevived = Math.round(spearD_losses / 2)
+                    swordDrevived = Math.round(swordD_losses / 2)
+                    axeDrevived = Math.round(axeD_losses / 2)
+                    archerDrevived = Math.round(archerD_losses / 2)
+                    lcDrevived = 0
+                    maDrevived = 0
+                    hcDrevived = 0
+                } else {
+                    spearDrevived = Math.round(spearD_losses * beds / (archerD_losses + spearD_losses + swordD_losses + axeD_losses))
+                    swordDrevived = Math.round(swordD_losses * beds / (archerD_losses + spearD_losses + swordD_losses + axeD_losses))
+                    axeDrevived = Math.round(axeD_losses * beds / (archerD_losses + spearD_losses + swordD_losses + axeD_losses))
+                    archerDrevived = Math.round(archerD_losses * beds / (archerD_losses + spearD_losses + swordD_losses + axeD_losses))
+                    lcDrevived = 0
+                    maDrevived = 0
+                    hcDrevived = 0
+                }
+            } else {
+                if (beds <= (((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6) / 2)) {
+                    spearDrevived = Math.round(spearD_losses / 2)
+                    swordDrevived = Math.round(swordD_losses / 2)
+                    axeDrevived = Math.round(axeD_losses / 2)
+                    archerDrevived = Math.round(archerD_losses / 2)
+                    lcDrevived = Math.round(lcD_losses / 2)
+                    maDrevived = Math.round(maD_losses / 2)
+                    hcDrevived = Math.round(hcD_losses / 2)
+                } else {
+                    spearDrevived = Math.round(spearD_losses * beds / ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6))
+                    swordDrevived = Math.round(swordD_losses * beds / ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6))
+                    axeDrevived = Math.round(axeD_losses * beds / ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6))
+                    archerDrevived = Math.round(archerD_losses * beds / ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6))
+                    lcDrevived = Math.round(lcD_losses * beds / ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6))
+                    maDrevived = Math.round(maD_losses * beds / ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6))
+                    hcDrevived = Math.round(hcD_losses * beds / ((archerD_losses + spearD_losses + swordD_losses + axeD_losses) + lcD_losses * 4 + maD_losses * 5 + hcD_losses * 6))
+                }
+            }
+            console.log(spearDrevived, swordDrevived, axeDrevived, archerDrevived, lcDrevived, maDrevived, hcDrevived)
+            survivedProvisions()
+        }
+
+        function survivedProvisions() {
+            survivedProvisionA = attackerprovision + (lossesprovisionA)
+            survivedProvisionD = defenderprovision + (lossesprovisionD)
+        }
+        console.log(survivedProvisionA, survivedProvisionD)
+        getDataBattle()
+    }
+    battleCalculator.calculateT = function() {
+        const spear = battleCalculatorSettings[SETTINGS.TROOPS_SPEAR]
+        const sword = battleCalculatorSettings[SETTINGS.TROOPS_SWORD]
+        const axe = battleCalculatorSettings[SETTINGS.TROOPS_AXE]
+        const archer = battleCalculatorSettings[SETTINGS.TROOPS_ARCHER]
+        const lc = battleCalculatorSettings[SETTINGS.TROOPS_LC]
+        const ma = battleCalculatorSettings[SETTINGS.TROOPS_MA]
+        const hc = battleCalculatorSettings[SETTINGS.TROOPS_HC]
+        const ram = battleCalculatorSettings[SETTINGS.TROOPS_RAM]
+        const catapult = battleCalculatorSettings[SETTINGS.TROOPS_CATAPULT]
+        const berserker = battleCalculatorSettings[SETTINGS.TROOPS_DOPPELSOLDNER]
+        const trebuchet = battleCalculatorSettings[SETTINGS.TROOPS_TREBUCHET]
+        const snob = battleCalculatorSettings[SETTINGS.TROOPS_SNOB]
+        const knight = battleCalculatorSettings[SETTINGS.TROOPS_KNIGHT]
+        const barracks = battleCalculatorSettings[SETTINGS.TROOPS_BARRACKS]
+        const preceptory = battleCalculatorSettings[SETTINGS.TROOPS_PRECEPTORY]
+        const order = battleCalculatorSettings[SETTINGS.TROOPS_ORDER]
+        const intenseTraining = battleCalculatorSettings[SETTINGS.TROOPS_TRAINING]
+        var wood = [50, 30, 60, 80, 125, 250, 200, 300, 320, 0, 40000, 4000, 1200]
+        var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
+        var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
+        var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
+        var build_time = [90, 120, 150, 180, 360, 450, 600, 480, 450, 21600, 10800, 1200, 1200]
+        var attack = [10, 25, 45, 25, 130, 150, 150, 2, 100, 150, 30, 30, 300]
+        var def_inf = [25, 55, 10, 10, 30, 40, 200, 20, 100, 250, 100, 200, 100]
+        var def_kav = [45, 5, 5, 30, 40, 30, 160, 50, 50, 400, 50, 250, 100]
+        var def_arc = [10, 30, 10, 60, 30, 50, 180, 20, 100, 150, 100, 200, 50]
+        var speed = [8, 9, 14, 18, 24, 35, 50, 0]
+        var load = [25, 15, 10, 10, 80, 50, 50, 0, 0, 100, 0, 0, 10]
+        var discipline = [0, 33, 66, 99]
+        let buildTime = 0
+        let factor = 1
+        let researchFactor = 1
+        let effectFactor = 1
+        let preceptoryBonus = 1
+        let barracksModifier = 1
+        let barracksEffectModifier = 1
+        let barracksPreceptoryModifier = 1
+        let preceptoryModifier = 1
+        let intenseTrainingEffect = 0
+
+        function checkResearches() {
+            if (barracks >= 10 && barracks < 20) {
+                researchFactor = 1.05
+            } else if (barracks >= 20 && barracks < 25) {
+                researchFactor = 1.15
+            } else if (barracks >= 25) {
+                researchFactor = 1.30
+            } else {
+                researchFactor = 1.00
+            }
+            checkTribeEffect()
+        }
+
+        function checkTribeEffect() {
+            if (intenseTraining == 'level_1') {
+                intenseTrainingEffect = 1.04
+            } else if (intenseTraining == 'level_2') {
+                intenseTrainingEffect = 1.08
+            } else if (intenseTraining == 'level_3') {
+                intenseTrainingEffect = 1.12
+            } else if (intenseTraining == 'level_4') {
+                intenseTrainingEffect = 1.16
+            } else if (intenseTraining == 'level_5') {
+                intenseTrainingEffect = 1.20
+            } else {
+                intenseTrainingEffect = 1.00
+            }
+            checkPreceptory()
+        }
+
+        function checkPreceptory() {
+            if (preceptory == 1) {
+                preceptoryBonus = 1.01
+            } else if (preceptory == 2) {
+                preceptoryBonus = 1.02
+            } else if (preceptory == 3) {
+                preceptoryBonus = 1.03
+            } else if (preceptory == 4) {
+                preceptoryBonus = 1.04
+            } else if (preceptory == 5) {
+                preceptoryBonus = 1.05
+            } else if (preceptory == 6) {
+                preceptoryBonus = 1.06
+            } else if (preceptory == 7) {
+                preceptoryBonus = 1.07
+            } else if (preceptory == 8) {
+                preceptoryBonus = 1.08
+            } else if (preceptory == 9) {
+                preceptoryBonus = 1.09
+            } else if (preceptory == 10) {
+                preceptoryBonus = 1.10
+            } else {
+                preceptoryBonus = 1.00
+            }
+            checkDomination()
+        }
+
+        function checkDomination() {
+            const domination = battleCalculatorSettings[SETTINGS.TROOPS_DOMINATION]
+            if (domination) {
+                effectFactor = 1.10
+            } else {
+                effectFactor = 1.00
+            }
+            checkTravel()
+        }
+
+        function checkTravel() {
+            if (trebuchet > 0) {
+                travelTime = speed[6] + ' minut'
+            } else if (snob > 0) {
+                travelTime = speed[5] + ' minut'
+            } else if (ram > 0 || catapult > 0) {
+                travelTime = speed[4] + ' minuty'
+            } else if (sword > 0) {
+                travelTime = speed[3] + ' minut'
+            } else if (spear > 0 || axe > 0 || archer > 0 || berserker > 0) {
+                travelTime = speed[2] + ' minut'
+            } else if (hc > 0) {
+                travelTime = speed[1] + ' minut'
+            } else if (lc > 0 || ma > 0 || knight > 0) {
+                travelTime = speed[0] + ' minut'
+            } else {
+                travelTime = speed[7] + ' minut'
+            }
+            checkDiscipline()
+        }
+
+        function checkDiscipline() {
+            if (barracks >= 7 && barracks < 14) {
+                disciplinePercent = discipline[1]
+            } else if (barracks >= 14 && barracks < 23) {
+                disciplinePercent = discipline[2]
+            } else if (barracks >= 23) {
+                disciplinePercent = discipline[3]
+            } else {
+                disciplinePercent = discipline[0]
+            }
+            calculateModifier()
+        }
+
+        function calculateModifier() {
+            barracksEffectModifier = factor / (effectFactor * intenseTrainingEffect)
+            barracksModifier = barracksEffectModifier / researchFactor
+            barracksPreceptoryModifier = barracksModifier / preceptoryBonus
+            preceptoryModifier = factor / preceptoryBonus
+            calculateBuildtime()
+        }
+
+        function calculateBuildtime() {
+            if (order == 'troops.teutonic') {
+                buildTime = barracksPreceptoryModifier * (spear * build_time[0] + sword * build_time[1] + archer * build_time[3] + hc * build_time[6]) + preceptoryModifier * (trebuchet * build_time[11]) + barracksModifier * (axe * build_time[2] + lc * build_time[4] + ma * build_time[5] + ram * build_time[7] + catapult * build_time[8]) + berserker * build_time[12] + knight * build_time[9] + snob * build_time[10]
+            } else if (order == 'troops.templars') {
+                buildTime = barracksModifier * (spear * build_time[0] + sword * build_time[1] + archer * build_time[3] + hc * build_time[6]) + trebuchet * build_time[11] + barracksPreceptoryModifier * (axe * build_time[2] + lc * build_time[4] + ma * build_time[5] + ram * build_time[7] + catapult * build_time[8]) + preceptoryModifier * (berserker * build_time[12]) + knight * build_time[9] + snob * build_time[10]
+            } else {
+                buildTime = barracksModifier * (spear * build_time[0] + sword * build_time[1] + archer * build_time[3] + hc * build_time[6]) + trebuchet * build_time[11] + barracksModifier * (axe * build_time[2] + lc * build_time[4] + ma * build_time[5] + ram * build_time[7] + catapult * build_time[8]) + berserker * build_time[12] + knight * build_time[9] + snob * build_time[10]
+            }
+            updateDisplay()
+        }
+
+        function secondsToDaysHHMMSS(totalSeconds) {
+            var returnString = ''
+            var date = new Date(totalSeconds * 1000)
+            var hhmmss = date.toISOString().substr(11, 8)
+            var numdays = Math.floor(totalSeconds / 86400)
+            if (numdays > 1) {
+                returnString = numdays + ' dni i '
+            } else if (numdays > 0) {
+                returnString = '1 dzień i '
+            }
+            returnString += hhmmss
+            return returnString
+        }
+
+        function updateDisplay() {
+            woodAmount = spear * wood[0] + sword * wood[1] + axe * wood[2] + archer * wood[3] + lc * wood[4] + ma * wood[5] + hc * wood[6] + ram * wood[7] + catapult * wood[8] + knight * wood[9] + snob * wood[10] + trebuchet * wood[11] + berserker * wood[12]
+            clayAmount = spear * clay[0] + sword * clay[1] + axe * clay[2] + archer * clay[3] + lc * clay[4] + ma * clay[5] + hc * clay[6] + ram * clay[7] + catapult * clay[8] + knight * clay[9] + snob * clay[10] + trebuchet * clay[11] + berserker * clay[12]
+            ironAmount = spear * iron[0] + sword * iron[1] + axe * iron[2] + archer * iron[3] + lc * iron[4] + ma * iron[5] + hc * iron[6] + ram * iron[7] + catapult * iron[8] + knight * iron[9] + snob * iron[10] + trebuchet * iron[11] + berserker * iron[12]
+            foodAmount = spear * food[0] + sword * food[1] + axe * food[2] + archer * food[3] + lc * food[4] + ma * food[5] + hc * food[6] + ram * food[7] + catapult * food[8] + knight * food[9] + snob * food[10] + trebuchet * food[11] + berserker * food[12]
+            attackPower = spear * attack[0] + sword * attack[1] + axe * attack[2] + archer * attack[3] + lc * attack[4] + ma * attack[5] + hc * attack[6] + ram * attack[7] + catapult * attack[8] + knight * attack[9] + snob * attack[10] + trebuchet * attack[11] + berserker * attack[12]
+            defInf = spear * def_inf[0] + sword * def_inf[1] + axe * def_inf[2] + archer * def_inf[3] + lc * def_inf[4] + ma * def_inf[5] + hc * def_inf[6] + ram * def_inf[7] + catapult * def_inf[8] + knight * def_inf[9] + snob * def_inf[10] + trebuchet * def_inf[11] + berserker * def_inf[12]
+            defCav = spear * def_kav[0] + sword * def_kav[1] + axe * def_kav[2] + archer * def_kav[3] + lc * def_kav[4] + ma * def_kav[5] + hc * def_kav[6] + ram * def_kav[7] + catapult * def_kav[8] + knight * def_kav[9] + snob * def_kav[10] + trebuchet * def_kav[11] + berserker * def_kav[12]
+            defArch = spear * def_arc[0] + sword * def_arc[1] + axe * def_arc[2] + archer * def_arc[3] + lc * def_arc[4] + ma * def_arc[5] + hc * def_arc[6] + ram * def_arc[7] + catapult * def_arc[8] + knight * def_arc[9] + snob * def_arc[10] + trebuchet * def_arc[11] + berserker * def_arc[12]
+            loadAmount = spear * load[0] + sword * load[1] + axe * load[2] + archer * load[3] + lc * load[4] + ma * load[5] + hc * load[6] + ram * load[7] + catapult * load[8] + knight * load[9] + snob * load[10] + trebuchet * load[11] + berserker * load[12]
+            finalTime = secondsToDaysHHMMSS(buildTime)
+            attInf = spear * attack[0] + sword * attack[1] + axe * attack[2] + ram * attack[7] + catapult * attack[8] + trebuchet * attack[11] + berserker * attack[12]
+            attCav = lc * attack[4] + hc * attack[6] + knight * attack[9]
+            attArc = archer * attack[3] + ma * attack[5]
+        }
+        checkResearches()
+    }
+    battleCalculator.start = function() {
         running = true
-
-
         eventQueue.trigger(eventTypeProvider.BATTLE_CALCULATOR_START)
     }
-
-    battleCalculator.stop = function () {
+    battleCalculator.stop = function() {
         running = false
-
-        console.log('battleCalculator stop')
-
         eventQueue.trigger(eventTypeProvider.BATTLE_CALCULATOR_STOP)
     }
-
-    battleCalculator.getSettings = function () {
+    battleCalculator.getSettings = function() {
         return settings
     }
-
-    battleCalculator.isInitialized = function () {
+    battleCalculator.isInitialized = function() {
         return initialized
     }
-
-    battleCalculator.isRunning = function () {
+    battleCalculator.isRunning = function() {
         return running
     }
-
+    battleCalculator.getBashpointsAtt = function() {
+        return pointsdef
+    }
+    battleCalculator.getBashpointsDef = function() {
+        return pointsatt
+    }
+    battleCalculator.getWoodAmount = function() {
+        return woodAmount
+    }
+    battleCalculator.getClayAmount = function() {
+        return clayAmount
+    }
+    battleCalculator.getIronAmount = function() {
+        return ironAmount
+    }
+    battleCalculator.getLoadAmount = function() {
+        return loadAmount
+    }
+    battleCalculator.getFoodAmount = function() {
+        return foodAmount
+    }
+    battleCalculator.getDefInf = function() {
+        return defInf
+    }
+    battleCalculator.getDefCav = function() {
+        return defCav
+    }
+    battleCalculator.getDefArc = function() {
+        return defArch
+    }
+    battleCalculator.getAttInf = function() {
+        return attInf
+    }
+    battleCalculator.getAttCav = function() {
+        return attCav
+    }
+    battleCalculator.getAttArc = function() {
+        return attArc
+    }
+    battleCalculator.getSpeed = function() {
+        return travelTime
+    }
+    battleCalculator.getBuildTime = function() {
+        return finalTime
+    }
+    battleCalculator.getDiscipline = function() {
+        return disciplinePercent
+    }
+    battleCalculator.getPower = function() {
+        return attackPower
+    }
+    battleCalculator.getTarget = function() {
+        return catTarget
+    }
+    battleCalculator.getBuildingfrom = function() {
+        return catapulttargetlevel
+    }
+    battleCalculator.getBuildingto = function() {
+        return afterBattleTargetLevel
+    }
+    battleCalculator.getWallfrom = function() {
+        return wallAfterPreround
+    }
+    battleCalculator.getWallto = function() {
+        return afterRamAttackPastBattle
+    }
+    battleCalculator.getWallfrompre = function() {
+        return wall
+    }
+    battleCalculator.getWalltopre = function() {
+        return wallAfterPreround
+    }
+    battleCalculator.getDefencemodifier = function() {
+        return overalModifierDef
+    }
+    battleCalculator.getDefenceprovisions = function() {
+        return defenderprovision
+    }
+    battleCalculator.getStrentghdefend = function() {
+        return strengthDefenderRound1
+    }
+    battleCalculator.getDefencebashpoint = function() {
+        return bashpointsDefender
+    }
+    battleCalculator.getDefencekilledprovisions = function() {
+        return lossesprovisionD
+    }
+    battleCalculator.getStrongesttypedef = function() {
+        return showD
+    }
+    battleCalculator.getKillrated = function() {
+        return killratioDefender
+    }
+    battleCalculator.getDefencesurvivedprovisions = function() {
+        return survivedProvisionD
+    }
+    battleCalculator.getAvailablebeds = function() {
+        return beds
+    }
+    battleCalculator.getAttackmodifier = function() {
+        return overalModifierOff
+    }
+    battleCalculator.getAttackprovisions = function() {
+        return attackerprovision
+    }
+    battleCalculator.getStrentghattack = function() {
+        return strengthAttackerRound1
+    }
+    battleCalculator.getAttackbashpoint = function() {
+        return bashpointsAttacker
+    }
+    battleCalculator.getAttackkilledprovisions = function() {
+        return lossesprovisionA
+    }
+    battleCalculator.getStrongesttypeoff = function() {
+        return showA
+    }
+    battleCalculator.getKillratea = function() {
+        return killratioAttacker
+    }
+    battleCalculator.getAttacksurvivedprovisions = function() {
+        return survivedProvisionA
+    }
+    battleCalculator.getDoublestrength = function() {
+        return doubleStrengthBonus
+    }
+    battleCalculator.getSpeardAmount = function() {
+        return spearD
+    }
+    battleCalculator.getSpeardLosses = function() {
+        return spearD_losses
+    }
+    battleCalculator.getSpeardRevived = function() {
+        return spearDrevived
+    }
+    battleCalculator.getSpeardSurvived = function() {
+        return spearD_survivorsRound3
+    }
+    battleCalculator.getSworddAmount = function() {
+        return swordD
+    }
+    battleCalculator.getSworddLosses = function() {
+        return swordD_losses
+    }
+    battleCalculator.getSworddRevived = function() {
+        return swordDrevived
+    }
+    battleCalculator.getSworddSurvived = function() {
+        return swordD_survivorsRound3
+    }
+    battleCalculator.getAxedAmount = function() {
+        return axeD
+    }
+    battleCalculator.getAxedLosses = function() {
+        return axeD_losses
+    }
+    battleCalculator.getAxedRevived = function() {
+        return axeDrevived
+    }
+    battleCalculator.getAxedSurvived = function() {
+        return axeD_survivorsRound3
+    }
+    battleCalculator.getArcherdAmount = function() {
+        return archerD
+    }
+    battleCalculator.getArcherdLosses = function() {
+        return archerD_losses
+    }
+    battleCalculator.getArcherdRevived = function() {
+        return archerDrevived
+    }
+    battleCalculator.getArcherdSurvived = function() {
+        return archerD_survivorsRound3
+    }
+    battleCalculator.getSnobdAmount = function() {
+        return snobD
+    }
+    battleCalculator.getSnobdLosses = function() {
+        return snobD_losses
+    }
+    battleCalculator.getSnobdSurvived = function() {
+        return snobD_survivorsRound3
+    }
+    battleCalculator.getKnightdAmount = function() {
+        return knightD
+    }
+    battleCalculator.getKnightdLosses = function() {
+        return knightD_losses
+    }
+    battleCalculator.getKnightdSurvived = function() {
+        return knightD_survivorsRound3
+    }
+    battleCalculator.getRamdAmount = function() {
+        return ramD
+    }
+    battleCalculator.getRamdLosses = function() {
+        return ramD_losses
+    }
+    battleCalculator.getRamdSurvived = function() {
+        return ramD_survivorsRound3
+    }
+    battleCalculator.getCatapultdAmount = function() {
+        return catapultD
+    }
+    battleCalculator.getCatapultdLosses = function() {
+        return catapultD_losses
+    }
+    battleCalculator.getCatapultdSurvived = function() {
+        return catapultD_survivorsRound3
+    }
+    battleCalculator.getTrebuchetdAmount = function() {
+        return trebuchetD
+    }
+    battleCalculator.getTrebuchetdLosses = function() {
+        return trebuchetD_losses
+    }
+    battleCalculator.getTrebuchetdSurvived = function() {
+        return trebuchetD_survivorsRound3
+    }
+    battleCalculator.getLcdAmount = function() {
+        return lcD
+    }
+    battleCalculator.getLcdLosses = function() {
+        return lcD_losses
+    }
+    battleCalculator.getLcdRevived = function() {
+        return lcDrevived
+    }
+    battleCalculator.getLcdSurvived = function() {
+        return lcD_survivorsRound3
+    }
+    battleCalculator.getMadAmount = function() {
+        return maD
+    }
+    battleCalculator.getMadLosses = function() {
+        return maD_losses
+    }
+    battleCalculator.getMadRevived = function() {
+        return maDrevived
+    }
+    battleCalculator.getMadSurvived = function() {
+        return maD_survivorsRound3
+    }
+    battleCalculator.getHcdAmount = function() {
+        return hcD
+    }
+    battleCalculator.getHcdLosses = function() {
+        return hcD_losses
+    }
+    battleCalculator.getHcdRevived = function() {
+        return hcDrevived
+    }
+    battleCalculator.getHcdSurvived = function() {
+        return hcD_survivorsRound3
+    }
+    battleCalculator.getBerserkerdAmount = function() {
+        return berserkerD
+    }
+    battleCalculator.getBerserkerdLosses = function() {
+        return berserkerD_losses
+    }
+    battleCalculator.getBerserkerdSurvived = function() {
+        return berserkerD_survivorsRound3
+    }
+    battleCalculator.getSpearaAmount = function() {
+        return spearA
+    }
+    battleCalculator.getSpearaLosses = function() {
+        return spearA_losses
+    }
+    battleCalculator.getSpearaRevived = function() {
+        return spearArevived
+    }
+    battleCalculator.getSpearaSurvived = function() {
+        return spearA_survivorsRound3
+    }
+    battleCalculator.getSwordaAmount = function() {
+        return swordA
+    }
+    battleCalculator.getSwordaLosses = function() {
+        return swordA_losses
+    }
+    battleCalculator.getSwordaRevived = function() {
+        return swordArevived
+    }
+    battleCalculator.getSwordaSurvived = function() {
+        return swordA_survivorsRound3
+    }
+    battleCalculator.getAxeaAmount = function() {
+        return axeA
+    }
+    battleCalculator.getAxeaLosses = function() {
+        return axeA_losses
+    }
+    battleCalculator.getAxeaRevived = function() {
+        return axeArevived
+    }
+    battleCalculator.getAxeaSurvived = function() {
+        return axeA_survivorsRound3
+    }
+    battleCalculator.getArcheraAmount = function() {
+        return archerA
+    }
+    battleCalculator.getArcheraLosses = function() {
+        return archerA_losses
+    }
+    battleCalculator.getArcheraRevived = function() {
+        return archerArevived
+    }
+    battleCalculator.getArcheraSurvived = function() {
+        return archerA_survivorsRound3
+    }
+    battleCalculator.getSnobaAmount = function() {
+        return snobA
+    }
+    battleCalculator.getSnobaLosses = function() {
+        return snobA_losses
+    }
+    battleCalculator.getSnobaRevived = function() {
+        return snobArevived
+    }
+    battleCalculator.getSnobaSurvived = function() {
+        return snobA_survivorsRound3
+    }
+    battleCalculator.getKnightaAmount = function() {
+        return knightA
+    }
+    battleCalculator.getKnightaLosses = function() {
+        return knightA_losses
+    }
+    battleCalculator.getKnightaRevived = function() {
+        return knightArevived
+    }
+    battleCalculator.getKnightaSurvived = function() {
+        return knightA_survivorsRound3
+    }
+    battleCalculator.getRamaAmount = function() {
+        return ramA
+    }
+    battleCalculator.getRamaLosses = function() {
+        return ramA_losses
+    }
+    battleCalculator.getRamaRevived = function() {
+        return ramArevived
+    }
+    battleCalculator.getRamaSurvived = function() {
+        return ramA_survivorsRound3
+    }
+    battleCalculator.getCatapultaAmount = function() {
+        return catapultA
+    }
+    battleCalculator.getCatapultaLosses = function() {
+        return catapultA_losses
+    }
+    battleCalculator.getCatapultaRevived = function() {
+        return catapultArevived
+    }
+    battleCalculator.getCatapultaSurvived = function() {
+        return catapultA_survivorsRound3
+    }
+    battleCalculator.getTrebuchetaAmount = function() {
+        return trebuchetA
+    }
+    battleCalculator.getTrebuchetaLosses = function() {
+        return trebuchetA_losses
+    }
+    battleCalculator.getTrebuchetaRevived = function() {
+        return trebuchetArevived
+    }
+    battleCalculator.getTrebuchetaSurvived = function() {
+        return trebuchetA_survivorsRound3
+    }
+    battleCalculator.getLcaAmount = function() {
+        return lcA
+    }
+    battleCalculator.getLcaLosses = function() {
+        return lcA_losses
+    }
+    battleCalculator.getLcaRevived = function() {
+        return lcArevived
+    }
+    battleCalculator.getLcaSurvived = function() {
+        return lcA_survivorsRound3
+    }
+    battleCalculator.getMaaAmount = function() {
+        return maA
+    }
+    battleCalculator.getMaaLosses = function() {
+        return maA_losses
+    }
+    battleCalculator.getMaaRevived = function() {
+        return maArevived
+    }
+    battleCalculator.getMaaSurvived = function() {
+        return maA_survivorsRound3
+    }
+    battleCalculator.getHcaAmount = function() {
+        return hcA
+    }
+    battleCalculator.getHcaLosses = function() {
+        return hcA_losses
+    }
+    battleCalculator.getHcaRevived = function() {
+        return hcArevived
+    }
+    battleCalculator.getHcaSurvived = function() {
+        return hcA_survivorsRound3
+    }
+    battleCalculator.getBerserkeraAmount = function() {
+        return berserkerA
+    }
+    battleCalculator.getBerserkeraLosses = function() {
+        return berserkerA_losses
+    }
+    battleCalculator.getBerserkeraRevived = function() {
+        return berserkerArevived
+    }
+    battleCalculator.getBerserkeraSurvived = function() {
+        return berserkerA_survivorsRound3
+    }
     return battleCalculator
 })
-
 define('two/battleCalculator/events', [], function () {
     angular.extend(eventTypeProvider, {
         BATTLE_CALCULATOR_START: 'battle_calculator_start',
@@ -6842,7 +10858,7 @@ define('two/battleCalculator/ui', [
     'two/Settings',
     'two/EventScope',
     'two/utils'
-], function (
+], function(
     interfaceOverflow,
     battleCalculator,
     SETTINGS,
@@ -6866,99 +10882,387 @@ define('two/battleCalculator/ui', [
     let presetList = modelDataService.getPresetList()
     let settings
     let $button
-    
     const TAB_TYPES = {
         BATTLE: 'battle',
         TROOPS: 'troops',
         BASHPOINTS: 'bashpoints'
     }
-
-    const selectTab = function (tabType) {
+    const selectTab = function(tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
+    const switchState = function() {
         if (battleCalculator.isRunning()) {
             battleCalculator.stop()
         } else {
             battleCalculator.start()
         }
     }
-
+    const showBashpoints = function() {
+        settings.setAll(settings.decode($scope.settings))
+        battleCalculator.calculateB()
+        let bashpointsAtt = battleCalculator.getBashpointsAtt()
+        let bashpointsDef = battleCalculator.getBashpointsDef()
+        if (bashpointsAtt) {
+            $scope.totalAtt = bashpointsAtt
+        }
+        if (bashpointsDef) {
+            $scope.totalDef = bashpointsDef
+        }
+    }
+    const showBattleScore = function() {
+        settings.setAll(settings.decode($scope.settings))
+        battleCalculator.simulate()
+        let target = battleCalculator.getTarget()
+        let buildingfrom = battleCalculator.getBuildingfrom()
+        let buildingto = battleCalculator.getBuildingto()
+        let wallfrom = battleCalculator.getWallfrom()
+        let wallto = battleCalculator.getWallto()
+        let wallfrompre = battleCalculator.getWallfrompre()
+        let walltopre = battleCalculator.getWalltopre()
+        let defenceModifier = battleCalculator.getDefencemodifier() * 100
+        let defenceProvisions = battleCalculator.getDefenceprovisions()
+        let strentghDefend = battleCalculator.getStrentghdefend()
+        let defenceBashpoint = -battleCalculator.getDefencebashpoint()
+        let defenceKilledProvisions = -battleCalculator.getDefencekilledprovisions()
+        let strongestTypeDef = battleCalculator.getStrongesttypedef()
+        let killrateD = battleCalculator.getKillrated() * 100
+        let defenceSurvivedProvisions = battleCalculator.getDefencesurvivedprovisions()
+        let availableBeds = battleCalculator.getAvailablebeds()
+        let attackModifier = battleCalculator.getAttackmodifier() * 100
+        let attackProvisions = battleCalculator.getAttackprovisions()
+        let strentghAttack = battleCalculator.getStrentghattack()
+        let attackBashpoint = -battleCalculator.getAttackbashpoint()
+        let attackKilledProvisions = -battleCalculator.getAttackkilledprovisions()
+        let strongestTypeOff = battleCalculator.getStrongesttypeoff()
+        let killrateA = battleCalculator.getKillratea() * 100
+        let attackSurvivedProvisions = battleCalculator.getAttacksurvivedprovisions()
+        let doubleStrength = battleCalculator.getDoublestrength()
+		
+        let spearDamount = battleCalculator.getSpeardAmount()
+        let spearDlosses = -battleCalculator.getSpeardLosses()
+        let spearDrevived = battleCalculator.getSpeardRevived()
+        let spearDsurvived = battleCalculator.getSpeardSurvived()
+        let swordDamount = battleCalculator.getSworddAmount()
+        let swordDlosses = -battleCalculator.getSworddLosses()
+        let swordDrevived = battleCalculator.getSworddRevived()
+        let swordDsurvived = battleCalculator.getSworddSurvived()
+        let axeDamount = battleCalculator.getAxedAmount()
+        let axeDlosses = -battleCalculator.getAxedLosses()
+        let axeDrevived = battleCalculator.getAxedRevived()
+        let axeDsurvived = battleCalculator.getAxedSurvived()
+        let archerDamount = battleCalculator.getArcherdAmount()
+        let archerDlosses = -battleCalculator.getArcherdLosses()
+        let archerDrevived = battleCalculator.getArcherdRevived()
+        let archerDsurvived = battleCalculator.getArcherdSurvived()
+        let snobDamount = battleCalculator.getSnobdAmount()
+        let snobDlosses = -battleCalculator.getSnobdLosses()
+        let snobDrevived = 0
+        let snobDsurvived = battleCalculator.getSnobdSurvived()
+        let knightDamount = battleCalculator.getKnightdAmount()
+        let knightDlosses = -battleCalculator.getKnightdLosses()
+        let knightDrevived = 0
+        let knightDsurvived = battleCalculator.getKnightdSurvived()
+        let ramDamount = battleCalculator.getRamdAmount()
+        let ramDlosses = -battleCalculator.getRamdLosses()
+        let ramDrevived = 0
+        let ramDsurvived = battleCalculator.getRamdSurvived()
+        let catapultDamount = battleCalculator.getCatapultdAmount()
+        let catapultDlosses = -battleCalculator.getCatapultdLosses()
+        let catapultDrevived = 0
+        let catapultDsurvived = battleCalculator.getCatapultdSurvived()
+        let trebuchetDamount = battleCalculator.getTrebuchetdAmount()
+        let trebuchetDlosses = -battleCalculator.getTrebuchetdLosses()
+        let trebuchetDrevived = 0
+        let trebuchetDsurvived = battleCalculator.getTrebuchetdSurvived()
+        let lcDamount = battleCalculator.getLcdAmount()
+        let lcDlosses = -battleCalculator.getLcdLosses()
+        let lcDrevived = battleCalculator.getLcdRevived()
+        let lcDsurvived = battleCalculator.getLcdSurvived()
+        let maDamount = battleCalculator.getMadAmount()
+        let maDlosses = -battleCalculator.getMadLosses()
+        let maDrevived = battleCalculator.getMadRevived()
+        let maDsurvived = battleCalculator.getMadSurvived()
+        let hcDamount = battleCalculator.getHcdAmount()
+        let hcDlosses = -battleCalculator.getHcdLosses()
+        let hcDrevived = battleCalculator.getHcdRevived()
+        let hcDsurvived = battleCalculator.getHcdSurvived()
+        let berserkerDamount = battleCalculator.getBerserkerdAmount()
+        let berserkerDlosses = -battleCalculator.getBerserkerdLosses()
+        let berserkerDrevived = 0
+        let berserkerDsurvived = battleCalculator.getBerserkerdSurvived()
+        let spearAamount = battleCalculator.getSpearaAmount()
+        let spearAlosses = -battleCalculator.getSpearaLosses()
+        let spearArevived = -battleCalculator.getSpearaRevived()
+        let spearAsurvived = battleCalculator.getSpearaSurvived()
+        let swordAamount = battleCalculator.getSwordaAmount()
+        let swordAlosses = -battleCalculator.getSwordaLosses()
+        let swordArevived = -battleCalculator.getSwordaRevived()
+        let swordAsurvived = battleCalculator.getSwordaSurvived()
+        let axeAamount = battleCalculator.getAxeaAmount()
+        let axeAlosses = -battleCalculator.getAxeaLosses()
+        let axeArevived = -battleCalculator.getAxeaRevived()
+        let axeAsurvived = battleCalculator.getAxeaSurvived()
+        let archerAamount = battleCalculator.getArcheraAmount()
+        let archerAlosses = -battleCalculator.getArcheraLosses()
+        let archerArevived = -battleCalculator.getArcheraRevived()
+        let archerAsurvived = battleCalculator.getArcheraSurvived()
+        let snobAamount = battleCalculator.getSnobaAmount()
+        let snobAlosses = -battleCalculator.getSnobaLosses()
+        let snobArevived = -battleCalculator.getSnobaRevived()
+        let snobAsurvived = battleCalculator.getSnobaSurvived()
+        let knightAamount = battleCalculator.getKnightaAmount()
+        let knightAlosses = -battleCalculator.getKnightaLosses()
+        let knightArevived = -battleCalculator.getKnightaRevived()
+        let knightAsurvived = battleCalculator.getKnightaSurvived()
+        let ramAamount = battleCalculator.getRamaAmount()
+        let ramAlosses = -battleCalculator.getRamaLosses()
+        let ramArevived = -battleCalculator.getRamaRevived()
+        let ramAsurvived = battleCalculator.getRamaSurvived()
+        let catapultAamount = battleCalculator.getCatapultaAmount()
+        let catapultAlosses = -battleCalculator.getCatapultaLosses()
+        let catapultArevived = -battleCalculator.getCatapultaRevived()
+        let catapultAsurvived = battleCalculator.getCatapultaSurvived()
+        let trebuchetAamount = battleCalculator.getTrebuchetaAmount()
+        let trebuchetAlosses = -battleCalculator.getTrebuchetaLosses()
+        let trebuchetArevived = -battleCalculator.getTrebuchetaRevived()
+        let trebuchetAsurvived = battleCalculator.getTrebuchetaSurvived()
+        let lcAamount = battleCalculator.getLcaAmount()
+        let lcAlosses = -battleCalculator.getLcaLosses()
+        let lcArevived = -battleCalculator.getLcaRevived()
+        let lcAsurvived = battleCalculator.getLcaSurvived()
+        let maAamount = battleCalculator.getMaaAmount()
+        let maAlosses = -battleCalculator.getMaaLosses()
+        let maArevived = -battleCalculator.getMaaRevived()
+        let maAsurvived = battleCalculator.getMaaSurvived()
+        let hcAamount = battleCalculator.getHcaAmount()
+        let hcAlosses = -battleCalculator.getHcaLosses()
+        let hcArevived = -battleCalculator.getHcaRevived()
+        let hcAsurvived = battleCalculator.getHcaSurvived()
+        let berserkerAamount = battleCalculator.getBerserkeraAmount()
+        let berserkerAlosses = -battleCalculator.getBerserkeraLosses()
+        let berserkerArevived = -battleCalculator.getBerserkeraRevived()
+        let berserkerAsurvived = battleCalculator.getBerserkeraSurvived()
+        $scope.spearDamount = spearDamount
+        $scope.spearDlosses = spearDlosses
+        $scope.spearDrevived = spearDrevived
+        $scope.spearDsurvived = spearDsurvived
+        $scope.swordDamount = swordDamount
+        $scope.swordDlosses = swordDlosses
+        $scope.swordDrevived = swordDrevived
+        $scope.swordDsurvived = swordDsurvived
+        $scope.axeDamount = axeDamount
+        $scope.axeDlosses = axeDlosses
+        $scope.axeDrevived = axeDrevived
+        $scope.axeDsurvived = axeDsurvived
+        $scope.archerDamount = archerDamount
+        $scope.archerDlosses = archerDlosses
+        $scope.archerDrevived = archerDrevived
+        $scope.archerDsurvived = archerDsurvived
+        $scope.snobDamount = snobDamount
+        $scope.snobDlosses = snobDlosses
+        $scope.snobDrevived = snobDrevived
+        $scope.snobDsurvived = snobDsurvived
+        $scope.knightDamount = knightDamount
+        $scope.knightDlosses = knightDlosses
+        $scope.knightDrevived = knightDrevived
+        $scope.knightDsurvived = knightDsurvived
+        $scope.ramDamount = ramDamount
+        $scope.ramDlosses = ramDlosses
+        $scope.ramDrevived = ramDrevived
+        $scope.ramDsurvived = ramDsurvived
+        $scope.catapultDamount = catapultDamount
+        $scope.catapultDlosses = catapultDlosses
+        $scope.catapultDrevived = catapultDrevived
+        $scope.catapultDsurvived = catapultDsurvived
+        $scope.trebuchetDamount = trebuchetDamount
+        $scope.trebuchetDlosses = trebuchetDlosses
+        $scope.trebuchetDrevived = trebuchetDrevived
+        $scope.trebuchetDsurvived = trebuchetDsurvived
+        $scope.lcDamount = lcDamount
+        $scope.lcDlosses = lcDlosses
+        $scope.lcDrevived = lcDrevived
+        $scope.lcDsurvived = lcDsurvived
+        $scope.maDamount = maDamount
+        $scope.maDlosses = maDlosses
+        $scope.maDrevived = maDrevived
+        $scope.maDsurvived = maDsurvived
+        $scope.hcDamount = hcDamount
+        $scope.hcDlosses = hcDlosses
+        $scope.hcDrevived = hcDrevived
+        $scope.hcDsurvived = hcDsurvived
+        $scope.berserkerDamount = berserkerDamount
+        $scope.berserkerDlosses = berserkerDlosses
+        $scope.berserkerDrevived = berserkerDrevived
+        $scope.berserkerDsurvived = berserkerDsurvived
+        $scope.spearAamount = spearAamount
+        $scope.spearAlosses = spearAlosses
+        $scope.spearArevived = spearArevived
+        $scope.spearAsurvived = spearAsurvived
+        $scope.swordAamount = swordAamount
+        $scope.swordAlosses = swordAlosses
+        $scope.swordArevived = swordArevived
+        $scope.swordAsurvived = swordAsurvived
+        $scope.axeAamount = axeAamount
+        $scope.axeAlosses = axeAlosses
+        $scope.axeArevived = axeArevived
+        $scope.axeAsurvived = axeAsurvived
+        $scope.archerAamount = archerAamount
+        $scope.archerAlosses = archerAlosses
+        $scope.archerArevived = archerArevived
+        $scope.archerAsurvived = archerAsurvived
+        $scope.snobAamount = snobAamount
+        $scope.snobAlosses = snobAlosses
+        $scope.snobArevived = snobArevived
+        $scope.snobAsurvived = snobAsurvived
+        $scope.knightAamount = knightAamount
+        $scope.knightAlosses = knightAlosses
+        $scope.knightArevived = knightArevived
+        $scope.knightAsurvived = knightAsurvived
+        $scope.ramAamount = ramAamount
+        $scope.ramAlosses = ramAlosses
+        $scope.ramArevived = ramArevived
+        $scope.ramAsurvived = ramAsurvived
+        $scope.catapultAamount = catapultAamount
+        $scope.catapultAlosses = catapultAlosses
+        $scope.catapultArevived = catapultArevived
+        $scope.catapultAsurvived = catapultAsurvived
+        $scope.trebuchetAamount = trebuchetAamount
+        $scope.trebuchetAlosses = trebuchetAlosses
+        $scope.trebuchetArevived = trebuchetArevived
+        $scope.trebuchetAsurvived = trebuchetAsurvived
+        $scope.lcAamount = lcAamount
+        $scope.lcAlosses = lcAlosses
+        $scope.lcArevived = lcArevived
+        $scope.lcAsurvived = lcAsurvived
+        $scope.maAamount = maAamount
+        $scope.maAlosses = maAlosses
+        $scope.maArevived = maArevived
+        $scope.maAsurvived = maAsurvived
+        $scope.hcAamount = hcAamount
+        $scope.hcAlosses = hcAlosses
+        $scope.hcArevived = hcArevived
+        $scope.hcAsurvived = hcAsurvived
+        $scope.berserkerAamount = berserkerAamount
+        $scope.berserkerAlosses = berserkerAlosses
+        $scope.berserkerArevived = berserkerArevived
+        $scope.berserkerAsurvived = berserkerAsurvived
+        $scope.availableBeds = availableBeds
+        $scope.target = target
+        $scope.buildingfrom = buildingfrom
+        $scope.buildingto = buildingto
+        $scope.wallfrom = wallfrom
+        $scope.wallto = wallto
+        $scope.wallfrompre = wallfrompre
+        $scope.walltopre = walltopre
+        $scope.defenceModifier = defenceModifier
+        $scope.defenceProvisions = defenceProvisions
+        $scope.strentghDefend = strentghDefend
+        $scope.defenceBashpoint = defenceBashpoint
+        $scope.defenceKilledProvisions = defenceKilledProvisions
+        $scope.strongestTypeDef = strongestTypeDef
+        $scope.killrateD = killrateD
+        $scope.defenceSurvivedProvisions = defenceSurvivedProvisions
+        $scope.attackModifier = attackModifier
+        $scope.attackProvisions = attackProvisions
+        $scope.strentghAttack = strentghAttack
+        $scope.attackBashpoint = attackBashpoint
+        $scope.attackKilledProvisions = attackKilledProvisions
+        $scope.strongestTypeOff = strongestTypeOff
+        $scope.killrateA = killrateA
+        $scope.attackSurvivedProvisions = attackSurvivedProvisions
+        $scope.doubleStrength = doubleStrength
+    }
+    const showTroops = function() {
+        settings.setAll(settings.decode($scope.settings))
+        battleCalculator.calculateT()
+        let troopsWood = battleCalculator.getWoodAmount()
+        let troopsClay = battleCalculator.getClayAmount()
+        let troopsIron = battleCalculator.getIronAmount()
+        let troopsLoad = battleCalculator.getLoadAmount()
+        let troopsFood = battleCalculator.getFoodAmount()
+        let troopsDI = battleCalculator.getDefInf()
+        let troopsDC = battleCalculator.getDefCav()
+        let troopsDA = battleCalculator.getDefArc()
+        let troopsAI = battleCalculator.getAttInf()
+        let troopsAC = battleCalculator.getAttCav()
+        let troopsAA = battleCalculator.getAttArc()
+        let troopsSpeed = battleCalculator.getSpeed()
+        let troopsBuild = battleCalculator.getBuildTime()
+        let troopsDiscipline = battleCalculator.getDiscipline()
+        let troopsPower = battleCalculator.getPower()
+        if (troopsWood) {
+            $scope.woodTotal = troopsWood
+            $scope.speedTotal = troopsSpeed
+            $scope.attackTotal = troopsPower
+            $scope.clayTotal = troopsClay
+            $scope.disciplineTotal = troopsDiscipline
+            $scope.definfTotal = troopsDI
+            $scope.ironTotal = troopsIron
+            $scope.loadTotal = troopsLoad
+            $scope.defcavTotal = troopsDC
+            $scope.foodTotal = troopsFood
+            $scope.buildtimeTotal = troopsBuild
+            $scope.defarcTotal = troopsDA
+            $scope.attackinfTotal = troopsAI
+            $scope.attackcavTotal = troopsAC
+            $scope.attackarcTotal = troopsAA
+        }
+    }
     const eventHandlers = {
-        updatePresets: function () {
+        updatePresets: function() {
             $scope.presets = Settings.encodeList(presetList.getPresets(), {
                 disabled: false,
                 type: 'presets'
             })
         },
-        start: function () {
+        start: function() {
             $scope.running = true
-
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-
             utils.notif('success', 'battleCalculator started')
         },
-        stop: function () {
+        stop: function() {
             $scope.running = false
-
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-
             utils.notif('success', 'battleCalculator stopped')
         }
     }
-
-    const init = function () {
+    const init = function() {
         settings = battleCalculator.getSettings()
         $button = interfaceOverflow.addMenuButton4('Kalkulator', 10)
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_battle_calculator_window', `<div id=\"two-battle-calculator\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'battle_calculator' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BATTLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BATTLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BATTLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BATTLE}\">{{ 'battle' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TROOPS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TROOPS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TROOPS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TROOPS}\">{{ 'troops' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BASHPOINTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BASHPOINTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BASHPOINTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BASHPOINTS}\">{{ 'bashpoints' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><h5 class=\"twx-section\">{{ 'battle.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"14\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsA' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span id=\"spearA-amount\" class=\"spearA-amount\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"spearA-losses\" class=\"spearA-losses\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"spearA-revived\" class=\"spearA-revived\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"spearA-survived\" class=\"spearA-survived\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span id=\"swordA-amount\" class=\"swordA-amount\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"swordA-losses\" class=\"swordA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"swordA-revived\" class=\"swordA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"swordA-survived\" class=\"swordA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span id=\"axeA-amount\" class=\"axeA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"axeA-losses\" class=\"axeA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"axeA-revived\" class=\"axeA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"axeA-survived\" class=\"axeA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span id=\"archerA-amount\" class=\"archerA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"archerA-losses\" class=\"archerA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"archerA-revived\" class=\"archerA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"archerA-survived\" class=\"archerA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span id=\"lcA-amount\" class=\"lcA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"lcA-losses\" class=\"lcA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"lcA-revived\" class=\"lcA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"lcA-survived\" class=\"lcA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span id=\"maA-amount\" class=\"maA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"maA-losses\" class=\"maA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"maA-revived\" class=\"maA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"maA-survived\" class=\"maA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span id=\"hcA-amount\" class=\"hcA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"hcA-losses\" class=\"hcA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"hcA-revived\" class=\"hcA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"hcA-survived\" class=\"hcA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span id=\"ramA-amount\" class=\"ramA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"ramA-losses\" class=\"ramA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"ramA-revived\" class=\"ramA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"ramA-survived\" class=\"ramA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span id=\"catapultA-amount\" class=\"catapultA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"catapultA-losses\" class=\"catapultA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"catapultA-revived\" class=\"catapultA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"catapultA-survived\" class=\"catapultA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span id=\"berserkerA-amount\" class=\"berserkerA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"berserkerA-losses\" class=\"berserkerA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"berserkerA-revived\" class=\"berserkerA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"berserkerA-survived\" class=\"berserkerA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span id=\"trebuchetA-amount\" class=\"trebuchetA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"trebuchetA-losses\" class=\"trebuchetA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"trebuchetA-revived\" class=\"trebuchetA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"trebuchetA-survived\" class=\"trebuchetA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span id=\"snobA-amount\" class=\"snobA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"snobA-losses\" class=\"snobA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"snobA-revived\" class=\"snobA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"snobA-survived\" class=\"snobA-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span id=\"knightA-amount\" class=\"knightA-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"knightA-losses\" class=\"knightA-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"knightA-revived\" class=\"knightA-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"knightA-survived\" class=\"knightA-survived\" style=\"text-align:center;color:#000000\">0</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackModifier\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackProvisions\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghAttack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"strentghAttack\"></span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-offensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackBashpoint\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackKilledProvisions\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"strongestTypeOff\"></span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateA' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"killrateA\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackSurvivedProvisions\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-attack_bonus\" tooltip=\"\" tooltip-content=\"{{ 'battle.doublestrength' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"doubleStrength\"></span></div><tr><th colspan=\"14\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span id=\"spearD-amount\" class=\"spearD-amount\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"spearD-losses\" class=\"spearD-losses\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"spearD-revived\" class=\"spearD-revived\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"spearD-survived\" class=\"spearD-survived\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span id=\"swordD-amount\" class=\"swordD-amount\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"swordD-losses\" class=\"swordD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"swordD-revived\" class=\"swordD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"swordD-survived\" class=\"swordD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span id=\"axeD-amount\" class=\"axeD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"axeD-losses\" class=\"axeD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"axeD-revived\" class=\"axeD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"axeD-survived\" class=\"axeD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span id=\"archerD-amount\" class=\"archerD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"archerD-losses\" class=\"archerD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"archerD-revived\" class=\"archerD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"archerD-survived\" class=\"archerD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span id=\"lcD-amount\" class=\"lcD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"lcD-losses\" class=\"lcD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"lcD-revived\" class=\"lcD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"lcD-survived\" class=\"lcD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span id=\"maD-amount\" class=\"maD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"maD-losses\" class=\"maD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"maD-revived\" class=\"maD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"maD-survived\" class=\"maD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span id=\"hcD-amount\" class=\"hcD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"hcD-losses\" class=\"hcD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"hcD-revived\" class=\"hcD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"hcD-survived\" class=\"hcD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span id=\"ramD-amount\" class=\"ramD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"ramD-losses\" class=\"ramD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"ramD-revived\" class=\"ramD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"ramD-survived\" class=\"ramD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span id=\"catapultD-amount\" class=\"catapultD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"catapultD-losses\" class=\"catapultD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"catapultD-revived\" class=\"catapultD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"catapultD-survived\" class=\"catapultD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span id=\"berserkerD-amount\" class=\"berserkerD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"berserkerD-losses\" class=\"berserkerD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"berserkerD-revived\" class=\"berserkerD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"berserkerD-survived\" class=\"berserkerD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span id=\"trebuchetD-amount\" class=\"trebuchetD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"trebuchetD-losses\" class=\"trebuchetD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"trebuchetD-revived\" class=\"trebuchetD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"trebuchetD-survived\" class=\"trebuchetD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span id=\"snobD-amount\" class=\"snobD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"snobD-losses\" class=\"snobD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"snobD-revived\" class=\"snobD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"snobD-survived\" class=\"snobD-survived\" style=\"text-align:center;color:#000000\">0</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span id=\"knightD-amount\" class=\"knightD-amount\" style=\"text-align:center;\">0</span></div><div style=\"text-align:center;color:#a1251f\"><span id=\"knightD-losses\" class=\"knightD-losses\" style=\"text-align:center;color:#a1251f\">0</span></div><div style=\"text-align:center;color:#009fff\"><span id=\"knightD-revived\" class=\"knightD-revived\" style=\"text-align:center;color:#009fff\">0</span></div><div style=\"text-align:center;color:#000000\"><span id=\"knightD-survived\" class=\"knightD-survived\" style=\"text-align:center;color:#000000\">0</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"defenceModifier\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"defenceProvisions\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghDefend' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"strentghDefend\"></span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-defensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"defenceBashpoint\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"defenceKilledProvisions\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"strongestTypeDef\"></span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateD' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"killrateD\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"defenceSurvivedProvisions\"></span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-better_hospital\" tooltip=\"\" tooltip-content=\"{{ 'battle.beds' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"availableBeds\"></span></div><tr id=\"predamage\"><th><span class=\"unitname\">{{ 'battle.predamage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"8\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><b class=\"wallfrompre\" id=\"wallfrompre\"></b><td>{{ 'battle.to' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><b class=\"walltopre\" id=\"walltopre\"></b><tr id=\"ramdamage\"><th><span class=\"unitname\">{{ 'battle.damage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"8\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><b class=\"wallfrom\" id=\"wallfrom\"></b><td>{{ 'battle.to' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><b class=\"wallto\" id=\"wallto\"></b><tr id=\"catapultdamage\"><th><span class=\"unitname\">{{ 'battle.damageCatapult' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"2\"><span class=\"target\"></span><td colspan=\"6\">{{ 'battle.downgradeCatapult' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><b class=\"buildingfrom\" id=\"buildingfrom\"></b><td>{{ 'battle.to' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><b class=\"buildingto\" id=\"buildingto\"></b></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\">{{ 'battle.options' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"3\" class=\"item-insert\"><span class=\"btn btn-orange addSelected\">{{ 'battle.insert' | i18n:loc.ale:'battle_calculator' }}</span><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'battle.id' | i18n:loc.ale:'battle_calculator' }}\"></div><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'battle.no_village' | i18n:loc.ale:'battle_calculator' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'battle.add_map_selected' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.selected' | i18n:loc.ale:'battle_calculator' }}</a><tr><td><td class=\"item-insertV\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertV' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertVD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertVD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><tr><td><span class=\"item-icon\"></span><td class=\"item-name\"><td class=\"item-id\"><tr><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><td class=\"item-insertP\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertP' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertPD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertPD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span></table></form><form class=\"addForm\"><table class=\"table\" id=\"units\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_D]\"></table></form><form class=\"addForm\"><table class=\"table\"><col width=\"34%\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><thead><tr><th colspan=\"7\"><span class=\"icon-bg-black icon-44x44-special\"></span> {{ 'battle.bonuses' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-church\"></span> {{ 'battle.faith' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_A]\" drop-down=\"true\"></div><td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_D]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-moral\"></span> {{ 'battle.morale' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"100\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MORALE]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-clover\"></span> {{ 'battle.luck' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LUCK]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-building-wall\"></span> {{ 'battle.wall' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.BATTLE_WALL]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-26x26-night-mode\"></span> {{ 'battle.nightbonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_NIGHT_BONUS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_leader\"></span> {{ 'battle.leader' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_LEADER]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_medic\"></span> {{ 'battle.medic' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-medic\"></span> {{ 'battle.doctor' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_SKILL_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-attack_bonus\"></span> {{ 'battle.attack-bonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"weaponmaster\" selected=\"settings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]\" drop-down=\"true\"></div><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span> {{ 'battle.iron-walls' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.BATTLE_SKILL_IRON_WALLS]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-better_hospital\"></span> {{ 'battle.clinique' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"clinique\" selected=\"settings[SETTINGS.BATTLE_SKILL_CLINIQUE]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-hospital\"></span> {{ 'battle.hospital' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"hospital\" selected=\"settings[SETTINGS.BATTLE_HOSPITAL]\" drop-down=\"true\"></div></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\"><span class=\"icon-bg-black icon-34x34-paladin\"></span> {{ 'battle.equip' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><th colspan=\"3\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D3]\" drop-down=\"true\"></div><tr><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D3]\" drop-down=\"true\"></div><tr><th colspan=\"3\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div class=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_A]\" drop-down=\"true\"></div><td><tr><td><td><div class=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_A]\" drop-down=\"true\"></div><td></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><tr><th colspan=\"3\"><span class=\"icon-34x34-unit-special-ability-catapult\"></span> {{ 'battle.target' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div select=\"\" list=\"catapulttarget\" selected=\"settings[SETTINGS.BATTLE_CATAPULT_TARGET]\" drop-down=\"true\"></div><td><tr><th colspan=\"3\">{{ 'battle.target-level' | i18n:loc.ale:'battle_calculator' }}<tr><td><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TARGET_LEVEL]\"><td></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><h5 class=\"twx-section\">{{ 'troops.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"33%\"><col width=\"33%\"><col><thead><tr><th colspan=\"3\">{{ 'troops.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-wood\" tooltip=\"\" tooltip-content=\"{{ 'troops.wood' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"wood\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time-per-tile\" tooltip=\"\" tooltip-content=\"{{ 'troops.speed' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"speed\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'troops.attack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attack\"></span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-clay\" tooltip=\"\" tooltip-content=\"{{ 'troops.clay' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"clay\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-units\" tooltip=\"\" tooltip-content=\"{{ 'troops.discipline' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"discipline\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'troops.definf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"definf\"></span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-iron\" tooltip=\"\" tooltip-content=\"{{ 'troops.iron' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"iron\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-weight\" tooltip=\"\" tooltip-content=\"{{ 'troops.load' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"load\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-cavalry\" tooltip=\"\" tooltip-content=\"{{ 'troops.defcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"defcav\"></span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'troops.food' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"food\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time\" tooltip=\"\" tooltip-content=\"{{ 'troops.buildtime' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"buildtime\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-archer\" tooltip=\"\" tooltip-content=\"{{ 'troops.defarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"defarc\"></span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackinf\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackinf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackinf\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackcav\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackcav\"></span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackarc\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span class=\"attackarc\"></span></div></table><br><table class=\"table\" id=\"unitsCost\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'troops.units' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_CATAPULT]\"></table><br><table class=\"table\"><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.building' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-building-barracks\"></span> {{ 'troops.barracks' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_BARRACKS].min\" max=\"settingsMap[SETTINGS.TROOPS_BARRACKS].max\" value=\"settings[SETTINGS.TROOPS_BARRACKS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_BARRACKS]\"><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.preceptory' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].min\" max=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].max\" value=\"settings[SETTINGS.TROOPS_PRECEPTORY]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_PRECEPTORY]\"></table><table class=\"table\"><col><col width=\"140px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.effects' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"2\"><span class=\"icon-bg-black icon-120x120-domination\"></span> {{ 'troops.domination' | i18n:loc.ale:'battle_calculator' }}<td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TROOPS_DOMINATION]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-recruit_speed_bonus\"></span> {{ 'troops.training' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"training\" selected=\"settings[SETTINGS.TROOPS_TRAINING]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.order' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"order\" selected=\"settings[SETTINGS.TROOPS_ORDER]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><h5 class=\"twx-section\">{{ 'bashpoints.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"50%\"><col width=\"50%\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-attack\"></span> {{ 'bashpoints.attacker' | i18n:loc.ale:'battle_calculator' }}<td class=\"points-att\"><tr><td><span class=\"icon-bg-black icon-34x34-defense\"></span> {{ 'bashpoints.defender' | i18n:loc.ale:'battle_calculator' }}<td class=\"points-def\"></table><br><table class=\"table\" id=\"unitsBash\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.killed' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_CATAPULT]\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"simulate()\">{{ 'battle.simulate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateT()\">{{ 'troops.calculate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateB()\">{{ 'bashpoints.calculate' | i18n:loc.ale:'battle_calculator' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_battle_calculator_window', `<div id=\"two-battle-calculator\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'battle_calculator' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BATTLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BATTLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BATTLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BATTLE}\">{{ 'battle' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TROOPS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TROOPS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TROOPS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TROOPS}\">{{ 'troops' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BASHPOINTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BASHPOINTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BASHPOINTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BASHPOINTS}\">{{ 'bashpoints' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><h5 class=\"twx-section\">{{ 'battle.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"14\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsA' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span>{{ spearAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ spearAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ spearArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ spearAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span>{{ swordAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ swordAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ swordArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ swordAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span>{{ axeAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ axeAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ axeArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ axeAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span>{{ archerAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ archerAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ archerArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ archerAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span>{{ lcAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ lcAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ lcArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ lcAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span>{{ maAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ maAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ maArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ maAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span>{{ hcAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ hcAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ hcArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ hcAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span>{{ ramAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ ramAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ ramArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ ramAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span>{{ catapultAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ catapultAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ catapultArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ catapultAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span>{{ berserkerAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ berserkerAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ berserkerArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ berserkerAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span>{{ trebuchetAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ trebuchetAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ trebuchetArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ trebuchetAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span>{{ snobAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ snobAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ snobArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ snobAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span>{{ knightAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ knightAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ knightArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ knightAsurvived }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackModifier }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghAttack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strentghAttack }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-offensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackBashpoint }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackKilledProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strongestTypeOff }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateA' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ killrateA }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackSurvivedProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-attack_bonus\" tooltip=\"\" tooltip-content=\"{{ 'battle.doublestrength' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ doubleStrength }}</span></div><tr><th colspan=\"14\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span>{{ spearDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ spearDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ spearDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ spearDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span>{{ swordDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ swordDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ swordDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ swordDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span>{{ axeDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ axeDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ axeDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ axeDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span>{{ archerDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ archerDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ archerDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ archerDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span>{{ lcDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ lcDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ lcDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ lcDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span>{{ maDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ maDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ maDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ maDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span>{{ hcDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ hcDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ hcDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ hcDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span>{{ ramDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ ramDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ ramDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ ramDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span>{{ catapultDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ catapultDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ catapultDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ catapultDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span>{{ berserkerDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ berserkerDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ berserkerDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ berserkerDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span>{{ trebuchetDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ trebuchetDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ trebuchetDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ trebuchetDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span>{{ snobDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ snobDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ snobDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ snobDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span>{{ knightDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ knightDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ knightDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ knightDsurvived }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceModifier }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghDefend' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strentghDefend }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-defensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceBashpoint }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceKilledProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strongestTypeDef }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateD' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ killrateD }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceSurvivedProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-better_hospital\" tooltip=\"\" tooltip-content=\"{{ 'battle.beds' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ availableBeds }}</span></div><tr id=\"predamage\"><th><span class=\"unitname\">{{ 'battle.predamage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallfrompre\" id=\"wallfrompre\">{{ wallfrompre }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"walltopre\" id=\"walltopre\">{{ walltopre }}</b><tr id=\"ramdamage\"><th><span class=\"unitname\">{{ 'battle.damage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallfrom\" id=\"wallfrom\">{{ wallfrom }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallto\" id=\"wallto\">{{ wallto }}</b><tr id=\"catapultdamage\"><th><span class=\"unitname\">{{ 'battle.damageCatapult' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\"><span class=\"target\">{{ target }} </span>{{ 'battle.downgradeCatapult' | i18n:loc.ale:'battle_calculator' }} <b class=\"buildingfrom\" id=\"buildingfrom\">{{ buildingfrom }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"buildingto\" id=\"buildingto\">{{ buildingto }}</b></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\">{{ 'battle.options' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"3\" class=\"item-insert\"><span class=\"btn btn-orange addSelected\">{{ 'battle.insert' | i18n:loc.ale:'battle_calculator' }}</span><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'battle.id' | i18n:loc.ale:'battle_calculator' }}\"></div><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'battle.no_village' | i18n:loc.ale:'battle_calculator' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'battle.add_map_selected' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.selected' | i18n:loc.ale:'battle_calculator' }}</a><tr><td><td class=\"item-insertV\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertV' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertVD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertVD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><tr><td><span class=\"item-icon\"></span><td class=\"item-name\"><td class=\"item-id\"><tr><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><td class=\"item-insertP\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertP' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertPD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertPD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span></table></form><form class=\"addForm\"><table class=\"table\" id=\"units\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_D]\"></table></form><form class=\"addForm\"><table class=\"table\"><col width=\"34%\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><thead><tr><th colspan=\"7\"><span class=\"icon-bg-black icon-44x44-special\"></span> {{ 'battle.bonuses' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-church\"></span> {{ 'battle.faith' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_A]\" drop-down=\"true\"></div><td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_D]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-moral\"></span> {{ 'battle.morale' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"100\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MORALE]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-clover\"></span> {{ 'battle.luck' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LUCK]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-building-wall\"></span> {{ 'battle.wall' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.BATTLE_WALL]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-26x26-night-mode\"></span> {{ 'battle.nightbonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_NIGHT_BONUS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_leader\"></span> {{ 'battle.leader' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_LEADER]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_medic\"></span> {{ 'battle.medic' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-medic\"></span> {{ 'battle.doctor' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_SKILL_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-attack_bonus\"></span> {{ 'battle.attack-bonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"weaponmaster\" selected=\"settings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]\" drop-down=\"true\"></div><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span> {{ 'battle.iron-walls' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.BATTLE_SKILL_IRON_WALLS]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-better_hospital\"></span> {{ 'battle.clinique' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"clinique\" selected=\"settings[SETTINGS.BATTLE_SKILL_CLINIQUE]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-hospital\"></span> {{ 'battle.hospital' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"hospital\" selected=\"settings[SETTINGS.BATTLE_HOSPITAL]\" drop-down=\"true\"></div></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\"><span class=\"icon-bg-black icon-34x34-paladin\"></span> {{ 'battle.equip' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><th colspan=\"3\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D3]\" drop-down=\"true\"></div><tr><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D3]\" drop-down=\"true\"></div><tr><th colspan=\"3\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div class=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_A]\" drop-down=\"true\"></div><td><tr><td><td><div class=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_A]\" drop-down=\"true\"></div><td></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><tr><th colspan=\"3\"><span class=\"icon-34x34-unit-special-ability-catapult\"></span> {{ 'battle.target' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div select=\"\" list=\"catapulttarget\" selected=\"settings[SETTINGS.BATTLE_CATAPULT_TARGET]\" drop-down=\"true\"></div><td><tr><th colspan=\"3\">{{ 'battle.target-level' | i18n:loc.ale:'battle_calculator' }}<tr><td><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TARGET_LEVEL]\"><td></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><h5 class=\"twx-section\">{{ 'troops.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"33%\"><col width=\"33%\"><col><thead><tr><th colspan=\"3\">{{ 'troops.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-wood\" tooltip=\"\" tooltip-content=\"{{ 'troops.wood' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ woodTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time-per-tile\" tooltip=\"\" tooltip-content=\"{{ 'troops.speed' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ speedTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'troops.attack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-clay\" tooltip=\"\" tooltip-content=\"{{ 'troops.clay' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ clayTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-units\" tooltip=\"\" tooltip-content=\"{{ 'troops.discipline' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ disciplineTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'troops.definf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ definfTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-iron\" tooltip=\"\" tooltip-content=\"{{ 'troops.iron' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ ironTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-weight\" tooltip=\"\" tooltip-content=\"{{ 'troops.load' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ loadTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-cavalry\" tooltip=\"\" tooltip-content=\"{{ 'troops.defcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defcavTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'troops.food' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ foodTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time\" tooltip=\"\" tooltip-content=\"{{ 'troops.buildtime' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ buildtimeTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-archer\" tooltip=\"\" tooltip-content=\"{{ 'troops.defarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defarcTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackinf\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackinf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackinfTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackcav\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackcavTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackarc\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackarcTotal }}</span></div></table><br><table class=\"table\" id=\"unitsCost\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'troops.units' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_CATAPULT]\"></table><br><table class=\"table\"><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.building' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-building-barracks\"></span> {{ 'troops.barracks' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_BARRACKS].min\" max=\"settingsMap[SETTINGS.TROOPS_BARRACKS].max\" value=\"settings[SETTINGS.TROOPS_BARRACKS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_BARRACKS]\"><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.preceptory' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].min\" max=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].max\" value=\"settings[SETTINGS.TROOPS_PRECEPTORY]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_PRECEPTORY]\"></table><table class=\"table\"><col><col width=\"140px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.effects' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"2\"><span class=\"icon-bg-black icon-120x120-domination\"></span> {{ 'troops.domination' | i18n:loc.ale:'battle_calculator' }}<td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TROOPS_DOMINATION]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-recruit_speed_bonus\"></span> {{ 'troops.training' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"training\" selected=\"settings[SETTINGS.TROOPS_TRAINING]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.order' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"order\" selected=\"settings[SETTINGS.TROOPS_ORDER]\" drop-down=\"true\"></div></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><h5 class=\"twx-section\">{{ 'bashpoints.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"50%\"><col width=\"50%\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-attack\"></span> {{ 'bashpoints.attacker' | i18n:loc.ale:'battle_calculator' }}<td class=\"text-center\"><span>{{ totalDef }}</span><tr><td><span class=\"icon-bg-black icon-34x34-defense\"></span> {{ 'bashpoints.defender' | i18n:loc.ale:'battle_calculator' }}<td class=\"text-center\"><span>{{ totalAtt }}</span></table><br><table class=\"table\" id=\"unitsBash\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.killed' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_CATAPULT]\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"simulate()\">{{ 'battle.simulate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateT()\">{{ 'troops.calculate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateB()\">{{ 'bashpoints.calculate' | i18n:loc.ale:'battle_calculator' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-battle-calculator div[select]{text-align:center}#two-battle-calculator div[select] .select-wrapper{height:34px}#two-battle-calculator div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-battle-calculator div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-battle-calculator .range-container{width:250px}#two-battle-calculator .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-battle-calculator .textfield-border.fit{width:100%}#two-battle-calculator .addForm1 td{text-align:center}#two-battle-calculator .addForm1 th{text-align:center;padding:0px}#two-battle-calculator .addForm1 span{height:26px;line-height:26px}#two-battle-calculator .addForm1 .item-insert{text-align:center}#two-battle-calculator .addForm1 .item-insert span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertV{text-align:center}#two-battle-calculator .addForm1 .item-insertV span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertVD{text-align:center}#two-battle-calculator .addForm1 .item-insertVD span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertP{text-align:center}#two-battle-calculator .addForm1 .item-insertP span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertPD{text-align:center}#two-battle-calculator .addForm1 .item-insertPD span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 input{height:34px;line-height:26px;color:#000;font-size:14px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAABGdBTUEAALGPC/xhBQAAALRQTFRFr6+vmJiYoKCgrKysq6urpaWltLS0s7OzsLCwpKSkm5ubqKiojY2NlZWVk5OTqampbGxsWFhYUVFRhISEgYGBmpqaUFBQnp6eYmJidnZ2nZ2dY2NjW1tbZ2dnoaGhe3t7l5eXg4ODVVVVWVlZj4+PXFxcVlZWkpKSZmZmdXV1ZWVlc3NzjIyMXl5eVFRUeHh4hoaGYWFhXV1dbW1tampqb29veXl5fHx8gICAiYmJcnJyTk5Ooj6l1wAAADx0Uk5TGhkZGhoaGxoaGRkaGRkZGhkbHBgYGR0ZGhkZGhsZGRgZGRwbGRscGRoZGhkZGhwZGRobGRkZGRkZGRkeyXExWQAABOJJREFUSMeNVgdy4zgQxIW9TQ7KOVEUo5gz0f//1/WA0sple6+OLokQiUk9PQ2rvlzvT0vA6xDXU3R5hQmqddDVaIELsMl3KLUGoFHugUphjt25PWkE6KMAqPkO/Qh7HRadPmTNxKJpWuhSjLZAoSZmXYoPXh0w2R2z10rjBxpMNRfomhbNFUfUFbfUCh6TWmO4ZqNn6Jxekx6lte3h9IgYv9ZwzIZXfhQ/bejmsYkgOeVInoDGT6KGP9MMbsj7mtEKphKgVFKkJGUM+r/00zybNkPMFWYske+jY9hUblbrK4YosyPtrxl+5kNRWSb2B3+pceKT05SQRPZY8pVSGoWutgen2junRVKPZJ0v5Nu9HAk/CFPr+T1XTkXYFWSJXfTyLPcpcPXtBZIPONq/cFQ0Y0Lr1GF6f5doHdm2RLTbQMpMmCIf/HGm53OLFPiiEOsBKtgHccgKTVwn8l7kbt3iPvqniMX4jgWj4aqlX43xLwXVet5XTG1cYp/29m58q6ULSa7V0M3UQFyjd+AD+1W9WLBpDd9uej7emFbea/+Yw8faySElQQrBDksTpTOVIG/SE2HpPvZsplJWsblRLEGXATEW9YLUY1rPSdivBDmuK3exNiAysfPALfYZFWJrsA4Zt+fftEeRY0UsMDqfyNCKJpdrtI1r2k0vp9LMSwdO0u5SpjBeEYz5ebhWNbwT2g7OJXy1vjW+pEwyd1FTkAtbzzcbmX1yZlkR2pPiXZ/mDbPNWvHRsaKfLH8+FqiZbnodbOK9RGWlNMli8k+wsgbSNwS35QB6qxn53xhu2DFqUilisB9q2Zqw4nNI9tOB2z8GbkvEdNjPaD2j+9pwEC+YlWJvI7xN7xMC09eqhq/qwRvz3JWcFWmkjrWBWSiOysEmc4LmMb0iSsxR8+Z8pk3+oE39cdAmh1xSDXuAryRLZgpp9V62+8IOeBSICjs8LlbtKGN4E7XGoGASIJ+vronVa5mjagPHIFJA2b+BKkZC5I/78wOqmzYp1N8vzTkWIWz6YfsS3eh3w8pBkfKz6TSLxK9Qai5DUGTMZ8NNmrW8ldNudIJq+eJycwjv+xbeOJwPv1jjsSV/rCBaS/IBrafaUQ+5ksHwwl9y9X7kmvvIKWoBDFvbWySGyMU3XflxZRkNeRU63otWb0+P8H8BrRokbJivpWkk6m6LccSlrC2K0i6+4otx4dN3mbAVKt0wbaqBab4/MW8rgrS8JP06HU6UYSTYsQ5pYETpo87ZonORvbPlvYbXwmsMgoQGKr8PUQ5dDEO0EcXp2oOfSk+YpR/Eg4R46O0/Sf7jVnbqbXBrRkCPsZFOQTN8h+aqlcRw9FjJ/j8V7SXZ3hVNXYsOYcxzpfPNgFrvB9S6Dej2PqDqq0su+5ng0WMi527p/pA+OiW0fsYzDa6sPS9C1qxTtxVRMuySrwPD6qGPRKc4uIx4oceJ9FPjxWaqPPebzyXxU7W1jNqqOw+9z6X/k+Na3SBa0v+VjgoaULR30G1nxvZN1vsha2UaSrKy/PyCaHK5zAYnJzm9RSpSPDWbDVu0dkUujMmB/ly4w8EnDdXXoyX/VfhB3yKzMJ2BSaZO+A9GiNQMbll+6z1WGLWpEGMeEg85MESSep0IPFaHYZZ1QOW/xcjfxGhNjP0tRtbhFHOmhhjAv/p77JrCX3+ZAAAAAElFTkSuQmCC) top left #b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:213px}#two-battle-calculator .addForm1 .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-battle-calculator .addForm1 .actions a{width:100px}#two-battle-calculator .addForm .table{border-spacing:1px;border-collapse:separate;box-shadow:0 0 0 2px rgba(124,54,0,0.4);width:100%;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAl7SURBVHjatF3bcRtJDIRYigLhnGNRAnYcSsCORekgDd3HmazdWfQDQx6rVJKopbiDwaPRwIBv39/f8efXj4z5oyIiyfPo7+tr2XXuezmvmd6XfHx8ftUqu9vxiY/PryJvdPwe5I1T/D0OC4tm0ev7HgVx/Apz8QWEu/6vy3rv8kBy+fPrRx7/9vH5VW93De2kvbtzYAGrMNPU3G4TkfYhRUjz+Ysmr3K5/47k9fb75z+thh4uVsJcTUkttgzBMjMtIKAUG5LGxrbCZMq2yuyG/MHhwhRuQAk9m9+z0bjO5FO4iBBuZb0+m98ts3cfb2tQArvhap9rqlMXwqwhhIXE4H5P93kX5ioPprHv7oXgJpgZdotT2p7CxyGNLaCRDpqAroLJArjH/6L8x+dXHYV5uFgtLIBZ1YYbCKDRCGlkI2B232m4h8662mh/l9Uqs1un0oaWFoAgAQRbQ7Mu4O+CQCwltGq+l2FVFxR0/L762JsRkKY33gWgFILoNKPbjBIuxkElnYl3LuKkeR3m7H6+rWq7CLeAOQcwvyI3y8w5wSYkCXBhWAl73y4OUPDeaeTFh65SXl7kLt7JTlgmpCBREu0qAJNK+N4kSUehQI3c411ut+Mf0A4QcwyirUGuL+JCigi/M+0E0V8BeIRXE0X0uwWzaP/O1HcQFdfFFADjRYSosGMO09NdAgUKtZPNGuXffv/8B+arG0C8jEU5P09BfYSXSanUdMRdtGwTcsTDaL5qUhlQC+X2Cqa5llPGfUhczFJPCJsaQB/CjxXxdQ7wT1O7WNBJkkQkyYpSwDVq0uv3VUMfJg986NS8HBOeUHe7VKFL5RULZB+fX1ZMOQr37fv7+5INEIJEEcJpCnsiTCUgRcXtEC5t3HC4jtsdLnUpFjGXAiDcWTxyGbXhtx334frl7PjQo4l3rNP6/Sacbw0dPFtc5+MYS4TglZsETAialgY8Khsy8dVNQj602ZEJF8rM2SUyXgHTJhCtUIRnbP0lKJlVz3oC700wZgyE6N5Dme6Irm9VtI7u/PPrR55qSgZj72YXDsNfgovcRQKqZqWCo8WorS7yLuSLQE2TmmqvW6hTG+BG/0nJhZr/avYq0r8fVRiA2hr6qtxg6FU0TuN/VBPskliBw+AHo+1agSJpN+lnGWRtbmi6WuBOwS2Hmtheq6i7jvZ8N5mmXUIjBoJmOT2j26YcQ5oW0WomEvL9uvehMAOYVGz6Obferjo8WJROI8NqrcyFTUch3xiZGrz02pElaWqmYqQcd4NMPA1rSUGYnEh3ZcVtCaSj9A3qLAPXZmrAwjuMVQnSOYDmuVovg04HldbnIWz6q8bhMtomuJ6Sx4r4rf/hXmxmqSVHBA+YIv9V+b3K013TdEnoMghsVe96vAaVihmMuolaMyNGknCJzLzToN9S0IIVXj2JUYqsqJjIpFU33g2p8UFDp06/q82rlLPTvgJCD4I6UNBjGw/hXEe8d4nQqdEBUfwgcDhtNSqKqoqASgIm0XyanRWL6F07zkqS3FZ40Ki5AtIMDSCf5kAm9L9Ve7qqi4WxuckC0FqfP3bcXFrCQSuOXb8eECJhMFiv4k5dBovynU4J5G14CmRSF7L8lAmPXnFPE/pPUnfosIfDh06Oz0xw4rTJwWG7HCZ+q7rq9NvTTMnwY06Hcg59JYvwChKxQJYCLbRFRIQ1uwB+asUxsoFd4neivU5D1zNuZztDYia+BvJ3wYWqHF5pJcKLDo2mtB5tAGoJckshVsMYIkluaEcMhjqJvyqhParMrNxFCU0uAzapDmaoYAy7n1pxXlSc67RIIYBnCexnSJFS2ZQbkB5BiVD7zpEUtutpanYOUlCXZOkSkxL3c0q3UXrJAtMN9Y8vQp40KuSGKaLNy9B98IjEcTGwZL+6Ux/oOWXyYZi4W0ufNm+5Wdnu/51kUyGwepxST+RsD2Vkh1yYdrq9AtK4TQux8X718flFkU9H66lGh3hywY52s/dwnmPtiIoMiVfh1ruG3pDEFyfswKMaQhQ3rQzDMliwcRswLgcj2OmPzs+egtLK6y1ZkuqljNCFOpXCIkGtXwglKO0sApPooS/SMn+FTaosCqIpgiNuswJqlUmRCLidKUm4AHSiDmp9J1TUunRjjjbw4aogUKUETk2TPc8B096dRlYaiPzwqVFsLQsRIv7MNoELVTbT4UQkeDU9QWl1CDPO8LtWSihLxN8OZlVDWpVRlZFXgbiwhJkiO6fZ+bqKeZ+nU1gcNac5h2gfGiqimNtK6LBFJYLYpB9+B7YFybwubmTVzuOwBkR3XnJ5NasIaAej0ZDLKIH9MvYnQigiOgSLDw8lqH6n01nPhlV5toThzGuaENIT9zLtBJTA3irSPZnLT4hal+zdOa/0bG5Phd/5Tto5Quh9x19N60YJoq0TyYNAtimnoCBUa9JHk+9q886hhWdIEec69/BBvFjzXnas+/i7w9grTdwlInaZJqdS8Arqj7JNKCV9aCiQepCgssPOuHPv3OEALmMV8eToS0K+nx7vBrBnMKNIlhIig1JR350EpkyfrcMWsorup0FYIqVS0xdQcSs3TTFFMCxBzITx+qewbReMHsDe6MxltSXkBhBFloCa6wSdgjpkGusmBRW68zlW4XXA/nEKBI0hM3J2NoqSmXoA03dOkaCJt4i2Y+f0FaM1Mns6+26A4YrQZ6xCybCg4gUSMEVhBskU7ov2giIhP2pKx3ZG0NM0zVp2T3Q88yhSTXDmPdP7GowBPQelJvGfHHINYrbO+CHmU1nWpNwQ00y6RocDXQV/GYQ12Y1NAmL36PW0FYhNkmCVU2mRCNRfGh1MAmAnVXQFqg4vTBprkfuZnrkfPdoxQwNqTVFfrxiNMdWmqc9+irZbla+dfTek73Z39ZVBaceKQvGzJq15DkpdDg+ggnOY1aXgdoSvJt6qEURtZZNlgd0IUPXzTiuOOzboVf1KLs2222TmfgqEJEkuOBT5hanPGTJHyPeG8NnTsUQqKLbv3ckC9dzDMUOHHYjwZx9N6LGJZrMPAdiBWY4bG318BQT2DcBPkqOz1FMxRmh6uPJzkyqBO3ITkTKwDEKP1XSp5/JPXN/kks+Tj5vYLlMYvlIB/tO4S3TEe9XcE2NP8GiIgOQSE8/2hO4Q0k7O77ojGWNOHwxgfFgVm1SbBkk8WXCErop2AUVNI3d6Ri+HFhiVd6opGQNZJ0FhR+scBLELpSYYmX5ijcuJ/jsA5u4AhqNud/gAAAAASUVORK5CYII=) #d1ad86}#two-battle-calculator .addForm .table th{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAAcCAMAAAAa7mKqAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAJeUExURa2FWbOLX6mBVbKKXq6GWrCIXLGJXa+HW6yEWKuDV6qCVqiAVKyEV7WNYa6GWbSMYJlxRZpzSad/U5lySJhySJZwRpp0SqqCVbCIW6+HWraOYppzR5x0SJlyR5t0SplyRqZ+UquDVplzSZx1S553TJ94TZVvRa2FWLePY5t1S5ZwR5dwRqmBVLKKXaB5Tp53TZ11SZx1SppzSJ94TptzR6d/UqiAU5hxR5x1SZhxSJ53S7GJXJdxSKZ+U5t0SJpyRpdwR512S512TJdwRaV9UpdxR5hwRJp0S593S5RuRaF6T6V9UZZvRqV+UqJ7T5NtQ5hySZZvQ5lySaR8UJ52Spt1SqB4TKB5TZt0SZlzSqN8UKJ7UKB5T5hxRqR8UZdvQ6N8UamBVphxRbSMX7iQZLOLXqN7UJ12SpVuRad/VJdwRJZvRaF6Tpt0S513TJx1TJp0SZVuQ5t1TJ13TZpzSp54TqR9UJhyR5RuRJ11SqZ/U6F5TZlzSKB6T6J6T594TKJ6TpZuQpx2TJlxRqV9UJVuRKR9UqeAVKF6UJx0SZx2S7aOYaR9UbWNYKV+UaqCV553TqF6TZ95TphwRZpyR5tzSJlySpRtRJ93TKB4TZVvRqZ+UZpzS6J7TqN7T5RtQpZuQ6V+U6F5Tp54TbePYpVuRp94T512TZ13Tpl0SaJ7UaZ/UqV/U5NtRJdwSKyFWKuDWJdvRJZvRJVvRJ54TKiBVJx2TaiAVaN8T595T6B6UJx2SpRtQ5RtRaqDV5RuQ5hySqeAU6B5TJZwRZp0TJdxRqF7UJNsRJ95TbiQY/RiQRAAAAcgSURBVEjHHZJjgy27EobT3elO0lq2bXvWeNYa27Zntm1772Pb59q28a9u9v2SVKpST71VCVDsUIAMZ2eiDM9BYVv5L6/sRCFvZ5So8CyqQYLGzmxz0agQ/YrZtm9rkIKiTPSl8YyLKhy/zXBRZjuqgK8A4IFGY+eiENUVmsYDPiowdg0nIIQgZJQXGjsE/0fbkSAggATlGRI4BAW7wikCBFzUjoUoUAWNAnjOihgB2zWI22IQEjClMxoNvwUhAgqCGsbOIcZeh6oibPHUo0KFY2wKLaUwdmRTAL1HnRBggWMYBcgAMRywEyxgjUBhL/gtThDqqqKJCBClFMLgFBCIVSMzER5YAZfCOwJSeJ6OAABBY+PULZ4BPGRUwMkUKaQwsQmQJiK4A6g+qgwKGmYLgxcQ84xADQZCnktpgA1yEQ1gBA0GGFkxQRyHBEh8PMP5ELNj1RDIiQJGGBGhTnge71DhVAxgGIgQQwTMMMBGw4LKCAxIMYQHwAYEahPVBgGDCIQWSIgPEgwgBTG8mkIQcTy2RgTMc4RPMRobXeU6s8PRqYgpFe8QbBVeouqI1FUiAF89wvOE0MII2SBiWYAJRILIIyRjzEPelwJUPhZlIIA6wbQdK+CtWOapTJmCVCxjSSQ4iVQsElTnMWJ5XuZFxKYiNhaAlGzhLVYbBfIp+gd4Kytb63SUCAgsFumfYSFUWbYO9IT3Akx7KyeRKPoA60v6rD5WtUUQi8qEx5CwEPmsKAkiliR4mSpC0WIrIxCRiWpN6oEKLSr1E5TEPBDLqijJVB6RLVZWZCWLVKIVWZ+MMPBKIILLko14bZYSARGSZCOyBOhjiUACGKqSGmFtQJIkljan90akiFwieqlEJGLBVjr3ErGIsoXVW5JYj0plS9lbShKCLWBIX2KBiGlE0gOJlcoffijJYEq6r5fEpI8t+Urlkr4kRixlcUp/n3iTolxmiSQCtmyR5fsWUSUU7JOlss2H1R8TX1ItJfWSF3tZelkC5JVV/au73o3XX924uHEw0jZ6kV2c8j6a2tjAbX/aZdnnI1PsXxurbb88aLs60vj40dXvH0jirz/5jZ59pF8deuWAPWi0sT9p814FQ21T+o2h26+33ZzSDzVuN75gd99vDB1MrU5Jf2us7m54G3qp4fXqr11bvT002zZ03NC3XWx7/+OLjV3vzd2b0uqsd2h29NYnX4BQMB1cHxwMzs2FRgZvjYRG04NXl9Jzxw9Di8dzi593jc49P34+93lwdDB3PLJ+PBIaCaUfri+GfrA4sjSaHn3YsjiaXlwfDS2CpVAgkx4sBDPdmcLycujLk6FMMDO43B0MrReWlh7/PrMUeBwMrgcDwa50ev5kZnA93R38RVcgs/y9riWamQl2L6dDoX/9B5yPffOaqzuQMwROuCdPvZH5VucOpAunQjdOFS6cXr5g6C5MzqcnM7rCOXfGnSk8vfE41l0InnujsNwd0+VO/W6ycCNUCOh0N4D7/PnvJE7qdBXdpN9vNgYK5w3fdZ+7UNt/rTXgNgTMAX/NsODXVc51JxI6f/fT69eNJ2tGw4W7vzL0xRYMv+02nDpb+dLongRGv3HYvGA6ezlsbm22mibjH4zFYrGPBgbGW01n/ZMn+ib/2GfqrA2Y+symr+OxTnOfv/VEp/FE8x1a2D9ujsWbxq/D51oXQOvAWNy4EB+PD5vNZ8fu1n5kNr8TpkeTcTxs9MfDftOAvxlrhs3jfX8Zb34UPvsPk9FsCpvi7/YtxAeMCwMms7+vL/7vMOg0XW5txkzD8UDNH29+cGQym+4aHzT7arHOMeMP+8aNC6bxZmdrOBwbNo6NDbRWwuF4olJp1TVjRpMuYRygVPPAZfMY6KzNDF9P1PYNhtqlmf3OWueMoaa7dDSsc7tnxvZ1MwaD7t39mYrhhPvB34d1unD4QSChiw0nEsbE0dPhyxX3pdOJo3+6KwHgyo31VAwzCcOKwb2Sq6zMVDpdObPboPv0ZyuXes6cdnW6zAnXvCHfc+bP+dOuvK4rUXG59g2nf56/nsv3zJ/s+YPbNe/61AXyT/IeVz7Y5fBMOHRn2qu5npXcW4c/7XIkclcCni7XocfV7nDk87mue57DHkfO0X546HH0zDs28/M9R5vzriPPma5Nh3sCTDiCjqpnwtO7117NT6xo29s9LV0TE9qWzb23q/l7e2tVzx1He7tjs8cx4ai25DyfVT2ew+petedMdWWv3eNo90y0t3gcLqB1Fnv3rvRnncXilV6ts/e9jmJ2rthx683s2lzLvWx2+r23ens/u6Pd1La0rGm1LU66O53Tb/YX16pFbct0h7Z6p7c47dwE2n6ttnea8vq1We3alelsh9M5u6bteDubLTq12unZ3v5r2Y5sb6+z6OzvKM4WnzzpcGqd2Y7+/lntdNbZ0T97jS5rzv8BpuZps+PoLdkAAAAASUVORK5CYII=);text-align:center;min-height:26px;line-height:26px;color:#fff3d0;font-size:14px;font-weight:normal;padding-left:5px;border:1px solid rgba(124,54,0,0.3);padding:1px}#two-battle-calculator .addForm .table td{border:1px solid rgba(124,54,0,0.3);padding:1px}#two-battle-calculator .addForm .table tr nth-child(odd) td{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAl7SURBVHjatF3bcRtJDIRYigLhnGNRAnYcSsCORekgDd3HmazdWfQDQx6rVJKopbiDwaPRwIBv39/f8efXj4z5oyIiyfPo7+tr2XXuezmvmd6XfHx8ftUqu9vxiY/PryJvdPwe5I1T/D0OC4tm0ev7HgVx/Apz8QWEu/6vy3rv8kBy+fPrRx7/9vH5VW93De2kvbtzYAGrMNPU3G4TkfYhRUjz+Ysmr3K5/47k9fb75z+thh4uVsJcTUkttgzBMjMtIKAUG5LGxrbCZMq2yuyG/MHhwhRuQAk9m9+z0bjO5FO4iBBuZb0+m98ts3cfb2tQArvhap9rqlMXwqwhhIXE4H5P93kX5ioPprHv7oXgJpgZdotT2p7CxyGNLaCRDpqAroLJArjH/6L8x+dXHYV5uFgtLIBZ1YYbCKDRCGlkI2B232m4h8662mh/l9Uqs1un0oaWFoAgAQRbQ7Mu4O+CQCwltGq+l2FVFxR0/L762JsRkKY33gWgFILoNKPbjBIuxkElnYl3LuKkeR3m7H6+rWq7CLeAOQcwvyI3y8w5wSYkCXBhWAl73y4OUPDeaeTFh65SXl7kLt7JTlgmpCBREu0qAJNK+N4kSUehQI3c411ut+Mf0A4QcwyirUGuL+JCigi/M+0E0V8BeIRXE0X0uwWzaP/O1HcQFdfFFADjRYSosGMO09NdAgUKtZPNGuXffv/8B+arG0C8jEU5P09BfYSXSanUdMRdtGwTcsTDaL5qUhlQC+X2Cqa5llPGfUhczFJPCJsaQB/CjxXxdQ7wT1O7WNBJkkQkyYpSwDVq0uv3VUMfJg986NS8HBOeUHe7VKFL5RULZB+fX1ZMOQr37fv7+5INEIJEEcJpCnsiTCUgRcXtEC5t3HC4jtsdLnUpFjGXAiDcWTxyGbXhtx334frl7PjQo4l3rNP6/Sacbw0dPFtc5+MYS4TglZsETAialgY8Khsy8dVNQj602ZEJF8rM2SUyXgHTJhCtUIRnbP0lKJlVz3oC700wZgyE6N5Dme6Irm9VtI7u/PPrR55qSgZj72YXDsNfgovcRQKqZqWCo8WorS7yLuSLQE2TmmqvW6hTG+BG/0nJhZr/avYq0r8fVRiA2hr6qtxg6FU0TuN/VBPskliBw+AHo+1agSJpN+lnGWRtbmi6WuBOwS2Hmtheq6i7jvZ8N5mmXUIjBoJmOT2j26YcQ5oW0WomEvL9uvehMAOYVGz6Obferjo8WJROI8NqrcyFTUch3xiZGrz02pElaWqmYqQcd4NMPA1rSUGYnEh3ZcVtCaSj9A3qLAPXZmrAwjuMVQnSOYDmuVovg04HldbnIWz6q8bhMtomuJ6Sx4r4rf/hXmxmqSVHBA+YIv9V+b3K013TdEnoMghsVe96vAaVihmMuolaMyNGknCJzLzToN9S0IIVXj2JUYqsqJjIpFU33g2p8UFDp06/q82rlLPTvgJCD4I6UNBjGw/hXEe8d4nQqdEBUfwgcDhtNSqKqoqASgIm0XyanRWL6F07zkqS3FZ40Ki5AtIMDSCf5kAm9L9Ve7qqi4WxuckC0FqfP3bcXFrCQSuOXb8eECJhMFiv4k5dBovynU4J5G14CmRSF7L8lAmPXnFPE/pPUnfosIfDh06Oz0xw4rTJwWG7HCZ+q7rq9NvTTMnwY06Hcg59JYvwChKxQJYCLbRFRIQ1uwB+asUxsoFd4neivU5D1zNuZztDYia+BvJ3wYWqHF5pJcKLDo2mtB5tAGoJckshVsMYIkluaEcMhjqJvyqhParMrNxFCU0uAzapDmaoYAy7n1pxXlSc67RIIYBnCexnSJFS2ZQbkB5BiVD7zpEUtutpanYOUlCXZOkSkxL3c0q3UXrJAtMN9Y8vQp40KuSGKaLNy9B98IjEcTGwZL+6Ux/oOWXyYZi4W0ufNm+5Wdnu/51kUyGwepxST+RsD2Vkh1yYdrq9AtK4TQux8X718flFkU9H66lGh3hywY52s/dwnmPtiIoMiVfh1ruG3pDEFyfswKMaQhQ3rQzDMliwcRswLgcj2OmPzs+egtLK6y1ZkuqljNCFOpXCIkGtXwglKO0sApPooS/SMn+FTaosCqIpgiNuswJqlUmRCLidKUm4AHSiDmp9J1TUunRjjjbw4aogUKUETk2TPc8B096dRlYaiPzwqVFsLQsRIv7MNoELVTbT4UQkeDU9QWl1CDPO8LtWSihLxN8OZlVDWpVRlZFXgbiwhJkiO6fZ+bqKeZ+nU1gcNac5h2gfGiqimNtK6LBFJYLYpB9+B7YFybwubmTVzuOwBkR3XnJ5NasIaAej0ZDLKIH9MvYnQigiOgSLDw8lqH6n01nPhlV5toThzGuaENIT9zLtBJTA3irSPZnLT4hal+zdOa/0bG5Phd/5Tto5Quh9x19N60YJoq0TyYNAtimnoCBUa9JHk+9q886hhWdIEec69/BBvFjzXnas+/i7w9grTdwlInaZJqdS8Arqj7JNKCV9aCiQepCgssPOuHPv3OEALmMV8eToS0K+nx7vBrBnMKNIlhIig1JR350EpkyfrcMWsorup0FYIqVS0xdQcSs3TTFFMCxBzITx+qewbReMHsDe6MxltSXkBhBFloCa6wSdgjpkGusmBRW68zlW4XXA/nEKBI0hM3J2NoqSmXoA03dOkaCJt4i2Y+f0FaM1Mns6+26A4YrQZ6xCybCg4gUSMEVhBskU7ov2giIhP2pKx3ZG0NM0zVp2T3Q88yhSTXDmPdP7GowBPQelJvGfHHINYrbO+CHmU1nWpNwQ00y6RocDXQV/GYQ12Y1NAmL36PW0FYhNkmCVU2mRCNRfGh1MAmAnVXQFqg4vTBprkfuZnrkfPdoxQwNqTVFfrxiNMdWmqc9+irZbla+dfTek73Z39ZVBaceKQvGzJq15DkpdDg+ggnOY1aXgdoSvJt6qEURtZZNlgd0IUPXzTiuOOzboVf1KLs2222TmfgqEJEkuOBT5hanPGTJHyPeG8NnTsUQqKLbv3ckC9dzDMUOHHYjwZx9N6LGJZrMPAdiBWY4bG318BQT2DcBPkqOz1FMxRmh6uPJzkyqBO3ITkTKwDEKP1XSp5/JPXN/kks+Tj5vYLlMYvlIB/tO4S3TEe9XcE2NP8GiIgOQSE8/2hO4Q0k7O77ojGWNOHwxgfFgVm1SbBkk8WXCErop2AUVNI3d6Ri+HFhiVd6opGQNZJ0FhR+scBLELpSYYmX5ijcuJ/jsA5u4AhqNud/gAAAAASUVORK5CYII=) #d1ad86}#two-battle-calculator .addForm .table_vertical td:nth-child(odd){background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAl7SURBVHjatF3bcRtJDIRYigLhnGNRAnYcSsCORekgDd3HmazdWfQDQx6rVJKopbiDwaPRwIBv39/f8efXj4z5oyIiyfPo7+tr2XXuezmvmd6XfHx8ftUqu9vxiY/PryJvdPwe5I1T/D0OC4tm0ev7HgVx/Apz8QWEu/6vy3rv8kBy+fPrRx7/9vH5VW93De2kvbtzYAGrMNPU3G4TkfYhRUjz+Ysmr3K5/47k9fb75z+thh4uVsJcTUkttgzBMjMtIKAUG5LGxrbCZMq2yuyG/MHhwhRuQAk9m9+z0bjO5FO4iBBuZb0+m98ts3cfb2tQArvhap9rqlMXwqwhhIXE4H5P93kX5ioPprHv7oXgJpgZdotT2p7CxyGNLaCRDpqAroLJArjH/6L8x+dXHYV5uFgtLIBZ1YYbCKDRCGlkI2B232m4h8662mh/l9Uqs1un0oaWFoAgAQRbQ7Mu4O+CQCwltGq+l2FVFxR0/L762JsRkKY33gWgFILoNKPbjBIuxkElnYl3LuKkeR3m7H6+rWq7CLeAOQcwvyI3y8w5wSYkCXBhWAl73y4OUPDeaeTFh65SXl7kLt7JTlgmpCBREu0qAJNK+N4kSUehQI3c411ut+Mf0A4QcwyirUGuL+JCigi/M+0E0V8BeIRXE0X0uwWzaP/O1HcQFdfFFADjRYSosGMO09NdAgUKtZPNGuXffv/8B+arG0C8jEU5P09BfYSXSanUdMRdtGwTcsTDaL5qUhlQC+X2Cqa5llPGfUhczFJPCJsaQB/CjxXxdQ7wT1O7WNBJkkQkyYpSwDVq0uv3VUMfJg986NS8HBOeUHe7VKFL5RULZB+fX1ZMOQr37fv7+5INEIJEEcJpCnsiTCUgRcXtEC5t3HC4jtsdLnUpFjGXAiDcWTxyGbXhtx334frl7PjQo4l3rNP6/Sacbw0dPFtc5+MYS4TglZsETAialgY8Khsy8dVNQj602ZEJF8rM2SUyXgHTJhCtUIRnbP0lKJlVz3oC700wZgyE6N5Dme6Irm9VtI7u/PPrR55qSgZj72YXDsNfgovcRQKqZqWCo8WorS7yLuSLQE2TmmqvW6hTG+BG/0nJhZr/avYq0r8fVRiA2hr6qtxg6FU0TuN/VBPskliBw+AHo+1agSJpN+lnGWRtbmi6WuBOwS2Hmtheq6i7jvZ8N5mmXUIjBoJmOT2j26YcQ5oW0WomEvL9uvehMAOYVGz6Obferjo8WJROI8NqrcyFTUch3xiZGrz02pElaWqmYqQcd4NMPA1rSUGYnEh3ZcVtCaSj9A3qLAPXZmrAwjuMVQnSOYDmuVovg04HldbnIWz6q8bhMtomuJ6Sx4r4rf/hXmxmqSVHBA+YIv9V+b3K013TdEnoMghsVe96vAaVihmMuolaMyNGknCJzLzToN9S0IIVXj2JUYqsqJjIpFU33g2p8UFDp06/q82rlLPTvgJCD4I6UNBjGw/hXEe8d4nQqdEBUfwgcDhtNSqKqoqASgIm0XyanRWL6F07zkqS3FZ40Ki5AtIMDSCf5kAm9L9Ve7qqi4WxuckC0FqfP3bcXFrCQSuOXb8eECJhMFiv4k5dBovynU4J5G14CmRSF7L8lAmPXnFPE/pPUnfosIfDh06Oz0xw4rTJwWG7HCZ+q7rq9NvTTMnwY06Hcg59JYvwChKxQJYCLbRFRIQ1uwB+asUxsoFd4neivU5D1zNuZztDYia+BvJ3wYWqHF5pJcKLDo2mtB5tAGoJckshVsMYIkluaEcMhjqJvyqhParMrNxFCU0uAzapDmaoYAy7n1pxXlSc67RIIYBnCexnSJFS2ZQbkB5BiVD7zpEUtutpanYOUlCXZOkSkxL3c0q3UXrJAtMN9Y8vQp40KuSGKaLNy9B98IjEcTGwZL+6Ux/oOWXyYZi4W0ufNm+5Wdnu/51kUyGwepxST+RsD2Vkh1yYdrq9AtK4TQux8X718flFkU9H66lGh3hywY52s/dwnmPtiIoMiVfh1ruG3pDEFyfswKMaQhQ3rQzDMliwcRswLgcj2OmPzs+egtLK6y1ZkuqljNCFOpXCIkGtXwglKO0sApPooS/SMn+FTaosCqIpgiNuswJqlUmRCLidKUm4AHSiDmp9J1TUunRjjjbw4aogUKUETk2TPc8B096dRlYaiPzwqVFsLQsRIv7MNoELVTbT4UQkeDU9QWl1CDPO8LtWSihLxN8OZlVDWpVRlZFXgbiwhJkiO6fZ+bqKeZ+nU1gcNac5h2gfGiqimNtK6LBFJYLYpB9+B7YFybwubmTVzuOwBkR3XnJ5NasIaAej0ZDLKIH9MvYnQigiOgSLDw8lqH6n01nPhlV5toThzGuaENIT9zLtBJTA3irSPZnLT4hal+zdOa/0bG5Phd/5Tto5Quh9x19N60YJoq0TyYNAtimnoCBUa9JHk+9q886hhWdIEec69/BBvFjzXnas+/i7w9grTdwlInaZJqdS8Arqj7JNKCV9aCiQepCgssPOuHPv3OEALmMV8eToS0K+nx7vBrBnMKNIlhIig1JR350EpkyfrcMWsorup0FYIqVS0xdQcSs3TTFFMCxBzITx+qewbReMHsDe6MxltSXkBhBFloCa6wSdgjpkGusmBRW68zlW4XXA/nEKBI0hM3J2NoqSmXoA03dOkaCJt4i2Y+f0FaM1Mns6+26A4YrQZ6xCybCg4gUSMEVhBskU7ov2giIhP2pKx3ZG0NM0zVp2T3Q88yhSTXDmPdP7GowBPQelJvGfHHINYrbO+CHmU1nWpNwQ00y6RocDXQV/GYQ12Y1NAmL36PW0FYhNkmCVU2mRCNRfGh1MAmAnVXQFqg4vTBprkfuZnrkfPdoxQwNqTVFfrxiNMdWmqc9+irZbla+dfTek73Z39ZVBaceKQvGzJq15DkpdDg+ggnOY1aXgdoSvJt6qEURtZZNlgd0IUPXzTiuOOzboVf1KLs2222TmfgqEJEkuOBT5hanPGTJHyPeG8NnTsUQqKLbv3ckC9dzDMUOHHYjwZx9N6LGJZrMPAdiBWY4bG318BQT2DcBPkqOz1FMxRmh6uPJzkyqBO3ITkTKwDEKP1XSp5/JPXN/kks+Tj5vYLlMYvlIB/tO4S3TEe9XcE2NP8GiIgOQSE8/2hO4Q0k7O77ojGWNOHwxgfFgVm1SbBkk8WXCErop2AUVNI3d6Ri+HFhiVd6opGQNZJ0FhR+scBLELpSYYmX5ijcuJ/jsA5u4AhqNud/gAAAAASUVORK5CYII=) #d1ad86}#two-battle-calculator .addForm .center-34x{text-align:center;line-height:34px}#two-battle-calculator .addForm span{text-align:right}#two-battle-calculator .icon-120x120-skill-recruit_speed_bonus{zoom:.283333}#two-battle-calculator .icon-120x120-skill-recruit_speed_bonus:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-domination{zoom:.283333}#two-battle-calculator .icon-120x120-domination:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-26x26-night-mode{zoom:1.307692}#two-battle-calculator .icon-26x26-night-mode:before{-moz-transform:scale(1.307692)}#two-battle-calculator .icon-120x120-skill-medic{zoom:.283333}#two-battle-calculator .icon-120x120-skill-medic:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-skill-attack_bonus{zoom:.283333}#two-battle-calculator .icon-120x120-skill-attack_bonus:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-skill-iron_walls{zoom:.283333}#two-battle-calculator .icon-120x120-skill-iron_walls:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-skill-better_hospital{zoom:.283333}#two-battle-calculator .icon-120x120-skill-better_hospital:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-44x44-premium_officer_leader{zoom:.772727}#two-battle-calculator .icon-44x44-premium_officer_leader:before{-moz-transform:scale(.772727)}#two-battle-calculator .icon-44x44-premium_officer_medic{zoom:.772727}#two-battle-calculator .icon-44x44-premium_officer_medic:before{-moz-transform:scale(.772727)}#two-battle-calculator .icon-90x90-item-spear{background-image:url(https://twxen.innogamescdn.com/img/icons/no-alpha_3bfedc2e90.jpg);background-position:-1710px -1892px;zoom:.288888}#two-battle-calculator .icon-90x90-item-spear:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-sword:before{background-image:url(https://twxen.innogamescdn.com/img/icons/no-alpha_3bfedc2e90.jpg);background-position:-1620px -1892px;transform:scale(.288888);width:26px;height:26px}#two-battle-calculator .icon-34x34-attackarc:before{background-image:url(https://i.imgur.com/qGoj36r.png);background-position:0px 0px}#two-battle-calculator .icon-34x34-attackcav:before{background-image:url(https://i.imgur.com/etSiYUW.png);background-position:0px 0px}#two-battle-calculator .icon-34x34-attackinf:before{background-image:url(https://i.imgur.com/z9hX6Au.png);background-position:0px 0px}#two-battle-calculator .icon-90x90-item-axe{zoom:.288888}#two-battle-calculator .icon-90x90-item-axe:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-archer{zoom:.288888}#two-battle-calculator .icon-90x90-item-archer:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-light_cavalry{zoom:.288888}#two-battle-calculator .icon-90x90-item-light_cavalry:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-mounted_archer{zoom:.288888}#two-battle-calculator .icon-90x90-item-mounted_archer:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-heavy_cavalry{zoom:.288888}#two-battle-calculator .icon-90x90-item-heavy_cavalry:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-ram{zoom:.288888}#two-battle-calculator .icon-90x90-item-ram:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-catapult{zoom:.288888}#two-battle-calculator .icon-90x90-item-catapult:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-snob{zoom:.288888}#two-battle-calculator .icon-90x90-item-snob:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-34x34-paladin{zoom:.73529412}#two-battle-calculator .icon-34x34-paladin:before{-moz-transform:scale(.73529412)}#two-battle-calculator .icon-34x34-unit-special-ability-catapult{zoom:.73529412}#two-battle-calculator .icon-34x34-unit-special-ability-catapult:before{-moz-transform:scale(.73529412)}#two-battle-calculator .icon-44x44-special{zoom:.56818}#two-battle-calculator .icon-44x44-special:before{-moz-transform:scale(.56818)}#two-battle-calculator .switch{text-align:center}#two-battle-calculator .item{text-align:center}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = battleCalculator.isRunning()
         $scope.selectedTab = TAB_TYPES.BATTLE
         $scope.settingsMap = SETTINGS_MAP
-		
         $scope.catapulttarget = Settings.encodeList(B_CAT_TARGET, {
             textObject: 'battle_calculator',
             disabled: true
         })
-		
         $scope.knightitem = Settings.encodeList(B_ITEMS, {
             textObject: 'battle_calculator',
             disabled: true
         })
-		
         $scope.itemlevel = Settings.encodeList(B_ITEMS_LEVELS, {
             textObject: 'battle_calculator',
             disabled: true
         })
-		
         $scope.order = Settings.encodeList(T_ORDER_TYPE, {
             textObject: 'battle_calculator',
             disabled: true
         })
         $scope.wall = Settings.encodeList(B_WALLS, {
-            textObject: 'battle_calculator',
-            disabled: true
+            textObject: 'battle_calculator'
         })
         $scope.church = Settings.encodeList(B_CHURCHES, {
-            textObject: 'battle_calculator',
-            disabled: true
+            textObject: 'battle_calculator'
         })
         $scope.weaponmaster = Settings.encodeList(B_SKILL_WEAPON_MASTER_LEVEL, {
             textObject: 'battle_calculator',
@@ -6980,28 +11284,170 @@ define('two/battleCalculator/ui', [
             textObject: 'battle_calculator',
             disabled: true
         })
-
         settings.injectScope($scope)
         eventHandlers.updatePresets()
-
         $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
+        $scope.calculateB = showBashpoints
+        $scope.totalDef = 0
+        $scope.totalAtt = 0
+        $scope.calculateT = showTroops
+        $scope.woodTotal = 0
+        $scope.speedTotal = 0
+        $scope.attackTotal = 0
+        $scope.clayTotal = 0
+        $scope.disciplineTotal = 0
+        $scope.definfTotal = 0
+        $scope.ironTotal = 0
+        $scope.loadTotal = 0
+        $scope.defcavTotal = 0
+        $scope.foodTotal = 0
+        $scope.buildtimeTotal = 0
+        $scope.defarcTotal = 0
+        $scope.attackinfTotal = 0
+        $scope.attackcavTotal = 0
+        $scope.attackarcTotal = 0
+        $scope.simulate = showBattleScore
+        $scope.target = 0
+        $scope.buildingfrom = 0
+        $scope.buildingto = 0
+        $scope.wallfrom = 0
+        $scope.wallto = 0
+        $scope.wallfrompre = 0
+        $scope.walltopre = 0
+        $scope.defenceModifier = 0
+        $scope.defenceProvisions = 0
+        $scope.strentghDefend = 0
+        $scope.defenceBashpoint = 0
+        $scope.defenceKilledProvisions = 0
+        $scope.strongestTypeDef = 0
+        $scope.killrateD = 0
+        $scope.defenceSurvivedProvisions = 0
+        $scope.availableBeds = 0
+        $scope.attackModifier = 0
+        $scope.attackProvisions = 0
+        $scope.strentghAttack = 0
+        $scope.attackBashpoint = 0
+        $scope.attackKilledProvisions = 0
+        $scope.strongestTypeOff = 0
+        $scope.killrateA = 0
+        $scope.attackSurvivedProvisions = 0
+        $scope.doubleStrength = 0
+        $scope.spearDamount = 0
+        $scope.spearDlosses = 0
+        $scope.spearDrevived = 0
+        $scope.spearDsurvived = 0
+        $scope.swordDamount = 0
+        $scope.swordDlosses = 0
+        $scope.swordDrevived = 0
+        $scope.swordDsurvived = 0
+        $scope.axeDamount = 0
+        $scope.axeDlosses = 0
+        $scope.axeDrevived = 0
+        $scope.axeDsurvived = 0
+        $scope.archerDamount = 0
+        $scope.archerDlosses = 0
+        $scope.archerDrevived = 0
+        $scope.archerDsurvived = 0
+        $scope.snobDamount = 0
+        $scope.snobDlosses = 0
+        $scope.snobDrevived = 0
+        $scope.snobDsurvived = 0
+        $scope.knightDamount = 0
+        $scope.knightDlosses = 0
+        $scope.knightDrevived = 0
+        $scope.knightDsurvived = 0
+        $scope.ramDamount = 0
+        $scope.ramDlosses = 0
+        $scope.ramDrevived = 0
+        $scope.ramDsurvived = 0
+        $scope.catapultDamount = 0
+        $scope.catapultDlosses = 0
+        $scope.catapultDrevived = 0
+        $scope.catapultDsurvived = 0
+        $scope.trebuchetDamount = 0
+        $scope.trebuchetDlosses = 0
+        $scope.trebuchetDrevived = 0
+        $scope.trebuchetDsurvived = 0
+        $scope.lcDamount = 0
+        $scope.lcDlosses = 0
+        $scope.lcDrevived = 0
+        $scope.lcDsurvived = 0
+        $scope.maDamount = 0
+        $scope.maDlosses = 0
+        $scope.maDrevived = 0
+        $scope.maDsurvived = 0
+        $scope.hcDamount = 0
+        $scope.hcDlosses = 0
+        $scope.hcDrevived = 0
+        $scope.hcDsurvived = 0
+        $scope.berserkerDamount = 0
+        $scope.berserkerDlosses = 0
+        $scope.berserkerDrevived = 0
+        $scope.berserkerDsurvived = 0
+        $scope.spearAamount = 0
+        $scope.spearAlosses = 0
+        $scope.spearArevived = 0
+        $scope.spearAsurvived = 0
+        $scope.swordAamount = 0
+        $scope.swordAlosses = 0
+        $scope.swordArevived = 0
+        $scope.swordAsurvived = 0
+        $scope.axeAamount = 0
+        $scope.axeAlosses = 0
+        $scope.axeArevived = 0
+        $scope.axeAsurvived = 0
+        $scope.archerAamount = 0
+        $scope.archerAlosses = 0
+        $scope.archerArevived = 0
+        $scope.archerAsurvived = 0
+        $scope.snobAamount = 0
+        $scope.snobAlosses = 0
+        $scope.snobArevived = 0
+        $scope.snobAsurvived = 0
+        $scope.knightAamount = 0
+        $scope.knightAlosses = 0
+        $scope.knightArevived = 0
+        $scope.knightAsurvived = 0
+        $scope.ramAamount = 0
+        $scope.ramAlosses = 0
+        $scope.ramArevived = 0
+        $scope.ramAsurvived = 0
+        $scope.catapultAamount = 0
+        $scope.catapultAlosses = 0
+        $scope.catapultArevived = 0
+        $scope.catapultAsurvived = 0
+        $scope.trebuchetAamount = 0
+        $scope.trebuchetAlosses = 0
+        $scope.trebuchetArevived = 0
+        $scope.trebuchetAsurvived = 0
+        $scope.lcAamount = 0
+        $scope.lcAlosses = 0
+        $scope.lcArevived = 0
+        $scope.lcAsurvived = 0
+        $scope.maAamount = 0
+        $scope.maAlosses = 0
+        $scope.maArevived = 0
+        $scope.maAsurvived = 0
+        $scope.hcAamount = 0
+        $scope.hcAlosses = 0
+        $scope.hcArevived = 0
+        $scope.hcAsurvived = 0
+        $scope.berserkerAamount = 0
+        $scope.berserkerAlosses = 0
+        $scope.berserkerArevived = 0
+        $scope.berserkerAsurvived = 0
         $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_battle_calculator_window', function onDestroy () {
+        let eventScope = new EventScope('twoverflow_battle_calculator_window', function onDestroy() {
             console.log('battleCalculator window closed')
         })
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true /*true = native game event*/)
+        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_STOP, eventHandlers.stop)
-        
         windowManagerService.getScreenWithInjectedScope('!twoverflow_battle_calculator_window', $scope)
     }
-
     return init
 })
-
 define('two/battleCalculator/settings', [], function () {
     return {
         BATTLE_SPEAR_D: 'battle_spear_d',
@@ -7102,6 +11548,110 @@ define('two/battleCalculator/settings/map', [
     UPDATES
 ) {
     return {
+        [SETTINGS.BATTLE_SPEAR_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_SWORD_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_AXE_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_ARCHER_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_LC_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_MA_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_HC_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_RAM_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_CATAPULT_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_SNOB_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_KNIGHT_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_TREBUCHET_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_DOPPELSOLDNER_D]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_SPEAR_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_SWORD_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_AXE_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_ARCHER_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_LC_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_MA_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_HC_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_RAM_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_CATAPULT_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_SNOB_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_KNIGHT_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_TREBUCHET_A]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_DOPPELSOLDNER_A]: {
+            default: 0,
+            inputType: 'number'
+        },
         [SETTINGS.PRESET]: {
             default: [],
             updates: [
@@ -7205,17 +11755,133 @@ define('two/battleCalculator/settings/map', [
             disabledOption: true,
             inputType: 'select'
         },
-        [SETTINGS.TROOPS_BARRACKS]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 25
+        [SETTINGS.BATTLE_TARGET_LEVEL]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_LUCK]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BATTLE_MORALE]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_SPEAR]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_SWORD]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_AXE]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_ARCHER]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_LC]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_MA]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_HC]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_RAM]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_CATAPULT]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_SNOB]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_KNIGHT]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_TREBUCHET]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.BASHPOINTS_DOPPELSOLDNER]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_SPEAR]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_SWORD]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_AXE]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_ARCHER]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_LC]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_MA]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_HC]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_RAM]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_CATAPULT]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_SNOB]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_KNIGHT]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_TREBUCHET]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.TROOPS_DOPPELSOLDNER]: {
+            default: 0,
+            inputType: 'number'
         },
         [SETTINGS.TROOPS_PRECEPTORY]: {
             default: 10,
             inputType: 'number',
             min: 0,
             max: 10
+        },
+        [SETTINGS.TROOPS_BARRACKS]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 25
         },
         [SETTINGS.TROOPS_ORDER]: {
             default: false,
@@ -7413,7 +12079,7 @@ define('two/builderQueue', [
     'queues/EventQueue',
     'Lockr',
     'helper/time'
-], function (
+], function(
     ready,
     utils,
     Settings,
@@ -7450,48 +12116,34 @@ define('two/builderQueue', [
         LOGS: 'builder_queue_log',
         SETTINGS: 'builder_queue_settings'
     }
-
-    /**
-     * Loop all player villages, check if ready and init the building analyse
-     * for each village.
-     */
-    const analyseVillages = function () {
+    const analyseVillages = function() {
         const villageIds = getVillageIds()
-
         if (!sequencesAvail) {
             builderQueue.stop()
             return false
         }
-
-        villageIds.forEach(function (villageId) {
+        villageIds.forEach(function(villageId) {
             const village = $player.getVillage(villageId)
             const readyState = village.checkReadyState()
             const queue = village.buildingQueue
             const jobs = queue.getAmountJobs()
-
             if (jobs === queue.getUnlockedSlots()) {
                 return false
             }
-
             if (!readyState.buildingQueue || !readyState.buildings) {
                 return false
             }
-
             analyseVillageBuildings(village)
         })
     }
-
-    const analyseVillagesInstantFinish = function () {
+    const analyseVillagesInstantFinish = function() {
         const villageIds = getVillageIds()
-
-        villageIds.forEach(function (villageId) {
+        villageIds.forEach(function(villageId) {
             const village = $player.getVillage(villageId)
             const queue = village.buildingQueue
-
             if (queue.getAmountJobs()) {
                 const jobs = queue.getQueue()
-
-                jobs.forEach(function (job) {
+                jobs.forEach(function(job) {
                     if (buildingQueueService.canBeFinishedForFree(job, village)) {
                         premiumActionService.instantBuild(job, LOCATION_TYPES.MASS_SCREEN, true, villageId)
                     }
@@ -7499,110 +12151,76 @@ define('two/builderQueue', [
             }
         })
     }
-
-    const initializeAllVillages = function () {
+    const initializeAllVillages = function() {
         const villageIds = getVillageIds()
-
-        villageIds.forEach(function (villageId) {
+        villageIds.forEach(function(villageId) {
             const village = $player.getVillage(villageId)
-
             if (!village.isInitialized()) {
                 villageService.initializeVillage(village)
             }
         })
     }
-
-    /**
-     * Generate an Array with all player's village IDs.
-     *
-     * @return {Array}
-     */
-    const getVillageIds = function () {
+    const getVillageIds = function() {
         const groupVillages = builderSettings[SETTINGS.GROUP_VILLAGES]
         let villages = []
-
         if (groupVillages) {
             villages = groupList.getGroupVillageIds(groupVillages)
-            villages = villages.filter(function (vid) {
+            villages = villages.filter(function(vid) {
                 return $player.getVillage(vid)
             })
         } else {
-            utils.each($player.getVillages(), function (village) {
+            utils.each($player.getVillages(), function(village) {
                 villages.push(village.getId())
             })
         }
-
         return villages
     }
-
-    /**
-     * Loop all village buildings, start build job if available.
-     *
-     * @param {VillageModel} village
-     */
-    const analyseVillageBuildings = function (village) {
+    const analyseVillageBuildings = function(village) {
         let buildingLevels = angular.copy(village.buildingData.getBuildingLevels())
         const currentQueue = village.buildingQueue.getQueue()
         let sequence = angular.copy(VILLAGE_BUILDINGS)
         const sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
         const activeSequenceId = builderSettings[SETTINGS.ACTIVE_SEQUENCE]
         const activeSequence = sequences[activeSequenceId]
-
-        currentQueue.forEach(function (job) {
+        currentQueue.forEach(function(job) {
             buildingLevels[job.building]++
         })
-
         if (checkVillageBuildingLimit(buildingLevels)) {
             return false
         }
-
-        activeSequence.some(function (buildingName) {
+        activeSequence.some(function(buildingName) {
             if (++sequence[buildingName] > buildingLevels[buildingName]) {
                 buildingService.compute(village)
-
-                checkAndUpgradeBuilding(village, buildingName, function (jobAdded, data) {
+                checkAndUpgradeBuilding(village, buildingName, function(jobAdded, data) {
                     if (jobAdded && data.job) {
                         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_JOB_STARTED, data.job)
                         addLog(village.getId(), data.job)
                     }
                 })
-
                 return true
             }
         })
     }
-
-    /**
-     * Init a build job
-     *
-     * @param {VillageModel} village
-     * @param {String} buildingName - Building to be build.
-     * @param {Function} callback
-     */
-    const checkAndUpgradeBuilding = function (village, buildingName, callback) {
+    const checkAndUpgradeBuilding = function(village, buildingName, callback) {
         const upgradeability = checkBuildingUpgradeability(village, buildingName)
-
         if (upgradeability === UPGRADEABILITY_STATES.POSSIBLE) {
-            upgradeBuilding(village, buildingName, function (data) {
+            upgradeBuilding(village, buildingName, function(data) {
                 callback(true, data)
             })
         } else if (upgradeability === UPGRADEABILITY_STATES.NOT_ENOUGH_FOOD) {
             if (builderSettings[SETTINGS.PRIORIZE_FARM]) {
                 const limitFarm = buildingSequenceLimit[BUILDING_TYPES.FARM]
                 const villageFarm = village.getBuildingData().getDataForBuilding(BUILDING_TYPES.FARM)
-
                 if (villageFarm.level < limitFarm) {
-                    upgradeBuilding(village, BUILDING_TYPES.FARM, function (data) {
+                    upgradeBuilding(village, BUILDING_TYPES.FARM, function(data) {
                         callback(true, data)
                     })
                 }
             }
         }
-
         callback(false)
     }
-
-    const upgradeBuilding = function (village, buildingName, callback) {
+    const upgradeBuilding = function(village, buildingName, callback) {
         socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
             building: buildingName,
             village_id: village.getId(),
@@ -7610,17 +12228,11 @@ define('two/builderQueue', [
             premium: false
         }, callback)
     }
-
-    /**
-     * Can't just use the .upgradeability value because of the preserve resources setting.
-     */
-    const checkBuildingUpgradeability = function (village, buildingName) {
+    const checkBuildingUpgradeability = function(village, buildingName) {
         const buildingData = village.getBuildingData().getDataForBuilding(buildingName)
-
         if (buildingData.upgradeability === UPGRADEABILITY_STATES.POSSIBLE) {
             const nextLevelCosts = buildingData.nextLevelCosts
             const resources = village.getResources().getComputed()
-
             if (
                 resources.clay.currentStock - builderSettings[SETTINGS.PRESERVE_CLAY] < nextLevelCosts.clay ||
                 resources.iron.currentStock - builderSettings[SETTINGS.PRESERVE_IRON] < nextLevelCosts.iron ||
@@ -7629,255 +12241,180 @@ define('two/builderQueue', [
                 return UPGRADEABILITY_STATES.NOT_ENOUGH_RESOURCES
             }
         }
-
         return buildingData.upgradeability
     }
-
-    /**
-     * Check if all buildings from the sequence already reached
-     * the specified level.
-     *
-     * @param {Object} buildingLevels - Current buildings level from the village.
-     * @return {Boolean} True if the levels already reached the limit.
-     */
-    const checkVillageBuildingLimit = function (buildingLevels) {
+    const checkVillageBuildingLimit = function(buildingLevels) {
         for (let buildingName in buildingLevels) {
             if (buildingLevels[buildingName] < buildingSequenceLimit[buildingName]) {
                 return false
             }
         }
-
         return true
     }
-
-    /**
-     * Check if the building sequence is valid by analysing if the
-     * buildings exceed the maximum level.
-     *
-     * @param {Array} sequence
-     * @return {Boolean}
-     */
-    const validSequence = function (sequence) {
+    const validSequence = function(sequence) {
         const buildingData = modelDataService.getGameData().getBuildings()
-
         for (let i = 0; i < sequence.length; i++) {
             let building = sequence[i]
-
             if (++sequence[building] > buildingData[building].max_level) {
                 return false
             }
         }
-
         return true
     }
-
-    /**
-     * Get the level max for each building.
-     *
-     * @param {String} sequenceId
-     * @return {Object} Maximum level for each building.
-     */
-    const getSequenceLimit = function (sequenceId) {
+    const getSequenceLimit = function(sequenceId) {
         const sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
         const sequence = sequences[sequenceId]
         let sequenceLimit = angular.copy(VILLAGE_BUILDINGS)
-
-        sequence.forEach(function (buildingName) {
+        sequence.forEach(function(buildingName) {
             sequenceLimit[buildingName]++
         })
-
         return sequenceLimit
     }
-
-    const addLog = function (villageId, jobData) {
+    const addLog = function(villageId, jobData) {
         let data = {
             time: timeHelper.gameTime(),
             villageId: villageId,
             building: jobData.building,
             level: jobData.level
         }
-
         logs.unshift(data)
-
         if (logs.length > LOGS_LIMIT) {
             logs.splice(logs.length - LOGS_LIMIT, logs.length)
         }
-
         Lockr.set(STORAGE_KEYS.LOGS, logs)
-
         return true
     }
-
     let builderQueue = {}
-
-    builderQueue.start = function () {
+    builderQueue.start = function() {
         if (!sequencesAvail) {
             eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_NO_SEQUENCES)
             return false
         }
-
         running = true
         intervalCheckId = setInterval(analyseVillages, 60000 / ANALYSES_PER_MINUTE)
         intervalInstantCheckId = setInterval(analyseVillagesInstantFinish, 60000 / ANALYSES_PER_MINUTE_INSTANT_FINISH)
-        
-        ready(function () {
+        ready(function() {
             initializeAllVillages()
             analyseVillages()
             analyseVillagesInstantFinish()
         }, ['all_villages_ready'])
-
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_START)
     }
-
-    builderQueue.stop = function () {
+    builderQueue.stop = function() {
         running = false
         clearInterval(intervalCheckId)
         clearInterval(intervalInstantCheckId)
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_STOP)
     }
-
-    builderQueue.isRunning = function () {
+    builderQueue.isRunning = function() {
         return running
     }
-
-    builderQueue.isInitialized = function () {
+    builderQueue.isInitialized = function() {
         return initialized
     }
-
-    builderQueue.getSettings = function () {
+    builderQueue.getSettings = function() {
         return settings
     }
-
-    builderQueue.getLogs = function () {
+    builderQueue.getLogs = function() {
         return logs
     }
-
-    builderQueue.clearLogs = function () {
+    builderQueue.clearLogs = function() {
         logs = []
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS)
     }
-
-    builderQueue.addBuildingSequence = function (id, sequence) {
+    builderQueue.addBuildingSequence = function(id, sequence) {
         let sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
-
         if (id in sequences) {
             return SEQUENCE_STATUS.SEQUENCE_EXISTS
         }
-
         if (!Array.isArray(sequence)) {
             return SEQUENCE_STATUS.SEQUENCE_INVALID
         }
-
         sequences[id] = sequence
         settings.set(SETTINGS.BUILDING_SEQUENCES, sequences, {
             quiet: true
         })
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_ADDED, id)
-
         return SEQUENCE_STATUS.SEQUENCE_SAVED
     }
-
-    builderQueue.updateBuildingSequence = function (id, sequence) {
+    builderQueue.updateBuildingSequence = function(id, sequence) {
         let sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
-
         if (!(id in sequences)) {
             return SEQUENCE_STATUS.SEQUENCE_NO_EXISTS
         }
-
         if (!Array.isArray(sequence) || !validSequence(sequence)) {
             return SEQUENCE_STATUS.SEQUENCE_INVALID
         }
-
         sequences[id] = sequence
         settings.set(SETTINGS.BUILDING_SEQUENCES, sequences, {
             quiet: true
         })
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_UPDATED, id)
-
         return SEQUENCE_STATUS.SEQUENCE_SAVED
     }
-
-    builderQueue.removeSequence = function (id) {
+    builderQueue.removeSequence = function(id) {
         let sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
-
         if (!(id in sequences)) {
             return SEQUENCE_STATUS.SEQUENCE_NO_EXISTS
         }
-
         delete sequences[id]
         settings.set(SETTINGS.BUILDING_SEQUENCES, sequences, {
             quiet: true
         })
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_REMOVED, id)
     }
-
-    builderQueue.init = function () {
+    builderQueue.init = function() {
         initialized = true
         logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
         $player = modelDataService.getSelectedCharacter()
         groupList = modelDataService.getGroupList()
-        
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates, opt) {
+        settings.onChange(function(changes, updates, opt) {
             builderSettings = settings.getAll()
-
             if (running) {
                 if (updates[UPDATES.ANALYSE]) {
                     analyseVillages()
                 }
             }
-
             if (!opt.quiet) {
                 eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_SETTINGS_CHANGE)
             }
         })
-
         builderSettings = settings.getAll()
-
         for (let buildingName in BUILDING_TYPES) {
             VILLAGE_BUILDINGS[BUILDING_TYPES[buildingName]] = 0
         }
-
         sequencesAvail = Object.keys(builderSettings[SETTINGS.BUILDING_SEQUENCES]).length
         buildingSequenceLimit = sequencesAvail ? getSequenceLimit(builderSettings[SETTINGS.ACTIVE_SEQUENCE]) : false
-
-        $rootScope.$on(eventTypeProvider.BUILDING_LEVEL_CHANGED, function (event, data) {
+        $rootScope.$on(eventTypeProvider.BUILDING_LEVEL_CHANGED, function(event, data) {
             if (!running) {
                 return false
             }
-
-            setTimeout(function () {
+            setTimeout(function() {
                 let village = $player.getVillage(data.village_id)
                 analyseVillageBuildings(village)
             }, 1000)
         })
     }
-
     return builderQueue
 })
-
 define('two/builderQueue/defaultOrders', [
     'conf/buildingTypes'
-], function (
+], function(
     BUILDING_TYPES
 ) {
     let defaultSequences = {}
-    
-    const shuffle = function (array) {
+    const shuffle = function(array) {
         array.sort(() => Math.random() - 0.5)
     }
-
-    const parseSequence = function (rawSequence) {
+    const parseSequence = function(rawSequence) {
         let parsed = []
-
         for (let i = 0; i < rawSequence.length; i++) {
             let item = rawSequence[i]
-
             if (Array.isArray(item)) {
                 shuffle(item)
                 parsed = parsed.concat(item)
@@ -7885,22 +12422,17 @@ define('two/builderQueue/defaultOrders', [
                 parsed.push(item)
             }
         }
-
         return parsed
     }
-
-    const parseSequences = function (rawSequences) {
+    const parseSequences = function(rawSequences) {
         let parsed = {}
-
         for (let i in rawSequences) {
             if (hasOwn.call(rawSequences, i)) {
                 parsed[i] = parseSequence(rawSequences[i])
             }
         }
-
         return parsed
     }
-
     defaultSequences['Essential'] = [
         BUILDING_TYPES.HEADQUARTER, // 1
         BUILDING_TYPES.FARM, // 1
@@ -7913,7 +12445,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 2
             BUILDING_TYPES.CLAY_PIT, // 1
             BUILDING_TYPES.IRON_MINE, // 1
-
             BUILDING_TYPES.HEADQUARTER, // 2
             BUILDING_TYPES.RALLY_POINT, // 2
         ],
@@ -7921,7 +12452,6 @@ define('two/builderQueue/defaultOrders', [
             // Quest: First Steps
             BUILDING_TYPES.FARM, // 2
             BUILDING_TYPES.WAREHOUSE, // 2
-            
             // Quest: Laying Down Foundation
             BUILDING_TYPES.CLAY_PIT, // 2
             BUILDING_TYPES.IRON_MINE, // 2
@@ -7931,7 +12461,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 3
             BUILDING_TYPES.CLAY_PIT, // 3
             BUILDING_TYPES.IRON_MINE, // 3
-            
             // Quest: Resource Building
             BUILDING_TYPES.WAREHOUSE, // 3
             BUILDING_TYPES.TIMBER_CAMP, // 4
@@ -7944,7 +12473,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 5
             BUILDING_TYPES.CLAY_PIT, // 5
             BUILDING_TYPES.IRON_MINE, // 5
-
             // Quest: Capital
             BUILDING_TYPES.FARM, // 3
             BUILDING_TYPES.WAREHOUSE, // 5
@@ -7953,7 +12481,6 @@ define('two/builderQueue/defaultOrders', [
         [
             // Quest: The Hero
             BUILDING_TYPES.STATUE, // 1
-
             // Quest: Resource Expansions
             BUILDING_TYPES.TIMBER_CAMP, // 6
             BUILDING_TYPES.CLAY_PIT, // 6
@@ -7962,7 +12489,6 @@ define('two/builderQueue/defaultOrders', [
         [
             // Quest: Military
             BUILDING_TYPES.BARRACKS, // 2
-
             // Quest: The Hospital
             BUILDING_TYPES.HOSPITAL, // 1
             BUILDING_TYPES.HEADQUARTER, // 4
@@ -8005,7 +12531,6 @@ define('two/builderQueue/defaultOrders', [
         [
             // Quest: The way of defence
             BUILDING_TYPES.BARRACKS, // 3
-
             BUILDING_TYPES.WAREHOUSE, // 7
             BUILDING_TYPES.WAREHOUSE, // 8
             BUILDING_TYPES.FARM, // 8
@@ -8016,7 +12541,6 @@ define('two/builderQueue/defaultOrders', [
             // Quest: Market Barker
             BUILDING_TYPES.HEADQUARTER, // 6
             BUILDING_TYPES.MARKET, // 1
-
             // Quest: Preparations
             BUILDING_TYPES.BARRACKS, // 4
             BUILDING_TYPES.WALL, // 2
@@ -8025,7 +12549,6 @@ define('two/builderQueue/defaultOrders', [
         [
             BUILDING_TYPES.FARM, // 9
             BUILDING_TYPES.FARM, // 10
-
             BUILDING_TYPES.BARRACKS, // 5
             BUILDING_TYPES.WAREHOUSE, // 11
             BUILDING_TYPES.FARM, // 11
@@ -8034,7 +12557,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.BARRACKS, // 6
             BUILDING_TYPES.WAREHOUSE, // 12
             BUILDING_TYPES.FARM, // 12
-
             BUILDING_TYPES.BARRACKS, // 7
             BUILDING_TYPES.WAREHOUSE, // 13
             BUILDING_TYPES.FARM, // 13
@@ -8043,7 +12565,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.WALL, // 4
             BUILDING_TYPES.WALL, // 5
             BUILDING_TYPES.WALL, // 6
-
             BUILDING_TYPES.MARKET, // 2
             BUILDING_TYPES.MARKET, // 3
             BUILDING_TYPES.MARKET, // 4
@@ -8051,7 +12572,6 @@ define('two/builderQueue/defaultOrders', [
         [
             BUILDING_TYPES.BARRACKS, // 8
             BUILDING_TYPES.BARRACKS, // 9
-
             BUILDING_TYPES.HEADQUARTER, // 7
             BUILDING_TYPES.HEADQUARTER, // 8
         ],
@@ -8059,34 +12579,29 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TAVERN, // 1
             BUILDING_TYPES.TAVERN, // 2
             BUILDING_TYPES.TAVERN, // 3
-
             BUILDING_TYPES.RALLY_POINT, // 3
         ],
         [
             BUILDING_TYPES.BARRACKS, // 10
             BUILDING_TYPES.BARRACKS, // 11
-
             BUILDING_TYPES.WAREHOUSE, // 14
             BUILDING_TYPES.FARM, // 14
         ],
         [
             BUILDING_TYPES.WAREHOUSE, // 15
             BUILDING_TYPES.FARM, // 15
-
             BUILDING_TYPES.BARRACKS, // 12
             BUILDING_TYPES.BARRACKS, // 13
         ],
         [
             BUILDING_TYPES.STATUE, // 2
             BUILDING_TYPES.STATUE, // 3
-
             BUILDING_TYPES.WALL, // 7
             BUILDING_TYPES.WALL, // 8
         ],
         [
             BUILDING_TYPES.HEADQUARTER, // 9
             BUILDING_TYPES.HEADQUARTER, // 10
-
             BUILDING_TYPES.WAREHOUSE, // 16
             BUILDING_TYPES.FARM, // 16
             BUILDING_TYPES.FARM, // 17
@@ -8095,20 +12610,17 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.IRON_MINE, // 13
             BUILDING_TYPES.IRON_MINE, // 14
             BUILDING_TYPES.IRON_MINE, // 15
-
             BUILDING_TYPES.WAREHOUSE, // 17
         ],
         [
             BUILDING_TYPES.BARRACKS, // 14
             BUILDING_TYPES.BARRACKS, // 15
-
             BUILDING_TYPES.WAREHOUSE, // 18
             BUILDING_TYPES.FARM, // 18
         ],
         [
             BUILDING_TYPES.WALL, // 9
             BUILDING_TYPES.WALL, // 10
-
             BUILDING_TYPES.TAVERN, // 4
             BUILDING_TYPES.TAVERN, // 5
             BUILDING_TYPES.TAVERN, // 6
@@ -8117,7 +12629,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.MARKET, // 5
             BUILDING_TYPES.MARKET, // 6
             BUILDING_TYPES.MARKET, // 7
-
             BUILDING_TYPES.WAREHOUSE, // 19
             BUILDING_TYPES.FARM, // 19
             BUILDING_TYPES.WAREHOUSE, // 20
@@ -8129,13 +12640,11 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.IRON_MINE, // 16
             BUILDING_TYPES.IRON_MINE, // 17
             BUILDING_TYPES.IRON_MINE, // 18
-
             BUILDING_TYPES.RALLY_POINT, // 4
         ],
         [
             BUILDING_TYPES.BARRACKS, // 16
             BUILDING_TYPES.BARRACKS, // 17
-
             BUILDING_TYPES.FARM, // 22
             BUILDING_TYPES.FARM, // 23
             BUILDING_TYPES.FARM, // 24
@@ -8144,30 +12653,25 @@ define('two/builderQueue/defaultOrders', [
         [
             BUILDING_TYPES.WAREHOUSE, // 22
             BUILDING_TYPES.WAREHOUSE, // 23
-
             BUILDING_TYPES.HEADQUARTER, // 11
             BUILDING_TYPES.HEADQUARTER, // 12
         ],
         [
             BUILDING_TYPES.STATUE, // 4
             BUILDING_TYPES.STATUE, // 5
-
             BUILDING_TYPES.FARM, // 26
             BUILDING_TYPES.BARRACKS, // 18
         ],
         [
             BUILDING_TYPES.HEADQUARTER, // 14
             BUILDING_TYPES.HEADQUARTER, // 15
-
             BUILDING_TYPES.FARM, // 27
             BUILDING_TYPES.BARRACKS, // 19
         ],
         [
             BUILDING_TYPES.HEADQUARTER, // 15
             BUILDING_TYPES.HEADQUARTER, // 16
-
             BUILDING_TYPES.BARRACKS, // 20
-
             BUILDING_TYPES.HEADQUARTER, // 17
             BUILDING_TYPES.HEADQUARTER, // 18
             BUILDING_TYPES.HEADQUARTER, // 19
@@ -8175,7 +12679,6 @@ define('two/builderQueue/defaultOrders', [
         ],
         [
             BUILDING_TYPES.ACADEMY, // 1
-
             BUILDING_TYPES.FARM, // 28
             BUILDING_TYPES.WAREHOUSE, // 23
             BUILDING_TYPES.WAREHOUSE, // 24
@@ -8185,7 +12688,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.MARKET, // 8
             BUILDING_TYPES.MARKET, // 9
             BUILDING_TYPES.MARKET, // 10
-
             BUILDING_TYPES.TIMBER_CAMP, // 13
             BUILDING_TYPES.CLAY_PIT, // 13
             BUILDING_TYPES.IRON_MINE, // 19
@@ -8195,14 +12697,12 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.CLAY_PIT, // 14
             BUILDING_TYPES.TIMBER_CAMP, // 15
             BUILDING_TYPES.CLAY_PIT, // 15
-
             BUILDING_TYPES.TIMBER_CAMP, // 16
             BUILDING_TYPES.TIMBER_CAMP, // 17
         ],
         [
             BUILDING_TYPES.WALL, // 11
             BUILDING_TYPES.WALL, // 12
-
             BUILDING_TYPES.MARKET, // 11
             BUILDING_TYPES.MARKET, // 12
             BUILDING_TYPES.MARKET, // 13
@@ -8212,7 +12712,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.CLAY_PIT, // 16
             BUILDING_TYPES.TIMBER_CAMP, // 19
             BUILDING_TYPES.CLAY_PIT, // 17
-
             BUILDING_TYPES.TAVERN, // 7
             BUILDING_TYPES.TAVERN, // 8
             BUILDING_TYPES.TAVERN, // 9
@@ -8220,7 +12719,6 @@ define('two/builderQueue/defaultOrders', [
         [
             BUILDING_TYPES.WALL, // 13
             BUILDING_TYPES.WALL, // 14
-
             BUILDING_TYPES.TIMBER_CAMP, // 20
             BUILDING_TYPES.CLAY_PIT, // 18
             BUILDING_TYPES.IRON_MINE, // 20
@@ -8229,7 +12727,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 21
             BUILDING_TYPES.CLAY_PIT, // 19
             BUILDING_TYPES.IRON_MINE, // 21
-
             BUILDING_TYPES.BARRACKS, // 21
             BUILDING_TYPES.BARRACKS, // 22
             BUILDING_TYPES.BARRACKS, // 23
@@ -8238,7 +12735,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.FARM, // 29
             BUILDING_TYPES.WAREHOUSE, // 26
             BUILDING_TYPES.WAREHOUSE, // 27
-
             BUILDING_TYPES.TAVERN, // 10
             BUILDING_TYPES.TAVERN, // 11
             BUILDING_TYPES.TAVERN, // 12
@@ -8247,7 +12743,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 22
             BUILDING_TYPES.CLAY_PIT, // 20
             BUILDING_TYPES.IRON_MINE, // 22
-
             BUILDING_TYPES.TIMBER_CAMP, // 23
             BUILDING_TYPES.CLAY_PIT, // 21
             BUILDING_TYPES.IRON_MINE, // 23
@@ -8256,7 +12751,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 24
             BUILDING_TYPES.CLAY_PIT, // 22
             BUILDING_TYPES.IRON_MINE, // 24
-
             BUILDING_TYPES.BARRACKS, // 24
             BUILDING_TYPES.BARRACKS, // 25
         ],
@@ -8264,7 +12758,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.FARM, // 30
             BUILDING_TYPES.WAREHOUSE, // 28
             BUILDING_TYPES.WAREHOUSE, // 29
-
             BUILDING_TYPES.WALL, // 15
             BUILDING_TYPES.WALL, // 16
             BUILDING_TYPES.WALL, // 17
@@ -8273,9 +12766,7 @@ define('two/builderQueue/defaultOrders', [
         [
             BUILDING_TYPES.TAVERN, // 13
             BUILDING_TYPES.TAVERN, // 14
-
             BUILDING_TYPES.RALLY_POINT, // 5
-
             BUILDING_TYPES.TIMBER_CAMP, // 25
             BUILDING_TYPES.CLAY_PIT, // 23
             BUILDING_TYPES.IRON_MINE, // 25
@@ -8284,7 +12775,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 26
             BUILDING_TYPES.CLAY_PIT, // 24
             BUILDING_TYPES.IRON_MINE, // 26
-
             BUILDING_TYPES.TIMBER_CAMP, // 27
             BUILDING_TYPES.CLAY_PIT, // 25
             BUILDING_TYPES.IRON_MINE, // 27
@@ -8293,7 +12783,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.TIMBER_CAMP, // 28
             BUILDING_TYPES.CLAY_PIT, // 26
             BUILDING_TYPES.IRON_MINE, // 28
-
             BUILDING_TYPES.TIMBER_CAMP, // 29
             BUILDING_TYPES.CLAY_PIT, // 27
             BUILDING_TYPES.CLAY_PIT, // 28
@@ -8304,19 +12793,16 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.CLAY_PIT, // 29
             BUILDING_TYPES.CLAY_PIT, // 30
             BUILDING_TYPES.IRON_MINE, // 30
-
             BUILDING_TYPES.WALL, // 19
             BUILDING_TYPES.WALL, // 20
         ]
     ]
-
     defaultSequences['Pełna rozbudowa'] = [
         [
             BUILDING_TYPES.HOSPITAL, // 2
             BUILDING_TYPES.HOSPITAL, // 3
             BUILDING_TYPES.HOSPITAL, // 4
             BUILDING_TYPES.HOSPITAL, // 5
-
             BUILDING_TYPES.MARKET, // 14
             BUILDING_TYPES.MARKET, // 15
             BUILDING_TYPES.MARKET, // 16
@@ -8328,9 +12814,7 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.HEADQUARTER, // 23
             BUILDING_TYPES.HEADQUARTER, // 24
             BUILDING_TYPES.HEADQUARTER, // 25
-
             BUILDING_TYPES.PRECEPTORY, // 1
-
             BUILDING_TYPES.HOSPITAL, // 6
             BUILDING_TYPES.HOSPITAL, // 7
             BUILDING_TYPES.HOSPITAL, // 8
@@ -8342,10 +12826,8 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.MARKET, // 19
             BUILDING_TYPES.MARKET, // 20
             BUILDING_TYPES.MARKET, // 21
-
             BUILDING_TYPES.PRECEPTORY, // 2
             BUILDING_TYPES.PRECEPTORY, // 3
-
             BUILDING_TYPES.MARKET, // 22
             BUILDING_TYPES.MARKET, // 23
             BUILDING_TYPES.MARKET, // 24
@@ -8357,7 +12839,6 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.HEADQUARTER, // 28
             BUILDING_TYPES.HEADQUARTER, // 29
             BUILDING_TYPES.HEADQUARTER, // 30
-
             BUILDING_TYPES.PRECEPTORY, // 4
             BUILDING_TYPES.PRECEPTORY, // 5
             BUILDING_TYPES.PRECEPTORY, // 6
@@ -8367,331 +12848,315 @@ define('two/builderQueue/defaultOrders', [
             BUILDING_TYPES.PRECEPTORY, // 10
         ]
     ]
-
     Array.prototype.unshift.apply(
         defaultSequences['Pełna rozbudowa'],
         defaultSequences['Essential']
     )
-
     defaultSequences['Essential bez murów'] =
-        defaultSequences['Essential'].filter(function (building) {
+        defaultSequences['Essential'].filter(function(building) {
             return building !== BUILDING_TYPES.WALL
         })
-        
     defaultSequences['DirtyStyle'] = [
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.RALLY_POINT, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.RALLY_POINT, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.STATUE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.HOSPITAL, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.HEADQUARTER, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.ACADEMY, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.RALLY_POINT, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.STATUE, 
-        BUILDING_TYPES.STATUE, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.BARRACKS, 
-        BUILDING_TYPES.FARM, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.WAREHOUSE, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.RALLY_POINT, 
-        BUILDING_TYPES.STATUE, 
-        BUILDING_TYPES.STATUE, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.MARKET, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.TAVERN, 
-        BUILDING_TYPES.RALLY_POINT, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.TIMBER_CAMP, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.CLAY_PIT, 
-        BUILDING_TYPES.IRON_MINE, 
-        BUILDING_TYPES.WALL, 
-        BUILDING_TYPES.WALL 
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.RALLY_POINT,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.RALLY_POINT,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.STATUE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.HOSPITAL,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.HEADQUARTER,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.ACADEMY,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.RALLY_POINT,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.STATUE,
+        BUILDING_TYPES.STATUE,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.BARRACKS,
+        BUILDING_TYPES.FARM,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.WAREHOUSE,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.RALLY_POINT,
+        BUILDING_TYPES.STATUE,
+        BUILDING_TYPES.STATUE,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.MARKET,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.TAVERN,
+        BUILDING_TYPES.RALLY_POINT,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.TIMBER_CAMP,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.CLAY_PIT,
+        BUILDING_TYPES.IRON_MINE,
+        BUILDING_TYPES.WALL,
+        BUILDING_TYPES.WALL
     ]
-
     defaultSequences['IrooStyle'] = [
         BUILDING_TYPES.HEADQUARTER, // 1
         BUILDING_TYPES.FARM, // 1
         BUILDING_TYPES.WAREHOUSE, // 1
         BUILDING_TYPES.RALLY_POINT, // 1
         BUILDING_TYPES.BARRACKS, // 1
-
         // Quest: The Resources
         BUILDING_TYPES.TIMBER_CAMP, // 1
         BUILDING_TYPES.TIMBER_CAMP, // 2
         BUILDING_TYPES.CLAY_PIT, // 1
         BUILDING_TYPES.IRON_MINE, // 1
-
         BUILDING_TYPES.HEADQUARTER, // 2
         BUILDING_TYPES.RALLY_POINT, // 2
-
         // Quest: First Steps
         BUILDING_TYPES.FARM, // 2
         BUILDING_TYPES.WAREHOUSE, // 2
-
         // Quest: Laying Down Foundation
         BUILDING_TYPES.CLAY_PIT, // 2
         BUILDING_TYPES.IRON_MINE, // 2
-
         // Quest: More Resources
         BUILDING_TYPES.TIMBER_CAMP, // 3
         BUILDING_TYPES.CLAY_PIT, // 3
         BUILDING_TYPES.IRON_MINE, // 3
-
         // Quest: Resource Building
         BUILDING_TYPES.WAREHOUSE, // 3
         BUILDING_TYPES.TIMBER_CAMP, // 4
         BUILDING_TYPES.CLAY_PIT, // 4
         BUILDING_TYPES.IRON_MINE, // 4
-
         // Quest: Get an Overview
         BUILDING_TYPES.WAREHOUSE, // 4
         BUILDING_TYPES.TIMBER_CAMP, // 5
         BUILDING_TYPES.CLAY_PIT, // 5
         BUILDING_TYPES.IRON_MINE, // 5
-
         // Quest: Capital
         BUILDING_TYPES.FARM, // 3
         BUILDING_TYPES.WAREHOUSE, // 5
         BUILDING_TYPES.HEADQUARTER, // 3
-
         // Quest: The Hero
         BUILDING_TYPES.STATUE, // 1
-
         // Quest: Resource Expansions
         BUILDING_TYPES.TIMBER_CAMP, // 6
         BUILDING_TYPES.CLAY_PIT, // 6
         BUILDING_TYPES.IRON_MINE, // 6
-
         // Quest: Military
         BUILDING_TYPES.BARRACKS, // 2
-
         // Quest: The Hospital
         BUILDING_TYPES.HEADQUARTER, // 4
         BUILDING_TYPES.TIMBER_CAMP, // 7
@@ -8699,18 +13164,15 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.IRON_MINE, // 7
         BUILDING_TYPES.FARM, // 4
         BUILDING_TYPES.HOSPITAL, // 1
-
         // Quest: Resources
         BUILDING_TYPES.TIMBER_CAMP, // 8
         BUILDING_TYPES.CLAY_PIT, // 8
         BUILDING_TYPES.IRON_MINE, // 8
-
         // Quest: The Wall
         BUILDING_TYPES.WAREHOUSE, // 6
         BUILDING_TYPES.HEADQUARTER, // 5
         BUILDING_TYPES.WALL, // 1
         BUILDING_TYPES.WAREHOUSE, // 7
-        
         // Quest: Village Improvements
         BUILDING_TYPES.TIMBER_CAMP, // 9
         BUILDING_TYPES.CLAY_PIT, // 9
@@ -8720,7 +13182,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.IRON_MINE, // 10
         BUILDING_TYPES.WAREHOUSE, // 8
         BUILDING_TYPES.FARM, // 5
-
         // Quest: Hard work
         BUILDING_TYPES.TIMBER_CAMP, // 11
         BUILDING_TYPES.CLAY_PIT, // 11
@@ -8728,10 +13189,8 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.TIMBER_CAMP, // 12
         BUILDING_TYPES.CLAY_PIT, // 12
         BUILDING_TYPES.IRON_MINE, // 12
-        
         // Quest: The way of defence
         BUILDING_TYPES.BARRACKS, // 3
-
         BUILDING_TYPES.FARM, // 6
         BUILDING_TYPES.WAREHOUSE, // 7
         BUILDING_TYPES.FARM, // 7
@@ -8740,7 +13199,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.FARM, // 8
         BUILDING_TYPES.WAREHOUSE, // 9
         BUILDING_TYPES.MARKET, // 1
-        
         // Quest: Preparations
         BUILDING_TYPES.BARRACKS, // 4
         BUILDING_TYPES.WALL, // 2
@@ -8818,7 +13276,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.WAREHOUSE, // 14
         BUILDING_TYPES.ACADEMY // 1
     ]
-
     defaultSequences['Mury'] = [
         BUILDING_TYPES.WALL,
         BUILDING_TYPES.WALL,
@@ -8841,7 +13298,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.WALL,
         BUILDING_TYPES.WALL // 20
     ]
-
     defaultSequences['Farma'] = [
         BUILDING_TYPES.FARM,
         BUILDING_TYPES.FARM,
@@ -8874,64 +13330,51 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.FARM,
         BUILDING_TYPES.FARM // 30
     ]
-
     defaultSequences['War Build'] = [
         BUILDING_TYPES.HEADQUARTER, // 1
         BUILDING_TYPES.FARM, // 1
         BUILDING_TYPES.WAREHOUSE, // 1
         BUILDING_TYPES.RALLY_POINT, // 1
         BUILDING_TYPES.BARRACKS, // 1
-
         // Quest: The Resources
         BUILDING_TYPES.TIMBER_CAMP, // 1
         BUILDING_TYPES.TIMBER_CAMP, // 2
         BUILDING_TYPES.CLAY_PIT, // 1
         BUILDING_TYPES.IRON_MINE, // 1
-
         BUILDING_TYPES.HEADQUARTER, // 2
         BUILDING_TYPES.RALLY_POINT, // 2
-
         // Quest: First Steps
         BUILDING_TYPES.FARM, // 2
         BUILDING_TYPES.WAREHOUSE, // 2
-        
         // Quest: Laying Down Foundation
         BUILDING_TYPES.CLAY_PIT, // 2
         BUILDING_TYPES.IRON_MINE, // 2
-
         // Quest: More Resources
         BUILDING_TYPES.TIMBER_CAMP, // 3
         BUILDING_TYPES.CLAY_PIT, // 3
         BUILDING_TYPES.IRON_MINE, // 3
-        
         // Quest: Resource Building
         BUILDING_TYPES.WAREHOUSE, // 3
         BUILDING_TYPES.TIMBER_CAMP, // 4
         BUILDING_TYPES.CLAY_PIT, // 4
         BUILDING_TYPES.IRON_MINE, // 4
-
         // Quest: Get an Overview
         BUILDING_TYPES.WAREHOUSE, // 4
         BUILDING_TYPES.TIMBER_CAMP, // 5
         BUILDING_TYPES.CLAY_PIT, // 5
         BUILDING_TYPES.IRON_MINE, // 5
-
         // Quest: Capital
         BUILDING_TYPES.FARM, // 3
         BUILDING_TYPES.WAREHOUSE, // 5
         BUILDING_TYPES.HEADQUARTER, // 3
-
         // Quest: The Hero
         BUILDING_TYPES.STATUE, // 1
-
         // Quest: Resource Expansions
         BUILDING_TYPES.TIMBER_CAMP, // 6
         BUILDING_TYPES.CLAY_PIT, // 6
         BUILDING_TYPES.IRON_MINE, // 6
-        
         // Quest: Military
         BUILDING_TYPES.BARRACKS, // 2
-
         // Quest: The Hospital
         BUILDING_TYPES.HEADQUARTER, // 4
         BUILDING_TYPES.TIMBER_CAMP, // 7
@@ -8939,17 +13382,14 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.IRON_MINE, // 7
         BUILDING_TYPES.FARM, // 4
         BUILDING_TYPES.HOSPITAL, // 1
-
         // Quest: Resources
         BUILDING_TYPES.TIMBER_CAMP, // 8
         BUILDING_TYPES.CLAY_PIT, // 8
         BUILDING_TYPES.IRON_MINE, // 8
-
         // Quest: The Wall
         BUILDING_TYPES.WAREHOUSE, // 6
         BUILDING_TYPES.HEADQUARTER, // 5
         BUILDING_TYPES.WALL, // 1
-        
         // Quest: Village Improvements
         BUILDING_TYPES.TIMBER_CAMP, // 9
         BUILDING_TYPES.CLAY_PIT, // 9
@@ -8958,7 +13398,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.CLAY_PIT, // 10
         BUILDING_TYPES.IRON_MINE, // 10
         BUILDING_TYPES.FARM, // 5
-
         // Quest: Hard work
         BUILDING_TYPES.TIMBER_CAMP, // 11
         BUILDING_TYPES.CLAY_PIT, // 11
@@ -8966,10 +13405,8 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.TIMBER_CAMP, // 12
         BUILDING_TYPES.CLAY_PIT, // 12
         BUILDING_TYPES.IRON_MINE, // 12
-
         // Quest: The way of defence
         BUILDING_TYPES.BARRACKS, // 3
-
         BUILDING_TYPES.FARM, // 6
         BUILDING_TYPES.WAREHOUSE, // 7
         BUILDING_TYPES.FARM, // 7
@@ -8977,246 +13414,178 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.FARM, // 8
         BUILDING_TYPES.WAREHOUSE, // 9
         BUILDING_TYPES.WAREHOUSE, // 10
-
         // Quest: Market Barker
         BUILDING_TYPES.HEADQUARTER, // 6
         BUILDING_TYPES.MARKET, // 1
-
         // Quest: Preparations
         BUILDING_TYPES.BARRACKS, // 4
         BUILDING_TYPES.WALL, // 2
         BUILDING_TYPES.WALL, // 3
-
         BUILDING_TYPES.FARM, // 9
         BUILDING_TYPES.FARM, // 10
-
         BUILDING_TYPES.BARRACKS, // 5
         BUILDING_TYPES.WAREHOUSE, // 11
         BUILDING_TYPES.FARM, // 11
-
         BUILDING_TYPES.BARRACKS, // 6
         BUILDING_TYPES.WAREHOUSE, // 12
         BUILDING_TYPES.FARM, // 12
-
         BUILDING_TYPES.BARRACKS, // 7
         BUILDING_TYPES.WAREHOUSE, // 13
         BUILDING_TYPES.FARM, // 13
-
         BUILDING_TYPES.WALL, // 4
         BUILDING_TYPES.WALL, // 5
         BUILDING_TYPES.WALL, // 6
-
         BUILDING_TYPES.MARKET, // 2
         BUILDING_TYPES.MARKET, // 3
         BUILDING_TYPES.MARKET, // 4
-        
         BUILDING_TYPES.BARRACKS, // 8
         BUILDING_TYPES.BARRACKS, // 9
-
         BUILDING_TYPES.HEADQUARTER, // 7
         BUILDING_TYPES.HEADQUARTER, // 8
-        
         BUILDING_TYPES.TAVERN, // 1
         BUILDING_TYPES.TAVERN, // 2
         BUILDING_TYPES.TAVERN, // 3
-
         BUILDING_TYPES.RALLY_POINT, // 3
-
         BUILDING_TYPES.BARRACKS, // 10
         BUILDING_TYPES.BARRACKS, // 11
-
         BUILDING_TYPES.WAREHOUSE, // 14
         BUILDING_TYPES.FARM, // 14
-
         BUILDING_TYPES.WAREHOUSE, // 15
         BUILDING_TYPES.FARM, // 15
-
         BUILDING_TYPES.BARRACKS, // 12
         BUILDING_TYPES.BARRACKS, // 13
-
         BUILDING_TYPES.STATUE, // 2
         BUILDING_TYPES.STATUE, // 3
-
         BUILDING_TYPES.WALL, // 7
         BUILDING_TYPES.WALL, // 8
-
         BUILDING_TYPES.HEADQUARTER, // 9
         BUILDING_TYPES.HEADQUARTER, // 10
-
         BUILDING_TYPES.WAREHOUSE, // 16
         BUILDING_TYPES.FARM, // 16
         BUILDING_TYPES.FARM, // 17
-
         BUILDING_TYPES.IRON_MINE, // 13
         BUILDING_TYPES.IRON_MINE, // 14
         BUILDING_TYPES.IRON_MINE, // 15
-
         BUILDING_TYPES.WAREHOUSE, // 17
-
         BUILDING_TYPES.BARRACKS, // 14
         BUILDING_TYPES.BARRACKS, // 15
-
         BUILDING_TYPES.WAREHOUSE, // 18
         BUILDING_TYPES.FARM, // 18
-
         BUILDING_TYPES.WALL, // 9
         BUILDING_TYPES.WALL, // 10
-
         BUILDING_TYPES.TAVERN, // 4
         BUILDING_TYPES.TAVERN, // 5
         BUILDING_TYPES.TAVERN, // 6
-
         BUILDING_TYPES.MARKET, // 5
         BUILDING_TYPES.MARKET, // 6
         BUILDING_TYPES.MARKET, // 7
-
         BUILDING_TYPES.WAREHOUSE, // 19
         BUILDING_TYPES.FARM, // 19
         BUILDING_TYPES.WAREHOUSE, // 20
         BUILDING_TYPES.FARM, // 20
         BUILDING_TYPES.WAREHOUSE, // 21
         BUILDING_TYPES.FARM, // 21
-
         BUILDING_TYPES.IRON_MINE, // 16
         BUILDING_TYPES.IRON_MINE, // 17
         BUILDING_TYPES.IRON_MINE, // 18
-
         BUILDING_TYPES.RALLY_POINT, // 4
-
         BUILDING_TYPES.BARRACKS, // 16
         BUILDING_TYPES.BARRACKS, // 17
-
         BUILDING_TYPES.FARM, // 22
         BUILDING_TYPES.FARM, // 23
         BUILDING_TYPES.FARM, // 24
         BUILDING_TYPES.FARM, // 25
-
         BUILDING_TYPES.WAREHOUSE, // 22
         BUILDING_TYPES.WAREHOUSE, // 23
-
         BUILDING_TYPES.HEADQUARTER, // 11
         BUILDING_TYPES.HEADQUARTER, // 12
-
         BUILDING_TYPES.STATUE, // 4
         BUILDING_TYPES.STATUE, // 5
-
         BUILDING_TYPES.FARM, // 26
         BUILDING_TYPES.BARRACKS, // 18
-
         BUILDING_TYPES.HEADQUARTER, // 14
         BUILDING_TYPES.HEADQUARTER, // 15
-
         BUILDING_TYPES.FARM, // 27
         BUILDING_TYPES.BARRACKS, // 19
-
         BUILDING_TYPES.HEADQUARTER, // 15
         BUILDING_TYPES.HEADQUARTER, // 16
-
         BUILDING_TYPES.BARRACKS, // 20
-
         BUILDING_TYPES.HEADQUARTER, // 17
         BUILDING_TYPES.HEADQUARTER, // 18
         BUILDING_TYPES.HEADQUARTER, // 19
         BUILDING_TYPES.HEADQUARTER, // 20
-
         BUILDING_TYPES.ACADEMY, // 1
-        
         BUILDING_TYPES.HEADQUARTER, // 21
         BUILDING_TYPES.HEADQUARTER, // 22
         BUILDING_TYPES.HEADQUARTER, // 23
         BUILDING_TYPES.HEADQUARTER, // 24
         BUILDING_TYPES.HEADQUARTER, // 25
-        
         BUILDING_TYPES.PRECEPTORY, // 1
-
         BUILDING_TYPES.FARM, // 28
         BUILDING_TYPES.WAREHOUSE, // 23
         BUILDING_TYPES.WAREHOUSE, // 24
         BUILDING_TYPES.WAREHOUSE, // 25
-
         BUILDING_TYPES.MARKET, // 8
         BUILDING_TYPES.MARKET, // 9
         BUILDING_TYPES.MARKET, // 10
-
         BUILDING_TYPES.TIMBER_CAMP, // 13
         BUILDING_TYPES.CLAY_PIT, // 13
         BUILDING_TYPES.IRON_MINE, // 19
-
         BUILDING_TYPES.TIMBER_CAMP, // 14
         BUILDING_TYPES.CLAY_PIT, // 14
         BUILDING_TYPES.TIMBER_CAMP, // 15
         BUILDING_TYPES.CLAY_PIT, // 15
-
         BUILDING_TYPES.TIMBER_CAMP, // 16
         BUILDING_TYPES.TIMBER_CAMP, // 17
-
         BUILDING_TYPES.WALL, // 11
         BUILDING_TYPES.WALL, // 12
-
         BUILDING_TYPES.MARKET, // 11
         BUILDING_TYPES.MARKET, // 12
         BUILDING_TYPES.MARKET, // 13
-
         BUILDING_TYPES.TIMBER_CAMP, // 18
         BUILDING_TYPES.CLAY_PIT, // 16
         BUILDING_TYPES.TIMBER_CAMP, // 19
         BUILDING_TYPES.CLAY_PIT, // 17
-
         BUILDING_TYPES.TAVERN, // 7
         BUILDING_TYPES.TAVERN, // 8
         BUILDING_TYPES.TAVERN, // 9
-
         BUILDING_TYPES.WALL, // 13
         BUILDING_TYPES.WALL, // 14
-
         BUILDING_TYPES.TIMBER_CAMP, // 20
         BUILDING_TYPES.CLAY_PIT, // 18
         BUILDING_TYPES.IRON_MINE, // 20
-
         BUILDING_TYPES.TIMBER_CAMP, // 21
         BUILDING_TYPES.CLAY_PIT, // 19
         BUILDING_TYPES.IRON_MINE, // 21
-
         BUILDING_TYPES.BARRACKS, // 21
         BUILDING_TYPES.BARRACKS, // 22
         BUILDING_TYPES.BARRACKS, // 23
-
         BUILDING_TYPES.FARM, // 29
         BUILDING_TYPES.WAREHOUSE, // 26
         BUILDING_TYPES.WAREHOUSE, // 27
-
         BUILDING_TYPES.TAVERN, // 10
         BUILDING_TYPES.TAVERN, // 11
         BUILDING_TYPES.TAVERN, // 12
-
         BUILDING_TYPES.TIMBER_CAMP, // 22
         BUILDING_TYPES.CLAY_PIT, // 20
         BUILDING_TYPES.IRON_MINE, // 22
-
         BUILDING_TYPES.CLAY_PIT, // 21
         BUILDING_TYPES.CLAY_PIT, // 22
-
         BUILDING_TYPES.BARRACKS, // 24
         BUILDING_TYPES.BARRACKS, // 25
-
         BUILDING_TYPES.FARM, // 30
         BUILDING_TYPES.WAREHOUSE, // 28
         BUILDING_TYPES.WAREHOUSE, // 29
-
         BUILDING_TYPES.WALL, // 15
         BUILDING_TYPES.WALL, // 16
         BUILDING_TYPES.WALL, // 17
         BUILDING_TYPES.WALL, // 18
-
         BUILDING_TYPES.TAVERN, // 13
         BUILDING_TYPES.TAVERN, // 14
-
         BUILDING_TYPES.RALLY_POINT, // 5
-
         BUILDING_TYPES.WALL, // 19
         BUILDING_TYPES.WALL, // 20
     ]
-    
     defaultSequences['Komturia'] = [
         BUILDING_TYPES.HEADQUARTER, // 21
         BUILDING_TYPES.HEADQUARTER, // 22
@@ -9243,7 +13612,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.HEADQUARTER, // 23
         BUILDING_TYPES.HEADQUARTER, // 24
         BUILDING_TYPES.HEADQUARTER, // 25
-
         BUILDING_TYPES.PRECEPTORY, // 1
         BUILDING_TYPES.PRECEPTORY, // 2
         BUILDING_TYPES.PRECEPTORY, // 3
@@ -9255,7 +13623,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.PRECEPTORY, // 9
         BUILDING_TYPES.PRECEPTORY // 10
     ]
-    
     defaultSequences['Rynek'] = [
         BUILDING_TYPES.MARKET, // 14
         BUILDING_TYPES.MARKET, // 14
@@ -9283,7 +13650,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.MARKET, // 24
         BUILDING_TYPES.MARKET, // 25
     ]
-    
     defaultSequences['Koszary'] = [
         BUILDING_TYPES.BARRACKS,
         BUILDING_TYPES.BARRACKS,
@@ -9311,7 +13677,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.BARRACKS,
         BUILDING_TYPES.BARRACKS
     ]
-    
     defaultSequences['Szpital'] = [
         BUILDING_TYPES.HOSPITAL, // 1
         BUILDING_TYPES.HOSPITAL, // 2
@@ -9324,7 +13689,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.HOSPITAL, // 9
         BUILDING_TYPES.HOSPITAL // 10
     ]
-    
     defaultSequences['FARM-K'] = [
         BUILDING_TYPES.HEADQUARTER,
         BUILDING_TYPES.FARM,
@@ -9433,7 +13797,6 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.WAREHOUSE,
         BUILDING_TYPES.WAREHOUSE
     ]
-
     defaultSequences['Eko'] = [
         BUILDING_TYPES.WAREHOUSE,
         BUILDING_TYPES.TIMBER_CAMP,
@@ -9556,10 +13919,8 @@ define('two/builderQueue/defaultOrders', [
         BUILDING_TYPES.CLAY_PIT,
         BUILDING_TYPES.IRON_MINE
     ]
-
     return parseSequences(defaultSequences)
 })
-
 define('two/builderQueue/events', [], function () {
     angular.extend(eventTypeProvider, {
         BUILDER_QUEUE_JOB_STARTED: 'builder_queue_job_started',
@@ -9576,8 +13937,6 @@ define('two/builderQueue/events', [], function () {
         COMMAND_QUEUE_ADD_RELOCATE_DISABLED: 'command_queue_add_relocate_disabled'
     })
 })
-
-
 define('two/builderQueue/ui', [
     'two/ui',
     'two/builderQueue',
@@ -9591,7 +13950,7 @@ define('two/builderQueue/ui', [
     'two/EventScope',
     'queues/EventQueue',
     'helper/time'
-], function (
+], function(
     interfaceOverflow,
     builderQueue,
     utils,
@@ -9630,78 +13989,59 @@ define('two/builderQueue/ui', [
     let unsavedChanges = false
     let oldCloseWindow
     let ignoreInputChange = false
-
-    // TODO: make it shared with other modules
-    const loadVillageInfo = function (villageId) {
+    const loadVillageInfo = function(villageId) {
         if (villagesInfo[villageId]) {
             return villagesInfo[villageId]
         }
-
         villagesInfo[villageId] = true
         villagesLabel[villageId] = 'LOADING...'
-
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: villageId,
             num_reports: 1
-        }, function (data) {
+        }, function(data) {
             villagesInfo[villageId] = {
                 x: data.village_x,
                 y: data.village_y,
                 name: data.village_name,
                 last_report: data.last_reports[0]
             }
-
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
     }
-
-    const buildingLevelReached = function (building, level) {
+    const buildingLevelReached = function(building, level) {
         const buildingData = modelDataService.getSelectedVillage().getBuildingData()
         return buildingData.getBuildingLevel(building) >= level
     }
-
-    const buildingLevelProgress = function (building, level) {
+    const buildingLevelProgress = function(building, level) {
         const queue = modelDataService.getSelectedVillage().getBuildingQueue().getQueue()
         let progress = false
-
-        queue.some(function (job) {
+        queue.some(function(job) {
             if (job.building === building && job.level === level) {
                 return progress = true
             }
         })
-
         return progress
     }
-
-    /**
-     * Calculate the total of points accumulated ultil the specified level.
-     */
-    const getLevelScale = function (factor, base, level) {
+    const getLevelScale = function(factor, base, level) {
         return level ? parseInt(Math.round(factor * Math.pow(base, level - 1)), 10) : 0
     }
-
-    const moveArrayItem = function (obj, oldIndex, newIndex) {
+    const moveArrayItem = function(obj, oldIndex, newIndex) {
         if (newIndex >= obj.length) {
             let i = newIndex - obj.length + 1
-            
             while (i--) {
                 obj.push(undefined)
             }
         }
-
         obj.splice(newIndex, 0, obj.splice(oldIndex, 1)[0])
     }
-
-    const parseBuildingSequence = function (sequence) {
-        return sequence.map(function (item) {
+    const parseBuildingSequence = function(sequence) {
+        return sequence.map(function(item) {
             return item.building
         })
     }
-
-    const createBuildingSequence = function (sequenceId, sequence) {
+    const createBuildingSequence = function(sequenceId, sequence) {
         const status = builderQueue.addBuildingSequence(sequenceId, sequence)
-
         switch (status) {
             case SEQUENCE_STATUS.SEQUENCE_SAVED: {
                 return true
@@ -9716,59 +14056,46 @@ define('two/builderQueue/ui', [
             }
         }
     }
-
-    const selectSome = function (obj) {
+    const selectSome = function(obj) {
         for (let i in obj) {
             if (hasOwn.call(obj, i)) {
                 return i
             }
         }
-
         return false
     }
-
-    settingsView.generateSequences = function () {
+    settingsView.generateSequences = function() {
         const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
         const sequencesAvail = Object.keys(sequences).length
-
         settingsView.sequencesAvail = sequencesAvail
-
         if (!sequencesAvail) {
             return false
         }
-
         settingsView.generateBuildingSequence()
         settingsView.generateBuildingSequenceFinal()
         settingsView.updateVisibleBuildingSequence()
     }
-
-    settingsView.generateBuildingSequence = function () {
+    settingsView.generateBuildingSequence = function() {
         const sequenceId = $scope.settings[SETTINGS.ACTIVE_SEQUENCE].value
         const buildingSequenceRaw = $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId]
         const buildingData = modelDataService.getGameData().getBuildings()
         let buildingLevels = {}
-
         settingsView.sequencesAvail = !!buildingSequenceRaw
-
         if (!settingsView.sequencesAvail) {
             return false
         }
-
         for (let building in BUILDING_TYPES) {
             buildingLevels[BUILDING_TYPES[building]] = 0
         }
-
-        settingsView.buildingSequence = buildingSequenceRaw.map(function (building) {
+        settingsView.buildingSequence = buildingSequenceRaw.map(function(building) {
             let level = ++buildingLevels[building]
             let price = buildingData[building].individual_level_costs[level]
             let state = 'not-reached'
-
             if (buildingLevelReached(building, level)) {
                 state = 'reached'
             } else if (buildingLevelProgress(building, level)) {
                 state = 'progress'
             }
-
             return {
                 level: level,
                 price: buildingData[building].individual_level_costs[level],
@@ -9779,13 +14106,11 @@ define('two/builderQueue/ui', [
             }
         })
     }
-
-    settingsView.generateBuildingSequenceFinal = function (_sequenceId) {
+    settingsView.generateBuildingSequenceFinal = function(_sequenceId) {
         const selectedSequence = $scope.settings[SETTINGS.ACTIVE_SEQUENCE].value
         const sequenceBuildings = $scope.settings[SETTINGS.BUILDING_SEQUENCES][_sequenceId || selectedSequence]
         let sequenceObj = {}
         let sequence = []
-        
         for (let building in gameDataBuildings) {
             sequenceObj[building] = {
                 level: 0,
@@ -9800,11 +14125,9 @@ define('two/builderQueue/ui', [
                 build_time: 0
             }
         }
-
-        sequenceBuildings.forEach(function (building) {
+        sequenceBuildings.forEach(function(building) {
             let level = ++sequenceObj[building].level
             let costs = gameDataBuildings[building].individual_level_costs[level]
-
             sequenceObj[building].resources.wood += parseInt(costs.wood, 10)
             sequenceObj[building].resources.clay += parseInt(costs.clay, 10)
             sequenceObj[building].resources.iron += parseInt(costs.iron, 10)
@@ -9812,7 +14135,6 @@ define('two/builderQueue/ui', [
             sequenceObj[building].build_time += parseInt(costs.build_time, 10)
             sequenceObj[building].points += buildingsLevelPoints[building][level - 1]
         })
-
         for (let building in sequenceObj) {
             if (sequenceObj[building].level !== 0) {
                 sequence.push({
@@ -9825,110 +14147,84 @@ define('two/builderQueue/ui', [
                 })
             }
         }
-
         settingsView.buildingSequenceFinal = sequence
     }
-
-    settingsView.updateVisibleBuildingSequence = function () {
+    settingsView.updateVisibleBuildingSequence = function() {
         const offset = $scope.pagination.buildingSequence.offset
         const limit = $scope.pagination.buildingSequence.limit
-
         settingsView.visibleBuildingSequence = settingsView.buildingSequence.slice(offset, offset + limit)
         $scope.pagination.buildingSequence.count = settingsView.buildingSequence.length
     }
-
-    settingsView.generateBuildingsLevelPoints = function () {
+    settingsView.generateBuildingsLevelPoints = function() {
         const $gameData = modelDataService.getGameData()
         let buildingTotalPoints
-
-        for(let buildingName in $gameData.data.buildings) {
+        for (let buildingName in $gameData.data.buildings) {
             let buildingData = $gameData.getBuildingDataForBuilding(buildingName)
             buildingTotalPoints = 0
             buildingsLevelPoints[buildingName] = []
-
             for (let level = 1; level <= buildingData.max_level; level++) {
-                let currentLevelPoints  = getLevelScale(buildingData.points, buildingData.points_factor, level)
+                let currentLevelPoints = getLevelScale(buildingData.points, buildingData.points_factor, level)
                 let levelPoints = currentLevelPoints - buildingTotalPoints
                 buildingTotalPoints += levelPoints
-
                 buildingsLevelPoints[buildingName].push(levelPoints)
             }
         }
     }
-
-    editorView.moveUp = function () {
+    editorView.moveUp = function() {
         let copy = angular.copy(editorView.buildingSequence)
         let changed = false
-
         for (let i = 0; i < copy.length; i++) {
             let item = copy[i]
-
             if (!item.checked) {
                 continue
             }
-
             if (i === 0) {
                 continue
             }
-
             if (copy[i - 1].checked) {
                 continue
             }
-
             if (copy[i - 1].building === item.building) {
                 copy[i - 1].level++
                 item.level--
                 changed = true
             }
-
             moveArrayItem(copy, i, i - 1)
         }
-
         editorView.buildingSequence = copy
         editorView.updateVisibleBuildingSequence()
-
         if (changed) {
             unsavedChanges = true
         }
     }
-
-    editorView.moveDown = function () {
+    editorView.moveDown = function() {
         let copy = angular.copy(editorView.buildingSequence)
         let changed = false
-
         for (let i = copy.length - 1; i >= 0; i--) {
             let item = copy[i]
-
             if (!item.checked) {
                 continue
             }
-
             if (i === copy.length - 1) {
                 continue
             }
-
             if (copy[i + 1].checked) {
                 continue
             }
-
             if (copy[i + 1].building === item.building) {
                 copy[i + 1].level--
                 item.level++
                 changed = true
             }
-
             moveArrayItem(copy, i, i + 1)
         }
-
         editorView.buildingSequence = copy
         editorView.updateVisibleBuildingSequence()
-        
         if (changed) {
             unsavedChanges = true
         }
     }
-
-    editorView.addBuilding = function (building, position, amount = 1) {
+    editorView.addBuilding = function(building, position, amount = 1) {
         const index = position - 1
         let newSequence = editorView.buildingSequence.slice()
         let buildingData = {
@@ -9936,35 +14232,26 @@ define('two/builderQueue/ui', [
             building: building,
             checked: false
         }
-
         for (let i = 0; i < amount; i++) {
             newSequence.splice(index, 0, buildingData)
         }
-
         editorView.buildingSequence = editorView.updateLevels(newSequence, building)
         editorView.updateVisibleBuildingSequence()
         unsavedChanges = true
-
         return true
     }
-
-    editorView.removeBuilding = function (index) {
+    editorView.removeBuilding = function(index) {
         const building = editorView.buildingSequence[index].building
-
         editorView.buildingSequence.splice(index, 1)
         editorView.buildingSequence = editorView.updateLevels(editorView.buildingSequence, building)
-
         editorView.updateVisibleBuildingSequence()
         unsavedChanges = true
     }
-
-    editorView.updateLevels = function (sequence, building) {
+    editorView.updateLevels = function(sequence, building) {
         let buildingLevel = 0
         let modifiedSequence = []
-
         for (let i = 0; i < sequence.length; i++) {
             let item = sequence[i]
-
             if (item.building === building) {
                 if (buildingLevel < gameDataBuildings[building].max_level) {
                     modifiedSequence.push({
@@ -9977,52 +14264,40 @@ define('two/builderQueue/ui', [
                 modifiedSequence.push(item)
             }
         }
-
         return modifiedSequence
     }
-
-    editorView.generateBuildingSequence = function () {
+    editorView.generateBuildingSequence = function() {
         const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
         const sequencesAvail = Object.keys(sequences).length
-
         editorView.sequencesAvail = sequencesAvail
-
         if (!sequencesAvail) {
             return false
         }
-
         const sequenceId = editorView.selectedSequence.value
         const buildingSequenceRaw = sequences[sequenceId]
         let buildingLevels = {}
-
         for (let building in BUILDING_TYPES) {
             buildingLevels[BUILDING_TYPES[building]] = 0
         }
-
-        editorView.buildingSequence = buildingSequenceRaw.map(function (building) {
+        editorView.buildingSequence = buildingSequenceRaw.map(function(building) {
             return {
                 level: ++buildingLevels[building],
                 building: building,
                 checked: false
             }
         })
-
         editorView.updateVisibleBuildingSequence()
     }
-
-    editorView.updateVisibleBuildingSequence = function () {
+    editorView.updateVisibleBuildingSequence = function() {
         const offset = $scope.pagination.buildingSequenceEditor.offset
         const limit = $scope.pagination.buildingSequenceEditor.limit
-
         editorView.visibleBuildingSequence = editorView.buildingSequence.slice(offset, offset + limit)
         $scope.pagination.buildingSequenceEditor.count = editorView.buildingSequence.length
     }
-
-    editorView.updateBuildingSequence = function () {
+    editorView.updateBuildingSequence = function() {
         const selectedSequence = editorView.selectedSequence.value
         const parsedSequence = parseBuildingSequence(editorView.buildingSequence)
         const status = builderQueue.updateBuildingSequence(selectedSequence, parsedSequence)
-
         switch (status) {
             case SEQUENCE_STATUS.SEQUENCE_SAVED: {
                 unsavedChanges = false
@@ -10038,30 +14313,24 @@ define('two/builderQueue/ui', [
             }
         }
     }
-
-    editorView.modal.removeSequence = function () {
+    editorView.modal.removeSequence = function() {
         let modalScope = $rootScope.$new()
-
         modalScope.title = $filter('i18n')('title', $rootScope.loc.ale, 'builder_queue_remove_sequence_modal')
         modalScope.text = $filter('i18n')('text', $rootScope.loc.ale, 'builder_queue_remove_sequence_modal')
         modalScope.submitText = $filter('i18n')('remove', $rootScope.loc.ale, 'common')
         modalScope.cancelText = $filter('i18n')('cancel', $rootScope.loc.ale, 'common')
         modalScope.switchColors = true
-
-        modalScope.submit = function () {
+        modalScope.submit = function() {
             modalScope.closeWindow()
             builderQueue.removeSequence(editorView.selectedSequence.value)
             unsavedChanges = false
         }
-
-        modalScope.cancel = function () {
+        modalScope.cancel = function() {
             modalScope.closeWindow()
         }
-
         windowManagerService.getModal('modal_attention', modalScope)
     }
-
-    editorView.modal.addBuilding = function () {
+    editorView.modal.addBuilding = function() {
         let modalScope = $rootScope.$new()
         modalScope.buildings = []
         modalScope.position = editorView.lastAddedIndex
@@ -10072,24 +14341,20 @@ define('two/builderQueue/ui', [
             name: $filter('i18n')(editorView.lastAddedBuilding, $rootScope.loc.ale, 'building_names'),
             value: editorView.lastAddedBuilding
         }
-
         for (let building in gameDataBuildings) {
             modalScope.buildings.push({
                 name: $filter('i18n')(building, $rootScope.loc.ale, 'building_names'),
                 value: building
             })
         }
-
-        modalScope.add = function () {
+        modalScope.add = function() {
             const building = modalScope.selectedBuilding.value
             const position = modalScope.position
             const amount = modalScope.amount
             const buildingName = $filter('i18n')(building, $rootScope.loc.ale, 'building_names')
             const buildingLimit = gameDataBuildings[building].max_level
-
             editorView.lastAddedBuilding = building
             editorView.lastAddedIndex = position
-
             if (editorView.addBuilding(building, position, amount)) {
                 modalScope.closeWindow()
                 utils.notif('success', $filter('i18n')('add_building_success', $rootScope.loc.ale, 'builder_queue', buildingName, position))
@@ -10097,256 +14362,223 @@ define('two/builderQueue/ui', [
                 utils.notif('error', $filter('i18n')('add_building_limit_exceeded', $rootScope.loc.ale, 'builder_queue', buildingName, buildingLimit))
             }
         }
-
         windowManagerService.getModal('!twoverflow_builder_queue_add_building_modal', modalScope)
     }
-
-    editorView.modal.nameSequence = function () {
-        const nameSequence = function () {
+    editorView.modal.nameSequence = function() {
+        const nameSequence = function() {
             let modalScope = $rootScope.$new()
             const selectedSequenceName = editorView.selectedSequence.name
             const selectedSequence = $scope.settings[SETTINGS.BUILDING_SEQUENCES][selectedSequenceName]
-            
             modalScope.name = selectedSequenceName
-
-            modalScope.submit = function () {
+            modalScope.submit = function() {
                 if (modalScope.name.length < 3) {
                     utils.notif('error', $filter('i18n')('name_sequence_min_lenght', $rootScope.loc.ale, 'builder_queue'))
                     return false
                 }
-
                 if (createBuildingSequence(modalScope.name, selectedSequence)) {
                     modalScope.closeWindow()
                 }
             }
-
             windowManagerService.getModal('!twoverflow_builder_queue_name_sequence_modal', modalScope)
         }
-
         if (unsavedChanges) {
             let modalScope = $rootScope.$new()
             modalScope.title = $filter('i18n')('clone_warn_changed_sequence_title', $rootScope.loc.ale, 'builder_queue')
             modalScope.text = $filter('i18n')('clone_warn_changed_sequence_text', $rootScope.loc.ale, 'builder_queue')
             modalScope.submitText = $filter('i18n')('clone', $rootScope.loc.ale, 'builder_queue')
             modalScope.cancelText = $filter('i18n')('cancel', $rootScope.loc.ale, 'common')
-
-            modalScope.submit = function () {
+            modalScope.submit = function() {
                 modalScope.closeWindow()
                 nameSequence()
             }
-
-            modalScope.cancel = function () {
+            modalScope.cancel = function() {
                 modalScope.closeWindow()
             }
-
             windowManagerService.getModal('modal_attention', modalScope)
         } else {
             nameSequence()
         }
     }
-
-    logsView.updateVisibleLogs = function () {
+    logsView.updateVisibleLogs = function() {
         const offset = $scope.pagination.logs.offset
         const limit = $scope.pagination.logs.limit
-
         logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
         $scope.pagination.logs.count = logsView.logs.length
-
-        logsView.visibleLogs.forEach(function (log) {
+        logsView.visibleLogs.forEach(function(log) {
             if (log.villageId) {
                 loadVillageInfo(log.villageId)
             }
         })
     }
-
-    logsView.clearLogs = function () {
+    logsView.clearLogs = function() {
         builderQueue.clearLogs()
     }
-
-    const createSequence = function () {
+    const createSequence = function() {
         let modalScope = $rootScope.$new()
         const initialSequence = [BUILDING_TYPES.HEADQUARTER]
-
         modalScope.name = ''
-        
-        modalScope.submit = function () {
+        modalScope.submit = function() {
             if (modalScope.name.length < 3) {
                 utils.notif('error', $filter('i18n')('name_sequence_min_lenght', $rootScope.loc.ale, 'builder_queue'))
                 return false
             }
-
             if (createBuildingSequence(modalScope.name, initialSequence)) {
-                $scope.settings[SETTINGS.ACTIVE_SEQUENCE] = { name: modalScope.name, value: modalScope.name }
+                $scope.settings[SETTINGS.ACTIVE_SEQUENCE] = {
+                    name: modalScope.name,
+                    value: modalScope.name
+                }
                 $scope.settings[SETTINGS.BUILDING_SEQUENCES][modalScope.name] = initialSequence
-
                 saveSettings()
-
-                settingsView.selectedSequence = { name: modalScope.name, value: modalScope.name }
-                editorView.selectedSequence = { name: modalScope.name, value: modalScope.name }
-
+                settingsView.selectedSequence = {
+                    name: modalScope.name,
+                    value: modalScope.name
+                }
+                editorView.selectedSequence = {
+                    name: modalScope.name,
+                    value: modalScope.name
+                }
                 settingsView.generateSequences()
                 editorView.generateBuildingSequence()
-
                 modalScope.closeWindow()
                 selectTab(TAB_TYPES.SEQUENCES)
             }
         }
-
         windowManagerService.getModal('!twoverflow_builder_queue_name_sequence_modal', modalScope)
     }
-
-    const selectTab = function (tabType) {
+    const selectTab = function(tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
+    const saveSettings = function() {
         settings.setAll(settings.decode($scope.settings))
         unsavedChanges = false
     }
-
-    const switchBuilder = function () {
+    const switchBuilder = function() {
         if (builderQueue.isRunning()) {
             builderQueue.stop()
         } else {
             builderQueue.start()
         }
     }
-
-    const confirmDiscardModal = function (onDiscard, onCancel) {
+    const confirmDiscardModal = function(onDiscard, onCancel) {
         let modalScope = $rootScope.$new()
         modalScope.title = $filter('i18n')('discard_changes_title', $rootScope.loc.ale, 'builder_queue')
         modalScope.text = $filter('i18n')('discard_changes_text', $rootScope.loc.ale, 'builder_queue')
         modalScope.submitText = $filter('i18n')('discard', $rootScope.loc.ale, 'common')
         modalScope.cancelText = $filter('i18n')('cancel', $rootScope.loc.ale, 'common')
         modalScope.switchColors = true
-
-        modalScope.submit = function () {
+        modalScope.submit = function() {
             modalScope.closeWindow()
             onDiscard && onDiscard()
         }
-
-        modalScope.cancel = function () {
+        modalScope.cancel = function() {
             modalScope.closeWindow()
             onCancel && onCancel()
         }
-
         windowManagerService.getModal('modal_attention', modalScope)
     }
-
-    const confirmCloseWindow = function () {
+    const confirmCloseWindow = function() {
         if (unsavedChanges) {
-            confirmDiscardModal(function onDiscard () {
+            confirmDiscardModal(function onDiscard() {
                 oldCloseWindow()
             })
         } else {
             oldCloseWindow()
         }
     }
-
     const eventHandlers = {
-        updateGroups: function () {
+        updateGroups: function() {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 type: 'groups',
                 disabled: true
             })
         },
-        updateSequences: function () {
+        updateSequences: function() {
             const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
-            
             $scope.sequences = Settings.encodeList(sequences, {
                 type: 'keys',
                 disabled: false
             })
         },
-        generateBuildingSequences: function () {
+        generateBuildingSequences: function() {
             settingsView.generateSequences()
         },
-        generateBuildingSequencesEditor: function () {
+        generateBuildingSequencesEditor: function() {
             editorView.generateBuildingSequence()
         },
-        updateLogs: function () {
+        updateLogs: function() {
             $scope.logs = builderQueue.getLogs()
             logsView.updateVisibleLogs()
         },
-        clearLogs: function () {
+        clearLogs: function() {
             utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'builder_queue'))
             eventHandlers.updateLogs()
         },
-        buildingSequenceUpdate: function (event, sequenceId) {
+        buildingSequenceUpdate: function(event, sequenceId) {
             const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
             $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId] = sequences[sequenceId]
-
             if ($scope.settings[SETTINGS.ACTIVE_SEQUENCE].value === sequenceId) {
                 settingsView.generateSequences()
             }
-
             utils.notif('success', $filter('i18n')('sequence_updated', $rootScope.loc.ale, 'builder_queue', sequenceId))
         },
-        buildingSequenceAdd: function (event, sequenceId) {
+        buildingSequenceAdd: function(event, sequenceId) {
             const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
             $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId] = sequences[sequenceId]
             eventHandlers.updateSequences()
             utils.notif('success', $filter('i18n')('sequence_created', $rootScope.loc.ale, 'builder_queue', sequenceId))
         },
-        buildingSequenceRemoved: function (event, sequenceId) {
+        buildingSequenceRemoved: function(event, sequenceId) {
             delete $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId]
-
             const substituteSequence = selectSome($scope.settings[SETTINGS.BUILDING_SEQUENCES])
-            editorView.selectedSequence = { name: substituteSequence, value: substituteSequence }
+            editorView.selectedSequence = {
+                name: substituteSequence,
+                value: substituteSequence
+            }
             eventHandlers.updateSequences()
             editorView.generateBuildingSequence()
-
             if (settings.get(SETTINGS.ACTIVE_SEQUENCE) === sequenceId) {
                 settings.set(SETTINGS.ACTIVE_SEQUENCE, substituteSequence, {
                     quiet: true
                 })
                 settingsView.generateSequences()
             }
-
             utils.notif('success', $filter('i18n')('sequence_removed', $rootScope.loc.ale, 'builder_queue', sequenceId))
         },
-        saveSettings: function () {
+        saveSettings: function() {
             utils.notif('success', $filter('i18n')('settings_saved', $rootScope.loc.ale, 'builder_queue'))
         },
-        started: function () {
+        started: function() {
             $scope.running = true
         },
-        stopped: function () {
+        stopped: function() {
             $scope.running = false
         }
     }
-
-    const init = function () {
+    const init = function() {
         gameDataBuildings = modelDataService.getGameData().getBuildings()
         settingsView.generateBuildingsLevelPoints()
         settings = builderQueue.getSettings()
-
-        $button = interfaceOverflow.addMenuButton2('Budowniczy', 20)
+        $button = interfaceOverflow.addMenuButton2('Budowniczy', 20, $filter('i18n')('general.description', $rootScope.loc.ale, 'builder_queue'))
         $button.addEventListener('click', buildWindow)
-
-        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_START, function () {
+        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_START, function() {
             running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
             utils.notif('success', $filter('i18n')('started', $rootScope.loc.ale, 'builder_queue'))
         })
-
-        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_STOP, function () {
+        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_STOP, function() {
             running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('stopped', $rootScope.loc.ale, 'builder_queue'))
         })
-
         interfaceOverflow.addTemplate('twoverflow_builder_queue_window', `<div id=\"two-builder-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'builder_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SEQUENCES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}\">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><h5 class=\"twx-section\">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5><table class=\"settings tbl-border-light tbl-striped\"><col width=\"40%\"><col><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_VILLAGES]\" drop-down=\"true\"></div><tr ng-show=\"settingsView.sequencesAvail\"><td><span class=\"ff-cell-fix\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"sequences\" selected=\"settings[SETTINGS.ACTIVE_SEQUENCE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_WOOD].min\" max=\"settingsMap[SETTINGS.PRESERVE_WOOD].max\" value=\"settings[SETTINGS.PRESERVE_WOOD]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_WOOD]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_CLAY].min\" max=\"settingsMap[SETTINGS.PRESERVE_CLAY].max\" value=\"settings[SETTINGS.PRESERVE_CLAY]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_CLAY]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_IRON].min\" max=\"settingsMap[SETTINGS.PRESERVE_IRON].max\" value=\"settings[SETTINGS.PRESERVE_IRON]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_IRON]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span><td class=\"text-center\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORIZE_FARM]\" vertical=\"false\" size=\"'56x28'\"></div></table><h5 class=\"twx-section\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!settingsView.sequencesAvail\" class=\"text-center\"><a href=\"#\" class=\"btn-orange btn-border create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><div ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div><table class=\"tbl-border-light header-center building-sequence\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"13%\"><col width=\"8%\"><col width=\"9%\"><col width=\"9%\"><col width=\"9%\"><col width=\"6%\"><tr><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.visibleBuildingSequence track by $index\" class=\"{{ item.state }}\"><td>{{ pagination.buildingSequence.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.duration }}<td class=\"green\">+{{ item.levelPoints | number }}<td>{{ item.price.wood | number }}<td>{{ item.price.clay | number }}<td>{{ item.price.iron | number }}<td>{{ item.price.food | number }}</table><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div></div><h5 ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"twx-section\">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5><table ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-final\"><col><col width=\"5%\"><col width=\"12%\"><col width=\"8%\"><col width=\"11%\"><col width=\"11%\"><col width=\"11%\"><col width=\"7%\"><tr><th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.buildingSequenceFinal | orderBy:'order'\"><td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.build_time | readableSecondsFilter }}<td class=\"green\">+{{ item.points | number }}<td>{{ item.resources.wood | number }}<td>{{ item.resources.clay | number }}<td>{{ item.resources.iron | number }}<td>{{ item.resources.food | number }}</table><p ng-show=\"settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length\" class=\"text-center\">{{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}</div><div ng-show=\"selectedTab === TAB_TYPES.SEQUENCES\"><h5 class=\"twx-section\">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!editorView.sequencesAvail\" class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><table ng-if=\"editorView.sequencesAvail\" class=\"tbl-border-light tbl-striped editor-select-sequence\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span><td><div class=\"select-sequence-editor\" select=\"\" list=\"sequences\" selected=\"editorView.selectedSequence\" drop-down=\"true\"></div><tr><td class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-orange clone-sequence\" ng-click=\"editorView.modal.nameSequence()\">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-red remove-sequence\" ng-click=\"editorView.modal.removeSequence()\">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></table><div ng-if=\"editorView.sequencesAvail\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><table ng-show=\"editorView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-editor\"><col width=\"5%\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"10%\"><tr><th><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'actions' | i18n:loc.ale:'common' }}<tr ng-repeat=\"item in editorView.visibleBuildingSequence track by $index\" ng-class=\"{'selected': item.checked}\"><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" ng-class=\"{'icon-26x26-checkbox-checked': item.checked}\"><input type=\"checkbox\" ng-model=\"item.checked\"></label><td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)\" tooltip=\"\" tooltip-content=\"{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><p ng-show=\"!editorView.visibleBuildingSequence.length\" class=\"text-center\"><a class=\"btn btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a></div></div><div ng-show=\"selectedTab === TAB_TYPES.LOGS\" class=\"rich-text\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'started_at' | i18n:loc.ale:'common' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"building-icon icon-20x20-building-{{ log.building }}\"></span> {{ log.building | i18n:loc.ale:'building_names' }}<td>{{ log.level }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchBuilder()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveUp()\">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveDown()\">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"editorView.updateBuildingSequence()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_add_building_modal', `<div id=\"add-building-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_add_building_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap unit-operate-slider\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"15%\"><col><col width=\"15%\"><tr><td>{{ 'building' | i18n:loc.ale:'common' }}<td colspan=\"2\"><div select=\"\" list=\"buildings\" selected=\"selectedBuilding\" drop-down=\"true\"></div><tr><td>{{ 'position' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"indexLimit\" value=\"position\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"position\"><tr><td>{{ 'amount' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"buildingsData[selectedBuilding.value].max_level\" value=\"amount\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"amount\"></table></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"add()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_name_sequence_modal', `<div id=\"name-sequence-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_name_sequence_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><div class=\"box-border-light input-wrapper name_preset\"><form ng-submit=\"submit()\"><input focus=\"true\" ng-model=\"name\" minlength=\"3\"></form></div></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"submit()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-builder-queue tr.reached td{background-color:#b9af7e}#two-builder-queue tr.progress td{background-color:#af9d57}#two-builder-queue .building-sequence,#two-builder-queue .building-sequence-final,#two-builder-queue .building-sequence-editor,#two-builder-queue .logs{margin-bottom:10px}#two-builder-queue .building-sequence td,#two-builder-queue .building-sequence-final td,#two-builder-queue .building-sequence-editor td,#two-builder-queue .logs td,#two-builder-queue .building-sequence th,#two-builder-queue .building-sequence-final th,#two-builder-queue .building-sequence-editor th,#two-builder-queue .logs th{text-align:center;line-height:20px}#two-builder-queue .building-sequence-editor .selected td{background-color:#b9af7e}#two-builder-queue .editor-select-sequence{margin-bottom:13px}#two-builder-queue a.btn{height:28px;line-height:28px;padding:0 10px}#two-builder-queue .select-sequence-editor{text-align:center;margin-top:1px}#two-builder-queue .create-sequence{padding:8px 20px 8px 20px}#two-builder-queue table.settings td{padding:1px 5px}#two-builder-queue table.settings td.text-right{text-align:right}#two-builder-queue table.settings div[switch-slider]{display:inline-block;margin-top:2px}#two-builder-queue .small-select a.select-handler{height:28px;line-height:28px}#two-builder-queue .small-select a.select-button{height:28px}#two-builder-queue input.preserve-resource{width:70px;height:32px}#two-builder-queue .icon-26x26-resource-wood,#two-builder-queue .icon-26x26-resource-clay,#two-builder-queue .icon-26x26-resource-iron,#two-builder-queue .icon-26x26-resource-food{transform:scale(.8);top:-1px}#add-building-modal td{text-align:center}#add-building-modal .select-wrapper{width:250px}#add-building-modal input[type="text"]{width:60px}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         const activeSequence = settings.get(SETTINGS.ACTIVE_SEQUENCE)
-
         $scope = $rootScope.$new()
         $scope.selectedTab = TAB_TYPES.SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
@@ -10354,62 +14586,52 @@ define('two/builderQueue/ui', [
         $scope.running = running
         $scope.pagination = {}
         $scope.settingsMap = settings.settingsMap
-
         $scope.villagesLabel = villagesLabel
         $scope.villagesInfo = villagesInfo
-
         $scope.editorView = editorView
         $scope.editorView.buildingSequence = {}
         $scope.editorView.visibleBuildingSequence = []
-        $scope.editorView.selectedSequence = { name: activeSequence, value: activeSequence }
-
+        $scope.editorView.selectedSequence = {
+            name: activeSequence,
+            value: activeSequence
+        }
         $scope.editorView.lastAddedBuilding = BUILDING_TYPES.HEADQUARTER
         $scope.editorView.lastAddedIndex = 1
-
         $scope.settingsView = settingsView
         $scope.settingsView.buildingSequence = {}
         $scope.settingsView.buildingSequenceFinal = {}
-
         $scope.logsView = logsView
         $scope.logsView.logs = builderQueue.getLogs()
-
         // methods
         $scope.selectTab = selectTab
         $scope.switchBuilder = switchBuilder
         $scope.saveSettings = saveSettings
         $scope.createSequence = createSequence
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
-
         settings.injectScope($scope)
         eventHandlers.updateGroups()
         eventHandlers.updateSequences()
-
         $scope.pagination.buildingSequence = {
             count: settingsView.buildingSequence.length,
             offset: 0,
             loader: settingsView.updateVisibleBuildingSequence,
             limit: storageService.getPaginationLimit()
         }
-
         $scope.pagination.buildingSequenceEditor = {
             count: editorView.buildingSequence.length,
             offset: 0,
             loader: editorView.updateVisibleBuildingSequence,
             limit: storageService.getPaginationLimit()
         }
-
         $scope.pagination.logs = {
             count: logsView.logs.length,
             offset: 0,
             loader: logsView.updateVisibleLogs,
             limit: storageService.getPaginationLimit()
         }
-
         logsView.updateVisibleLogs()
-
         settingsView.generateSequences()
         editorView.generateBuildingSequence()
-
         let eventScope = new EventScope('twoverflow_builder_queue_window')
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
@@ -10427,31 +14649,29 @@ define('two/builderQueue/ui', [
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_SETTINGS_CHANGE, eventHandlers.saveSettings)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_START, eventHandlers.started)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_STOP, eventHandlers.stopped)
-
         windowManagerService.getScreenWithInjectedScope('!twoverflow_builder_queue_window', $scope)
-
         oldCloseWindow = $scope.closeWindow
         $scope.closeWindow = confirmCloseWindow
-
-        $scope.$watch('settings[SETTINGS.ACTIVE_SEQUENCE].value', function (newValue, oldValue) {
+        $scope.$watch('settings[SETTINGS.ACTIVE_SEQUENCE].value', function(newValue, oldValue) {
             if (newValue !== oldValue) {
                 eventHandlers.generateBuildingSequences()
             }
         })
-
-        $scope.$watch('editorView.selectedSequence.value', function (newValue, oldValue) {
+        $scope.$watch('editorView.selectedSequence.value', function(newValue, oldValue) {
             if (ignoreInputChange) {
                 ignoreInputChange = false
                 return
             }
-
             if (newValue !== oldValue) {
                 if (unsavedChanges) {
-                    confirmDiscardModal(function onDiscard () {
+                    confirmDiscardModal(function onDiscard() {
                         eventHandlers.generateBuildingSequencesEditor()
                         unsavedChanges = false
-                    }, function onCancel () {
-                        $scope.editorView.selectedSequence = { name: oldValue, value: oldValue }
+                    }, function onCancel() {
+                        $scope.editorView.selectedSequence = {
+                            name: oldValue,
+                            value: oldValue
+                        }
                         ignoreInputChange = true
                     })
                 } else {
@@ -10460,11 +14680,9 @@ define('two/builderQueue/ui', [
             }
         })
     }
-
     return init
 })
-
-define('two/builderQueue/settings', [], function () {
+define('two/builderQueue/settings', [], function() {
     return {
         GROUP_VILLAGES: 'group_villages',
         ACTIVE_SEQUENCE: 'building_sequence',
@@ -10475,18 +14693,16 @@ define('two/builderQueue/settings', [], function () {
         PRIORIZE_FARM: 'priorize_farm'
     }
 })
-
-define('two/builderQueue/settings/updates', [], function () {
+define('two/builderQueue/settings/updates', [], function() {
     return {
         ANALYSE: 'analyse'
     }
 })
-
 define('two/builderQueue/settings/map', [
     'two/builderQueue/defaultOrders',
     'two/builderQueue/settings',
     'two/builderQueue/settings/updates'
-], function (
+], function(
     DEFAULT_ORDERS,
     SETTINGS,
     UPDATES
@@ -10537,7 +14753,6 @@ define('two/builderQueue/settings/map', [
         }
     }
 })
-
 define('two/builderQueue/sequenceStatus', [], function () {
     return {
         SEQUENCE_NO_EXISTS: 'sequence_no_exists',
@@ -10546,13 +14761,12 @@ define('two/builderQueue/sequenceStatus', [], function () {
         SEQUENCE_SAVED: 'sequence_saved'
     }
 })
-
 require([
     'two/ready',
     'two/builderQueue',
     'two/builderQueue/ui',
     'two/builderQueue/events'
-], function (
+], function(
     ready,
     builderQueue,
     builderQueueInterface
@@ -10560,13 +14774,11 @@ require([
     if (builderQueue.isInitialized()) {
         return false
     }
-
-    ready(function () {
+    ready(function() {
         builderQueue.init()
         builderQueueInterface()
     })
 })
-
 define('two/commandQueue', [
     'two/utils',
     'two/commandQueue/types/dates',
@@ -14252,7 +18464,7 @@ define('two/farmOverflow/ui', [
         }
 
         villagesInfo[villageId] = true
-        villagesLabel[villageId] = 'LOADING...'
+        villagesLabel[villageId] = 'ładowanie...'
 
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
@@ -15707,7 +19919,7 @@ define('two/minimap', [
     'conf/colorGroups',
     'conf/conf',
     'states/MapState'
-], function (
+], function(
     ACTION_TYPES,
     MAP_SIZE_TYPES,
     SETTINGS,
@@ -15740,10 +19952,22 @@ define('two/minimap', [
         character: {},
         tribe: {}
     }
-    let boundariesX = { a: 0, b: 0 }
-    let boundariesY = { a: 0, b: 0 }
-    let viewBoundariesX = { a: 0, b: 0 }
-    let viewBoundariesY = { a: 0, b: 0 }
+    let boundariesX = {
+        a: 0,
+        b: 0
+    }
+    let boundariesY = {
+        a: 0,
+        b: 0
+    }
+    let viewBoundariesX = {
+        a: 0,
+        b: 0
+    }
+    let viewBoundariesY = {
+        a: 0,
+        b: 0
+    }
     let selectedVillage
     let currentPosition = {}
     let currentCoords = {}
@@ -15781,7 +20005,6 @@ define('two/minimap', [
     const BORDER_COLOR = '#2B4700'
     const colorService = injector.get('colorService')
     const spriteFactory = injector.get('spriteFactory')
-    
     let allowJump = true
     let allowMove = false
     let dragStart = {}
@@ -15792,57 +20015,29 @@ define('two/minimap', [
     }
     let firstDraw = true
     const rhexcolor = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
-
-    /**
-     * Calcule the coords from clicked position in the canvas.
-     *
-     * @param {Object} event - Canvas click event.
-     * @return {Object} X and Y coordinates.
-     */
-    const getCoords = function (event) {
+    const getCoords = function(event) {
         let rawX = Math.ceil(currentPosition.x + event.offsetX) - blockOffset
         let rawY = Math.ceil(currentPosition.y + event.offsetY) + blockOffset
-
         if (Math.floor((rawY / villageBlock)) % 2) {
             rawX += blockOffset
         }
-
         rawX -= rawX % villageBlock
         rawY -= rawY % villageBlock
-
         return {
             x: Math.ceil((rawX - $viewport.width / 2) / villageBlock),
             y: Math.ceil((rawY - $viewport.height / 2) / villageBlock)
         }
     }
-
-    /**
-     * Convert pixel wide map position to coords
-     *
-     * @param {Number} x - X pixel position.
-     * @param {Number} y - Y pixel position.
-     * @return {Object} Y and Y coordinates.
-     */
-    const pixel2Tiles = function (x, y) {
+    const pixel2Tiles = function(x, y) {
         return {
             x: (x / conf.TILESIZE.x),
             y: (y / conf.TILESIZE.y / conf.TILESIZE.off)
         }
     }
-
-    /**
-     * Calculate the coords based on zoom.
-     *
-     * @param {Array[x, y, canvasW, canvasH]} rect - Coords and canvas size.
-     * @param {Number} zoom - Current zoom used to display the game original map.
-     * @return {Array} Calculated coords.
-     */
-    const convert = function (rect, zoom) {
+    const convert = function(rect, zoom) {
         zoom = 1 / (zoom || 1)
-
         const xy = pixel2Tiles(rect[0] * zoom, rect[1] * zoom)
         const wh = pixel2Tiles(rect[2] * zoom, rect[3] * zoom)
-        
         return [
             xy.x - 1,
             xy.y - 1,
@@ -15850,24 +20045,20 @@ define('two/minimap', [
             (wh.y + 3) || 1
         ]
     }
-
-    const drawBorders = function () {
+    const drawBorders = function() {
         const binUrl = cdn.getPath(conf.getMapPath())
         const continentEnabled = minimapSettings[SETTINGS.SHOW_CONTINENT_DEMARCATIONS]
         const provinceEnabled = minimapSettings[SETTINGS.SHOW_PROVINCE_DEMARCATIONS]
-
-        const drawContinent = function (x, y) {
+        const drawContinent = function(x, y) {
             viewportCacheContext.fillStyle = minimapSettings[SETTINGS.COLOR_CONTINENT]
             viewportCacheContext.fillRect(x * villageBlock + blockOffset - 1, y * villageBlock + blockOffset - 1, 3, 1)
             viewportCacheContext.fillRect(x * villageBlock + blockOffset, y * villageBlock + blockOffset - 2, 1, 3)
         }
-
-        const drawProvince = function (x, y) {
+        const drawProvince = function(x, y) {
             viewportCacheContext.fillStyle = minimapSettings[SETTINGS.COLOR_PROVINCE]
             viewportCacheContext.fillRect(x * villageBlock + blockOffset, y * villageBlock + blockOffset - 1, 1, 1)
         }
-
-        utils.xhrGet(binUrl, 'arraybuffer').then(function (xhr) {
+        utils.xhrGet(binUrl, 'arraybuffer').then(function(xhr) {
             const dataView = new DataView(xhr.response)
             const paddedBoundariesX = {
                 a: boundariesX.a - BORDER_PADDING,
@@ -15877,12 +20068,10 @@ define('two/minimap', [
                 a: boundariesY.a - BORDER_PADDING,
                 b: boundariesY.b + BORDER_PADDING
             }
-
             if (continentEnabled || provinceEnabled) {
                 for (let x = paddedBoundariesX.a; x < paddedBoundariesX.b; x++) {
                     for (let y = paddedBoundariesY.a; y < paddedBoundariesY.b; y++) {
                         const tile = mapconvert.toTile(dataView, x, y)
-
                         // is border
                         if (tile.key.b) {
                             // is continental border
@@ -15899,12 +20088,10 @@ define('two/minimap', [
                     }
                 }
             }
-
             const borderX = paddedBoundariesX.a * villageBlock
             const borderY = paddedBoundariesY.a * villageBlock
             const borderWidth = (paddedBoundariesX.b - paddedBoundariesX.a) * villageBlock
             const borderHeight = (paddedBoundariesY.b - paddedBoundariesY.a) * villageBlock
-
             viewportCacheContext.beginPath()
             viewportCacheContext.lineWidth = 2
             viewportCacheContext.strokeStyle = BORDER_COLOR
@@ -15912,42 +20099,27 @@ define('two/minimap', [
             viewportCacheContext.stroke()
         })
     }
-
-    const drawLoadedVillages = function () {
+    const drawLoadedVillages = function() {
         drawVillages(allVillages)
     }
-
-    /**
-     * @param {Object} pos - Minimap current position plus center of canvas.
-     */
-    const drawViewport = function (pos) {
+    const drawViewport = function(pos) {
         viewportContext.drawImage($viewportCache, -pos.x, -pos.y)
     }
-
-    const clearViewport = function () {
+    const clearViewport = function() {
         viewportContext.clearRect(0, 0, $viewport.width, $viewport.height)
     }
-
-    /**
-     * @param {Object} pos - Minimap current position plus center of canvas.
-     */
-    const drawViewReference = function (pos) {
+    const drawViewReference = function(pos) {
         const mapPosition = minimap.getMapPosition()
         const x = ((mapPosition.x - 2) * villageBlock) - pos.x
         const y = ((mapPosition.y - 2) * villageBlock) - pos.y
-
-        // cross
         viewportRefContext.fillStyle = minimapSettings[SETTINGS.COLOR_VIEW_REFERENCE]
         viewportRefContext.fillRect(x, 0, 1, lineSize)
         viewportRefContext.fillRect(0, y, lineSize, 1)
-
         const mapRect = $mapWrapper.getBoundingClientRect()
         const refRectWidth = (mapRect.width / conf.TILESIZE.x / mapState.view.z) * villageBlock
         const refRectHeight = (mapRect.height / conf.TILESIZE.y / mapState.view.z) * villageBlock
         const refRectX = x - (refRectWidth / 2)
         const refRectY = y - (refRectHeight / 2)
-
-        // view rect
         viewportRefContext.clearRect(refRectX, refRectY, refRectWidth, refRectHeight)
         viewportRefContext.beginPath()
         viewportRefContext.lineWidth = 1
@@ -15955,57 +20127,46 @@ define('two/minimap', [
         viewportRefContext.rect(refRectX, refRectY, refRectWidth, refRectHeight)
         viewportRefContext.stroke()
     }
-
-    const clearCross = function () {
+    const clearCross = function() {
         viewportRefContext.clearRect(0, 0, $viewportRef.width, $viewportRef.height)
     }
-
-    const renderStep = function () {
+    const renderStep = function() {
         if (renderingEnabled) {
             const pos = {
                 x: currentPosition.x - ($viewport.width / 2),
                 y: currentPosition.y - ($viewport.height / 2)
             }
-
             clearViewport()
             clearCross()
             drawViewport(pos)
-
             if (minimapSettings[SETTINGS.SHOW_VIEW_REFERENCE]) {
                 drawViewReference(pos)
             }
         }
-
         window.requestAnimationFrame(renderStep)
     }
-
-    const cacheVillages = function (villages) {
+    const cacheVillages = function(villages) {
         for (let i = 0, l = villages.length; i < l; i++) {
             let v = villages[i]
-
-            // meta village
             if (v.id < 0) {
                 continue
             }
-
             if (!(v.x in mappedData.village)) {
                 mappedData.village[v.x] = {}
             }
-
             if (!(v.x in mappedVillages)) {
                 mappedVillages[v.x] = []
             }
-
             mappedData.village[v.x][v.y] = v.character_id || 0
             mappedVillages[v.x][v.y] = v
-
             if (v.character_id) {
                 if (v.character_id in mappedData.character) {
                     mappedData.character[v.character_id].push([v.x, v.y])
                 } else {
-                    mappedData.character[v.character_id] = [[v.x, v.y]]
+                    mappedData.character[v.character_id] = [
+                        [v.x, v.y]
+                    ]
                 }
-
                 if (v.tribe_id) {
                     if (v.tribe_id in mappedData.tribe) {
                         mappedData.tribe[v.tribe_id].push(v.character_id)
@@ -16016,31 +20177,25 @@ define('two/minimap', [
             }
         }
     }
-
-    const setBoundaries = function () {
+    const setBoundaries = function() {
         let allX = []
         let allY = []
-
         for (let x in mappedData.village) {
             allX.push(x)
-
             for (let y in mappedData.village[x]) {
                 allY.push(y)
             }
         }
-
         boundariesX.a = Math.min(...allX)
         boundariesX.b = Math.max(...allX)
         boundariesY.a = Math.min(...allY)
         boundariesY.b = Math.max(...allY)
-
         viewBoundariesX.a = boundariesX.a * villageBlock
         viewBoundariesX.b = boundariesX.b * villageBlock
         viewBoundariesY.a = boundariesY.a * villageBlock
         viewBoundariesY.b = boundariesY.b * villageBlock
     }
-
-    const onHoverVillage = function (coords, event) {
+    const onHoverVillage = function(coords, event) {
         if (hoveredVillage) {
             if (hoveredVillageX === coords.x && hoveredVillageY === coords.y) {
                 return false
@@ -16048,136 +20203,111 @@ define('two/minimap', [
                 onBlurVillage()
             }
         }
-
         hoveredVillage = true
         hoveredVillageX = coords.x
         hoveredVillageY = coords.y
-
         eventQueue.trigger(eventTypeProvider.MINIMAP_VILLAGE_HOVER, {
             x: hoveredVillageX,
             y: hoveredVillageY,
             event: event
         })
-
         const pid = mappedData.village[hoveredVillageX][hoveredVillageY]
-
         if (pid) {
             highlightVillages(mappedData.character[pid])
         } else {
-            highlightVillages([[hoveredVillageX, hoveredVillageY]])
+            highlightVillages([
+                [hoveredVillageX, hoveredVillageY]
+            ])
         }
     }
-
-    const onBlurVillage = function () {
+    const onBlurVillage = function() {
         if (!hoveredVillage) {
             return false
         }
-
         const pid = mappedData.village[hoveredVillageX][hoveredVillageY]
-
         if (pid) {
             unhighlightVillages(mappedData.character[pid])
         } else {
-            unhighlightVillages([[hoveredVillageX, hoveredVillageY]])
+            unhighlightVillages([
+                [hoveredVillageX, hoveredVillageY]
+            ])
         }
-
         hoveredVillage = false
         eventQueue.trigger(eventTypeProvider.MINIMAP_VILLAGE_BLUR, {
             x: hoveredVillageX,
             y: hoveredVillageY
         })
     }
-
-    const highlightVillages = function (villages) {
+    const highlightVillages = function(villages) {
         let villagesData = []
-
         for (let i = 0; i < villages.length; i++) {
             let x = villages[i][0]
             let y = villages[i][1]
-
             villagesData.push(mappedVillages[x][y])
         }
-
         drawVillages(villagesData, minimapSettings[SETTINGS.COLOR_QUICK_HIGHLIGHT])
     }
-
-    const unhighlightVillages = function (villages) {
+    const unhighlightVillages = function(villages) {
         let villagesData = []
-
         for (let i = 0; i < villages.length; i++) {
             let x = villages[i][0]
             let y = villages[i][1]
-
             villagesData.push(mappedVillages[x][y])
         }
-
         drawVillages(villagesData)
     }
-
-    const showHighlightSprite = function (x, y) {
+    const showHighlightSprite = function(x, y) {
         let pos = mapService.tileCoordinate2Pixel(x, y)
         highlightSprite.setTranslation(pos[0] - 25, pos[1] + 2)
         highlightSprite.alpha = 1
     }
-
-    const hideHighlightSprite = function () {
+    const hideHighlightSprite = function() {
         highlightSprite.alpha = 0
     }
-
-    const quickHighlight = function (x, y) {
-        mapData.getTownAtAsync(x, y, function (village) {
+    const quickHighlight = function(x, y) {
+        mapData.getTownAtAsync(x, y, function(village) {
             if (!village) {
                 return false
             }
-
             switch (minimapSettings[SETTINGS.RIGHT_CLICK_ACTION]) {
                 case ACTION_TYPES.HIGHLIGHT_PLAYER: {
                     if (!village.character_id) {
                         return false
                     }
-
                     minimap.addHighlight({
                         type: 'character',
                         id: village.character_id
                     }, colors.palette.flat().random())
-
                     break
                 }
                 case ACTION_TYPES.HIGHLIGHT_TRIBE: {
                     if (!village.tribe_id) {
                         return false
                     }
-
                     minimap.addHighlight({
                         type: 'tribe',
                         id: village.tribe_id
                     }, colors.palette.flat().random())
-
                     break
                 }
             }
         })
     }
-
-    const getVillageColor = function (village) {
+    const getVillageColor = function(village) {
         if (minimapSettings[SETTINGS.SHOW_ONLY_CUSTOM_HIGHLIGHTS]) {
             if (village.character_id in highlights.character) {
                 return highlights.character[village.character_id]
             } else if (village.tribe_id in highlights.tribe) {
                 return highlights.tribe[village.tribe_id]
             }
-
             return false
         }
-
         if (!village.character_id) {
             if (minimapSettings[SETTINGS.SHOW_BARBARIANS]) {
                 return villageColors.barbarian
             }
-
             return false
         }
-
         if (village.character_id === playerId) {
             if (village.id === selectedVillage.getId() && minimapSettings[SETTINGS.HIGHLIGHT_SELECTED]) {
                 return villageColors.selected
@@ -16201,98 +20331,76 @@ define('two/minimap', [
                 return villageColors.friendly
             }
         }
-
         return villageColors.ugly
     }
-
-    const drawVillages = function (villages, predefinedColor) {
+    const drawVillages = function(villages, predefinedColor) {
         for (let i = 0; i < villages.length; i++) {
             const village = villages[i]
-
-            // meta village
             if (village.id < 0) {
                 continue
             }
-
             const color = predefinedColor || getVillageColor(village)
-
             if (!color) {
                 continue
             }
-
             const x = village.x * villageBlock + (village.y % 2 ? blockOffset : 0)
             const y = village.y * villageBlock
-
             viewportCacheContext.fillStyle = color
             viewportCacheContext.fillRect(x, y, villageSize, villageSize)
         }
     }
-
-    const updateMinimapValues = function () {
+    const updateMinimapValues = function() {
         villageSize = MAP_SIZES[minimapSettings[SETTINGS.MAP_SIZE]]
         blockOffset = Math.round(villageSize / 2)
         villageBlock = villageSize + villageMargin
         lineSize = villageBlock * 1000
-        
         viewBoundariesX.a = boundariesX.a * villageBlock
         viewBoundariesX.b = boundariesX.b * villageBlock
         viewBoundariesY.a = boundariesY.a * villageBlock
         viewBoundariesY.b = boundariesY.b * villageBlock
-
         $viewportCache.width = 1000 * villageBlock
         $viewportCache.height = 1000 * villageBlock
         viewportCacheContext.imageSmoothingEnabled = false
     }
-
-    const setViewportSize = function () {
+    const setViewportSize = function() {
         const WIDTH = 686
         const HEIGHT = document.body.clientHeight - INTERFACE_HEIGHT
-
         $viewport.width = WIDTH
         $viewport.height = HEIGHT
         $viewportRef.width = WIDTH
         $viewportRef.height = HEIGHT
-
         viewportContext.imageSmoothingEnabled = false
         viewportRefContext.imageSmoothingEnabled = false
     }
-
     const eventHandlers = {
-        onViewportRefMouseDown: function (event) {
+        onViewportRefMouseDown: function(event) {
             event.preventDefault()
-
             allowJump = true
             allowMove = true
             dragStart.x = currentPosition.x + event.pageX
             dragStart.y = currentPosition.y + event.pageY
-
             if (hoveredVillage) {
                 eventQueue.trigger(eventTypeProvider.MINIMAP_VILLAGE_CLICK, [
                     hoveredVillageX,
                     hoveredVillageY,
                     event
                 ])
-
-                // right click
                 if (event.which === 3) {
                     quickHighlight(hoveredVillageX, hoveredVillageY)
                 }
             }
-
             eventQueue.trigger(eventTypeProvider.MINIMAP_START_MOVE)
         },
-        onViewportRefMouseUp: function () {
+        onViewportRefMouseUp: function() {
             allowMove = false
             dragStart = {}
-
             if (!allowJump) {
                 eventQueue.trigger(eventTypeProvider.MINIMAP_STOP_MOVE)
             }
         },
-        onViewportRefMouseMove: function (event) {
+        onViewportRefMouseMove: function(event) {
             allowJump = false
             currentMouseCoords = getCoords(event)
-
             if (allowMove) {
                 currentPosition.x = (dragStart.x - event.pageX).bound(viewBoundariesX.a, viewBoundariesX.b)
                 currentPosition.y = (dragStart.y - event.pageY).bound(viewBoundariesY.a, viewBoundariesY.b)
@@ -16300,74 +20408,59 @@ define('two/minimap', [
                 currentCoords.y = currentMouseCoords.y
                 return false
             }
-
             if (currentCoords.x !== currentMouseCoords.x || currentCoords.y !== currentMouseCoords.y) {
                 hideHighlightSprite()
                 showHighlightSprite(currentMouseCoords.x, currentMouseCoords.y)
             }
-
             if (currentMouseCoords.x in mappedVillages && currentMouseCoords.y in mappedVillages[currentMouseCoords.x]) {
                 let village = mappedVillages[currentMouseCoords.x][currentMouseCoords.y]
-
-                // ignore barbarian villages
                 if (!minimapSettings[SETTINGS.SHOW_BARBARIANS] && !village.character_id) {
                     return false
                 }
-
-                // check if the village is custom highlighted
                 if (minimapSettings[SETTINGS.SHOW_ONLY_CUSTOM_HIGHLIGHTS]) {
                     let highlighted = false
-
                     if (village.character_id in highlights.character) {
                         highlighted = true
                     } else if (village.tribe_id in highlights.tribe) {
                         highlighted = true
                     }
-
                     if (!highlighted) {
                         return false
                     }
                 }
-
                 return onHoverVillage(currentMouseCoords, event)
             }
-
             onBlurVillage()
         },
-        onViewportRefMouseLeave: function () {
+        onViewportRefMouseLeave: function() {
             if (hoveredVillage) {
                 onBlurVillage()
             }
-
             eventQueue.trigger(eventTypeProvider.MINIMAP_MOUSE_LEAVE)
         },
-        onViewportRefMouseClick: function (event) {
+        onViewportRefMouseClick: function(event) {
             if (!allowJump) {
                 return false
             }
-
             const coords = getCoords(event)
             mapService.jumpToVillage(coords.x, coords.y)
         },
-        onViewportRefMouseContext: function (event) {
+        onViewportRefMouseContext: function(event) {
             event.preventDefault()
             return false
         },
-        onHighlightChange: function () {
+        onHighlightChange: function() {
             highlights.tribe = colorService.getCustomColorsByGroup(colorGroups.TRIBE_COLORS) || {}
             highlights.character = colorService.getCustomColorsByGroup(colorGroups.PLAYER_COLORS) || {}
-
             drawLoadedVillages()
         },
-        onSelectedVillageChange: function () {
+        onSelectedVillageChange: function() {
             const old = {
                 id: selectedVillage.getId(),
                 x: selectedVillage.getX(),
                 y: selectedVillage.getY()
             }
-
             selectedVillage = $player.getSelectedVillage()
-
             drawVillages([{
                 character_id: $player.getId(),
                 id: old.id,
@@ -16381,102 +20474,73 @@ define('two/minimap', [
             }])
         }
     }
-
     let minimap = {}
-
-    /**
-     * @param {Object} item - Highlight item.
-     * @param {String} item.type - player or tribe
-     * @param {String} item.id - player/tribe id
-     * @param {String} color - Hex color
-     *
-     * @return {Boolean} true if successfully added
-     */
-    minimap.addHighlight = function (item, color) {
+    minimap.addHighlight = function(item, color) {
         if (!item || !item.type || !item.id || !hasOwn.call(highlights, item.type)) {
             eventQueue.trigger(eventTypeProvider.MINIMAP_HIGHLIGHT_ADD_ERROR_NO_ENTRY)
             return false
         }
-
         if (!rhexcolor.test(color)) {
             eventQueue.trigger(eventTypeProvider.MINIMAP_HIGHLIGHT_ADD_ERROR_INVALID_COLOR)
             return false
         }
-
         highlights[item.type][item.id] = color[0] !== '#' ? '#' + color : color
         const colorGroup = item.type === 'character' ? colorGroups.PLAYER_COLORS : colorGroups.TRIBE_COLORS
         colorService.setCustomColorsByGroup(colorGroup, highlights[item.type])
         $rootScope.$broadcast(eventTypeProvider.GROUPS_VILLAGES_CHANGED)
-
         drawLoadedVillages()
-
         return true
     }
-
-    minimap.removeHighlight = function (type, itemId) {
+    minimap.removeHighlight = function(type, itemId) {
         if (typeof itemId === 'undefined' || !hasOwn.call(highlights, type)) {
             return false
         }
-
         if (!hasOwn.call(highlights[type], itemId)) {
             return false
         }
-
         delete highlights[type][itemId]
         const colorGroup = type === 'character' ? colorGroups.PLAYER_COLORS : colorGroups.TRIBE_COLORS
         colorService.setCustomColorsByGroup(colorGroup, highlights[type])
         $rootScope.$broadcast(eventTypeProvider.GROUPS_VILLAGES_CHANGED)
         drawLoadedVillages()
-
         return true
     }
-
-    minimap.getHighlight = function (type, item) {
+    minimap.getHighlight = function(type, item) {
         if (hasOwn.call(highlights[type], item)) {
             return highlights[type][item]
         } else {
             return false
         }
     }
-
-    minimap.getHighlights = function () {
+    minimap.getHighlights = function() {
         return highlights
     }
-
-    minimap.eachHighlight = function (callback) {
+    minimap.eachHighlight = function(callback) {
         for (let type in highlights) {
             for (let id in highlights[type]) {
                 callback(type, id, highlights[type][id])
             }
         }
     }
-
-    minimap.setViewport = function (element) {
+    minimap.setViewport = function(element) {
         $viewport = element
         $viewport.style.background = minimapSettings[SETTINGS.COLOR_BACKGROUND]
         viewportContext = $viewport.getContext('2d')
     }
-
-    minimap.setViewportRef = function (element) {
+    minimap.setViewportRef = function(element) {
         $viewportRef = element
         viewportRefContext = $viewportRef.getContext('2d')
     }
-
-    minimap.setCurrentPosition = function (x, y) {
+    minimap.setCurrentPosition = function(x, y) {
         currentPosition.x = (x * villageBlock)
         currentPosition.y = (y * villageBlock)
         currentCoords.x = Math.ceil(x)
         currentCoords.y = Math.ceil(y)
     }
-
-    /**
-     * @return {Array}
-     */
-    minimap.getMapPosition = function () {
+    minimap.getMapPosition = function() {
         if (!$map.width || !$map.height) {
             return false
         }
-
         let view = mapData.getMap().engine.getView()
         let converted = convert([
             -view.x,
@@ -16484,75 +20548,60 @@ define('two/minimap', [
             $map.width / 2,
             $map.height / 2
         ], view.z)
-
         return {
             x: converted[0] + converted[2],
             y: converted[1] + converted[3]
         }
     }
-
-    minimap.getSettings = function () {
+    minimap.getSettings = function() {
         return settings
     }
-
-    minimap.drawMinimap = function () {
+    minimap.drawMinimap = function() {
         if (firstDraw) {
             firstDraw = false
         }
-
         $viewport.style.background = minimapSettings[SETTINGS.COLOR_BACKGROUND]
         viewportCacheContext.clearRect(0, 0, $viewportCache.width, $viewportCache.height)
-
-        ready(function () {
+        ready(function() {
             drawBorders()
             drawLoadedVillages()
         }, 'minimap_data')
     }
-
-    minimap.enableRendering = function enableRendering () {
+    minimap.enableRendering = function enableRendering() {
         renderingEnabled = true
     }
-
-    minimap.disableRendering = function disableRendering () {
+    minimap.disableRendering = function disableRendering() {
         renderingEnabled = false
     }
-
-    minimap.isFirstDraw = function () {
+    minimap.isFirstDraw = function() {
         return !!firstDraw
     }
-
-    minimap.init = function () {
+    minimap.init = function() {
         minimap.initialized = true
         $viewportCache = document.createElement('canvas')
         viewportCacheContext = $viewportCache.getContext('2d')
         highlightSprite = spriteFactory.make('hover')
-        
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function(changes, updates) {
             minimapSettings = settings.getAll()
             updateMinimapValues()
-
             if (updates[UPDATES.MAP_POSITION]) {
                 minimap.setCurrentPosition(currentCoords.x, currentCoords.y)
             }
-
             if (updates[UPDATES.MINIMAP]) {
                 minimap.drawMinimap()
             }
         })
-
         minimapSettings = settings.getAll()
         highlights.tribe = colorService.getCustomColorsByGroup(colorGroups.TRIBE_COLORS) || {}
         highlights.character = colorService.getCustomColorsByGroup(colorGroups.PLAYER_COLORS) || {}
         updateMinimapValues()
     }
-
-    minimap.run = function () {
-        ready(function () {
+    minimap.run = function() {
+        ready(function() {
             $mapWrapper = document.getElementById('map')
             $map = document.getElementById('main-canvas')
             $player = modelDataService.getSelectedCharacter()
@@ -16560,18 +20609,14 @@ define('two/minimap', [
             playerId = $player.getId()
             playerTribeId = $player.getTribeId()
             villageColors = $player.getVillagesColors()
-
             highlightSprite.alpha = 0
             mapState.graph.layers.effects.push(highlightSprite)
-
             setViewportSize()
-
             selectedVillage = $player.getSelectedVillage()
             currentCoords.x = selectedVillage.getX()
             currentCoords.y = selectedVillage.getY()
             currentPosition.x = selectedVillage.getX() * villageBlock
             currentPosition.y = selectedVillage.getY() * villageBlock
-
             window.addEventListener('resize', setViewportSize, false)
             $viewportRef.addEventListener('mousedown', eventHandlers.onViewportRefMouseDown)
             $viewportRef.addEventListener('mouseup', eventHandlers.onViewportRefMouseUp)
@@ -16579,23 +20624,19 @@ define('two/minimap', [
             $viewportRef.addEventListener('mouseleave', eventHandlers.onViewportRefMouseLeave)
             $viewportRef.addEventListener('click', eventHandlers.onViewportRefMouseClick)
             $viewportRef.addEventListener('contextmenu', eventHandlers.onViewportRefMouseContext)
-
-            twoMapData.load(function () {
+            twoMapData.load(function() {
                 allVillages = twoMapData.getVillages()
                 cacheVillages(allVillages)
                 setBoundaries()
                 renderStep()
-
                 $rootScope.$on(eventTypeProvider.VILLAGE_SELECTED_CHANGED, eventHandlers.onSelectedVillageChange)
                 $rootScope.$on(eventTypeProvider.TRIBE_RELATION_CHANGED, drawLoadedVillages)
                 $rootScope.$on(eventTypeProvider.GROUPS_VILLAGES_CHANGED, eventHandlers.onHighlightChange)
             })
         }, ['initial_village', 'tribe_relations'])
     }
-
     return minimap
 })
-
 define('two/minimap/events', [], function () {
     angular.extend(eventTypeProvider, {
         MINIMAP_HIGHLIGHT_ADD_ERROR_EXISTS: 'minimap_highlight_add_error_exists',
@@ -16610,7 +20651,6 @@ define('two/minimap/events', [], function () {
         MINIMAP_AREA_LOADED: 'minimap_area_loaded'
     })
 })
-
 define('two/minimap/ui', [
     'two/ui',
     'two/minimap',
@@ -16625,7 +20665,7 @@ define('two/minimap/ui', [
     'struct/MapData',
     'cdn',
     'conf/colors'
-], function (
+], function(
     interfaceOverflow,
     minimap,
     ACTION_TYPES,
@@ -16663,101 +20703,82 @@ define('two/minimap/ui', [
         SETTINGS: 'settings'
     }
     const DEFAULT_TAB = TAB_TYPES.MINIMAP
-
-    const selectTab = function (tab) {
+    const selectTab = function(tab) {
         $scope.selectedTab = tab
-
         if (tab === TAB_TYPES.MINIMAP) {
             minimap.enableRendering()
         } else {
             minimap.disableRendering()
         }
     }
-
-    const appendCanvas = function () {
+    const appendCanvas = function() {
         $minimapContainer = document.querySelector('#two-minimap .minimap-container')
         $minimapContainer.appendChild($minimapCanvas)
         $minimapContainer.appendChild($viewportRefCanvas)
     }
-
-    const getTribeData = function (data, callback) {
+    const getTribeData = function(data, callback) {
         socketService.emit(routeProvider.TRIBE_GET_PROFILE, {
             tribe_id: data.id
         }, callback)
     }
-    
-    const getCharacterData = function (data, callback) {
+    const getCharacterData = function(data, callback) {
         socketService.emit(routeProvider.CHAR_GET_PROFILE, {
             character_id: data.id
         }, callback)
     }
-
-    const updateHighlightNames = function () {
-        Object.keys($scope.highlights.character).forEach(function (id) {
+    const updateHighlightNames = function() {
+        Object.keys($scope.highlights.character).forEach(function(id) {
             if (id in highlightNames.character) {
                 return
             }
-
             getCharacterData({
                 id: id
-            }, function (data) {
+            }, function(data) {
                 highlightNames.character[id] = data.character_name
             })
         })
-
-        Object.keys($scope.highlights.tribe).forEach(function (id) {
+        Object.keys($scope.highlights.tribe).forEach(function(id) {
             if (id in highlightNames.tribe) {
                 return
             }
-
             getTribeData({
                 id: id
-            }, function (data) {
+            }, function(data) {
                 highlightNames.tribe[id] = data.name
             })
         })
     }
-
-    const loadVillageData = function (x, y) {
-        return new Promise(function (resolve) {
+    const loadVillageData = function(x, y) {
+        return new Promise(function(resolve) {
             let village = mapData.getTownAt(x, y)
-
             if (village) {
                 return resolve(village)
             }
-
-            mapData.loadTownDataAsync(x, y, 1, 1, function (village) {
+            mapData.loadTownDataAsync(x, y, 1, 1, function(village) {
                 resolve(village)
             })
         })
     }
-
-    const genVillageHash = function (x, y) {
+    const genVillageHash = function(x, y) {
         return String(x) + String(y)
     }
-
-    const showTooltip = function (event, data) {
+    const showTooltip = function(event, data) {
         if (!tooltipWrapper) {
             return
         }
-
         let villageHash = genVillageHash(data.x, data.y)
         currentVillageHash = villageHash
         tooltipQueue[villageHash] = true
         allowTooltip = true
-
-        loadVillageData(data.x, data.y).then(function (village) {
+        loadVillageData(data.x, data.y).then(function(village) {
             if (!tooltipQueue[genVillageHash(village.x, village.y)]) {
                 return
             }
-
             if (!allowTooltip) {
                 return
             }
-
             windowWrapper.appendChild(tooltipWrapper)
             tooltipWrapper.classList.remove('ng-hide')
-
             MapController.tt.name = village.name
             MapController.tt.x = village.x
             MapController.tt.y = village.y
@@ -16773,29 +20794,23 @@ define('two/minimap/ui', [
             MapController.tt.position.x = data.event.pageX + 50
             MapController.tt.position.y = data.event.pageY + 50
             MapController.tt.visible = true
-
             const tooltipOffset = tooltipWrapper.getBoundingClientRect()
             const windowOffset = windowWrapper.getBoundingClientRect()
             const tooltipWrapperSpacerX = tooltipOffset.width + 50
             const tooltipWrapperSpacerY = tooltipOffset.height + 50
-
             const onTop = MapController.tt.position.y + tooltipWrapperSpacerY > windowOffset.top + windowOffset.height
             const onLeft = MapController.tt.position.x + tooltipWrapperSpacerX > windowOffset.width
-
             if (onTop) {
                 MapController.tt.position.y -= 50
             }
-
             tooltipWrapper.classList.toggle('left', onLeft)
             tooltipWrapper.classList.toggle('top', onTop)
         })
     }
-
-    const hideTooltip = function (event, coords) {
+    const hideTooltip = function(event, coords) {
         if (!tooltipWrapper) {
             return
         }
-
         let villageHash = coords ? genVillageHash(coords) : currentVillageHash
         tooltipQueue[villageHash] = false
         allowTooltip = false
@@ -16803,40 +20818,33 @@ define('two/minimap/ui', [
         tooltipWrapper.classList.add('ng-hide')
         mapWrapper.appendChild(tooltipWrapper)
     }
-
-    const openColorPalette = function (inputType, colorGroup, itemId) {
+    const openColorPalette = function(inputType, colorGroup, itemId) {
         let modalScope = $rootScope.$new()
         let selectedColor
         let hideReset = true
         let settingId
-
         modalScope.colorPalettes = colors.palette
-
         if (inputType === 'setting') {
             settingId = colorGroup
             selectedColor = settings.get(settingId)
             hideReset = false
-
-            modalScope.submit = function () {
+            modalScope.submit = function() {
                 $scope.settings[settingId] = '#' + modalScope.selectedColor
                 modalScope.closeWindow()
             }
-
-            modalScope.reset = function () {
+            modalScope.reset = function() {
                 $scope.settings[settingId] = settings.getDefault(settingId)
                 modalScope.closeWindow()
             }
         } else if (inputType === 'add_custom_highlight') {
             selectedColor = $scope.addHighlightColor
-
-            modalScope.submit = function () {
+            modalScope.submit = function() {
                 $scope.addHighlightColor = '#' + modalScope.selectedColor
                 modalScope.closeWindow()
             }
         } else if (inputType === 'edit_custom_highlight') {
             selectedColor = $scope.highlights[colorGroup][itemId]
-
-            modalScope.submit = function () {
+            modalScope.submit = function() {
                 minimap.addHighlight({
                     id: itemId,
                     type: colorGroup
@@ -16844,136 +20852,111 @@ define('two/minimap/ui', [
                 modalScope.closeWindow()
             }
         }
-
         modalScope.selectedColor = selectedColor.replace('#', '')
         modalScope.hasCustomColors = true
         modalScope.hideReset = hideReset
-
-        modalScope.finishAction = function ($event, color) {
+        modalScope.finishAction = function($event, color) {
             modalScope.selectedColor = color
         }
-
         windowManagerService.getModal('modal_color_palette', modalScope)
     }
-
-    const addCustomHighlight = function () {
+    const addCustomHighlight = function() {
         minimap.addHighlight($scope.selectedHighlight, $scope.addHighlightColor)
     }
-
-    const saveSettings = function () {
+    const saveSettings = function() {
         settings.setAll(settings.decode($scope.settings))
         utils.notif('success', $filter('i18n')('settings_saved', $rootScope.loc.ale, 'minimap'))
     }
-
-    const resetSettings = function () {
+    const resetSettings = function() {
         let modalScope = $rootScope.$new()
-
         modalScope.title = $filter('i18n')('reset_confirm_title', $rootScope.loc.ale, 'minimap')
         modalScope.text = $filter('i18n')('reset_confirm_text', $rootScope.loc.ale, 'minimap')
         modalScope.submitText = $filter('i18n')('reset', $rootScope.loc.ale, 'common')
         modalScope.cancelText = $filter('i18n')('cancel', $rootScope.loc.ale, 'common')
         modalScope.showQuestionMarkIcon = true
         modalScope.switchColors = true
-
         modalScope.submit = function submit() {
             settings.resetAll()
             utils.notif('success', $filter('i18n')('settings_reset', $rootScope.loc.ale, 'minimap'))
             modalScope.closeWindow()
         }
-
         modalScope.cancel = function cancel() {
             modalScope.closeWindow()
         }
-
         windowManagerService.getModal('modal_attention', modalScope)
     }
-
-    const highlightsCount = function () {
+    const highlightsCount = function() {
         const character = Object.keys($scope.highlights.character).length
         const tribe = Object.keys($scope.highlights.tribe).length
-        
         return character + tribe
     }
-
-    const openProfile = function (type, itemId) {
-        const handler = type === 'character'
-            ? windowDisplayService.openCharacterProfile
-            : windowDisplayService.openTribeProfile
-
+    const openProfile = function(type, itemId) {
+        const handler = type === 'character' ?
+            windowDisplayService.openCharacterProfile :
+            windowDisplayService.openTribeProfile
         handler(itemId)
     }
-
     const eventHandlers = {
-        addHighlightAutoCompleteSelect: function (item) {
+        addHighlightAutoCompleteSelect: function(item) {
             $scope.selectedHighlight = {
                 id: item.id,
                 type: item.type,
                 name: item.name
             }
         },
-        highlightUpdate: function () {
+        highlightUpdate: function() {
             updateHighlightNames()
         },
-        highlightAddErrorExists: function () {
+        highlightAddErrorExists: function() {
             utils.notif('error', $filter('i18n')('highlight_add_error_exists', $rootScope.loc.ale, 'minimap'))
         },
-        highlightAddErrorNoEntry: function () {
+        highlightAddErrorNoEntry: function() {
             utils.notif('error', $filter('i18n')('highlight_add_error_no_entry', $rootScope.loc.ale, 'minimap'))
         },
-        highlightAddErrorInvalidColor: function () {
+        highlightAddErrorInvalidColor: function() {
             utils.notif('error', $filter('i18n')('highlight_add_error_invalid_color', $rootScope.loc.ale, 'minimap'))
         },
-        onMouseLeaveMinimap: function () {
+        onMouseLeaveMinimap: function() {
             hideTooltip()
-
             $viewportRefCanvas.dispatchEvent(new MouseEvent('mouseup', {
                 view: window,
                 bubbles: true,
                 cancelable: true
             }))
         },
-        onMouseMoveMinimap: function () {
+        onMouseMoveMinimap: function() {
             hideTooltip()
-
             $viewportRefCanvas.style.cursor = 'url(' + cdn.getPath('/img/cursor/grab_pushed.png') + '), move'
         },
-        onMouseStopMoveMinimap: function () {
+        onMouseStopMoveMinimap: function() {
             $viewportRefCanvas.style.cursor = ''
         }
     }
-
-    const init = function () {
+    const init = function() {
         settings = minimap.getSettings()
         MapController = transferredSharedDataService.getSharedData('MapController')
         $minimapCanvas = document.createElement('canvas')
         $minimapCanvas.className = 'minimap'
         $viewportRefCanvas = document.createElement('canvas')
         $viewportRefCanvas.className = 'cross'
-
         minimap.setViewport($minimapCanvas)
         minimap.setViewportRef($viewportRefCanvas)
-
         tooltipWrapper = document.querySelector('#map-tooltip')
         windowWrapper = document.querySelector('#wrapper')
         mapWrapper = document.querySelector('#map')
-
-        $button = interfaceOverflow.addMenuButton4('Minimapa', 30)
-        $button.addEventListener('click', function () {
+        $button = interfaceOverflow.addMenuButton4('Minimapa', 30, $filter('i18n')('general.description', $rootScope.loc.ale, 'minimap'))
+        $button.addEventListener('click', function() {
             const current = minimap.getMapPosition()
-
             if (!current) {
                 return false
             }
-
             buildWindow()
             minimap.setCurrentPosition(current.x, current.y)
         })
-
         interfaceOverflow.addTemplate('twoverflow_minimap_window', `<div id=\"two-minimap\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'minimap' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.MINIMAP)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.MINIMAP}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.MINIMAP}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.MINIMAP}\">{{ 'minimap' | i18n:loc.ale:'minimap' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.HIGHLIGHTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.HIGHLIGHTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.HIGHLIGHTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.HIGHLIGHTS}\">{{ 'highlights' | i18n:loc.ale:'minimap' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ 'settings' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div ng-show=\"selectedTab === TAB_TYPES.MINIMAP\" class=\"minimap-container\"></div><div class=\"box-paper\" ng-class=\"{'footer': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab == TAB_TYPES.HIGHLIGHTS\"><h5 class=\"twx-section\">{{ 'add' | i18n:loc.ale:'minimap' }}</h5><table class=\"tbl-border-light tbl-striped add-highlight\"><col width=\"40%\"><col><col width=\"4%\"><col width=\"4%\"><tr><td><div auto-complete=\"autoComplete\"></div><td class=\"text-center\"><span ng-show=\"selectedHighlight\" class=\"icon-26x26-rte-{{ selectedHighlight.type }}\"></span> {{ selectedHighlight.name }}<td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('add_custom_highlight')\" ng-style=\"{'background-color': addHighlightColor }\" tooltip=\"\" tooltip-content=\"{{ 'tooltip_pick_color' | i18n:loc.ale:'minimap' }}\"></div><td><span class=\"btn-orange icon-26x26-plus\" ng-click=\"addCustomHighlight()\" tooltip=\"\" tooltip-content=\"{{ 'add' | i18n:loc.ale:'minimap' }}\"></span></table><h5 class=\"twx-section\">{{ TAB_TYPES.HIGHLIGHTS | i18n:loc.ale:'minimap' }}</h5><p class=\"text-center\" ng-show=\"!highlightsCount()\">{{ 'no_highlights' | i18n:loc.ale:'minimap' }}<table class=\"highlights tbl-border-light tbl-striped\" ng-show=\"highlightsCount()\"><col width=\"4%\"><col><col width=\"4%\"><col width=\"4%\"><tr ng-repeat=\"(id, color) in highlights.character\"><td><span class=\"icon-26x26-rte-character\"></span><td><span class=\"open-profile\" ng-click=\"openProfile('character', id)\">{{ highlightNames.character[id] }}</span><td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('edit_custom_highlight', 'character', id)\" ng-style=\"{'background-color': color }\"></div><td><a class=\"size-26x26 btn-red icon-20x20-close\" ng-click=\"removeHighlight('character', id)\" tooltip=\"\" tooltip-content=\"{{ 'remove' | i18n:loc.ale:'minimap' }}\"></a><tr ng-repeat=\"(id, color) in highlights.tribe\"><td><span class=\"icon-26x26-rte-tribe\"></span><td><span class=\"open-profile\" ng-click=\"openProfile('tribe', id)\">{{ highlightNames.tribe[id] }}</span><td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('edit_custom_highlight', 'tribe', id)\" ng-style=\"{'background-color': color }\"></div><td><a class=\"size-26x26 btn-red icon-20x20-close\" ng-click=\"removeHighlight('tribe', id)\" tooltip=\"\" tooltip-content=\"{{ 'remove' | i18n:loc.ale:'minimap' }}\"></a></table></div><div class=\"settings\" ng-show=\"selectedTab == TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-striped\"><col width=\"60%\"><col><col width=\"56px\"><tr><th colspan=\"3\">{{ 'misc' | i18n:loc.ale:'minimap' }}<tr><td>{{ 'settings_map_size' | i18n:loc.ale:'minimap' }}<td colspan=\"3\"><div select=\"\" list=\"mapSizes\" selected=\"settings[SETTINGS.MAP_SIZE]\" drop-down=\"true\"></div><tr><td>{{ 'settings_right_click_action' | i18n:loc.ale:'minimap' }}<td colspan=\"3\"><div select=\"\" list=\"actionTypes\" selected=\"settings[SETTINGS.RIGHT_CLICK_ACTION]\" drop-down=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_show_view_reference' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.SHOW_VIEW_REFERENCE]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_show_continent_demarcations' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.SHOW_CONTINENT_DEMARCATIONS]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_show_province_demarcations' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.SHOW_PROVINCE_DEMARCATIONS]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_show_barbarians' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.SHOW_BARBARIANS]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_show_only_custom_highlights' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.SHOW_ONLY_CUSTOM_HIGHLIGHTS]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_highlight_own' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.HIGHLIGHT_OWN]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_highlight_selected' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.HIGHLIGHT_SELECTED]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div><tr><td colspan=\"2\">{{ 'settings_highlight_diplomacy' | i18n:loc.ale:'minimap' }}<td><div switch-slider=\"\" value=\"settings[SETTINGS.HIGHLIGHT_DIPLOMACY]\" vertical=\"false\" size=\"'56x28'\" enabled=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"29px\"><tr><th colspan=\"2\">{{ 'colors_misc' | i18n:loc.ale:'minimap' }}<tr><td>{{ 'settings_colors_background' | i18n:loc.ale:'minimap' }}<td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('setting', SETTINGS.COLOR_BACKGROUND)\" ng-style=\"{'background-color': settings[SETTINGS.COLOR_BACKGROUND] }\"></div><tr><td>{{ 'settings_colors_province' | i18n:loc.ale:'minimap' }}<td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('setting', SETTINGS.COLOR_PROVINCE)\" ng-style=\"{'background-color': settings[SETTINGS.COLOR_PROVINCE] }\"></div><tr><td>{{ 'settings_colors_continent' | i18n:loc.ale:'minimap' }}<td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('setting', SETTINGS.COLOR_CONTINENT)\" ng-style=\"{'background-color': settings[SETTINGS.COLOR_CONTINENT] }\"></div><tr><td>{{ 'settings_colors_view_reference' | i18n:loc.ale:'minimap' }}<td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('setting', SETTINGS.COLOR_VIEW_REFERENCE)\" ng-style=\"{'background-color': settings[SETTINGS.COLOR_VIEW_REFERENCE] }\"></div><tr><td>{{ 'settings_colors_quick_highlight' | i18n:loc.ale:'minimap' }}<td><div class=\"color-container box-border-dark\" ng-click=\"openColorPalette('setting', SETTINGS.COLOR_QUICK_HIGHLIGHT)\" ng-style=\"{'background-color': settings[SETTINGS.COLOR_QUICK_HIGHLIGHT] }\"></div></table><p class=\"text-center\">{{ 'default_village_colors_info'| i18n:loc.ale:'minimap' }}</div></div></div></div><footer class=\"win-foot\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"resetSettings()\">{{ 'reset' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-border btn-green\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#map-tooltip{z-index:1000}#two-minimap .minimap{position:absolute;left:0;top:38px;z-index:5}#two-minimap .cross{position:absolute;left:0;top:38px;z-index:6}#two-minimap .box-paper:not(.footer) .scroll-wrap{margin-bottom:40px}#two-minimap span.select-wrapper{width:100%}#two-minimap .add-highlight input{width:100%}#two-minimap .open-profile{font-weight:500;color:#5d3b17;padding:0 5px}#two-minimap .open-profile:hover{text-shadow:-1px 1px 0 #e0cc97}#two-minimap .settings td:first-child{padding:0 5px}#two-minimap .highlights .color-container{margin:1px}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
@@ -16995,8 +20978,6 @@ define('two/minimap/ui', [
             placeholder: $filter('i18n')('placeholder_search', $rootScope.loc.ale, 'minimap'),
             onEnter: eventHandlers.addHighlightAutoCompleteSelect
         }
-
-        // functions
         $scope.selectTab = selectTab
         $scope.openColorPalette = openColorPalette
         $scope.addCustomHighlight = addCustomHighlight
@@ -17005,15 +20986,12 @@ define('two/minimap/ui', [
         $scope.resetSettings = resetSettings
         $scope.highlightsCount = highlightsCount
         $scope.openProfile = openProfile
-
         settings.injectScope($scope, {
             textObject: 'minimap'
         })
-
-        let eventScope = new EventScope('twoverflow_minimap_window', function onClose () {
+        let eventScope = new EventScope('twoverflow_minimap_window', function onClose() {
             minimap.disableRendering()
         })
-
         eventScope.register(eventTypeProvider.GROUPS_VILLAGES_CHANGED, eventHandlers.highlightUpdate, true)
         eventScope.register(eventTypeProvider.MINIMAP_HIGHLIGHT_ADD_ERROR_EXISTS, eventHandlers.highlightAddErrorExists)
         eventScope.register(eventTypeProvider.MINIMAP_HIGHLIGHT_ADD_ERROR_NO_ENTRY, eventHandlers.highlightAddErrorNoEntry)
@@ -17023,21 +21001,17 @@ define('two/minimap/ui', [
         eventScope.register(eventTypeProvider.MINIMAP_MOUSE_LEAVE, eventHandlers.onMouseLeaveMinimap)
         eventScope.register(eventTypeProvider.MINIMAP_START_MOVE, eventHandlers.onMouseMoveMinimap)
         eventScope.register(eventTypeProvider.MINIMAP_STOP_MOVE, eventHandlers.onMouseStopMoveMinimap)
-
         windowManagerService.getScreenWithInjectedScope('!twoverflow_minimap_window', $scope)
         updateHighlightNames()
         appendCanvas()
         minimap.enableRendering()
-
         if (minimap.isFirstDraw()) {
             minimap.drawMinimap()
         }
     }
-
     return init
 })
-
-define('two/minimap/settings', [], function () {
+define('two/minimap/settings', [], function() {
     return {
         MAP_SIZE: 'map_size',
         RIGHT_CLICK_ACTION: 'right_click_action',
@@ -17058,20 +21032,18 @@ define('two/minimap/settings', [], function () {
         COLOR_VIEW_REFERENCE: 'color_view_reference'
     }
 })
-
-define('two/minimap/settings/updates', function () {
+define('two/minimap/settings/updates', function() {
     return {
         MINIMAP: 'minimap',
         MAP_POSITION: 'map_position'
     }
 })
-
 define('two/minimap/settings/map', [
     'two/minimap/settings',
     'two/minimap/types/actions',
     'two/minimap/types/mapSizes',
     'two/minimap/settings/updates'
-], function (
+], function(
     SETTINGS,
     ACTION_TYPES,
     MAP_SIZES,
@@ -17196,15 +21168,13 @@ define('two/minimap/settings/map', [
         }
     }
 })
-
-define('two/minimap/types/actions', [], function () {
+define('two/minimap/types/actions', [], function() {
     return {
         HIGHLIGHT_PLAYER: 'highlight_player',
         HIGHLIGHT_TRIBE: 'highlight_tribe'
     }
 })
-
-define('two/minimap/types/mapSizes', [], function () {
+define('two/minimap/types/mapSizes', [], function() {
     return {
         VERY_SMALL: 'very_small',
         SMALL: 'small',
@@ -17212,7 +21182,6 @@ define('two/minimap/types/mapSizes', [], function () {
         VERY_BIG: 'very_big'
     }
 })
-
 require([
     'two/ready',
     'two/minimap',
@@ -17222,7 +21191,7 @@ require([
     'two/minimap/settings',
     'two/minimap/settings/updates',
     'two/minimap/settings/map'
-], function (
+], function(
     ready,
     minimap,
     minimapInterface
@@ -17230,14 +21199,12 @@ require([
     if (minimap.initialized) {
         return false
     }
-
-    ready(function () {
+    ready(function() {
         minimap.init()
         minimapInterface()
         minimap.run()
     }, 'map')
 })
-
 define('two/mintHelper', [
     'queues/EventQueue'
 ], function(
@@ -22931,8 +26898,7 @@ define('two/tutorialHelper', [
     eventQueue
 ) {
     let initialized = false
-    let running = false
-	
+    let running = false	
     let tutorialHelper = {}
     tutorialHelper.init = function() {
         initialized = true
@@ -22964,18 +26930,16 @@ define('two/tutorialHelper/ui', [
     'two/tutorialHelper',
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     interfaceOverflow,
     tutorialHelper,
     utils,
     eventQueue
 ) {
     let $button
-
-    const init = function () {
+    const init = function() {
         $button = interfaceOverflow.addMenuButton2('Giermek', 60, $filter('i18n')('description', $rootScope.loc.ale, 'tutorial_helper'))
-
-        $button.addEventListener('click', function () {
+        $button.addEventListener('click', function() {
             if (tutorialHelper.isRunning()) {
                 tutorialHelper.stop()
                 utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'tutorial_helper'))
@@ -22984,24 +26948,19 @@ define('two/tutorialHelper/ui', [
                 utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'tutorial_helper'))
             }
         })
-
-        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function () {
+        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function() {
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
         })
-
-        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function () {
+        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function() {
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
         })
-
         if (tutorialHelper.isRunning()) {
             eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STARTED)
         }
-
         return opener
     }
-
     return init
 })
 require([
@@ -23021,23 +26980,19 @@ require([
     const STORAGE_KEYS = {
         ACTIVE: 'tutorial_helper_active'
     }
-	
     if (tutorialHelper.isInitialized()) {
         return false
     }
     ready(function() {
         tutorialHelper.init()
         tutorialHelperInterface()
-
         ready(function() {
             if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
                 tutorialHelper.start()
             }
-
             eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, true)
             })
-
             eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
