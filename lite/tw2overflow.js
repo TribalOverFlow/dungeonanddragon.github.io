@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 24 Nov 2020 19:25:42 GMT
+ * Tue, 24 Nov 2020 19:41:55 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6736,55 +6736,28 @@ define('two/battleCalculator', [
         var def_arc = [10, 30, 10, 60, 30, 50, 180, 20, 100, 150, 100, 200, 50]
         var attack = [10, 25, 45, 25, 130, 150, 150, 2, 100, 150, 30, 30, 300]
         var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
-        const faithAttacker = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_A]
-        const faithDefender = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_D]
-        const nightBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_NIGHT_BONUS]
-        const leaderBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_LEADER]
-        const medicBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_MEDIC]
-        const medicSkillModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_MEDIC]
-        const skillAttackModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]
-        const wallModifier = battleCalculatorSettings[SETTINGS.BATTLE_WALL]
-        const skillWallsModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_IRON_WALLS]
-        const skillCliniqueModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_CLINIQUE]
-        const hospitalBedsAvailable = battleCalculatorSettings[SETTINGS.BATTLE_HOSPITAL]
-        const catTarget = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_TARGET]
-        const catapultTarget = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_TARGET]
-        const itemDeff1 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D1]
-        const itemDeff2 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D2]
-        const itemDeff3 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D3]
-        const itemOff = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_A]
-        const levelDeff1 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D1]
-        const levelDeff2 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D2]
-        const levelDeff3 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D3]
-        const levelOff = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_A]
-        const archerA = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_A]
-        const archerD = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_D]
-        const axeA = battleCalculatorSettings[SETTINGS.BATTLE_AXE_A]
-        const axeD = battleCalculatorSettings[SETTINGS.BATTLE_AXE_D]
-        const berserkerA = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_A]
-        const berserkerD = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_D]
-        const catapultA = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_A]
-        const catapultD = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_D]
-        const hcA = battleCalculatorSettings[SETTINGS.BATTLE_HC_A]
-        const hcD = battleCalculatorSettings[SETTINGS.BATTLE_HC_D]
-        const knightA = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_A]
-        const knightD = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_D]
-        const lcA = battleCalculatorSettings[SETTINGS.BATTLE_LC_A]
-        const lcD = battleCalculatorSettings[SETTINGS.BATTLE_LC_D]
-        const maA = battleCalculatorSettings[SETTINGS.BATTLE_MA_A]
-        const maD = battleCalculatorSettings[SETTINGS.BATTLE_MA_D]
-        const ramA = battleCalculatorSettings[SETTINGS.BATTLE_RAM_A]
-        const ramD = battleCalculatorSettings[SETTINGS.BATTLE_RAM_D]
-        const snobA = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_A]
-        const snobD = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_D]
-        const spearA = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_A]
-        const spearD = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_D]
-        const swordA = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_A]
-        const swordD = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_D]
-        const trebuchetA = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_A]
-        const trebuchetD = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_D]
-        const morale = battleCalculatorSettings[SETTINGS.BATTLE_MORALE]
-        const luck = battleCalculatorSettings[SETTINGS.BATTLE_LUCK]
+        var faithAttacker = 0
+        var faithDefender = 0
+        var nightBonusModifier = 0
+        var leaderBonusModifier = 0
+        var medicBonusModifier = 0
+        var medicSkillModifier = 0
+        var skillAttackModifier = 0
+        var wallModifier = 0
+        var skillWallsModifier = 0
+        var skillCliniqueModifier = 0
+        var hospitalBedsAvailable = 0
+        var catapultTarget = 0
+        var itemDeff1 = 0
+        var itemDeff2 = 0
+        var itemDeff3 = 0
+        var itemOff = 0
+        var levelDeff1 = 0
+        var levelDeff2 = 0
+        var levelDeff3 = 0
+        var levelOff = 0
+        var morale = 0
+        var luck = 0
         var archerA_lossesRound1 = 0
         var archerA_lossesRound2 = 0
         var archerA_lossesRound3 = 0
@@ -7253,8 +7226,61 @@ define('two/battleCalculator', [
         var largestGroupD = 0
         var attFaithBonus = 0
         var defFaithBonus = 0
-        console.log(catTarget)
 
+        function getDataBattle() {
+            faithAttacker = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_A]
+            faithDefender = battleCalculatorSettings[SETTINGS.BATTLE_CHURCH_D]
+            nightBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_NIGHT_BONUS]
+            leaderBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_LEADER]
+            medicBonusModifier = battleCalculatorSettings[SETTINGS.BATTLE_OFFICER_MEDIC]
+            medicSkillModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_MEDIC]
+            skillAttackModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]
+            wallModifier = battleCalculatorSettings[SETTINGS.BATTLE_WALL]
+            skillWallsModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_IRON_WALLS]
+            skillCliniqueModifier = battleCalculatorSettings[SETTINGS.BATTLE_SKILL_CLINIQUE]
+            hospitalBedsAvailable = battleCalculatorSettings[SETTINGS.BATTLE_HOSPITAL]
+            catTarget = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_TARGET]
+            catapultTarget = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_TARGET]
+            itemDeff1 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D1]
+            itemDeff2 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D2]
+            itemDeff3 = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_D3]
+            itemOff = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_ITEM_A]
+            levelDeff1 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D1]
+            levelDeff2 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D2]
+            levelDeff3 = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_D3]
+            levelOff = battleCalculatorSettings[SETTINGS.BATTLE_ITEM_LEVEL_A]
+            archerA = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_A]
+            archerD = battleCalculatorSettings[SETTINGS.BATTLE_ARCHER_D]
+            axeA = battleCalculatorSettings[SETTINGS.BATTLE_AXE_A]
+            axeD = battleCalculatorSettings[SETTINGS.BATTLE_AXE_D]
+            berserkerA = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_A]
+            berserkerD = battleCalculatorSettings[SETTINGS.BATTLE_DOPPELSOLDNER_D]
+            catapultA = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_A]
+            catapultD = battleCalculatorSettings[SETTINGS.BATTLE_CATAPULT_D]
+            hcA = battleCalculatorSettings[SETTINGS.BATTLE_HC_A]
+            hcD = battleCalculatorSettings[SETTINGS.BATTLE_HC_D]
+            knightA = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_A]
+            knightD = battleCalculatorSettings[SETTINGS.BATTLE_KNIGHT_D]
+            lcA = battleCalculatorSettings[SETTINGS.BATTLE_LC_A]
+            lcD = battleCalculatorSettings[SETTINGS.BATTLE_LC_D]
+            maA = battleCalculatorSettings[SETTINGS.BATTLE_MA_A]
+            maD = battleCalculatorSettings[SETTINGS.BATTLE_MA_D]
+            ramA = battleCalculatorSettings[SETTINGS.BATTLE_RAM_A]
+            ramD = battleCalculatorSettings[SETTINGS.BATTLE_RAM_D]
+            snobA = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_A]
+            snobD = battleCalculatorSettings[SETTINGS.BATTLE_SNOB_D]
+            spearA = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_A]
+            spearD = battleCalculatorSettings[SETTINGS.BATTLE_SPEAR_D]
+            swordA = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_A]
+            swordD = battleCalculatorSettings[SETTINGS.BATTLE_SWORD_D]
+            trebuchetA = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_A]
+            trebuchetD = battleCalculatorSettings[SETTINGS.BATTLE_TREBUCHET_D]
+            morale = battleCalculatorSettings[SETTINGS.BATTLE_MORALE]
+            luck = battleCalculatorSettings[SETTINGS.BATTLE_LUCK]
+            console.log(catTarget)
+            checkAttackerFaith()
+        }
+		
         function checkAttackerFaith() {
             if (faithAttacker == 'level_1') {
                 attFaithBonus = 100
@@ -10173,7 +10199,7 @@ define('two/battleCalculator', [
             survivedProvisionD = defenderprovision + (lossesprovisionD)
         }
         console.log(survivedProvisionA, survivedProvisionD)
-        checkAttackerFaith()
+        getDataBattle()
     }
     battleCalculator.calculateT = function() {
         const spear = battleCalculatorSettings[SETTINGS.TROOPS_SPEAR]
