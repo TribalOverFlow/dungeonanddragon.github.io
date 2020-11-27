@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 27 Nov 2020 18:24:46 GMT
+ * Fri, 27 Nov 2020 21:15:28 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -673,12 +673,15 @@ define('two/language', [
             "battle": "Bitwa",
             "battle.simulate": "Symuluj",
             "battle.clear": "Wyczyść pola",
+            "battle.add_village_search": "Znajdź wioskę...",
+            "battle.add_origin": "Cel",
             "battle.error_no_map_selected_village": "Nie wybrano wioski na mapie",
             "battle.predamage": "Uszkodzenia wstępne",
             "battle.bonuses": "Modyfikatory bitewne",
             "battle.options": "Szybkie opcje",
             "battle.header": "Kalkulator bitewny",
             "battle.id": "Wioska",
+            "battle.add_insert_preset": "Wybierz szablon",
             "battle.killrateA": "Procent strat",
             "battle.attackBashpoint": "Ofensywne punkty bojowe",
             "battle.strentghAttack": "Siła bojowa off",
@@ -2013,12 +2016,15 @@ define('two/language', [
             "battle": "Bitwa",
             "battle.simulate": "Symuluj",
             "battle.clear": "Wyczyść pola",
+            "battle.add_village_search": "Znajdź wioskę...",
+            "battle.add_origin": "Cel",
             "battle.error_no_map_selected_village": "Nie wybrano wioski na mapie",
             "battle.predamage": "Uszkodzenia wstępne",
             "battle.bonuses": "Modyfikatory bitewne",
             "battle.options": "Szybkie opcje",
             "battle.header": "Kalkulator bitewny",
             "battle.id": "Wioska",
+            "battle.add_insert_preset": "Wybierz szablon",
             "battle.killrateA": "Procent strat",
             "battle.attackBashpoint": "Ofensywne punkty bojowe",
             "battle.strentghAttack": "Siła bojowa off",
@@ -6739,7 +6745,9 @@ define('two/battleCalculator', [
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
-    battleCalculator.getPresetUnits = function() {
+    battleCalculator.getPresetUnits = function() {	
+        presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
+        console.log(presetSelected)
         var Archer = []
         var Axe = []
         var Catapult = []
@@ -11089,7 +11097,6 @@ define('two/battleCalculator/ui', [
         }
         mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
             battleVillage.origin = data
-            console.log(battleVillage.origin)
         })
     }
     const insertSurvived = function() {
@@ -11808,6 +11815,9 @@ define('two/battleCalculator/ui', [
     }
     const init = function() {
         settings = battleCalculator.getSettings()
+        battleVillage = {
+            origin: false
+        }
         $button = interfaceOverflow.addMenuButton4('Kalkulator', 10)
         $button.addEventListener('click', buildWindow)
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
@@ -11826,7 +11836,7 @@ define('two/battleCalculator/ui', [
             type: ['village'],
             placeholder: $filter('i18n')('add_village_search', $rootScope.loc.ale, 'battle_calculator'),
             onEnter: eventHandlers.onAutoCompleteVillage,
-            tooltip: $filter('i18n')('add_target', $rootScope.loc.ale, 'battle_calculator'),
+            tooltip: $filter('i18n')('battle.add_origin', $rootScope.loc.ale, 'battle_calculator'),
             dropDown: true
         }
         $scope.catapulttarget = Settings.encodeList(B_CAT_TARGET, {
@@ -11874,6 +11884,7 @@ define('two/battleCalculator/ui', [
         settings.injectScope($scope)
         eventHandlers.updatePresets()
         $scope.selectTab = selectTab
+        $scope.battleVillage = battleVillage
         $scope.insertSurvived = insertSurvived
         $scope.insertPA = insertPresetAttacker
         $scope.insertPD = insertPresetDefender
