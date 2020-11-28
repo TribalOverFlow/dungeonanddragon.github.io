@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 20:19:17 GMT
+ * Sat, 28 Nov 2020 20:27:19 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6609,6 +6609,7 @@ define('two/battleCalculator', [
     let villageSpear = null
     let villageSword = null
     let villageTrebuchet = null
+    let villageUnits = null
     const STORAGE_KEYS = {
         SETTINGS: 'battle_calculator_settings'
     }
@@ -6779,25 +6780,26 @@ define('two/battleCalculator', [
                     Snob.push(data.presets[i].units.snob)
                 }
             }
+            presetSPEAR = Spear[0]
+            presetSWORD = Sword[0]
+            presetAXE = Axe[0]
+            presetARCHER = Archer[0]
+            presetLC = LC[0]
+            presetMA = MA[0]
+            presetHC = HC[0]
+            presetRAM = Ram[0]
+            presetCATAPULT = Catapult[0]
+            presetSNOB = Snob[0]
+            presetKNIGHT = Knight[0]
+            presetTREBUCHET = Trebuchet[0]
+            presetBERSERKER = Berserker[0]
+            console.log(presetSPEAR, Spear[0])
         })
-        presetSPEAR = Spear[0]
-        presetSWORD = Sword[0]
-        presetAXE = Axe[0]
-        presetARCHER = Archer[0]
-        presetLC = LC[0]
-        presetMA = MA[0]
-        presetHC = HC[0]
-        presetRAM = Ram[0]
-        presetCATAPULT = Catapult[0]
-        presetSNOB = Snob[0]
-        presetKNIGHT = Knight[0]
-        presetTREBUCHET = Trebuchet[0]
-        presetBERSERKER = Berserker[0]
     }
     battleCalculator.getVillageUnits = function() {
-        var village = settings[SETTINGS.BATTLE_VILLAGE_ID]
+        villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
         socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
-            village_id: village
+            village_id: villageUnits
         }, function(data) {
             villageAxe = data.available_units.axe.total
             villageArcher = data.available_units.archer.total
