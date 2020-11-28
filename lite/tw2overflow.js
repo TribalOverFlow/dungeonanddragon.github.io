@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 20:58:36 GMT
+ * Sat, 28 Nov 2020 21:28:02 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -11196,6 +11196,7 @@ define('two/battleCalculator/ui', [
         settings.setAll(settings.decode($scope.settings))
     }
     const insertVillageAttacker = function() {
+        settings.setAll(settings.decode($scope.settings))
         battleCalculator.getVillageUnits()
         $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getVillageSpear()
         $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getVillageSword()
