@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 22:40:29 GMT
+ * Sat, 28 Nov 2020 22:50:41 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6795,54 +6795,24 @@ define('two/battleCalculator', [
         presetBERSERKER = Berserker[0]
     }
     battleCalculator.getVillageUnits = function() {
-        var previllageAxe = 0
-        var previllageArcher = 0
-        var previllageCatapult = 0
-        var previllageBerserker = 0
-        var previllageHC = 0
-        var previllageKnight = 0
-        var previllageLC = 0
-        var previllageMA = 0
-        var previllageRam = 0
-        var previllageSnob = 0
-        var previllageSpear = 0
-        var previllageSword = 0
-        var previllageTrebuchet = 0
         villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
-
-        function getUnits() {
-            socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
-                village_id: villageUnits
-            }, function(data) {
-                previllageAxe = data.available_units.axe.total
-                previllageArcher = data.available_units.archer.total
-                previllageCatapult = data.available_units.catapult.total
-                previllageBerserker = data.available_units.doppelsoldner.total
-                previllageHC = data.available_units.heavy_cavalry.total
-                previllageKnight = data.available_units.knight.total
-                previllageLC = data.available_units.light_cavalry.total
-                previllageMA = data.available_units.mounted_archer.total
-                previllageRam = data.available_units.ram.total
-                previllageSnob = data.available_units.snob.total
-                previllageSpear = data.available_units.spear.total
-                previllageSword = data.available_units.sword.total
-                previllageTrebuchet = data.available_units.trebuchet.total
-            })
-            villageAxe = previllageAxe
-            villageArcher = previllageArcher
-            villageCatapult = previllageCatapult
-            villageBerserker = previllageBerserker
-            villageHC = previllageHC
-            villageKnight = previllageKnight
-            villageLC = previllageLC
-            villageMA = previllageMA
-            villageRam = previllageRam
-            villageSnob = previllageSnob
-            villageSpear = previllageSpear
-            villageSword = previllageSword
-            villageTrebuchet = previllageTrebuchet
-        }
-        getUnits()
+        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+            village_id: villageUnits
+        }, function(data) {
+            villageAxe = data.available_units.axe.total
+            villageArcher = data.available_units.archer.total
+            villageCatapult = data.available_units.catapult.total
+            villageBerserker = data.available_units.doppelsoldner.total
+            villageHC = data.available_units.heavy_cavalry.total
+            villageKnight = data.available_units.knight.total
+            villageLC = data.available_units.light_cavalry.total
+            villageMA = data.available_units.mounted_archer.total
+            villageRam = data.available_units.ram.total
+            villageSnob = data.available_units.snob.total
+            villageSpear = data.available_units.spear.total
+            villageSword = data.available_units.sword.total
+            villageTrebuchet = data.available_units.trebuchet.total
+        })
     }
     battleCalculator.calculateB = function() {
         const spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
@@ -11857,6 +11827,7 @@ define('two/battleCalculator/ui', [
                 name: data.name
             }
             $scope.settings[SETTINGS.BATTLE_VILLAGE_ID] = data.id
+            settings.setAll(settings.decode($scope.settings))
         },
         start: function() {
             $scope.running = true
