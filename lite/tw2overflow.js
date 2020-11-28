@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 22:05:36 GMT
+ * Sat, 28 Nov 2020 22:15:18 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6832,10 +6832,6 @@ define('two/battleCalculator', [
                 previllageSword = data.available_units.sword.total
                 previllageTrebuchet = data.available_units.trebuchet.total
             })
-            setUnits()
-        }
-
-        function setUnits() {
             villageAxe = previllageAxe
             villageArcher = previllageArcher
             villageCatapult = previllageCatapult
