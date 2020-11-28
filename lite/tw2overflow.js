@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 20:45:01 GMT
+ * Sat, 28 Nov 2020 20:58:36 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6610,20 +6610,6 @@ define('two/battleCalculator', [
     let villageSword = null
     let villageTrebuchet = null
     let villageUnits = null
-    let Archer = []
-    let Axe = []
-    let Catapult = []
-    let Berserker = []
-    let HC = []
-    let Knight = []
-    let LC = []
-    let MA = []
-    let Ram = []
-    let Snob = []
-    let Spear = []
-    let Sword = []
-    let Trebuchet = []
-    let i = 0
     const STORAGE_KEYS = {
         SETTINGS: 'battle_calculator_settings'
     }
@@ -6760,10 +6746,23 @@ define('two/battleCalculator', [
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
-    battleCalculator.getPresetUnits = function() {	
+    battleCalculator.getPresetUnits = function() {
+        let Archer = []
+        let Axe = []
+        let Catapult = []
+        let Berserker = []
+        let HC = []
+        let Knight = []
+        let LC = []
+        let MA = []
+        let Ram = []
+        let Snob = []
+        let Spear = []
+        let Sword = []
+        let Trebuchet = []
         presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-            for (i = 0; i < data.presets.length; i++) {
+            for (var i = 0; i < data.presets.length; i++) {
                 if (data.presets[i].id == presetSelected) {
                     Axe.push(data.presets[i].units.axe)
                     Archer.push(data.presets[i].units.archer)
@@ -6797,6 +6796,7 @@ define('two/battleCalculator', [
     }
     battleCalculator.getVillageUnits = function() {
         villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
+        console.log(villageUnits)
         socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
             village_id: villageUnits
         }, function(data) {
@@ -6813,6 +6813,7 @@ define('two/battleCalculator', [
             villageSpear = data.available_units.spear.total
             villageSword = data.available_units.sword.total
             villageTrebuchet = data.available_units.trebuchet.total
+            console.log(villageAxe, villageSpear)
         })
     }
     battleCalculator.calculateB = function() {
@@ -11800,7 +11801,6 @@ define('two/battleCalculator/ui', [
                 name: data.name
             }
             $scope.settings[SETTINGS.BATTLE_VILLAGE_ID] = data.id
-            settings.setAll(settings.decode($scope.settings))
         },
         start: function() {
             $scope.running = true
