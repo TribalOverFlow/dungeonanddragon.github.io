@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 20:27:19 GMT
+ * Sat, 28 Nov 2020 20:45:01 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6610,6 +6610,20 @@ define('two/battleCalculator', [
     let villageSword = null
     let villageTrebuchet = null
     let villageUnits = null
+    let Archer = []
+    let Axe = []
+    let Catapult = []
+    let Berserker = []
+    let HC = []
+    let Knight = []
+    let LC = []
+    let MA = []
+    let Ram = []
+    let Snob = []
+    let Spear = []
+    let Sword = []
+    let Trebuchet = []
+    let i = 0
     const STORAGE_KEYS = {
         SETTINGS: 'battle_calculator_settings'
     }
@@ -6748,20 +6762,6 @@ define('two/battleCalculator', [
     }
     battleCalculator.getPresetUnits = function() {	
         presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
-        var Archer = []
-        var Axe = []
-        var Catapult = []
-        var Berserker = []
-        var HC = []
-        var Knight = []
-        var LC = []
-        var MA = []
-        var Ram = []
-        var Snob = []
-        var Spear = []
-        var Sword = []
-        var Trebuchet = []
-        var i = 0
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
                 if (data.presets[i].id == presetSelected) {
@@ -6780,21 +6780,20 @@ define('two/battleCalculator', [
                     Snob.push(data.presets[i].units.snob)
                 }
             }
-            presetSPEAR = Spear[0]
-            presetSWORD = Sword[0]
-            presetAXE = Axe[0]
-            presetARCHER = Archer[0]
-            presetLC = LC[0]
-            presetMA = MA[0]
-            presetHC = HC[0]
-            presetRAM = Ram[0]
-            presetCATAPULT = Catapult[0]
-            presetSNOB = Snob[0]
-            presetKNIGHT = Knight[0]
-            presetTREBUCHET = Trebuchet[0]
-            presetBERSERKER = Berserker[0]
-            console.log(presetSPEAR, Spear[0])
         })
+        presetSPEAR = Spear[0]
+        presetSWORD = Sword[0]
+        presetAXE = Axe[0]
+        presetARCHER = Archer[0]
+        presetLC = LC[0]
+        presetMA = MA[0]
+        presetHC = HC[0]
+        presetRAM = Ram[0]
+        presetCATAPULT = Catapult[0]
+        presetSNOB = Snob[0]
+        presetKNIGHT = Knight[0]
+        presetTREBUCHET = Trebuchet[0]
+        presetBERSERKER = Berserker[0]
     }
     battleCalculator.getVillageUnits = function() {
         villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
@@ -11801,6 +11800,7 @@ define('two/battleCalculator/ui', [
                 name: data.name
             }
             $scope.settings[SETTINGS.BATTLE_VILLAGE_ID] = data.id
+            settings.setAll(settings.decode($scope.settings))
         },
         start: function() {
             $scope.running = true
