@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 22:22:15 GMT
+ * Sat, 28 Nov 2020 22:29:15 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6808,11 +6808,7 @@ define('two/battleCalculator', [
         var previllageSpear = 0
         var previllageSword = 0
         var previllageTrebuchet = 0
-
-        function getId() {
-            villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
-            getUnits()
-        }
+        villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
 
         function getUnits() {
             socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
@@ -6850,7 +6846,7 @@ define('two/battleCalculator', [
             villageSword = previllageSword
             villageTrebuchet = previllageTrebuchet
         }
-        getId()
+        getUnits()
     }
     battleCalculator.calculateB = function() {
         const spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
