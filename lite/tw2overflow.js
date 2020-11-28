@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 28 Nov 2020 22:34:08 GMT
+ * Sat, 28 Nov 2020 22:40:29 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -11238,21 +11238,19 @@ define('two/battleCalculator/ui', [
         let lcVillage = battleCalculator.getVillageLc()
         let maVillage = battleCalculator.getVillageMa()
         let hcVillage = battleCalculator.getVillageHc()
-        if (spearVillage >= 0 || swordVillage >= 0 || axeVillage >= 0 || archerVillage >= 0 || ramVillage >= 0 || catapultVillage >= 0 || snobVillage >= 0 || knigthVillage >= 0 || trebuchetVillage >= 0 || berserkerVillage >= 0 || lcVillage >= 0 || maVillage >= 0 || hcVillage >= 0) {
-            $scope.settings[SETTINGS.BATTLE_SPEAR_A] = spearVillage
-            $scope.settings[SETTINGS.BATTLE_SWORD_A] = swordVillage
-            $scope.settings[SETTINGS.BATTLE_AXE_A] = axeVillage
-            $scope.settings[SETTINGS.BATTLE_ARCHER_A] = archerVillage
-            $scope.settings[SETTINGS.BATTLE_RAM_A] = ramVillage
-            $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = catapultVillage
-            $scope.settings[SETTINGS.BATTLE_SNOB_A] = snobVillage
-            $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = knigthVillage
-            $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = trebuchetVillage
-            $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = berserkerVillage
-            $scope.settings[SETTINGS.BATTLE_LC_A] = lcVillage
-            $scope.settings[SETTINGS.BATTLE_MA_A] = maVillage
-            $scope.settings[SETTINGS.BATTLE_HC_A] = hcVillage
-        }
+        $scope.settings[SETTINGS.BATTLE_SPEAR_A] = spearVillage
+        $scope.settings[SETTINGS.BATTLE_SWORD_A] = swordVillage
+        $scope.settings[SETTINGS.BATTLE_AXE_A] = axeVillage
+        $scope.settings[SETTINGS.BATTLE_ARCHER_A] = archerVillage
+        $scope.settings[SETTINGS.BATTLE_RAM_A] = ramVillage
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = catapultVillage
+        $scope.settings[SETTINGS.BATTLE_SNOB_A] = snobVillage
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = knigthVillage
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = trebuchetVillage
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = berserkerVillage
+        $scope.settings[SETTINGS.BATTLE_LC_A] = lcVillage
+        $scope.settings[SETTINGS.BATTLE_MA_A] = maVillage
+        $scope.settings[SETTINGS.BATTLE_HC_A] = hcVillage
         settings.setAll(settings.decode($scope.settings))
     }
     const insertVillageDefender = function() {
