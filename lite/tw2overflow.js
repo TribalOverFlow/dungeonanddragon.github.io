@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 29 Nov 2020 08:41:48 GMT
+ * Sun, 29 Nov 2020 08:46:23 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -11137,8 +11137,7 @@ define('two/battleCalculator/ui', [
     }
     const insertPresetAttacker = function() {
         battleCalculator.getPresetUnits()
-        battleCalculator.getPresetUnits()
-        battleCalculator.getPresetUnits()
+        settings.setAll(settings.decode($scope.settings))
         $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getPresetSpear()
         $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getPresetSword()
         $scope.settings[SETTINGS.BATTLE_AXE_A] = battleCalculator.getPresetAxe()
@@ -11156,8 +11155,7 @@ define('two/battleCalculator/ui', [
     }
     const insertPresetDefender = function() {
         battleCalculator.getPresetUnits()
-        battleCalculator.getPresetUnits()
-        battleCalculator.getPresetUnits()
+        settings.setAll(settings.decode($scope.settings))
         $scope.settings[SETTINGS.BATTLE_SPEAR_D] = battleCalculator.getPresetSpear()
         $scope.settings[SETTINGS.BATTLE_SWORD_D] = battleCalculator.getPresetSword()
         $scope.settings[SETTINGS.BATTLE_AXE_D] = battleCalculator.getPresetAxe()
@@ -11175,8 +11173,7 @@ define('two/battleCalculator/ui', [
     }
     const insertVillageAttacker = function() {
         battleCalculator.getVillageUnits()
-        battleCalculator.getVillageUnits()
-        battleCalculator.getVillageUnits()
+        settings.setAll(settings.decode($scope.settings))
         let spearVillage = battleCalculator.getVillageSpear()
         let swordVillage = battleCalculator.getVillageSword()
         let axeVillage = battleCalculator.getVillageAxe()
@@ -11207,8 +11204,7 @@ define('two/battleCalculator/ui', [
     }
     const insertVillageDefender = function() {
         battleCalculator.getVillageUnits()
-        battleCalculator.getVillageUnits()
-        battleCalculator.getVillageUnits()
+        settings.setAll(settings.decode($scope.settings))
         let spearVillage = battleCalculator.getVillageSpear()
         let swordVillage = battleCalculator.getVillageSword()
         let axeVillage = battleCalculator.getVillageAxe()
