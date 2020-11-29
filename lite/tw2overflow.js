@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 29 Nov 2020 08:58:04 GMT
+ * Sun, 29 Nov 2020 09:09:53 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6440,7 +6440,7 @@ define('two/battleCalculator', [
     let running = false
     let settings
     let battleCalculatorSettings
-    let presetSelected = null
+    let presetSelected = []
     // Bashpoints
     let pointsatt = null
     let pointsdef = null
@@ -6748,11 +6748,10 @@ define('two/battleCalculator', [
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
     battleCalculator.getPresetUnits = function() {
-        presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
-        console.log(presetSelected)
+        const presetSelectedtoGet = battleCalculatorSettings[SETTINGS.PRESET]
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
-                if (data.presets[i].id == presetSelected) {
+                if (data.presets[i].id == presetSelectedtoGet) {
                     presetSPEAR = data.presets[i].units.spear
                     presetSWORD = data.presets[i].units.sword
                     presetAXE = data.presets[i].units.axe
@@ -11153,7 +11152,6 @@ define('two/battleCalculator/ui', [
         $scope.settings[SETTINGS.BATTLE_LC_A] = battleCalculator.getPresetLc()
         $scope.settings[SETTINGS.BATTLE_MA_A] = battleCalculator.getPresetMa()
         $scope.settings[SETTINGS.BATTLE_HC_A] = battleCalculator.getPresetHc()
-        settings.setAll(settings.decode($scope.settings))
     }
     const insertPresetDefender = function() {
         battleCalculator.getPresetUnits()
