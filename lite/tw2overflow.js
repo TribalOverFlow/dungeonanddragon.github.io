@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 29 Nov 2020 09:23:55 GMT
+ * Sun, 29 Nov 2020 09:40:38 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6441,7 +6441,6 @@ define('two/battleCalculator', [
     let settings
     let battleCalculatorSettings
     let presetSelected = []
-    let presetSelectedtoGet = []
     // Bashpoints
     let pointsatt = null
     let pointsdef = null
@@ -6749,16 +6748,10 @@ define('two/battleCalculator', [
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
     battleCalculator.getPresetUnits = function() {
-        presetSelectedtoGet = []
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = battleCalculatorSettings[SETTINGS.PRESET]
-        presetsSelectedByTheUser.forEach(function(presetId) {
-            presetSelectedtoGet.push(allPresets[presetId])
-        })
-        console.log(presetSelectedtoGet)
+        presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
-                if (data.presets[i].id == presetSelectedtoGet) {
+                if (data.presets[i].id == presetSelected) {
                     presetSPEAR = data.presets[i].units.spear
                     presetSWORD = data.presets[i].units.sword
                     presetAXE = data.presets[i].units.axe
