@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 29 Nov 2020 09:09:53 GMT
+ * Sun, 29 Nov 2020 09:23:55 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6441,6 +6441,7 @@ define('two/battleCalculator', [
     let settings
     let battleCalculatorSettings
     let presetSelected = []
+    let presetSelectedtoGet = []
     // Bashpoints
     let pointsatt = null
     let pointsdef = null
@@ -6748,7 +6749,13 @@ define('two/battleCalculator', [
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
     battleCalculator.getPresetUnits = function() {
-        const presetSelectedtoGet = battleCalculatorSettings[SETTINGS.PRESET]
+        presetSelectedtoGet = []
+        const allPresets = modelDataService.getPresetList().getPresets()
+        const presetsSelectedByTheUser = battleCalculatorSettings[SETTINGS.PRESET]
+        presetsSelectedByTheUser.forEach(function(presetId) {
+            presetSelectedtoGet.push(allPresets[presetId])
+        })
+        console.log(presetSelectedtoGet)
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
                 if (data.presets[i].id == presetSelectedtoGet) {
@@ -11136,9 +11143,6 @@ define('two/battleCalculator/ui', [
     }
     const insertPresetAttacker = function() {
         battleCalculator.getPresetUnits()
-        putDataPresetAttacker()
-    }
-    const putDataPresetAttacker = function() {
         $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getPresetSpear()
         $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getPresetSword()
         $scope.settings[SETTINGS.BATTLE_AXE_A] = battleCalculator.getPresetAxe()
@@ -11152,6 +11156,7 @@ define('two/battleCalculator/ui', [
         $scope.settings[SETTINGS.BATTLE_LC_A] = battleCalculator.getPresetLc()
         $scope.settings[SETTINGS.BATTLE_MA_A] = battleCalculator.getPresetMa()
         $scope.settings[SETTINGS.BATTLE_HC_A] = battleCalculator.getPresetHc()
+        settings.setAll(settings.decode($scope.settings))
     }
     const insertPresetDefender = function() {
         battleCalculator.getPresetUnits()
