@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 29 Nov 2020 07:21:21 GMT
+ * Sun, 29 Nov 2020 08:36:35 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6748,52 +6748,27 @@ define('two/battleCalculator', [
     }
     battleCalculator.getPresetUnits = function() {
         presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
-        let Archer = []
-        let Axe = []
-        let Catapult = []
-        let Berserker = []
-        let HC = []
-        let Knight = []
-        let LC = []
-        let MA = []
-        let Ram = []
-        let Snob = []
-        let Spear = []
-        let Sword = []
-        let Trebuchet = []
+        console.log(presetSelected)
         let i = 0
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
                 if (data.presets[i].id == presetSelected) {
-                    Axe.push(data.presets[i].units.axe)
-                    Archer.push(data.presets[i].units.archer)
-                    Catapult.push(data.presets[i].units.catapult)
-                    Berserker.push(data.presets[i].units.doppelsoldner)
-                    HC.push(data.presets[i].units.heavy_cavalry)
-                    Knight.push(data.presets[i].units.knight)
-                    LC.push(data.presets[i].units.light_cavalry)
-                    MA.push(data.presets[i].units.mounted_archer)
-                    Ram.push(data.presets[i].units.ram)
-                    Trebuchet.push(data.presets[i].units.trebuchet)
-                    Sword.push(data.presets[i].units.sword)
-                    Spear.push(data.presets[i].units.spear)
-                    Snob.push(data.presets[i].units.snob)
+                    presetSPEAR = data.presets[i].units.spear
+                    presetSWORD = data.presets[i].units.sword
+                    presetAXE = data.presets[i].units.axe
+                    presetARCHER = data.presets[i].units.archer
+                    presetLC = data.presets[i].units.light_cavalry
+                    presetMA = data.presets[i].units.mounted_archer
+                    presetHC = data.presets[i].units.heavy_cavalry
+                    presetRAM = data.presets[i].units.ram
+                    presetCATAPULT = data.presets[i].units.catapult
+                    presetSNOB = data.presets[i].units.snob
+                    presetKNIGHT = data.presets[i].units.knight
+                    presetTREBUCHET = data.presets[i].units.trebuchet
+                    presetBERSERKER = data.presets[i].units.doppelsoldner
                 }
             }
         })
-        presetSPEAR = Spear[0]
-        presetSWORD = Sword[0]
-        presetAXE = Axe[0]
-        presetARCHER = Archer[0]
-        presetLC = LC[0]
-        presetMA = MA[0]
-        presetHC = HC[0]
-        presetRAM = Ram[0]
-        presetCATAPULT = Catapult[0]
-        presetSNOB = Snob[0]
-        presetKNIGHT = Knight[0]
-        presetTREBUCHET = Trebuchet[0]
-        presetBERSERKER = Berserker[0]
     }
     battleCalculator.getVillageUnits = function() {
         villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
@@ -11070,7 +11045,6 @@ define('two/battleCalculator/ui', [
     let $button
     let battleVillage
     let mapSelectedVillage = false
-    let presetSelected = null
     const TAB_TYPES = {
         BATTLE: 'battle',
         TROOPS: 'troops',
@@ -11162,24 +11136,20 @@ define('two/battleCalculator/ui', [
         }
     }
     const insertPresetAttacker = function() {
-        presetSelected = $scope.settings[SETTINGS.PRESET]
-        settings.setAll(settings.decode($scope.settings))
         battleCalculator.getPresetUnits()
-        if (presetSelected) {
-            $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getPresetSpear()
-            $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getPresetSword()
-            $scope.settings[SETTINGS.BATTLE_AXE_A] = battleCalculator.getPresetAxe()
-            $scope.settings[SETTINGS.BATTLE_ARCHER_A] = battleCalculator.getPresetArcher()
-            $scope.settings[SETTINGS.BATTLE_RAM_A] = battleCalculator.getPresetRam()
-            $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = battleCalculator.getPresetCatapult()
-            $scope.settings[SETTINGS.BATTLE_SNOB_A] = battleCalculator.getPresetSnob()
-            $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = battleCalculator.getPresetKnight()
-            $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = battleCalculator.getPresetTrebuchet()
-            $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = battleCalculator.getPresetBerserker()
-            $scope.settings[SETTINGS.BATTLE_LC_A] = battleCalculator.getPresetLc()
-            $scope.settings[SETTINGS.BATTLE_MA_A] = battleCalculator.getPresetMa()
-            $scope.settings[SETTINGS.BATTLE_HC_A] = battleCalculator.getPresetHc()
-        }
+        $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getPresetSpear()
+        $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getPresetSword()
+        $scope.settings[SETTINGS.BATTLE_AXE_A] = battleCalculator.getPresetAxe()
+        $scope.settings[SETTINGS.BATTLE_ARCHER_A] = battleCalculator.getPresetArcher()
+        $scope.settings[SETTINGS.BATTLE_RAM_A] = battleCalculator.getPresetRam()
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = battleCalculator.getPresetCatapult()
+        $scope.settings[SETTINGS.BATTLE_SNOB_A] = battleCalculator.getPresetSnob()
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = battleCalculator.getPresetKnight()
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = battleCalculator.getPresetTrebuchet()
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = battleCalculator.getPresetBerserker()
+        $scope.settings[SETTINGS.BATTLE_LC_A] = battleCalculator.getPresetLc()
+        $scope.settings[SETTINGS.BATTLE_MA_A] = battleCalculator.getPresetMa()
+        $scope.settings[SETTINGS.BATTLE_HC_A] = battleCalculator.getPresetHc()
         settings.setAll(settings.decode($scope.settings))
     }
     const insertPresetDefender = function() {
@@ -11244,21 +11214,19 @@ define('two/battleCalculator/ui', [
         let lcVillage = battleCalculator.getVillageLc()
         let maVillage = battleCalculator.getVillageMa()
         let hcVillage = battleCalculator.getVillageHc()
-        if (spearVillage >= 0 || swordVillage >= 0 || axeVillage >= 0 || archerVillage >= 0 || ramVillage >= 0 || catapultVillage >= 0 || snobVillage >= 0 || knigthVillage >= 0 || trebuchetVillage >= 0 || berserkerVillage >= 0 || lcVillage >= 0 || maVillage >= 0 || hcVillage >= 0) {
-            $scope.settings[SETTINGS.BATTLE_SPEAR_D] = spearVillage
-            $scope.settings[SETTINGS.BATTLE_SWORD_D] = swordVillage
-            $scope.settings[SETTINGS.BATTLE_AXE_D] = axeVillage
-            $scope.settings[SETTINGS.BATTLE_ARCHER_D] = archerVillage
-            $scope.settings[SETTINGS.BATTLE_RAM_D] = ramVillage
-            $scope.settings[SETTINGS.BATTLE_CATAPULT_D] = catapultVillage
-            $scope.settings[SETTINGS.BATTLE_SNOB_D] = snobVillage
-            $scope.settings[SETTINGS.BATTLE_KNIGHT_D] = knigthVillage
-            $scope.settings[SETTINGS.BATTLE_TREBUCHET_D] = trebuchetVillage
-            $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_D] = berserkerVillage
-            $scope.settings[SETTINGS.BATTLE_LC_D] = lcVillage
-            $scope.settings[SETTINGS.BATTLE_MA_D] = maVillage
-            $scope.settings[SETTINGS.BATTLE_HC_D] = hcVillage
-        }
+        $scope.settings[SETTINGS.BATTLE_SPEAR_D] = spearVillage
+        $scope.settings[SETTINGS.BATTLE_SWORD_D] = swordVillage
+        $scope.settings[SETTINGS.BATTLE_AXE_D] = axeVillage
+        $scope.settings[SETTINGS.BATTLE_ARCHER_D] = archerVillage
+        $scope.settings[SETTINGS.BATTLE_RAM_D] = ramVillage
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_D] = catapultVillage
+        $scope.settings[SETTINGS.BATTLE_SNOB_D] = snobVillage
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_D] = knigthVillage
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_D] = trebuchetVillage
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_D] = berserkerVillage
+        $scope.settings[SETTINGS.BATTLE_LC_D] = lcVillage
+        $scope.settings[SETTINGS.BATTLE_MA_D] = maVillage
+        $scope.settings[SETTINGS.BATTLE_HC_D] = hcVillage
         settings.setAll(settings.decode($scope.settings))
     }
     const showBashpoints = function() {
