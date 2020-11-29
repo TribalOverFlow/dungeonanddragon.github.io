@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 29 Nov 2020 08:36:35 GMT
+ * Sun, 29 Nov 2020 08:41:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6610,6 +6610,7 @@ define('two/battleCalculator', [
     let villageSword = null
     let villageTrebuchet = null
     let villageUnits = null
+    let i = null
     const STORAGE_KEYS = {
         SETTINGS: 'battle_calculator_settings'
     }
@@ -6749,7 +6750,6 @@ define('two/battleCalculator', [
     battleCalculator.getPresetUnits = function() {
         presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
         console.log(presetSelected)
-        let i = 0
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
                 if (data.presets[i].id == presetSelected) {
@@ -11137,6 +11137,8 @@ define('two/battleCalculator/ui', [
     }
     const insertPresetAttacker = function() {
         battleCalculator.getPresetUnits()
+        battleCalculator.getPresetUnits()
+        battleCalculator.getPresetUnits()
         $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getPresetSpear()
         $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getPresetSword()
         $scope.settings[SETTINGS.BATTLE_AXE_A] = battleCalculator.getPresetAxe()
@@ -11154,6 +11156,8 @@ define('two/battleCalculator/ui', [
     }
     const insertPresetDefender = function() {
         battleCalculator.getPresetUnits()
+        battleCalculator.getPresetUnits()
+        battleCalculator.getPresetUnits()
         $scope.settings[SETTINGS.BATTLE_SPEAR_D] = battleCalculator.getPresetSpear()
         $scope.settings[SETTINGS.BATTLE_SWORD_D] = battleCalculator.getPresetSword()
         $scope.settings[SETTINGS.BATTLE_AXE_D] = battleCalculator.getPresetAxe()
@@ -11170,6 +11174,8 @@ define('two/battleCalculator/ui', [
         settings.setAll(settings.decode($scope.settings))
     }
     const insertVillageAttacker = function() {
+        battleCalculator.getVillageUnits()
+        battleCalculator.getVillageUnits()
         battleCalculator.getVillageUnits()
         let spearVillage = battleCalculator.getVillageSpear()
         let swordVillage = battleCalculator.getVillageSword()
@@ -11200,6 +11206,8 @@ define('two/battleCalculator/ui', [
         settings.setAll(settings.decode($scope.settings))
     }
     const insertVillageDefender = function() {
+        battleCalculator.getVillageUnits()
+        battleCalculator.getVillageUnits()
         battleCalculator.getVillageUnits()
         let spearVillage = battleCalculator.getVillageSpear()
         let swordVillage = battleCalculator.getVillageSword()
