@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 29 Nov 2020 21:02:54 GMT
+ * Mon, 30 Nov 2020 19:05:09 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23839,7 +23839,8 @@ define('two/recruitQueue', [
     'two/recruitQueue/types/units',
     'two/ready',
     'queues/EventQueue',
-    'Lockr'
+    'Lockr',
+    'helper/time'
 ], function(
     Settings,
     SETTINGS,
@@ -23848,7 +23849,8 @@ define('two/recruitQueue', [
     RQ_UNIT,
     ready,
     eventQueue,
-    Lockr
+    Lockr,
+    timeHelper
 ) {
     let initialized = false
     let running = false
@@ -23856,6 +23858,7 @@ define('two/recruitQueue', [
     let recruitQueueSettings
     let recruitLog
     let logData = []
+    const LOGS_LIMIT = 500
     let selectedPreset1 = []
     let selectedPreset2 = []
     let selectedPreset3 = []
@@ -23889,7 +23892,8 @@ define('two/recruitQueue', [
     let selectedGroups23 = []
     let selectedGroups24 = []
     const STORAGE_KEYS = {
-        SETTINGS: 'recruit_queue_settings'
+        SETTINGS: 'recruit_queue_settings',
+        LOGS: 'recruit_queue_log',
     }
     const RECRUIT_UNIT = {
         [RQ_UNIT.SPEAR]: 'spear',
@@ -24069,6 +24073,20 @@ define('two/recruitQueue', [
             selectedGroups24.push(allGroups[groupId])
         })
     }
+    const addLog = function(villageId, logData) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            unit: logData.unit,
+            amount: logData.amount
+        }
+        recruitLog.unshift(data)
+        if (recruitLog.length > LOGS_LIMIT) {
+            recruitLog.splice(recruitLog.length - LOGS_LIMIT, recruitLog.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
+        return true
+    }
     recruitQueue.presetRecrutation = function() {
         var groupList = modelDataService.getGroupList()
         var selectedGroup1 = selectedGroups1
@@ -24087,7 +24105,6 @@ define('two/recruitQueue', [
         var finalPreset2 = selectedPreset2_F
         var finalPreset3 = selectedPreset3_F
         var finalPreset4 = selectedPreset4_F
-        var now = null
         var unit = ''
         var woodModifier1 = 0
         var woodModifier2 = 0
@@ -24549,20 +24566,12 @@ define('two/recruitQueue', [
                                                 amount: spear1
                                             })
                                             unit = 'Pikinier'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            spear1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                spear1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -24582,20 +24591,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew1
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24607,20 +24609,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable1
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -24641,20 +24636,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew1
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24666,20 +24654,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable1
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -24700,20 +24681,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew1
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24725,20 +24699,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable1
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -24781,20 +24748,12 @@ define('two/recruitQueue', [
                                                 amount: sword1
                                             })
                                             unit = 'Miecznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            sword1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                sword1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -24814,20 +24773,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew1
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24839,20 +24791,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable1
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -24873,20 +24818,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew1
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24898,20 +24836,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable1
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -24932,20 +24863,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew1
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24957,20 +24881,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable1
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -25013,20 +24930,12 @@ define('two/recruitQueue', [
                                                 amount: axe1
                                             })
                                             unit = 'Topornik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            axe1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                axe1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25046,20 +24955,13 @@ define('two/recruitQueue', [
                                                         amount: axenew1
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25071,20 +24973,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable1
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25105,20 +25000,13 @@ define('two/recruitQueue', [
                                                         amount: axenew1
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25130,20 +25018,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable1
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25164,20 +25045,13 @@ define('two/recruitQueue', [
                                                         amount: axenew1
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25189,20 +25063,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable1
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -25245,20 +25112,12 @@ define('two/recruitQueue', [
                                                 amount: archer1
                                             })
                                             unit = 'Łucznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            archer1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                archer1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25278,20 +25137,13 @@ define('two/recruitQueue', [
                                                         amount: archernew1
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25303,20 +25155,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable1
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25337,20 +25182,13 @@ define('two/recruitQueue', [
                                                         amount: archernew1
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25362,20 +25200,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable1
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25396,20 +25227,13 @@ define('two/recruitQueue', [
                                                         amount: archernew1
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25421,20 +25245,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable1
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -25477,20 +25294,12 @@ define('two/recruitQueue', [
                                                 amount: lc1
                                             })
                                             unit = 'Lekki Kawalerzysta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            lc1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                lc1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25510,20 +25319,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew1
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25535,20 +25337,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable1
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25569,20 +25364,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew1
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25594,20 +25382,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable1
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25628,20 +25409,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew1
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25653,20 +25427,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable1
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -25709,20 +25476,12 @@ define('two/recruitQueue', [
                                                 amount: ma1
                                             })
                                             unit = 'Łucznik na koniu'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ma1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ma1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25742,20 +25501,13 @@ define('two/recruitQueue', [
                                                         amount: manew1
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25767,20 +25519,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable1
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25801,20 +25546,13 @@ define('two/recruitQueue', [
                                                         amount: manew1
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25826,20 +25564,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable1
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25860,20 +25591,13 @@ define('two/recruitQueue', [
                                                         amount: manew1
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25885,20 +25609,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable1
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -25941,20 +25658,12 @@ define('two/recruitQueue', [
                                                 amount: ram1
                                             })
                                             unit = 'Taran'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ram1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ram1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25974,20 +25683,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew1
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25999,20 +25701,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable1
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -26033,20 +25728,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew1
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26058,20 +25746,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable1
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -26092,20 +25773,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew1
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26117,20 +25791,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable1
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -26173,20 +25840,12 @@ define('two/recruitQueue', [
                                                 amount: catapult1
                                             })
                                             unit = 'Katapulta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            catapult1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                catapult1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -26206,20 +25865,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew1
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26231,20 +25883,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable1
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -26265,20 +25910,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew1
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26290,20 +25928,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable1
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -26324,20 +25955,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew1
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26349,20 +25973,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable1
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -26405,20 +26022,12 @@ define('two/recruitQueue', [
                                                 amount: hc1
                                             })
                                             unit = 'Ciężka Kawaleria'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            hc1,
-                                            now
+                                            logData = [
+                                                unit,
+                                                hc1
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -26438,20 +26047,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew1
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26463,20 +26065,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable1
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -26497,20 +26092,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew1
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26522,20 +26110,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable1
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -26556,20 +26137,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew1
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew1,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew1
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -26581,20 +26155,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable1
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable1,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable1
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -26850,20 +26417,12 @@ define('two/recruitQueue', [
                                                 amount: spear2
                                             })
                                             unit = 'Pikinier'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            spear2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                spear2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -26883,20 +26442,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew2
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26908,20 +26460,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable2
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -26942,20 +26487,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew2
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26967,20 +26505,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable2
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27001,20 +26532,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew2
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27026,20 +26550,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable2
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -27082,20 +26599,12 @@ define('two/recruitQueue', [
                                                 amount: sword2
                                             })
                                             unit = 'Miecznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            sword2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                sword2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27115,20 +26624,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew2
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27140,20 +26642,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable2
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27174,20 +26669,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew2
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27199,20 +26687,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable2
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27233,20 +26714,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew2
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27258,20 +26732,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable2
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -27314,20 +26781,12 @@ define('two/recruitQueue', [
                                                 amount: axe2
                                             })
                                             unit = 'Topornik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            axe2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                axe2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27347,20 +26806,13 @@ define('two/recruitQueue', [
                                                         amount: axenew2
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27372,20 +26824,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable2
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27406,20 +26851,13 @@ define('two/recruitQueue', [
                                                         amount: axenew2
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27431,20 +26869,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable2
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27465,20 +26896,13 @@ define('two/recruitQueue', [
                                                         amount: axenew2
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27490,20 +26914,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable2
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -27546,20 +26963,12 @@ define('two/recruitQueue', [
                                                 amount: archer2
                                             })
                                             unit = 'Łucznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            archer2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                archer2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27579,20 +26988,13 @@ define('two/recruitQueue', [
                                                         amount: archernew2
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27604,20 +27006,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable2
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27638,20 +27033,13 @@ define('two/recruitQueue', [
                                                         amount: archernew2
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27663,20 +27051,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable2
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27697,20 +27078,13 @@ define('two/recruitQueue', [
                                                         amount: archernew2
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27722,20 +27096,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable2
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -27778,20 +27145,12 @@ define('two/recruitQueue', [
                                                 amount: lc2
                                             })
                                             unit = 'Lekki Kawalerzysta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            lc2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                lc2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27811,20 +27170,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew2
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27836,20 +27188,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable2
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27870,20 +27215,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew2
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27895,20 +27233,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable2
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27929,20 +27260,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew2
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27954,20 +27278,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable2
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -28010,20 +27327,12 @@ define('two/recruitQueue', [
                                                 amount: ma2
                                             })
                                             unit = 'Łucznik na koniu'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ma2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ma2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -28043,20 +27352,13 @@ define('two/recruitQueue', [
                                                         amount: manew2
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28068,20 +27370,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable2
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -28102,20 +27397,13 @@ define('two/recruitQueue', [
                                                         amount: manew2
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28127,20 +27415,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable2
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -28161,20 +27442,13 @@ define('two/recruitQueue', [
                                                         amount: manew2
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28186,20 +27460,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable2
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -28242,20 +27509,12 @@ define('two/recruitQueue', [
                                                 amount: ram2
                                             })
                                             unit = 'Taran'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ram2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ram2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -28275,20 +27534,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew2
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28300,20 +27552,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable2
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -28334,20 +27579,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew2
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28359,20 +27597,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable2
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -28393,20 +27624,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew2
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28418,20 +27642,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable2
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -28474,20 +27691,12 @@ define('two/recruitQueue', [
                                                 amount: catapult2
                                             })
                                             unit = 'Katapulta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            catapult2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                catapult2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -28507,20 +27716,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew2
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28532,20 +27734,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable2
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -28566,20 +27761,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew2
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28591,20 +27779,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable2
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -28625,20 +27806,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew2
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28650,20 +27824,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable2
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -28706,20 +27873,12 @@ define('two/recruitQueue', [
                                                 amount: hc2
                                             })
                                             unit = 'Ciężka Kawaleria'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            hc2,
-                                            now
+                                            logData = [
+                                                unit,
+                                                hc2
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -28739,20 +27898,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew2
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28764,20 +27916,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable2
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -28798,20 +27943,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew2
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28823,20 +27961,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable2
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -28857,20 +27988,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew2
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew2,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew2
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -28882,20 +28006,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable2
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable2,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable2
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -29151,20 +28268,12 @@ define('two/recruitQueue', [
                                                 amount: spear3
                                             })
                                             unit = 'Pikinier'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            spear3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                spear3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -29184,20 +28293,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew3
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29209,20 +28311,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable3
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -29243,20 +28338,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew3
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29268,20 +28356,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable3
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -29302,20 +28383,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew3
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29327,20 +28401,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable3
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -29383,20 +28450,12 @@ define('two/recruitQueue', [
                                                 amount: sword3
                                             })
                                             unit = 'Miecznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            sword3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                sword3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -29416,20 +28475,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew3
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29441,20 +28493,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable3
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -29475,20 +28520,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew3
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29500,20 +28538,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable3
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -29534,20 +28565,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew3
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29559,20 +28583,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable3
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -29615,20 +28632,12 @@ define('two/recruitQueue', [
                                                 amount: axe3
                                             })
                                             unit = 'Topornik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            axe3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                axe3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -29648,20 +28657,13 @@ define('two/recruitQueue', [
                                                         amount: axenew3
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29673,20 +28675,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable3
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -29707,20 +28702,13 @@ define('two/recruitQueue', [
                                                         amount: axenew3
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29732,20 +28720,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable3
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -29766,20 +28747,13 @@ define('two/recruitQueue', [
                                                         amount: axenew3
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29791,20 +28765,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable3
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -29847,20 +28814,12 @@ define('two/recruitQueue', [
                                                 amount: archer3
                                             })
                                             unit = 'Łucznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            archer3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                archer3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -29880,20 +28839,13 @@ define('two/recruitQueue', [
                                                         amount: archernew3
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29905,20 +28857,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable3
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -29939,20 +28884,13 @@ define('two/recruitQueue', [
                                                         amount: archernew3
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29964,20 +28902,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable3
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -29998,20 +28929,13 @@ define('two/recruitQueue', [
                                                         amount: archernew3
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30023,20 +28947,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable3
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -30079,20 +28996,12 @@ define('two/recruitQueue', [
                                                 amount: lc3
                                             })
                                             unit = 'Lekki Kawalerzysta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            lc3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                lc3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -30112,20 +29021,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew3
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30137,20 +29039,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable3
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -30171,20 +29066,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew3
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30196,20 +29084,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable3
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -30230,20 +29111,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew3
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30255,20 +29129,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable3
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -30311,20 +29178,12 @@ define('two/recruitQueue', [
                                                 amount: ma3
                                             })
                                             unit = 'Łucznik na koniu'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ma3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ma3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -30344,20 +29203,13 @@ define('two/recruitQueue', [
                                                         amount: manew3
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30369,20 +29221,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable3
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -30403,20 +29248,13 @@ define('two/recruitQueue', [
                                                         amount: manew3
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30428,20 +29266,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable3
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -30462,20 +29293,13 @@ define('two/recruitQueue', [
                                                         amount: manew3
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30487,20 +29311,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable3
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -30543,20 +29360,12 @@ define('two/recruitQueue', [
                                                 amount: ram3
                                             })
                                             unit = 'Taran'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ram3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ram3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -30576,20 +29385,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew3
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30601,20 +29403,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable3
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -30635,20 +29430,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew3
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30660,20 +29448,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable3
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -30694,20 +29475,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew3
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30719,20 +29493,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable3
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -30775,20 +29542,12 @@ define('two/recruitQueue', [
                                                 amount: catapult3
                                             })
                                             unit = 'Katapulta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            catapult3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                catapult3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -30808,20 +29567,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew3
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30833,20 +29585,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable3
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -30867,20 +29612,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew3
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30892,20 +29630,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable3
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -30926,20 +29657,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew3
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -30951,20 +29675,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable3
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -31007,20 +29724,12 @@ define('two/recruitQueue', [
                                                 amount: hc3
                                             })
                                             unit = 'Ciężka Kawaleria'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            hc3,
-                                            now
+                                            logData = [
+                                                unit,
+                                                hc3
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -31040,20 +29749,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew3
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -31065,20 +29767,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable3
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -31099,20 +29794,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew3
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -31124,20 +29812,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable3
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -31158,20 +29839,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew3
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew3,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew3
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -31183,20 +29857,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable3
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable3,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable3
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -31452,20 +30119,12 @@ define('two/recruitQueue', [
                                                 amount: spear4
                                             })
                                             unit = 'Pikinier'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            spear4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                spear4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -31485,20 +30144,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew4
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31510,20 +30162,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable4
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -31544,20 +30189,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew4
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31569,20 +30207,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable4
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -31603,20 +30234,13 @@ define('two/recruitQueue', [
                                                         amount: spearnew4
                                                     })
                                                     unit = 'Pikinier'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    spearnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        spearnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31628,20 +30252,13 @@ define('two/recruitQueue', [
                                                             amount: spearavailable4
                                                         })
                                                         unit = 'Pikinier'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        spearavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            spearavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -31684,20 +30301,12 @@ define('two/recruitQueue', [
                                                 amount: sword4
                                             })
                                             unit = 'Miecznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            sword4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                sword4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -31717,20 +30326,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew4
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31742,20 +30344,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable4
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -31776,20 +30371,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew4
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31801,20 +30389,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable4
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -31835,20 +30416,13 @@ define('two/recruitQueue', [
                                                         amount: swordnew4
                                                     })
                                                     unit = 'Miecznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    swordnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        swordnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31860,20 +30434,13 @@ define('two/recruitQueue', [
                                                             amount: swordavailable4
                                                         })
                                                         unit = 'Miecznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        swordavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            swordavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -31916,20 +30483,12 @@ define('two/recruitQueue', [
                                                 amount: axe4
                                             })
                                             unit = 'Topornik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            axe4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                axe4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -31949,20 +30508,13 @@ define('two/recruitQueue', [
                                                         amount: axenew4
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31974,20 +30526,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable4
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -32008,20 +30553,13 @@ define('two/recruitQueue', [
                                                         amount: axenew4
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32033,20 +30571,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable4
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -32067,20 +30598,13 @@ define('two/recruitQueue', [
                                                         amount: axenew4
                                                     })
                                                     unit = 'Topornik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    axenew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        axenew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32092,20 +30616,13 @@ define('two/recruitQueue', [
                                                             amount: axeavailable4
                                                         })
                                                         unit = 'Topornik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        axeavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            axeavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -32148,20 +30665,12 @@ define('two/recruitQueue', [
                                                 amount: archer4
                                             })
                                             unit = 'Łucznik'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            archer4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                archer4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -32181,20 +30690,13 @@ define('two/recruitQueue', [
                                                         amount: archernew4
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32206,20 +30708,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable4
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -32240,20 +30735,13 @@ define('two/recruitQueue', [
                                                         amount: archernew4
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32265,20 +30753,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable4
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -32299,20 +30780,13 @@ define('two/recruitQueue', [
                                                         amount: archernew4
                                                     })
                                                     unit = 'Łucznik'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    archernew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        archernew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32324,20 +30798,13 @@ define('two/recruitQueue', [
                                                             amount: archeravailable4
                                                         })
                                                         unit = 'Łucznik'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        archeravailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            archeravailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -32380,20 +30847,12 @@ define('two/recruitQueue', [
                                                 amount: lc4
                                             })
                                             unit = 'Lekki Kawalerzysta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            lc4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                lc4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -32413,20 +30872,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew4
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32438,20 +30890,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable4
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -32472,20 +30917,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew4
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32497,20 +30935,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable4
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -32531,20 +30962,13 @@ define('two/recruitQueue', [
                                                         amount: lcnew4
                                                     })
                                                     unit = 'Lekki Kawalerzysta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    lcnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        lcnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32556,20 +30980,13 @@ define('two/recruitQueue', [
                                                             amount: lcavailable4
                                                         })
                                                         unit = 'Lekki Kawalerzysta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        lcavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            lcavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -32612,20 +31029,12 @@ define('two/recruitQueue', [
                                                 amount: ma4
                                             })
                                             unit = 'Łucznik na koniu'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ma4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ma4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -32645,20 +31054,13 @@ define('two/recruitQueue', [
                                                         amount: manew4
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32670,20 +31072,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable4
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -32704,20 +31099,13 @@ define('two/recruitQueue', [
                                                         amount: manew4
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32729,20 +31117,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable4
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -32763,20 +31144,13 @@ define('two/recruitQueue', [
                                                         amount: manew4
                                                     })
                                                     unit = 'Łucznik na koniu'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    manew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        manew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32788,20 +31162,13 @@ define('two/recruitQueue', [
                                                             amount: maavailable4
                                                         })
                                                         unit = 'Łucznik na koniu'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        maavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            maavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -32844,20 +31211,12 @@ define('two/recruitQueue', [
                                                 amount: ram4
                                             })
                                             unit = 'Taran'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            ram4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                ram4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -32877,20 +31236,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew4
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32902,20 +31254,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable4
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -32936,20 +31281,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew4
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -32961,20 +31299,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable4
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -32995,20 +31326,13 @@ define('two/recruitQueue', [
                                                         amount: ramnew4
                                                     })
                                                     unit = 'Taran'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    ramnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        ramnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -33020,20 +31344,13 @@ define('two/recruitQueue', [
                                                             amount: ramavailable4
                                                         })
                                                         unit = 'Taran'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        ramavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            ramavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -33076,20 +31393,12 @@ define('two/recruitQueue', [
                                                 amount: catapult4
                                             })
                                             unit = 'Katapulta'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            catapult4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                catapult4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -33109,20 +31418,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew4
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -33134,20 +31436,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable4
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -33168,20 +31463,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew4
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -33193,20 +31481,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable4
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -33227,20 +31508,13 @@ define('two/recruitQueue', [
                                                         amount: catapultnew4
                                                     })
                                                     unit = 'Katapulta'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    catapultnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        catapultnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -33252,20 +31526,13 @@ define('two/recruitQueue', [
                                                             amount: catapultavailable4
                                                         })
                                                         unit = 'Katapulta'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        catapultavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            catapultavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -33308,20 +31575,12 @@ define('two/recruitQueue', [
                                                 amount: hc4
                                             })
                                             unit = 'Ciężka Kawaleria'
-                                            now = Date.now()
-                                            logData = [{
-                                                x: village.getX(),
-                                                y: village.getY(),
-                                                name: village.getName(),
-                                                id: village.getId()
-                                            },
-                                            unit,
-                                            hc4,
-                                            now
+                                            logData = [
+                                                unit,
+                                                hc4
                                             ]
-                                            eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                            recruitLog.unshift(logData)
-                                            Lockr.set('recruiter-log', recruitLog)
+                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                            addLog(village.getId(), logData)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -33341,20 +31600,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew4
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -33366,20 +31618,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable4
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -33400,20 +31645,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew4
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -33425,20 +31663,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable4
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -33459,20 +31690,13 @@ define('two/recruitQueue', [
                                                         amount: hcnew4
                                                     })
                                                     unit = 'Ciężka Kawaleria'
-                                                    now = Date.now()
-                                                    logData = [{
-                                                        x: village.getX(),
-                                                        y: village.getY(),
-                                                        name: village.getName(),
-                                                        id: village.getId()
-                                                    },
-                                                    unit,
-                                                    hcnew4,
-                                                    now
+                                                    logData = [
+                                                        unit,
+                                                        hcnew4
                                                     ]
-                                                    eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                    recruitLog.unshift(logData)
-                                                    Lockr.set('recruiter-log', recruitLog)
+                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                    addLog(village.getId(), logData)
+                                                    Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -33484,20 +31708,13 @@ define('two/recruitQueue', [
                                                             amount: hcavailable4
                                                         })
                                                         unit = 'Ciężka Kawaleria'
-                                                        now = Date.now()
-                                                        logData = [{
-                                                            x: village.getX(),
-                                                            y: village.getY(),
-                                                            name: village.getName(),
-                                                            id: village.getId()
-                                                        },
-                                                        unit,
-                                                        hcavailable4,
-                                                        now
+                                                        logData = [
+                                                            unit,
+                                                            hcavailable4
                                                         ]
-                                                        eventQueue.trigger('RecruitQueue/jobStarted', logData)
-                                                        recruitLog.unshift(logData)
-                                                        Lockr.set('recruiter-log', recruitLog)
+                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                                                        addLog(village.getId(), logData)
+                                                        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
                                                     }
                                                 }
                                             }
@@ -33673,6 +31890,14 @@ define('two/recruitQueue', [
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
+    recruitQueue.getLogs = function() {
+        return recruitLog
+    }
+    recruitQueue.clearLogs = function() {
+        recruitLog = []
+        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
+    }
     recruitQueue.start = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.recruit_queue_START)
@@ -33689,14 +31914,6 @@ define('two/recruitQueue', [
     }
     recruitQueue.isRunning = function() {
         return running
-    }
-    recruitQueue.getLogs = function() {
-        return recruitLog
-    }
-    recruitQueue.clearLogs = function() {
-        recruitLog = []
-        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
-        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
     }
     return recruitQueue
 })
@@ -33964,6 +32181,7 @@ define('two/recruitQueue/ui', [
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, eventHandlers.updateLogs)
         eventScope.register(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS, eventHandlers.clearLogs)
         eventScope.register(eventTypeProvider.RECRUIT_QUEUE_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.RECRUIT_QUEUE_STOP, eventHandlers.stop)
