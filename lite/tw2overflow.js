@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 30 Nov 2020 21:59:52 GMT
+ * Mon, 30 Nov 2020 22:10:02 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -32274,9 +32274,9 @@ define('two/recruitQueue/settings', [], function() {
         PRESET3: 'preset3',
         PRESET4: 'preset4',
         PRESET1_FINAL: 'preset1_final',
-        PRESET2_FINAL: 'preset1_final',
-        PRESET3_FINAL: 'preset1_final',
-        PRESET4_FINAL: 'preset1_final'
+        PRESET2_FINAL: 'preset2_final',
+        PRESET3_FINAL: 'preset3_final',
+        PRESET4_FINAL: 'preset4_final'
     }
 })
 define('two/recruitQueue/settings/updates', function() {
