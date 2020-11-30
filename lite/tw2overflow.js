@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 30 Nov 2020 22:23:42 GMT
+ * Mon, 30 Nov 2020 23:16:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24134,6 +24134,7 @@ define('two/recruitQueue', [
         var finalPreset2 = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
         var finalPreset3 = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
         var finalPreset4 = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
+        console.log(choosedPreset1, selectedGroup1, groupVillages1)
         var unit = ''
         var woodModifier1 = 0
         var woodModifier2 = 0
