@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 30 Nov 2020 23:16:05 GMT
+ * Mon, 30 Nov 2020 23:24:30 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24119,7 +24119,7 @@ define('two/recruitQueue', [
     recruitQueue.presetRecrutation = function() {
         var groupList = modelDataService.getGroupList()
         var selectedGroup1 = recruitQueueSettings[SETTINGS.GROUP1]
-        var groupVillages1 = groupList.getGroupVillageIds(selectedGroup1)
+        var groupVillages1 = groupList.getGroupVillageIds(recruitQueueSettings[SETTINGS.GROUP1])
         var selectedGroup2 = recruitQueueSettings[SETTINGS.GROUP2]
         var groupVillages2 = groupList.getGroupVillageIds(selectedGroup2)
         var selectedGroup3 = recruitQueueSettings[SETTINGS.GROUP3]
