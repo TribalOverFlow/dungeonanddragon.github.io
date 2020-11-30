@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 30 Nov 2020 19:29:26 GMT
+ * Mon, 30 Nov 2020 19:38:58 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24087,6 +24087,43 @@ define('two/recruitQueue', [
         Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
         return true
     }
+    const recruitQueue = {}
+    recruitQueue.init = function() {
+        initialized = true
+        recruitLog = Lockr.get(STORAGE_KEYS.LOGS, [], true)
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+        settings.onChange(function(changes, updates) {
+            recruitQueueSettings = settings.getAll()
+            if (updates[UPDATES.PRESETS]) {
+                updatePresets()
+            }
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+        recruitQueueSettings = settings.getAll()
+        console.log('recruitQueue settings', recruitQueueSettings)
+        ready(function() {
+            updatePresets()
+        }, 'presets')
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
+        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+    recruitQueue.getLogs = function() {
+        return recruitLog
+    }
+    recruitQueue.clearLogs = function() {
+        recruitLog = []
+        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
+    }
+    recruitQueue.ownRecrutation = function() {}
     recruitQueue.presetRecrutation = function() {
         var groupList = modelDataService.getGroupList()
         var selectedGroup1 = selectedGroups1
@@ -31860,43 +31897,6 @@ define('two/recruitQueue', [
             console.log(Barracks1, Barracks2, Barracks3, Barracks4, queue1, queue2, queue3, queue4, barracksQueue1, barracksQueue2, barracksQueue3, barracksQueue4, villageFood1, villageFood2, villageFood3, villageFood4, villageWood1, villageWood2, villageWood3, villageWood4, villageClay1, villageClay2, villageClay3, villageClay4, villageIron1, villageIron2, villageIron3, villageIron4)
         }
         getPresets()
-    }
-    recruitQueue.ownRecrutation = function() {}
-    const recruitQueue = {}
-    recruitQueue.init = function() {
-        initialized = true
-        recruitLog = Lockr.get(STORAGE_KEYS.LOGS, [], true)
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-        settings.onChange(function(changes, updates) {
-            recruitQueueSettings = settings.getAll()
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-        recruitQueueSettings = settings.getAll()
-        console.log('recruitQueue settings', recruitQueueSettings)
-        ready(function() {
-            updatePresets()
-        }, 'presets')
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-    recruitQueue.getLogs = function() {
-        return recruitLog
-    }
-    recruitQueue.clearLogs = function() {
-        recruitLog = []
-        Lockr.set(STORAGE_KEYS.LOGS, recruitLog)
-        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
     }
     recruitQueue.start = function() {
         running = true
