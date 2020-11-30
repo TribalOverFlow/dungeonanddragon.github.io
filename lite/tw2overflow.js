@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 30 Nov 2020 20:10:12 GMT
+ * Mon, 30 Nov 2020 20:20:23 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24126,22 +24126,22 @@ define('two/recruitQueue', [
     recruitQueue.ownRecrutation = function() {}
     recruitQueue.presetRecrutation = function() {
         var groupList = modelDataService.getGroupList()
-        var selectedGroup1 = selectedGroups1
+        var selectedGroup1 = recruitQueueSettings[SETTINGS.GROUP1]
         var groupVillages1 = groupList.getGroupVillageIds(selectedGroup1)
-        var selectedGroup2 = selectedGroups2
+        var selectedGroup2 = recruitQueueSettings[SETTINGS.GROUP2]
         var groupVillages2 = groupList.getGroupVillageIds(selectedGroup2)
-        var selectedGroup3 = selectedGroups3
+        var selectedGroup3 = recruitQueueSettings[SETTINGS.GROUP3]
         var groupVillages3 = groupList.getGroupVillageIds(selectedGroup3)
-        var selectedGroup4 = selectedGroups4
+        var selectedGroup4 = recruitQueueSettings[SETTINGS.GROUP4]
         var groupVillages4 = groupList.getGroupVillageIds(selectedGroup4)
-        var choosedPreset1 = selectedPreset1
-        var choosedPreset2 = selectedPreset2
-        var choosedPreset3 = selectedPreset3
-        var choosedPreset4 = selectedPreset4
-        var finalPreset1 = selectedPreset1_F
-        var finalPreset2 = selectedPreset2_F
-        var finalPreset3 = selectedPreset3_F
-        var finalPreset4 = selectedPreset4_F
+        var choosedPreset1 = recruitQueueSettings[SETTINGS.PRESET1]
+        var choosedPreset2 = recruitQueueSettings[SETTINGS.PRESET2]
+        var choosedPreset3 = recruitQueueSettings[SETTINGS.PRESET3]
+        var choosedPreset4 = recruitQueueSettings[SETTINGS.PRESET4]
+        var finalPreset1 = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
+        var finalPreset2 = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
+        var finalPreset3 = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
+        var finalPreset4 = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
         var unit = ''
         var woodModifier1 = 0
         var woodModifier2 = 0
