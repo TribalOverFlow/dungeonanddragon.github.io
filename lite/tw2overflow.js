@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 07:10:53 GMT
+ * Tue, 01 Dec 2020 08:43:25 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6748,10 +6748,10 @@ define('two/battleCalculator', [
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
     battleCalculator.getPresetUnits = function() {
-        const presetSelectedtoGet = battleCalculatorSettings[SETTINGS.PRESET]
+        presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
-                if (data.presets[i].id == presetSelectedtoGet[0]) {
+                if (data.presets[i].id == presetSelected) {
                     presetSPEAR = data.presets[i].units.spear
                     presetSWORD = data.presets[i].units.sword
                     presetAXE = data.presets[i].units.axe
@@ -24312,8 +24312,28 @@ define('two/recruitQueue', [
             groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
             groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
             groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
-            console.log(groupVillages1, choosedPreset1)
-            
+            console.log(groupVillages1)
+            const presets = modelDataService.getPresetList().getPresets()
+            const preset1 = presets[choosedPreset1]
+            const preset2 = presets[choosedPreset2]
+            const preset3 = presets[choosedPreset3]
+            const preset4 = presets[choosedPreset4]
+            const preset1F = presets[finalPreset1]
+            const preset2F = presets[finalPreset2]
+            const preset3F = presets[finalPreset3]
+            const preset4F = presets[finalPreset4]
+            Axe1 = preset1.units.axe
+            Archer1 = preset1.units.archer
+            Catapult1 = preset1.units.catapult
+            HC1 = preset1.units.heavy_cavalry
+            LC1 = preset1.units.light_cavalry
+            MA1 = preset1.units.mounted_archer
+            Ram1 = preset1.units.ram
+            Sword1 = preset1.units.sword
+            Spear1 = preset1.units.spear
+            console.log(Spear1, finalSpear1, Archer1, finalArcher1)
+            console.log(preset2, preset3, preset4, preset1F, preset2F, preset3F, preset4F)
+			
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
                     if (data.presets[i].name == selectedPreset1) {
@@ -24331,7 +24351,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset1[0]) {
+                    if (data.presets[i].name == selectedPreset1_F) {
                         finalAxe1 = data.presets[i].units.axe
                         finalArcher1 = data.presets[i].units.archer
                         finalCatapult1 = data.presets[i].units.catapult
@@ -24434,7 +24454,6 @@ define('two/recruitQueue', [
                     }
                 }
             })
-            console.log(Archer1, finalArcher1)
             getVillageData()
         }
 
