@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 21:47:34 GMT
+ * Tue, 01 Dec 2020 22:08:59 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24354,15 +24354,15 @@ define('two/recruitQueue', [
             Ram1 = selectedPreset1[0].units.ram
             Catapult1 = selectedPreset1[0].units.catapult
             console.log(selectedPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
-            finalSpear1 = selectedPreset1_F[1].units.spear
-            finalSword1 = selectedPreset1_F[1].units.sword
-            finalAxe1 = selectedPreset1_F[1].units.axe
-            finalArcher1 = selectedPreset1_F[1].units.archer
-            finalLC1 = selectedPreset1_F[1].units.light_cavalry
-            finalMA1 = selectedPreset1_F[1].units.mounted_archer
-            finalHC1 = selectedPreset1_F[1].units.heavy_cavalry
-            finalRam1 = selectedPreset1_F[1].units.ram
-            finalCatapult1 = selectedPreset1_F[1].units.catapult
+            finalSpear1 = selectedPreset1_F[0].units.spear
+            finalSword1 = selectedPreset1_F[0].units.sword
+            finalAxe1 = selectedPreset1_F[0].units.axe
+            finalArcher1 = selectedPreset1_F[0].units.archer
+            finalLC1 = selectedPreset1_F[0].units.light_cavalry
+            finalMA1 = selectedPreset1_F[0].units.mounted_archer
+            finalHC1 = selectedPreset1_F[0].units.heavy_cavalry
+            finalRam1 = selectedPreset1_F[0].units.ram
+            finalCatapult1 = selectedPreset1_F[0].units.catapult
             console.log(Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
             getVillageData()
         }
