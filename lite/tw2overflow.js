@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 06:41:51 GMT
+ * Tue, 01 Dec 2020 07:02:54 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6751,7 +6751,7 @@ define('two/battleCalculator', [
         presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
-                if (data.presets[i].id == presetSelected) {
+                if (data.presets[i].id == presetSelected[0]) {
                     presetSPEAR = data.presets[i].units.spear
                     presetSWORD = data.presets[i].units.sword
                     presetAXE = data.presets[i].units.axe
@@ -24132,7 +24132,6 @@ define('two/recruitQueue', [
         const finalPreset4 = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
-        console.log(choosedPreset1, selectedGroup1)
         let groupVillages1 = []
         let groupVillages2 = []
         let groupVillages3 = []
@@ -24313,11 +24312,11 @@ define('two/recruitQueue', [
             groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
             groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
             groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
-            console.log(groupVillages1)
+            console.log(groupVillages1, choosedPreset1)
             
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset1[0]) {
+                    if (data.presets[i].name == selectedPreset1[0]) {
                         Axe1 = data.presets[i].units.axe
                         Archer1 = data.presets[i].units.archer
                         Catapult1 = data.presets[i].units.catapult
