@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 06:35:49 GMT
+ * Tue, 01 Dec 2020 06:41:51 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24309,10 +24309,10 @@ define('two/recruitQueue', [
         let i = 0
 
         function getPresets() {
-            groupVillages1 = groupList.getGroupVillageIds(selectedGroup1)
-            groupVillages2 = groupList.getGroupVillageIds(selectedGroup2)
-            groupVillages3 = groupList.getGroupVillageIds(selectedGroup3)
-            groupVillages4 = groupList.getGroupVillageIds(selectedGroup4)
+            groupVillages1 = groupList.getGroupVillageIds(selectedGroup1[0])
+            groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
+            groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
+            groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
             console.log(groupVillages1)
             
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
@@ -24332,7 +24332,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset1) {
+                    if (data.presets[i].name == finalPreset1[0]) {
                         finalAxe1 = data.presets[i].units.axe
                         finalArcher1 = data.presets[i].units.archer
                         finalCatapult1 = data.presets[i].units.catapult
@@ -24347,7 +24347,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset2) {
+                    if (data.presets[i].name == choosedPreset2[0]) {
                         Axe2 = data.presets[i].units.axe
                         Archer2 = data.presets[i].units.archer
                         Catapult2 = data.presets[i].units.catapult
@@ -24362,7 +24362,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset2) {
+                    if (data.presets[i].name == finalPreset2[0]) {
                         finalAxe2 = data.presets[i].units.axe
                         finalArcher2 = data.presets[i].units.archer
                         finalCatapult2 = data.presets[i].units.catapult
@@ -24377,7 +24377,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset3) {
+                    if (data.presets[i].name == choosedPreset3[0]) {
                         Axe3 = data.presets[i].units.axe
                         Archer3 = data.presets[i].units.archer
                         Catapult3 = data.presets[i].units.catapult
@@ -24392,7 +24392,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset3) {
+                    if (data.presets[i].name == finalPreset3[0]) {
                         finalAxe3 = data.presets[i].units.axe
                         finalArcher3 = data.presets[i].units.archer
                         finalCatapult3 = data.presets[i].units.catapult
@@ -24407,7 +24407,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset4) {
+                    if (data.presets[i].name == choosedPreset4[0]) {
                         Axe4 = data.presets[i].units.axe
                         Archer4 = data.presets[i].units.archer
                         Catapult4 = data.presets[i].units.catapult
@@ -24422,7 +24422,7 @@ define('two/recruitQueue', [
             })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset4) {
+                    if (data.presets[i].name == finalPreset4[0]) {
                         finalAxe4 = data.presets[i].units.axe
                         finalArcher4 = data.presets[i].units.archer
                         finalCatapult4 = data.presets[i].units.catapult
