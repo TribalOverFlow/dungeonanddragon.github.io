@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 17:31:53 GMT
+ * Tue, 01 Dec 2020 17:57:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24359,22 +24359,10 @@ define('two/recruitQueue', [
             Archer1 = selectedPreset1[0].units.archer
             LC1 = selectedPreset1[0].units.light_cavalry
             MA1 = selectedPreset1[0].units.mounted_archer
-            console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1)
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == selectedPreset1[0]) {
-                        Axe1 = data.presets[i].units.axe
-                        Archer1 = data.presets[i].units.archer
-                        Catapult1 = data.presets[i].units.catapult
-                        HC1 = data.presets[i].units.heavy_cavalry
-                        LC1 = data.presets[i].units.light_cavalry
-                        MA1 = data.presets[i].units.mounted_archer
-                        Ram1 = data.presets[i].units.ram
-                        Sword1 = data.presets[i].units.sword
-                        Spear1 = data.presets[i].units.spear
-                    }
-                }
-            })
+            HC1 = selectedPreset1[0].units.heavy_cavalry
+            Ram1 = selectedPreset1[0].units.ram
+            Catapult1 = selectedPreset1[0].units.catapult
+            console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
                     if (data.presets[i].name == selectedPreset1_F) {
