@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 16:41:15 GMT
+ * Tue, 01 Dec 2020 16:45:19 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23859,14 +23859,14 @@ define('two/recruitQueue', [
     let recruitLog
     let logData = []
     const LOGS_LIMIT = 500
-    let selectedPreset1 = []
-    let selectedPreset2 = []
-    let selectedPreset3 = []
-    let selectedPreset4 = []
-    let selectedPreset1_F = []
-    let selectedPreset2_F = []
-    let selectedPreset3_F = []
-    let selectedPreset4_F = []
+    var selectedPreset1 = []
+    var selectedPreset2 = []
+    var selectedPreset3 = []
+    var selectedPreset4 = []
+    var selectedPreset1_F = []
+    var selectedPreset2_F = []
+    var selectedPreset3_F = []
+    var selectedPreset4_F = []
     let selectedGroups1 = []
     let selectedGroups2 = []
     let selectedGroups3 = []
