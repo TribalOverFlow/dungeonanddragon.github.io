@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 16:02:57 GMT
+ * Tue, 01 Dec 2020 16:28:03 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24311,6 +24311,14 @@ define('two/recruitQueue', [
             var selectedPreset2_F = []
             var selectedPreset3_F = []
             var selectedPreset4_F = []
+            var units1 = []
+            var units2 = []
+            var units3 = []
+            var units4 = []
+            var units1_F = selectedPreset1_F[0].units
+            var units2_F = selectedPreset2_F[0].units
+            var units3_F = selectedPreset3_F[0].units
+            var units4_F = selectedPreset4_F[0].units
             var allPresets = modelDataService.getPresetList().getPresets()
             var presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
             var presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
@@ -24322,18 +24330,23 @@ define('two/recruitQueue', [
             var presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
             presetsSelectedByTheUser1.forEach(function(presetId) {
                 selectedPreset1.push(allPresets[presetId])
+                units1 = selectedPreset1[0].units
             })
             presetsSelectedByTheUser2.forEach(function(presetId) {
                 selectedPreset2.push(allPresets[presetId])
+                units2 = selectedPreset2[0].units
             })
             presetsSelectedByTheUser3.forEach(function(presetId) {
                 selectedPreset3.push(allPresets[presetId])
+                units3 = selectedPreset3[0].units
             })
             presetsSelectedByTheUser4.forEach(function(presetId) {
                 selectedPreset4.push(allPresets[presetId])
+                units4 = selectedPreset4[0].units
             })
             presetsSelectedByTheUser1_F.forEach(function(presetId) {
                 selectedPreset1_F.push(allPresets[presetId])
+                units1_F = selectedPreset1_F[0].units
             })
             presetsSelectedByTheUser2_F.forEach(function(presetId) {
                 selectedPreset2_F.push(allPresets[presetId])
@@ -24345,14 +24358,6 @@ define('two/recruitQueue', [
                 selectedPreset4_F.push(allPresets[presetId])
             })
             console.log(selectedPreset1)
-            var units1 = selectedPreset1[0].units
-            var units2 = selectedPreset2[0].units
-            var units3 = selectedPreset3[0].units
-            var units4 = selectedPreset4[0].units
-            var units1_F = selectedPreset1_F[0].units
-            var units2_F = selectedPreset2_F[0].units
-            var units3_F = selectedPreset3_F[0].units
-            var units4_F = selectedPreset4_F[0].units
             console.log(units1, units2, units3, units4, units1_F, units2_F, units3_F, units4_F)
             Axe1 = units1.axe
             Archer1 = units1.archer
