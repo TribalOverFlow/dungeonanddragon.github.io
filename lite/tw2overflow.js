@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 19:01:32 GMT
+ * Tue, 01 Dec 2020 19:11:43 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23863,7 +23863,6 @@ define('two/recruitQueue', [
     var selectedPreset2 = []
     var selectedPreset3 = []
     var selectedPreset4 = []
-    var selectedPreset1_F = []
     var selectedPreset2_F = []
     var selectedPreset3_F = []
     var selectedPreset4_F = []
@@ -23912,7 +23911,6 @@ define('two/recruitQueue', [
         selectedPreset2 = []
         selectedPreset3 = []
         selectedPreset4 = []
-        selectedPreset1_F = []
         selectedPreset2_F = []
         selectedPreset3_F = []
         selectedPreset4_F = []
@@ -23928,6 +23926,9 @@ define('two/recruitQueue', [
         presetsSelectedByTheUser1.forEach(function(presetId) {
             selectedPreset1.push(allPresets[presetId])
         })
+        presetsSelectedByTheUser1_F.forEach(function(presetId) {
+            selectedPreset1.push(allPresets[presetId])
+        })
         presetsSelectedByTheUser2.forEach(function(presetId) {
             selectedPreset2.push(allPresets[presetId])
         })
@@ -23936,9 +23937,6 @@ define('two/recruitQueue', [
         })
         presetsSelectedByTheUser4.forEach(function(presetId) {
             selectedPreset4.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser1_F.forEach(function(presetId) {
-            selectedPreset1_F.push(allPresets[presetId])
         })
         presetsSelectedByTheUser2_F.forEach(function(presetId) {
             selectedPreset2_F.push(allPresets[presetId])
@@ -24316,7 +24314,6 @@ define('two/recruitQueue', [
             selectedPreset2 = []
             selectedPreset3 = []
             selectedPreset4 = []
-            selectedPreset1_F = []
             selectedPreset2_F = []
             selectedPreset3_F = []
             selectedPreset4_F = []
@@ -24332,6 +24329,9 @@ define('two/recruitQueue', [
             presetsSelectedByTheUser1.forEach(function(presetId) {
                 selectedPreset1.push(allPresets[presetId])
             })
+            presetsSelectedByTheUser1_F.forEach(function(presetId) {
+                selectedPreset1.push(allPresets[presetId])
+            })
             presetsSelectedByTheUser2.forEach(function(presetId) {
                 selectedPreset2.push(allPresets[presetId])
             })
@@ -24340,9 +24340,6 @@ define('two/recruitQueue', [
             })
             presetsSelectedByTheUser4.forEach(function(presetId) {
                 selectedPreset4.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser1_F.forEach(function(presetId) {
-                selectedPreset1.push(allPresets[presetId])
             })
             presetsSelectedByTheUser2_F.forEach(function(presetId) {
                 selectedPreset2_F.push(allPresets[presetId])
@@ -24372,7 +24369,7 @@ define('two/recruitQueue', [
             finalHC2 = selectedPreset1[1].units.heavy_cavalry
             finalRam2 = selectedPreset1[1].units.ram
             finalCatapult2 = selectedPreset1[1].units.catapult
-            console.log(selectedPreset2, choosedPreset2, finalPreset2, Spear2, Sword2, Axe2, Archer2, LC2, MA2, HC2, Ram2, Catapult2)
+            console.log(Spear2, Sword2, Axe2, Archer2, LC2, MA2, HC2, Ram2, Catapult2)
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
                     if (data.presets[i].name == choosedPreset2[0]) {
