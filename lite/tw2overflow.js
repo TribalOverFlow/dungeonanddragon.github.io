@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 14:06:42 GMT
+ * Tue, 01 Dec 2020 14:16:14 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24303,14 +24303,14 @@ define('two/recruitQueue', [
             groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
             groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
             groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
-            selectedPreset1 = []
-            selectedPreset2 = []
-            selectedPreset3 = []
-            selectedPreset4 = []
-            selectedPreset1_F = []
-            selectedPreset2_F = []
-            selectedPreset3_F = []
-            selectedPreset4_F = []
+            var selectedPreset1 = []
+            var selectedPreset2 = []
+            var selectedPreset3 = []
+            var selectedPreset4 = []
+            var selectedPreset1_F = []
+            var selectedPreset2_F = []
+            var selectedPreset3_F = []
+            var selectedPreset4_F = []
             const allPresets = modelDataService.getPresetList().getPresets()
             const presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
             const presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
@@ -24344,6 +24344,7 @@ define('two/recruitQueue', [
             presetsSelectedByTheUser4_F.forEach(function(presetId) {
                 selectedPreset4_F.push(allPresets[presetId])
             })
+            console.log(selectedPreset1)
             var units1 = selectedPreset1[0].units
             var units2 = selectedPreset2[0].units
             var units3 = selectedPreset3[0].units
