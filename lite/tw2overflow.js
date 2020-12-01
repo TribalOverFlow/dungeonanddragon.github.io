@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 09:05:14 GMT
+ * Tue, 01 Dec 2020 09:15:04 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24312,8 +24312,8 @@ define('two/recruitQueue', [
             groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
             groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
             groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
-            const presets = modelDataService.getPresetList().getPresets()
-            const preset1 = presets[choosedPreset1]
+            const presets = modelDataService.getPresetList()
+            const preset1 = presets.getPresets(selectedPreset1[0])
             const preset2 = presets[choosedPreset2]
             const preset3 = presets[choosedPreset3]
             const preset4 = presets[choosedPreset4]
@@ -24321,7 +24321,7 @@ define('two/recruitQueue', [
             const preset2F = presets[finalPreset2]
             const preset3F = presets[finalPreset3]
             const preset4F = presets[finalPreset4]
-            console.log(preset1, preset2, preset3, preset4, preset1F, preset2F, preset3F, preset4F)
+            console.log(choosedPreset1, preset1, preset2, preset3, preset4, preset1F, preset2F, preset3F, preset4F)
             Axe1 = preset1.units.axe
             Archer1 = preset1.units.archer
             Catapult1 = preset1.units.catapult
