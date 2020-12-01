@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 06:30:43 GMT
+ * Tue, 01 Dec 2020 06:35:49 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24317,7 +24317,7 @@ define('two/recruitQueue', [
             
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset1) {
+                    if (data.presets[i].name == choosedPreset1[0]) {
                         Axe1 = data.presets[i].units.axe
                         Archer1 = data.presets[i].units.archer
                         Catapult1 = data.presets[i].units.catapult
@@ -24435,7 +24435,7 @@ define('two/recruitQueue', [
                     }
                 }
             })
-            console.log(Axe1, finalAxe1)
+            console.log(Archer1, finalArcher1)
             getVillageData()
         }
 
