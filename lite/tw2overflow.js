@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 07:02:54 GMT
+ * Tue, 01 Dec 2020 07:10:53 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6748,10 +6748,10 @@ define('two/battleCalculator', [
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
     }
     battleCalculator.getPresetUnits = function() {
-        presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
+        const presetSelectedtoGet = battleCalculatorSettings[SETTINGS.PRESET]
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             for (i = 0; i < data.presets.length; i++) {
-                if (data.presets[i].id == presetSelected[0]) {
+                if (data.presets[i].id == presetSelectedtoGet[0]) {
                     presetSPEAR = data.presets[i].units.spear
                     presetSWORD = data.presets[i].units.sword
                     presetAXE = data.presets[i].units.axe
@@ -24316,7 +24316,7 @@ define('two/recruitQueue', [
             
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == selectedPreset1[0]) {
+                    if (data.presets[i].name == selectedPreset1) {
                         Axe1 = data.presets[i].units.axe
                         Archer1 = data.presets[i].units.archer
                         Catapult1 = data.presets[i].units.catapult
