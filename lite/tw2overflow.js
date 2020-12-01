@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 18:25:46 GMT
+ * Tue, 01 Dec 2020 19:01:32 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24342,7 +24342,7 @@ define('two/recruitQueue', [
                 selectedPreset4.push(allPresets[presetId])
             })
             presetsSelectedByTheUser1_F.forEach(function(presetId) {
-                selectedPreset1_F.push(allPresets[presetId])
+                selectedPreset1.push(allPresets[presetId])
             })
             presetsSelectedByTheUser2_F.forEach(function(presetId) {
                 selectedPreset2_F.push(allPresets[presetId])
@@ -24363,31 +24363,16 @@ define('two/recruitQueue', [
             Ram1 = selectedPreset1[0].units.ram
             Catapult1 = selectedPreset1[0].units.catapult
             console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
-            finalSpear2 = selectedPreset2[0].units.spear
-            finalSword2 = selectedPreset2[0].units.sword
-            finalAxe2 = selectedPreset2[0].units.axe
-            finalArcher2 = selectedPreset2[0].units.archer
-            finalLC2 = selectedPreset2[0].units.light_cavalry
-            finalMA2 = selectedPreset2[0].units.mounted_archer
-            finalHC2 = selectedPreset2[0].units.heavy_cavalry
-            finalRam2 = selectedPreset2[0].units.ram
-            finalCatapult2 = selectedPreset2[0].units.catapult
+            finalSpear2 = selectedPreset1[1].units.spear
+            finalSword2 = selectedPreset1[1].units.sword
+            finalAxe2 = selectedPreset1[1].units.axe
+            finalArcher2 = selectedPreset1[1].units.archer
+            finalLC2 = selectedPreset1[1].units.light_cavalry
+            finalMA2 = selectedPreset1[1].units.mounted_archer
+            finalHC2 = selectedPreset1[1].units.heavy_cavalry
+            finalRam2 = selectedPreset1[1].units.ram
+            finalCatapult2 = selectedPreset1[1].units.catapult
             console.log(selectedPreset2, choosedPreset2, finalPreset2, Spear2, Sword2, Axe2, Archer2, LC2, MA2, HC2, Ram2, Catapult2)
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == selectedPreset1_F) {
-                        finalAxe1 = data.presets[i].units.axe
-                        finalArcher1 = data.presets[i].units.archer
-                        finalCatapult1 = data.presets[i].units.catapult
-                        finalHC1 = data.presets[i].units.heavy_cavalry
-                        finalLC1 = data.presets[i].units.light_cavalry
-                        finalMA1 = data.presets[i].units.mounted_archer
-                        finalRam1 = data.presets[i].units.ram
-                        finalSword1 = data.presets[i].units.sword
-                        finalSpear1 = data.presets[i].units.spear
-                    }
-                }
-            })
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
                     if (data.presets[i].name == choosedPreset2[0]) {
