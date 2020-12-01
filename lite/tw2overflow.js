@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 16:35:05 GMT
+ * Tue, 01 Dec 2020 16:41:15 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24353,82 +24353,10 @@ define('two/recruitQueue', [
             presetsSelectedByTheUser4_F.forEach(function(presetId) {
                 selectedPreset4_F.push(allPresets[presetId])
             })
-            Axe1 = selectedPreset1[0].units.axe
-            Archer1 = selectedPreset1[0].units.archer
-            Catapult1 = selectedPreset1[0].units.catapult
-            HC1 = selectedPreset1[0].units.heavy_cavalry
-            LC1 = selectedPreset1[0].units.light_cavalry
-            MA1 = selectedPreset1[0].units.mounted_archer
-            Ram1 = selectedPreset1[0].units.ram
-            Sword1 = selectedPreset1[0].units.sword
-            Spear1 = selectedPreset1[0].units.spear
-            finalAxe1 = selectedPreset1_F[0].units.axe
-            finalArcher1 = selectedPreset1_F[0].units.archer
-            finalCatapult1 = selectedPreset1_F[0].units.catapult
-            finalHC1 = selectedPreset1_F[0].units.heavy_cavalry
-            finalLC1 = selectedPreset1_F[0].units.light_cavalry
-            finalMA1 = selectedPreset1_F[0].units.mounted_archer
-            finalRam1 = selectedPreset1_F[0].units.ram
-            finalSword1 = selectedPreset1_F[0].units.sword
-            finalSpear1 = selectedPreset1_F[0].units.spear
-            Axe2 = selectedPreset2[0].units.axe
-            Archer2 = selectedPreset2[0].units.archer
-            Catapult2 = selectedPreset2[0].units.catapult
-            HC2 = selectedPreset2[0].units.heavy_cavalry
-            LC2 = selectedPreset2[0].units.light_cavalry
-            MA2 = selectedPreset2[0].units.mounted_archer
-            Ram2 = selectedPreset2[0].units.ram
-            Sword2 = selectedPreset2[0].units.sword
-            Spear2 = selectedPreset2[0].units.spear
-            finalAxe2 = selectedPreset2_F[0].units.axe
-            finalArcher2 = selectedPreset2_F[0].units.archer
-            finalCatapult2 = selectedPreset2_F[0].units.catapult
-            finalHC2 = selectedPreset2_F[0].units.heavy_cavalry
-            finalLC2 = selectedPreset2_F[0].units.light_cavalry
-            finalMA2 = selectedPreset2_F[0].units.mounted_archer
-            finalRam2 = selectedPreset2_F[0].units.ram
-            finalSword2 = selectedPreset2_F[0].units.sword
-            finalSpear2 = selectedPreset2_F[0].units.spear
-            Axe3 = selectedPreset3[0].units.axe
-            Archer3 = selectedPreset3[0].units.archer
-            Catapult3 = selectedPreset3[0].units.catapult
-            HC3 = selectedPreset3[0].units.heavy_cavalry
-            LC3 = selectedPreset3[0].units.light_cavalry
-            MA3 = selectedPreset3[0].units.mounted_archer
-            Ram3 = selectedPreset3[0].units.ram
-            Sword3 = selectedPreset3[0].units.sword
-            Spear3 = selectedPreset3[0].units.spear
-            finalAxe3 = selectedPreset3_F[0].units.axe
-            finalArcher3 = selectedPreset3_F[0].units.archer
-            finalCatapult3 = selectedPreset3_F[0].units.catapult
-            finalHC3 = selectedPreset3_F[0].units.heavy_cavalry
-            finalLC3 = selectedPreset3_F[0].units.light_cavalry
-            finalMA3 = selectedPreset3_F[0].units.mounted_archer
-            finalRam3 = selectedPreset3_F[0].units.ram
-            finalSword3 = selectedPreset3_F[0].units.sword
-            finalSpear3 = selectedPreset3_F[0].units.spear
-            Axe4 = selectedPreset4[0].units.axe
-            Archer4 = selectedPreset4[0].units.archer
-            Catapult4 = selectedPreset4[0].units.catapult
-            HC4 = selectedPreset4[0].units.heavy_cavalry
-            LC4 = selectedPreset4[0].units.light_cavalry
-            MA4 = selectedPreset4[0].units.mounted_archer
-            Ram4 = selectedPreset4[0].units.ram
-            Sword4 = selectedPreset4[0].units.sword
-            Spear4 = selectedPreset4[0].units.spear
-            finalAxe4 = selectedPreset4_F[0].units.axe
-            finalArcher4 = selectedPreset4_F[0].units.archer
-            finalCatapult4 = selectedPreset4_F[0].units.catapult
-            finalHC4 = selectedPreset4_F[0].units.heavy_cavalry
-            finalLC4 = selectedPreset4_F[0].units.light_cavalry
-            finalMA4 = selectedPreset4_F[0].units.mounted_archer
-            finalRam4 = selectedPreset4_F[0].units.ram
-            finalSword4 = selectedPreset4_F[0].units.sword
-            finalSpear4 = selectedPreset4_F[0].units.spear
             console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1)
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == selectedPreset1[0]) {
+                    if (data.presets[i].name == selectedPreset1[0].id) {
                         Axe1 = data.presets[i].units.axe
                         Archer1 = data.presets[i].units.archer
                         Catapult1 = data.presets[i].units.catapult
