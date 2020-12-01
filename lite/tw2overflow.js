@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 16:45:19 GMT
+ * Tue, 01 Dec 2020 16:58:25 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24353,10 +24353,11 @@ define('two/recruitQueue', [
             presetsSelectedByTheUser4_F.forEach(function(presetId) {
                 selectedPreset4_F.push(allPresets[presetId])
             })
+            Spear1 = selectedPreset1[0].units.spear
             console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1)
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == selectedPreset1[0].id) {
+                    if (data.presets[i].name == selectedPreset1[0]) {
                         Axe1 = data.presets[i].units.axe
                         Archer1 = data.presets[i].units.archer
                         Catapult1 = data.presets[i].units.catapult
