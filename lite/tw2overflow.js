@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 11:10:40 GMT
+ * Tue, 01 Dec 2020 11:34:27 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24353,7 +24353,16 @@ define('two/recruitQueue', [
             presetsSelectedByTheUser4_F.forEach(function(presetId) {
                 selectedPreset4_F.push(allPresets[presetId])
             })
-            console.log(selectedPreset1, choosedPreset1, finalPreset1)
+            Axe1 = selectedPreset1[0].units.axe
+            Archer1 = selectedPreset1[0].units.archer
+            Catapult1 = selectedPreset1[0].units.catapult
+            HC1 = selectedPreset1[0].units.heavy_cavalry
+            LC1 = selectedPreset1[0].units.light_cavalry
+            MA1 = selectedPreset1[0].units.mounted_archer
+            Ram1 = selectedPreset1[0].units.ram
+            Sword1 = selectedPreset1[0].units.sword
+            Spear1 = selectedPreset1[0].units.spear
+            console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1)
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
                     if (data.presets[i].name == selectedPreset1[0]) {
@@ -24366,7 +24375,6 @@ define('two/recruitQueue', [
                         Ram1 = data.presets[i].units.ram
                         Sword1 = data.presets[i].units.sword
                         Spear1 = data.presets[i].units.spear
-                        console.log(Spear1)
                     }
                 }
             })
@@ -24475,6 +24483,7 @@ define('two/recruitQueue', [
                     }
                 }
             })
+            console.log(Spear1)
             getVillageData()
         }
 
