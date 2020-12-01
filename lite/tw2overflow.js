@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 19:53:16 GMT
+ * Tue, 01 Dec 2020 20:38:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24120,14 +24120,6 @@ define('two/recruitQueue', [
         const selectedGroup2 = recruitQueueSettings[SETTINGS.GROUP2]
         const selectedGroup3 = recruitQueueSettings[SETTINGS.GROUP3]
         const selectedGroup4 = recruitQueueSettings[SETTINGS.GROUP4]
-        const choosedPreset1 = recruitQueueSettings[SETTINGS.PRESET1]
-        const choosedPreset2 = recruitQueueSettings[SETTINGS.PRESET2]
-        const choosedPreset3 = recruitQueueSettings[SETTINGS.PRESET3]
-        const choosedPreset4 = recruitQueueSettings[SETTINGS.PRESET4]
-        const finalPreset1 = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
-        const finalPreset2 = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
-        const finalPreset3 = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
-        const finalPreset4 = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
         let groupVillages1 = []
@@ -24303,7 +24295,6 @@ define('two/recruitQueue', [
         let finalSpear4 = 0
         let finalSword4 = 0
         let interval = 5000
-        let i = 0
 
         function getPresets() {
             groupVillages1 = groupList.getGroupVillageIds(selectedGroup1[0])
@@ -24359,7 +24350,7 @@ define('two/recruitQueue', [
             HC1 = selectedPreset1[0].units.heavy_cavalry
             Ram1 = selectedPreset1[0].units.ram
             Catapult1 = selectedPreset1[0].units.catapult
-            console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
+            console.log(selectedPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
             finalSpear2 = selectedPreset1[1].units.spear
             finalSword2 = selectedPreset1[1].units.sword
             finalAxe2 = selectedPreset1[1].units.axe
@@ -24370,97 +24361,6 @@ define('two/recruitQueue', [
             finalRam2 = selectedPreset1[1].units.ram
             finalCatapult2 = selectedPreset1[1].units.catapult
             console.log(Spear2, Sword2, Axe2, Archer2, LC2, MA2, HC2, Ram2, Catapult2)
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset2[0]) {
-                        Axe2 = data.presets[i].units.axe
-                        Archer2 = data.presets[i].units.archer
-                        Catapult2 = data.presets[i].units.catapult
-                        HC2 = data.presets[i].units.heavy_cavalry
-                        LC2 = data.presets[i].units.light_cavalry
-                        MA2 = data.presets[i].units.mounted_archer
-                        Ram2 = data.presets[i].units.ram
-                        Sword2 = data.presets[i].units.sword
-                        Spear2 = data.presets[i].units.spear
-                    }
-                }
-            })
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset2[0]) {
-                        finalAxe2 = data.presets[i].units.axe
-                        finalArcher2 = data.presets[i].units.archer
-                        finalCatapult2 = data.presets[i].units.catapult
-                        finalHC2 = data.presets[i].units.heavy_cavalry
-                        finalLC2 = data.presets[i].units.light_cavalry
-                        finalMA2 = data.presets[i].units.mounted_archer
-                        finalRam2 = data.presets[i].units.ram
-                        finalSword2 = data.presets[i].units.sword
-                        finalSpear2 = data.presets[i].units.spear
-                    }
-                }
-            })
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset3[0]) {
-                        Axe3 = data.presets[i].units.axe
-                        Archer3 = data.presets[i].units.archer
-                        Catapult3 = data.presets[i].units.catapult
-                        HC3 = data.presets[i].units.heavy_cavalry
-                        LC3 = data.presets[i].units.light_cavalry
-                        MA3 = data.presets[i].units.mounted_archer
-                        Ram3 = data.presets[i].units.ram
-                        Sword3 = data.presets[i].units.sword
-                        Spear3 = data.presets[i].units.spear
-                    }
-                }
-            })
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset3[0]) {
-                        finalAxe3 = data.presets[i].units.axe
-                        finalArcher3 = data.presets[i].units.archer
-                        finalCatapult3 = data.presets[i].units.catapult
-                        finalHC3 = data.presets[i].units.heavy_cavalry
-                        finalLC3 = data.presets[i].units.light_cavalry
-                        finalMA3 = data.presets[i].units.mounted_archer
-                        finalRam3 = data.presets[i].units.ram
-                        finalSword3 = data.presets[i].units.sword
-                        finalSpear3 = data.presets[i].units.spear
-                    }
-                }
-            })
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == choosedPreset4[0]) {
-                        Axe4 = data.presets[i].units.axe
-                        Archer4 = data.presets[i].units.archer
-                        Catapult4 = data.presets[i].units.catapult
-                        HC4 = data.presets[i].units.heavy_cavalry
-                        LC4 = data.presets[i].units.light_cavalry
-                        MA4 = data.presets[i].units.mounted_archer
-                        Ram4 = data.presets[i].units.ram
-                        Sword4 = data.presets[i].units.sword
-                        Spear4 = data.presets[i].units.spear
-                    }
-                }
-            })
-            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-                for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == finalPreset4[0]) {
-                        finalAxe4 = data.presets[i].units.axe
-                        finalArcher4 = data.presets[i].units.archer
-                        finalCatapult4 = data.presets[i].units.catapult
-                        finalHC4 = data.presets[i].units.heavy_cavalry
-                        finalLC4 = data.presets[i].units.light_cavalry
-                        finalMA4 = data.presets[i].units.mounted_archer
-                        finalRam4 = data.presets[i].units.ram
-                        finalSword4 = data.presets[i].units.sword
-                        finalSpear4 = data.presets[i].units.spear
-                    }
-                }
-            })
-            console.log(Spear1)
             getVillageData()
         }
 
