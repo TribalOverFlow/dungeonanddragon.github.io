@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 17:01:45 GMT
+ * Tue, 01 Dec 2020 17:31:53 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24355,7 +24355,11 @@ define('two/recruitQueue', [
             })
             Spear1 = selectedPreset1[0].units.spear
             Sword1 = selectedPreset1[0].units.sword
-            console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1, Sword1)
+            Axe1 = selectedPreset1[0].units.axe
+            Archer1 = selectedPreset1[0].units.archer
+            LC1 = selectedPreset1[0].units.light_cavalry
+            MA1 = selectedPreset1[0].units.mounted_archer
+            console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1)
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
                     if (data.presets[i].name == selectedPreset1[0]) {
