@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 13:41:57 GMT
+ * Tue, 01 Dec 2020 13:54:54 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24345,26 +24345,33 @@ define('two/recruitQueue', [
                 selectedPreset4_F.push(allPresets[presetId])
             })
             var units1 = selectedPreset1[0].units
-            console.log(units1)
+            var units2 = selectedPreset2[0].units
+            var units3 = selectedPreset3[0].units
+            var units4 = selectedPreset4[0].units
+            var units1_F = selectedPreset1_F[0].units
+            var units2_F = selectedPreset2_F[0].units
+            var units3_F = selectedPreset3_F[0].units
+            var units4_F = selectedPreset4_F[0].units
+            console.log(units1, units2, units3, units4, units1_F, units2_F, units3_F, units4_F)
             if (selectedPreset1 && selectedPreset1_F) {
-                Axe1 = selectedPreset1[0].units.axe
-                Archer1 = selectedPreset1[0].units.archer
-                Catapult1 = selectedPreset1[0].units.catapult
-                HC1 = selectedPreset1[0].units.heavy_cavalry
-                LC1 = selectedPreset1[0].units.light_cavalry
-                MA1 = selectedPreset1[0].units.mounted_archer
-                Ram1 = selectedPreset1[0].units.ram
-                Sword1 = selectedPreset1[0].units.sword
-                Spear1 = selectedPreset1[0].units.spear
-                finalAxe1 = selectedPreset1_F[0].units.axe
-                finalArcher1 = selectedPreset1_F[0].units.archer
-                finalCatapult1 = selectedPreset1_F[0].units.catapult
-                finalHC1 = selectedPreset1_F[0].units.heavy_cavalry
-                finalLC1 = selectedPreset1_F[0].units.light_cavalry
-                finalMA1 = selectedPreset1_F[0].units.mounted_archer
-                finalRam1 = selectedPreset1_F[0].units.ram
-                finalSword1 = selectedPreset1_F[0].units.sword
-                finalSpear1 = selectedPreset1_F[0].units.spear
+                Axe1 = units1.axe
+                Archer1 = units1.archer
+                Catapult1 = units1.catapult
+                HC1 = units1.heavy_cavalry
+                LC1 = units1.light_cavalry
+                MA1 = units1.mounted_archer
+                Ram1 = units1.ram
+                Sword1 = units1.sword
+                Spear1 = units1.spear
+                finalAxe1 = units1_F.axe
+                finalArcher1 = units1_F.archer
+                finalCatapult1 = units1_F.catapult
+                finalHC1 = units1_F.heavy_cavalry
+                finalLC1 = units1_F.light_cavalry
+                finalMA1 = units1_F.mounted_archer
+                finalRam1 = units1_F.ram
+                finalSword1 = units1_F.sword
+                finalSpear1 = units1_F.spear
             }
             if (selectedPreset2 && selectedPreset2_F) {
                 Axe2 = selectedPreset2[0].units.axe
