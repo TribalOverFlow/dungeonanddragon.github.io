@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 15:24:05 GMT
+ * Tue, 01 Dec 2020 16:02:57 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23859,14 +23859,14 @@ define('two/recruitQueue', [
     let recruitLog
     let logData = []
     const LOGS_LIMIT = 500
-    let selectedPreset1 = []
-    let selectedPreset2 = []
-    let selectedPreset3 = []
-    let selectedPreset4 = []
-    let selectedPreset1_F = []
-    let selectedPreset2_F = []
-    let selectedPreset3_F = []
-    let selectedPreset4_F = []
+    var selectedPreset1 = []
+    var selectedPreset2 = []
+    var selectedPreset3 = []
+    var selectedPreset4 = []
+    var selectedPreset1_F = []
+    var selectedPreset2_F = []
+    var selectedPreset3_F = []
+    var selectedPreset4_F = []
     let selectedGroups1 = []
     let selectedGroups2 = []
     let selectedGroups3 = []
@@ -24311,15 +24311,15 @@ define('two/recruitQueue', [
             var selectedPreset2_F = []
             var selectedPreset3_F = []
             var selectedPreset4_F = []
-            const allPresets = modelDataService.getPresetList().getPresets()
-            const presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
-            const presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
-            const presetsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.PRESET3]
-            const presetsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.PRESET4]
-            const presetsSelectedByTheUser1_F = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
-            const presetsSelectedByTheUser2_F = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
-            const presetsSelectedByTheUser3_F = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
-            const presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
+            var allPresets = modelDataService.getPresetList().getPresets()
+            var presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
+            var presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
+            var presetsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.PRESET3]
+            var presetsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.PRESET4]
+            var presetsSelectedByTheUser1_F = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
+            var presetsSelectedByTheUser2_F = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
+            var presetsSelectedByTheUser3_F = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
+            var presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
             presetsSelectedByTheUser1.forEach(function(presetId) {
                 selectedPreset1.push(allPresets[presetId])
             })
@@ -24372,66 +24372,60 @@ define('two/recruitQueue', [
             finalRam1 = units1_F.ram
             finalSword1 = units1_F.sword
             finalSpear1 = units1_F.spear
-            if (selectedPreset2 && selectedPreset2_F) {
-                Axe2 = units2.axe
-                Archer2 = units2.archer
-                Catapult2 = units2.catapult
-                HC2 = units2.heavy_cavalry
-                LC2 = units2.light_cavalry
-                MA2 = units2.mounted_archer
-                Ram2 = units2.ram
-                Sword2 = units2.sword
-                Spear2 = units2.spear
-                finalAxe2 = units2_F.axe
-                finalArcher2 = units2_F.archer
-                finalCatapult2 = units2_F.catapult
-                finalHC2 = units2_F.heavy_cavalry
-                finalLC2 = units2_F.light_cavalry
-                finalMA2 = units2_F.mounted_archer
-                finalRam2 = units2_F.ram
-                finalSword2 = units2_F.sword
-                finalSpear2 = units2_F.spear
-            }
-            if (selectedPreset3 && selectedPreset3_F) {
-                Axe3 = units3.axe
-                Archer3 = units3.archer
-                Catapult3 = units3.catapult
-                HC3 = units3.heavy_cavalry
-                LC3 = units3.light_cavalry
-                MA3 = units3.mounted_archer
-                Ram3 = units3.ram
-                Sword3 = units3.sword
-                Spear3 = units3.spear
-                finalAxe3 = units3_F.axe
-                finalArcher3 = units3_F.archer
-                finalCatapult3 = units3_F.catapult
-                finalHC3 = units3_F.heavy_cavalry
-                finalLC3 = units3_F.light_cavalry
-                finalMA3 = units3_F.mounted_archer
-                finalRam3 = units3_F.ram
-                finalSword3 = units3_F.sword
-                finalSpear3 = units3_F.spear
-            }
-            if (selectedPreset4 && selectedPreset4_F) {
-                Axe4 = units4.axe
-                Archer4 = units4.archer
-                Catapult4 = units4.catapult
-                HC4 = units4.heavy_cavalry
-                LC4 = units4.light_cavalry
-                MA4 = units4.mounted_archer
-                Ram4 = units4.ram
-                Sword4 = units4.sword
-                Spear4 = units4.spear
-                finalAxe4 = units4_F.axe
-                finalArcher4 = units4_F.archer
-                finalCatapult4 = units4_F.catapult
-                finalHC4 = units4_F.heavy_cavalry
-                finalLC4 = units4_F.light_cavalry
-                finalMA4 = units4_F.mounted_archer
-                finalRam4 = units4_F.ram
-                finalSword4 = units4_F.sword
-                finalSpear4 = units4_F.spear
-            }
+            Axe2 = units2.axe
+            Archer2 = units2.archer
+            Catapult2 = units2.catapult
+            HC2 = units2.heavy_cavalry
+            LC2 = units2.light_cavalry
+            MA2 = units2.mounted_archer
+            Ram2 = units2.ram
+            Sword2 = units2.sword
+            Spear2 = units2.spear
+            finalAxe2 = units2_F.axe
+            finalArcher2 = units2_F.archer
+            finalCatapult2 = units2_F.catapult
+            finalHC2 = units2_F.heavy_cavalry
+            finalLC2 = units2_F.light_cavalry
+            finalMA2 = units2_F.mounted_archer
+            finalRam2 = units2_F.ram
+            finalSword2 = units2_F.sword
+            finalSpear2 = units2_F.spear
+            Axe3 = units3.axe
+            Archer3 = units3.archer
+            Catapult3 = units3.catapult
+            HC3 = units3.heavy_cavalry
+            LC3 = units3.light_cavalry
+            MA3 = units3.mounted_archer
+            Ram3 = units3.ram
+            Sword3 = units3.sword
+            Spear3 = units3.spear
+            finalAxe3 = units3_F.axe
+            finalArcher3 = units3_F.archer
+            finalCatapult3 = units3_F.catapult
+            finalHC3 = units3_F.heavy_cavalry
+            finalLC3 = units3_F.light_cavalry
+            finalMA3 = units3_F.mounted_archer
+            finalRam3 = units3_F.ram
+            finalSword3 = units3_F.sword
+            finalSpear3 = units3_F.spear
+            Axe4 = units4.axe
+            Archer4 = units4.archer
+            Catapult4 = units4.catapult
+            HC4 = units4.heavy_cavalry
+            LC4 = units4.light_cavalry
+            MA4 = units4.mounted_archer
+            Ram4 = units4.ram
+            Sword4 = units4.sword
+            Spear4 = units4.spear
+            finalAxe4 = units4_F.axe
+            finalArcher4 = units4_F.archer
+            finalCatapult4 = units4_F.catapult
+            finalHC4 = units4_F.heavy_cavalry
+            finalLC4 = units4_F.light_cavalry
+            finalMA4 = units4_F.mounted_archer
+            finalRam4 = units4_F.ram
+            finalSword4 = units4_F.sword
+            finalSpear4 = units4_F.spear
             console.log(selectedPreset1, Spear1, finalSpear1)
             getVillageData()
         }
