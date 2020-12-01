@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 09:15:04 GMT
+ * Tue, 01 Dec 2020 11:10:40 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24312,31 +24312,51 @@ define('two/recruitQueue', [
             groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
             groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
             groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
-            const presets = modelDataService.getPresetList()
-            const preset1 = presets.getPresets(selectedPreset1[0])
-            const preset2 = presets[choosedPreset2]
-            const preset3 = presets[choosedPreset3]
-            const preset4 = presets[choosedPreset4]
-            const preset1F = presets[finalPreset1]
-            const preset2F = presets[finalPreset2]
-            const preset3F = presets[finalPreset3]
-            const preset4F = presets[finalPreset4]
-            console.log(choosedPreset1, preset1, preset2, preset3, preset4, preset1F, preset2F, preset3F, preset4F)
-            Axe1 = preset1.units.axe
-            Archer1 = preset1.units.archer
-            Catapult1 = preset1.units.catapult
-            HC1 = preset1.units.heavy_cavalry
-            LC1 = preset1.units.light_cavalry
-            MA1 = preset1.units.mounted_archer
-            Ram1 = preset1.units.ram
-            Sword1 = preset1.units.sword
-            Spear1 = preset1.units.spear
-            console.log(Spear1, finalSpear1, Archer1, finalArcher1)
-            console.log(preset2, preset3, preset4, preset1F, preset2F, preset3F, preset4F)
-			
+            selectedPreset1 = []
+            selectedPreset2 = []
+            selectedPreset3 = []
+            selectedPreset4 = []
+            selectedPreset1_F = []
+            selectedPreset2_F = []
+            selectedPreset3_F = []
+            selectedPreset4_F = []
+            const allPresets = modelDataService.getPresetList().getPresets()
+            const presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
+            const presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
+            const presetsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.PRESET3]
+            const presetsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.PRESET4]
+            const presetsSelectedByTheUser1_F = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
+            const presetsSelectedByTheUser2_F = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
+            const presetsSelectedByTheUser3_F = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
+            const presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
+            presetsSelectedByTheUser1.forEach(function(presetId) {
+                selectedPreset1.push(allPresets[presetId])
+            })
+            presetsSelectedByTheUser2.forEach(function(presetId) {
+                selectedPreset2.push(allPresets[presetId])
+            })
+            presetsSelectedByTheUser3.forEach(function(presetId) {
+                selectedPreset3.push(allPresets[presetId])
+            })
+            presetsSelectedByTheUser4.forEach(function(presetId) {
+                selectedPreset4.push(allPresets[presetId])
+            })
+            presetsSelectedByTheUser1_F.forEach(function(presetId) {
+                selectedPreset1_F.push(allPresets[presetId])
+            })
+            presetsSelectedByTheUser2_F.forEach(function(presetId) {
+                selectedPreset2_F.push(allPresets[presetId])
+            })
+            presetsSelectedByTheUser3_F.forEach(function(presetId) {
+                selectedPreset3_F.push(allPresets[presetId])
+            })
+            presetsSelectedByTheUser4_F.forEach(function(presetId) {
+                selectedPreset4_F.push(allPresets[presetId])
+            })
+            console.log(selectedPreset1, choosedPreset1, finalPreset1)
             socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
                 for (i = 0; i < data.presets.length; i++) {
-                    if (data.presets[i].name == selectedPreset1) {
+                    if (data.presets[i].name == selectedPreset1[0]) {
                         Axe1 = data.presets[i].units.axe
                         Archer1 = data.presets[i].units.archer
                         Catapult1 = data.presets[i].units.catapult
@@ -24346,6 +24366,7 @@ define('two/recruitQueue', [
                         Ram1 = data.presets[i].units.ram
                         Sword1 = data.presets[i].units.sword
                         Spear1 = data.presets[i].units.spear
+                        console.log(Spear1)
                     }
                 }
             })
