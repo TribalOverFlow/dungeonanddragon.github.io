@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 11:59:11 GMT
+ * Tue, 01 Dec 2020 12:13:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24122,6 +24122,14 @@ define('two/recruitQueue', [
         const selectedGroup2 = recruitQueueSettings[SETTINGS.GROUP2]
         const selectedGroup3 = recruitQueueSettings[SETTINGS.GROUP3]
         const selectedGroup4 = recruitQueueSettings[SETTINGS.GROUP4]
+        const choosedPreset1 = recruitQueueSettings[SETTINGS.PRESET1]
+        const choosedPreset2 = recruitQueueSettings[SETTINGS.PRESET2]
+        const choosedPreset3 = recruitQueueSettings[SETTINGS.PRESET3]
+        const choosedPreset4 = recruitQueueSettings[SETTINGS.PRESET4]
+        const finalPreset1 = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
+        const finalPreset2 = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
+        const finalPreset3 = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
+        const finalPreset4 = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
         let groupVillages1 = []
@@ -24297,6 +24305,7 @@ define('two/recruitQueue', [
         let finalSpear4 = 0
         let finalSword4 = 0
         let interval = 5000
+        let i = 0
 
         function getPresets() {
             groupVillages1 = groupList.getGroupVillageIds(selectedGroup1[0])
@@ -24353,70 +24362,128 @@ define('two/recruitQueue', [
             Ram1 = selectedPreset1[0].units.ram
             Sword1 = selectedPreset1[0].units.sword
             Spear1 = selectedPreset1[0].units.spear
-            finalAxe1 = selectedPreset1_F[0].units.axe
-            finalArcher1 = selectedPreset1_F[0].units.archer
-            finalCatapult1 = selectedPreset1_F[0].units.catapult
-            finalHC1 = selectedPreset1_F[0].units.heavy_cavalry
-            finalLC1 = selectedPreset1_F[0].units.light_cavalry
-            finalMA1 = selectedPreset1_F[0].units.mounted_archer
-            finalRam1 = selectedPreset1_F[0].units.ram
-            finalSword1 = selectedPreset1_F[0].units.sword
-            finalSpear1 = selectedPreset1_F[0].units.spear
-            Axe2 = selectedPreset2[0].units.axe
-            Archer2 = selectedPreset2[0].units.archer
-            Catapult2 = selectedPreset2[0].units.catapult
-            HC2 = selectedPreset2[0].units.heavy_cavalry
-            LC2 = selectedPreset2[0].units.light_cavalry
-            MA2 = selectedPreset2[0].units.mounted_archer
-            Ram2 = selectedPreset2[0].units.ram
-            Sword2 = selectedPreset2[0].units.sword
-            Spear2 = selectedPreset2[0].units.spear
-            finalAxe2 = selectedPreset2_F[0].units.axe
-            finalArcher2 = selectedPreset2_F[0].units.archer
-            finalCatapult2 = selectedPreset2_F[0].units.catapult
-            finalHC2 = selectedPreset2_F[0].units.heavy_cavalry
-            finalLC2 = selectedPreset2_F[0].units.light_cavalry
-            finalMA2 = selectedPreset2_F[0].units.mounted_archer
-            finalRam2 = selectedPreset2_F[0].units.ram
-            finalSword2 = selectedPreset2_F[0].units.sword
-            finalSpear2 = selectedPreset2_F[0].units.spear
-            Axe3 = selectedPreset3[0].units.axe
-            Archer3 = selectedPreset3[0].units.archer
-            Catapult3 = selectedPreset3[0].units.catapult
-            HC3 = selectedPreset3[0].units.heavy_cavalry
-            LC3 = selectedPreset3[0].units.light_cavalry
-            MA3 = selectedPreset3[0].units.mounted_archer
-            Ram3 = selectedPreset3[0].units.ram
-            Sword3 = selectedPreset3[0].units.sword
-            Spear3 = selectedPreset3[0].units.spear
-            finalAxe3 = selectedPreset3_F[0].units.axe
-            finalArcher3 = selectedPreset3_F[0].units.archer
-            finalCatapult3 = selectedPreset3_F[0].units.catapult
-            finalHC3 = selectedPreset3_F[0].units.heavy_cavalry
-            finalLC3 = selectedPreset3_F[0].units.light_cavalry
-            finalMA3 = selectedPreset3_F[0].units.mounted_archer
-            finalRam3 = selectedPreset3_F[0].units.ram
-            finalSword3 = selectedPreset3_F[0].units.sword
-            finalSpear3 = selectedPreset3_F[0].units.spear
-            Axe4 = selectedPreset4[0].units.axe
-            Archer4 = selectedPreset4[0].units.archer
-            Catapult4 = selectedPreset4[0].units.catapult
-            HC4 = selectedPreset4[0].units.heavy_cavalry
-            LC4 = selectedPreset4[0].units.light_cavalry
-            MA4 = selectedPreset4[0].units.mounted_archer
-            Ram4 = selectedPreset4[0].units.ram
-            Sword4 = selectedPreset4[0].units.sword
-            Spear4 = selectedPreset4[0].units.spear
-            finalAxe4 = selectedPreset4_F[0].units.axe
-            finalArcher4 = selectedPreset4_F[0].units.archer
-            finalCatapult4 = selectedPreset4_F[0].units.catapult
-            finalHC4 = selectedPreset4_F[0].units.heavy_cavalry
-            finalLC4 = selectedPreset4_F[0].units.light_cavalry
-            finalMA4 = selectedPreset4_F[0].units.mounted_archer
-            finalRam4 = selectedPreset4_F[0].units.ram
-            finalSword4 = selectedPreset4_F[0].units.sword
-            finalSpear4 = selectedPreset4_F[0].units.spear
-            console.log(selectedPreset1, Spear1)
+            console.log(selectedPreset1, choosedPreset1, finalPreset1, Spear1)
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == selectedPreset1[0]) {
+                        Axe1 = data.presets[i].units.axe
+                        Archer1 = data.presets[i].units.archer
+                        Catapult1 = data.presets[i].units.catapult
+                        HC1 = data.presets[i].units.heavy_cavalry
+                        LC1 = data.presets[i].units.light_cavalry
+                        MA1 = data.presets[i].units.mounted_archer
+                        Ram1 = data.presets[i].units.ram
+                        Sword1 = data.presets[i].units.sword
+                        Spear1 = data.presets[i].units.spear
+                    }
+                }
+            })
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == selectedPreset1_F) {
+                        finalAxe1 = data.presets[i].units.axe
+                        finalArcher1 = data.presets[i].units.archer
+                        finalCatapult1 = data.presets[i].units.catapult
+                        finalHC1 = data.presets[i].units.heavy_cavalry
+                        finalLC1 = data.presets[i].units.light_cavalry
+                        finalMA1 = data.presets[i].units.mounted_archer
+                        finalRam1 = data.presets[i].units.ram
+                        finalSword1 = data.presets[i].units.sword
+                        finalSpear1 = data.presets[i].units.spear
+                    }
+                }
+            })
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == choosedPreset2[0]) {
+                        Axe2 = data.presets[i].units.axe
+                        Archer2 = data.presets[i].units.archer
+                        Catapult2 = data.presets[i].units.catapult
+                        HC2 = data.presets[i].units.heavy_cavalry
+                        LC2 = data.presets[i].units.light_cavalry
+                        MA2 = data.presets[i].units.mounted_archer
+                        Ram2 = data.presets[i].units.ram
+                        Sword2 = data.presets[i].units.sword
+                        Spear2 = data.presets[i].units.spear
+                    }
+                }
+            })
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == finalPreset2[0]) {
+                        finalAxe2 = data.presets[i].units.axe
+                        finalArcher2 = data.presets[i].units.archer
+                        finalCatapult2 = data.presets[i].units.catapult
+                        finalHC2 = data.presets[i].units.heavy_cavalry
+                        finalLC2 = data.presets[i].units.light_cavalry
+                        finalMA2 = data.presets[i].units.mounted_archer
+                        finalRam2 = data.presets[i].units.ram
+                        finalSword2 = data.presets[i].units.sword
+                        finalSpear2 = data.presets[i].units.spear
+                    }
+                }
+            })
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == choosedPreset3[0]) {
+                        Axe3 = data.presets[i].units.axe
+                        Archer3 = data.presets[i].units.archer
+                        Catapult3 = data.presets[i].units.catapult
+                        HC3 = data.presets[i].units.heavy_cavalry
+                        LC3 = data.presets[i].units.light_cavalry
+                        MA3 = data.presets[i].units.mounted_archer
+                        Ram3 = data.presets[i].units.ram
+                        Sword3 = data.presets[i].units.sword
+                        Spear3 = data.presets[i].units.spear
+                    }
+                }
+            })
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == finalPreset3[0]) {
+                        finalAxe3 = data.presets[i].units.axe
+                        finalArcher3 = data.presets[i].units.archer
+                        finalCatapult3 = data.presets[i].units.catapult
+                        finalHC3 = data.presets[i].units.heavy_cavalry
+                        finalLC3 = data.presets[i].units.light_cavalry
+                        finalMA3 = data.presets[i].units.mounted_archer
+                        finalRam3 = data.presets[i].units.ram
+                        finalSword3 = data.presets[i].units.sword
+                        finalSpear3 = data.presets[i].units.spear
+                    }
+                }
+            })
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == choosedPreset4[0]) {
+                        Axe4 = data.presets[i].units.axe
+                        Archer4 = data.presets[i].units.archer
+                        Catapult4 = data.presets[i].units.catapult
+                        HC4 = data.presets[i].units.heavy_cavalry
+                        LC4 = data.presets[i].units.light_cavalry
+                        MA4 = data.presets[i].units.mounted_archer
+                        Ram4 = data.presets[i].units.ram
+                        Sword4 = data.presets[i].units.sword
+                        Spear4 = data.presets[i].units.spear
+                    }
+                }
+            })
+            socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+                for (i = 0; i < data.presets.length; i++) {
+                    if (data.presets[i].name == finalPreset4[0]) {
+                        finalAxe4 = data.presets[i].units.axe
+                        finalArcher4 = data.presets[i].units.archer
+                        finalCatapult4 = data.presets[i].units.catapult
+                        finalHC4 = data.presets[i].units.heavy_cavalry
+                        finalLC4 = data.presets[i].units.light_cavalry
+                        finalMA4 = data.presets[i].units.mounted_archer
+                        finalRam4 = data.presets[i].units.ram
+                        finalSword4 = data.presets[i].units.sword
+                        finalSpear4 = data.presets[i].units.spear
+                    }
+                }
+            })
+            console.log(Spear1)
             getVillageData()
         }
 
