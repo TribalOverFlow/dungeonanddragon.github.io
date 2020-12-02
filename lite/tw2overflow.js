@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 13:30:20 GMT
+ * Wed, 02 Dec 2020 17:53:39 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24314,6 +24314,7 @@ define('two/recruitQueue', [
                                 var queue1 = village.buildingQueue.data.queue
                                 var recruitingQueues = village.getRecruitingQueues()
                                 var barracksQueue1 = recruitingQueues.barracks.jobs
+                                console.log(spearAmount, Barracks1, queue1, recruitingQueues, barracksQueue1)
                                 barracksQueue1.forEach(function(job) {
                                     recruitingTime = job.clientRecruitingTime
                                     totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
@@ -31591,6 +31592,78 @@ define('two/recruitQueue/ui', [
         $scope.settings[SETTINGS.GROUP2] = false
         $scope.settings[SETTINGS.GROUP3] = false
         $scope.settings[SETTINGS.GROUP4] = false
+        $scope.settings[SETTINGS.FINAL_AMOUNT1] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT2] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT3] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT4] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT5] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT6] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT7] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT8] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT9] = 0
+        $scope.settings[SETTINGS.START_AMOUNT1] = 0
+        $scope.settings[SETTINGS.START_AMOUNT2] = 0
+        $scope.settings[SETTINGS.START_AMOUNT3] = 0
+        $scope.settings[SETTINGS.START_AMOUNT4] = 0
+        $scope.settings[SETTINGS.START_AMOUNT5] = 0
+        $scope.settings[SETTINGS.START_AMOUNT6] = 0
+        $scope.settings[SETTINGS.START_AMOUNT7] = 0
+        $scope.settings[SETTINGS.START_AMOUNT8] = 0
+        $scope.settings[SETTINGS.START_AMOUNT9] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT11] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT12] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT13] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT14] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT15] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT16] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT17] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT18] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT19] = 0
+        $scope.settings[SETTINGS.START_AMOUNT11] = 0
+        $scope.settings[SETTINGS.START_AMOUNT12] = 0
+        $scope.settings[SETTINGS.START_AMOUNT13] = 0
+        $scope.settings[SETTINGS.START_AMOUNT14] = 0
+        $scope.settings[SETTINGS.START_AMOUNT15] = 0
+        $scope.settings[SETTINGS.START_AMOUNT16] = 0
+        $scope.settings[SETTINGS.START_AMOUNT17] = 0
+        $scope.settings[SETTINGS.START_AMOUNT18] = 0
+        $scope.settings[SETTINGS.START_AMOUNT19] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT21] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT22] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT23] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT24] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT25] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT26] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT27] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT28] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT29] = 0
+        $scope.settings[SETTINGS.START_AMOUNT21] = 0
+        $scope.settings[SETTINGS.START_AMOUNT22] = 0
+        $scope.settings[SETTINGS.START_AMOUNT23] = 0
+        $scope.settings[SETTINGS.START_AMOUNT24] = 0
+        $scope.settings[SETTINGS.START_AMOUNT25] = 0
+        $scope.settings[SETTINGS.START_AMOUNT26] = 0
+        $scope.settings[SETTINGS.START_AMOUNT27] = 0
+        $scope.settings[SETTINGS.START_AMOUNT28] = 0
+        $scope.settings[SETTINGS.START_AMOUNT29] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT31] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT32] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT33] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT34] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT35] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT36] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT37] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT38] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT39] = 0
+        $scope.settings[SETTINGS.START_AMOUNT31] = 0
+        $scope.settings[SETTINGS.START_AMOUNT32] = 0
+        $scope.settings[SETTINGS.START_AMOUNT33] = 0
+        $scope.settings[SETTINGS.START_AMOUNT34] = 0
+        $scope.settings[SETTINGS.START_AMOUNT35] = 0
+        $scope.settings[SETTINGS.START_AMOUNT36] = 0
+        $scope.settings[SETTINGS.START_AMOUNT37] = 0
+        $scope.settings[SETTINGS.START_AMOUNT38] = 0
+        $scope.settings[SETTINGS.START_AMOUNT39] = 0
         settings.setAll(settings.decode($scope.settings))
     }
     const clearO = function() {
@@ -31728,7 +31801,7 @@ define('two/recruitQueue/ui', [
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('stopped', $rootScope.loc.ale, 'recruit_queue'))
         })
-        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tr><th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td colspan=\"2\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><td colspan=\"2\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><td colspan=\"2\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><td colspan=\"2\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.unit | i18n:loc.ale:'unit_names' }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tr><th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><td>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><td>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><td>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.unit | i18n:loc.ale:'unit_names' }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-recruit-queue div[select]{text-align:center}#two-recruit-queue div[select] .select-wrapper{height:34px;width:164px;min-width:164px}#two-recruit-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-recruit-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:160px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .addForm th{text-align:center}#two-recruit-queue .recruitLog td{text-align:center}#two-recruit-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .noRecruits td{height:26px;text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
     const buildWindow = function() {
@@ -32147,121 +32220,121 @@ define('two/recruitQueue/settings/map', [
             type: 'groups'
         },
         [SETTINGS.AMOUNT1]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT2]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT3]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT4]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT5]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT6]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT7]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT8]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT9]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT10]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT11]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT12]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT13]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT14]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT15]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT16]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT17]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT18]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT19]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.AMOUNT20]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
@@ -32412,433 +32485,433 @@ define('two/recruitQueue/settings/map', [
             inputType: 'select'
         },
         [SETTINGS.FINAL_AMOUNT1]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT2]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT3]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT4]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT5]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT6]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT7]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT8]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT9]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT1]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT2]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT3]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT4]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT5]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT6]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT7]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT8]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT9]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT11]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT12]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT13]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT14]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT15]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT16]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT17]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT18]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT19]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT11]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT12]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT13]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT14]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT15]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT16]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT17]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT18]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT19]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT21]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT22]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT23]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT24]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT25]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT26]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT27]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT28]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT29]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT21]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT22]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT23]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT24]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT25]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT26]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT27]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT28]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT29]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT31]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT32]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT33]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT34]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT35]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT36]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT37]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT38]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT39]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT31]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT32]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT33]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT34]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT35]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT36]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT37]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT38]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
         },
         [SETTINGS.START_AMOUNT39]: {
-            default: 1,
+            default: 0,
             inputType: 'number',
             min: 1,
             max: 24000
