@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 22:20:16 GMT
+ * Wed, 02 Dec 2020 22:31:43 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24033,7 +24033,6 @@ define('two/recruitQueue', [
         var groupVillages2 = groupList.getGroupVillageIds(selectedGroup2)
         var groupVillages3 = groupList.getGroupVillageIds(selectedGroup3)
         var groupVillages4 = groupList.getGroupVillageIds(selectedGroup4)
-        console.log(groupVillages1, groupVillages2, groupVillages3, groupVillages4)
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var unit = ''
@@ -24245,13 +24244,12 @@ define('two/recruitQueue', [
                                 var queue1 = village.buildingQueue.data.queue
                                 var recruitingQueues = village.getRecruitingQueues()
                                 var barracksQueue1 = recruitingQueues.barracks.jobs
-                                console.log(spearAmount, Barracks1, queue1, recruitingQueues, barracksQueue1)
                                 barracksQueue1.forEach(function(job) {
                                     recruitingTime = job.clientRecruitingTime
                                     totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
                                     recruitingTimeToFinish = totalRecruitingTime - recruitingTime
                                     barracksRecrutingTime1.push(recruitingTimeToFinish)
-                                    console.log(barracksRecrutingTime1)
+                                    console.log(recruitingTime, totalRecruitingTime, recruitingTimeToFinish, barracksRecrutingTime1)
                                 })
 
                                 function modifier1Get() {
