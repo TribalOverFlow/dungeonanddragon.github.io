@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 01 Dec 2020 22:08:59 GMT
+ * Wed, 02 Dec 2020 00:33:28 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23859,14 +23859,6 @@ define('two/recruitQueue', [
     let recruitLog
     let logData = []
     const LOGS_LIMIT = 500
-    var selectedPreset1 = []
-    var selectedPreset2 = []
-    var selectedPreset3 = []
-    var selectedPreset4 = []
-    var selectedPreset1_F = []
-    var selectedPreset2_F = []
-    var selectedPreset3_F = []
-    var selectedPreset4_F = []
     let selectedGroups1 = []
     let selectedGroups2 = []
     let selectedGroups3 = []
@@ -23907,49 +23899,6 @@ define('two/recruitQueue', [
         [RQ_UNIT.CATAPULT]: 'catapult'
     }
     console.log(RECRUIT_UNIT)
-    const updatePresets = function() {
-        selectedPreset1 = []
-        selectedPreset2 = []
-        selectedPreset3 = []
-        selectedPreset4 = []
-        selectedPreset1_F = []
-        selectedPreset2_F = []
-        selectedPreset3_F = []
-        selectedPreset4_F = []
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
-        const presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
-        const presetsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.PRESET3]
-        const presetsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.PRESET4]
-        const presetsSelectedByTheUser1_F = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
-        const presetsSelectedByTheUser2_F = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
-        const presetsSelectedByTheUser3_F = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
-        const presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
-        presetsSelectedByTheUser1.forEach(function(presetId) {
-            selectedPreset1.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser1_F.forEach(function(presetId) {
-            selectedPreset1_F.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser2.forEach(function(presetId) {
-            selectedPreset2.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser3.forEach(function(presetId) {
-            selectedPreset3.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser4.forEach(function(presetId) {
-            selectedPreset4.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser2_F.forEach(function(presetId) {
-            selectedPreset2_F.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser3_F.forEach(function(presetId) {
-            selectedPreset3_F.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser4_F.forEach(function(presetId) {
-            selectedPreset4_F.push(allPresets[presetId])
-        })
-    }
     const updateGroups = function() {
         selectedGroups1 = []
         selectedGroups2 = []
@@ -24097,20 +24046,12 @@ define('two/recruitQueue', [
         })
         settings.onChange(function(changes, updates) {
             recruitQueueSettings = settings.getAll()
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
         })
         recruitQueueSettings = settings.getAll()
         console.log('recruitQueue settings', recruitQueueSettings)
-        ready(function() {
-            updatePresets()
-        }, 'presets')
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
@@ -24224,78 +24165,78 @@ define('two/recruitQueue', [
         let swordnew3 = 0
         let swordnew4 = 0
         let totalRecruitingTime = 0
-        let Archer1 = 0
-        let Axe1 = 0
-        let Catapult1 = 0
-        let HC1 = 0
-        let LC1 = 0
-        let MA1 = 0
-        let Ram1 = 0
-        let Spear1 = 0
-        let Sword1 = 0
-        let finalArcher1 = 0
-        let finalAxe1 = 0
-        let finalCatapult1 = 0
-        let finalHC1 = 0
-        let finalLC1 = 0
-        let finalMA1 = 0
-        let finalRam1 = 0
-        let finalSpear1 = 0
-        let finalSword1 = 0
-        let Archer2 = 0
-        let Axe2 = 0
-        let Catapult2 = 0
-        let HC2 = 0
-        let LC2 = 0
-        let MA2 = 0
-        let Ram2 = 0
-        let Spear2 = 0
-        let Sword2 = 0
-        let finalArcher2 = 0
-        let finalAxe2 = 0
-        let finalCatapult2 = 0
-        let finalHC2 = 0
-        let finalLC2 = 0
-        let finalMA2 = 0
-        let finalRam2 = 0
-        let finalSpear2 = 0
-        let finalSword2 = 0
-        let Archer3 = 0
-        let Axe3 = 0
-        let Catapult3 = 0
-        let HC3 = 0
-        let LC3 = 0
-        let MA3 = 0
-        let Ram3 = 0
-        let Spear3 = 0
-        let Sword3 = 0
-        let finalArcher3 = 0
-        let finalAxe3 = 0
-        let finalCatapult3 = 0
-        let finalHC3 = 0
-        let finalLC3 = 0
-        let finalMA3 = 0
-        let finalRam3 = 0
-        let finalSpear3 = 0
-        let finalSword3 = 0
-        let Archer4 = 0
-        let Axe4 = 0
-        let Catapult4 = 0
-        let HC4 = 0
-        let LC4 = 0
-        let MA4 = 0
-        let Ram4 = 0
-        let Spear4 = 0
-        let Sword4 = 0
-        let finalArcher4 = 0
-        let finalAxe4 = 0
-        let finalCatapult4 = 0
-        let finalHC4 = 0
-        let finalLC4 = 0
-        let finalMA4 = 0
-        let finalRam4 = 0
-        let finalSpear4 = 0
-        let finalSword4 = 0
+        const Archer1 = recruitQueueSettings[SETTINGS.START_AMOUNT4]
+        const Axe1 = recruitQueueSettings[SETTINGS.START_AMOUNT3]
+        const Catapult1 = recruitQueueSettings[SETTINGS.START_AMOUNT9]
+        const HC1 = recruitQueueSettings[SETTINGS.START_AMOUNT7]
+        const LC1 = recruitQueueSettings[SETTINGS.START_AMOUNT5]
+        const MA1 = recruitQueueSettings[SETTINGS.START_AMOUNT6]
+        const Ram1 = recruitQueueSettings[SETTINGS.START_AMOUNT8]
+        const Spear1 = recruitQueueSettings[SETTINGS.START_AMOUNT1]
+        const Sword1 = recruitQueueSettings[SETTINGS.START_AMOUNT2]
+        const Archer2 = recruitQueueSettings[SETTINGS.START_AMOUNT14]
+        const Axe2 = recruitQueueSettings[SETTINGS.START_AMOUNT13]
+        const Catapult2 = recruitQueueSettings[SETTINGS.START_AMOUNT19]
+        const HC2 = recruitQueueSettings[SETTINGS.START_AMOUNT17]
+        const LC2 = recruitQueueSettings[SETTINGS.START_AMOUNT15]
+        const MA2 = recruitQueueSettings[SETTINGS.START_AMOUNT16]
+        const Ram2 = recruitQueueSettings[SETTINGS.START_AMOUNT18]
+        const Spear2 = recruitQueueSettings[SETTINGS.START_AMOUNT11]
+        const Sword2 = recruitQueueSettings[SETTINGS.START_AMOUNT12]
+        const Archer3 = recruitQueueSettings[SETTINGS.START_AMOUNT24]
+        const Axe3 = recruitQueueSettings[SETTINGS.START_AMOUNT23]
+        const Catapult3 = recruitQueueSettings[SETTINGS.START_AMOUNT29]
+        const HC3 = recruitQueueSettings[SETTINGS.START_AMOUNT27]
+        const LC3 = recruitQueueSettings[SETTINGS.START_AMOUNT25]
+        const MA3 = recruitQueueSettings[SETTINGS.START_AMOUNT26]
+        const Ram3 = recruitQueueSettings[SETTINGS.START_AMOUNT28]
+        const Spear3 = recruitQueueSettings[SETTINGS.START_AMOUNT21]
+        const Sword3 = recruitQueueSettings[SETTINGS.START_AMOUNT22]
+        const Archer4 = recruitQueueSettings[SETTINGS.START_AMOUNT34]
+        const Axe4 = recruitQueueSettings[SETTINGS.START_AMOUNT33]
+        const Catapult4 = recruitQueueSettings[SETTINGS.START_AMOUNT39]
+        const HC4 = recruitQueueSettings[SETTINGS.START_AMOUNT37]
+        const LC4 = recruitQueueSettings[SETTINGS.START_AMOUNT35]
+        const MA4 = recruitQueueSettings[SETTINGS.START_AMOUNT36]
+        const Ram4 = recruitQueueSettings[SETTINGS.START_AMOUNT38]
+        const Spear4 = recruitQueueSettings[SETTINGS.START_AMOUNT31]
+        const Sword4 = recruitQueueSettings[SETTINGS.START_AMOUNT32]
+        const finalArcher1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT4]
+        const finalAxe1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT3]
+        const finalCatapult1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT9]
+        const finalHC1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT7]
+        const finalLC1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT5]
+        const finalMA1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT6]
+        const finalRam1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT8]
+        const finalSpear1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT1]
+        const finalSword1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT2]
+        const finalArcher2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT14]
+        const finalAxe2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT13]
+        const finalCatapult2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT19]
+        const finalHC2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT17]
+        const finalLC2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT15]
+        const finalMA2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT16]
+        const finalRam2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT18]
+        const finalSpear2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT11]
+        const finalSword2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT12]
+        const finalArcher3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT24]
+        const finalAxe3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT23]
+        const finalCatapult3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT29]
+        const finalHC3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT27]
+        const finalLC3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT25]
+        const finalMA3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT26]
+        const finalRam3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT28]
+        const finalSpear3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT21]
+        const finalSword3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT22]
+        const finalArcher4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT34]
+        const finalAxe4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT33]
+        const finalCatapult4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT39]
+        const finalHC4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT37]
+        const finalLC4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT35]
+        const finalMA4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT36]
+        const finalRam4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT38]
+        const finalSpear4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT31]
+        const finalSword4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT32]
         let interval = 5000
 
         function getPresets() {
@@ -24303,67 +24244,6 @@ define('two/recruitQueue', [
             groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
             groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
             groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
-            selectedPreset1 = []
-            selectedPreset2 = []
-            selectedPreset3 = []
-            selectedPreset4 = []
-            selectedPreset1_F = []
-            selectedPreset2_F = []
-            selectedPreset3_F = []
-            selectedPreset4_F = []
-            const allPresets = modelDataService.getPresetList().getPresets()
-            const presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
-            const presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
-            const presetsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.PRESET3]
-            const presetsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.PRESET4]
-            const presetsSelectedByTheUser1_F = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
-            const presetsSelectedByTheUser2_F = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
-            const presetsSelectedByTheUser3_F = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
-            const presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
-            presetsSelectedByTheUser1.forEach(function(presetId) {
-                selectedPreset1.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser1_F.forEach(function(presetId) {
-                selectedPreset1_F.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser2.forEach(function(presetId) {
-                selectedPreset2.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser3.forEach(function(presetId) {
-                selectedPreset3.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser4.forEach(function(presetId) {
-                selectedPreset4.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser2_F.forEach(function(presetId) {
-                selectedPreset2_F.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser3_F.forEach(function(presetId) {
-                selectedPreset3_F.push(allPresets[presetId])
-            })
-            presetsSelectedByTheUser4_F.forEach(function(presetId) {
-                selectedPreset4_F.push(allPresets[presetId])
-            })
-            Spear1 = selectedPreset1[0].units.spear
-            Sword1 = selectedPreset1[0].units.sword
-            Axe1 = selectedPreset1[0].units.axe
-            Archer1 = selectedPreset1[0].units.archer
-            LC1 = selectedPreset1[0].units.light_cavalry
-            MA1 = selectedPreset1[0].units.mounted_archer
-            HC1 = selectedPreset1[0].units.heavy_cavalry
-            Ram1 = selectedPreset1[0].units.ram
-            Catapult1 = selectedPreset1[0].units.catapult
-            console.log(selectedPreset1, Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
-            finalSpear1 = selectedPreset1_F[0].units.spear
-            finalSword1 = selectedPreset1_F[0].units.sword
-            finalAxe1 = selectedPreset1_F[0].units.axe
-            finalArcher1 = selectedPreset1_F[0].units.archer
-            finalLC1 = selectedPreset1_F[0].units.light_cavalry
-            finalMA1 = selectedPreset1_F[0].units.mounted_archer
-            finalHC1 = selectedPreset1_F[0].units.heavy_cavalry
-            finalRam1 = selectedPreset1_F[0].units.ram
-            finalCatapult1 = selectedPreset1_F[0].units.catapult
-            console.log(Spear1, Sword1, Axe1, Archer1, LC1, MA1, HC1, Ram1, Catapult1)
             getVillageData()
         }
 
@@ -31670,7 +31550,6 @@ define('two/recruitQueue/ui', [
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
     let groupList = modelDataService.getGroupList()
     let $button
     let running = false
@@ -31694,6 +31573,7 @@ define('two/recruitQueue/ui', [
             recruitQueue.stop()
         } else {
             recruitQueue.start()
+            settings.setAll(settings.decode($scope.settings))
             recruitQueue.presetRecrutation()
         }
     }
@@ -31702,6 +31582,7 @@ define('two/recruitQueue/ui', [
             recruitQueue.stop()
         } else {
             recruitQueue.start()
+            settings.setAll(settings.decode($scope.settings))
             recruitQueue.ownRecrutation()
         }
     }
@@ -31710,14 +31591,6 @@ define('two/recruitQueue/ui', [
         $scope.settings[SETTINGS.GROUP2] = false
         $scope.settings[SETTINGS.GROUP3] = false
         $scope.settings[SETTINGS.GROUP4] = false
-        $scope.settings[SETTINGS.PRESET1] = false
-        $scope.settings[SETTINGS.PRESET2] = false
-        $scope.settings[SETTINGS.PRESET3] = false
-        $scope.settings[SETTINGS.PRESET4] = false
-        $scope.settings[SETTINGS.PRESET1_FINAL] = false
-        $scope.settings[SETTINGS.PRESET2_FINAL] = false
-        $scope.settings[SETTINGS.PRESET3_FINAL] = false
-        $scope.settings[SETTINGS.PRESET4_FINAL] = false
         settings.setAll(settings.decode($scope.settings))
     }
     const clearO = function() {
@@ -31803,14 +31676,6 @@ define('two/recruitQueue/ui', [
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
     }
-    const recruitP = function() {
-        settings.setAll(settings.decode($scope.settings))
-        recruitQueue.presetRecrutation()
-    }
-    const recruitO = function() {
-        settings.setAll(settings.decode($scope.settings))
-        recruitQueue.ownRecrutation()
-    }
     logsView.updateVisibleLogs = function() {
         const offset = $scope.pagination.logs.offset
         const limit = $scope.pagination.logs.limit
@@ -31826,16 +31691,6 @@ define('two/recruitQueue/ui', [
         recruitQueue.clearLogs()
     }
     const eventHandlers = {
-        updatePresets: function() {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-            $scope.presetsF = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
         updateGroups: function() {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
@@ -31873,7 +31728,7 @@ define('two/recruitQueue/ui', [
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('stopped', $rootScope.loc.ale, 'recruit_queue'))
         })
-        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tr><th>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presetsF\" selected=\"settings[SETTINGS.PRESET1_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4_FINAL]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.unit | i18n:loc.ale:'unit_names' }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tr><th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><td>{{ 'presets.group' | i28n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><td>{{ 'presets.group' | i28n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><td>{{ 'presets.group' | i28n:loc.ale:'recruit_queue' }}<td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.unit | i18n:loc.ale:'unit_names' }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-recruit-queue div[select]{text-align:center}#two-recruit-queue div[select] .select-wrapper{height:34px;width:164px;min-width:164px}#two-recruit-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-recruit-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:160px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .addForm th{text-align:center}#two-recruit-queue .recruitLog td{text-align:center}#two-recruit-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .noRecruits td{height:26px;text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
     const buildWindow = function() {
@@ -31886,14 +31741,11 @@ define('two/recruitQueue/ui', [
         $scope.pagination = {}
         $scope.clearP = clearP
         $scope.clearO = clearO
-        $scope.recruitP = recruitP
-        $scope.recruitO = recruitO
         $scope.units = Settings.encodeList(RQ_UNIT, {
             textObject: 'recruit_queue',
             disabled: true
         })
         settings.injectScope($scope)
-        eventHandlers.updatePresets()
         eventHandlers.updateGroups()
         $scope.selectTab = selectTab
         $scope.saveSettings = saveSettings
@@ -31914,8 +31766,6 @@ define('two/recruitQueue/ui', [
         let eventScope = new EventScope('twoverflow_recruit_queue_window', function onDestroy() {
             console.log('recruitQueue window closed')
         })
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
@@ -31973,6 +31823,78 @@ define('two/recruitQueue/settings', [], function() {
         UNIT18: 'unit18',
         UNIT19: 'unit19',
         UNIT20: 'unit20',
+        START_AMOUNT1: 'startamount1',
+        START_AMOUNT2: 'startamount2',
+        START_AMOUNT3: 'startamount3',
+        START_AMOUNT4: 'startamount4',
+        START_AMOUNT5: 'startamount5',
+        START_AMOUNT6: 'startamount6',
+        START_AMOUNT7: 'startamount7',
+        START_AMOUNT8: 'startamount8',
+        START_AMOUNT9: 'startamount9',
+        START_AMOUNT11: 'startamount11',
+        START_AMOUNT12: 'startamount12',
+        START_AMOUNT13: 'startamount13',
+        START_AMOUNT14: 'startamount14',
+        START_AMOUNT15: 'startamount15',
+        START_AMOUNT16: 'startamount16',
+        START_AMOUNT17: 'startamount17',
+        START_AMOUNT18: 'startamount18',
+        START_AMOUNT19: 'startamount19',
+        START_AMOUNT21: 'startamount21',
+        START_AMOUNT22: 'startamount22',
+        START_AMOUNT23: 'startamount23',
+        START_AMOUNT24: 'startamount24',
+        START_AMOUNT25: 'startamount25',
+        START_AMOUNT26: 'startamount26',
+        START_AMOUNT27: 'startamount27',
+        START_AMOUNT28: 'startamount28',
+        START_AMOUNT29: 'startamount29',
+        START_AMOUNT31: 'startamount31',
+        START_AMOUNT32: 'startamount32',
+        START_AMOUNT33: 'startamount33',
+        START_AMOUNT34: 'startamount34',
+        START_AMOUNT35: 'startamount35',
+        START_AMOUNT36: 'startamount36',
+        START_AMOUNT37: 'startamount37',
+        START_AMOUNT38: 'startamount38',
+        START_AMOUNT39: 'startamount39',
+        FINAL_AMOUNT1: 'finalamount1',
+        FINAL_AMOUNT2: 'finalamount2',
+        FINAL_AMOUNT3: 'finalamount3',
+        FINAL_AMOUNT4: 'finalamount4',
+        FINAL_AMOUNT5: 'finalamount5',
+        FINAL_AMOUNT6: 'finalamount6',
+        FINAL_AMOUNT7: 'finalamount7',
+        FINAL_AMOUNT8: 'finalamount8',
+        FINAL_AMOUNT9: 'finalamount9',
+        FINAL_AMOUNT11: 'finalamount11',
+        FINAL_AMOUNT12: 'finalamount12',
+        FINAL_AMOUNT13: 'finalamount13',
+        FINAL_AMOUNT14: 'finalamount14',
+        FINAL_AMOUNT15: 'finalamount15',
+        FINAL_AMOUNT16: 'finalamount16',
+        FINAL_AMOUNT17: 'finalamount17',
+        FINAL_AMOUNT18: 'finalamount18',
+        FINAL_AMOUNT19: 'finalamount19',
+        FINAL_AMOUNT21: 'finalamount21',
+        FINAL_AMOUNT22: 'finalamount22',
+        FINAL_AMOUNT23: 'finalamount23',
+        FINAL_AMOUNT24: 'finalamount24',
+        FINAL_AMOUNT25: 'finalamount25',
+        FINAL_AMOUNT26: 'finalamount26',
+        FINAL_AMOUNT27: 'finalamount27',
+        FINAL_AMOUNT28: 'finalamount28',
+        FINAL_AMOUNT29: 'finalamount29',
+        FINAL_AMOUNT31: 'finalamount31',
+        FINAL_AMOUNT32: 'finalamount32',
+        FINAL_AMOUNT33: 'finalamount33',
+        FINAL_AMOUNT34: 'finalamount34',
+        FINAL_AMOUNT35: 'finalamount35',
+        FINAL_AMOUNT36: 'finalamount36',
+        FINAL_AMOUNT37: 'finalamount37',
+        FINAL_AMOUNT38: 'finalamount38',
+        FINAL_AMOUNT39: 'finalamount39',
         AMOUNT1: 'amount1',
         AMOUNT2: 'amount2',
         AMOUNT3: 'amount3',
@@ -31992,20 +31914,11 @@ define('two/recruitQueue/settings', [], function() {
         AMOUNT17: 'amount17',
         AMOUNT18: 'amount18',
         AMOUNT19: 'amount19',
-        AMOUNT20: 'amount20',
-        PRESET1: 'preset1',
-        PRESET2: 'preset2',
-        PRESET3: 'preset3',
-        PRESET4: 'preset4',
-        PRESET1_FINAL: 'preset1_final',
-        PRESET2_FINAL: 'preset2_final',
-        PRESET3_FINAL: 'preset3_final',
-        PRESET4_FINAL: 'preset4_final'
+        AMOUNT20: 'amount20'
     }
 })
 define('two/recruitQueue/settings/updates', function() {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups'
     }
 })
@@ -32017,78 +31930,6 @@ define('two/recruitQueue/settings/map', [
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESET1]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
-        [SETTINGS.PRESET2]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
-        [SETTINGS.PRESET3]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
-        [SETTINGS.PRESET4]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
-        [SETTINGS.PRESET1_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
-        [SETTINGS.PRESET2_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
-        [SETTINGS.PRESET3_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
-        [SETTINGS.PRESET4_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            type: 'presets'
-        },
         [SETTINGS.GROUP1]: {
             default: [],
             updates: [
@@ -32524,6 +32365,483 @@ define('two/recruitQueue/settings/map', [
             default: false,
             disabledOption: true,
             inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET1]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET2]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET3]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET4]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET5]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET6]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET7]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET8]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET9]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.FINAL_AMOUNT1]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT2]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT3]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT4]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT5]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT6]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT7]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT8]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT9]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT1]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT2]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT3]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT4]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT5]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT6]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT7]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT8]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT9]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT11]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT12]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT13]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT14]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT15]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT16]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT17]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT18]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT19]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT11]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT12]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT13]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT14]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT15]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT16]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT17]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT18]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT19]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT21]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT22]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT23]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT24]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT25]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT26]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT27]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT28]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT29]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT21]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT22]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT23]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT24]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT25]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT26]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT27]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT28]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT29]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT31]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT32]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT33]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT34]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT35]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT36]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT37]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT38]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT39]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT31]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT32]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT33]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT34]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT35]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT36]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT37]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT38]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT39]: {
+            default: 1,
+            inputType: 'number',
+            min: 1,
+            max: 24000
         }
     }
 })
