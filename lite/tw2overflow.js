@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 18:44:46 GMT
+ * Wed, 02 Dec 2020 19:10:13 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4505,30 +4505,16 @@ define('two/alertSender', [
                         alertText.push('[size=large][b]Nadchodzący atak [/b]--- [/size][unit]' + incomingUnit + '[/unit] [size=large][b]' + incomingName + '[/b][/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + commands[i].target_village_id + ']' + commands[i].target_village_name + '[/village][b] Gracz cel: [/b][player=' + playerId + ']' + playerName + '[/player][b] [br]Wioska pochodzenia: [/b][village=' + commands[i].origin_village_id + ']' + commands[i].origin_village_name + '[/village][b] Gracz atakujący: [/b][player=' + commands[i].origin_character_id + ']' + commands[i].origin_character_name + '[/player][/size]')
                         var message = alertText.join()
                         if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
-                            if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 14378,
-                                    message: message
-                                })
-                            } else {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 4646,
-                                    message: message
-                                })
-                            }
+                            socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                message_id: 7749,
+                                message: message
+                            })
                             alertText = []
                         } else {
-                            if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 14379,
-                                    message: message
-                                })
-                            } else {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 4648,
-                                    message: message
-                                })
-                            }
+                            socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                message_id: 7750,
+                                message: message
+                            })
                             alertText = []
                         }
                     }
