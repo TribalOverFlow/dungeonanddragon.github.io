@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 17:53:39 GMT
+ * Wed, 02 Dec 2020 18:44:46 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24063,108 +24063,108 @@ define('two/recruitQueue', [
         const selectedGroup2 = recruitQueueSettings[SETTINGS.GROUP2]
         const selectedGroup3 = recruitQueueSettings[SETTINGS.GROUP3]
         const selectedGroup4 = recruitQueueSettings[SETTINGS.GROUP4]
-        let player = modelDataService.getSelectedCharacter()
-        let villages = player.getVillageList()
-        let groupVillages1 = []
-        let groupVillages2 = []
-        let groupVillages3 = []
-        let groupVillages4 = []
-        let unit = ''
-        let woodModifier1 = 0
-        let woodModifier2 = 0
-        let woodModifier3 = 0
-        let woodModifier4 = 0
-        let archeravailable1 = 0
-        let archeravailable2 = 0
-        let archeravailable3 = 0
-        let archeravailable4 = 0
-        let archernew1 = 0
-        let archernew2 = 0
-        let archernew3 = 0
-        let archernew4 = 0
-        let axeavailable1 = 0
-        let axeavailable2 = 0
-        let axeavailable3 = 0
-        let axeavailable4 = 0
-        let axenew1 = 0
-        let axenew2 = 0
-        let axenew3 = 0
-        let axenew4 = 0
-        let catapultavailable1 = 0
-        let catapultavailable2 = 0
-        let catapultavailable3 = 0
-        let catapultavailable4 = 0
-        let catapultnew1 = 0
-        let catapultnew2 = 0
-        let catapultnew3 = 0
-        let catapultnew4 = 0
-        let clayModifier1 = 0
-        let clayModifier2 = 0
-        let clayModifier3 = 0
-        let clayModifier4 = 0
-        let foodAvailable1 = 0
-        let foodAvailable2 = 0
-        let foodAvailable3 = 0
-        let foodAvailable4 = 0
-        let foodnew1 = 0
-        let foodnew2 = 0
-        let foodnew3 = 0
-        let foodnew4 = 0
-        let hcavailable1 = 0
-        let hcavailable2 = 0
-        let hcavailable3 = 0
-        let hcavailable4 = 0
-        let hcnew1 = 0
-        let hcnew2 = 0
-        let hcnew3 = 0
-        let hcnew4 = 0
-        let ironModifier1 = 0
-        let ironModifier2 = 0
-        let ironModifier3 = 0
-        let ironModifier4 = 0
-        let lcavailable1 = 0
-        let lcavailable2 = 0
-        let lcavailable3 = 0
-        let lcavailable4 = 0
-        let lcnew1 = 0
-        let lcnew2 = 0
-        let lcnew3 = 0
-        let lcnew4 = 0
-        let maavailable1 = 0
-        let maavailable2 = 0
-        let maavailable3 = 0
-        let maavailable4 = 0
-        let manew1 = 0
-        let manew2 = 0
-        let manew3 = 0
-        let manew4 = 0
-        let ramavailable1 = 0
-        let ramavailable2 = 0
-        let ramavailable3 = 0
-        let ramavailable4 = 0
-        let ramnew1 = 0
-        let ramnew2 = 0
-        let ramnew3 = 0
-        let ramnew4 = 0
-        let recruitingTime = 0
-        let recruitingTimeToFinish = 0
-        let spearavailable1 = 0
-        let spearavailable2 = 0
-        let spearavailable3 = 0
-        let spearavailable4 = 0
-        let spearnew1 = 0
-        let spearnew2 = 0
-        let spearnew3 = 0
-        let spearnew4 = 0
-        let swordavailable1 = 0
-        let swordavailable2 = 0
-        let swordavailable3 = 0
-        let swordavailable4 = 0
-        let swordnew1 = 0
-        let swordnew2 = 0
-        let swordnew3 = 0
-        let swordnew4 = 0
-        let totalRecruitingTime = 0
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        var groupVillages1 = []
+        var groupVillages2 = []
+        var groupVillages3 = []
+        var groupVillages4 = []
+        var unit = ''
+        var woodModifier1 = 0
+        var woodModifier2 = 0
+        var woodModifier3 = 0
+        var woodModifier4 = 0
+        var archeravailable1 = 0
+        var archeravailable2 = 0
+        var archeravailable3 = 0
+        var archeravailable4 = 0
+        var archernew1 = 0
+        var archernew2 = 0
+        var archernew3 = 0
+        var archernew4 = 0
+        var axeavailable1 = 0
+        var axeavailable2 = 0
+        var axeavailable3 = 0
+        var axeavailable4 = 0
+        var axenew1 = 0
+        var axenew2 = 0
+        var axenew3 = 0
+        var axenew4 = 0
+        var catapultavailable1 = 0
+        var catapultavailable2 = 0
+        var catapultavailable3 = 0
+        var catapultavailable4 = 0
+        var catapultnew1 = 0
+        var catapultnew2 = 0
+        var catapultnew3 = 0
+        var catapultnew4 = 0
+        var clayModifier1 = 0
+        var clayModifier2 = 0
+        var clayModifier3 = 0
+        var clayModifier4 = 0
+        var foodAvailable1 = 0
+        var foodAvailable2 = 0
+        var foodAvailable3 = 0
+        var foodAvailable4 = 0
+        var foodnew1 = 0
+        var foodnew2 = 0
+        var foodnew3 = 0
+        var foodnew4 = 0
+        var hcavailable1 = 0
+        var hcavailable2 = 0
+        var hcavailable3 = 0
+        var hcavailable4 = 0
+        var hcnew1 = 0
+        var hcnew2 = 0
+        var hcnew3 = 0
+        var hcnew4 = 0
+        var ironModifier1 = 0
+        var ironModifier2 = 0
+        var ironModifier3 = 0
+        var ironModifier4 = 0
+        var lcavailable1 = 0
+        var lcavailable2 = 0
+        var lcavailable3 = 0
+        var lcavailable4 = 0
+        var lcnew1 = 0
+        var lcnew2 = 0
+        var lcnew3 = 0
+        var lcnew4 = 0
+        var maavailable1 = 0
+        var maavailable2 = 0
+        var maavailable3 = 0
+        var maavailable4 = 0
+        var manew1 = 0
+        var manew2 = 0
+        var manew3 = 0
+        var manew4 = 0
+        var ramavailable1 = 0
+        var ramavailable2 = 0
+        var ramavailable3 = 0
+        var ramavailable4 = 0
+        var ramnew1 = 0
+        var ramnew2 = 0
+        var ramnew3 = 0
+        var ramnew4 = 0
+        var recruitingTime = 0
+        var recruitingTimeToFinish = 0
+        var spearavailable1 = 0
+        var spearavailable2 = 0
+        var spearavailable3 = 0
+        var spearavailable4 = 0
+        var spearnew1 = 0
+        var spearnew2 = 0
+        var spearnew3 = 0
+        var spearnew4 = 0
+        var swordavailable1 = 0
+        var swordavailable2 = 0
+        var swordavailable3 = 0
+        var swordavailable4 = 0
+        var swordnew1 = 0
+        var swordnew2 = 0
+        var swordnew3 = 0
+        var swordnew4 = 0
+        var totalRecruitingTime = 0
         const Archer1 = recruitQueueSettings[SETTINGS.START_AMOUNT4]
         const Axe1 = recruitQueueSettings[SETTINGS.START_AMOUNT3]
         const Catapult1 = recruitQueueSettings[SETTINGS.START_AMOUNT9]
@@ -24237,65 +24237,38 @@ define('two/recruitQueue', [
         const finalRam4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT38]
         const finalSpear4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT31]
         const finalSword4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT32]
-        let interval = 5000
+        var interval = 5000
+        var barracksRecrutingTime1 = []
+        var barracks1TotalJobsLength = 0
+        var modifier1 = 0
+        var timeModifier1 = 0
+        var barracksRecrutingTime2 = []
+        var barracks2TotalJobsLength = 0
+        var modifier2 = 0
+        var timeModifier2 = 0
+        var barracksRecrutingTime3 = []
+        var barracks3TotalJobsLength = 0
+        var modifier3 = 0
+        var timeModifier3 = 0
+        var barracksRecrutingTime4 = []
+        var barracks4TotalJobsLength = 0
+        var modifier4 = 0
+        var timeModifier4 = 0
+        var wood = [50, 30, 60, 80, 125, 250, 200, 300, 320, 0, 40000, 4000, 1200]
+        var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
+        var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
+        var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
 
         function getPresets() {
             groupVillages1 = groupList.getGroupVillageIds(selectedGroup1[0])
             groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
             groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
             groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
+            console.log(groupVillages1)
             getVillageData()
         }
 
         function getVillageData() {
-            var Barracks1 = 0
-            var queue1 = 0
-            var villageFood1 = 0
-            var villageWood1 = 0
-            var villageClay1 = 0
-            var villageIron1 = 0
-            var barracksQueue1 = 0
-            var barracksRecrutingTime1 = []
-            var barracks1TotalJobsLength = 0
-            var modifier1 = 0
-            var timeModifier1 = 0
-            var Barracks2 = 0
-            var queue2 = 0
-            var villageFood2 = 0
-            var villageWood2 = 0
-            var villageClay2 = 0
-            var villageIron2 = 0
-            var barracksQueue2 = 0
-            var barracksRecrutingTime2 = []
-            var barracks2TotalJobsLength = 0
-            var modifier2 = 0
-            var timeModifier2 = 0
-            var Barracks3 = 0
-            var queue3 = 0
-            var villageFood3 = 0
-            var villageWood3 = 0
-            var villageClay3 = 0
-            var villageIron3 = 0
-            var barracksQueue3 = 0
-            var barracksRecrutingTime3 = []
-            var barracks3TotalJobsLength = 0
-            var modifier3 = 0
-            var timeModifier3 = 0
-            var Barracks4 = 0
-            var queue4 = 0
-            var villageFood4 = 0
-            var villageWood4 = 0
-            var villageClay4 = 0
-            var villageIron4 = 0
-            var barracksQueue4 = 0
-            var barracksRecrutingTime4 = []
-            var barracks4TotalJobsLength = 0
-            var modifier4 = 0
-            var timeModifier4 = 0
-            var wood = [50, 30, 60, 80, 125, 250, 200, 300, 320, 0, 40000, 4000, 1200]
-            var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
-            var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
-            var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
             villages.forEach(function(village, index) {
                 setTimeout(function() {
                     groupVillages1.forEach(function(id1) {
@@ -31488,7 +31461,6 @@ define('two/recruitQueue', [
                     })
                 }, index * interval)
             })
-            console.log(Barracks1, Barracks2, Barracks3, Barracks4, queue1, queue2, queue3, queue4, barracksQueue1, barracksQueue2, barracksQueue3, barracksQueue4, villageFood1, villageFood2, villageFood3, villageFood4, villageWood1, villageWood2, villageWood3, villageWood4, villageClay1, villageClay2, villageClay3, villageClay4, villageIron1, villageIron2, villageIron3, villageIron4)
         }
         getPresets()
     }
@@ -32222,121 +32194,121 @@ define('two/recruitQueue/settings/map', [
         [SETTINGS.AMOUNT1]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT2]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT3]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT4]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT5]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT6]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT7]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT8]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT9]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT10]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT11]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT12]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT13]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT14]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT15]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT16]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT17]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT18]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT19]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.AMOUNT20]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.UNIT1]: {
@@ -32487,433 +32459,433 @@ define('two/recruitQueue/settings/map', [
         [SETTINGS.FINAL_AMOUNT1]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT2]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT3]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT4]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT5]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT6]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT7]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT8]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT9]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT1]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT2]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT3]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT4]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT5]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT6]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT7]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT8]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT9]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT11]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT12]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT13]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT14]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT15]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT16]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT17]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT18]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT19]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT11]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT12]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT13]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT14]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT15]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT16]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT17]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT18]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT19]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT21]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT22]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT23]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT24]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT25]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT26]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT27]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT28]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT29]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT21]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT22]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT23]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT24]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT25]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT26]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT27]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT28]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT29]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT31]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT32]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT33]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT34]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT35]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT36]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT37]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT38]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.FINAL_AMOUNT39]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT31]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT32]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT33]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT34]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT35]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT36]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT37]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT38]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         },
         [SETTINGS.START_AMOUNT39]: {
             default: 0,
             inputType: 'number',
-            min: 1,
+            min: 0,
             max: 24000
         }
     }
