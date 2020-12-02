@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 22:15:41 GMT
+ * Wed, 02 Dec 2020 22:20:16 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24025,32 +24025,14 @@ define('two/recruitQueue', [
     recruitQueue.ownRecrutation = function() {}
     recruitQueue.presetRecrutation = function() {
         const groupList = modelDataService.getGroupList()
-        var selectedGroup1 = []
-        var selectedGroup2 = []
-        var selectedGroup3 = []
-        var selectedGroup4 = []
-        const groupsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.GROUP1]
-        const groupsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.GROUP2]
-        const groupsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.GROUP3]
-        const groupsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.GROUP4]
-        console.log(groupsSelectedByTheUser1, groupsSelectedByTheUser2)
-        groupsSelectedByTheUser1.forEach(function(groupId) {
-            selectedGroup1.push(groupList[groupId])
-        })
-        groupsSelectedByTheUser2.forEach(function(groupId) {
-            selectedGroup2.push(groupList[groupId])
-        })
-        groupsSelectedByTheUser3.forEach(function(groupId) {
-            selectedGroup3.push(groupList[groupId])
-        })
-        groupsSelectedByTheUser4.forEach(function(groupId) {
-            selectedGroup4.push(groupList[groupId])
-        })
-        console.log(selectedGroup1)
-        var groupVillages1 = groupList.getGroupVillageIds(selectedGroup1[0])
-        var groupVillages2 = groupList.getGroupVillageIds(selectedGroup2[0])
-        var groupVillages3 = groupList.getGroupVillageIds(selectedGroup3[0])
-        var groupVillages4 = groupList.getGroupVillageIds(selectedGroup4[0])
+        const selectedGroup1 = recruitQueueSettings[SETTINGS.GROUP1]
+        const selectedGroup2 = recruitQueueSettings[SETTINGS.GROUP2]
+        const selectedGroup3 = recruitQueueSettings[SETTINGS.GROUP3]
+        const selectedGroup4 = recruitQueueSettings[SETTINGS.GROUP4]
+        var groupVillages1 = groupList.getGroupVillageIds(selectedGroup1)
+        var groupVillages2 = groupList.getGroupVillageIds(selectedGroup2)
+        var groupVillages3 = groupList.getGroupVillageIds(selectedGroup3)
+        var groupVillages4 = groupList.getGroupVillageIds(selectedGroup4)
         console.log(groupVillages1, groupVillages2, groupVillages3, groupVillages4)
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
