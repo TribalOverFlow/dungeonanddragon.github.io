@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 19:29:11 GMT
+ * Wed, 02 Dec 2020 20:06:58 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4263,35 +4263,27 @@ define('two/alertSender', [
     }
 
     var getSlowestUnit = function(command) {
-        var commandDuration = command.model.duration
-        var units = {}
-        var origin = {
+        const origin = {
             x: command.origin_x,
             y: command.origin_y
         }
-        var target = {
+        const target = {
             x: command.target_x,
             y: command.target_y
         }
-        var travelTimes = []
+        const unitDurationDiff = UNIT_SPEED_ORDER.map(function (unit) {
+            const travelTime = utils.getTravelTime(origin, target, {[unit]: 1}, command.command_type, {}, false)
+            const durationDiff = Math.abs(travelTime - command.model.duration)
 
-        UNIT_SPEED_ORDER.forEach(function(unit) {
-            units[unit] = 1
-
-            travelTimes.push({
+            return {
                 unit: unit,
-                duration: utils.getTravelTime(origin, target, units, command.command_type, {})
-            })
+                diff: durationDiff
+            }
+        }).sort(function (a, b) {
+            return a.diff - b.diff
         })
 
-        travelTimes = travelTimes.map(function(travelTime) {
-            travelTime.duration = Math.abs(travelTime.duration - commandDuration)
-            return travelTime
-        }).sort(function(a, b) {
-            return a.duration - b.duration
-        })
-
-        return travelTimes[0].unit
+        return unitDurationDiff[0].unit
     }
 
     var alertSender = {}
