@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 24 Nov 2020 19:41:55 GMT
+ * Wed, 02 Dec 2020 19:25:19 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -672,11 +672,16 @@ define('two/language', [
             "title": "Kalkulator",
             "battle": "Bitwa",
             "battle.simulate": "Symuluj",
+            "battle.clear": "Wyczyść pola",
+            "battle.add_village_search": "Znajdź wioskę...",
+            "battle.add_origin": "Cel",
+            "battle.error_no_map_selected_village": "Nie wybrano wioski na mapie",
             "battle.predamage": "Uszkodzenia wstępne",
             "battle.bonuses": "Modyfikatory bitewne",
             "battle.options": "Szybkie opcje",
             "battle.header": "Kalkulator bitewny",
             "battle.id": "Wioska",
+            "battle.add_insert_preset": "Wybierz szablon",
             "battle.killrateA": "Procent strat",
             "battle.attackBashpoint": "Ofensywne punkty bojowe",
             "battle.strentghAttack": "Siła bojowa off",
@@ -2010,11 +2015,16 @@ define('two/language', [
             "title": "Kalkulator",
             "battle": "Bitwa",
             "battle.simulate": "Symuluj",
+            "battle.clear": "Wyczyść pola",
+            "battle.add_village_search": "Znajdź wioskę...",
+            "battle.add_origin": "Cel",
+            "battle.error_no_map_selected_village": "Nie wybrano wioski na mapie",
             "battle.predamage": "Uszkodzenia wstępne",
             "battle.bonuses": "Modyfikatory bitewne",
             "battle.options": "Szybkie opcje",
             "battle.header": "Kalkulator bitewny",
             "battle.id": "Wioska",
+            "battle.add_insert_preset": "Wybierz szablon",
             "battle.killrateA": "Procent strat",
             "battle.attackBashpoint": "Ofensywne punkty bojowe",
             "battle.strentghAttack": "Siła bojowa off",
@@ -4109,275 +4119,14 @@ define('Lockr', function(root, Lockr) {
     return Lockr
 })
 
-define('two/about', [], function () {
-    let initialized = false
-
-    let about = {}
-
-    about.isInitialized = function () {
-        return initialized
-    }
-
-    about.init = function () {
-        initialized = true
-    }
-
-    return about
-})
-
-define('two/about/ui', [
-    'two/ui'
-], function (
-    interfaceOverflow
-) {
-    let $scope
-    
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const init = function () {
-        interfaceOverflow.addDivisor4(189)
-        const $button = interfaceOverflow.addMenuButton4('O mnie', 190)
-
-        $button.addEventListener('click', function () {
-            buildWindow()
-        })
-
-        interfaceOverflow.addTemplate('twoverflow_about_window', `<div id=\"two-about\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'version' | i18n:loc.ale:'about' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"logo\"><img src=\"https://i.imgur.com/iNcVMvw.png\"></div><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'contact' | i18n:loc.ale:'about' }}<tr><td>{{ 'email' | i18n:loc.ale:'about' }}<td>twoverflow@outlook.com<tr><td colspan=\"2\" class=\"text-center\">{{ 'donate' | i18n:loc.ale:'about' }}</table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'links' | i18n:loc.ale:'about' }}<tr><td>{{ 'autor' | i18n:loc.ale:'about' }}<td>{{ 'source_autor' | i18n:loc.ale:'about' }}<tr><td>{{ 'source_code' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/</a><tr><td>{{ 'issues_suggestions' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/issues\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/issues</a><tr><td>{{ 'translations' | i18n:loc.ale:'about' }}<td><a href=\"https://crowdin.com/project/twoverflow\" target=\"_blank\">https://crowdin.com/project/twoverflow</a></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'edit' | i18n:loc.ale:'about' }}<tr><td>{{ 'editor' | i18n:loc.ale:'about' }}<td>{{ 'edit_autor' | i18n:loc.ale:'about' }}<tr><td>{{ 'credits' | i18n:loc.ale:'about' }}<td>{{ 'assisters' | i18n:loc.ale:'about' }}<tr><td colspan=\"2\">{{ 'text' | i18n:loc.ale:'about' }}</table></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"closeWindow()\">{{ 'close' | i18n:loc.ale:'about' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-about{padding:42px 0 0px 0;position:relative;height:100%}#two-about .box-paper a{font-weight:bold;color:#3f2615;text-decoration:none}#two-about .box-paper a:hover{text-shadow:0 1px 0 #000;color:#fff}#two-about .logo{text-align:center;margin-bottom:8px}#two-about table td{padding:0 10px}#two-about table td:first-child{text-align:right;width:20%}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.selectTab = selectTab
-
-        windowManagerService.getModal('!twoverflow_about_window', $scope)
-    }
-
-    return init
-})
-
-require([
-    'two/ready',
-    'two/about',
-    'two/about/ui'
-], function (
-    ready,
-    about,
-    aboutInterface
-) {
-    if (about.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        about.init()
-        aboutInterface()
-    }, ['map'])
-})
-
-define('two/activityTool', [
-    'two/Settings',
-    'two/activityTool/settings',
-    'two/activityTool/settings/map',
-    'two/ready',
-    'queues/EventQueue'
-], function(
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let activityToolSettings
-    const STORAGE_KEYS = {
-        SETTINGS: 'activity_tool_settings'
-    }
-    const activityTool = {}
-    activityTool.init = function() {
-        initialized = true
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-        settings.onChange(function() {
-            activityToolSettings = settings.getAll()
-        })
-        activityToolSettings = settings.getAll()
-        console.log('Statystyki - ustawienia', activityToolSettings)
-    }
-    activityTool.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_START)
-    }
-    activityTool.stop = function() {
-        running = false
-        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_STOP)
-    }
-    activityTool.getSettings = function() {
-        return settings
-    }
-    activityTool.isInitialized = function() {
-        return initialized
-    }
-    activityTool.isRunning = function() {
-        return running
-    }
-    return activityTool
-})
-define('two/activityTool/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        ACTIVITY_TOOL_START: 'activity_tool_start',
-        ACTIVITY_TOOL_STOP: 'activity_tool_stop'
-    })
-})
-define('two/activityTool/ui', [
-    'two/ui',
-    'two/activityTool',
-    'two/activityTool/settings',
-    'two/activityTool/settings/map',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function(
-    interfaceOverflow,
-    activityTool,
-    SETTINGS,
-    SETTINGS_MAP,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    const TAB_TYPES = {
-        DATA: 'data',
-        LOGS: 'logs'
-    }
-    const selectTab = function(tabType) {
-        $scope.selectedTab = tabType
-    }
-    const saveSettings = function() {
-        settings.setAll(settings.decode($scope.settings))
-        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'activity_tool'))
-    }
-    const resetSettings = function() {
-        utils.notif('success', $filter('i18n')('general.reseted', $rootScope.loc.ale, 'activity_tool'))
-    }
-    const clearLogs = function() {
-        utils.notif('success', $filter('i18n')('general.logs-cleared', $rootScope.loc.ale, 'activity_tool'))
-    }
-    const switchState = function() {
-        if (activityTool.isRunning()) {
-            activityTool.stop()
-        } else {
-            activityTool.start()
-        }
-    }
-    const eventHandlers = {
-        start: function() {
-            $scope.running = true
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'activity_tool'))
-        },
-        stop: function() {
-            $scope.running = false
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'activity_tool'))
-        }
-    }
-    const init = function() {
-        settings = activityTool.getSettings()
-        $button = interfaceOverflow.addMenuButton4('Statystyki', 40, $filter('i18n')('general.description', $rootScope.loc.ale, 'activity_tool'))
-        $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.DATA)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.DATA}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.DATA}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.DATA}\">{{ 'data' | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.DATA\"><h5 class=\"twx-section\">{{ 'data.dump' | i18n:loc.ale:'activity_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"303px\"><col width=\"60px\"><col><tr><th colspan=\"3\">{{ 'data.players' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PLAYERS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.tribes' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TRIBES]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.achievements' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ACHIEVEMENTS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.attention' | i18n:loc.ale:'activity_tool' }}<tr><td colspan=\"3\">{{ 'data.text' | i18n:loc.ale:'activity_tool' }}</table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col><col width=\"20%\"><thead><tr><th>{{ 'logs.type' | i18n:loc.ale:'activity_tool' }}<th>{{ 'logs.date' | i18n:loc.ale:'activity_tool' }}<tbody class=\"activityLog\"><tr class=\"noDumps\"><td colspan=\"2\">{{ 'logs.noDumps' | i18n:loc.ale:'activity_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.DATA\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'data.save' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"resetSettings()\">{{ 'data.reset' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'activity_tool' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'activity_tool' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-activity-tool .range-container{width:250px}#two-activity-tool th{text-align:center}#two-activity-tool .activityLog td{text-align:center}#two-activity-tool .activityLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .activityLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .noDumps td{height:26px;text-align:center}#two-activity-tool .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-    const buildWindow = function() {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = activityTool.isRunning()
-        $scope.selectedTab = TAB_TYPES.DATA
-        $scope.settingsMap = SETTINGS_MAP
-        settings.injectScope($scope)
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.resetSettings = resetSettings
-        $scope.clearLogs = clearLogs
-        $scope.switchState = switchState
-        let eventScope = new EventScope('twoverflow_activity_tool_window', function onDestroy() {
-            console.log('Statystyki - zamknięto moduł')
-        })
-        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_STOP, eventHandlers.stop)
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_activity_tool_window', $scope)
-    }
-    return init
-})
-define('two/activityTool/settings', [], function() {
-    return {
-        PLAYERS: 'players',
-        TRIBES: 'tribes',
-        ACHIEVEMENTS: 'achievements'
-    }
-})
-define('two/activityTool/settings/updates', function() {
-    return {}
-})
-define('two/activityTool/settings/map', [
-    'two/activityTool/settings'
-], function(
-    SETTINGS
-) {
-    return {
-        [SETTINGS.PLAYERS]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.TRIBES]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.ACHIEVEMENTS]: {
-            default: false,
-            inputType: 'checkbox'
-        }
-    }
-})
-require([
-    'two/ready',
-    'two/activityTool',
-    'two/activityTool/ui',
-    'two/activityTool/events'
-], function(
-    ready,
-    activityTool,
-    activityToolInterface
-) {
-    if (activityTool.isInitialized()) {
-        return false
-    }
-    ready(function() {
-        activityTool.init()
-        activityToolInterface()
-    })
-})
 define('two/alertSender', [
+    'two/utils',
     'queues/EventQueue',
-    'two/commandQueue',
     'models/CommandModel',
     'conf/unitTypes'
 ], function(
+    utils,
     eventQueue,
-    commandQueue,
     CommandModel,
     UNIT_TYPES
 ) { 
@@ -4495,30 +4244,16 @@ define('two/alertSender', [
                         alertText.push('[size=large][b]Nadchodzący atak [/b]--- [/size][unit]' + incomingUnit + '[/unit] [size=large][b]' + incomingName + '[/b][/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + commands[i].target_village_id + ']' + commands[i].target_village_name + '[/village][b] Gracz cel: [/b][player=' + playerId + ']' + playerName + '[/player][b] [br]Wioska pochodzenia: [/b][village=' + commands[i].origin_village_id + ']' + commands[i].origin_village_name + '[/village][b] Gracz atakujący: [/b][player=' + commands[i].origin_character_id + ']' + commands[i].origin_character_name + '[/player][/size]')
                         var message = alertText.join()
                         if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
-                            if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 14378,
-                                    message: message
-                                })
-                            } else {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 4646,
-                                    message: message
-                                })
-                            }
+                            socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                message_id: 7749,
+                                message: message
+                            })
                             alertText = []
                         } else {
-                            if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 14379,
-                                    message: message
-                                })
-                            } else {
-                                socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                    message_id: 4648,
-                                    message: message
-                                })
-                            }
+                            socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                message_id: 7750,
+                                message: message
+                            })
                             alertText = []
                         }
                     }
@@ -4545,7 +4280,7 @@ define('two/alertSender', [
 
             travelTimes.push({
                 unit: unit,
-                duration: commandQueue.getTravelTime(origin, target, units, command.command_type, {})
+                duration: utils.getTravelTime(origin, target, units, command.command_type, {})
             })
         })
 
@@ -4672,338 +4407,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/armyHelper', [
-    'two/Settings',
-    'two/armyHelper/settings',
-    'two/armyHelper/settings/map',
-    'two/armyHelper/settings/updates',
-    'two/armyHelper/types/unit',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    B_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let armyHelperSettings
-
-    let byGroupBalance = []
-    let byUnitAndGroupBalance = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'army_helper_settings'
-    }
-	
-    const BALANCER_UNIT = {
-        [B_UNIT.SPEAR]: 'spear',
-        [B_UNIT.SWORD]: 'sword',
-        [B_UNIT.AXE]: 'axe',
-        [B_UNIT.ARCHER]: 'archer',
-        [B_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [B_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [B_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [B_UNIT.RAM]: 'ram',
-        [B_UNIT.CATAPULT]: 'catapult',
-        [B_UNIT.TREBUCHET]: 'trebuchet',
-        [B_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [B_UNIT.SNOB]: 'snob',
-        [B_UNIT.KNIGHT]: 'knight'
-    }
-    console.log(BALANCER_UNIT)
-	
-    const updateGroups = function () {
-        byGroupBalance = []
-        byUnitAndGroupBalance = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser3 = armyHelperSettings[SETTINGS.GROUP3]
-        const groupsSelectedByTheUser4 = armyHelperSettings[SETTINGS.GROUP4]
-
-        groupsSelectedByTheUser3.forEach(function (groupId) {
-            byGroupBalance.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser4.forEach(function (groupId) {
-            byUnitAndGroupBalance.push(allGroups[groupId])
-        })
-    }
-
-    const armyHelper = {}
-
-    armyHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            armyHelperSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        armyHelperSettings = settings.getAll()
-
-        console.log('armyHelper settings', armyHelperSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    armyHelper.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_START)
-    }
-
-    armyHelper.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_STOP)
-    }
-
-    armyHelper.getSettings = function () {
-        return settings
-    }
-
-    armyHelper.isInitialized = function () {
-        return initialized
-    }
-
-    armyHelper.isRunning = function () {
-        return running
-    }
-
-    return armyHelper
-})
-
-define('two/armyHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        ARMY_HELPER_START: 'army_helper_start',
-        ARMY_HELPER_STOP: 'army_helper_stop'
-    })
-})
-
-define('two/armyHelper/ui', [
-    'two/ui',
-    'two/armyHelper',
-    'two/armyHelper/settings',
-    'two/armyHelper/settings/map',
-    'two/armyHelper/types/unit',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    armyHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    B_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        ARMY: 'army',
-        BALANCER: 'balancer',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (armyHelper.isRunning()) {
-            armyHelper.stop()
-        } else {
-            armyHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
-        }
-    }
-
-    const init = function () {
-        settings = armyHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton('Hetman', 90)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"item-spear-a\"><td class=\"item-spear-o\"><td class=\"item-spear-i\"><td class=\"item-spear-s\"><td class=\"item-spear-r\"><td class=\"item-spear-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"item-sword-a\"><td class=\"item-sword-o\"><td class=\"item-sword-i\"><td class=\"item-sword-s\"><td class=\"item-sword-r\"><td class=\"item-sword-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"item-archer-a\"><td class=\"item-archer-o\"><td class=\"item-archer-i\"><td class=\"item-archer-s\"><td class=\"item-archer-r\"><td class=\"item-archer-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-hc-a\"><td class=\"item-hc-o\"><td class=\"item-hc-i\"><td class=\"item-hc-s\"><td class=\"item-hc-r\"><td class=\"item-hc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"item-trebuchet-a\"><td class=\"item-trebuchet-o\"><td class=\"item-trebuchet-i\"><td class=\"item-trebuchet-s\"><td class=\"item-trebuchet-r\"><td class=\"item-trebuchet-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"item-axe-a\"><td class=\"item-axe-o\"><td class=\"item-axe-i\"><td class=\"item-axe-s\"><td class=\"item-axe-r\"><td class=\"item-axe-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-lc-a\"><td class=\"item-lc-o\"><td class=\"item-lc-i\"><td class=\"item-lc-s\"><td class=\"item-lc-r\"><td class=\"item-lc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"item-ma-a\"><td class=\"item-ma-o\"><td class=\"item-ma-i\"><td class=\"item-ma-s\"><td class=\"item-ma-r\"><td class=\"item-ma-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"item-ram-a\"><td class=\"item-ram-o\"><td class=\"item-ram-i\"><td class=\"item-ram-s\"><td class=\"item-ram-r\"><td class=\"item-ram-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"item-catapult-a\"><td class=\"item-catapult-o\"><td class=\"item-catapult-i\"><td class=\"item-catapult-s\"><td class=\"item-catapult-r\"><td class=\"item-catapult-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"item-berserker-a\"><td class=\"item-berserker-o\"><td class=\"item-berserker-i\"><td class=\"item-berserker-s\"><td class=\"item-berserker-r\"><td class=\"item-berserker-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"item-snob-a\"><td class=\"item-snob-o\"><td class=\"item-snob-i\"><td class=\"item-snob-s\"><td class=\"item-snob-r\"><td class=\"item-snob-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"item-knight-a\"><td class=\"item-knight-o\"><td class=\"item-knight-i\"><td class=\"item-knight-s\"><td class=\"item-knight-r\"><td class=\"item-knight-t\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody class=\"balancerLog\"><tr class=\"noBalances\"><td colspan=\"5\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .balancerLog td{text-align:center}#two-army-helper .balancerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-army-helper .balancerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-army-helper .noBalances td{height:26px;text-align:center}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = armyHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.ARMY
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.unit = Settings.encodeList(B_UNIT, {
-            textObject: 'army_helper',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_army_helper_window', function onDestroy () {
-            console.log('armyHelper window closed')
-        })
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.ARMY_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.ARMY_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_army_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/armyHelper/settings', [], function () {
-    return {
-        GROUP3: 'group3',
-        GROUP4: 'group4',
-        UNIT_TYPE1: 'unit_type1',
-        UNIT_TYPE2: 'unit_type2'
-    }
-})
-
-define('two/armyHelper/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/armyHelper/settings/map', [
-    'two/armyHelper/settings',
-    'two/armyHelper/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUP3]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP4]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'groups'
-        },
-        [SETTINGS.UNIT_TYPE1]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT_TYPE2]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/armyHelper/types/unit', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-require([
-    'two/ready',
-    'two/armyHelper',
-    'two/armyHelper/ui',
-    'two/armyHelper/events'
-], function (
-    ready,
-    armyHelper,
-    armyHelperInterface
-) {
-    if (armyHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        armyHelper.init()
-        armyHelperInterface()
-    }, ['map', 'world_config'])
-})
-
 define('two/attackView', [
     'two/ready',
     'two/utils',
@@ -5455,13 +4858,13 @@ define('two/attackView/ui', [
 
     const copyTimeModal = function (time) {
         let modalScope = $rootScope.$new()
-        modalScope.text = $filter('readableDateFilter')(time * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'H:mm:ss:sss dd/MM/yyyy')
+        modalScope.text = $filter('readableDateFilter')(time * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         modalScope.title = $filter('i18n')('copy', $rootScope.loc.ale, 'attack_view')
         windowManagerService.getModal('!twoverflow_attack_view_show_text_modal', modalScope)
     }
 
     const removeTroops = function (command) {
-        const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'H:mm:ss:sss dd/MM/yyyy')
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         console.log(formatedDate)
         attackView.setCommander(command, formatedDate)
     }
@@ -5959,172 +5362,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/autoFoundator', [
-    'two/utils',
-    'queues/EventQueue'
-], function (
-    utils,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-	
-    let interval = 3000
-
-    const donateTribe = function () {
-        if (!running) {
-            return false
-        }
-        console.log('Fundator uruchomiony')
-		
-        let player = modelDataService.getSelectedCharacter()
-        let villages = player.getVillageList()
-        villages.forEach(function(village, index) {
-            var resources = village.getResources()
-            var computed = resources.getComputed()
-            var wood = computed.wood
-            var clay = computed.clay
-            var iron = computed.iron
-            var villageWood = wood.currentStock
-            var villageClay = clay.currentStock
-            var villageIron = iron.currentStock
-            var woodCalculated = Math.round(villageWood * 0.02) + 1
-            var ironCalculated = Math.round(villageIron * 0.02) + 1
-            var clayCalculated = Math.round(villageClay * 0.02) + 1
-            setTimeout(function() {
-                socketService.emit(routeProvider.TRIBE_SKILL_DONATE, {
-                    village_id: village.getId(),
-                    crowns: 0,
-                    resources: {
-                        wood: woodCalculated,
-                        clay: clayCalculated,
-                        iron: ironCalculated
-                    }
-                })
-            }, index * Math.random() * interval)
-            console.log('Wykonano darowizne na plemię: ' + village.getName() + ' drewno: ' + woodCalculated + ', glina: ' + clayCalculated + ', żelazo: ' + ironCalculated)
-        })
-        setTimeout(doAgain, 1000)
-    }
-
-    function doAgain() {
-        setTimeout(donateTribe, 3600000)
-    }
-
-    let autoFoundator = {}
-    autoFoundator.init = function() {
-        initialized = true
-    }
-    autoFoundator.start = function() {
-        eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
-        running = true
-        donateTribe()
-    }
-    autoFoundator.stop = function() {
-        eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STOPPED)
-        running = false
-    }
-    autoFoundator.isRunning = function() {
-        return running
-    }
-    autoFoundator.isInitialized = function() {
-        return initialized
-    }
-    return autoFoundator
-})
-define('two/autoFoundator/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        AUTO_FOUNDATOR_STARTED: 'auto_foundator_started',
-        AUTO_FOUNDATOR_STOPPED: 'auto_foundator_stopped'
-    })
-})
-
-define('two/autoFoundator/ui', [
-    'two/ui',
-    'two/autoFoundator',
-    'two/utils',
-    'queues/EventQueue'
-], function (
-    interfaceOverflow,
-    autoFoundator,
-    utils,
-    eventQueue
-) {
-    let $button
-
-    const init = function () {
-        interfaceOverflow.addDivisor3(71)
-        $button = interfaceOverflow.addMenuButton3('Fundator', 70, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
-
-        $button.addEventListener('click', function () {
-            if (autoFoundator.isRunning()) {
-                autoFoundator.stop()
-                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_foundator'))
-            } else {
-                autoFoundator.start()
-                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_foundator'))
-            }
-        })
-
-        eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STARTED, function () {
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-        })
-
-        eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STOPPED, function () {
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-        })
-
-        if (autoFoundator.isRunning()) {
-            eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
-        }
-
-        return opener
-    }
-
-    return init
-})
-require([
-    'two/ready',
-    'two/autoFoundator',
-    'two/autoFoundator/ui',
-    'Lockr',
-    'queues/EventQueue',
-    'two/autoFoundator/events'
-], function(
-    ready,
-    autoFoundator,
-    autoFoundatorInterface,
-    Lockr,
-    eventQueue
-) {
-    const STORAGE_KEYS = {
-        ACTIVE: 'auto_foundator_active'
-    }
-	
-    if (autoFoundator.isInitialized()) {
-        return false
-    }
-    ready(function() {
-        autoFoundator.init()
-        autoFoundatorInterface()
-
-        ready(function() {
-            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
-                autoFoundator.start()
-            }
-
-            eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STARTED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, true)
-            })
-
-            eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STOPPED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, false)
-            })
-        }, ['initial_village'])
-    })
-})
 define('two/autoHealer', [
     'two/utils',
     'queues/EventQueue'
@@ -6262,128 +5499,6 @@ require([
                 Lockr.set(STORAGE_KEYS.ACTIVE, true)
             })
             eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, false)
-            })
-        }, ['initial_village'])
-    })
-})
-define('two/autoWithdraw', [
-    'two/utils',
-    'queues/EventQueue'
-], function (
-    utils,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-
-    let autoWithdraw = {}
-    autoWithdraw.init = function() {
-        initialized = true
-    }
-    autoWithdraw.start = function() {
-        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
-        running = true
-    }
-    autoWithdraw.stop = function() {
-        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STOPPED)
-        running = false
-    }
-    autoWithdraw.isRunning = function() {
-        return running
-    }
-    autoWithdraw.isInitialized = function() {
-        return initialized
-    }
-    return autoWithdraw
-})
-define('two/autoWithdraw/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        AUTO_WITHDRAW_STARTED: 'auto_withdraw_started',
-        AUTO_WITHDRAW_STOPPED: 'auto_withdraw_stopped'
-    })
-})
-
-define('two/autoWithdraw/ui', [
-    'two/ui',
-    'two/autoWithdraw',
-    'two/utils',
-    'queues/EventQueue'
-], function (
-    interfaceOverflow,
-    autoWithdraw,
-    utils,
-    eventQueue
-) {
-    let $button
-
-    const init = function () {
-        $button = interfaceOverflow.addMenuButton('Dezerter', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_withdraw'))
-
-        $button.addEventListener('click', function () {
-            if (autoWithdraw.isRunning()) {
-                autoWithdraw.stop()
-                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_withdraw'))
-            } else {
-                autoWithdraw.start()
-                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_withdraw'))
-            }
-        })
-
-        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function () {
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-        })
-
-        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function () {
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-        })
-
-        if (autoWithdraw.isRunning()) {
-            eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
-        }
-
-        return opener
-    }
-
-    return init
-})
-require([
-    'two/ready',
-    'two/autoWithdraw',
-    'two/autoWithdraw/ui',
-    'Lockr',
-    'queues/EventQueue',
-    'two/autoWithdraw/events'
-], function(
-    ready,
-    autoWithdraw,
-    autoWithdrawInterface,
-    Lockr,
-    eventQueue
-) {
-    const STORAGE_KEYS = {
-        ACTIVE: 'auto_withdraw_active'
-    }
-	
-    if (autoWithdraw.isInitialized()) {
-        return false
-    }
-    ready(function() {
-        autoWithdraw.init()
-        autoWithdrawInterface()
-
-        ready(function() {
-            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
-                autoWithdraw.start()
-            }
-
-            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, true)
-            })
-
-            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
@@ -6573,6 +5688,34 @@ define('two/battleCalculator', [
     let killratioAttacker = null
     let survivedProvisionA = null
     let doubleStrengthBonus = null
+    let presetSPEAR = null
+    let presetSWORD = null
+    let presetAXE = null
+    let presetARCHER = null
+    let presetLC = null
+    let presetMA = null
+    let presetHC = null
+    let presetRAM = null
+    let presetCATAPULT = null
+    let presetSNOB = null
+    let presetKNIGHT = null
+    let presetTREBUCHET = null
+    let presetBERSERKER = null
+    let villageArcher = null
+    let villageAxe = null
+    let villageCatapult = null
+    let villageBerserker = null
+    let villageHC = null
+    let villageKnight = null
+    let villageLC = null
+    let villageMA = null
+    let villageRam = null
+    let villageSnob = null
+    let villageSpear = null
+    let villageSword = null
+    let villageTrebuchet = null
+    let villageUnits = null
+    let i = null
     const STORAGE_KEYS = {
         SETTINGS: 'battle_calculator_settings'
     }
@@ -6684,7 +5827,7 @@ define('two/battleCalculator', [
         presetSelected = []
         const allPresets = modelDataService.getPresetList().getPresets()
         const presetsSelectedByTheUser = battleCalculatorSettings[SETTINGS.PRESET]
-        presetsSelectedByTheUser.forEach(function(presetId) {
+        presetsSelectedByTheUser.forEach(function (presetId) {
             presetSelected.push(allPresets[presetId])
         })
     }
@@ -6708,6 +5851,48 @@ define('two/battleCalculator', [
         }, 'presets')
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+    }
+    battleCalculator.getPresetUnits = function() {
+        presetSelected = battleCalculatorSettings[SETTINGS.PRESET]
+        socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+            for (i = 0; i < data.presets.length; i++) {
+                if (data.presets[i].id == presetSelected) {
+                    presetSPEAR = data.presets[i].units.spear
+                    presetSWORD = data.presets[i].units.sword
+                    presetAXE = data.presets[i].units.axe
+                    presetARCHER = data.presets[i].units.archer
+                    presetLC = data.presets[i].units.light_cavalry
+                    presetMA = data.presets[i].units.mounted_archer
+                    presetHC = data.presets[i].units.heavy_cavalry
+                    presetRAM = data.presets[i].units.ram
+                    presetCATAPULT = data.presets[i].units.catapult
+                    presetSNOB = data.presets[i].units.snob
+                    presetKNIGHT = data.presets[i].units.knight
+                    presetTREBUCHET = data.presets[i].units.trebuchet
+                    presetBERSERKER = data.presets[i].units.doppelsoldner
+                }
+            }
+        })
+    }
+    battleCalculator.getVillageUnits = function() {
+        villageUnits = battleCalculatorSettings[SETTINGS.BATTLE_VILLAGE_ID]
+        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+            village_id: villageUnits
+        }, function(data) {
+            villageAxe = data.available_units.axe.total
+            villageArcher = data.available_units.archer.total
+            villageCatapult = data.available_units.catapult.total
+            villageBerserker = data.available_units.doppelsoldner.total
+            villageHC = data.available_units.heavy_cavalry.total
+            villageKnight = data.available_units.knight.total
+            villageLC = data.available_units.light_cavalry.total
+            villageMA = data.available_units.mounted_archer.total
+            villageRam = data.available_units.ram.total
+            villageSnob = data.available_units.snob.total
+            villageSpear = data.available_units.spear.total
+            villageSword = data.available_units.sword.total
+            villageTrebuchet = data.available_units.trebuchet.total
+        })
     }
     battleCalculator.calculateB = function() {
         const spear = battleCalculatorSettings[SETTINGS.BASHPOINTS_SPEAR]
@@ -7280,7 +6465,7 @@ define('two/battleCalculator', [
             console.log(catTarget)
             checkAttackerFaith()
         }
-		
+
         function checkAttackerFaith() {
             if (faithAttacker == 'level_1') {
                 attFaithBonus = 100
@@ -8634,7 +7819,7 @@ define('two/battleCalculator', [
         function lossesProvisionsRound1Total() {
             lossesAttackerRound1Total = spearA_lossesRound1 * food[0] + swordA_lossesRound1 * food[1] + axeA_lossesRound1 * food[2] + archerA_lossesRound1 * food[3] + lcA_lossesRound1 * food[4] + maA_lossesRound1 * food[5] + hcA_lossesRound1 * food[6] + ramA_lossesRound1 * food[7] + catapultA_lossesRound1 * food[8] + knightA_lossesRound1 * food[9] + snobA_lossesRound1 * food[10] + trebuchetA_lossesRound1 * food[11] + berserkerA_lossesRound1 * food[12]
             lossesDefenderRound1Total = spearD_lossesRound1 * food[0] + swordD_lossesRound1 * food[1] + axeD_lossesRound1 * food[2] + archerD_lossesRound1 * food[3] + lcD_lossesRound1 * food[4] + maD_lossesRound1 * food[5] + hcD_lossesRound1 * food[6] + ramD_lossesRound1 * food[7] + catapultD_lossesRound1 * food[8] + knightD_lossesRound1 * food[9] + snobD_lossesRound1 * food[10] + trebuchetD_lossesRound1 * food[11] + berserkerD_lossesRound1 * food[12]
-            console.log(lossesAttackerRound1Total,lossesDefenderRound1Total)
+            console.log(lossesAttackerRound1Total, lossesDefenderRound1Total)
             survivorsProvisionsRound1Total()
         }
 
@@ -8990,7 +8175,7 @@ define('two/battleCalculator', [
         function lossesProvisionsRound2Total() {
             lossesAttackerRound2Total = spearA_lossesRound2 * food[0] + swordA_lossesRound2 * food[1] + axeA_lossesRound2 * food[2] + archerA_lossesRound2 * food[3] + lcA_lossesRound2 * food[4] + maA_lossesRound2 * food[5] + hcA_lossesRound2 * food[6] + ramA_lossesRound2 * food[7] + catapultA_lossesRound2 * food[8] + knightA_lossesRound2 * food[9] + snobA_lossesRound2 * food[10] + trebuchetA_lossesRound2 * food[11] + berserkerA_lossesRound2 * food[12]
             lossesDefenderRound2Total = spearD_lossesRound2 * food[0] + swordD_lossesRound2 * food[1] + axeD_lossesRound2 * food[2] + archerD_lossesRound2 * food[3] + lcD_lossesRound2 * food[4] + maD_lossesRound2 * food[5] + hcD_lossesRound2 * food[6] + ramD_lossesRound2 * food[7] + catapultD_lossesRound2 * food[8] + knightD_lossesRound2 * food[9] + snobD_lossesRound2 * food[10] + trebuchetD_lossesRound2 * food[11] + berserkerD_lossesRound2 * food[12]
-            console.log(lossesAttackerRound2Total,lossesDefenderRound2Total)
+            console.log(lossesAttackerRound2Total, lossesDefenderRound2Total)
             survivorsProvisionsRound2Total()
         }
 
@@ -9334,7 +8519,7 @@ define('two/battleCalculator', [
         function lossesProvisionsRound3Total() {
             lossesAttackerRound3Total = spearA_lossesRound3 * food[0] + swordA_lossesRound3 * food[1] + axeA_lossesRound3 * food[2] + archerA_lossesRound3 * food[3] + lcA_lossesRound3 * food[4] + maA_lossesRound3 * food[5] + hcA_lossesRound3 * food[6] + ramA_lossesRound3 * food[7] + catapultA_lossesRound3 * food[8] + knightA_lossesRound3 * food[9] + snobA_lossesRound3 * food[10] + trebuchetA_lossesRound3 * food[11] + berserkerA_lossesRound3 * food[12]
             lossesDefenderRound3Total = spearD_lossesRound3 * food[0] + swordD_lossesRound3 * food[1] + axeD_lossesRound3 * food[2] + archerD_lossesRound3 * food[3] + lcD_lossesRound3 * food[4] + maD_lossesRound3 * food[5] + hcD_lossesRound3 * food[6] + ramD_lossesRound3 * food[7] + catapultD_lossesRound3 * food[8] + knightD_lossesRound3 * food[9] + snobD_lossesRound3 * food[10] + trebuchetD_lossesRound3 * food[11] + berserkerD_lossesRound3 * food[12]
-            console.log(lossesAttackerRound3Total,lossesDefenderRound3Total)
+            console.log(lossesAttackerRound3Total, lossesDefenderRound3Total)
             survivorsProvisionsRound3Total()
         }
 
@@ -10830,6 +10015,84 @@ define('two/battleCalculator', [
     battleCalculator.getBerserkeraSurvived = function() {
         return berserkerA_survivorsRound3
     }
+    battleCalculator.getPresetBerserker = function() {
+        return presetBERSERKER
+    }
+    battleCalculator.getPresetAxe = function() {
+        return presetAXE
+    }
+    battleCalculator.getPresetArcher = function() {
+        return presetARCHER
+    }
+    battleCalculator.getPresetSnob = function() {
+        return presetSNOB
+    }
+    battleCalculator.getPresetKnight = function() {
+        return presetKNIGHT
+    }
+    battleCalculator.getPresetHc = function() {
+        return presetHC
+    }
+    battleCalculator.getPresetLc = function() {
+        return presetLC
+    }
+    battleCalculator.getPresetMa = function() {
+        return presetMA
+    }
+    battleCalculator.getPresetRam = function() {
+        return presetRAM
+    }
+    battleCalculator.getPresetCatapult = function() {
+        return presetCATAPULT
+    }
+    battleCalculator.getPresetSpear = function() {
+        return presetSPEAR
+    }
+    battleCalculator.getPresetSword = function() {
+        return presetSWORD
+    }
+    battleCalculator.getPresetTrebuchet = function() {
+        return presetTREBUCHET
+    }
+    battleCalculator.getVillageBerserker = function() {
+        return villageBerserker
+    }
+    battleCalculator.getVillageAxe = function() {
+        return villageAxe
+    }
+    battleCalculator.getVillageArcher = function() {
+        return villageArcher
+    }
+    battleCalculator.getVillageSnob = function() {
+        return villageSnob
+    }
+    battleCalculator.getVillageKnight = function() {
+        return villageKnight
+    }
+    battleCalculator.getVillageHc = function() {
+        return villageHC
+    }
+    battleCalculator.getVillageLc = function() {
+        return villageLC
+    }
+    battleCalculator.getVillageMa = function() {
+        return villageMA
+    }
+    battleCalculator.getVillageRam = function() {
+        return villageRam
+    }
+    battleCalculator.getVillageCatapult = function() {
+        return villageCatapult
+    }
+    battleCalculator.getVillageSpear = function() {
+        return villageSpear
+    }
+    battleCalculator.getVillageSword = function() {
+        return villageSword
+    }
+    battleCalculator.getVillageTrebuchet = function() {
+        return villageTrebuchet
+    }
     return battleCalculator
 })
 define('two/battleCalculator/events', [], function () {
@@ -10857,6 +10120,7 @@ define('two/battleCalculator/ui', [
     'two/battleCalculator/types/training',
     'two/Settings',
     'two/EventScope',
+    'struct/MapData',
     'two/utils'
 ], function(
     interfaceOverflow,
@@ -10876,16 +10140,25 @@ define('two/battleCalculator/ui', [
     T_TRAINING_LEVEL,
     Settings,
     EventScope,
+    mapData,
     utils
 ) {
     let $scope
     let presetList = modelDataService.getPresetList()
     let settings
     let $button
+    let battleVillage
+    let mapSelectedVillage = false
     const TAB_TYPES = {
         BATTLE: 'battle',
         TROOPS: 'troops',
         BASHPOINTS: 'bashpoints'
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
     }
     const selectTab = function(tabType) {
         $scope.selectedTab = tabType
@@ -10896,6 +10169,172 @@ define('two/battleCalculator/ui', [
         } else {
             battleCalculator.start()
         }
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'battle_calculator'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            battleVillage.origin = data
+        })
+    }
+    const insertSurvived = function() {
+        if ($scope.spearDsurvived > 0 || $scope.swordDsurvived > 0 || $scope.axeDsurvived > 0 || $scope.archerDsurvived > 0 || $scope.lcDsurvived > 0 || $scope.maDsurvived > 0 || $scope.hcDsurvived > 0 || $scope.ramDsurvived > 0 || $scope.catapultDsurvived > 0 || $scope.snobDsurvived > 0 || $scope.knightDsurvived > 0 || $scope.trebuchetDsurvived > 0 || $scope.berserkerDsurvived > 0) {
+            $scope.settings[SETTINGS.BATTLE_SPEAR_D] = battleCalculator.getSpeardSurvived()
+            $scope.settings[SETTINGS.BATTLE_SWORD_D] = battleCalculator.getSworddSurvived()
+            $scope.settings[SETTINGS.BATTLE_AXE_D] = battleCalculator.getAxedSurvived()
+            $scope.settings[SETTINGS.BATTLE_ARCHER_D] = battleCalculator.getArcherdSurvived()
+            $scope.settings[SETTINGS.BATTLE_RAM_D] = battleCalculator.getRamdSurvived()
+            $scope.settings[SETTINGS.BATTLE_CATAPULT_D] = battleCalculator.getCatapultdSurvived()
+            $scope.settings[SETTINGS.BATTLE_SNOB_D] = battleCalculator.getSnobdSurvived()
+            $scope.settings[SETTINGS.BATTLE_KNIGHT_D] = battleCalculator.getKnightdSurvived()
+            $scope.settings[SETTINGS.BATTLE_TREBUCHET_D] = battleCalculator.getTrebuchetdSurvived()
+            $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_D] = battleCalculator.getBerserkerdSurvived()
+            $scope.settings[SETTINGS.BATTLE_LC_D] = battleCalculator.getLcdSurvived()
+            $scope.settings[SETTINGS.BATTLE_MA_D] = battleCalculator.getMadSurvived()
+            $scope.settings[SETTINGS.BATTLE_HC_D] = battleCalculator.getHcdSurvived()
+            settings.setAll(settings.decode($scope.settings))
+        } else if ($scope.spearAsurvived > 0 || $scope.swordAsurvived > 0 || $scope.axeAsurvived > 0 || $scope.archerAsurvived > 0 || $scope.lcAsurvived > 0 || $scope.maAsurvived > 0 || $scope.hcAsurvived > 0 || $scope.ramAsurvived > 0 || $scope.catapultAsurvived > 0 || $scope.snobAsurvived > 0 || $scope.knightAsurvived > 0 || $scope.trebuchetAsurvived > 0 || $scope.berserkerAsurvived > 0) {
+            $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getSpearaSurvived()
+            $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getSwordaSurvived()
+            $scope.settings[SETTINGS.BATTLE_AXE_A] = battleCalculator.getAxeaSurvived()
+            $scope.settings[SETTINGS.BATTLE_ARCHER_A] = battleCalculator.getArcheraSurvived()
+            $scope.settings[SETTINGS.BATTLE_RAM_A] = battleCalculator.getRamaSurvived()
+            $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = battleCalculator.getCatapultaSurvived()
+            $scope.settings[SETTINGS.BATTLE_SNOB_A] = battleCalculator.getSnobaSurvived()
+            $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = battleCalculator.getKnightaSurvived()
+            $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = battleCalculator.getTrebuchetaSurvived()
+            $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = battleCalculator.getBerserkeraSurvived()
+            $scope.settings[SETTINGS.BATTLE_LC_A] = battleCalculator.getLcaSurvived()
+            $scope.settings[SETTINGS.BATTLE_MA_A] = battleCalculator.getMaaSurvived()
+            $scope.settings[SETTINGS.BATTLE_HC_A] = battleCalculator.getHcaSurvived()
+            settings.setAll(settings.decode($scope.settings))
+        } else {
+            $scope.settings[SETTINGS.BATTLE_SPEAR_A] = 0
+            $scope.settings[SETTINGS.BATTLE_SWORD_A] = 0
+            $scope.settings[SETTINGS.BATTLE_AXE_A] = 0
+            $scope.settings[SETTINGS.BATTLE_ARCHER_A] = 0
+            $scope.settings[SETTINGS.BATTLE_RAM_A] = 0
+            $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = 0
+            $scope.settings[SETTINGS.BATTLE_SNOB_A] = 0
+            $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = 0
+            $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = 0
+            $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = 0
+            $scope.settings[SETTINGS.BATTLE_LC_A] = 0
+            $scope.settings[SETTINGS.BATTLE_MA_A] = 0
+            $scope.settings[SETTINGS.BATTLE_HC_A] = 0
+            $scope.settings[SETTINGS.BATTLE_SPEAR_D] = 0
+            $scope.settings[SETTINGS.BATTLE_SWORD_D] = 0
+            $scope.settings[SETTINGS.BATTLE_AXE_D] = 0
+            $scope.settings[SETTINGS.BATTLE_ARCHER_D] = 0
+            $scope.settings[SETTINGS.BATTLE_RAM_D] = 0
+            $scope.settings[SETTINGS.BATTLE_CATAPULT_D] = 0
+            $scope.settings[SETTINGS.BATTLE_SNOB_D] = 0
+            $scope.settings[SETTINGS.BATTLE_KNIGHT_D] = 0
+            $scope.settings[SETTINGS.BATTLE_TREBUCHET_D] = 0
+            $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_D] = 0
+            $scope.settings[SETTINGS.BATTLE_LC_D] = 0
+            $scope.settings[SETTINGS.BATTLE_MA_D] = 0
+            $scope.settings[SETTINGS.BATTLE_HC_D] = 0
+            settings.setAll(settings.decode($scope.settings))
+        }
+    }
+    const insertPresetAttacker = function() {
+        battleCalculator.getPresetUnits()
+        $scope.settings[SETTINGS.BATTLE_SPEAR_A] = battleCalculator.getPresetSpear()
+        $scope.settings[SETTINGS.BATTLE_SWORD_A] = battleCalculator.getPresetSword()
+        $scope.settings[SETTINGS.BATTLE_AXE_A] = battleCalculator.getPresetAxe()
+        $scope.settings[SETTINGS.BATTLE_ARCHER_A] = battleCalculator.getPresetArcher()
+        $scope.settings[SETTINGS.BATTLE_RAM_A] = battleCalculator.getPresetRam()
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = battleCalculator.getPresetCatapult()
+        $scope.settings[SETTINGS.BATTLE_SNOB_A] = battleCalculator.getPresetSnob()
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = battleCalculator.getPresetKnight()
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = battleCalculator.getPresetTrebuchet()
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = battleCalculator.getPresetBerserker()
+        $scope.settings[SETTINGS.BATTLE_LC_A] = battleCalculator.getPresetLc()
+        $scope.settings[SETTINGS.BATTLE_MA_A] = battleCalculator.getPresetMa()
+        $scope.settings[SETTINGS.BATTLE_HC_A] = battleCalculator.getPresetHc()
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const insertPresetDefender = function() {
+        battleCalculator.getPresetUnits()
+        settings.setAll(settings.decode($scope.settings))
+        $scope.settings[SETTINGS.BATTLE_SPEAR_D] = battleCalculator.getPresetSpear()
+        $scope.settings[SETTINGS.BATTLE_SWORD_D] = battleCalculator.getPresetSword()
+        $scope.settings[SETTINGS.BATTLE_AXE_D] = battleCalculator.getPresetAxe()
+        $scope.settings[SETTINGS.BATTLE_ARCHER_D] = battleCalculator.getPresetArcher()
+        $scope.settings[SETTINGS.BATTLE_RAM_D] = battleCalculator.getPresetRam()
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_D] = battleCalculator.getPresetCatapult()
+        $scope.settings[SETTINGS.BATTLE_SNOB_D] = battleCalculator.getPresetSnob()
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_D] = battleCalculator.getPresetKnight()
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_D] = battleCalculator.getPresetTrebuchet()
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_D] = battleCalculator.getPresetBerserker()
+        $scope.settings[SETTINGS.BATTLE_LC_D] = battleCalculator.getPresetLc()
+        $scope.settings[SETTINGS.BATTLE_MA_D] = battleCalculator.getPresetMa()
+        $scope.settings[SETTINGS.BATTLE_HC_D] = battleCalculator.getPresetHc()
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const insertVillageAttacker = function() {
+        battleCalculator.getVillageUnits()
+        settings.setAll(settings.decode($scope.settings))
+        let spearVillage = battleCalculator.getVillageSpear()
+        let swordVillage = battleCalculator.getVillageSword()
+        let axeVillage = battleCalculator.getVillageAxe()
+        let archerVillage = battleCalculator.getVillageArcher()
+        let ramVillage = battleCalculator.getVillageRam()
+        let catapultVillage = battleCalculator.getVillageCatapult()
+        let snobVillage = battleCalculator.getVillageSnob()
+        let knigthVillage = battleCalculator.getVillageKnight()
+        let trebuchetVillage = battleCalculator.getVillageTrebuchet()
+        let berserkerVillage = battleCalculator.getVillageBerserker()
+        let lcVillage = battleCalculator.getVillageLc()
+        let maVillage = battleCalculator.getVillageMa()
+        let hcVillage = battleCalculator.getVillageHc()
+        $scope.settings[SETTINGS.BATTLE_SPEAR_A] = spearVillage
+        $scope.settings[SETTINGS.BATTLE_SWORD_A] = swordVillage
+        $scope.settings[SETTINGS.BATTLE_AXE_A] = axeVillage
+        $scope.settings[SETTINGS.BATTLE_ARCHER_A] = archerVillage
+        $scope.settings[SETTINGS.BATTLE_RAM_A] = ramVillage
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = catapultVillage
+        $scope.settings[SETTINGS.BATTLE_SNOB_A] = snobVillage
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = knigthVillage
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = trebuchetVillage
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = berserkerVillage
+        $scope.settings[SETTINGS.BATTLE_LC_A] = lcVillage
+        $scope.settings[SETTINGS.BATTLE_MA_A] = maVillage
+        $scope.settings[SETTINGS.BATTLE_HC_A] = hcVillage
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const insertVillageDefender = function() {
+        battleCalculator.getVillageUnits()
+        settings.setAll(settings.decode($scope.settings))
+        let spearVillage = battleCalculator.getVillageSpear()
+        let swordVillage = battleCalculator.getVillageSword()
+        let axeVillage = battleCalculator.getVillageAxe()
+        let archerVillage = battleCalculator.getVillageArcher()
+        let ramVillage = battleCalculator.getVillageRam()
+        let catapultVillage = battleCalculator.getVillageCatapult()
+        let snobVillage = battleCalculator.getVillageSnob()
+        let knigthVillage = battleCalculator.getVillageKnight()
+        let trebuchetVillage = battleCalculator.getVillageTrebuchet()
+        let berserkerVillage = battleCalculator.getVillageBerserker()
+        let lcVillage = battleCalculator.getVillageLc()
+        let maVillage = battleCalculator.getVillageMa()
+        let hcVillage = battleCalculator.getVillageHc()
+        $scope.settings[SETTINGS.BATTLE_SPEAR_D] = spearVillage
+        $scope.settings[SETTINGS.BATTLE_SWORD_D] = swordVillage
+        $scope.settings[SETTINGS.BATTLE_AXE_D] = axeVillage
+        $scope.settings[SETTINGS.BATTLE_ARCHER_D] = archerVillage
+        $scope.settings[SETTINGS.BATTLE_RAM_D] = ramVillage
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_D] = catapultVillage
+        $scope.settings[SETTINGS.BATTLE_SNOB_D] = snobVillage
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_D] = knigthVillage
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_D] = trebuchetVillage
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_D] = berserkerVillage
+        $scope.settings[SETTINGS.BATTLE_LC_D] = lcVillage
+        $scope.settings[SETTINGS.BATTLE_MA_D] = maVillage
+        $scope.settings[SETTINGS.BATTLE_HC_D] = hcVillage
+        settings.setAll(settings.decode($scope.settings))
     }
     const showBashpoints = function() {
         settings.setAll(settings.decode($scope.settings))
@@ -10908,6 +10347,241 @@ define('two/battleCalculator/ui', [
         if (bashpointsDef) {
             $scope.totalDef = bashpointsDef
         }
+    }
+    const clearBashpoints = function() {
+        $scope.totalAtt = 0
+        $scope.totalDef = 0
+        $scope.settings[SETTINGS.BASHPOINTS_SPEAR] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_SWORD] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_AXE] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_ARCHER] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_RAM] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_CATAPULT] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_SNOB] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_KNIGHT] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_TREBUCHET] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_DOPPELSOLDNER] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_LC] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_MA] = 0
+        $scope.settings[SETTINGS.BASHPOINTS_HC] = 0
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const clearBattle = function() {
+        $scope.spearDamount = 0
+        $scope.spearDlosses = 0
+        $scope.spearDrevived = 0
+        $scope.spearDsurvived = 0
+        $scope.swordDamount = 0
+        $scope.swordDlosses = 0
+        $scope.swordDrevived = 0
+        $scope.swordDsurvived = 0
+        $scope.axeDamount = 0
+        $scope.axeDlosses = 0
+        $scope.axeDrevived = 0
+        $scope.axeDsurvived = 0
+        $scope.archerDamount = 0
+        $scope.archerDlosses = 0
+        $scope.archerDrevived = 0
+        $scope.archerDsurvived = 0
+        $scope.snobDamount = 0
+        $scope.snobDlosses = 0
+        $scope.snobDrevived = 0
+        $scope.snobDsurvived = 0
+        $scope.knightDamount = 0
+        $scope.knightDlosses = 0
+        $scope.knightDrevived = 0
+        $scope.knightDsurvived = 0
+        $scope.ramDamount = 0
+        $scope.ramDlosses = 0
+        $scope.ramDrevived = 0
+        $scope.ramDsurvived = 0
+        $scope.catapultDamount = 0
+        $scope.catapultDlosses = 0
+        $scope.catapultDrevived = 0
+        $scope.catapultDsurvived = 0
+        $scope.trebuchetDamount = 0
+        $scope.trebuchetDlosses = 0
+        $scope.trebuchetDrevived = 0
+        $scope.trebuchetDsurvived = 0
+        $scope.lcDamount = 0
+        $scope.lcDlosses = 0
+        $scope.lcDrevived = 0
+        $scope.lcDsurvived = 0
+        $scope.maDamount = 0
+        $scope.maDlosses = 0
+        $scope.maDrevived = 0
+        $scope.maDsurvived = 0
+        $scope.hcDamount = 0
+        $scope.hcDlosses = 0
+        $scope.hcDrevived = 0
+        $scope.hcDsurvived = 0
+        $scope.berserkerDamount = 0
+        $scope.berserkerDlosses = 0
+        $scope.berserkerDrevived = 0
+        $scope.berserkerDsurvived = 0
+        $scope.spearAamount = 0
+        $scope.spearAlosses = 0
+        $scope.spearArevived = 0
+        $scope.spearAsurvived = 0
+        $scope.swordAamount = 0
+        $scope.swordAlosses = 0
+        $scope.swordArevived = 0
+        $scope.swordAsurvived = 0
+        $scope.axeAamount = 0
+        $scope.axeAlosses = 0
+        $scope.axeArevived = 0
+        $scope.axeAsurvived = 0
+        $scope.archerAamount = 0
+        $scope.archerAlosses = 0
+        $scope.archerArevived = 0
+        $scope.archerAsurvived = 0
+        $scope.snobAamount = 0
+        $scope.snobAlosses = 0
+        $scope.snobArevived = 0
+        $scope.snobAsurvived = 0
+        $scope.knightAamount = 0
+        $scope.knightAlosses = 0
+        $scope.knightArevived = 0
+        $scope.knightAsurvived = 0
+        $scope.ramAamount = 0
+        $scope.ramAlosses = 0
+        $scope.ramArevived = 0
+        $scope.ramAsurvived = 0
+        $scope.catapultAamount = 0
+        $scope.catapultAlosses = 0
+        $scope.catapultArevived = 0
+        $scope.catapultAsurvived = 0
+        $scope.trebuchetAamount = 0
+        $scope.trebuchetAlosses = 0
+        $scope.trebuchetArevived = 0
+        $scope.trebuchetAsurvived = 0
+        $scope.lcAamount = 0
+        $scope.lcAlosses = 0
+        $scope.lcArevived = 0
+        $scope.lcAsurvived = 0
+        $scope.maAamount = 0
+        $scope.maAlosses = 0
+        $scope.maArevived = 0
+        $scope.maAsurvived = 0
+        $scope.hcAamount = 0
+        $scope.hcAlosses = 0
+        $scope.hcArevived = 0
+        $scope.hcAsurvived = 0
+        $scope.berserkerAamount = 0
+        $scope.berserkerAlosses = 0
+        $scope.berserkerArevived = 0
+        $scope.berserkerAsurvived = 0
+        $scope.availableBeds = 0
+        $scope.target = 'Mur'
+        $scope.buildingfrom = 0
+        $scope.buildingto = 0
+        $scope.wallfrom = 0
+        $scope.wallto = 0
+        $scope.wallfrompre = 0
+        $scope.walltopre = 0
+        $scope.defenceModifier = 0
+        $scope.defenceProvisions = 0
+        $scope.strentghDefend = 0
+        $scope.defenceBashpoint = 0
+        $scope.defenceKilledProvisions = 0
+        $scope.strongestTypeDef = 0
+        $scope.killrateD = 0
+        $scope.defenceSurvivedProvisions = 0
+        $scope.attackModifier = 0
+        $scope.attackProvisions = 0
+        $scope.strentghAttack = 0
+        $scope.attackBashpoint = 0
+        $scope.attackKilledProvisions = 0
+        $scope.strongestTypeOff = 0
+        $scope.killrateA = 0
+        $scope.attackSurvivedProvisions = 0
+        $scope.doubleStrength = 0
+        $scope.settings[SETTINGS.BATTLE_SPEAR_D] = 0
+        $scope.settings[SETTINGS.BATTLE_SWORD_D] = 0
+        $scope.settings[SETTINGS.BATTLE_AXE_D] = 0
+        $scope.settings[SETTINGS.BATTLE_ARCHER_D] = 0
+        $scope.settings[SETTINGS.BATTLE_RAM_D] = 0
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_D] = 0
+        $scope.settings[SETTINGS.BATTLE_SNOB_D] = 0
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_D] = 0
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_D] = 0
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_D] = 0
+        $scope.settings[SETTINGS.BATTLE_LC_D] = 0
+        $scope.settings[SETTINGS.BATTLE_MA_D] = 0
+        $scope.settings[SETTINGS.BATTLE_HC_D] = 0
+        $scope.settings[SETTINGS.BATTLE_SPEAR_A] = 0
+        $scope.settings[SETTINGS.BATTLE_SWORD_A] = 0
+        $scope.settings[SETTINGS.BATTLE_AXE_A] = 0
+        $scope.settings[SETTINGS.BATTLE_ARCHER_A] = 0
+        $scope.settings[SETTINGS.BATTLE_RAM_A] = 0
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_A] = 0
+        $scope.settings[SETTINGS.BATTLE_SNOB_A] = 0
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_A] = 0
+        $scope.settings[SETTINGS.BATTLE_TREBUCHET_A] = 0
+        $scope.settings[SETTINGS.BATTLE_DOPPELSOLDNER_A] = 0
+        $scope.settings[SETTINGS.BATTLE_LC_A] = 0
+        $scope.settings[SETTINGS.BATTLE_MA_A] = 0
+        $scope.settings[SETTINGS.BATTLE_HC_A] = 0
+        $scope.settings[SETTINGS.BATTLE_MORALE] = 100
+        $scope.settings[SETTINGS.BATTLE_LUCK] = 0
+        $scope.settings[SETTINGS.BATTLE_TARGET_LEVEL] = 0
+        $scope.settings[SETTINGS.BATTLE_WALL] = 'level_20'
+        $scope.settings[SETTINGS.BATTLE_CHURCH_A] = 'level_1'
+        $scope.settings[SETTINGS.BATTLE_CHURCH_D] = 'level_1'
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_ITEM_D1] = false
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_ITEM_D2] = false
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_ITEM_D3] = false
+        $scope.settings[SETTINGS.BATTLE_KNIGHT_ITEM_A] = false
+        $scope.settings[SETTINGS.BATTLE_ITEM_LEVEL_D1] = false
+        $scope.settings[SETTINGS.BATTLE_ITEM_LEVEL_D2] = false
+        $scope.settings[SETTINGS.BATTLE_ITEM_LEVEL_D3] = false
+        $scope.settings[SETTINGS.BATTLE_ITEM_LEVEL_A] = false
+        $scope.settings[SETTINGS.BATTLE_NIGHT_BONUS] = false
+        $scope.settings[SETTINGS.BATTLE_OFFICER_LEADER] = false
+        $scope.settings[SETTINGS.BATTLE_OFFICER_MEDIC] = false
+        $scope.settings[SETTINGS.BATTLE_SKILL_MEDIC] = false
+        $scope.settings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER] = false
+        $scope.settings[SETTINGS.BATTLE_SKILL_IRON_WALLS] = false
+        $scope.settings[SETTINGS.BATTLE_SKILL_CLINIQUE] = false
+        $scope.settings[SETTINGS.BATTLE_HOSPITAL] = false
+        $scope.settings[SETTINGS.BATTLE_CATAPULT_TARGET] = false
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const clearTroops = function() {
+        $scope.woodTotal = 0
+        $scope.speedTotal = 0
+        $scope.attackTotal = 0
+        $scope.clayTotal = 0
+        $scope.disciplineTotal = 0
+        $scope.definfTotal = 0
+        $scope.ironTotal = 0
+        $scope.loadTotal = 0
+        $scope.defcavTotal = 0
+        $scope.foodTotal = 0
+        $scope.buildtimeTotal = 0
+        $scope.defarcTotal = 0
+        $scope.attackinfTotal = 0
+        $scope.attackcavTotal = 0
+        $scope.attackarcTotal = 0
+        $scope.settings[SETTINGS.TROOPS_SPEAR] = 0
+        $scope.settings[SETTINGS.TROOPS_SWORD] = 0
+        $scope.settings[SETTINGS.TROOPS_AXE] = 0
+        $scope.settings[SETTINGS.TROOPS_ARCHER] = 0
+        $scope.settings[SETTINGS.TROOPS_RAM] = 0
+        $scope.settings[SETTINGS.TROOPS_CATAPULT] = 0
+        $scope.settings[SETTINGS.TROOPS_SNOB] = 0
+        $scope.settings[SETTINGS.TROOPS_KNIGHT] = 0
+        $scope.settings[SETTINGS.TROOPS_TREBUCHET] = 0
+        $scope.settings[SETTINGS.TROOPS_DOPPELSOLDNER] = 0
+        $scope.settings[SETTINGS.TROOPS_LC] = 0
+        $scope.settings[SETTINGS.TROOPS_MA] = 0
+        $scope.settings[SETTINGS.TROOPS_HC] = 0
+        $scope.settings[SETTINGS.TROOPS_BARRACKS] = 25
+        $scope.settings[SETTINGS.TROOPS_PRECEPTORY] = 10
+        $scope.settings[SETTINGS.TROOPS_ORDER] = false
+        $scope.settings[SETTINGS.TROOPS_DOMINATION] = false
+        $scope.settings[SETTINGS.TROOPS_TRAINING] = false
+        settings.setAll(settings.decode($scope.settings))
     }
     const showBattleScore = function() {
         settings.setAll(settings.decode($scope.settings))
@@ -10937,7 +10611,6 @@ define('two/battleCalculator/ui', [
         let killrateA = battleCalculator.getKillratea() * 100
         let attackSurvivedProvisions = battleCalculator.getAttacksurvivedprovisions()
         let doubleStrength = battleCalculator.getDoublestrength()
-		
         let spearDamount = battleCalculator.getSpeardAmount()
         let spearDlosses = -battleCalculator.getSpeardLosses()
         let spearDrevived = battleCalculator.getSpeardRevived()
@@ -11215,6 +10888,28 @@ define('two/battleCalculator/ui', [
                 type: 'presets'
             })
         },
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'battlecalculator_village_search') {
+                return false
+            }
+            battleVillage[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+        },
+        onAutoCompleteVillage: function(data) {
+            battleVillage.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.BATTLE_VILLAGE_ID] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
         start: function() {
             $scope.running = true
             $button.classList.remove('btn-orange')
@@ -11230,9 +10925,14 @@ define('two/battleCalculator/ui', [
     }
     const init = function() {
         settings = battleCalculator.getSettings()
+        battleVillage = {
+            origin: false
+        }
         $button = interfaceOverflow.addMenuButton4('Kalkulator', 10)
         $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_battle_calculator_window', `<div id=\"two-battle-calculator\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'battle_calculator' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BATTLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BATTLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BATTLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BATTLE}\">{{ 'battle' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TROOPS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TROOPS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TROOPS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TROOPS}\">{{ 'troops' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BASHPOINTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BASHPOINTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BASHPOINTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BASHPOINTS}\">{{ 'bashpoints' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><h5 class=\"twx-section\">{{ 'battle.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"14\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsA' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span>{{ spearAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ spearAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ spearArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ spearAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span>{{ swordAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ swordAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ swordArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ swordAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span>{{ axeAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ axeAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ axeArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ axeAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span>{{ archerAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ archerAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ archerArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ archerAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span>{{ lcAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ lcAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ lcArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ lcAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span>{{ maAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ maAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ maArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ maAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span>{{ hcAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ hcAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ hcArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ hcAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span>{{ ramAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ ramAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ ramArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ ramAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span>{{ catapultAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ catapultAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ catapultArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ catapultAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span>{{ berserkerAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ berserkerAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ berserkerArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ berserkerAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span>{{ trebuchetAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ trebuchetAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ trebuchetArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ trebuchetAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span>{{ snobAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ snobAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ snobArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ snobAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span>{{ knightAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ knightAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ knightArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ knightAsurvived }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackModifier }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghAttack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strentghAttack }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-offensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackBashpoint }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackKilledProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strongestTypeOff }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateA' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ killrateA }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackSurvivedProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-attack_bonus\" tooltip=\"\" tooltip-content=\"{{ 'battle.doublestrength' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ doubleStrength }}</span></div><tr><th colspan=\"14\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span>{{ spearDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ spearDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ spearDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ spearDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span>{{ swordDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ swordDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ swordDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ swordDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span>{{ axeDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ axeDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ axeDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ axeDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span>{{ archerDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ archerDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ archerDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ archerDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span>{{ lcDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ lcDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ lcDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ lcDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span>{{ maDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ maDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ maDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ maDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span>{{ hcDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ hcDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ hcDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ hcDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span>{{ ramDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ ramDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ ramDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ ramDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span>{{ catapultDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ catapultDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ catapultDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ catapultDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span>{{ berserkerDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ berserkerDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ berserkerDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ berserkerDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span>{{ trebuchetDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ trebuchetDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ trebuchetDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ trebuchetDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span>{{ snobDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ snobDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ snobDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ snobDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span>{{ knightDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ knightDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ knightDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ knightDsurvived }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceModifier }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghDefend' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strentghDefend }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-defensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceBashpoint }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceKilledProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strongestTypeDef }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateD' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ killrateD }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceSurvivedProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-better_hospital\" tooltip=\"\" tooltip-content=\"{{ 'battle.beds' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ availableBeds }}</span></div><tr id=\"predamage\"><th><span class=\"unitname\">{{ 'battle.predamage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallfrompre\" id=\"wallfrompre\">{{ wallfrompre }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"walltopre\" id=\"walltopre\">{{ walltopre }}</b><tr id=\"ramdamage\"><th><span class=\"unitname\">{{ 'battle.damage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallfrom\" id=\"wallfrom\">{{ wallfrom }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallto\" id=\"wallto\">{{ wallto }}</b><tr id=\"catapultdamage\"><th><span class=\"unitname\">{{ 'battle.damageCatapult' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\"><span class=\"target\">{{ target }} </span>{{ 'battle.downgradeCatapult' | i18n:loc.ale:'battle_calculator' }} <b class=\"buildingfrom\" id=\"buildingfrom\">{{ buildingfrom }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"buildingto\" id=\"buildingto\">{{ buildingto }}</b></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\">{{ 'battle.options' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"3\" class=\"item-insert\"><span class=\"btn btn-orange addSelected\">{{ 'battle.insert' | i18n:loc.ale:'battle_calculator' }}</span><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'battle.id' | i18n:loc.ale:'battle_calculator' }}\"></div><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'battle.no_village' | i18n:loc.ale:'battle_calculator' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'battle.add_map_selected' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.selected' | i18n:loc.ale:'battle_calculator' }}</a><tr><td><td class=\"item-insertV\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertV' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertVD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertVD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><tr><td><span class=\"item-icon\"></span><td class=\"item-name\"><td class=\"item-id\"><tr><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><td class=\"item-insertP\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertP' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertPD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertPD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span></table></form><form class=\"addForm\"><table class=\"table\" id=\"units\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_D]\"></table></form><form class=\"addForm\"><table class=\"table\"><col width=\"34%\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><thead><tr><th colspan=\"7\"><span class=\"icon-bg-black icon-44x44-special\"></span> {{ 'battle.bonuses' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-church\"></span> {{ 'battle.faith' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_A]\" drop-down=\"true\"></div><td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_D]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-moral\"></span> {{ 'battle.morale' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"100\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MORALE]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-clover\"></span> {{ 'battle.luck' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LUCK]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-building-wall\"></span> {{ 'battle.wall' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.BATTLE_WALL]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-26x26-night-mode\"></span> {{ 'battle.nightbonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_NIGHT_BONUS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_leader\"></span> {{ 'battle.leader' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_LEADER]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_medic\"></span> {{ 'battle.medic' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-medic\"></span> {{ 'battle.doctor' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_SKILL_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-attack_bonus\"></span> {{ 'battle.attack-bonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"weaponmaster\" selected=\"settings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]\" drop-down=\"true\"></div><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span> {{ 'battle.iron-walls' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.BATTLE_SKILL_IRON_WALLS]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-better_hospital\"></span> {{ 'battle.clinique' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"clinique\" selected=\"settings[SETTINGS.BATTLE_SKILL_CLINIQUE]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-hospital\"></span> {{ 'battle.hospital' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"hospital\" selected=\"settings[SETTINGS.BATTLE_HOSPITAL]\" drop-down=\"true\"></div></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\"><span class=\"icon-bg-black icon-34x34-paladin\"></span> {{ 'battle.equip' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><th colspan=\"3\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D3]\" drop-down=\"true\"></div><tr><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D3]\" drop-down=\"true\"></div><tr><th colspan=\"3\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div class=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_A]\" drop-down=\"true\"></div><td><tr><td><td><div class=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_A]\" drop-down=\"true\"></div><td></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><tr><th colspan=\"3\"><span class=\"icon-34x34-unit-special-ability-catapult\"></span> {{ 'battle.target' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div select=\"\" list=\"catapulttarget\" selected=\"settings[SETTINGS.BATTLE_CATAPULT_TARGET]\" drop-down=\"true\"></div><td><tr><th colspan=\"3\">{{ 'battle.target-level' | i18n:loc.ale:'battle_calculator' }}<tr><td><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TARGET_LEVEL]\"><td></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><h5 class=\"twx-section\">{{ 'troops.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"33%\"><col width=\"33%\"><col><thead><tr><th colspan=\"3\">{{ 'troops.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-wood\" tooltip=\"\" tooltip-content=\"{{ 'troops.wood' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ woodTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time-per-tile\" tooltip=\"\" tooltip-content=\"{{ 'troops.speed' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ speedTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'troops.attack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-clay\" tooltip=\"\" tooltip-content=\"{{ 'troops.clay' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ clayTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-units\" tooltip=\"\" tooltip-content=\"{{ 'troops.discipline' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ disciplineTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'troops.definf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ definfTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-iron\" tooltip=\"\" tooltip-content=\"{{ 'troops.iron' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ ironTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-weight\" tooltip=\"\" tooltip-content=\"{{ 'troops.load' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ loadTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-cavalry\" tooltip=\"\" tooltip-content=\"{{ 'troops.defcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defcavTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'troops.food' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ foodTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time\" tooltip=\"\" tooltip-content=\"{{ 'troops.buildtime' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ buildtimeTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-archer\" tooltip=\"\" tooltip-content=\"{{ 'troops.defarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defarcTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackinf\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackinf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackinfTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackcav\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackcavTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackarc\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackarcTotal }}</span></div></table><br><table class=\"table\" id=\"unitsCost\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'troops.units' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_CATAPULT]\"></table><br><table class=\"table\"><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.building' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-building-barracks\"></span> {{ 'troops.barracks' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_BARRACKS].min\" max=\"settingsMap[SETTINGS.TROOPS_BARRACKS].max\" value=\"settings[SETTINGS.TROOPS_BARRACKS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_BARRACKS]\"><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.preceptory' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].min\" max=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].max\" value=\"settings[SETTINGS.TROOPS_PRECEPTORY]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_PRECEPTORY]\"></table><table class=\"table\"><col><col width=\"140px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.effects' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"2\"><span class=\"icon-bg-black icon-120x120-domination\"></span> {{ 'troops.domination' | i18n:loc.ale:'battle_calculator' }}<td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TROOPS_DOMINATION]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-recruit_speed_bonus\"></span> {{ 'troops.training' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"training\" selected=\"settings[SETTINGS.TROOPS_TRAINING]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.order' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"order\" selected=\"settings[SETTINGS.TROOPS_ORDER]\" drop-down=\"true\"></div></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><h5 class=\"twx-section\">{{ 'bashpoints.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"50%\"><col width=\"50%\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-attack\"></span> {{ 'bashpoints.attacker' | i18n:loc.ale:'battle_calculator' }}<td class=\"text-center\"><span>{{ totalDef }}</span><tr><td><span class=\"icon-bg-black icon-34x34-defense\"></span> {{ 'bashpoints.defender' | i18n:loc.ale:'battle_calculator' }}<td class=\"text-center\"><span>{{ totalAtt }}</span></table><br><table class=\"table\" id=\"unitsBash\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.killed' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_CATAPULT]\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"simulate()\">{{ 'battle.simulate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateT()\">{{ 'troops.calculate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateB()\">{{ 'bashpoints.calculate' | i18n:loc.ale:'battle_calculator' }}</a></ul></footer></div>`)
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_battle_calculator_window', `<div id=\"two-battle-calculator\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'battle_calculator' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BATTLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BATTLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BATTLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BATTLE}\">{{ 'battle' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TROOPS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TROOPS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TROOPS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TROOPS}\">{{ 'troops' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BASHPOINTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BASHPOINTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BASHPOINTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BASHPOINTS}\">{{ 'bashpoints' | i18n:loc.ale:'battle_calculator' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><h5 class=\"twx-section\">{{ 'battle.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"14\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsA' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span>{{ spearAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ spearAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ spearArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ spearAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span>{{ swordAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ swordAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ swordArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ swordAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span>{{ axeAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ axeAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ axeArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ axeAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span>{{ archerAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ archerAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ archerArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ archerAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span>{{ lcAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ lcAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ lcArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ lcAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span>{{ maAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ maAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ maArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ maAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span>{{ hcAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ hcAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ hcArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ hcAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span>{{ ramAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ ramAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ ramArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ ramAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span>{{ catapultAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ catapultAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ catapultArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ catapultAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span>{{ berserkerAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ berserkerAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ berserkerArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ berserkerAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span>{{ trebuchetAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ trebuchetAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ trebuchetArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ trebuchetAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span>{{ snobAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ snobAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ snobArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ snobAsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span>{{ knightAamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ knightAlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ knightArevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ knightAsurvived }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackModifier }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghAttack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strentghAttack }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-offensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.attackBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackBashpoint }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackKilledProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strongestTypeOff }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateA' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ killrateA }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackSurvivedProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-attack_bonus\" tooltip=\"\" tooltip-content=\"{{ 'battle.doublestrength' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ doubleStrength }}</span></div><tr><th colspan=\"14\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td style=\"padding-left:5px;\"><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-amount\"></span><span class=\"unitname\"> {{ 'battle.amount' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-losses\"></span><span class=\"unitname\"> {{ 'battle.loses' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"icon-20x20-report-revive\"></span><span class=\"unitname\"> {{ 'battle.revived' | i18n:loc.ale:'battle_calculator' }}</span></div><div height=\"26px\"><span class=\"unitname\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivorsD' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.survivors' | i18n:loc.ale:'battle_calculator' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><div style=\"text-align:center;\"><span>{{ spearDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ spearDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ spearDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ spearDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><div style=\"text-align:center;\"><span>{{ swordDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ swordDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ swordDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ swordDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><div style=\"text-align:center;\"><span>{{ axeDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ axeDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ axeDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ axeDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><div style=\"text-align:center;\"><span>{{ archerDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ archerDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ archerDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ archerDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><div style=\"text-align:center;\"><span>{{ lcDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ lcDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ lcDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ lcDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><div style=\"text-align:center;\"><span>{{ maDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ maDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ maDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ maDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><div style=\"text-align:center;\"><span>{{ hcDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ hcDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ hcDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ hcDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><div style=\"text-align:center;\"><span>{{ ramDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ ramDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ ramDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ ramDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><div style=\"text-align:center;\"><span>{{ catapultDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ catapultDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ catapultDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ catapultDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><div style=\"text-align:center;\"><span>{{ berserkerDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ berserkerDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ berserkerDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ berserkerDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><div style=\"text-align:center;\"><span>{{ trebuchetDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ trebuchetDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ trebuchetDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ trebuchetDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><div style=\"text-align:center;\"><span>{{ snobDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ snobDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ snobDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ snobDsurvived }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><div style=\"text-align:center;\"><span>{{ knightDamount }}</span></div><div style=\"text-align:center;color:#a1251f\"><span>{{ knightDlosses }}</span></div><div style=\"text-align:center;color:#009fff\"><span>{{ knightDrevived }}</span></div><div style=\"text-align:center;color:#000000\"><span>{{ knightDsurvived }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceModifier' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceModifier }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.provisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'battle.strentghDefend' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strentghDefend }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-bashpoints-defensive\" tooltip=\"\" tooltip-content=\"{{ 'battle.defenceBashpoint' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceBashpoint }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-red icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.killedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceKilledProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-black icon-34x34-favourite\" tooltip=\"\" tooltip-content=\"{{ 'battle.strongesttype' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ strongestTypeDef }}</span></div><tr><td colspan=\"2\"><span style=\"float:left\" class=\"report-symbol icon-34x34-casualties bg-casualties\" tooltip=\"\" tooltip-content=\"{{ 'battle.killrateD' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ killrateD }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-bg-blue icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'battle.survivedprovisions' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defenceSurvivedProvisions }}</span></div><td colspan=\"6\"><span style=\"float:left\" class=\"icon-34x34-skill-better_hospital\" tooltip=\"\" tooltip-content=\"{{ 'battle.beds' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ availableBeds }}</span></div><tr id=\"predamage\"><th><span class=\"unitname\">{{ 'battle.predamage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallfrompre\" id=\"wallfrompre\">{{ wallfrompre }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"walltopre\" id=\"walltopre\">{{ walltopre }}</b><tr id=\"ramdamage\"><th><span class=\"unitname\">{{ 'battle.damage' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\">{{ 'battle.downgrade' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallfrom\" id=\"wallfrom\">{{ wallfrom }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"wallto\" id=\"wallto\">{{ wallto }}</b><tr id=\"catapultdamage\"><th><span class=\"unitname\">{{ 'battle.damageCatapult' | i18n:loc.ale:'battle_calculator' }}:</span><td colspan=\"13\"><span class=\"target\">{{ target }} </span>{{ 'battle.downgradeCatapult' | i18n:loc.ale:'battle_calculator' }} <b class=\"buildingfrom\" id=\"buildingfrom\">{{ buildingfrom }}</b> {{ 'battle.to' | i18n:loc.ale:'battle_calculator' }} <b class=\"buildingto\" id=\"buildingto\">{{ buildingto }}</b></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\">{{ 'battle.options' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"3\" class=\"item-insert\"><span class=\"btn btn-orange addSelected\" ng-click=\"insertSurvived()\">{{ 'battle.insert' | i18n:loc.ale:'battle_calculator' }}</span><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_VILLAGE_ID]\"><td><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'battle.id' | i18n:loc.ale:'battle_calculator' }}\"></div><td ng-if=\"!battleVillage.origin\" class=\"command-village\">{{ 'battle.no_village' | i18n:loc.ale:'battle_calculator' }}<td ng-if=\"battleVillage.origin\" class=\"command-village\">{{ battleVillage.origin.name }} ({{ battleVillage.origin.x }}|{{ battleVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'battle.add_map_selected' | i18n:loc.ale:'battle_calculator' }}\">{{ 'battle.selected' | i18n:loc.ale:'battle_calculator' }}</a><tr><td><td class=\"item-insertV\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertV' | i18n:loc.ale:'battle_calculator' }}\" ng-click=\"insertVA()\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertVD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertVD' | i18n:loc.ale:'battle_calculator' }}\" ng-click=\"insertVD()\">{{ 'battle.insertvillage' | i18n:loc.ale:'battle_calculator' }}</span><tr><td><span class=\"item-icon\"></span><td class=\"item-name\"><td class=\"item-id\"><tr><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><td class=\"item-insertP\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertP' | i18n:loc.ale:'battle_calculator' }}\" ng-click=\"insertPA()\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span><td class=\"item-insertPD\"><span class=\"btn btn-orange addSelected\" tooltip=\"\" tooltip-content=\"{{ 'battle.insertPD' | i18n:loc.ale:'battle_calculator' }}\" ng-click=\"insertPD()\">{{ 'battle.insertpreset' | i18n:loc.ale:'battle_calculator' }}</span></table></form><form class=\"addForm\"><table class=\"table\" id=\"units\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th><th>{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<th>{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SPEAR_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SWORD_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_AXE_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_ARCHER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MA_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_HC_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_RAM_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_CATAPULT_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_DOPPELSOLDNER_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TREBUCHET_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_SNOB_D]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'common' }}</span><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_A]\"><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_KNIGHT_D]\"></table></form><form class=\"addForm\"><table class=\"table\"><col width=\"34%\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><col width=\"77px\"><col width=\"60px\"><col width=\"77px\"><thead><tr><th colspan=\"7\"><span class=\"icon-bg-black icon-44x44-special\"></span> {{ 'battle.bonuses' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-church\"></span> {{ 'battle.faith' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_A]\" drop-down=\"true\"></div><td colspan=\"3\"><div select=\"\" list=\"church\" selected=\"settings[SETTINGS.BATTLE_CHURCH_D]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-moral\"></span> {{ 'battle.morale' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"100\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_MORALE]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-clover\"></span> {{ 'battle.luck' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_LUCK]\"><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-34x34-building-wall\"></span> {{ 'battle.wall' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.BATTLE_WALL]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-26x26-night-mode\"></span> {{ 'battle.nightbonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_NIGHT_BONUS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_leader\"></span> {{ 'battle.leader' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_LEADER]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-44x44-premium_officer_medic\"></span> {{ 'battle.medic' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_OFFICER_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-medic\"></span> {{ 'battle.doctor' | i18n:loc.ale:'battle_calculator' }}<td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.BATTLE_SKILL_MEDIC]\" vertical=\"false\" size=\"'56x28'\"></div><td><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-attack_bonus\"></span> {{ 'battle.attack-bonus' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><div select=\"\" list=\"weaponmaster\" selected=\"settings[SETTINGS.BATTLE_SKILL_WEAPON_MASTER]\" drop-down=\"true\"></div><td colspan=\"3\"><tr><td><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span> {{ 'battle.iron-walls' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.BATTLE_SKILL_IRON_WALLS]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-better_hospital\"></span> {{ 'battle.clinique' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"clinique\" selected=\"settings[SETTINGS.BATTLE_SKILL_CLINIQUE]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-hospital\"></span> {{ 'battle.hospital' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"3\"><td colspan=\"3\"><div select=\"\" list=\"hospital\" selected=\"settings[SETTINGS.BATTLE_HOSPITAL]\" drop-down=\"true\"></div></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><thead><tr><th colspan=\"3\"><span class=\"icon-bg-black icon-34x34-paladin\"></span> {{ 'battle.equip' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><th colspan=\"3\">{{ 'battle.defender' | i18n:loc.ale:'battle_calculator' }}<tr><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_D3]\" drop-down=\"true\"></div><tr><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D1]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D2]\" drop-down=\"true\"></div><td><div id=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_D3]\" drop-down=\"true\"></div><tr><th colspan=\"3\">{{ 'battle.attacker' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div class=\"item\" select=\"\" list=\"knightitem\" selected=\"settings[SETTINGS.BATTLE_KNIGHT_ITEM_A]\" drop-down=\"true\"></div><td><tr><td><td><div class=\"item\" select=\"\" list=\"itemlevel\" selected=\"settings[SETTINGS.BATTLE_ITEM_LEVEL_A]\" drop-down=\"true\"></div><td></table></form><form class=\"addForm\"><table class=\"table\"><col><col width=\"33%\"><col width=\"33%\"><tr><th colspan=\"3\"><span class=\"icon-34x34-unit-special-ability-catapult\"></span> {{ 'battle.target' | i18n:loc.ale:'battle_calculator' }}<tr><td><td><div select=\"\" list=\"catapulttarget\" selected=\"settings[SETTINGS.BATTLE_CATAPULT_TARGET]\" drop-down=\"true\"></div><td><tr><th colspan=\"3\">{{ 'battle.target-level' | i18n:loc.ale:'battle_calculator' }}<tr><td><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BATTLE_TARGET_LEVEL]\"><td></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><h5 class=\"twx-section\">{{ 'troops.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"33%\"><col width=\"33%\"><col><thead><tr><th colspan=\"3\">{{ 'troops.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-wood\" tooltip=\"\" tooltip-content=\"{{ 'troops.wood' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ woodTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time-per-tile\" tooltip=\"\" tooltip-content=\"{{ 'troops.speed' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ speedTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attack\" tooltip=\"\" tooltip-content=\"{{ 'troops.attack' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-clay\" tooltip=\"\" tooltip-content=\"{{ 'troops.clay' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ clayTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-units\" tooltip=\"\" tooltip-content=\"{{ 'troops.discipline' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ disciplineTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense\" tooltip=\"\" tooltip-content=\"{{ 'troops.definf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ definfTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-iron\" tooltip=\"\" tooltip-content=\"{{ 'troops.iron' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ ironTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-weight\" tooltip=\"\" tooltip-content=\"{{ 'troops.load' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ loadTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-cavalry\" tooltip=\"\" tooltip-content=\"{{ 'troops.defcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defcavTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"\" tooltip-content=\"{{ 'troops.food' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ foodTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-time\" tooltip=\"\" tooltip-content=\"{{ 'troops.buildtime' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ buildtimeTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-defense-archer\" tooltip=\"\" tooltip-content=\"{{ 'troops.defarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ defarcTotal }}</span></div><tr><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackinf\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackinf' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackinfTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackcav\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackcav' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackcavTotal }}</span></div><td><span style=\"float:left\" class=\"icon-bg-black icon-34x34-attackarc\" tooltip=\"\" tooltip-content=\"{{ 'troops.attackarc' | i18n:loc.ale:'battle_calculator' }}\"></span><div class=\"center-34x\"><span>{{ attackarcTotal }}</span></div></table><br><table class=\"table\" id=\"unitsCost\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'troops.units' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_CATAPULT]\"></table><br><table class=\"table\"><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.building' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-building-barracks\"></span> {{ 'troops.barracks' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_BARRACKS].min\" max=\"settingsMap[SETTINGS.TROOPS_BARRACKS].max\" value=\"settings[SETTINGS.TROOPS_BARRACKS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_BARRACKS]\"><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.preceptory' | i18n:loc.ale:'battle_calculator' }}<td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].min\" max=\"settingsMap[SETTINGS.TROOPS_PRECEPTORY].max\" value=\"settings[SETTINGS.TROOPS_PRECEPTORY]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TROOPS_PRECEPTORY]\"></table><table class=\"table\"><col><col width=\"140px\"><col width=\"60px\"><thead><tr><th colspan=\"3\">{{ 'troops.effects' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td colspan=\"2\"><span class=\"icon-bg-black icon-120x120-domination\"></span> {{ 'troops.domination' | i18n:loc.ale:'battle_calculator' }}<td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TROOPS_DOMINATION]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"icon-bg-black icon-120x120-skill-recruit_speed_bonus\"></span> {{ 'troops.training' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"training\" selected=\"settings[SETTINGS.TROOPS_TRAINING]\" drop-down=\"true\"></div><tr><td><span class=\"icon-bg-black icon-34x34-building-preceptory\"></span> {{ 'troops.order' | i18n:loc.ale:'battle_calculator' }}<td colspan=\"2\"><div select=\"\" list=\"order\" selected=\"settings[SETTINGS.TROOPS_ORDER]\" drop-down=\"true\"></div></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><h5 class=\"twx-section\">{{ 'bashpoints.header' | i18n:loc.ale:'battle_calculator' }}</h5><form class=\"addForm\"><table class=\"table\"><col width=\"50%\"><col width=\"50%\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.th' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-attack\"></span> {{ 'bashpoints.attacker' | i18n:loc.ale:'battle_calculator' }}<td class=\"text-center\"><span>{{ totalDef }}</span><tr><td><span class=\"icon-bg-black icon-34x34-defense\"></span> {{ 'bashpoints.defender' | i18n:loc.ale:'battle_calculator' }}<td class=\"text-center\"><span>{{ totalAtt }}</span></table><br><table class=\"table\" id=\"unitsBash\"><col><col width=\"150px\"><thead><tr><th colspan=\"2\">{{ 'bashpoints.killed' | i18n:loc.ale:'battle_calculator' }}<tbody><tr><td><span class=\"icon-bg-black icon-44x44-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SPEAR]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SWORD]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_AXE]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td><input type=\"number\" placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_ARCHER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_LC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_MA]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_HC]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_RAM]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_DOPPELSOLDNER]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_TREBUCHET]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_SNOB]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_KNIGHT]\"><tr><td><span class=\"icon-bg-black icon-44x44-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BASHPOINTS_CATAPULT]\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BATTLE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'battle.clear' | i18n:loc.ale:'battle_calculator' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"simulate()\">{{ 'battle.simulate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.TROOPS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearT()\">{{ 'battle.clear' | i18n:loc.ale:'battle_calculator' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateT()\">{{ 'troops.calculate' | i18n:loc.ale:'battle_calculator' }}</a><li ng-show=\"selectedTab === TAB_TYPES.BASHPOINTS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearB()\">{{ 'battle.clear' | i18n:loc.ale:'battle_calculator' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"calculateB()\">{{ 'bashpoints.calculate' | i18n:loc.ale:'battle_calculator' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-battle-calculator div[select]{text-align:center}#two-battle-calculator div[select] .select-wrapper{height:34px}#two-battle-calculator div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-battle-calculator div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-battle-calculator .range-container{width:250px}#two-battle-calculator .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-battle-calculator .textfield-border.fit{width:100%}#two-battle-calculator .addForm1 td{text-align:center}#two-battle-calculator .addForm1 th{text-align:center;padding:0px}#two-battle-calculator .addForm1 span{height:26px;line-height:26px}#two-battle-calculator .addForm1 .item-insert{text-align:center}#two-battle-calculator .addForm1 .item-insert span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertV{text-align:center}#two-battle-calculator .addForm1 .item-insertV span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertVD{text-align:center}#two-battle-calculator .addForm1 .item-insertVD span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertP{text-align:center}#two-battle-calculator .addForm1 .item-insertP span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 .item-insertPD{text-align:center}#two-battle-calculator .addForm1 .item-insertPD span{height:30px;text-align:center;line-height:30px;width:115px}#two-battle-calculator .addForm1 input{height:34px;line-height:26px;color:#000;font-size:14px;background:url(data:image/png;base64,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) top left #b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:213px}#two-battle-calculator .addForm1 .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-battle-calculator .addForm1 .actions a{width:100px}#two-battle-calculator .addForm .table{border-spacing:1px;border-collapse:separate;box-shadow:0 0 0 2px rgba(124,54,0,0.4);width:100%;background:url(data:image/png;base64,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) #d1ad86}#two-battle-calculator .addForm .table th{background:url(data:image/png;base64,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);text-align:center;min-height:26px;line-height:26px;color:#fff3d0;font-size:14px;font-weight:normal;padding-left:5px;border:1px solid rgba(124,54,0,0.3);padding:1px}#two-battle-calculator .addForm .table td{border:1px solid rgba(124,54,0,0.3);padding:1px}#two-battle-calculator .addForm .table tr nth-child(odd) td{background:url(data:image/png;base64,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) #d1ad86}#two-battle-calculator .addForm .table_vertical td:nth-child(odd){background:url(data:image/png;base64,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) #d1ad86}#two-battle-calculator .addForm .center-34x{text-align:center;line-height:34px}#two-battle-calculator .addForm span{text-align:right}#two-battle-calculator .icon-120x120-skill-recruit_speed_bonus{zoom:.283333}#two-battle-calculator .icon-120x120-skill-recruit_speed_bonus:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-domination{zoom:.283333}#two-battle-calculator .icon-120x120-domination:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-26x26-night-mode{zoom:1.307692}#two-battle-calculator .icon-26x26-night-mode:before{-moz-transform:scale(1.307692)}#two-battle-calculator .icon-120x120-skill-medic{zoom:.283333}#two-battle-calculator .icon-120x120-skill-medic:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-skill-attack_bonus{zoom:.283333}#two-battle-calculator .icon-120x120-skill-attack_bonus:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-skill-iron_walls{zoom:.283333}#two-battle-calculator .icon-120x120-skill-iron_walls:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-120x120-skill-better_hospital{zoom:.283333}#two-battle-calculator .icon-120x120-skill-better_hospital:before{-moz-transform:scale(.283333)}#two-battle-calculator .icon-44x44-premium_officer_leader{zoom:.772727}#two-battle-calculator .icon-44x44-premium_officer_leader:before{-moz-transform:scale(.772727)}#two-battle-calculator .icon-44x44-premium_officer_medic{zoom:.772727}#two-battle-calculator .icon-44x44-premium_officer_medic:before{-moz-transform:scale(.772727)}#two-battle-calculator .icon-90x90-item-spear{background-image:url(https://twxen.innogamescdn.com/img/icons/no-alpha_3bfedc2e90.jpg);background-position:-1710px -1892px;zoom:.288888}#two-battle-calculator .icon-90x90-item-spear:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-sword:before{background-image:url(https://twxen.innogamescdn.com/img/icons/no-alpha_3bfedc2e90.jpg);background-position:-1620px -1892px;transform:scale(.288888);width:26px;height:26px}#two-battle-calculator .icon-34x34-attackarc:before{background-image:url(https://i.imgur.com/qGoj36r.png);background-position:0px 0px}#two-battle-calculator .icon-34x34-attackcav:before{background-image:url(https://i.imgur.com/etSiYUW.png);background-position:0px 0px}#two-battle-calculator .icon-34x34-attackinf:before{background-image:url(https://i.imgur.com/z9hX6Au.png);background-position:0px 0px}#two-battle-calculator .icon-90x90-item-axe{zoom:.288888}#two-battle-calculator .icon-90x90-item-axe:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-archer{zoom:.288888}#two-battle-calculator .icon-90x90-item-archer:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-light_cavalry{zoom:.288888}#two-battle-calculator .icon-90x90-item-light_cavalry:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-mounted_archer{zoom:.288888}#two-battle-calculator .icon-90x90-item-mounted_archer:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-heavy_cavalry{zoom:.288888}#two-battle-calculator .icon-90x90-item-heavy_cavalry:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-ram{zoom:.288888}#two-battle-calculator .icon-90x90-item-ram:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-catapult{zoom:.288888}#two-battle-calculator .icon-90x90-item-catapult:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-90x90-item-snob{zoom:.288888}#two-battle-calculator .icon-90x90-item-snob:before{-moz-transform:scale(.288888)}#two-battle-calculator .icon-34x34-paladin{zoom:.73529412}#two-battle-calculator .icon-34x34-paladin:before{-moz-transform:scale(.73529412)}#two-battle-calculator .icon-34x34-unit-special-ability-catapult{zoom:.73529412}#two-battle-calculator .icon-34x34-unit-special-ability-catapult:before{-moz-transform:scale(.73529412)}#two-battle-calculator .icon-44x44-special{zoom:.56818}#two-battle-calculator .icon-44x44-special:before{-moz-transform:scale(.56818)}#two-battle-calculator .switch{text-align:center}#two-battle-calculator .item{text-align:center}')
     }
     const buildWindow = function() {
@@ -11242,6 +10942,13 @@ define('two/battleCalculator/ui', [
         $scope.running = battleCalculator.isRunning()
         $scope.selectedTab = TAB_TYPES.BATTLE
         $scope.settingsMap = SETTINGS_MAP
+        $scope.autoCompleteVillage = {
+            type: ['village'],
+            placeholder: $filter('i18n')('battle.add_village_search', $rootScope.loc.ale, 'battle_calculator'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('battle.add_origin', $rootScope.loc.ale, 'battle_calculator'),
+            dropDown: true
+        }
         $scope.catapulttarget = Settings.encodeList(B_CAT_TARGET, {
             textObject: 'battle_calculator',
             disabled: true
@@ -11287,10 +10994,18 @@ define('two/battleCalculator/ui', [
         settings.injectScope($scope)
         eventHandlers.updatePresets()
         $scope.selectTab = selectTab
+        $scope.battleVillage = battleVillage
+        $scope.insertSurvived = insertSurvived
+        $scope.insertPA = insertPresetAttacker
+        $scope.insertPD = insertPresetDefender
+        $scope.insertVA = insertVillageAttacker
+        $scope.insertVD = insertVillageDefender
         $scope.calculateB = showBashpoints
+        $scope.clearB = clearBashpoints
         $scope.totalDef = 0
         $scope.totalAtt = 0
         $scope.calculateT = showTroops
+        $scope.clearT = clearTroops
         $scope.woodTotal = 0
         $scope.speedTotal = 0
         $scope.attackTotal = 0
@@ -11307,6 +11022,7 @@ define('two/battleCalculator/ui', [
         $scope.attackcavTotal = 0
         $scope.attackarcTotal = 0
         $scope.simulate = showBattleScore
+        $scope.clear = clearBattle
         $scope.target = 0
         $scope.buildingfrom = 0
         $scope.buildingto = 0
@@ -11437,9 +11153,11 @@ define('two/battleCalculator/ui', [
         $scope.berserkerArevived = 0
         $scope.berserkerAsurvived = 0
         $scope.switchState = switchState
+        $scope.addMapSelected = addMapSelected
         let eventScope = new EventScope('twoverflow_battle_calculator_window', function onDestroy() {
             console.log('battleCalculator window closed')
         })
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
         eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.BATTLE_CALCULATOR_START, eventHandlers.start)
@@ -11450,6 +11168,7 @@ define('two/battleCalculator/ui', [
 })
 define('two/battleCalculator/settings', [], function () {
     return {
+        BATTLE_VILLAGE_ID: 'battle_village_id',
         BATTLE_SPEAR_D: 'battle_spear_d',
         BATTLE_SWORD_D: 'battle_sword_d',
         BATTLE_AXE_D: 'battle_axe_d',
@@ -11548,6 +11267,10 @@ define('two/battleCalculator/settings/map', [
     UPDATES
 ) {
     return {
+        [SETTINGS.BATTLE_VILLAGE_ID]: {
+            default: 0,
+            inputType: 'number'
+        },
         [SETTINGS.BATTLE_SPEAR_D]: {
             default: 0,
             inputType: 'number'
@@ -16323,558 +16046,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/fakeSender', [
-    'two/Settings',
-    'two/fakeSender/settings',
-    'two/fakeSender/settings/map',
-    'two/fakeSender/settings/updates',
-    'two/fakeSender/types/dates',
-    'two/fakeSender/types/type',
-    'two/fakeSender/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    DATE_TYPES,
-    FS_TYPE,
-    FS_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let fakeSenderSettings
-
-    let selectedGroups = []
-    let selectedGroupsP = []
-    let selectedGroupsT = []
-    let selectedGroupsG = []
-    let selectedGroupsTarget = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'fake_sender_settings'
-    }
-    const FAKE_UNIT = {
-        [FS_UNIT.SPEAR]: 'spear',
-        [FS_UNIT.SWORD]: 'sword',
-        [FS_UNIT.AXE]: 'axe',
-        [FS_UNIT.ARCHER]: 'archer',
-        [FS_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [FS_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [FS_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [FS_UNIT.RAM]: 'ram',
-        [FS_UNIT.CATAPULT]: 'catapult',
-        [FS_UNIT.TREBUCHET]: 'trebuchet',
-        [FS_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [FS_UNIT.SNOB]: 'snob',
-        [FS_UNIT.KNIGHT]: 'knight'
-    }
-	
-    const FAKE_TYPE = {
-        [FS_TYPE.ATTACK]: 'attack',
-        [FS_TYPE.SUPPORT]: 'support',
-        [FS_TYPE.QUATTRO]: 'four',
-        [FS_TYPE.FULL]: 'full'
-    }
-	
-    const FAKE_DATE = {
-        [DATE_TYPES.ARRIVE]: 'date_type_arrive',
-        [DATE_TYPES.OUT]: 'date_type_out'
-    }
-
-    console.log(FAKE_UNIT, FAKE_TYPE, FAKE_DATE)
-
-    const updateGroups = function () {
-        selectedGroups = []
-        selectedGroupsP = []
-        selectedGroupsT = []
-        selectedGroupsG = []
-        selectedGroupsTarget = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsInVillagesFake = fakeSenderSettings[SETTINGS.GROUP]
-        const groupsInPlayerFake = fakeSenderSettings[SETTINGS.GROUPP]
-        const groupsInTribeFake = fakeSenderSettings[SETTINGS.GROUPT]
-        const groupsInGroupFake = fakeSenderSettings[SETTINGS.GROUPG]
-        const targetsGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
-
-        groupsInVillagesFake.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-        groupsInPlayerFake.forEach(function (groupId) {
-            selectedGroupsP.push(allGroups[groupId])
-        })
-        groupsInTribeFake.forEach(function (groupId) {
-            selectedGroupsT.push(allGroups[groupId])
-        })
-        groupsInGroupFake.forEach(function (groupId) {
-            selectedGroupsG.push(allGroups[groupId])
-        })
-        targetsGroups.forEach(function (groupId) {
-            selectedGroupsTarget.push(allGroups[groupId])
-        })
-    }
-
-    const fakeSender = {}
-
-    fakeSender.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            fakeSenderSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        fakeSenderSettings = settings.getAll()
-
-        console.log('fakeSender settings', fakeSenderSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    fakeSender.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
-    }
-
-    fakeSender.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
-    }
-
-    fakeSender.getSettings = function () {
-        return settings
-    }
-
-    fakeSender.isInitialized = function () {
-        return initialized
-    }
-
-    fakeSender.isRunning = function () {
-        return running
-    }
-
-    return fakeSender
-})
-
-define('two/fakeSender/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        FAKE_SENDER_START: 'fake_sender_start',
-        FAKE_SENDER_STOP: 'fake_sender_stop'
-    })
-})
-
-define('two/fakeSender/ui', [
-    'two/ui',
-    'two/fakeSender',
-    'two/fakeSender/settings',
-    'two/fakeSender/settings/map',
-    'two/fakeSender/types/dates',
-    'two/fakeSender/types/type',
-    'two/fakeSender/types/units',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    fakeSender,
-    SETTINGS,
-    SETTINGS_MAP,
-    DATE_TYPES,
-    FS_TYPE,
-    FS_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        FAKE: 'fake',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'fake_sender'))
-    }
-
-    const switchState = function () {
-        if (fakeSender.isRunning()) {
-            fakeSender.stop()
-        } else {
-            fakeSender.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'fake_sender'))
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'fake_sender'))
-        }
-    }
-
-    const init = function () {
-        settings = fakeSender.getSettings()
-        interfaceOverflow.addDivisor(21)
-        $button = interfaceOverflow.addMenuButton('Watażka', 20)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendVillages\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendTribe\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendGroups\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody class=\"fakerLog\"><tr class=\"noFakes\"><td colspan=\"5\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-fake-sender div[select]{text-align:right}#two-fake-sender div[select] .select-wrapper{height:34px}#two-fake-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-fake-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm td{text-align:left}#two-fake-sender .addForm span{height:26px;line-height:26px}#two-fake-sender .addForm .item-send{text-align:center}#two-fake-sender .addForm .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-fake-sender .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actions a{width:100px}#two-fake-sender .addForm .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actionsTime .big{width:54px}#two-fake-sender .addForm .actionsTime .small{width:26px}#two-fake-sender .fakerLog td{text-align:center}#two-fake-sender .fakerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-fake-sender .fakerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-fake-sender .noFakes td{height:26px;text-align:center}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = fakeSender.isRunning()
-        $scope.selectedTab = TAB_TYPES.FAKE
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.datetype = Settings.encodeList(DATE_TYPES, {
-            textObject: 'fake_sender',
-            disabled: true
-        })
-        $scope.type = Settings.encodeList(FS_TYPE, {
-            textObject: 'fake_sender',
-            disabled: true
-        })
-        $scope.units = Settings.encodeList(FS_UNIT, {
-            textObject: 'fake_sender',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_fake_sender_window', function onDestroy () {
-            console.log('fakeSender closed')
-        })
-
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.FAKE_SENDER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.FAKE_SENDER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_fake_sender_window', $scope)
-    }
-
-    return init
-})
-
-define('two/fakeSender/settings', [], function () {
-    return {
-        COMMAND_INTERVAL: 'interval_villages',
-        COMMAND_INTERVALP: 'interval_player',
-        COMMAND_INTERVALT: 'interval_tribe',
-        COMMAND_INTERVALG: 'interval_groups',
-        DATE_TYPE: 'datetype',
-        GROUP: 'groups_villages',
-        GROUPP: 'groups_player',
-        GROUPT: 'groups_tribe',
-        GROUPG: 'groups_groups',
-        UNIT: 'units_villages',
-        UNITP: 'units_player',
-        UNITT: 'units_tribe',
-        UNITG: 'units_groups',
-        TYPE: 'type_villages',
-        TYPEP: 'type_player',
-        TYPET: 'type_tribe',
-        TYPEG: 'type_groups',
-        LIMIT_OWN: 'limit_own_villages',
-        LIMIT_OWNP: 'limit_own_player',
-        LIMIT_OWNT: 'limit_own_tribe',
-        LIMIT_OWNG: 'limit_own_groups',
-        LIMIT_TARGET: 'limit_target_villages',
-        LIMIT_TARGETP: 'limit_target_player',
-        LIMIT_TARGETT: 'limit_target_tribe',
-        LIMIT_TARGETG: 'limit_target_groups',
-        GROUP_TARGET: 'groups_target'
-    }
-})
-
-define('two/fakeSender/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/fakeSender/settings/map', [
-    'two/fakeSender/settings',
-    'two/fakeSender/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUP]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPP]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPT]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPG]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP_TARGET]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.DATE_TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPEP]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPET]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPEG]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNITT]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNITP]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNITG]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.COMMAND_INTERVAL]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.COMMAND_INTERVALP]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.COMMAND_INTERVALT]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.COMMAND_INTERVALG]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.LIMIT_OWN]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_OWNP]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_OWNT]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_OWNG]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_TARGET]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        },
-        [SETTINGS.LIMIT_TARGETP]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        },
-        [SETTINGS.LIMIT_TARGETT]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        },
-        [SETTINGS.LIMIT_TARGETG]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        }
-    }
-})
-
-define('two/fakeSender/types/type', [], function () {
-    return {
-        ATTACK: 'attack',
-        SUPPORT: 'support',
-        QUATTRO: 'four',
-        FULL: 'full'
-    }
-})
-
-define('two/fakeSender/types/dates', [], function () {
-    return {
-        ARRIVE: 'date_type_arrive',
-        OUT: 'date_type_out'
-    }
-})
-
-define('two/fakeSender/types/units', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-require([
-    'two/ready',
-    'two/fakeSender',
-    'two/fakeSender/ui',
-    'two/fakeSender/events'
-], function (
-    ready,
-    fakeSender,
-    fakeSenderInterface
-) {
-    if (fakeSender.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        fakeSender.init()
-        fakeSenderInterface()
-    })
-})
-
 define('two/farmOverflow', [
     'two/Settings',
     'two/farmOverflow/types/errors',
@@ -18997,909 +18168,6 @@ require([
     }, ['map', 'presets'])
 })
 
-define('two/kingTool', [
-    'two/Settings',
-    'two/kingTool/settings',
-    'two/kingTool/settings/map',
-    'two/kingTool/types/sequence',
-    'two/kingTool/types/aplication',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    SEQUENCES,
-    APLICATION_TYPE,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let kingToolSettings
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'king_tool_settings'
-    }
-	
-    const ALL_SEQUENCES = {
-        [SEQUENCES.LOOT]: 'loot',
-        [SEQUENCES.NUMBERS]: 'numbers',
-        [SEQUENCES.WAR]: 'war',
-        [SEQUENCES.BALANCED]: 'balanced'
-    }
-	
-    const APLICATION = {
-        [APLICATION_TYPE.ANYONE]: 'anyone',
-        [APLICATION_TYPE.APLICATION]: 'aplication',
-        [APLICATION_TYPE.CLOSED]: 'closed'
-    }
-	
-    console.log(APLICATION, ALL_SEQUENCES)
-	
-    const kingTool = {}
-
-    kingTool.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function () {
-            kingToolSettings = settings.getAll()
-        })
-
-        kingToolSettings = settings.getAll()
-
-        console.log('kingTool settings', kingToolSettings)
-    }
-
-    kingTool.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_START)
-    }
-
-    kingTool.stop = function () {
-        running = false
-
-        console.log('kingTool stop')
-
-        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_STOP)
-    }
-
-    kingTool.getSettings = function () {
-        return settings
-    }
-
-    kingTool.isInitialized = function () {
-        return initialized
-    }
-
-    kingTool.isRunning = function () {
-        return running
-    }
-
-    return kingTool
-})
-
-define('two/kingTool/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        KING_TOOL_START: 'king_tool_start',
-        KING_TOOL_STOP: 'king_tool_stop'
-    })
-})
-
-define('two/kingTool/ui', [
-    'two/ui',
-    'two/kingTool',
-    'two/kingTool/settings',
-    'two/kingTool/settings/map',
-    'two/kingTool/types/sequence',
-    'two/kingTool/types/aplication',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    kingTool,
-    SETTINGS,
-    SETTINGS_MAP,
-    SEQUENCES,
-    APLICATION_TYPE,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    
-    const TAB_TYPES = {
-        TRIBE: 'tribe',
-        SKILLS: 'skills',
-        FORUM: 'forum'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (kingTool.isRunning()) {
-            kingTool.stop()
-        } else {
-            kingTool.start()
-        }
-    }
-
-    const eventHandlers = {
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = kingTool.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Marszałek', 50)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRIBE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRIBE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRIBE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRIBE}\">{{ 'tribe' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SKILLS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SKILLS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SKILLS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SKILLS}\">{{ 'skills' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FORUM)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FORUM}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FORUM}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FORUM}\">{{ 'forum' | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><h5 class=\"twx-section\">{{ 'tribe.display' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'tribe.edit-name' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-name\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-name' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-description' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-description\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-description' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-emblem' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-emblem\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-emblem' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.aplication' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'tribe.aplication-type' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"aplication\" selected=\"settings[SETTINGS.APLICATION_TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'tribe.minimum-points' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.POINTS].min\" max=\"settingsMap[SETTINGS.POINTS].max\" value=\"settings[SETTINGS.POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.POINTS]\"><tr><td colspan=\"3\" class=\"item-aplication\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.set' | i18n:loc.ale:'king_tool' }}</span></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><h5 class=\"twx-section\">{{ 'skills.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"50%\"><tr><th colspan=\"2\">{{ 'skills.sequence' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"2\"><div select=\"\" list=\"sequence\" selected=\"settings[SETTINGS.SEQUENCE]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"item-manage\"><span class=\"btn btn-orange addSelected\">{{ 'skills.manage' | i18n:loc.ale:'king_tool' }}</span><tr><td colspan=\"2\">{{ 'skills.description' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.position' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsSequence\"><tr class=\"noSequence\"><td colspan=\"2\">{{ 'skills.noSequence' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.date' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsLog\"><tr class=\"noSkills\"><td colspan=\"2\">{{ 'skills.noSkills' | i18n:loc.ale:'king_tool' }}</table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FORUM\"><h5 class=\"twx-section\">{{ 'forum.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><tr><th>{{ 'forum.head-text' | i18n:loc.ale:'king_tool' }}<tr><td class=\"item-create\"><span class=\"btn btn-orange addSelected\">{{ 'forum.create' | i18n:loc.ale:'king_tool' }}</span><tr><td>{{ 'forum.description' | i18n:loc.ale:'king_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsTribe()\">{{ 'tribe.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearTribe()\">{{ 'tribe.clear' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsSkills()\">{{ 'skills.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearSkills()\">{{ 'skills.clear' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'skills.clear-logs' | i18n:loc.ale:'king_tool' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-king-tool div[select]{text-align:center}#two-king-tool div[select] .select-wrapper{height:34px}#two-king-tool div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-king-tool div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-king-tool .range-container{width:250px}#two-king-tool th{text-align:center}#two-king-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-king-tool .textfield-border.fit{width:100%}#two-king-tool .skillsLog td{text-align:center}#two-king-tool .skillsLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSkills td{height:26px;text-align:center}#two-king-tool .skillsSequence td{text-align:center}#two-king-tool .skillsSequence .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsSequence .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSequence td{height:26px;text-align:center}#two-king-tool .force-26to20{transform:scale(.8);width:20px;height:20px}#two-king-tool .item-name{text-align:center}#two-king-tool .item-name span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-description{text-align:center}#two-king-tool .item-description span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-emblem{text-align:center}#two-king-tool .item-emblem span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-aplication{text-align:center}#two-king-tool .item-aplication span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-manage{text-align:center}#two-king-tool .item-manage span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-create{text-align:center}#two-king-tool .item-create span{height:34px;line-height:34px;text-align:center;width:125px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = kingTool.isRunning()
-        $scope.selectedTab = TAB_TYPES.TRIBE
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.sequence = Settings.encodeList(SEQUENCES, {
-            textObject: 'king_tool',
-            disabled: true
-        })
-        $scope.aplication = Settings.encodeList(APLICATION_TYPE, {
-            textObject: 'king_tool',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_king_tool_window', function onDestroy () {
-            console.log('kingTool closed')
-        })
-
-        eventScope.register(eventTypeProvider.KING_TOOL_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.KING_TOOL_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_king_tool_window', $scope)
-    }
-
-    return init
-})
-
-define('two/kingTool/settings', [], function () {
-    return {
-        SEQUENCE: 'sequence',
-        POINTS: 'points',
-        APLICATION_TYPE: 'aplication_type'
-    }
-})
-
-define('two/kingTool/settings/map', [
-    'two/kingTool/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.SEQUENCE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.APLICATION_TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.POINTS]: {
-            default: 200,
-            inputType: 'number',
-            min: 0,
-            max: 10000
-        }
-    }
-})
-
-define('two/kingTool/types/sequence', [], function () {
-    return {
-        LOOT: 'loot',
-        NUMBERS: 'numbers',
-        WAR: 'war',
-        BALANCED: 'balanced'
-    }
-})
-
-define('two/kingTool/types/aplication', [], function () {
-    return {
-        ANYONE: 'anyone',
-        APLICATION: 'aplication',
-        CLOSED: 'closed'
-    }
-})
-require([
-    'two/ready',
-    'two/kingTool',
-    'two/kingTool/ui',
-    'two/kingTool/events'
-], function (
-    ready,
-    kingTool,
-    kingToolInterface
-) {
-    if (kingTool.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        kingTool.init()
-        kingToolInterface()
-    })
-})
-
-define('two/marketHelper', [
-    'two/Settings',
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/map',
-    'two/marketHelper/settings/updates',
-    'two/marketHelper/types/buildings',
-    'two/marketHelper/types/level',
-    'two/marketHelper/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    MH_BUILDINGS,
-    MH_LEVEL,
-    MH_UNITS,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let marketHelperSettings
-
-    let selectedGroups = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'market_helper_settings'
-    }
-    const PRESERVE_UNITS = {
-        [MH_UNITS.SPEAR]: 'spear',
-        [MH_UNITS.SWORD]: 'sword',
-        [MH_UNITS.AXE]: 'axe',
-        [MH_UNITS.ARCHER]: 'archer',
-        [MH_UNITS.LIGHT_CAVALRY]: 'light_cavalry',
-        [MH_UNITS.MOUNTED_ARCHER]: 'mounted_archer',
-        [MH_UNITS.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [MH_UNITS.RAM]: 'ram',
-        [MH_UNITS.CATAPULT]: 'catapult',
-        [MH_UNITS.TREBUCHET]: 'trebuchet',
-        [MH_UNITS.DOPPELSOLDNER]: 'doppelsoldner',
-        [MH_UNITS.SNOB]: 'snob',
-        [MH_UNITS.KNIGHT]: 'knight'
-    }
-	
-    const PRESERVE_BUILDINGS = {
-        [MH_BUILDINGS.HEADQUARTER]: 'headquarter',
-        [MH_BUILDINGS.WAREHOUSE]: 'warehouse',
-        [MH_BUILDINGS.FARM]: 'farm',
-        [MH_BUILDINGS.RALLY_POINT]: 'rally_point',
-        [MH_BUILDINGS.STATUE]: 'statue',
-        [MH_BUILDINGS.WALL]: 'wall',
-        [MH_BUILDINGS.TAVERN]: 'tavern',
-        [MH_BUILDINGS.BARRACKS]: 'barracks',
-        [MH_BUILDINGS.PRECEPTORY]: 'preceptory',
-        [MH_BUILDINGS.HOSPITAL]: 'hospital',
-        [MH_BUILDINGS.CLAY_PIT]: 'clay_pit',
-        [MH_BUILDINGS.IRON_MINE]: 'iron_mine',
-        [MH_BUILDINGS.TIMBER_CAMP]: 'timber_camp',
-        [MH_BUILDINGS.CHAPEL]: 'chapel',
-        [MH_BUILDINGS.CHURCH]: 'church',
-        [MH_BUILDINGS.MARKET]: 'market',
-        [MH_BUILDINGS.ACADEMY]: 'academy'
-    }
-	
-    const BUILDING_LEVEL = {
-        [MH_LEVEL.LEVEL_1]: 1,
-        [MH_LEVEL.LEVEL_2]: 2,
-        [MH_LEVEL.LEVEL_3]: 3,
-        [MH_LEVEL.LEVEL_4]: 4,
-        [MH_LEVEL.LEVEL_5]: 5,
-        [MH_LEVEL.LEVEL_6]: 6,
-        [MH_LEVEL.LEVEL_7]: 7,
-        [MH_LEVEL.LEVEL_8]: 8,
-        [MH_LEVEL.LEVEL_9]: 9,
-        [MH_LEVEL.LEVEL_10]: 10,
-        [MH_LEVEL.LEVEL_11]: 11,
-        [MH_LEVEL.LEVEL_12]: 12,
-        [MH_LEVEL.LEVEL_13]: 13,
-        [MH_LEVEL.LEVEL_14]: 14,
-        [MH_LEVEL.LEVEL_15]: 15,
-        [MH_LEVEL.LEVEL_16]: 16,
-        [MH_LEVEL.LEVEL_17]: 17,
-        [MH_LEVEL.LEVEL_18]: 18,
-        [MH_LEVEL.LEVEL_19]: 19,
-        [MH_LEVEL.LEVEL_20]: 20,
-        [MH_LEVEL.LEVEL_21]: 21,
-        [MH_LEVEL.LEVEL_22]: 22,
-        [MH_LEVEL.LEVEL_23]: 23,
-        [MH_LEVEL.LEVEL_24]: 24,
-        [MH_LEVEL.LEVEL_25]: 25,
-        [MH_LEVEL.LEVEL_26]: 26,
-        [MH_LEVEL.LEVEL_27]: 27,
-        [MH_LEVEL.LEVEL_28]: 28,
-        [MH_LEVEL.LEVEL_29]: 29,
-        [MH_LEVEL.LEVEL_30]: 30
-    }
-	
-    console.log(BUILDING_LEVEL, PRESERVE_BUILDINGS, PRESERVE_UNITS)
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = marketHelperSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-
-        console.log('selectedGroups', selectedGroups)
-    }
-
-    const marketHelper = {}
-
-    marketHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            marketHelperSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        marketHelperSettings = settings.getAll()
-
-        console.log('marketHelper settings', marketHelperSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    marketHelper.start = function () {
-        running = true
-
-        console.log('selectedGroups', selectedGroups)
-
-        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_START)
-    }
-
-    marketHelper.stop = function () {
-        running = false
-
-        console.log('marketHelper stop')
-
-        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_STOP)
-    }
-
-    marketHelper.getSettings = function () {
-        return settings
-    }
-
-    marketHelper.isInitialized = function () {
-        return initialized
-    }
-
-    marketHelper.isRunning = function () {
-        return running
-    }
-
-    return marketHelper
-})
-
-define('two/marketHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        MARKET_HELPER_START: 'market_helper_start',
-        MARKET_HELPER_STOP: 'market_helper_stop'
-    })
-})
-
-define('two/marketHelper/ui', [
-    'two/ui',
-    'two/marketHelper',
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/map',
-    'two/marketHelper/types/buildings',
-    'two/marketHelper/types/level',
-    'two/marketHelper/types/units',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    marketHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    MH_BUILDINGS,
-    MH_LEVEL,
-    MH_UNITS,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        TRADE: 'trade',
-        INSTANT_TRADE: 'instant_trade',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (marketHelper.isRunning()) {
-            marketHelper.stop()
-        } else {
-            marketHelper.start()
-        }
-    }
-	
-    const switchStateI = function () {
-        if (marketHelper.isRunning()) {
-            marketHelper.stop()
-        } else {
-            marketHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'marketHelper started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'marketHelper stopped')
-        }
-    }
-
-    const init = function () {
-        settings = marketHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton2('Handlarz', 30)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody class=\"traderLog\"><tr class=\"noTrades\"><td colspan=\"7\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchStateI()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-market-helper div[select]{text-align:center}#two-market-helper div[select] .select-wrapper{height:34px}#two-market-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-market-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-market-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-market-helper .actions a{width:100px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}#two-market-helper th{text-align:center}#two-market-helper .traderLog td{text-align:center}#two-market-helper .traderLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper .traderLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper table.header-center th{text-align:center}#two-market-helper .noTrades td{height:26px;text-align:center}#two-market-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = marketHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.TRADE
-        $scope.settingsMap = SETTINGS_MAP
-		
-        $scope.level = Settings.encodeList(MH_LEVEL, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-        $scope.units = Settings.encodeList(MH_UNITS, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-        $scope.buildings = Settings.encodeList(MH_BUILDINGS, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-        $scope.switchStateI = switchStateI
-
-        let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy () {
-            console.log('marketHelper closed')
-        })
-
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.MARKET_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.MARKET_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_market_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/marketHelper/settings', [], function () {
-    return {
-        GROUPS: 'groups',
-        WOOD_IN: 'wood_in',
-        WOOD_OUT: 'wood_out',
-        WOOD_MIN: 'wood_min',
-        WOOD_IN_I: 'wood_in_i',
-        WOOD_OUT_I: 'wood_out_i',
-        WOOD_MIN_I: 'wood_min_i',
-        CLAY_IN: 'clay_in',
-        CLAY_OUT: 'clay_out',
-        CLAY_MIN: 'clay_min',
-        CLAY_IN_I: 'clay_in_i',
-        CLAY_OUT_I: 'clay_out_i',
-        CLAY_MIN_I: 'clay_min_i',
-        IRON_IN: 'iron_in',
-        IRON_OUT: 'iron_out',
-        IRON_MIN: 'iron_min',
-        IRON_IN_I: 'iron_in_i',
-        IRON_OUT_I: 'iron_out_i',
-        IRON_MIN_I: 'iron_min_i',
-        DISTANCE: 'distance',
-        INDIVIDUAL: 'individual',
-        PRIORITIZE: 'prioritize',
-        FULL: 'full',
-        BUILDINGS: 'buildings',
-        LEVEL: 'level',
-        UNITS: 'units',
-        AMOUNT: 'amount',
-        COINS: 'coins'
-    }
-})
-
-define('two/marketHelper/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/marketHelper/settings/map', [
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUPS]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.WOOD_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.AMOUNT]: {
-            default: 100,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.UNITS]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.BUILDINGS]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.LEVEL]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.FULL]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.COINS]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.PRIORITIZE]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.INDIVIDUAL]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 235000
-        },
-        [SETTINGS.DISTANCE]: {
-            default: 90,
-            inputType: 'number',
-            min: 1,
-            max: 300
-        }
-    }
-})
-
-define('two/marketHelper/types/units', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-
-define('two/marketHelper/types/buildings', [], function () {
-    return {
-        HEADQUARTER: 'headquarter',
-        WAREHOUSE: 'warehouse',
-        FARM: 'farm',
-        RALLY_POINT: 'rally_point',
-        STATUE: 'statue',
-        WALL: 'wall',
-        TAVERN: 'tavern',
-        BARRACKS: 'barracks',
-        PRECEPTORY: 'preceptory',
-        HOSPITAL: 'hospital',
-        CLAY_PIT: 'clay_pit',
-        IRON_MINE: 'iron_mine',
-        TIMBER_CAMP: 'timber_camp',
-        CHAPEL: 'chapel',
-        CHURCH: 'church',
-        MARKET: 'market',
-        ACADEMY: 'academy'
-    }
-})
-
-define('two/marketHelper/types/level', [], function () {
-    return {
-        LEVEL_1: 'level_1',
-        LEVEL_2: 'level_2',
-        LEVEL_3: 'level_3',
-        LEVEL_4: 'level_4',
-        LEVEL_5: 'level_5',
-        LEVEL_6: 'level_6',
-        LEVEL_7: 'level_7',
-        LEVEL_8: 'level_8',
-        LEVEL_9: 'level_9',
-        LEVEL_10: 'level_10',
-        LEVEL_11: 'level_11',
-        LEVEL_12: 'level_12',
-        LEVEL_13: 'level_13',
-        LEVEL_14: 'level_14',
-        LEVEL_15: 'level_15',
-        LEVEL_16: 'level_16',
-        LEVEL_17: 'level_17',
-        LEVEL_18: 'level_18',
-        LEVEL_19: 'level_19',
-        LEVEL_20: 'level_20',
-        LEVEL_21: 'level_21',
-        LEVEL_22: 'level_22',
-        LEVEL_23: 'level_23',
-        LEVEL_24: 'level_24',
-        LEVEL_25: 'level_25',
-        LEVEL_26: 'level_26',
-        LEVEL_27: 'level_27',
-        LEVEL_28: 'level_28',
-        LEVEL_29: 'level_29',
-        LEVEL_30: 'level_30'
-    }
-})
-require([
-    'two/ready',
-    'two/marketHelper',
-    'two/marketHelper/ui',
-    'two/marketHelper/events'
-], function (
-    ready,
-    marketHelper,
-    marketHelperInterface
-) {
-    if (marketHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        marketHelper.init()
-        marketHelperInterface()
-    })
-})
-
 define('two/minimap', [
     'two/minimap/types/actions',
     'two/minimap/types/mapSizes',
@@ -21385,636 +19653,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/powerHelper', [
-    'two/Settings',
-    'two/powerHelper/settings',
-    'two/powerHelper/settings/map',
-    'two/powerHelper/settings/updates',
-    'two/powerHelper/types/ironwalls',
-    'two/powerHelper/types/wall',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    IRON_WALLS,
-    WALLS,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let powerHelperSettings
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'power_helper_settings'
-    }
-	
-    const BATTLE_IRON_WALLS = {
-        [IRON_WALLS.LEVEL_1]: 1,
-        [IRON_WALLS.LEVEL_2]: 2,
-        [IRON_WALLS.LEVEL_3]: 3,
-        [IRON_WALLS.LEVEL_4]: 4,
-        [IRON_WALLS.LEVEL_5]: 5
-    }
-	
-    const BATTLE_WALLS = {
-        [WALLS.NO_WALL]: 0,
-        [WALLS.LEVEL_1]: 5,
-        [WALLS.LEVEL_2]: 10,
-        [WALLS.LEVEL_3]: 15,
-        [WALLS.LEVEL_4]: 20,
-        [WALLS.LEVEL_5]: 25,
-        [WALLS.LEVEL_6]: 30,
-        [WALLS.LEVEL_7]: 35,
-        [WALLS.LEVEL_8]: 40,
-        [WALLS.LEVEL_9]: 45,
-        [WALLS.LEVEL_10]: 50,
-        [WALLS.LEVEL_11]: 55,
-        [WALLS.LEVEL_12]: 60,
-        [WALLS.LEVEL_13]: 65,
-        [WALLS.LEVEL_14]: 70,
-        [WALLS.LEVEL_15]: 75,
-        [WALLS.LEVEL_16]: 80,
-        [WALLS.LEVEL_17]: 85,
-        [WALLS.LEVEL_18]: 90,
-        [WALLS.LEVEL_19]: 95,
-        [WALLS.LEVEL_20]: 100
-    }
-    
-    console.log(BATTLE_IRON_WALLS, BATTLE_WALLS)
-
-    const powerHelper = {}
-
-    powerHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function () {
-            powerHelperSettings = settings.getAll()
-        })
-
-        powerHelperSettings = settings.getAll()
-
-        console.log('powerHelper settings', powerHelperSettings)
-    }
-
-    powerHelper.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.POWER_HELPER_START)
-    }
-
-    powerHelper.stop = function () {
-        running = false
-
-        console.log('powerHelper stop')
-
-        eventQueue.trigger(eventTypeProvider.POWER_HELPER_STOP)
-    }
-
-    powerHelper.getSettings = function () {
-        return settings
-    }
-
-    powerHelper.isInitialized = function () {
-        return initialized
-    }
-
-    powerHelper.isRunning = function () {
-        return running
-    }
-
-    return powerHelper
-})
-
-define('two/powerHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        POWER_HELPER_START: 'power_helper_start',
-        POWER_HELPER_STOP: 'power_helper_stop'
-    })
-})
-
-define('two/powerHelper/ui', [
-    'two/ui',
-    'two/powerHelper',
-    'two/powerHelper/settings',
-    'two/powerHelper/settings/map',
-    'two/powerHelper/types/ironwalls',
-    'two/powerHelper/types/wall',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    powerHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    IRON_WALLS,
-    WALLS,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    
-    const TAB_TYPES = {
-        POWERS: 'powers',
-        BUNKER: 'bunker',
-        BEATBUNKER: 'beatbunker'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (powerHelper.isRunning()) {
-            powerHelper.stop()
-        } else {
-            powerHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = powerHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton4('Bunkry', 20)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_power_helper_window', `<div id=\"two-power-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'power_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.POWERS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.POWERS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.POWERS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.POWERS}\">{{ 'powers' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BUNKER}\">{{ 'bunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BEATBUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BEATBUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BEATBUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BEATBUNKER}\">{{ 'beatbunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.POWERS\"><h5 class=\"twx-section\">{{ 'power-troops' | i18n:loc.ale:'power_helper' }}</h5><p>Do obliczeń przyjęto jedną zagrodę Off równą 21480 prowiantu oraz 14 zagród Deff równych 300720 prowiantu.<form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><col><tr><th><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td class=\"headD\" rowspan=\"12\">J<br>e<br>d<br>n<br>o<br>s<br>t<br>k<br>a<br><br>D<br>e<br>f<br>e<br>n<br>s<br>y<br>w<br>n<br>a<td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td>0,483<td>1,909<td>4,610<td class=\"yellow\">7,546<td class=\"blue\">1,172<td class=\"orange\">9,919<td>0,015<td>2,668<td class=\"blue\">0,790<td class=\"red\">15,272<td>0,314<td>5,399<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"blue\">0,148<td class=\"blue\">0,585<td class=\"blue\">1,413<td class=\"sky\">1,452<td class=\"orange\">31,636<td class=\"sky\">1,909<td>0,003<td>0,513<td class=\"yellow\">21,343<td class=\"blue\">4,680<td>0,060<td class=\"blue\">1,655<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td>18,223<td>7,546<td class=\"orange\">31,636<td>9,919<td>0,015<td>2,668<td class=\"yellow\">21,343<td class=\"red\">60,368<td>0,314<td class=\"yellow\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td class=\"yellow\">18,223<td class=\"blue\">0,513<td class=\"sky\">2,152<td class=\"blue\">0,675<td class=\"sky\">0,001<td class=\"sky\">0,182<td class=\"sky\">1,452<td class=\"red\">60,368<td class=\"blue\">0,021<td class=\"orange\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td>2,940<td>11,617<td class=\"yellow\">28,057<td>11,617<td>11,185<td>15,273<td>0,024<td>4,107<td>7,546<td class=\"red\">92,942<td>0,483<td class=\"orange\">32,858<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td>2,669<td>10,546<td class=\"yellow\">25,467<td>7,545<td class=\"yellow\">24,066<td>9,919<td>0,015<td>2,669<td>16,236<td class=\"red\">84,367<td>0,314<td class=\"orange\">29,827<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td>7,545<td>29,828<td class=\"yellow\">72,034<td>29,828<td>11,185<td>39,211<td>0,060<td>10,546<td>7,545<td class=\"red\">100,000<td>1,240<td class=\"orange\">100,000<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td>1,365<td>5,400<td>13,041<td>5,400<td class=\"orange\">22,636<td>7,098<td>0,011<td>1,910<td class=\"yellow\">15,273<td class=\"red\">43,195<td>0,223<td class=\"yellow\">15,271<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"sky\">0,313<td class=\"sky\">1,239<td class=\"yellow-sky\">2,995<td class=\"sky\">1,452<td>2,568<td class=\"sky\">1,909<td>0,002<td>0,513<td>1,734<td class=\"red-sky\">9,920<td class=\"sky\">0,060<td class=\"orange\">3,507<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td>0,888<td>3,508<td>8,470<td class=\"yellow\">9,920<td>5,197<td class=\"orange\">13,039<td>0,020<td>3,508<td>3,508<td class=\"red\">28,057<td>0,413<td class=\"yellow\">9,919<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td>0,675<td>2,667<td class=\"yellow\">6,444<td>2,667<td>2,830<td>3,508<td class=\"blue\">0,000<td class=\"blue\">0,000<td>1,909<td class=\"red\">21,342<td>0,110<td class=\"orange\">7,545</table></form><h5 class=\"twx-section\">{{ 'power-deff' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headD\" colspan=\"12\">J e d n o s t k a D e f e n s y w n a<tr><td><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,166<td>5,520<td>11,133<td>4,911<td>11,428<td>11,752<td>28,093<td>7,966<td class=\"blue\">1,481<td>5,308<td class=\"sky\">2,578<tr><td class=\"off\">{{ 'offensive-units' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,964<td>6,188<td>13,967<td>7,096<td>15,251<td>15,327<td>38,839<td>9,994<td class=\"blue\">1,916<td>6,692<td class=\"sky\">3,388</table></form><h5 class=\"twx-section\">{{ 'power-off' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td>1,895<td>7,490<td class=\"yellow\">18,089<td>7,772<td>13,297<td>10,216<td>0,015<td>2,662<td>8,971<td class=\"orange\">22,606<td>0,323<td class=\"red\">47,319<tr><td class=\"deff\">{{ 'defensive-units' | i18n:loc.ale:'power_helper' }}<td>0,706<td>2,789<td>6,737<td>2,726<td class=\"orange\">8,072<td>3,584<td>0,004<td>0,775<td>5,446<td class=\"yellow\">7,890<td>0,113<td class=\"red\">22,316</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BUNKER\"><h5 class=\"twx-section\">{{ 'deffense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><tr><td colspan=\"2\" class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span><tr><td class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\"></span><span class=\"unitname\"> {{ 'fullfarm.set' | i18n:loc.ale:'power_helper' }}</span><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-fullfarm\" tooltip=\"{{ 'compariser' | i18n:loc.ale:'fullfarm' }}\"><input id=\"settings-fullfarm\" data-setting=\"fullfarm\" type=\"checkbox\"></label></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.defender' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearD-amount\" class=\"spearD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordD-amount\" class=\"swordD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeD-amount\" class=\"axeD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerD-amount\" class=\"archerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcD-amount\" class=\"lcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maD-amount\" class=\"maD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcD-amount\" class=\"hcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramD-amount\" class=\"ramD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultD-amount\" class=\"catapultD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerD-amount\" class=\"berserkerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetD-amount\" class=\"trebuchetD-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearD\"><input id=\"settings-spearD\" data-setting=\"spearD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordD\"><input id=\"settings-swordD\" data-setting=\"swordD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerD\"><input id=\"settings-archerD\" data-setting=\"archerD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcD\"><input id=\"settings-hcD\" data-setting=\"hcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetD\"><input id=\"settings-trebuchetD\" data-setting=\"trebuchetD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeD\"><input id=\"settings-axeD\" data-setting=\"axeD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcD\"><input id=\"settings-lcD\" data-setting=\"lcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maD\"><input id=\"settings-maD\" data-setting=\"maD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramD\"><input id=\"settings-ramD\" data-setting=\"ramD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultD\"><input id=\"settings-catapultD\" data-setting=\"catapultD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerD\"><input id=\"settings-berserkerD\" data-setting=\"berserkerD\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.WALL]\" drop-down=\"true\"></div><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span><span class=\"unitname\"> {{ 'battle.iron-walls' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.IRON_WALL]\" drop-down=\"true\"></div></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.off' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BEATBUNKER\"><h5 class=\"twx-section\">{{ 'offense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check2\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.attacker' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div height=\"30px\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearA-amount\" class=\"spearA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordA-amount\" class=\"swordA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeA-amount\" class=\"axeA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerA-amount\" class=\"archerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcA-amount\" class=\"lcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maA-amount\" class=\"maA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcA-amount\" class=\"hcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramA-amount\" class=\"ramA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultA-amount\" class=\"catapultA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerA-amount\" class=\"berserkerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetA-amount\" class=\"trebuchetA-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeA\"><input id=\"settings-axeA\" data-setting=\"axeA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcA\"><input id=\"settings-lcA\" data-setting=\"lcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maA\"><input id=\"settings-maA\" data-setting=\"maA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramA\"><input id=\"settings-ramA\" data-setting=\"ramA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultA\"><input id=\"settings-catapultA\" data-setting=\"catapultA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerA\"><input id=\"settings-berserkerA\" data-setting=\"berserkerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearA\"><input id=\"settings-spearA\" data-setting=\"spearA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordA\"><input id=\"settings-swordA\" data-setting=\"swordA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerA\"><input id=\"settings-archerA\" data-setting=\"archerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcA\"><input id=\"settings-hcA\" data-setting=\"hcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetA\"><input id=\"settings-trebuchetA\" data-setting=\"trebuchetA\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"{{ 'simulator' | i18n:loc.ale:'food' }}\"></span><span class=\"unitname\"> {{ 'provisions' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\" class=\"item-input\"><input class=\"textfield-border\" id=\"provisions\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}\"></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.deff' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td colspan=\"1\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"1\" class=\"item-input\"><input class=\"textfield-border\" id=\"wallBB\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'level' | i18n:loc.ale:'power_helper' }}\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-power-helper div[select]{text-align:center}#two-power-helper div[select] .select-wrapper{height:34px}#two-power-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-power-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-power-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-power-helper .textfield-border.fit{width:100%}#two-power-helper .addForm1 td{text-align:left;line-height:34px}#two-power-helper .addForm1 th{text-align:center;padding:0px}#two-power-helper .addForm1 span{height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm1 input{height:34px;line-height:26px;color:#000;font-size:14px;background:url(data:image/png;base64,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) top left #b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:213px}#two-power-helper .addForm .table{border-spacing:1px;border-collapse:separate;box-shadow:0 0 0 2px rgba(124,54,0,0.4);width:100%;background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .table th{background:url(data:image/png;base64,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);text-align:center;min-height:26px;line-height:26px;color:#fff3d0;font-size:14px;font-weight:normal;padding-left:5px;border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table td{border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table tr nth-child(odd) td{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAl7SURBVHjatF3bcRtJDIRYigLhnGNRAnYcSsCORekgDd3HmazdWfQDQx6rVJKopbiDwaPRwIBv39/f8efXj4z5oyIiyfPo7+tr2XXuezmvmd6XfHx8ftUqu9vxiY/PryJvdPwe5I1T/D0OC4tm0ev7HgVx/Apz8QWEu/6vy3rv8kBy+fPrRx7/9vH5VW93De2kvbtzYAGrMNPU3G4TkfYhRUjz+Ysmr3K5/47k9fb75z+thh4uVsJcTUkttgzBMjMtIKAUG5LGxrbCZMq2yuyG/MHhwhRuQAk9m9+z0bjO5FO4iBBuZb0+m98ts3cfb2tQArvhap9rqlMXwqwhhIXE4H5P93kX5ioPprHv7oXgJpgZdotT2p7CxyGNLaCRDpqAroLJArjH/6L8x+dXHYV5uFgtLIBZ1YYbCKDRCGlkI2B232m4h8662mh/l9Uqs1un0oaWFoAgAQRbQ7Mu4O+CQCwltGq+l2FVFxR0/L762JsRkKY33gWgFILoNKPbjBIuxkElnYl3LuKkeR3m7H6+rWq7CLeAOQcwvyI3y8w5wSYkCXBhWAl73y4OUPDeaeTFh65SXl7kLt7JTlgmpCBREu0qAJNK+N4kSUehQI3c411ut+Mf0A4QcwyirUGuL+JCigi/M+0E0V8BeIRXE0X0uwWzaP/O1HcQFdfFFADjRYSosGMO09NdAgUKtZPNGuXffv/8B+arG0C8jEU5P09BfYSXSanUdMRdtGwTcsTDaL5qUhlQC+X2Cqa5llPGfUhczFJPCJsaQB/CjxXxdQ7wT1O7WNBJkkQkyYpSwDVq0uv3VUMfJg986NS8HBOeUHe7VKFL5RULZB+fX1ZMOQr37fv7+5INEIJEEcJpCnsiTCUgRcXtEC5t3HC4jtsdLnUpFjGXAiDcWTxyGbXhtx334frl7PjQo4l3rNP6/Sacbw0dPFtc5+MYS4TglZsETAialgY8Khsy8dVNQj602ZEJF8rM2SUyXgHTJhCtUIRnbP0lKJlVz3oC700wZgyE6N5Dme6Irm9VtI7u/PPrR55qSgZj72YXDsNfgovcRQKqZqWCo8WorS7yLuSLQE2TmmqvW6hTG+BG/0nJhZr/avYq0r8fVRiA2hr6qtxg6FU0TuN/VBPskliBw+AHo+1agSJpN+lnGWRtbmi6WuBOwS2Hmtheq6i7jvZ8N5mmXUIjBoJmOT2j26YcQ5oW0WomEvL9uvehMAOYVGz6Obferjo8WJROI8NqrcyFTUch3xiZGrz02pElaWqmYqQcd4NMPA1rSUGYnEh3ZcVtCaSj9A3qLAPXZmrAwjuMVQnSOYDmuVovg04HldbnIWz6q8bhMtomuJ6Sx4r4rf/hXmxmqSVHBA+YIv9V+b3K013TdEnoMghsVe96vAaVihmMuolaMyNGknCJzLzToN9S0IIVXj2JUYqsqJjIpFU33g2p8UFDp06/q82rlLPTvgJCD4I6UNBjGw/hXEe8d4nQqdEBUfwgcDhtNSqKqoqASgIm0XyanRWL6F07zkqS3FZ40Ki5AtIMDSCf5kAm9L9Ve7qqi4WxuckC0FqfP3bcXFrCQSuOXb8eECJhMFiv4k5dBovynU4J5G14CmRSF7L8lAmPXnFPE/pPUnfosIfDh06Oz0xw4rTJwWG7HCZ+q7rq9NvTTMnwY06Hcg59JYvwChKxQJYCLbRFRIQ1uwB+asUxsoFd4neivU5D1zNuZztDYia+BvJ3wYWqHF5pJcKLDo2mtB5tAGoJckshVsMYIkluaEcMhjqJvyqhParMrNxFCU0uAzapDmaoYAy7n1pxXlSc67RIIYBnCexnSJFS2ZQbkB5BiVD7zpEUtutpanYOUlCXZOkSkxL3c0q3UXrJAtMN9Y8vQp40KuSGKaLNy9B98IjEcTGwZL+6Ux/oOWXyYZi4W0ufNm+5Wdnu/51kUyGwepxST+RsD2Vkh1yYdrq9AtK4TQux8X718flFkU9H66lGh3hywY52s/dwnmPtiIoMiVfh1ruG3pDEFyfswKMaQhQ3rQzDMliwcRswLgcj2OmPzs+egtLK6y1ZkuqljNCFOpXCIkGtXwglKO0sApPooS/SMn+FTaosCqIpgiNuswJqlUmRCLidKUm4AHSiDmp9J1TUunRjjjbw4aogUKUETk2TPc8B096dRlYaiPzwqVFsLQsRIv7MNoELVTbT4UQkeDU9QWl1CDPO8LtWSihLxN8OZlVDWpVRlZFXgbiwhJkiO6fZ+bqKeZ+nU1gcNac5h2gfGiqimNtK6LBFJYLYpB9+B7YFybwubmTVzuOwBkR3XnJ5NasIaAej0ZDLKIH9MvYnQigiOgSLDw8lqH6n01nPhlV5toThzGuaENIT9zLtBJTA3irSPZnLT4hal+zdOa/0bG5Phd/5Tto5Quh9x19N60YJoq0TyYNAtimnoCBUa9JHk+9q886hhWdIEec69/BBvFjzXnas+/i7w9grTdwlInaZJqdS8Arqj7JNKCV9aCiQepCgssPOuHPv3OEALmMV8eToS0K+nx7vBrBnMKNIlhIig1JR350EpkyfrcMWsorup0FYIqVS0xdQcSs3TTFFMCxBzITx+qewbReMHsDe6MxltSXkBhBFloCa6wSdgjpkGusmBRW68zlW4XXA/nEKBI0hM3J2NoqSmXoA03dOkaCJt4i2Y+f0FaM1Mns6+26A4YrQZ6xCybCg4gUSMEVhBskU7ov2giIhP2pKx3ZG0NM0zVp2T3Q88yhSTXDmPdP7GowBPQelJvGfHHINYrbO+CHmU1nWpNwQ00y6RocDXQV/GYQ12Y1NAmL36PW0FYhNkmCVU2mRCNRfGh1MAmAnVXQFqg4vTBprkfuZnrkfPdoxQwNqTVFfrxiNMdWmqc9+irZbla+dfTek73Z39ZVBaceKQvGzJq15DkpdDg+ggnOY1aXgdoSvJt6qEURtZZNlgd0IUPXzTiuOOzboVf1KLs2222TmfgqEJEkuOBT5hanPGTJHyPeG8NnTsUQqKLbv3ckC9dzDMUOHHYjwZx9N6LGJZrMPAdiBWY4bG318BQT2DcBPkqOz1FMxRmh6uPJzkyqBO3ITkTKwDEKP1XSp5/JPXN/kks+Tj5vYLlMYvlIB/tO4S3TEe9XcE2NP8GiIgOQSE8/2hO4Q0k7O77ojGWNOHwxgfFgVm1SbBkk8WXCErop2AUVNI3d6Ri+HFhiVd6opGQNZJ0FhR+scBLELpSYYmX5ijcuJ/jsA5u4AhqNud/gAAAAASUVORK5CYII=) #d1ad86}#two-power-helper .addForm .table_vertical td:nth-child(odd){background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .center-34x{text-align:center;line-height:34px}#two-power-helper .addForm span{text-align:center;height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm2 td{text-align:center;height:34px;line-height:34px}#two-power-helper .addForm2 td input{text-align:center}#two-power-helper .addForm2 .center{text-align:left;height:34px;line-height:34px}#two-power-helper .addForm2 th{text-align:center;padding:0px}#two-power-helper .addForm2 span{text-align:center;height:26px;line-height:26px}#two-power-helper .addForm2 .headD{color:#0000ff}#two-power-helper .addForm2 .headO{color:#ff0000}#two-power-helper .addForm2 .sky{background-color:#7ec0ee}#two-power-helper .addForm2 .blue{background-color:#425EFF}#two-power-helper .addForm2 .red{background-color:#FF6666}#two-power-helper .addForm2 .yellow{background-color:#FFFC5E}#two-power-helper .addForm2 .orange{background-color:#FF8D42}#two-power-helper .addForm2 .off{background-color:#f98985}#two-power-helper .addForm2 .deff{background-color:#86b3f9}#two-power-helper .addForm2 .offx2{background-color:#980000}#two-power-helper .addForm2 .all{background-color:#4FBC5C}#two-power-helper .addForm2 .red-sky{background-color:#FF6666;color:#7ec0ee}#two-power-helper .addForm2 .yellow-sky{background-color:#FFFC5E;color:#7ec0ee}#two-power-helper .addForm2 .item-check{text-align:center}#two-power-helper .addForm2 .item-check span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .addForm2 .item-check2{text-align:center}#two-power-helper .addForm2 .item-check2 span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .unit-input-simulator{height:34px;line-height:26px;color:#fff;font-size:14px;background:#b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:80px;float:right;border:none;float:none;width:100%}#two-power-helper .icon-120x120-skill-iron_walls{zoom:.283333}#two-power-helper .icon-120x120-skill-iron_walls:before{-moz-transform:scale(.283333)}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = powerHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.POWERS
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.wall = Settings.encodeList(WALLS, {
-            textObject: 'battle_calculator',
-            disabled: true
-        })
-        $scope.ironwalls = Settings.encodeList(IRON_WALLS, {
-            textObject: 'battle_calculator',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_power_helper_window', function onDestroy () {
-            console.log('powerHelper closed')
-        })
-
-        eventScope.register(eventTypeProvider.POWER_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.POWER_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_power_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/powerHelper/settings', [], function () {
-    return {
-        WALL: 'wall',
-        IRON_WALL: 'ironwalls'
-    }
-})
-define('two/powerHelper/settings/updates', function () {
-    return {
-    }
-})
-
-define('two/powerHelper/settings/map', [
-    'two/powerHelper/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.WALL]: {
-            default: '20',
-            inputType: 'select'
-        },
-        [SETTINGS.IRON_WALL]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/powerHelper/types/wall', [], function () {
-    return {
-        NO_WALL: 'without',
-        LEVEL_1: 'level_1',
-        LEVEL_2: 'level_2',
-        LEVEL_3: 'level_3',
-        LEVEL_4: 'level_4',
-        LEVEL_5: 'level_5',
-        LEVEL_6: 'level_6',
-        LEVEL_7: 'level_7',
-        LEVEL_8: 'level_8',
-        LEVEL_9: 'level_9',
-        LEVEL_10: 'level_10',
-        LEVEL_11: 'level_11',
-        LEVEL_12: 'level_12',
-        LEVEL_13: 'level_13',
-        LEVEL_14: 'level_14',
-        LEVEL_15: 'level_15',
-        LEVEL_16: 'level_16',
-        LEVEL_17: 'level_17',
-        LEVEL_18: 'level_18',
-        LEVEL_19: 'level_19',
-        LEVEL_20: 'level_20'
-    }
-})
-
-define('two/powerHelper/types/ironwalls', [], function () {
-    return {
-        LEVEL_1: 'level_1',
-        LEVEL_2: 'level_2',
-        LEVEL_3: 'level_3',
-        LEVEL_4: 'level_4',
-        LEVEL_5: 'level_5'
-    }
-})
-require([
-    'two/ready',
-    'two/powerHelper',
-    'two/powerHelper/ui',
-    'two/powerHelper/events'
-], function (
-    ready,
-    powerHelper,
-    powerHelperInterface
-) {
-    if (powerHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        powerHelper.init()
-        powerHelperInterface()
-    })
-})
-
-define('two/prankHelper', [
-    'two/Settings',
-    'two/prankHelper/settings',
-    'two/prankHelper/settings/map',
-    'two/prankHelper/settings/updates',
-    'two/prankHelper/types/type',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    PH_TYPE,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let prankHelperSettings
-
-    let selectedGroups = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'prank_helper_settings'
-    }
-	
-    const RENAME_TYPE = {
-        [PH_TYPE.INCREASE]: 'increase',
-        [PH_TYPE.DECREASE]: 'decrease',
-        [PH_TYPE.RANDOM]: 'random'
-    }
-
-    console.log(RENAME_TYPE)
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = prankHelperSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-    }
-
-    const prankHelper = {}
-
-    prankHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            prankHelperSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        prankHelperSettings = settings.getAll()
-
-        console.log('all settings', prankHelperSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    prankHelper.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
-    }
-
-    prankHelper.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
-    }
-
-    prankHelper.getSettings = function () {
-        return settings
-    }
-
-    prankHelper.isInitialized = function () {
-        return initialized
-    }
-
-    prankHelper.isRunning = function () {
-        return running
-    }
-
-    return prankHelper
-})
-
-define('two/prankHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        PRANK_HELPER_START: 'prank_helper_start',
-        PRANK_HELPER_STOP: 'prank_helper_stop'
-    })
-})
-
-define('two/prankHelper/ui', [
-    'two/ui',
-    'two/prankHelper',
-    'two/prankHelper/settings',
-    'two/prankHelper/settings/map',
-    'two/prankHelper/types/type',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    prankHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    PH_TYPE,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        RENAME: 'rename',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (prankHelper.isRunning()) {
-            prankHelper.stop()
-        } else {
-            prankHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = prankHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Błazen', 80)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'rename.add_village' | i18n:loc.ale:'prank_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody class=\"renameLog\"><tr class=\"noRenames\"><td colspan=\"4\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .renameLog td{text-align:center}#two-prank-helper .renameLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-prank-helper .renameLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-prank-helper .noRenames td{height:26px;text-align:center}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = prankHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.RENAME
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.type = Settings.encodeList(PH_TYPE, {
-            textObject: 'prank_helper',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_prank_helper_window', function onDestroy () {
-            console.log('example window closed')
-        })
-
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.PRANK_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.PRANK_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_prank_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/prankHelper/settings', [], function () {
-    return {
-        GROUPS: 'groups',
-        TYPE1: 'type1',
-        TYPE2: 'type2',
-        TYPE3: 'type3',
-        CENTER1: 'center1',
-        CENTER2: 'center2',
-        CENTER3: 'center3',
-        PROLOGUE1: 'prologue1',
-        PROLOGUE2: 'prologue2',
-        PROLOGUE3: 'prologue3',
-        EPILOGUE1: 'epilogue1',
-        EPILOGUE2: 'epilogue2',
-        EPILOGUE3: 'epilogue3',
-        FROM1: 'from1',
-        FROM2: 'from2',
-        FROM3: 'from3',
-        TO1: 'to1',
-        TO2: 'to2',
-        TO3: 'to3'
-    }
-})
-
-define('two/prankHelper/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/prankHelper/settings/map', [
-    'two/prankHelper/settings',
-    'two/prankHelper/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUPS]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.TYPE1]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPE2]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPE3]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/prankHelper/types/type', [], function () {
-    return {
-        INCREASE: 'increase',
-        DECREASE: 'decrease',
-        RANDOM: 'random'
-    }
-})
-require([
-    'two/ready',
-    'two/prankHelper',
-    'two/prankHelper/ui',
-    'two/prankHelper/events'
-], function (
-    ready,
-    prankHelper,
-    prankHelperInterface
-) {
-    if (prankHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        prankHelper.init()
-        prankHelperInterface()
-    })
-})
-
 define('two/presetAsigner', [
     'two/Settings',
     'two/presetAsigner/settings',
@@ -23213,1431 +20851,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/recruitQueue', [
-    'two/Settings',
-    'two/recruitQueue/settings',
-    'two/recruitQueue/settings/map',
-    'two/recruitQueue/settings/updates',
-    'two/recruitQueue/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function(
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    RQ_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let recruitQueueSettings
-    let selectedPreset1 = []
-    let selectedPreset2 = []
-    let selectedPreset3 = []
-    let selectedPreset4 = []
-    let selectedPreset1_F = []
-    let selectedPreset2_F = []
-    let selectedPreset3_F = []
-    let selectedPreset4_F = []
-    let selectedGroups1 = []
-    let selectedGroups2 = []
-    let selectedGroups3 = []
-    let selectedGroups4 = []
-    let selectedGroups5 = []
-    let selectedGroups6 = []
-    let selectedGroups7 = []
-    let selectedGroups8 = []
-    let selectedGroups9 = []
-    let selectedGroups10 = []
-    let selectedGroups11 = []
-    let selectedGroups12 = []
-    let selectedGroups13 = []
-    let selectedGroups14 = []
-    let selectedGroups15 = []
-    let selectedGroups16 = []
-    let selectedGroups17 = []
-    let selectedGroups18 = []
-    let selectedGroups19 = []
-    let selectedGroups20 = []
-    let selectedGroups21 = []
-    let selectedGroups22 = []
-    let selectedGroups23 = []
-    let selectedGroups24 = []
-    const STORAGE_KEYS = {
-        SETTINGS: 'recruit_queue_settings'
-    }
-    const RECRUIT_UNIT = {
-        [RQ_UNIT.SPEAR]: 'spear',
-        [RQ_UNIT.SWORD]: 'sword',
-        [RQ_UNIT.AXE]: 'axe',
-        [RQ_UNIT.ARCHER]: 'archer',
-        [RQ_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [RQ_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [RQ_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [RQ_UNIT.RAM]: 'ram',
-        [RQ_UNIT.CATAPULT]: 'catapult',
-        [RQ_UNIT.TREBUCHET]: 'trebuchet',
-        [RQ_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [RQ_UNIT.SNOB]: 'snob',
-        [RQ_UNIT.KNIGHT]: 'knight'
-    }
-    console.log(RECRUIT_UNIT)
-    const updatePresets = function() {
-        selectedPreset1 = []
-        selectedPreset2 = []
-        selectedPreset3 = []
-        selectedPreset4 = []
-        selectedPreset1_F = []
-        selectedPreset2_F = []
-        selectedPreset3_F = []
-        selectedPreset4_F = []
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.PRESET1]
-        const presetsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.PRESET2]
-        const presetsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.PRESET3]
-        const presetsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.PRESET4]
-        const presetsSelectedByTheUser1_F = recruitQueueSettings[SETTINGS.PRESET1_FINAL]
-        const presetsSelectedByTheUser2_F = recruitQueueSettings[SETTINGS.PRESET2_FINAL]
-        const presetsSelectedByTheUser3_F = recruitQueueSettings[SETTINGS.PRESET3_FINAL]
-        const presetsSelectedByTheUser4_F = recruitQueueSettings[SETTINGS.PRESET4_FINAL]
-        presetsSelectedByTheUser1.forEach(function(presetId) {
-            selectedPreset1.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser2.forEach(function(presetId) {
-            selectedPreset2.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser3.forEach(function(presetId) {
-            selectedPreset3.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser4.forEach(function(presetId) {
-            selectedPreset4.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser1_F.forEach(function(presetId) {
-            selectedPreset1_F.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser2_F.forEach(function(presetId) {
-            selectedPreset2_F.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser3_F.forEach(function(presetId) {
-            selectedPreset3_F.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser4_F.forEach(function(presetId) {
-            selectedPreset4_F.push(allPresets[presetId])
-        })
-    }
-    const updateGroups = function() {
-        selectedGroups1 = []
-        selectedGroups2 = []
-        selectedGroups3 = []
-        selectedGroups4 = []
-        selectedGroups5 = []
-        selectedGroups6 = []
-        selectedGroups7 = []
-        selectedGroups8 = []
-        selectedGroups9 = []
-        selectedGroups10 = []
-        selectedGroups11 = []
-        selectedGroups12 = []
-        selectedGroups13 = []
-        selectedGroups14 = []
-        selectedGroups15 = []
-        selectedGroups16 = []
-        selectedGroups17 = []
-        selectedGroups18 = []
-        selectedGroups19 = []
-        selectedGroups20 = []
-        selectedGroups21 = []
-        selectedGroups22 = []
-        selectedGroups23 = []
-        selectedGroups24 = []
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.GROUP1]
-        const groupsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.GROUP2]
-        const groupsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.GROUP3]
-        const groupsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.GROUP4]
-        const groupsSelectedByTheUser5 = recruitQueueSettings[SETTINGS.GROUP5]
-        const groupsSelectedByTheUser6 = recruitQueueSettings[SETTINGS.GROUP6]
-        const groupsSelectedByTheUser7 = recruitQueueSettings[SETTINGS.GROUP7]
-        const groupsSelectedByTheUser8 = recruitQueueSettings[SETTINGS.GROUP8]
-        const groupsSelectedByTheUser9 = recruitQueueSettings[SETTINGS.GROUP9]
-        const groupsSelectedByTheUser10 = recruitQueueSettings[SETTINGS.GROUP10]
-        const groupsSelectedByTheUser11 = recruitQueueSettings[SETTINGS.GROUP11]
-        const groupsSelectedByTheUser12 = recruitQueueSettings[SETTINGS.GROUP12]
-        const groupsSelectedByTheUser13 = recruitQueueSettings[SETTINGS.GROUP13]
-        const groupsSelectedByTheUser14 = recruitQueueSettings[SETTINGS.GROUP14]
-        const groupsSelectedByTheUser15 = recruitQueueSettings[SETTINGS.GROUP15]
-        const groupsSelectedByTheUser16 = recruitQueueSettings[SETTINGS.GROUP16]
-        const groupsSelectedByTheUser17 = recruitQueueSettings[SETTINGS.GROUP17]
-        const groupsSelectedByTheUser18 = recruitQueueSettings[SETTINGS.GROUP18]
-        const groupsSelectedByTheUser19 = recruitQueueSettings[SETTINGS.GROUP19]
-        const groupsSelectedByTheUser20 = recruitQueueSettings[SETTINGS.GROUP20]
-        const groupsSelectedByTheUser21 = recruitQueueSettings[SETTINGS.GROUP21]
-        const groupsSelectedByTheUser22 = recruitQueueSettings[SETTINGS.GROUP22]
-        const groupsSelectedByTheUser23 = recruitQueueSettings[SETTINGS.GROUP23]
-        const groupsSelectedByTheUser24 = recruitQueueSettings[SETTINGS.GROUP24]
-        groupsSelectedByTheUser1.forEach(function(groupId) {
-            selectedGroups1.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser2.forEach(function(groupId) {
-            selectedGroups2.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser3.forEach(function(groupId) {
-            selectedGroups3.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser4.forEach(function(groupId) {
-            selectedGroups4.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser5.forEach(function(groupId) {
-            selectedGroups5.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser6.forEach(function(groupId) {
-            selectedGroups6.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser7.forEach(function(groupId) {
-            selectedGroups7.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser8.forEach(function(groupId) {
-            selectedGroups8.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser9.forEach(function(groupId) {
-            selectedGroups9.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser10.forEach(function(groupId) {
-            selectedGroups10.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser11.forEach(function(groupId) {
-            selectedGroups11.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser12.forEach(function(groupId) {
-            selectedGroups12.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser13.forEach(function(groupId) {
-            selectedGroups13.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser14.forEach(function(groupId) {
-            selectedGroups14.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser15.forEach(function(groupId) {
-            selectedGroups15.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser16.forEach(function(groupId) {
-            selectedGroups16.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser17.forEach(function(groupId) {
-            selectedGroups17.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser18.forEach(function(groupId) {
-            selectedGroups18.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser19.forEach(function(groupId) {
-            selectedGroups19.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser20.forEach(function(groupId) {
-            selectedGroups20.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser21.forEach(function(groupId) {
-            selectedGroups21.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser22.forEach(function(groupId) {
-            selectedGroups22.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser23.forEach(function(groupId) {
-            selectedGroups23.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser24.forEach(function(groupId) {
-            selectedGroups24.push(allGroups[groupId])
-        })
-    }
-    const recruitQueue = {}
-    recruitQueue.init = function() {
-        initialized = true
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-        settings.onChange(function(changes, updates) {
-            recruitQueueSettings = settings.getAll()
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-        recruitQueueSettings = settings.getAll()
-        console.log('recruitQueue settings', recruitQueueSettings)
-        ready(function() {
-            updatePresets()
-        }, 'presets')
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-    recruitQueue.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.recruit_queue_START)
-    }
-    recruitQueue.stop = function() {
-        running = false
-        eventQueue.trigger(eventTypeProvider.recruit_queue_STOP)
-    }
-    recruitQueue.getSettings = function() {
-        return settings
-    }
-    recruitQueue.isInitialized = function() {
-        return initialized
-    }
-    recruitQueue.isRunning = function() {
-        return running
-    }
-    return recruitQueue
-})
-define('two/recruitQueue/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        RECRUIT_QUEUE_START: 'recruit_queue_start',
-        RECRUIT_QUEUE_STOP: 'recruit_queue_stop'
-    })
-})
-
-define('two/recruitQueue/ui', [
-    'two/ui',
-    'two/recruitQueue',
-    'two/recruitQueue/settings',
-    'two/recruitQueue/settings/map',
-    'two/recruitQueue/types/units',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    recruitQueue,
-    SETTINGS,
-    SETTINGS_MAP,
-    RQ_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let presetList = modelDataService.getPresetList()
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        PRESETS: 'presets',
-        OWN: 'own',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (recruitQueue.isRunning()) {
-            recruitQueue.stop()
-        } else {
-            recruitQueue.start()
-        }
-    }
-
-    const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
-        }
-    }
-
-    const init = function () {
-        settings = recruitQueue.getSettings()
-        $button = interfaceOverflow.addMenuButton('Kapitan', 80)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tr><th>{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET1]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET1_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET2_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET3_FINAL]\" drop-down=\"true\"></div><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4]\" drop-down=\"true\"></div><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET4_FINAL]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'presets.start' | i18n:loc.ale:'recruit_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'own.start' | i18n:loc.ale:'recruit_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-recruit-queue div[select]{text-align:center}#two-recruit-queue div[select] .select-wrapper{height:34px;width:164px;min-width:164px}#two-recruit-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-recruit-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:160px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .addForm th{text-align:center}#two-recruit-queue .recruitLog td{text-align:center}#two-recruit-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .noRecruits td{height:26px;text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = recruitQueue.isRunning()
-        $scope.selectedTab = TAB_TYPES.PRESETS
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.units = Settings.encodeList(RQ_UNIT, {
-            textObject: 'recruit_queue',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_recruit_queue_window', function onDestroy () {
-            console.log('recruitQueue window closed')
-        })
-
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.recruit_queue_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.recruit_queue_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_recruit_queue_window', $scope)
-    }
-
-    return init
-})
-
-define('two/recruitQueue/settings', [], function() {
-    return {
-        GROUP1: 'group1',
-        GROUP2: 'group2',
-        GROUP3: 'group3',
-        GROUP4: 'group4',
-        GROUP5: 'group5',
-        GROUP6: 'group6',
-        GROUP7: 'group7',
-        GROUP8: 'group8',
-        GROUP9: 'group9',
-        GROUP10: 'group10',
-        GROUP11: 'group11',
-        GROUP12: 'group12',
-        GROUP13: 'group13',
-        GROUP14: 'group14',
-        GROUP15: 'group15',
-        GROUP16: 'group16',
-        GROUP17: 'group17',
-        GROUP18: 'group18',
-        GROUP19: 'group19',
-        GROUP20: 'group20',
-        GROUP21: 'group21',
-        GROUP22: 'group22',
-        GROUP23: 'group23',
-        GROUP24: 'group24',
-        UNIT1: 'unit1',
-        UNIT2: 'unit2',
-        UNIT3: 'unit3',
-        UNIT4: 'unit4',
-        UNIT5: 'unit5',
-        UNIT6: 'unit6',
-        UNIT7: 'unit7',
-        UNIT8: 'unit8',
-        UNIT9: 'unit9',
-        UNIT10: 'unit10',
-        UNIT11: 'unit11',
-        UNIT12: 'unit12',
-        UNIT13: 'unit13',
-        UNIT14: 'unit14',
-        UNIT15: 'unit15',
-        UNIT16: 'unit16',
-        UNIT17: 'unit17',
-        UNIT18: 'unit18',
-        UNIT19: 'unit19',
-        UNIT20: 'unit20',
-        AMOUNT1: 'amount1',
-        AMOUNT2: 'amount2',
-        AMOUNT3: 'amount3',
-        AMOUNT4: 'amount4',
-        AMOUNT5: 'amount5',
-        AMOUNT6: 'amount6',
-        AMOUNT7: 'amount7',
-        AMOUNT8: 'amount8',
-        AMOUNT9: 'amount9',
-        AMOUNT10: 'amount10',
-        AMOUNT11: 'amount11',
-        AMOUNT12: 'amount12',
-        AMOUNT13: 'amount13',
-        AMOUNT14: 'amount14',
-        AMOUNT15: 'amount15',
-        AMOUNT16: 'amount16',
-        AMOUNT17: 'amount17',
-        AMOUNT18: 'amount18',
-        AMOUNT19: 'amount19',
-        AMOUNT20: 'amount20',
-        PRESET1: 'preset1',
-        PRESET2: 'preset2',
-        PRESET3: 'preset3',
-        PRESET4: 'preset4',
-        PRESET1_FINAL: 'preset1_final',
-        PRESET2_FINAL: 'preset1_final',
-        PRESET3_FINAL: 'preset1_final',
-        PRESET4_FINAL: 'preset1_final'
-    }
-})
-define('two/recruitQueue/settings/updates', function() {
-    return {
-        PRESETS: 'presets',
-        GROUPS: 'groups'
-    }
-})
-define('two/recruitQueue/settings/map', [
-    'two/recruitQueue/settings',
-    'two/recruitQueue/settings/updates'
-], function(
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.PRESET1]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESET2]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESET3]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESET4]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESET1_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESET2_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESET3_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESET4_FINAL]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.GROUP1]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP2]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP3]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP4]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP5]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP6]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP7]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP8]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP9]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP10]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP11]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP12]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP13]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP14]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP15]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP16]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP17]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP18]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP19]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP20]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP21]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP22]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP23]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP24]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.AMOUNT1]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT2]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT3]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT4]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT5]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT6]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT7]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT8]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT9]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT10]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT11]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT12]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT13]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT14]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT15]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT16]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT17]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT18]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT19]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.AMOUNT20]: {
-            default: 1,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.UNIT1]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT2]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT3]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT4]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT5]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT6]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT7]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT8]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT9]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT10]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT11]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT12]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT13]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT14]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT15]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT16]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT17]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT18]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT19]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT20]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        }
-    }
-})
-define('two/recruitQueue/types/units', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-require([
-    'two/ready',
-    'two/recruitQueue',
-    'two/recruitQueue/ui',
-    'two/recruitQueue/events'
-], function (
-    ready,
-    recruitQueue,
-    recruitQueueInterface
-) {
-    if (recruitQueue.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        recruitQueue.init()
-        recruitQueueInterface()
-    })
-})
-
-define('two/reportHelper', [
-    'two/Settings',
-    'two/reportHelper/settings',
-    'two/reportHelper/settings/map',
-    'two/reportHelper/settings/updates',
-    'two/reportHelper/types/type',
-    'two/reportHelper/types/result',
-    'two/reportHelper/types/sort',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    RH_TYPE,
-    RH_RESULT,
-    RH_SORT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let reportHelperSettings
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'report_helper_settings'
-    }
-	
-    const REPORT_TYPE = {
-        [RH_TYPE.ATTACK]: 'attack',
-        [RH_TYPE.DEFENSE]: 'defense',
-        [RH_TYPE.SUPPORT_IN]: 'support_in',
-        [RH_TYPE.SUPPORT_OUT]: 'support_out',
-        [RH_TYPE.TRADE]: 'trade',
-        [RH_TYPE.SPY_IN]: 'spy_in',
-        [RH_TYPE.SPY_OUT]: 'spy_out',
-        [RH_TYPE.ACHIEVEMENTS]: 'achievements',
-        [RH_TYPE.SYSTEM]: 'system'
-    }
-	
-    const REPORT_RESULT = {
-        [RH_RESULT.WIN]: 'win',
-        [RH_RESULT.LOSSES]: 'losses',
-        [RH_RESULT.DEFEAT]: 'defeat'
-    }
-	
-    const REPORT_SORT = {
-        [RH_SORT.ALL]: 'all',
-        [RH_SORT.FARM]: 'farm',
-        [RH_SORT.FAKE]: 'fake',
-        [RH_SORT.FAVOURITE]: 'favourite',
-        [RH_SORT.WITHOUT_FAVOURITE]: 'without_favourite',
-        [RH_SORT.FARM_FAKE]: 'farm_fake'
-    }
-	
-    console.log(REPORT_RESULT, REPORT_SORT, REPORT_TYPE)
-
-    const reportHelper = {}
-
-    reportHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function () {
-            reportHelperSettings = settings.getAll()
-        })
-
-        reportHelperSettings = settings.getAll()
-
-        console.log('reportHelper settings', reportHelperSettings)
-    }
-
-    reportHelper.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.REPORT_HELPER_START)
-    }
-
-    reportHelper.stop = function () {
-        running = false
-
-        console.log('reportHelper stop')
-
-        eventQueue.trigger(eventTypeProvider.REPORT_HELPER_STOP)
-    }
-
-    reportHelper.getSettings = function () {
-        return settings
-    }
-
-    reportHelper.isInitialized = function () {
-        return initialized
-    }
-
-    reportHelper.isRunning = function () {
-        return running
-    }
-
-    return reportHelper
-})
-
-define('two/reportHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        REPORT_HELPER_START: 'report_helper_start',
-        REPORT_HELPER_STOP: 'report_helper_stop'
-    })
-})
-
-define('two/reportHelper/ui', [
-    'two/ui',
-    'two/reportHelper',
-    'two/reportHelper/settings',
-    'two/reportHelper/settings/map',
-    'two/reportHelper/types/type',
-    'two/reportHelper/types/result',
-    'two/reportHelper/types/sort',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    reportHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    RH_TYPE,
-    RH_RESULT,
-    RH_SORT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    
-    const TAB_TYPES = {
-        REPORTS: 'reports',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (reportHelper.isRunning()) {
-            reportHelper.stop()
-        } else {
-            reportHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = reportHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Skryba', 90)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-report-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'report_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.REPORTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.REPORTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.REPORTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.REPORTS}\">{{ 'reports' | i18n:loc.ale:'report_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'report_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.REPORTS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'reports.deletebyvillage' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'reports.add_village' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_village' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebyplayer' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'reports.add_player' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_player' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebytribe' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'reports.add_tribe' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_tribe' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebyprovince' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'reports.add_village' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_village' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.advanced' | i18n:loc.ale:'report_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.type' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.result' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"result\" selected=\"settings[SETTINGS.RESULT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.sort' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"sort\" selected=\"settings[SETTINGS.SORT]\" drop-down=\"true\"></div><tr><th colspan=\"4\">{{ 'reports.make-favourite' | i18n:loc.ale:'report_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.type' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE_FAVOURITE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.result' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"result\" selected=\"settings[SETTINGS.RESULT_FAVOURITE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.amount' | i18n:loc.ale:'report_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.type' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.result' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.sort' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.what' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'report_helper' }}<tbody class=\"reportLog\"><tr class=\"noReports\"><td colspan=\"6\">{{ 'logs.noReports' | i18n:loc.ale:'report_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.REPORTS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'reports.clear' | i18n:loc.ale:'report_helper' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'reports.save' | i18n:loc.ale:'report_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'report_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'report_helper' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'report_helper' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-report-helper div[select]{text-align:right}#two-report-helper div[select] .select-wrapper{height:34px}#two-report-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-report-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-report-helper .range-container{width:250px}#two-report-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-report-helper .textfield-border.fit{width:100%}#two-report-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-report-helper .actions a{width:100px}#two-report-helper th{text-align:center}#two-report-helper .reportLog td{text-align:center}#two-report-helper .reportLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-report-helper .reportLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-report-helper .noReports td{height:26px;text-align:center}#two-report-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = reportHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.REPORTS
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.type = Settings.encodeList(RH_TYPE, {
-            textObject: 'report_helper',
-            disabled: true
-        })
-        $scope.result = Settings.encodeList(RH_RESULT, {
-            textObject: 'report_helper',
-            disabled: true
-        })
-        $scope.sort = Settings.encodeList(RH_SORT, {
-            textObject: 'report_helper',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-		
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_report_helper_window', function onDestroy () {
-            console.log('reportHelper window closed')
-        })
-        eventScope.register(eventTypeProvider.REPORT_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.REPORT_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_report_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/reportHelper/settings', [], function () {
-    return {
-        TYPE: 'type',
-        TYPE_FAVOURITE: 'type-favourite',
-        RESULT: 'result',
-        RESULT_FAVOURITE: 'result-favourite',
-        SORT: 'sort',
-        AMOUNT: 'amount'
-    }
-})
-
-define('two/reportHelper/settings/updates', function () {
-    return {
-    }
-})
-
-define('two/reportHelper/settings/map', [
-    'two/reportHelper/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPE_FAVOURITE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.RESULT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.RESULT_FAVOURITE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.SORT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.AMOUNT]: {
-            default: 100,
-            inputType: 'number',
-            min: 5,
-            max: 1000000
-        },
-    }
-})
-
-define('two/reportHelper/types/type', [], function () {
-    return {
-        ATTACK: 'attack',
-        DEFENSE: 'defense',
-        SUPPORT_IN: 'support_in',
-        SUPPORT_OUT: 'support_out',
-        TRADE: 'trade',
-        SPY_IN: 'spy_in',
-        SPY_OUT: 'spy_out',
-        ACHIEVEMENTS: 'achievements',
-        SYSTEM: 'system'
-    }
-})
-
-define('two/reportHelper/types/result', [], function () {
-    return {
-        WIN: 'win',
-        LOSSES: 'losses',
-        DEFEAT: 'defeat'
-    }
-})
-
-define('two/reportHelper/types/sort', [], function () {
-    return {
-        ALL: 'all',
-        FARM: 'farm',
-        FAKE: 'fake',
-        FAVOURITE: 'favourite',
-        WITHOUT_FAVOURITE: 'without_favourite',
-        FARM_AND_FAKE: 'farm_and_fake'
-    }
-})
-require([
-    'two/ready',
-    'two/reportHelper',
-    'two/reportHelper/ui',
-    'two/reportHelper/events'
-], function (
-    ready,
-    reportHelper,
-    reportHelperInterface
-) {
-    if (reportHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        reportHelper.init()
-        reportHelperInterface()
-    })
-})
-
 define('two/reportSender', [
     'queues/EventQueue'
 ], function(
@@ -25465,380 +21678,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/specialQueue', [
-    'two/Settings',
-    'two/specialQueue/settings',
-    'two/specialQueue/settings/map',
-    'two/specialQueue/settings/updates',
-    'two/specialQueue/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    SQ_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let specialQueueSettings
-
-    let selectedGroupNoble = []
-    let selectedGroupSpecial = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'special_queue_settings'
-    }
-    const SPECIAL_UNIT = {
-        [SQ_UNIT.TREBUCHET]: 'trebuchet',
-        [SQ_UNIT.DOPPELSOLDNER]: 'doppelsoldner'
-    }
-    console.log(SPECIAL_UNIT)
-
-    const updateGroups = function () {
-        selectedGroupNoble = []
-        selectedGroupSpecial = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUserNoble = specialQueueSettings[SETTINGS.GROUPNOBLE]
-        const groupsSelectedByTheUserSpecial = specialQueueSettings[SETTINGS.GROUPSPECIAL]
-
-        groupsSelectedByTheUserNoble.forEach(function (groupId) {
-            selectedGroupNoble.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUserSpecial.forEach(function (groupId) {
-            selectedGroupSpecial.push(allGroups[groupId])
-        })
-
-    }
-
-    const specialQueue = {}
-
-    specialQueue.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            specialQueueSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        specialQueueSettings = settings.getAll()
-
-        console.log('specialQueue settings', specialQueueSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    specialQueue.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_START)
-    }
-
-    specialQueue.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_STOP)
-    }
-
-    specialQueue.getSettings = function () {
-        return settings
-    }
-
-    specialQueue.isInitialized = function () {
-        return initialized
-    }
-
-    specialQueue.isRunning = function () {
-        return running
-    }
-
-    return specialQueue
-})
-
-define('two/specialQueue/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        SPECIAL_QUEUE_START: 'special_queue_start',
-        SPECIAL_QUEUE_STOP: 'special_queue_stop'
-    })
-})
-
-define('two/specialQueue/ui', [
-    'two/ui',
-    'two/specialQueue',
-    'two/specialQueue/settings',
-    'two/specialQueue/settings/map',
-    'two/specialQueue/types/units',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    specialQueue,
-    SETTINGS,
-    SETTINGS_MAP,
-    SQ_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        NOBLE: 'noble',
-        SPECIAL: 'special',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'special_queue'))
-    }
-
-    const switchState = function () {
-        if (specialQueue.isRunning()) {
-            specialQueue.stop()
-        } else {
-            specialQueue.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'special_queue'))
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'special_queue'))
-        }
-    }
-
-    const init = function () {
-        settings = specialQueue.getSettings()
-        interfaceOverflow.addDivisor(86)
-        $button = interfaceOverflow.addMenuButton('Weteran', 85)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_special_queue_window', `<div id=\"two-special-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'special_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.NOBLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.NOBLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.NOBLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.NOBLE}\">{{ 'noble' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPECIAL)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPECIAL}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPECIAL}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPECIAL}\">{{ 'special' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'special_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><h3 class=\"twx-section\">{{ 'noble.knight' | i18n:loc.ale:'special_queue' }}</h3><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h3 class=\"twx-section\">{{ 'noble.nobleman' | i18n:loc.ale:'special_queue' }}</h3><h5 class=\"twx-section\">{{ 'noble.noblevillage' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byvillage' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageN\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amount' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.nobleprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageNP\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.noblegroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"260px\"><tr><th colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'noble.bygroup' | i18n:loc.ale:'special_queue' }}</span><tr><td><span class=\"ff-cell-fix\">{{ 'noble.groups' | i18n:loc.ale:'special_queue' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPNOBLE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><h5 class=\"twx-section\">{{ 'special.all' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textall' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.byprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageS\" placeholder=\"{{ 'special.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'special.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'special.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'special.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.bygroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textgroup' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPSPECIAL]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"35%\"><col width=\"25%\"><col width=\"15%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'special_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'special_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'noble.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'special.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'special_queue' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-special-queue div[select]{text-align:center}#two-special-queue div[select] .select-wrapper{height:34px}#two-special-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-special-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-special-queue .range-container{width:250px}#two-special-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-special-queue .textfield-border.fit{width:100%}#two-special-queue .addForm td{text-align:left}#two-special-queue .addForm th{text-align:center}#two-special-queue .addForm .item-recruit{text-align:center}#two-special-queue .addForm .item-recruit span{height:34px;line-height:34px;text-align:center;width:125px}#two-special-queue .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-special-queue .addForm .actions a{width:100px}#two-special-queue .recruitLog td{text-align:center}#two-special-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-special-queue table.header-center th{text-align:center}#two-special-queue .noRecruits td{height:26px;text-align:center}#two-special-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = specialQueue.isRunning()
-        $scope.selectedTab = TAB_TYPES.NOBLE
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.units = Settings.encodeList(SQ_UNIT, {
-            textObject: 'special_queue',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_special_queue_window', function onDestroy () {
-            console.log('specialQueue closed')
-        })
-
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.SPECIAL_QUEUE_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.SPECIAL_QUEUE_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_special_queue_window', $scope)
-    }
-
-    return init
-})
-
-define('two/specialQueue/settings', [], function () {
-    return {
-        AMOUNT1: 'amount1',
-        AMOUNT2: 'amount2',
-        AMOUNT3: 'amount3',		
-        AMOUNT4: 'amount4',
-        AMOUNT5: 'amount5',
-        AMOUNT6: 'amount6',
-        AMOUNT7: 'amount7',
-        AMOUNT8: 'amount8',
-        GROUPNOBLE: 'group-noble',
-        GROUPSPECIAL: 'group-special',
-        UNIT1: 'unit-special1',
-        UNIT2: 'unit-special2',
-        UNIT3: 'unit-special3'
-    }
-})
-
-define('two/specialQueue/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/specialQueue/settings/map', [
-    'two/specialQueue/settings',
-    'two/specialQueue/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUPNOBLE]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPSPECIAL]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.AMOUNT1]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 240
-        },
-        [SETTINGS.AMOUNT2]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 240
-        },
-        [SETTINGS.AMOUNT3]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 100000
-        },
-        [SETTINGS.AMOUNT4]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 240
-        },
-        [SETTINGS.AMOUNT5]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 100000
-        },
-        [SETTINGS.AMOUNT6]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.AMOUNT7]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.AMOUNT8]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.UNIT1]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT2]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT3]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/specialQueue/types/units', [], function () {
-    return {
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner'
-    }
-})
-require([
-    'two/ready',
-    'two/specialQueue',
-    'two/specialQueue/ui',
-    'two/specialQueue/events'
-], function (
-    ready,
-    specialQueue,
-    specialQueueInterface
-) {
-    if (specialQueue.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        specialQueue.init()
-        specialQueueInterface()
-    })
-})
-
 define('two/spyMaster', [
     'two/Settings',
     'two/spyMaster/settings',
@@ -26538,462 +22377,6 @@ require([
             })
 
             eventQueue.register(eventTypeProvider.SPY_RECRUITER_STOPPED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, false)
-            })
-        }, ['initial_village'])
-    })
-})
-define('two/supportSender', [
-    'two/Settings',
-    'two/supportSender/settings',
-    'two/supportSender/settings/map',
-    'two/supportSender/settings/updates',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let supportSenderSettings
-
-    let selectedPresets = []
-    let selectedGroups = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'support_sender_settings'
-    }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = supportSenderSettings[SETTINGS.PRESETS]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-    }
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = supportSenderSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-    }
-
-    const supportSender = {}
-
-    supportSender.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            supportSenderSettings = settings.getAll()
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        supportSenderSettings = settings.getAll()
-
-        console.log('supportSender settings', supportSenderSettings)
-
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    supportSender.start = function () {
-        running = true
-
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
-
-        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_START)
-    }
-
-    supportSender.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
-    }
-
-    supportSender.getSettings = function () {
-        return settings
-    }
-
-    supportSender.isInitialized = function () {
-        return initialized
-    }
-
-    supportSender.isRunning = function () {
-        return running
-    }
-
-    return supportSender
-})
-
-define('two/supportSender/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        SUPPORT_SENDER_START: 'support_sender_start',
-        SUPPORT_SENDER_STOP: 'support_sender_stop'
-    })
-})
-
-define('two/supportSender/ui', [
-    'two/ui',
-    'two/supportSender',
-    'two/supportSender/settings',
-    'two/supportSender/settings/map',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    supportSender,
-    SETTINGS,
-    SETTINGS_MAP,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let presetList = modelDataService.getPresetList()
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        SUPPORT: 'support',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (supportSender.isRunning()) {
-            supportSender.stop()
-        } else {
-            supportSender.start()
-        }
-    }
-
-    const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = supportSender.getSettings()
-        $button = interfaceOverflow.addMenuButton('Chorąży', 50)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td><div auto-complete=\"autoCompleteSupport\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody class=\"supporterLog\"><tr class=\"noSupports\"><td colspan=\"5\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender th{text-align:center}#two-support-sender .supporterLog td{text-align:center}#two-support-sender .supporterLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .supporterLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .noSupports td{height:26px;text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = supportSender.isRunning()
-        $scope.selectedTab = TAB_TYPES.SUPPORT
-        $scope.settingsMap = SETTINGS_MAP
-
-        settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_support_sender_window', function onDestroy () {
-            console.log('example window closed')
-        })
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.SUPPORT_SENDER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.SUPPORT_SENDER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_support_sender_window', $scope)
-    }
-
-    return init
-})
-
-define('two/supportSender/settings', [], function () {
-    return {
-        DISTANCE: 'distance',
-        PRESET: 'preset',
-        GROUP: 'group',
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        ARCHER: 'archer',
-        TREBUCHET: 'trebuchet',
-        HC: 'heavy_cavalry'
-    }
-})
-
-define('two/supportSender/settings/updates', function () {
-    return {
-        PRESETS: 'presets',
-        GROUPS: 'groups'
-    }
-})
-
-define('two/supportSender/settings/map', [
-    'two/supportSender/settings',
-    'two/supportSender/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.PRESET]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'presets'
-        },
-        [SETTINGS.GROUP]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.SPEAR]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 24000
-        },
-        [SETTINGS.SWORD]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 24000
-        },
-        [SETTINGS.ARCHER]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 24000
-        },
-        [SETTINGS.HC]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.TREBUCHET]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 2400
-        },
-        [SETTINGS.DISTANCE]: {
-            default: 90,
-            inputType: 'number',
-            min: 0,
-            max: 300
-        }
-    }
-})
-
-require([
-    'two/ready',
-    'two/supportSender',
-    'two/supportSender/ui',
-    'two/supportSender/events'
-], function (
-    ready,
-    supportSender,
-    supportSenderInterface
-) {
-    if (supportSender.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        supportSender.init()
-        supportSenderInterface()
-    })
-})
-
-define('two/tutorialHelper', [
-    'queues/EventQueue'
-], function (
-    eventQueue
-) {
-    let initialized = false
-    let running = false	
-    let tutorialHelper = {}
-    tutorialHelper.init = function() {
-        initialized = true
-    }
-    tutorialHelper.start = function() {
-        eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STARTED)
-        running = true
-    }
-    tutorialHelper.stop = function() {
-        eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STOPPED)
-        running = false
-    }
-    tutorialHelper.isRunning = function() {
-        return running
-    }
-    tutorialHelper.isInitialized = function() {
-        return initialized
-    }
-    return tutorialHelper
-})
-define('two/tutorialHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        TUTORIAL_HELPER_STARTED: 'tutorial_helper_started',
-        TUTORIAL_HELPER_STOPPED: 'tutorial_helper_stopped'
-    })
-})
-define('two/tutorialHelper/ui', [
-    'two/ui',
-    'two/tutorialHelper',
-    'two/utils',
-    'queues/EventQueue'
-], function(
-    interfaceOverflow,
-    tutorialHelper,
-    utils,
-    eventQueue
-) {
-    let $button
-    const init = function() {
-        $button = interfaceOverflow.addMenuButton2('Giermek', 60, $filter('i18n')('description', $rootScope.loc.ale, 'tutorial_helper'))
-        $button.addEventListener('click', function() {
-            if (tutorialHelper.isRunning()) {
-                tutorialHelper.stop()
-                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'tutorial_helper'))
-            } else {
-                tutorialHelper.start()
-                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'tutorial_helper'))
-            }
-        })
-        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function() {
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-        })
-        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function() {
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-        })
-        if (tutorialHelper.isRunning()) {
-            eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STARTED)
-        }
-        return opener
-    }
-    return init
-})
-require([
-    'two/ready',
-    'two/tutorialHelper',
-    'two/tutorialHelper/ui',
-    'Lockr',
-    'queues/EventQueue',
-    'two/tutorialHelper/events'
-], function(
-    ready,
-    tutorialHelper,
-    tutorialHelperInterface,
-    Lockr,
-    eventQueue
-) {
-    const STORAGE_KEYS = {
-        ACTIVE: 'tutorial_helper_active'
-    }
-    if (tutorialHelper.isInitialized()) {
-        return false
-    }
-    ready(function() {
-        tutorialHelper.init()
-        tutorialHelperInterface()
-        ready(function() {
-            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
-                tutorialHelper.start()
-            }
-            eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, true)
-            })
-            eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
