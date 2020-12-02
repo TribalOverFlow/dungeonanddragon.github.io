@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 19:25:19 GMT
+ * Wed, 02 Dec 2020 19:29:11 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -11261,7 +11261,7 @@ define('two/battleCalculator/settings/updates', function () {
 
 define('two/battleCalculator/settings/map', [
     'two/battleCalculator/settings',
-    'two/armyHelper/settings/updates'
+    'two/battleCalculator/settings/updates'
 ], function (
     SETTINGS,
     UPDATES
