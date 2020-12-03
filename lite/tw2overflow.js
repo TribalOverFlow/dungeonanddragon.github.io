@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 23:02:36 GMT
+ * Thu, 03 Dec 2020 08:01:50 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23990,12 +23990,12 @@ define('two/recruitQueue', [
             selectedGroups24.push(allGroups[groupId])
         })
     }
-    const addLog = function(villageId, log) {
+    const addLog = function(villageId, unit, amount) {
         let data = {
             time: timeHelper.gameTime(),
             villageId: villageId,
-            unit: log.unit,
-            amount: log.amount
+            unit: unit,
+            amount: amount
         }
         recruitLog.unshift(data)
         if (recruitLog.length > LOGS_LIMIT) {
@@ -24255,7 +24255,6 @@ define('two/recruitQueue', [
                                     totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
                                     recruitingTimeToFinish = totalRecruitingTime - recruitingTime
                                     barracksRecrutingTime1.push(recruitingTimeToFinish)
-                                    console.log(recruitingTime, totalRecruitingTime, recruitingTimeToFinish, barracksRecrutingTime1)
                                 })
 
                                 function modifier1Get() {
@@ -24339,7 +24338,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (spearToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && spear1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -24353,7 +24352,7 @@ define('two/recruitQueue', [
                                                 spear1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, spear1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -24378,7 +24377,7 @@ define('two/recruitQueue', [
                                                         spearnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24395,7 +24394,7 @@ define('two/recruitQueue', [
                                                             spearavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -24421,7 +24420,7 @@ define('two/recruitQueue', [
                                                         spearnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24438,7 +24437,7 @@ define('two/recruitQueue', [
                                                             spearavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -24464,7 +24463,7 @@ define('two/recruitQueue', [
                                                         spearnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24481,7 +24480,7 @@ define('two/recruitQueue', [
                                                             spearavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable1)
                                                     }
                                                 }
                                             }
@@ -24515,7 +24514,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (swordToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && sword1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -24529,7 +24528,7 @@ define('two/recruitQueue', [
                                                 sword1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, sword1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -24554,7 +24553,7 @@ define('two/recruitQueue', [
                                                         swordnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24571,7 +24570,7 @@ define('two/recruitQueue', [
                                                             swordavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -24597,7 +24596,7 @@ define('two/recruitQueue', [
                                                         swordnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24614,7 +24613,7 @@ define('two/recruitQueue', [
                                                             swordavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -24640,7 +24639,7 @@ define('two/recruitQueue', [
                                                         swordnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24657,7 +24656,7 @@ define('two/recruitQueue', [
                                                             swordavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable1)
                                                     }
                                                 }
                                             }
@@ -24691,7 +24690,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (axeToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && axe1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -24705,7 +24704,7 @@ define('two/recruitQueue', [
                                                 axe1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, axe1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -24730,7 +24729,7 @@ define('two/recruitQueue', [
                                                         axenew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24747,7 +24746,7 @@ define('two/recruitQueue', [
                                                             axeavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -24773,7 +24772,7 @@ define('two/recruitQueue', [
                                                         axenew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24790,7 +24789,7 @@ define('two/recruitQueue', [
                                                             axeavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -24816,7 +24815,7 @@ define('two/recruitQueue', [
                                                         axenew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24833,7 +24832,7 @@ define('two/recruitQueue', [
                                                             axeavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable1)
                                                     }
                                                 }
                                             }
@@ -24867,7 +24866,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (archerToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && archer1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -24881,7 +24880,7 @@ define('two/recruitQueue', [
                                                 archer1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, archer1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -24906,7 +24905,7 @@ define('two/recruitQueue', [
                                                         archernew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24923,7 +24922,7 @@ define('two/recruitQueue', [
                                                             archeravailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -24949,7 +24948,7 @@ define('two/recruitQueue', [
                                                         archernew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -24966,7 +24965,7 @@ define('two/recruitQueue', [
                                                             archeravailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -24992,7 +24991,7 @@ define('two/recruitQueue', [
                                                         archernew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25009,7 +25008,7 @@ define('two/recruitQueue', [
                                                             archeravailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable1)
                                                     }
                                                 }
                                             }
@@ -25043,7 +25042,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (lcToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && lc1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -25057,7 +25056,7 @@ define('two/recruitQueue', [
                                                 lc1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, lc1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25082,7 +25081,7 @@ define('two/recruitQueue', [
                                                         lcnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25099,7 +25098,7 @@ define('two/recruitQueue', [
                                                             lcavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25125,7 +25124,7 @@ define('two/recruitQueue', [
                                                         lcnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25142,7 +25141,7 @@ define('two/recruitQueue', [
                                                             lcavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25168,7 +25167,7 @@ define('two/recruitQueue', [
                                                         lcnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25185,7 +25184,7 @@ define('two/recruitQueue', [
                                                             lcavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable1)
                                                     }
                                                 }
                                             }
@@ -25219,7 +25218,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (maToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && ma1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -25233,7 +25232,7 @@ define('two/recruitQueue', [
                                                 ma1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ma1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25258,7 +25257,7 @@ define('two/recruitQueue', [
                                                         manew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25275,7 +25274,7 @@ define('two/recruitQueue', [
                                                             maavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25301,7 +25300,7 @@ define('two/recruitQueue', [
                                                         manew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25318,7 +25317,7 @@ define('two/recruitQueue', [
                                                             maavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25344,7 +25343,7 @@ define('two/recruitQueue', [
                                                         manew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25361,7 +25360,7 @@ define('two/recruitQueue', [
                                                             maavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable1)
                                                     }
                                                 }
                                             }
@@ -25395,7 +25394,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (ramToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && ram1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -25409,7 +25408,7 @@ define('two/recruitQueue', [
                                                 ram1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ram1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25434,7 +25433,7 @@ define('two/recruitQueue', [
                                                         ramnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25451,7 +25450,7 @@ define('two/recruitQueue', [
                                                             ramavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25477,7 +25476,7 @@ define('two/recruitQueue', [
                                                         ramnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25494,7 +25493,7 @@ define('two/recruitQueue', [
                                                             ramavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25520,7 +25519,7 @@ define('two/recruitQueue', [
                                                         ramnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25537,7 +25536,7 @@ define('two/recruitQueue', [
                                                             ramavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable1)
                                                     }
                                                 }
                                             }
@@ -25571,7 +25570,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (catapultToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && catapult1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -25585,7 +25584,7 @@ define('two/recruitQueue', [
                                                 catapult1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, catapult1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25610,7 +25609,7 @@ define('two/recruitQueue', [
                                                         catapultnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25627,7 +25626,7 @@ define('two/recruitQueue', [
                                                             catapultavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25653,7 +25652,7 @@ define('two/recruitQueue', [
                                                         catapultnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25670,7 +25669,7 @@ define('two/recruitQueue', [
                                                             catapultavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25696,7 +25695,7 @@ define('two/recruitQueue', [
                                                         catapultnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25713,7 +25712,7 @@ define('two/recruitQueue', [
                                                             catapultavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable1)
                                                     }
                                                 }
                                             }
@@ -25747,7 +25746,7 @@ define('two/recruitQueue', [
                                     var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
                                     var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
                                     if (hcToRecruit1 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && hc1 > minimal1) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -25761,7 +25760,7 @@ define('two/recruitQueue', [
                                                 hc1
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, hc1)
                                         } else {
                                             if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
                                                 woodModifier1 = villageWood1 / wood1
@@ -25786,7 +25785,7 @@ define('two/recruitQueue', [
                                                         hcnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25803,7 +25802,7 @@ define('two/recruitQueue', [
                                                             hcavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable1)
                                                     }
                                                 }
                                             } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
@@ -25829,7 +25828,7 @@ define('two/recruitQueue', [
                                                         hcnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25846,7 +25845,7 @@ define('two/recruitQueue', [
                                                             hcavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable1)
                                                     }
                                                 }
                                             } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
@@ -25872,7 +25871,7 @@ define('two/recruitQueue', [
                                                         hcnew1
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew1)
                                                 } else {
                                                     foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
                                                     foodAvailable1 = villageFood1 / foodnew1
@@ -25889,7 +25888,7 @@ define('two/recruitQueue', [
                                                             hcavailable1
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable1)
                                                     }
                                                 }
                                             }
@@ -26136,7 +26135,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (spearToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && spear2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -26150,7 +26149,7 @@ define('two/recruitQueue', [
                                                 spear2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, spear2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -26175,7 +26174,7 @@ define('two/recruitQueue', [
                                                         spearnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26192,7 +26191,7 @@ define('two/recruitQueue', [
                                                             spearavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -26218,7 +26217,7 @@ define('two/recruitQueue', [
                                                         spearnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26235,7 +26234,7 @@ define('two/recruitQueue', [
                                                             spearavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -26261,7 +26260,7 @@ define('two/recruitQueue', [
                                                         spearnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26278,7 +26277,7 @@ define('two/recruitQueue', [
                                                             spearavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable2)
                                                     }
                                                 }
                                             }
@@ -26312,7 +26311,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (swordToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && sword2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -26326,7 +26325,7 @@ define('two/recruitQueue', [
                                                 sword2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, sword2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -26351,7 +26350,7 @@ define('two/recruitQueue', [
                                                         swordnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26368,7 +26367,7 @@ define('two/recruitQueue', [
                                                             swordavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -26394,7 +26393,7 @@ define('two/recruitQueue', [
                                                         swordnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26411,7 +26410,7 @@ define('two/recruitQueue', [
                                                             swordavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -26437,7 +26436,7 @@ define('two/recruitQueue', [
                                                         swordnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26454,7 +26453,7 @@ define('two/recruitQueue', [
                                                             swordavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable2)
                                                     }
                                                 }
                                             }
@@ -26488,7 +26487,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (axeToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && axe2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -26502,7 +26501,7 @@ define('two/recruitQueue', [
                                                 axe2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, axe2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -26527,7 +26526,7 @@ define('two/recruitQueue', [
                                                         axenew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26544,7 +26543,7 @@ define('two/recruitQueue', [
                                                             axeavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -26570,7 +26569,7 @@ define('two/recruitQueue', [
                                                         axenew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26587,7 +26586,7 @@ define('two/recruitQueue', [
                                                             axeavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -26613,7 +26612,7 @@ define('two/recruitQueue', [
                                                         axenew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26630,7 +26629,7 @@ define('two/recruitQueue', [
                                                             axeavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable2)
                                                     }
                                                 }
                                             }
@@ -26664,7 +26663,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (archerToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && archer2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -26678,7 +26677,7 @@ define('two/recruitQueue', [
                                                 archer2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, archer2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -26703,7 +26702,7 @@ define('two/recruitQueue', [
                                                         archernew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26720,7 +26719,7 @@ define('two/recruitQueue', [
                                                             archeravailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -26746,7 +26745,7 @@ define('two/recruitQueue', [
                                                         archernew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26763,7 +26762,7 @@ define('two/recruitQueue', [
                                                             archeravailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -26789,7 +26788,7 @@ define('two/recruitQueue', [
                                                         archernew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26806,7 +26805,7 @@ define('two/recruitQueue', [
                                                             archeravailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable2)
                                                     }
                                                 }
                                             }
@@ -26840,7 +26839,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (lcToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && lc2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -26854,7 +26853,7 @@ define('two/recruitQueue', [
                                                 lc2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, lc2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -26879,7 +26878,7 @@ define('two/recruitQueue', [
                                                         lcnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26896,7 +26895,7 @@ define('two/recruitQueue', [
                                                             lcavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -26922,7 +26921,7 @@ define('two/recruitQueue', [
                                                         lcnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26939,7 +26938,7 @@ define('two/recruitQueue', [
                                                             lcavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -26965,7 +26964,7 @@ define('two/recruitQueue', [
                                                         lcnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -26982,7 +26981,7 @@ define('two/recruitQueue', [
                                                             lcavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable2)
                                                     }
                                                 }
                                             }
@@ -27016,7 +27015,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (maToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && ma2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -27030,7 +27029,7 @@ define('two/recruitQueue', [
                                                 ma2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ma2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27055,7 +27054,7 @@ define('two/recruitQueue', [
                                                         manew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27072,7 +27071,7 @@ define('two/recruitQueue', [
                                                             maavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27098,7 +27097,7 @@ define('two/recruitQueue', [
                                                         manew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27115,7 +27114,7 @@ define('two/recruitQueue', [
                                                             maavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27141,7 +27140,7 @@ define('two/recruitQueue', [
                                                         manew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27158,7 +27157,7 @@ define('two/recruitQueue', [
                                                             maavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable2)
                                                     }
                                                 }
                                             }
@@ -27192,7 +27191,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (ramToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && ram2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -27206,7 +27205,7 @@ define('two/recruitQueue', [
                                                 ram2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ram2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27231,7 +27230,7 @@ define('two/recruitQueue', [
                                                         ramnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27248,7 +27247,7 @@ define('two/recruitQueue', [
                                                             ramavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27274,7 +27273,7 @@ define('two/recruitQueue', [
                                                         ramnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27291,7 +27290,7 @@ define('two/recruitQueue', [
                                                             ramavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27317,7 +27316,7 @@ define('two/recruitQueue', [
                                                         ramnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27334,7 +27333,7 @@ define('two/recruitQueue', [
                                                             ramavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable2)
                                                     }
                                                 }
                                             }
@@ -27368,7 +27367,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (catapultToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && catapult2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -27382,7 +27381,7 @@ define('two/recruitQueue', [
                                                 catapult2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, catapult2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27407,7 +27406,7 @@ define('two/recruitQueue', [
                                                         catapultnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27424,7 +27423,7 @@ define('two/recruitQueue', [
                                                             catapultavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27450,7 +27449,7 @@ define('two/recruitQueue', [
                                                         catapultnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27467,7 +27466,7 @@ define('two/recruitQueue', [
                                                             catapultavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27493,7 +27492,7 @@ define('two/recruitQueue', [
                                                         catapultnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27510,7 +27509,7 @@ define('two/recruitQueue', [
                                                             catapultavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable2)
                                                     }
                                                 }
                                             }
@@ -27544,7 +27543,7 @@ define('two/recruitQueue', [
                                     var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
                                     var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
                                     if (hcToRecruit2 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && hc2 > minimal2) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -27558,7 +27557,7 @@ define('two/recruitQueue', [
                                                 hc2
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, hc2)
                                         } else {
                                             if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
                                                 woodModifier2 = villageWood2 / wood2
@@ -27583,7 +27582,7 @@ define('two/recruitQueue', [
                                                         hcnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27600,7 +27599,7 @@ define('two/recruitQueue', [
                                                             hcavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable2)
                                                     }
                                                 }
                                             } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
@@ -27626,7 +27625,7 @@ define('two/recruitQueue', [
                                                         hcnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27643,7 +27642,7 @@ define('two/recruitQueue', [
                                                             hcavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable2)
                                                     }
                                                 }
                                             } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
@@ -27669,7 +27668,7 @@ define('two/recruitQueue', [
                                                         hcnew2
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew2)
                                                 } else {
                                                     foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
                                                     foodAvailable2 = villageFood2 / foodnew2
@@ -27686,7 +27685,7 @@ define('two/recruitQueue', [
                                                             hcavailable2
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable2)
                                                     }
                                                 }
                                             }
@@ -27933,7 +27932,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (spearToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && spear3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -27947,7 +27946,7 @@ define('two/recruitQueue', [
                                                 spear3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, spear3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -27972,7 +27971,7 @@ define('two/recruitQueue', [
                                                         spearnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -27989,7 +27988,7 @@ define('two/recruitQueue', [
                                                             spearavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -28015,7 +28014,7 @@ define('two/recruitQueue', [
                                                         spearnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28032,7 +28031,7 @@ define('two/recruitQueue', [
                                                             spearavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -28058,7 +28057,7 @@ define('two/recruitQueue', [
                                                         spearnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28075,7 +28074,7 @@ define('two/recruitQueue', [
                                                             spearavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable3)
                                                     }
                                                 }
                                             }
@@ -28109,7 +28108,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (swordToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && sword3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -28123,7 +28122,7 @@ define('two/recruitQueue', [
                                                 sword3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, sword3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -28148,7 +28147,7 @@ define('two/recruitQueue', [
                                                         swordnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28165,7 +28164,7 @@ define('two/recruitQueue', [
                                                             swordavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -28191,7 +28190,7 @@ define('two/recruitQueue', [
                                                         swordnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28208,7 +28207,7 @@ define('two/recruitQueue', [
                                                             swordavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -28234,7 +28233,7 @@ define('two/recruitQueue', [
                                                         swordnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28251,7 +28250,7 @@ define('two/recruitQueue', [
                                                             swordavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable3)
                                                     }
                                                 }
                                             }
@@ -28285,7 +28284,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (axeToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && axe3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -28299,7 +28298,7 @@ define('two/recruitQueue', [
                                                 axe3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, axe3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -28324,7 +28323,7 @@ define('two/recruitQueue', [
                                                         axenew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28341,7 +28340,7 @@ define('two/recruitQueue', [
                                                             axeavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -28367,7 +28366,7 @@ define('two/recruitQueue', [
                                                         axenew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28384,7 +28383,7 @@ define('two/recruitQueue', [
                                                             axeavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -28410,7 +28409,7 @@ define('two/recruitQueue', [
                                                         axenew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28427,7 +28426,7 @@ define('two/recruitQueue', [
                                                             axeavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable3)
                                                     }
                                                 }
                                             }
@@ -28461,7 +28460,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (archerToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && archer3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -28475,7 +28474,7 @@ define('two/recruitQueue', [
                                                 archer3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, archer3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -28500,7 +28499,7 @@ define('two/recruitQueue', [
                                                         archernew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28517,7 +28516,7 @@ define('two/recruitQueue', [
                                                             archeravailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -28543,7 +28542,7 @@ define('two/recruitQueue', [
                                                         archernew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28560,7 +28559,7 @@ define('two/recruitQueue', [
                                                             archeravailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -28586,7 +28585,7 @@ define('two/recruitQueue', [
                                                         archernew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28603,7 +28602,7 @@ define('two/recruitQueue', [
                                                             archeravailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable3)
                                                     }
                                                 }
                                             }
@@ -28637,7 +28636,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (lcToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && lc3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -28651,7 +28650,7 @@ define('two/recruitQueue', [
                                                 lc3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, lc3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -28676,7 +28675,7 @@ define('two/recruitQueue', [
                                                         lcnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28693,7 +28692,7 @@ define('two/recruitQueue', [
                                                             lcavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -28719,7 +28718,7 @@ define('two/recruitQueue', [
                                                         lcnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28736,7 +28735,7 @@ define('two/recruitQueue', [
                                                             lcavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -28762,7 +28761,7 @@ define('two/recruitQueue', [
                                                         lcnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28779,7 +28778,7 @@ define('two/recruitQueue', [
                                                             lcavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable3)
                                                     }
                                                 }
                                             }
@@ -28813,7 +28812,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (maToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && ma3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -28827,7 +28826,7 @@ define('two/recruitQueue', [
                                                 ma3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ma3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -28852,7 +28851,7 @@ define('two/recruitQueue', [
                                                         manew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28869,7 +28868,7 @@ define('two/recruitQueue', [
                                                             maavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -28895,7 +28894,7 @@ define('two/recruitQueue', [
                                                         manew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28912,7 +28911,7 @@ define('two/recruitQueue', [
                                                             maavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -28938,7 +28937,7 @@ define('two/recruitQueue', [
                                                         manew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -28955,7 +28954,7 @@ define('two/recruitQueue', [
                                                             maavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable3)
                                                     }
                                                 }
                                             }
@@ -28989,7 +28988,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (ramToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && ram3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -29003,7 +29002,7 @@ define('two/recruitQueue', [
                                                 ram3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ram3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -29028,7 +29027,7 @@ define('two/recruitQueue', [
                                                         ramnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29045,7 +29044,7 @@ define('two/recruitQueue', [
                                                             ramavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -29071,7 +29070,7 @@ define('two/recruitQueue', [
                                                         ramnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29088,7 +29087,7 @@ define('two/recruitQueue', [
                                                             ramavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -29114,7 +29113,7 @@ define('two/recruitQueue', [
                                                         ramnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29131,7 +29130,7 @@ define('two/recruitQueue', [
                                                             ramavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable3)
                                                     }
                                                 }
                                             }
@@ -29165,7 +29164,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (catapultToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && catapult3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -29179,7 +29178,7 @@ define('two/recruitQueue', [
                                                 catapult3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, catapult3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -29204,7 +29203,7 @@ define('two/recruitQueue', [
                                                         catapultnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29221,7 +29220,7 @@ define('two/recruitQueue', [
                                                             catapultavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -29247,7 +29246,7 @@ define('two/recruitQueue', [
                                                         catapultnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29264,7 +29263,7 @@ define('two/recruitQueue', [
                                                             catapultavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -29290,7 +29289,7 @@ define('two/recruitQueue', [
                                                         catapultnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29307,7 +29306,7 @@ define('two/recruitQueue', [
                                                             catapultavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable3)
                                                     }
                                                 }
                                             }
@@ -29341,7 +29340,7 @@ define('two/recruitQueue', [
                                     var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
                                     var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
                                     if (hcToRecruit3 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && hc3 > minimal3) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -29355,7 +29354,7 @@ define('two/recruitQueue', [
                                                 hc3
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, hc3)
                                         } else {
                                             if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
                                                 woodModifier3 = villageWood3 / wood3
@@ -29380,7 +29379,7 @@ define('two/recruitQueue', [
                                                         hcnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29397,7 +29396,7 @@ define('two/recruitQueue', [
                                                             hcavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable3)
                                                     }
                                                 }
                                             } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
@@ -29423,7 +29422,7 @@ define('two/recruitQueue', [
                                                         hcnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29440,7 +29439,7 @@ define('two/recruitQueue', [
                                                             hcavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable3)
                                                     }
                                                 }
                                             } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
@@ -29466,7 +29465,7 @@ define('two/recruitQueue', [
                                                         hcnew3
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew3)
                                                 } else {
                                                     foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
                                                     foodAvailable3 = villageFood3 / foodnew3
@@ -29483,7 +29482,7 @@ define('two/recruitQueue', [
                                                             hcavailable3
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable3)
                                                     }
                                                 }
                                             }
@@ -29730,7 +29729,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (spearToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && spear4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -29744,7 +29743,7 @@ define('two/recruitQueue', [
                                                 spear4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, spear4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -29769,7 +29768,7 @@ define('two/recruitQueue', [
                                                         spearnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -29786,7 +29785,7 @@ define('two/recruitQueue', [
                                                             spearavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -29812,7 +29811,7 @@ define('two/recruitQueue', [
                                                         spearnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -29829,7 +29828,7 @@ define('two/recruitQueue', [
                                                             spearavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -29855,7 +29854,7 @@ define('two/recruitQueue', [
                                                         spearnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, spearnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -29872,7 +29871,7 @@ define('two/recruitQueue', [
                                                             spearavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, spearavailable4)
                                                     }
                                                 }
                                             }
@@ -29906,7 +29905,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (swordToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && sword4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -29920,7 +29919,7 @@ define('two/recruitQueue', [
                                                 sword4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, sword4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -29945,7 +29944,7 @@ define('two/recruitQueue', [
                                                         swordnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -29962,7 +29961,7 @@ define('two/recruitQueue', [
                                                             swordavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -29988,7 +29987,7 @@ define('two/recruitQueue', [
                                                         swordnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30005,7 +30004,7 @@ define('two/recruitQueue', [
                                                             swordavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -30031,7 +30030,7 @@ define('two/recruitQueue', [
                                                         swordnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, swordnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30048,7 +30047,7 @@ define('two/recruitQueue', [
                                                             swordavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, swordavailable4)
                                                     }
                                                 }
                                             }
@@ -30082,7 +30081,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (axeToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && axe4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -30096,7 +30095,7 @@ define('two/recruitQueue', [
                                                 axe4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, axe4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -30121,7 +30120,7 @@ define('two/recruitQueue', [
                                                         axenew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30138,7 +30137,7 @@ define('two/recruitQueue', [
                                                             axeavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -30164,7 +30163,7 @@ define('two/recruitQueue', [
                                                         axenew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30181,7 +30180,7 @@ define('two/recruitQueue', [
                                                             axeavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -30207,7 +30206,7 @@ define('two/recruitQueue', [
                                                         axenew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, axenew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30224,7 +30223,7 @@ define('two/recruitQueue', [
                                                             axeavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, axeavailable4)
                                                     }
                                                 }
                                             }
@@ -30258,7 +30257,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (archerToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && archer4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -30272,7 +30271,7 @@ define('two/recruitQueue', [
                                                 archer4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, archer4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -30297,7 +30296,7 @@ define('two/recruitQueue', [
                                                         archernew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30314,7 +30313,7 @@ define('two/recruitQueue', [
                                                             archeravailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -30340,7 +30339,7 @@ define('two/recruitQueue', [
                                                         archernew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30357,7 +30356,7 @@ define('two/recruitQueue', [
                                                             archeravailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -30383,7 +30382,7 @@ define('two/recruitQueue', [
                                                         archernew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, archernew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30400,7 +30399,7 @@ define('two/recruitQueue', [
                                                             archeravailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, archeravailable4)
                                                     }
                                                 }
                                             }
@@ -30434,7 +30433,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (lcToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && lc4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -30448,7 +30447,7 @@ define('two/recruitQueue', [
                                                 lc4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, lc4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -30473,7 +30472,7 @@ define('two/recruitQueue', [
                                                         lcnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30490,7 +30489,7 @@ define('two/recruitQueue', [
                                                             lcavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -30516,7 +30515,7 @@ define('two/recruitQueue', [
                                                         lcnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30533,7 +30532,7 @@ define('two/recruitQueue', [
                                                             lcavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -30559,7 +30558,7 @@ define('two/recruitQueue', [
                                                         lcnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, lcnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30576,7 +30575,7 @@ define('two/recruitQueue', [
                                                             lcavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, lcavailable4)
                                                     }
                                                 }
                                             }
@@ -30610,7 +30609,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (maToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && ma4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -30624,7 +30623,7 @@ define('two/recruitQueue', [
                                                 ma4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ma4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -30649,7 +30648,7 @@ define('two/recruitQueue', [
                                                         manew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30666,7 +30665,7 @@ define('two/recruitQueue', [
                                                             maavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -30692,7 +30691,7 @@ define('two/recruitQueue', [
                                                         manew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30709,7 +30708,7 @@ define('two/recruitQueue', [
                                                             maavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -30735,7 +30734,7 @@ define('two/recruitQueue', [
                                                         manew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, manew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30752,7 +30751,7 @@ define('two/recruitQueue', [
                                                             maavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, maavailable4)
                                                     }
                                                 }
                                             }
@@ -30786,7 +30785,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (ramToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && ram4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -30800,7 +30799,7 @@ define('two/recruitQueue', [
                                                 ram4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, ram4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -30825,7 +30824,7 @@ define('two/recruitQueue', [
                                                         ramnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30842,7 +30841,7 @@ define('two/recruitQueue', [
                                                             ramavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -30868,7 +30867,7 @@ define('two/recruitQueue', [
                                                         ramnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30885,7 +30884,7 @@ define('two/recruitQueue', [
                                                             ramavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -30911,7 +30910,7 @@ define('two/recruitQueue', [
                                                         ramnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, ramnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -30928,7 +30927,7 @@ define('two/recruitQueue', [
                                                             ramavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, ramavailable4)
                                                     }
                                                 }
                                             }
@@ -30962,7 +30961,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (catapultToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && catapult4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -30976,7 +30975,7 @@ define('two/recruitQueue', [
                                                 catapult4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, catapult4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -31001,7 +31000,7 @@ define('two/recruitQueue', [
                                                         catapultnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31018,7 +31017,7 @@ define('two/recruitQueue', [
                                                             catapultavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -31044,7 +31043,7 @@ define('two/recruitQueue', [
                                                         catapultnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31061,7 +31060,7 @@ define('two/recruitQueue', [
                                                             catapultavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -31087,7 +31086,7 @@ define('two/recruitQueue', [
                                                         catapultnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, catapultnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31104,7 +31103,7 @@ define('two/recruitQueue', [
                                                             catapultavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, catapultavailable4)
                                                     }
                                                 }
                                             }
@@ -31138,7 +31137,7 @@ define('two/recruitQueue', [
                                     var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
                                     var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
                                     if (hcToRecruit4 <= 0) {
-                                        console.log(0)
+                                        console.log('Brak możliwości rekrutacji')
                                     } else {
                                         if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && hc4 > minimal4) {
                                             socketService.emit(routeProvider.BARRACKS_RECRUIT, {
@@ -31152,7 +31151,7 @@ define('two/recruitQueue', [
                                                 hc4
                                             ]
                                             eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), logData)
+                                            addLog(village.getId(), unit, hc4)
                                         } else {
                                             if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
                                                 woodModifier4 = villageWood4 / wood4
@@ -31177,7 +31176,7 @@ define('two/recruitQueue', [
                                                         hcnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31194,7 +31193,7 @@ define('two/recruitQueue', [
                                                             hcavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable4)
                                                     }
                                                 }
                                             } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
@@ -31220,7 +31219,7 @@ define('two/recruitQueue', [
                                                         hcnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31237,7 +31236,7 @@ define('two/recruitQueue', [
                                                             hcavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable4)
                                                     }
                                                 }
                                             } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
@@ -31263,7 +31262,7 @@ define('two/recruitQueue', [
                                                         hcnew4
                                                     ]
                                                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), logData)
+                                                    addLog(village.getId(), unit, hcnew4)
                                                 } else {
                                                     foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
                                                     foodAvailable4 = villageFood4 / foodnew4
@@ -31280,7 +31279,7 @@ define('two/recruitQueue', [
                                                             hcavailable4
                                                         ]
                                                         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), logData)
+                                                        addLog(village.getId(), unit, hcavailable4)
                                                     }
                                                 }
                                             }
