@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 03 Dec 2020 13:35:18 GMT
+ * Thu, 03 Dec 2020 16:56:01 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -31739,16 +31739,15 @@ define('two/recruitQueue/ui', [
     }
     const checkCycleInterval = function () {
         let nextCycleDate = recruitQueue.getNextCycleDate()
-
+        let terminateCycle = nextCycleDate - timeHelper.gameTime()
         if (nextCycleDate) {
-            $scope.showCycleTimer = true
-            $scope.nextCycleCountdown = nextCycleDate - timeHelper.gameTime()
-            cycleCountdownTimer = setInterval(function () {
-                $scope.nextCycleCountdown -= 1000
-                if ($scope.nextCycleCountdown == 0) {                
-                    $scope.showCycleTimer = false
-                }
-            }, 1000)
+            setTimeout(function () {
+                $scope.showCycleTimer = true
+                $scope.nextCycleCountdown = terminateCycle
+                cycleCountdownTimer = setInterval(function () {
+                    $scope.nextCycleCountdown -= 1000
+                }, 1000)
+            }, terminateCycle)
         }
     }
     const eventHandlers = {
@@ -31790,16 +31789,14 @@ define('two/recruitQueue/ui', [
         onCycleEnd: function (event, reason) {
             if (reason === STATUS.USER_STOP) {
                 return
-            }            
-            $scope.showCycleTimer = true
-            $scope.nextCycleCountdown = 60000
-
-            cycleCountdownTimer = setInterval(function () {
-                $scope.nextCycleCountdown -= 1000
-                if ($scope.nextCycleCountdown == 0) {                
-                    $scope.showCycleTimer = false
-                }
-            }, 1000)
+            }
+            setTimeout(function () {            
+                $scope.showCycleTimer = true
+                $scope.nextCycleCountdown = 60000
+                cycleCountdownTimer = setInterval(function () {
+                    $scope.nextCycleCountdown -= 1000
+                }, 1000)
+            }, 60000)
         }
     }
     const init = function() {
