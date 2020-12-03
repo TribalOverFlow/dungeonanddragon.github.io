@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 03 Dec 2020 13:05:56 GMT
+ * Thu, 03 Dec 2020 13:29:07 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -31743,9 +31743,11 @@ define('two/recruitQueue/ui', [
         if (nextCycleDate) {
             $scope.showCycleTimer = true
             $scope.nextCycleCountdown = nextCycleDate - timeHelper.gameTime()
-
             cycleCountdownTimer = setInterval(function () {
                 $scope.nextCycleCountdown -= 1000
+                if ($scope.nextCycleCountdown == 0) {                
+                    $scope.showCycleTimer = false
+                }
             }, 1000)
         }
     }
@@ -31789,7 +31791,12 @@ define('two/recruitQueue/ui', [
             if (reason === STATUS.USER_STOP) {
                 return
             }            
-            $scope.showCycleTimer = false
+            $scope.showCycleTimer = true
+            $scope.nextCycleCountdown = 0
+
+            cycleCountdownTimer = setInterval(function () {
+                $scope.nextCycleCountdown -= 1000
+            }, 1000)
         }
     }
     const init = function() {
