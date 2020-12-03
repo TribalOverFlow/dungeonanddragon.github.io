@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 03 Dec 2020 13:29:07 GMT
+ * Thu, 03 Dec 2020 13:35:18 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -31792,10 +31792,13 @@ define('two/recruitQueue/ui', [
                 return
             }            
             $scope.showCycleTimer = true
-            $scope.nextCycleCountdown = 0
+            $scope.nextCycleCountdown = 60000
 
             cycleCountdownTimer = setInterval(function () {
                 $scope.nextCycleCountdown -= 1000
+                if ($scope.nextCycleCountdown == 0) {                
+                    $scope.showCycleTimer = false
+                }
             }, 1000)
         }
     }
