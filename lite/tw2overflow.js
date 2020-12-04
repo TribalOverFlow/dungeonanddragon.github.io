@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 04 Dec 2020 17:40:22 GMT
+ * Fri, 04 Dec 2020 18:25:57 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24359,9 +24359,7 @@ define('two/recruitQueue', [
             iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
             food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
             console.log(wood1, clay1, iron1, food1)
-            if (spearToRecruit1 <= 0 || hcToRecruit1 <= 0 || catapultToRecruit1 <= 0 || swordToRecruit1 <= 0 || axeToRecruit1 <= 0 || archerToRecruit1 <= 0 || lcToRecruit1 <= 0 || maToRecruit1 <= 0 || ramToRecruit1 <= 0) {
-                console.log('Brak jednostek do rekrutacji')
-            } else {
+            if (spearToRecruit1 > 0 || hcToRecruit1 > 0 || catapultToRecruit1 > 0 || swordToRecruit1 > 0 || axeToRecruit1 > 0 || archerToRecruit1 > 0 || lcToRecruit1 > 0 || maToRecruit1 > 0 || ramToRecruit1 > 0) {
                 if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
                     spearnew1 = spear1
                     swordnew1 = sword1
@@ -24752,6 +24750,8 @@ define('two/recruitQueue', [
                         recruitHc1()
                     }
                 }, 54000)
+            } else {
+                console.log('Brak jednostek do rekrutacji')
             }
 
             function recruitSpear1() {
@@ -25005,9 +25005,7 @@ define('two/recruitQueue', [
             var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
             var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
             console.log(wood2, clay2, iron2, food2)
-            if (spearToRecruit2 <= 0 || hcToRecruit2 <= 0 || catapultToRecruit2 <= 0 || swordToRecruit2 <= 0 || axeToRecruit2 <= 0 || archerToRecruit2 <= 0 || lcToRecruit2 <= 0 || maToRecruit2 <= 0 || ramToRecruit2 <= 0) {
-                console.log('Brak jednostek do rekrutacji')
-            } else {
+            if (spearToRecruit2 > 0 || hcToRecruit2 > 0 || catapultToRecruit2 > 0 || swordToRecruit2 > 0 || axeToRecruit2 > 0 || archerToRecruit2 > 0 || lcToRecruit2 > 0 || maToRecruit2 > 0 || ramToRecruit2 > 0) {
                 if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
                     spearnew2 = spear2
                     swordnew2 = sword2
@@ -25398,6 +25396,8 @@ define('two/recruitQueue', [
                         recruitHc2()
                     }
                 }, 54000)
+            } else {
+                console.log('Brak jednostek do rekrutacji')
             }
 
             function recruitSpear2() {
@@ -25651,9 +25651,7 @@ define('two/recruitQueue', [
             var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
             var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
             console.log(wood3, clay3, iron3, food3)
-            if (spearToRecruit3 <= 0 || hcToRecruit3 <= 0 || catapultToRecruit3 <= 0 || swordToRecruit3 <= 0 || axeToRecruit3 <= 0 || archerToRecruit3 <= 0 || lcToRecruit3 <= 0 || maToRecruit3 <= 0 || ramToRecruit3 <= 0) {
-                console.log('Brak jednostek do rekrutacji')
-            } else {
+            if (spearToRecruit3 > 0 || hcToRecruit3 > 0 || catapultToRecruit3 > 0 || swordToRecruit3 > 0 || axeToRecruit3 > 0 || archerToRecruit3 > 0 || lcToRecruit3 > 0 || maToRecruit3 > 0 || ramToRecruit3 > 0) {
                 if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
                     spearnew3 = spear3
                     swordnew3 = sword3
@@ -26044,6 +26042,8 @@ define('two/recruitQueue', [
                         recruitHc3()
                     }
                 }, 54000)
+            } else {
+                console.log('Brak jednostek do rekrutacji')
             }
 
             function recruitSpear3() {
