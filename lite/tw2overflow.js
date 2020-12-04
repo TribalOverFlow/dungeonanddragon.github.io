@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 04 Dec 2020 17:30:48 GMT
+ * Fri, 04 Dec 2020 17:40:22 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24159,12 +24159,6 @@ define('two/recruitQueue', [
         var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
         var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
         var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
-        var interval = 60000
-        var interval2 = (villages.length * 60000)
-        var interval3 = (villages.length * 60000) + (villages.length * 60000)
-        var interval4 = (villages.length * 60000) + (villages.length * 60000) + (villages.length * 60000)
-        var player = modelDataService.getSelectedCharacter()
-        var villages = player.getVillageList()
         var spearAmount = 0
         var swordAmount = 0
         var axeAmount = 0
@@ -26871,6 +26865,13 @@ define('two/recruitQueue', [
         }
 
         function getVillageData() {
+            var player = modelDataService.getSelectedCharacter()
+            var villages = player.getVillageList()
+            console.log(villages)
+            var interval = 60000
+            var interval2 = (villages.length * 60000)
+            var interval3 = (villages.length * 60000) + (villages.length * 60000)
+            var interval4 = (villages.length * 60000) + (villages.length * 60000) + (villages.length * 60000)
             villages.forEach(function(village, index) {
                 setTimeout(function() {
                     groupVillages1.forEach(function(id1) {
