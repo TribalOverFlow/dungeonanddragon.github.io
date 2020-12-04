@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 04 Dec 2020 14:43:39 GMT
+ * Fri, 04 Dec 2020 17:06:37 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23868,6 +23868,10 @@ define('two/recruitQueue', [
     let nextCycleDate = null
     let logData = []
     const LOGS_LIMIT = 500
+    let selectedGroups1 = []
+    let selectedGroups2 = []
+    let selectedGroups3 = []
+    let selectedGroups4 = []
     let selectedGroups5 = []
     let selectedGroups6 = []
     let selectedGroups7 = []
@@ -23905,6 +23909,10 @@ define('two/recruitQueue', [
     }
     console.log(RECRUIT_UNIT)
     const updateGroups = function() {
+        selectedGroups1 = []
+        selectedGroups2 = []
+        selectedGroups3 = []
+        selectedGroups4 = []
         selectedGroups5 = []
         selectedGroups6 = []
         selectedGroups7 = []
@@ -23926,6 +23934,10 @@ define('two/recruitQueue', [
         selectedGroups23 = []
         selectedGroups24 = []
         const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.GROUP1]
+        const groupsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.GROUP2]
+        const groupsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.GROUP3]
+        const groupsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.GROUP4]
         const groupsSelectedByTheUser5 = recruitQueueSettings[SETTINGS.GROUP5]
         const groupsSelectedByTheUser6 = recruitQueueSettings[SETTINGS.GROUP6]
         const groupsSelectedByTheUser7 = recruitQueueSettings[SETTINGS.GROUP7]
@@ -23946,6 +23958,18 @@ define('two/recruitQueue', [
         const groupsSelectedByTheUser22 = recruitQueueSettings[SETTINGS.GROUP22]
         const groupsSelectedByTheUser23 = recruitQueueSettings[SETTINGS.GROUP23]
         const groupsSelectedByTheUser24 = recruitQueueSettings[SETTINGS.GROUP24]
+        groupsSelectedByTheUser1.forEach(function(groupId) {
+            selectedGroups1.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser2.forEach(function(groupId) {
+            selectedGroups2.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser3.forEach(function(groupId) {
+            selectedGroups3.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser4.forEach(function(groupId) {
+            selectedGroups4.push(allGroups[groupId])
+        })
         groupsSelectedByTheUser5.forEach(function(groupId) {
             selectedGroups5.push(allGroups[groupId])
         })
