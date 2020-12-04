@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 03 Dec 2020 22:47:13 GMT
+ * Fri, 04 Dec 2020 14:43:39 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24044,7 +24044,7 @@ define('two/recruitQueue', [
     recruitQueue.ownRecrutation = function() {}
     recruitQueue.presetRecrutation = function() {
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_BEGIN)
-        nextCycleDate = timeHelper.gameTime() + 60000
+        nextCycleDate = timeHelper.gameTime() + 66000
         addLog(LOG_TYPES.RECRUIT_START, 'start', '')
         const groupList = modelDataService.getGroupList()
         const selectedGroup1 = recruitQueueSettings[SETTINGS.GROUP1]
@@ -24055,105 +24055,6 @@ define('two/recruitQueue', [
         var groupVillages2 = groupList.getGroupVillageIds(selectedGroup2)
         var groupVillages3 = groupList.getGroupVillageIds(selectedGroup3)
         var groupVillages4 = groupList.getGroupVillageIds(selectedGroup4)
-        var player = modelDataService.getSelectedCharacter()
-        var villages = player.getVillageList()
-        var unit = ''
-        var woodModifier1 = 0
-        var woodModifier2 = 0
-        var woodModifier3 = 0
-        var woodModifier4 = 0
-        var archeravailable1 = 0
-        var archeravailable2 = 0
-        var archeravailable3 = 0
-        var archeravailable4 = 0
-        var archernew1 = 0
-        var archernew2 = 0
-        var archernew3 = 0
-        var archernew4 = 0
-        var axeavailable1 = 0
-        var axeavailable2 = 0
-        var axeavailable3 = 0
-        var axeavailable4 = 0
-        var axenew1 = 0
-        var axenew2 = 0
-        var axenew3 = 0
-        var axenew4 = 0
-        var catapultavailable1 = 0
-        var catapultavailable2 = 0
-        var catapultavailable3 = 0
-        var catapultavailable4 = 0
-        var catapultnew1 = 0
-        var catapultnew2 = 0
-        var catapultnew3 = 0
-        var catapultnew4 = 0
-        var clayModifier1 = 0
-        var clayModifier2 = 0
-        var clayModifier3 = 0
-        var clayModifier4 = 0
-        var foodModifier1 = 0
-        var generalModifier1 = 0
-        var foodAvailable1 = 0
-        var foodAvailable2 = 0
-        var foodAvailable3 = 0
-        var foodAvailable4 = 0
-        var foodnew1 = 0
-        var foodnew2 = 0
-        var foodnew3 = 0
-        var foodnew4 = 0
-        var hcavailable1 = 0
-        var hcavailable2 = 0
-        var hcavailable3 = 0
-        var hcavailable4 = 0
-        var hcnew1 = 0
-        var hcnew2 = 0
-        var hcnew3 = 0
-        var hcnew4 = 0
-        var ironModifier1 = 0
-        var ironModifier2 = 0
-        var ironModifier3 = 0
-        var ironModifier4 = 0
-        var lcavailable1 = 0
-        var lcavailable2 = 0
-        var lcavailable3 = 0
-        var lcavailable4 = 0
-        var lcnew1 = 0
-        var lcnew2 = 0
-        var lcnew3 = 0
-        var lcnew4 = 0
-        var maavailable1 = 0
-        var maavailable2 = 0
-        var maavailable3 = 0
-        var maavailable4 = 0
-        var manew1 = 0
-        var manew2 = 0
-        var manew3 = 0
-        var manew4 = 0
-        var ramavailable1 = 0
-        var ramavailable2 = 0
-        var ramavailable3 = 0
-        var ramavailable4 = 0
-        var ramnew1 = 0
-        var ramnew2 = 0
-        var ramnew3 = 0
-        var ramnew4 = 0
-        var recruitingTime = 0
-        var recruitingTimeToFinish = 0
-        var spearavailable2 = 0
-        var spearavailable3 = 0
-        var spearavailable4 = 0
-        var spearnew1 = 0
-        var spearnew2 = 0
-        var spearnew3 = 0
-        var spearnew4 = 0
-        var swordavailable1 = 0
-        var swordavailable2 = 0
-        var swordavailable3 = 0
-        var swordavailable4 = 0
-        var swordnew1 = 0
-        var swordnew2 = 0
-        var swordnew3 = 0
-        var swordnew4 = 0
-        var totalRecruitingTime = 0
         const minimal1 = recruitQueueSettings[SETTINGS.MIN_PACK1]
         const minimal2 = recruitQueueSettings[SETTINGS.MIN_PACK2]
         const minimal3 = recruitQueueSettings[SETTINGS.MIN_PACK3]
@@ -24230,7 +24131,89 @@ define('two/recruitQueue', [
         const finalRam4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT38]
         const finalSpear4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT31]
         const finalSword4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT32]
-        var interval = 5000
+        var wood = [50, 30, 60, 80, 125, 250, 200, 300, 320, 0, 40000, 4000, 1200]
+        var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
+        var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
+        var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
+        var interval = 60000
+        var interval2 = (villages.length * 60000)
+        var interval3 = (villages.length * 60000) + (villages.length * 60000)
+        var interval4 = (villages.length * 60000) + (villages.length * 60000) + (villages.length * 60000)
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        var spearAmount = 0
+        var swordAmount = 0
+        var axeAmount = 0
+        var archerAmount = 0
+        var light_cavalryAmount = 0
+        var mounted_archerAmount = 0
+        var ramAmount = 0
+        var catapultAmount = 0
+        var heavy_cavalryAmount = 0
+        var Barracks1 = 0
+        var queue1 = 0
+        var recruitingQueues = 0
+        var barracksQueue1 = 0
+        var unit = ''
+        var woodModifier1 = 0
+        var woodModifier2 = 0
+        var woodModifier3 = 0
+        var woodModifier4 = 0
+        var archernew1 = 0
+        var archernew2 = 0
+        var archernew3 = 0
+        var archernew4 = 0
+        var axenew1 = 0
+        var axenew2 = 0
+        var axenew3 = 0
+        var axenew4 = 0
+        var catapultnew1 = 0
+        var catapultnew2 = 0
+        var catapultnew3 = 0
+        var catapultnew4 = 0
+        var clayModifier1 = 0
+        var clayModifier2 = 0
+        var clayModifier3 = 0
+        var clayModifier4 = 0
+        var foodModifier1 = 0
+        var foodModifier2 = 0
+        var foodModifier3 = 0
+        var foodModifier4 = 0
+        var generalModifier1 = 0
+        var generalModifier2 = 0
+        var generalModifier3 = 0
+        var generalModifier4 = 0
+        var hcnew1 = 0
+        var hcnew2 = 0
+        var hcnew3 = 0
+        var hcnew4 = 0
+        var ironModifier1 = 0
+        var ironModifier2 = 0
+        var ironModifier3 = 0
+        var ironModifier4 = 0
+        var lcnew1 = 0
+        var lcnew2 = 0
+        var lcnew3 = 0
+        var lcnew4 = 0
+        var manew1 = 0
+        var manew2 = 0
+        var manew3 = 0
+        var manew4 = 0
+        var ramnew1 = 0
+        var ramnew2 = 0
+        var ramnew3 = 0
+        var ramnew4 = 0
+        var recruitingTime = 0
+        var recruitingTimeToFinish = 0
+        var spearnew1 = 0
+        var spearnew2 = 0
+        var spearnew3 = 0
+        var spearnew4 = 0
+        var swordnew1 = 0
+        var swordnew2 = 0
+        var swordnew3 = 0
+        var swordnew4 = 0
+        var totalRecruitingTime = 0
         var barracksRecrutingTime1 = []
         var barracks1TotalJobsLength = 0
         var modifier1 = 0
@@ -24247,7208 +24230,2770 @@ define('two/recruitQueue', [
         var barracks4TotalJobsLength = 0
         var modifier4 = 0
         var timeModifier4 = 0
-        var wood = [50, 30, 60, 80, 125, 250, 200, 300, 320, 0, 40000, 4000, 1200]
-        var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
-        var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
-        var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
+        var wood1 = 0
+        var clay1 = 0
+        var food1 = 0
+        var iron1 = 0
+        var villageFood1 = 0
+        var villageWood1 = 0
+        var villageClay1 = 0
+        var villageIron1 = 0
+        var villageIdSet = 0
+        var Barracks2 = 0
+        var queue2 = 0
+        var barracksQueue2 = 0
+        var villageFood2 = 0
+        var villageWood2 = 0
+        var villageClay2 = 0
+        var villageIron2 = 0
+        var Barracks3 = 0
+        var queue3 = 0
+        var barracksQueue3 = 0
+        var villageFood3 = 0
+        var villageWood3 = 0
+        var villageClay3 = 0
+        var villageIron3 = 0
+        var Barracks4 = 0
+        var queue4 = 0
+        var barracksQueue4 = 0
+        var villageFood4 = 0
+        var villageWood4 = 0
+        var villageClay4 = 0
+        var villageIron4 = 0
+
+        function modifier1Get() {
+            if (selectedGroup1 > 0) {
+                if (queue1.length >= 2) {
+                    modifier1 = 1.0
+                } else if (queue1.length == 1) {
+                    modifier1 = 0.5
+                } else {
+                    modifier1 = 0.25
+                }
+            } else {
+                modifier1 = 0.0
+            }
+            time1GetB()
+        }
+
+        function time1GetB() {
+            if (barracksRecrutingTime1.length > 0) {
+                barracks1TotalJobsLength = barracksRecrutingTime1.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks1TotalJobsLength = 0
+            }
+            timeModifier1Get()
+        }
+
+        function timeModifier1Get() {
+            if (selectedGroup1 > 0) {
+                if (barracks1TotalJobsLength >= 93600000) {
+                    timeModifier1 = 0.00
+                } else if (barracks1TotalJobsLength < 93600000 && barracks1TotalJobsLength >= 86400000) {
+                    timeModifier1 = 0.10
+                } else if (barracks1TotalJobsLength < 86400000 && barracks1TotalJobsLength >= 72000000) {
+                    timeModifier1 = 0.25
+                } else if (barracks1TotalJobsLength < 72000000 && barracks1TotalJobsLength >= 57600000) {
+                    timeModifier1 = 0.40
+                } else if (barracks1TotalJobsLength < 57600000 && barracks1TotalJobsLength >= 43200000) {
+                    timeModifier1 = 0.55
+                } else if (barracks1TotalJobsLength < 43200000 && barracks1TotalJobsLength >= 28800000) {
+                    timeModifier1 = 0.70
+                } else if (barracks1TotalJobsLength < 28800000 && barracks1TotalJobsLength >= 14400000) {
+                    timeModifier1 = 0.85
+                } else if (barracks1TotalJobsLength < 14400000 && barracks1TotalJobsLength >= 7200000) {
+                    timeModifier1 = 0.925
+                } else if (barracks1TotalJobsLength < 7200000 && barracks1TotalJobsLength >= 3600000) {
+                    timeModifier1 = 0.9625
+                } else {
+                    timeModifier1 = 1.00
+                }
+            } else {
+                timeModifier1 = 0.00
+            }
+            recruit1()
+        }
+
+        function recruit1() {
+            var spearToRecruit1 = finalSpear1 - spearAmount
+            var swordToRecruit1 = finalSword1 - swordAmount
+            var axeToRecruit1 = finalAxe1 - axeAmount
+            var archerToRecruit1 = finalArcher1 - archerAmount
+            var lcToRecruit1 = finalLC1 - light_cavalryAmount
+            var maToRecruit1 = finalMA1 - mounted_archerAmount
+            var ramToRecruit1 = finalRam1 - ramAmount
+            var catapultToRecruit1 = finalCatapult1 - catapultAmount
+            var hcToRecruit1 = finalHC1 - heavy_cavalryAmount
+            var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
+            var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
+            var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
+            var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
+            var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
+            var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
+            var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
+            var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
+            var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
+            console.log(spear1, sword1, axe1, archer1, lc1, ma1, ram1, hc1, catapult1)
+            wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
+            clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
+            iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
+            food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
+            console.log(wood1, clay1, iron1, food1)
+            if (spearToRecruit1 <= 0 || hcToRecruit1 <= 0 || catapultToRecruit1 <= 0 || swordToRecruit1 <= 0 || axeToRecruit1 <= 0 || archerToRecruit1 <= 0 || lcToRecruit1 <= 0 || maToRecruit1 <= 0 || ramToRecruit1 <= 0) {
+                console.log('Brak jednostek do rekrutacji')
+            } else {
+                if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    spearnew1 = spear1
+                    swordnew1 = sword1
+                    axenew1 = axe1
+                    archernew1 = archer1
+                    lcnew1 = lc1
+                    manew1 = ma1
+                    ramnew1 = ram1
+                    catapultnew1 = catapult1
+                    hcnew1 = hc1
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    generalModifier1 = villageWood1 / wood1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    generalModifier1 = villageClay1 / clay1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    generalModifier1 = villageIron1 / iron1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    generalModifier1 = villageFood1 / food1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    ironModifier1 = villageIron1 / iron1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    foodModifier1 = villageFood1 / food1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    ironModifier1 = villageIron1 / iron1
+                    if (ironModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1) {
+                    foodModifier1 = villageFood1 / food1
+                    ironModifier1 = villageIron1 / iron1
+                    if (ironModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    foodModifier1 = villageFood1 / food1
+                    if (foodModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    ironModifier1 = villageIron1 / iron1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > ironModifier1 && woodModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else if (ironModifier1 > clayModifier1 && woodModifier1 > clayModifier1) {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    } else if (ironModifier1 > woodModifier1 && clayModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    foodModifier1 = villageFood1 / food1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > foodModifier1 && woodModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else if (foodModifier1 > clayModifier1 && woodModifier1 > clayModifier1) {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    } else if (foodModifier1 > woodModifier1 && clayModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    foodModifier1 = villageFood1 / food1
+                    ironModifier1 = villageIron1 / iron1
+                    if (foodModifier1 > ironModifier1 && woodModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else if (ironModifier1 > foodModifier1 && woodModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else if (ironModifier1 > woodModifier1 && foodModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1) {
+                    foodModifier1 = villageFood1 / food1
+                    ironModifier1 = villageIron1 / iron1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > ironModifier1 && foodModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else if (ironModifier1 > clayModifier1 && foodModifier1 > clayModifier1) {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    } else if (ironModifier1 > foodModifier1 && clayModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setTimeout(function() {
+                    recruitSpear1()
+                }, 6000)
+                setTimeout(function() {
+                    if (Barracks1 >= 3) {
+                        recruitSword1()
+                    }
+                }, 12000)
+                setTimeout(function() {
+                    if (Barracks1 >= 5) {
+                        recruitAxe1()
+                    }
+                }, 18000)
+                setTimeout(function() {
+                    if (Barracks1 >= 9) {
+                        recruitArcher1()
+                    }
+                }, 24000)
+                setTimeout(function() {
+                    if (Barracks1 >= 11) {
+                        recruitLc1()
+                    }
+                }, 30000)
+                setTimeout(function() {
+                    if (Barracks1 >= 13) {
+                        recruitMa1()
+                    }
+                }, 36000)
+                setTimeout(function() {
+                    if (Barracks1 >= 15) {
+                        recruitRam1()
+                    }
+                }, 42000)
+                setTimeout(function() {
+                    if (Barracks1 >= 17) {
+                        recruitCatapult1()
+                    }
+                }, 48000)
+                setTimeout(function() {
+                    if (Barracks1 >= 21) {
+                        recruitHc1()
+                    }
+                }, 54000)
+            }
+
+            function recruitSpear1() {
+                if (spearnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew1
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew1)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitSword1() {
+                if (swordnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew1
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew1)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitAxe1() {
+                if (axenew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew1
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew1)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitArcher1() {
+                if (archernew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew1
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew1)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitLc1() {
+                if (lcnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew1
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew1)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitMa1() {
+                if (manew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew1
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew1)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitRam1() {
+                if (ramnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew1
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew1)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitCatapult1() {
+                if (catapultnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew1
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew1)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitHc1() {
+                if (hcnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew1
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew1)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+        }
+
+        function modifier2Get() {
+            if (selectedGroup2 > 0) {
+                if (queue2.length >= 2) {
+                    modifier2 = 1.0
+                } else if (queue2.length == 1) {
+                    modifier2 = 0.5
+                } else {
+                    modifier2 = 0.25
+                }
+            } else {
+                modifier2 = 0.0
+            }
+            time2GetB()
+        }
+
+        function time2GetB() {
+            if (barracksRecrutingTime2.length > 0) {
+                barracks2TotalJobsLength = barracksRecrutingTime2.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks2TotalJobsLength = 0
+            }
+            timeModifier2Get()
+        }
+
+        function timeModifier2Get() {
+            if (selectedGroup2 > 0) {
+                if (barracks2TotalJobsLength >= 93600000) {
+                    timeModifier2 = 0.00
+                } else if (barracks2TotalJobsLength < 93600000 && barracks2TotalJobsLength >= 86400000) {
+                    timeModifier2 = 0.10
+                } else if (barracks2TotalJobsLength < 86400000 && barracks2TotalJobsLength >= 72000000) {
+                    timeModifier2 = 0.25
+                } else if (barracks2TotalJobsLength < 72000000 && barracks2TotalJobsLength >= 57600000) {
+                    timeModifier2 = 0.40
+                } else if (barracks2TotalJobsLength < 57600000 && barracks2TotalJobsLength >= 43200000) {
+                    timeModifier2 = 0.55
+                } else if (barracks2TotalJobsLength < 43200000 && barracks2TotalJobsLength >= 28800000) {
+                    timeModifier2 = 0.70
+                } else if (barracks2TotalJobsLength < 28800000 && barracks2TotalJobsLength >= 14400000) {
+                    timeModifier2 = 0.85
+                } else if (barracks2TotalJobsLength < 14400000 && barracks2TotalJobsLength >= 7200000) {
+                    timeModifier2 = 0.925
+                } else if (barracks2TotalJobsLength < 7200000 && barracks2TotalJobsLength >= 3600000) {
+                    timeModifier2 = 0.9625
+                } else {
+                    timeModifier2 = 1.00
+                }
+            } else {
+                timeModifier2 = 0.00
+            }
+            recruit2()
+        }
+
+        function recruit2() {
+            var spearToRecruit2 = finalSpear2 - spearAmount
+            var swordToRecruit2 = finalSword2 - swordAmount
+            var axeToRecruit2 = finalAxe2 - axeAmount
+            var archerToRecruit2 = finalArcher2 - archerAmount
+            var lcToRecruit2 = finalLC2 - light_cavalryAmount
+            var maToRecruit2 = finalMA2 - mounted_archerAmount
+            var ramToRecruit2 = finalRam2 - ramAmount
+            var catapultToRecruit2 = finalCatapult2 - catapultAmount
+            var hcToRecruit2 = finalHC2 - heavy_cavalryAmount
+            var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
+            var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
+            var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
+            var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
+            var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
+            var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
+            var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
+            var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
+            var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
+            var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
+            var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
+            var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
+            var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
+            console.log(wood2, clay2, iron2, food2)
+            if (spearToRecruit2 <= 0 || hcToRecruit2 <= 0 || catapultToRecruit2 <= 0 || swordToRecruit2 <= 0 || axeToRecruit2 <= 0 || archerToRecruit2 <= 0 || lcToRecruit2 <= 0 || maToRecruit2 <= 0 || ramToRecruit2 <= 0) {
+                console.log('Brak jednostek do rekrutacji')
+            } else {
+                if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    spearnew2 = spear2
+                    swordnew2 = sword2
+                    axenew2 = axe2
+                    archernew2 = archer2
+                    lcnew2 = lc2
+                    manew2 = ma2
+                    ramnew2 = ram2
+                    catapultnew2 = catapult2
+                    hcnew2 = hc2
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    generalModifier2 = villageWood2 / wood2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    generalModifier2 = villageClay2 / clay2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    generalModifier2 = villageIron2 / iron2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    generalModifier2 = villageFood2 / food2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    ironModifier2 = villageIron2 / iron2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    foodModifier2 = villageFood2 / food2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    ironModifier2 = villageIron2 / iron2
+                    if (ironModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 >= villageFood2) {
+                    foodModifier2 = villageFood2 / food2
+                    ironModifier2 = villageIron2 / iron2
+                    if (ironModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    foodModifier2 = villageFood2 / food2
+                    if (foodModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    ironModifier2 = villageIron2 / iron2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > ironModifier2 && woodModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else if (ironModifier2 > clayModifier2 && woodModifier2 > clayModifier2) {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    } else if (ironModifier2 > woodModifier2 && clayModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    foodModifier2 = villageFood2 / food2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > foodModifier2 && woodModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else if (foodModifier2 > clayModifier2 && woodModifier2 > clayModifier2) {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    } else if (foodModifier2 > woodModifier2 && clayModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 >= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    foodModifier2 = villageFood2 / food2
+                    ironModifier2 = villageIron2 / iron2
+                    if (foodModifier2 > ironModifier2 && woodModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else if (ironModifier2 > foodModifier2 && woodModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else if (ironModifier2 > woodModifier2 && foodModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 >= villageIron2 && food2 >= villageFood2) {
+                    foodModifier2 = villageFood2 / food2
+                    ironModifier2 = villageIron2 / iron2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > ironModifier2 && foodModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else if (ironModifier2 > clayModifier2 && foodModifier2 > clayModifier2) {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    } else if (ironModifier2 > foodModifier2 && clayModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setTimeout(function() {
+                    recruitSpear2()
+                }, 6000)
+                setTimeout(function() {
+                    if (Barracks2 >= 3) {
+                        recruitSword2()
+                    }
+                }, 12000)
+                setTimeout(function() {
+                    if (Barracks2 >= 5) {
+                        recruitAxe2()
+                    }
+                }, 18000)
+                setTimeout(function() {
+                    if (Barracks2 >= 9) {
+                        recruitArcher2()
+                    }
+                }, 24000)
+                setTimeout(function() {
+                    if (Barracks2 >= 11) {
+                        recruitLc2()
+                    }
+                }, 30000)
+                setTimeout(function() {
+                    if (Barracks2 >= 13) {
+                        recruitMa2()
+                    }
+                }, 36000)
+                setTimeout(function() {
+                    if (Barracks2 >= 15) {
+                        recruitRam2()
+                    }
+                }, 42000)
+                setTimeout(function() {
+                    if (Barracks2 >= 17) {
+                        recruitCatapult2()
+                    }
+                }, 48000)
+                setTimeout(function() {
+                    if (Barracks2 >= 21) {
+                        recruitHc2()
+                    }
+                }, 54000)
+            }
+
+            function recruitSpear2() {
+                if (spearnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew2
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew2)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitSword2() {
+                if (swordnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew2
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew2)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitAxe2() {
+                if (axenew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew2
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew2)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitArcher2() {
+                if (archernew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew2
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew2)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitLc2() {
+                if (lcnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew2
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew2)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitMa2() {
+                if (manew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew2
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew2)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitRam2() {
+                if (ramnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew2
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew2)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitCatapult2() {
+                if (catapultnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew2
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew2)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitHc2() {
+                if (hcnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew2
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew2)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+        }
+
+        function modifier3Get() {
+            if (selectedGroup3 > 0) {
+                if (queue3.length >= 2) {
+                    modifier3 = 1.0
+                } else if (queue3.length == 1) {
+                    modifier3 = 0.5
+                } else {
+                    modifier3 = 0.25
+                }
+            } else {
+                modifier3 = 0.0
+            }
+            time3GetB()
+        }
+
+        function time3GetB() {
+            if (barracksRecrutingTime3.length > 0) {
+                barracks3TotalJobsLength = barracksRecrutingTime3.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks3TotalJobsLength = 0
+            }
+            timeModifier3Get()
+        }
+
+        function timeModifier3Get() {
+            if (selectedGroup3 > 0) {
+                if (barracks3TotalJobsLength >= 93600000) {
+                    timeModifier3 = 0.00
+                } else if (barracks3TotalJobsLength < 93600000 && barracks3TotalJobsLength >= 86400000) {
+                    timeModifier3 = 0.10
+                } else if (barracks3TotalJobsLength < 86400000 && barracks3TotalJobsLength >= 72000000) {
+                    timeModifier3 = 0.25
+                } else if (barracks3TotalJobsLength < 72000000 && barracks3TotalJobsLength >= 57600000) {
+                    timeModifier3 = 0.40
+                } else if (barracks3TotalJobsLength < 57600000 && barracks3TotalJobsLength >= 43200000) {
+                    timeModifier3 = 0.55
+                } else if (barracks3TotalJobsLength < 43200000 && barracks3TotalJobsLength >= 28800000) {
+                    timeModifier3 = 0.70
+                } else if (barracks3TotalJobsLength < 28800000 && barracks3TotalJobsLength >= 14400000) {
+                    timeModifier3 = 0.85
+                } else if (barracks3TotalJobsLength < 14400000 && barracks3TotalJobsLength >= 7200000) {
+                    timeModifier3 = 0.925
+                } else if (barracks3TotalJobsLength < 7200000 && barracks3TotalJobsLength >= 3600000) {
+                    timeModifier3 = 0.9625
+                } else {
+                    timeModifier3 = 1.00
+                }
+            } else {
+                timeModifier3 = 0.00
+            }
+            recruit3()
+        }
+
+        function recruit3() {
+            var spearToRecruit3 = finalSpear3 - spearAmount
+            var swordToRecruit3 = finalSword3 - swordAmount
+            var axeToRecruit3 = finalAxe3 - axeAmount
+            var archerToRecruit3 = finalArcher3 - archerAmount
+            var lcToRecruit3 = finalLC3 - light_cavalryAmount
+            var maToRecruit3 = finalMA3 - mounted_archerAmount
+            var ramToRecruit3 = finalRam3 - ramAmount
+            var catapultToRecruit3 = finalCatapult3 - catapultAmount
+            var hcToRecruit3 = finalHC3 - heavy_cavalryAmount
+            var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
+            var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
+            var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
+            var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
+            var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
+            var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
+            var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
+            var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
+            var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
+            var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
+            var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
+            var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
+            var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
+            console.log(wood3, clay3, iron3, food3)
+            if (spearToRecruit3 <= 0 || hcToRecruit3 <= 0 || catapultToRecruit3 <= 0 || swordToRecruit3 <= 0 || axeToRecruit3 <= 0 || archerToRecruit3 <= 0 || lcToRecruit3 <= 0 || maToRecruit3 <= 0 || ramToRecruit3 <= 0) {
+                console.log('Brak jednostek do rekrutacji')
+            } else {
+                if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    spearnew3 = spear3
+                    swordnew3 = sword3
+                    axenew3 = axe3
+                    archernew3 = archer3
+                    lcnew3 = lc3
+                    manew3 = ma3
+                    ramnew3 = ram3
+                    catapultnew3 = catapult3
+                    hcnew3 = hc3
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    generalModifier3 = villageWood3 / wood3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    generalModifier3 = villageClay3 / clay3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    generalModifier3 = villageIron3 / iron3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    generalModifier3 = villageFood3 / food3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    ironModifier3 = villageIron3 / iron3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    foodModifier3 = villageFood3 / food3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    ironModifier3 = villageIron3 / iron3
+                    if (ironModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 >= villageFood3) {
+                    foodModifier3 = villageFood3 / food3
+                    ironModifier3 = villageIron3 / iron3
+                    if (ironModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    foodModifier3 = villageFood3 / food3
+                    if (foodModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    ironModifier3 = villageIron3 / iron3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > ironModifier3 && woodModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else if (ironModifier3 > clayModifier3 && woodModifier3 > clayModifier3) {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    } else if (ironModifier3 > woodModifier3 && clayModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    foodModifier3 = villageFood3 / food3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > foodModifier3 && woodModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else if (foodModifier3 > clayModifier3 && woodModifier3 > clayModifier3) {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    } else if (foodModifier3 > woodModifier3 && clayModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 >= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    foodModifier3 = villageFood3 / food3
+                    ironModifier3 = villageIron3 / iron3
+                    if (foodModifier3 > ironModifier3 && woodModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else if (ironModifier3 > foodModifier3 && woodModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else if (ironModifier3 > woodModifier3 && foodModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 >= villageIron3 && food3 >= villageFood3) {
+                    foodModifier3 = villageFood3 / food3
+                    ironModifier3 = villageIron3 / iron3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > ironModifier3 && foodModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else if (ironModifier3 > clayModifier3 && foodModifier3 > clayModifier3) {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    } else if (ironModifier3 > foodModifier3 && clayModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setTimeout(function() {
+                    recruitSpear3()
+                }, 6000)
+                setTimeout(function() {
+                    if (Barracks3 >= 3) {
+                        recruitSword3()
+                    }
+                }, 12000)
+                setTimeout(function() {
+                    if (Barracks3 >= 5) {
+                        recruitAxe3()
+                    }
+                }, 18000)
+                setTimeout(function() {
+                    if (Barracks3 >= 9) {
+                        recruitArcher3()
+                    }
+                }, 24000)
+                setTimeout(function() {
+                    if (Barracks3 >= 11) {
+                        recruitLc3()
+                    }
+                }, 30000)
+                setTimeout(function() {
+                    if (Barracks3 >= 13) {
+                        recruitMa3()
+                    }
+                }, 36000)
+                setTimeout(function() {
+                    if (Barracks3 >= 15) {
+                        recruitRam3()
+                    }
+                }, 42000)
+                setTimeout(function() {
+                    if (Barracks3 >= 17) {
+                        recruitCatapult3()
+                    }
+                }, 48000)
+                setTimeout(function() {
+                    if (Barracks3 >= 21) {
+                        recruitHc3()
+                    }
+                }, 54000)
+            }
+
+            function recruitSpear3() {
+                if (spearnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew3
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew3)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitSword3() {
+                if (swordnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew3
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew3)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitAxe3() {
+                if (axenew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew3
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew3)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitArcher3() {
+                if (archernew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew3
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew3)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitLc3() {
+                if (lcnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew3
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew3)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitMa3() {
+                if (manew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew3
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew3)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitRam3() {
+                if (ramnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew3
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew3)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitCatapult3() {
+                if (catapultnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew3
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew3)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitHc3() {
+                if (hcnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew3
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew3)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+        }
+
+        function modifier4Get() {
+            if (selectedGroup4 > 0) {
+                if (queue4.length >= 2) {
+                    modifier4 = 1.0
+                } else if (queue4.length == 1) {
+                    modifier4 = 0.5
+                } else {
+                    modifier4 = 0.25
+                }
+            } else {
+                modifier4 = 0.0
+            }
+            time4GetB()
+        }
+
+        function time4GetB() {
+            if (barracksRecrutingTime4.length > 0) {
+                barracks4TotalJobsLength = barracksRecrutingTime4.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks4TotalJobsLength = 0
+            }
+            timeModifier4Get()
+        }
+
+        function timeModifier4Get() {
+            if (selectedGroup4 > 0) {
+                if (barracks4TotalJobsLength >= 93600000) {
+                    timeModifier4 = 0.00
+                } else if (barracks4TotalJobsLength < 93600000 && barracks4TotalJobsLength >= 86400000) {
+                    timeModifier4 = 0.10
+                } else if (barracks4TotalJobsLength < 86400000 && barracks4TotalJobsLength >= 72000000) {
+                    timeModifier4 = 0.25
+                } else if (barracks4TotalJobsLength < 72000000 && barracks4TotalJobsLength >= 57600000) {
+                    timeModifier4 = 0.40
+                } else if (barracks4TotalJobsLength < 57600000 && barracks4TotalJobsLength >= 43200000) {
+                    timeModifier4 = 0.55
+                } else if (barracks4TotalJobsLength < 43200000 && barracks4TotalJobsLength >= 28800000) {
+                    timeModifier4 = 0.70
+                } else if (barracks4TotalJobsLength < 28800000 && barracks4TotalJobsLength >= 14400000) {
+                    timeModifier4 = 0.85
+                } else if (barracks4TotalJobsLength < 14400000 && barracks4TotalJobsLength >= 7200000) {
+                    timeModifier4 = 0.925
+                } else if (barracks4TotalJobsLength < 7200000 && barracks4TotalJobsLength >= 3600000) {
+                    timeModifier4 = 0.9625
+                } else {
+                    timeModifier4 = 1.00
+                }
+            } else {
+                timeModifier4 = 0.00
+            }
+            recruit4()
+        }
+
+        function recruit4() {
+            var spearToRecruit4 = finalSpear4 - spearAmount
+            var swordToRecruit4 = finalSword4 - swordAmount
+            var axeToRecruit4 = finalAxe4 - axeAmount
+            var archerToRecruit4 = finalArcher4 - archerAmount
+            var lcToRecruit4 = finalLC4 - light_cavalryAmount
+            var maToRecruit4 = finalMA4 - mounted_archerAmount
+            var ramToRecruit4 = finalRam4 - ramAmount
+            var catapultToRecruit4 = finalCatapult4 - catapultAmount
+            var hcToRecruit4 = finalHC4 - heavy_cavalryAmount
+            var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
+            var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
+            var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
+            var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
+            var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
+            var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
+            var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
+            var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
+            var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
+            var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
+            var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
+            var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
+            var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
+            console.log(wood4, clay4, iron4, food4)
+            if (spearToRecruit4 <= 0 || hcToRecruit4 <= 0 || catapultToRecruit4 <= 0 || swordToRecruit4 <= 0 || axeToRecruit4 <= 0 || archerToRecruit4 <= 0 || lcToRecruit4 <= 0 || maToRecruit4 <= 0 || ramToRecruit4 <= 0) {
+                console.log('Brak jednostek do rekrutacji')
+            } else {
+                if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    spearnew4 = spear4
+                    swordnew4 = sword4
+                    axenew4 = axe4
+                    archernew4 = archer4
+                    lcnew4 = lc4
+                    manew4 = ma4
+                    ramnew4 = ram4
+                    catapultnew4 = catapult4
+                    hcnew4 = hc4
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    generalModifier4 = villageWood4 / wood4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    generalModifier4 = villageClay4 / clay4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    generalModifier4 = villageIron4 / iron4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    generalModifier4 = villageFood4 / food4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    ironModifier4 = villageIron4 / iron4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    foodModifier4 = villageFood4 / food4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    ironModifier4 = villageIron4 / iron4
+                    if (ironModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 >= villageFood4) {
+                    foodModifier4 = villageFood4 / food4
+                    ironModifier4 = villageIron4 / iron4
+                    if (ironModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    foodModifier4 = villageFood4 / food4
+                    if (foodModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    ironModifier4 = villageIron4 / iron4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > ironModifier4 && woodModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else if (ironModifier4 > clayModifier4 && woodModifier4 > clayModifier4) {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    } else if (ironModifier4 > woodModifier4 && clayModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    foodModifier4 = villageFood4 / food4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > foodModifier4 && woodModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else if (foodModifier4 > clayModifier4 && woodModifier4 > clayModifier4) {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    } else if (foodModifier4 > woodModifier4 && clayModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 >= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    foodModifier4 = villageFood4 / food4
+                    ironModifier4 = villageIron4 / iron4
+                    if (foodModifier4 > ironModifier4 && woodModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else if (ironModifier4 > foodModifier4 && woodModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else if (ironModifier4 > woodModifier4 && foodModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 >= villageIron4 && food4 >= villageFood4) {
+                    foodModifier4 = villageFood4 / food4
+                    ironModifier4 = villageIron4 / iron4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > ironModifier4 && foodModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else if (ironModifier4 > clayModifier4 && foodModifier4 > clayModifier4) {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    } else if (ironModifier4 > foodModifier4 && clayModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setTimeout(function() {
+                    recruitSpear4()
+                }, 6000)
+                setTimeout(function() {
+                    if (Barracks4 >= 3) {
+                        recruitSword4()
+                    }
+                }, 12000)
+                setTimeout(function() {
+                    if (Barracks4 >= 5) {
+                        recruitAxe4()
+                    }
+                }, 18000)
+                setTimeout(function() {
+                    if (Barracks4 >= 9) {
+                        recruitArcher4()
+                    }
+                }, 24000)
+                setTimeout(function() {
+                    if (Barracks4 >= 11) {
+                        recruitLc4()
+                    }
+                }, 30000)
+                setTimeout(function() {
+                    if (Barracks4 >= 13) {
+                        recruitMa4()
+                    }
+                }, 36000)
+                setTimeout(function() {
+                    if (Barracks4 >= 15) {
+                        recruitRam4()
+                    }
+                }, 42000)
+                setTimeout(function() {
+                    if (Barracks4 >= 17) {
+                        recruitCatapult4()
+                    }
+                }, 48000)
+                setTimeout(function() {
+                    if (Barracks4 >= 21) {
+                        recruitHc4()
+                    }
+                }, 54000)
+            }
+
+            function recruitSpear4() {
+                if (spearnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew4
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew4)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitSword4() {
+                if (swordnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew4
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew4)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitAxe4() {
+                if (axenew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew4
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew4)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitArcher4() {
+                if (archernew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew4
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew4)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitLc4() {
+                if (lcnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew4
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew4)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitMa4() {
+                if (manew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew4
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew4)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitRam4() {
+                if (ramnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew4
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew4)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitCatapult4() {
+                if (catapultnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew4
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew4)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+
+            function recruitHc4() {
+                if (hcnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew4
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew4)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                }
+            }
+        }
 
         function getVillageData() {
             villages.forEach(function(village, index) {
                 setTimeout(function() {
                     groupVillages1.forEach(function(id1) {
                         if (village.data.villageId == id1) {
-                            setInterval(function() {
-                                console.log('wioska:' + village.data.villageId)
-                                var spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                var swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                var axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                var archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                var light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                var mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                var ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                var catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                var heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                var Barracks1 = village.buildingData.data.barracks.level
-                                var queue1 = village.buildingQueue.data.queue
-                                var recruitingQueues = village.getRecruitingQueues()
-                                var barracksQueue1 = recruitingQueues.barracks.jobs
-                                barracksQueue1.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime1.push(recruitingTimeToFinish)
-                                })
-
-                                function modifier1Get() {
-                                    if (selectedGroup1 > 0) {
-                                        if (queue1.length >= 2) {
-                                            modifier1 = 1.0
-                                        } else if (queue1.length == 1) {
-                                            modifier1 = 0.5
-                                        } else {
-                                            modifier1 = 0.25
-                                        }
-                                    } else {
-                                        modifier1 = 0.0
-                                    }
-                                    time1GetB()
-                                }
-
-                                function time1GetB() {
-                                    if (barracksRecrutingTime1.length > 0) {
-                                        barracks1TotalJobsLength = barracksRecrutingTime1.reduce(function(a, b) {
-                                            return a + b
-                                        })
-                                    } else {
-                                        barracks1TotalJobsLength = 0
-                                    }
-                                    timeModifier1Get()
-                                }
-
-                                function timeModifier1Get() {
-                                    if (selectedGroup1 > 0) {
-                                        if (barracks1TotalJobsLength >= 93600000) {
-                                            timeModifier1 = 0.00
-                                        } else if (barracks1TotalJobsLength < 93600000 && barracks1TotalJobsLength >= 86400000) {
-                                            timeModifier1 = 0.10
-                                        } else if (barracks1TotalJobsLength < 86400000 && barracks1TotalJobsLength >= 72000000) {
-                                            timeModifier1 = 0.25
-                                        } else if (barracks1TotalJobsLength < 72000000 && barracks1TotalJobsLength >= 57600000) {
-                                            timeModifier1 = 0.40
-                                        } else if (barracks1TotalJobsLength < 57600000 && barracks1TotalJobsLength >= 43200000) {
-                                            timeModifier1 = 0.55
-                                        } else if (barracks1TotalJobsLength < 43200000 && barracks1TotalJobsLength >= 28800000) {
-                                            timeModifier1 = 0.70
-                                        } else if (barracks1TotalJobsLength < 28800000 && barracks1TotalJobsLength >= 14400000) {
-                                            timeModifier1 = 0.85
-                                        } else if (barracks1TotalJobsLength < 14400000 && barracks1TotalJobsLength >= 7200000) {
-                                            timeModifier1 = 0.925
-                                        } else if (barracks1TotalJobsLength < 7200000 && barracks1TotalJobsLength >= 3600000) {
-                                            timeModifier1 = 0.9625
-                                        } else {
-                                            timeModifier1 = 1.00
-                                        }
-                                    } else {
-                                        timeModifier1 = 0.00
-                                    }
-                                    recruitFinal1()
-                                }
-
-                                function recruitSpear1() {
-                                    var spearToRecruit1 = finalSpear1 - spearAmount
-                                    console.log('piki do rekrutacji:' + spearToRecruit1)
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    console.log('drewno:' + villageWood1)
-                                    console.log('prowiant:' + villageFood1)
-                                    console.log('glina:' + villageClay1)
-                                    console.log('zelek:' + villageIron1)
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    console.log(spear1, sword1, axe1, archer1, lc1, ma1, ram1, hc1, catapult1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    console.log(wood1, clay1, iron1, food1)
-                                    if (spearToRecruit1 <= 0) {
-                                        console.log('Brak jednostek do rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && spear1 >= minimal1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
-                                            spearnew1 = spear1
-                                        } else if (wood1 >= villageWood1 && spear1 >= minimal1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && spear1 >= minimal1) {
-                                            generalModifier1 = villageWood1 / wood1
-                                            spearnew1 = Math.floor(generalModifier1 * spear1) - 1
-                                        } else if (wood1 <= villageWood1 && spear1 > minimal1 && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && spear1 > minimal1) {
-                                            generalModifier1 = villageClay1 / clay1
-                                            spearnew1 = Math.floor(generalModifier1 * spear1) - 1
-                                        } else if (wood1 <= villageWood1 && spear1 > minimal1 && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1 && spear1 > minimal1) {
-                                            generalModifier1 = villageIron1 / iron1
-                                            spearnew1 = Math.floor(generalModifier1 * spear1) - 1
-                                        } else if (wood1 <= villageWood1 && spear1 > minimal1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1 && spear1 > minimal1) {
-                                            generalModifier1 = villageFood1 / food1
-                                            spearnew1 = Math.floor(generalModifier1 * spear1) - 1
-                                        } else if (wood1 >= villageWood1 && spear1 > minimal1 && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && spear1 > minimal1) {
-                                            woodModifier1 = villageWood1 / wood1
-                                            clayModifier1 = villageClay1 / clay1
-                                            if (clayModifier1 > woodModifier1) {
-                                                spearnew1 = Math.floor(woodModifier1 * spear1) - 1
-                                            } else {
-                                                spearnew1 = Math.floor(clayModifier1 * spear1) - 1
-                                            }
-                                        } else if (wood1 <= villageWood1 && spear1 > minimal1 && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1 && spear1 > minimal1) {
-                                            ironModifier1 = villageIron1 / iron1
-                                            clayModifier1 = villageClay1 / clay1
-                                            if (clayModifier1 > ironModifier1) {
-                                                spearnew1 = Math.floor(ironModifier1 * spear1) - 1
-                                            } else {
-                                                spearnew1 = Math.floor(clayModifier1 * spear1) - 1
-                                            }
-                                        } else if (wood1 <= villageWood1 && spear1 > minimal1 && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1 && spear1 > minimal1) {
-                                            foodModifier1 = villageFood1 / food1
-                                            clayModifier1 = villageClay1 / clay1
-                                            if (clayModifier1 > foodModifier1) {
-                                                spearnew1 = Math.floor(foodModifier1 * spear1) - 1
-                                            } else {
-                                                spearnew1 = Math.floor(clayModifier1 * spear1) - 1
-                                            }
-                                        } else if (wood1 >= villageWood1 && spear1 > minimal1 && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1 && spear1 > minimal1) {
-                                            woodModifier1 = villageWood1 / wood1
-                                            ironModifier1 = villageIron1 / iron1
-                                            if (ironModifier1 > woodModifier1) {
-                                                spearnew1 = Math.floor(woodModifier1 * spear1) - 1
-                                            } else {
-                                                spearnew1 = Math.floor(ironModifier1 * spear1) - 1
-                                            }
-                                        } else if (wood1 <= villageWood1 && spear1 > minimal1 && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1 && spear1 > minimal1) {
-                                            foodModifier1 = villageFood1 / food1
-                                            ironModifier1 = villageIron1 / iron1
-                                            if (ironModifier1 > foodModifier1) {
-                                                spearnew1 = Math.floor(foodModifier1 * spear1) - 1
-                                            } else {
-                                                spearnew1 = Math.floor(ironModifier1 * spear1) - 1
-                                            }
-                                        } else if (wood1 >= villageWood1 && spear1 > minimal1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1 && spear1 > minimal1) {
-                                            woodModifier1 = villageWood1 / wood1
-                                            foodModifier1 = villageFood1 / food1
-                                            if (foodModifier1 > woodModifier1) {
-                                                spearnew1 = Math.floor(woodModifier1 * spear1) - 1
-                                            } else {
-                                                spearnew1 = Math.floor(foodModifier1 * spear1) - 1
-                                            }
-                                        } else if (wood1 >= villageWood1 && spear1 > minimal1 && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1 && spear1 > minimal1) {
-                                            woodModifier1 = villageWood1 / wood1
-                                            ironModifier1 = villageIron1 / iron1
-                                            clayModifier1 = villageClay1 / clay1
-                                            if (clayModifier1 > ironModifier1 && woodModifier1 > ironModifier1) {
-                                                spearnew1 = Math.floor(ironModifier1 * spear1) - 1
-                                            } else if (ironModifier1 > clayModifier1 && woodModifier1 > clayModifier1) {
-                                                spearnew1 = Math.floor(clayModifier1 * spear1) - 1
-                                            } else if (ironModifier1 > woodModifier1 && clayModifier1 > woodModifier1) {
-                                                spearnew1 = Math.floor(woodModifier1 * spear1) - 1
-                                            } else {
-                                                console.log('Nie znam przyczyny :P')
-                                            }
-                                        } else if (wood1 >= villageWood1 && spear1 > minimal1 && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1 && spear1 > minimal1) {
-                                            woodModifier1 = villageWood1 / wood1
-                                            foodModifier1 = villageFood1 / food1
-                                            clayModifier1 = villageClay1 / clay1
-                                            if (clayModifier1 > foodModifier1 && woodModifier1 > foodModifier1) {
-                                                spearnew1 = Math.floor(foodModifier1 * spear1) - 1
-                                            } else if (foodModifier1 > clayModifier1 && woodModifier1 > clayModifier1) {
-                                                spearnew1 = Math.floor(clayModifier1 * spear1) - 1
-                                            } else if (foodModifier1 > woodModifier1 && clayModifier1 > woodModifier1) {
-                                                spearnew1 = Math.floor(woodModifier1 * spear1) - 1
-                                            } else {
-                                                console.log('Nie znam przyczyny :P')
-                                            }
-                                        } else if (wood1 >= villageWood1 && spear1 > minimal1 && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1 && spear1 > minimal1) {
-                                            woodModifier1 = villageWood1 / wood1
-                                            foodModifier1 = villageFood1 / food1
-                                            ironModifier1 = villageIron1 / iron1
-                                            if (foodModifier1 > ironModifier1 && woodModifier1 > ironModifier1) {
-                                                spearnew1 = Math.floor(ironModifier1 * spear1) - 1
-                                            } else if (ironModifier1 > foodModifier1 && woodModifier1 > foodModifier1) {
-                                                spearnew1 = Math.floor(foodModifier1 * spear1) - 1
-                                            } else if (ironModifier1 > woodModifier1 && foodModifier1 > woodModifier1) {
-                                                spearnew1 = Math.floor(woodModifier1 * spear1) - 1
-                                            } else {
-                                                console.log('Nie znam przyczyny :P')
-                                            }
-                                        } else if (wood1 <= villageWood1 && spear1 > minimal1 && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1 && spear1 > minimal1) {
-                                            foodModifier1 = villageFood1 / food1
-                                            ironModifier1 = villageIron1 / iron1
-                                            clayModifier1 = villageClay1 / clay1
-                                            if (clayModifier1 > ironModifier1 && foodModifier1 > ironModifier1) {
-                                                spearnew1 = Math.floor(ironModifier1 * spear1) - 1
-                                            } else if (ironModifier1 > clayModifier1 && foodModifier1 > clayModifier1) {
-                                                spearnew1 = Math.floor(clayModifier1 * spear1) - 1
-                                            } else if (ironModifier1 > foodModifier1 && clayModifier1 > foodModifier1) {
-                                                spearnew1 = Math.floor(foodModifier1 * spear1) - 1
-                                            } else {
-                                                console.log('Nie znam przyczyny :P')
-                                            }
-                                        }
-                                    }
-                                    if (spearnew1 >= minimal1) {
-                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                            village_id: village.getId(),
-                                            unit_type: 'spear',
-                                            amount: spearnew1
-                                        })
-                                        unit = 'spear'
-                                        logData = [
-                                            unit,
-                                            spearnew1
-                                        ]
-                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                        addLog(village.getId(), unit, spearnew1)
-                                    } else if (spearnew1 == 0 && spear1 >= minimal1) {
-                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                            village_id: village.getId(),
-                                            unit_type: 'spear',
-                                            amount: spear1
-                                        })
-                                        unit = 'spear'
-                                        logData = [
-                                            unit,
-                                            spear1
-                                        ]
-                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                        addLog(village.getId(), unit, spear1)
-                                    } else {
-                                        console.log('Niezrekrutowano')
-                                    }
-                                }
-
-                                function recruitSword1() {
-                                    var swordToRecruit1 = finalSword1 - swordAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (swordToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && sword1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'sword',
-                                                amount: sword1
-                                            })
-                                            unit = 'sword'
-                                            logData = [
-                                                unit,
-                                                sword1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, sword1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (swordnew1 <= villageFood1 && swordnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew1
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    swordavailable1 = Math.floor(foodAvailable1 * swordnew1)
-                                                    if (swordavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable1
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (swordnew1 <= villageFood1 && swordnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew1
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    swordavailable1 = Math.floor(foodAvailable1 * swordnew1)
-                                                    if (swordavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable1
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (swordnew1 <= villageFood1 && swordnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew1
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    swordavailable1 = Math.floor(foodAvailable1 * swordnew1)
-                                                    if (swordavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable1
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitAxe1() {
-                                    var axeToRecruit1 = finalAxe1 - axeAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (axeToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && axe1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'axe',
-                                                amount: axe1
-                                            })
-                                            unit = 'axe'
-                                            logData = [
-                                                unit,
-                                                axe1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, axe1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (axenew1 <= villageFood1 && axenew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew1
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    axeavailable1 = Math.floor(foodAvailable1 * axenew1)
-                                                    if (axeavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable1
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (axenew1 <= villageFood1 && axenew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew1
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    axeavailable1 = Math.floor(foodAvailable1 * axenew1)
-                                                    if (axeavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable1
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (axenew1 <= villageFood1 && axenew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew1
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    axeavailable1 = Math.floor(foodAvailable1 * axenew1)
-                                                    if (axeavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable1
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitArcher1() {
-                                    var archerToRecruit1 = finalArcher1 - archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (archerToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && archer1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'archer',
-                                                amount: archer1
-                                            })
-                                            unit = 'archer'
-                                            logData = [
-                                                unit,
-                                                archer1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, archer1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (archernew1 <= villageFood1 && archernew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew1
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    archeravailable1 = Math.floor(foodAvailable1 * archernew1)
-                                                    if (archeravailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable1
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (archernew1 <= villageFood1 && archernew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew1
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    archeravailable1 = Math.floor(foodAvailable1 * archernew1)
-                                                    if (archeravailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable1
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (archernew1 <= villageFood1 && archernew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew1
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    archeravailable1 = Math.floor(foodAvailable1 * archernew1)
-                                                    if (archeravailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable1
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitLC1() {
-                                    var lcToRecruit1 = finalLC1 - light_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (lcToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && lc1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'light_cavalry',
-                                                amount: lc1
-                                            })
-                                            unit = 'light_cavalry'
-                                            logData = [
-                                                unit,
-                                                lc1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, lc1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (lcnew1 <= villageFood1 && lcnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew1
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    lcavailable1 = Math.floor(foodAvailable1 * lcnew1)
-                                                    if (lcavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable1
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (lcnew1 <= villageFood1 && lcnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew1
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    lcavailable1 = Math.floor(foodAvailable1 * lcnew1)
-                                                    if (lcavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable1
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (lcnew1 <= villageFood1 && lcnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew1
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    lcavailable1 = Math.floor(foodAvailable1 * lcnew1)
-                                                    if (lcavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable1
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitMA1() {
-                                    var maToRecruit1 = finalMA1 - mounted_archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (maToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && ma1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'mounted_archer',
-                                                amount: ma1
-                                            })
-                                            unit = 'mounted_archer'
-                                            logData = [
-                                                unit,
-                                                ma1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ma1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (manew1 <= villageFood1 && manew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew1
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    maavailable1 = Math.floor(foodAvailable1 * manew1)
-                                                    if (maavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable1
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (manew1 <= villageFood1 && manew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew1
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    maavailable1 = Math.floor(foodAvailable1 * manew1)
-                                                    if (maavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable1
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (manew1 <= villageFood1 && manew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew1
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    maavailable1 = Math.floor(foodAvailable1 * manew1)
-                                                    if (maavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable1
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitRam1() {
-                                    var ramToRecruit1 = finalRam1 - ramAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (ramToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && ram1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'ram',
-                                                amount: ram1
-                                            })
-                                            unit = 'ram'
-                                            logData = [
-                                                unit,
-                                                ram1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ram1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (ramnew1 <= villageFood1 && ramnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew1
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    ramavailable1 = Math.floor(foodAvailable1 * ramnew1)
-                                                    if (ramavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable1
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (ramnew1 <= villageFood1 && ramnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew1
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    ramavailable1 = Math.floor(foodAvailable1 * ramnew1)
-                                                    if (ramavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable1
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (ramnew1 <= villageFood1 && ramnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew1
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    ramavailable1 = Math.floor(foodAvailable1 * ramnew1)
-                                                    if (ramavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable1
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitCatapult1() {
-                                    var catapultToRecruit1 = finalCatapult1 - catapultAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (catapultToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && catapult1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'catapult',
-                                                amount: catapult1
-                                            })
-                                            unit = 'catapult'
-                                            logData = [
-                                                unit,
-                                                catapult1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, catapult1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (catapultnew1 <= villageFood1 && catapultnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew1
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    catapultavailable1 = Math.floor(foodAvailable1 * catapultnew1)
-                                                    if (catapultavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable1
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (catapultnew1 <= villageFood1 && catapultnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew1
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    catapultavailable1 = Math.floor(foodAvailable1 * catapultnew1)
-                                                    if (catapultavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable1
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (catapultnew1 <= villageFood1 && catapultnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew1
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    catapultavailable1 = Math.floor(foodAvailable1 * catapultnew1)
-                                                    if (catapultavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable1
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitHC1() {
-                                    var hcToRecruit1 = finalHC1 - heavy_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood1 = foodComputed.currentStock
-                                    var villageWood1 = woodComputed.currentStock
-                                    var villageClay1 = clayComputed.currentStock
-                                    var villageIron1 = ironComputed.currentStock
-                                    var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
-                                    var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
-                                    var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
-                                    var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
-                                    var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
-                                    var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
-                                    var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
-                                    var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
-                                    var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
-                                    var wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
-                                    var clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
-                                    var iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
-                                    var food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
-                                    if (hcToRecruit1 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood1 <= villageWood1 && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1 && hc1 > minimal1) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'heavy_cavalry',
-                                                amount: hc1
-                                            })
-                                            unit = 'heavy_cavalry'
-                                            logData = [
-                                                unit,
-                                                hc1
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, hc1)
-                                        } else {
-                                            if (villageWood1 < villageClay1 && villageWood1 < villageIron1) {
-                                                woodModifier1 = villageWood1 / wood1
-                                                spearnew1 = Math.floor(woodModifier1 * spear1)
-                                                swordnew1 = Math.floor(woodModifier1 * sword1)
-                                                axenew1 = Math.floor(woodModifier1 * axe1)
-                                                archernew1 = Math.floor(woodModifier1 * archer1)
-                                                lcnew1 = Math.floor(woodModifier1 * lc1)
-                                                manew1 = Math.floor(woodModifier1 * ma1)
-                                                hcnew1 = Math.floor(woodModifier1 * hc1)
-                                                ramnew1 = Math.floor(woodModifier1 * ram1)
-                                                catapultnew1 = Math.floor(woodModifier1 * catapult1)
-                                                if (hcnew1 <= villageFood1 && hcnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew1
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    hcavailable1 = Math.floor(foodAvailable1 * hcnew1)
-                                                    if (hcavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable1
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable1)
-                                                    }
-                                                }
-                                            } else if (villageClay1 < villageWood1 && villageClay1 < villageIron1) {
-                                                clayModifier1 = villageClay1 / clay1
-                                                spearnew1 = Math.floor(clayModifier1 * spear1)
-                                                swordnew1 = Math.floor(clayModifier1 * sword1)
-                                                axenew1 = Math.floor(clayModifier1 * axe1)
-                                                archernew1 = Math.floor(clayModifier1 * archer1)
-                                                lcnew1 = Math.floor(clayModifier1 * lc1)
-                                                manew1 = Math.floor(clayModifier1 * ma1)
-                                                hcnew1 = Math.floor(clayModifier1 * hc1)
-                                                ramnew1 = Math.floor(clayModifier1 * ram1)
-                                                catapultnew1 = Math.floor(clayModifier1 * catapult1)
-                                                if (hcnew1 <= villageFood1 && hcnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew1
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    hcavailable1 = Math.floor(foodAvailable1 * hcnew1)
-                                                    if (hcavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable1
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable1)
-                                                    }
-                                                }
-                                            } else if (villageIron1 < villageWood1 && villageClay1 > villageIron1) {
-                                                ironModifier1 = villageIron1 / iron1
-                                                spearnew1 = Math.floor(ironModifier1 * spear1)
-                                                swordnew1 = Math.floor(ironModifier1 * sword1)
-                                                axenew1 = Math.floor(ironModifier1 * axe1)
-                                                archernew1 = Math.floor(ironModifier1 * archer1)
-                                                lcnew1 = Math.floor(ironModifier1 * lc1)
-                                                manew1 = Math.floor(ironModifier1 * ma1)
-                                                hcnew1 = Math.floor(ironModifier1 * hc1)
-                                                ramnew1 = Math.floor(ironModifier1 * ram1)
-                                                catapultnew1 = Math.floor(ironModifier1 * catapult1)
-                                                if (hcnew1 <= villageFood1 && hcnew1 > minimal1) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew1
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew1
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew1)
-                                                } else {
-                                                    foodnew1 = spearnew1 * food[0] + swordnew1 * food[1] + axenew1 * food[2] + archernew1 * food[3] + lcnew1 * food[4] + manew1 * food[5] + ramnew1 * food[7] + catapultnew1 * food[8] + hcnew1 * food[6]
-                                                    foodAvailable1 = villageFood1 / foodnew1
-                                                    hcavailable1 = Math.floor(foodAvailable1 * hcnew1)
-                                                    if (hcavailable1 > minimal1) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable1
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable1
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable1)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitFinal1() {
-                                    if (Barracks1 > 0 && Barracks1 < 3) {
-                                        recruitSpear1()
-                                    } else if (Barracks1 >= 3 && Barracks1 < 5) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                    } else if (Barracks1 >= 5 && Barracks1 < 9) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe1()
-                                        }, 4000)
-                                    } else if (Barracks1 >= 9 && Barracks1 < 11) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe1()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher1()
-                                        }, 6000)
-                                    } else if (Barracks1 >= 11 && Barracks1 < 13) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe1()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher1()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC1()
-                                        }, 3000)
-                                    } else if (Barracks1 >= 13 && Barracks1 < 15) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe1()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher1()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC1()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA1()
-                                        }, 5000)
-                                    } else if (Barracks1 >= 15 && Barracks1 < 17) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe1()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher1()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC1()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA1()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam1()
-                                        }, 7000)
-                                    } else if (Barracks1 >= 17 && Barracks1 < 21) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe1()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher1()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC1()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA1()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam1()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult1()
-                                        }, 8000)
-                                    } else if (Barracks1 >= 21) {
-                                        recruitSpear1()
-                                        setTimeout(function() {
-                                            recruitSword1()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe1()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher1()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC1()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA1()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam1()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult1()
-                                        }, 8000)
-                                        setTimeout(function() {
-                                            recruitHC1()
-                                        }, 1000)
-                                    }
-                                }
-                                modifier1Get()
-                            }, 60000)
+                            console.log('wioska:' + village.data.villageId)
+                            villageIdSet = village.getId()
+                            spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                            swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                            axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                            archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                            light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                            mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                            ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                            catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                            heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                            Barracks1 = village.buildingData.data.barracks.level
+                            queue1 = village.buildingQueue.data.queue
+                            recruitingQueues = village.getRecruitingQueues()
+                            barracksQueue1 = recruitingQueues.barracks.jobs
+                            var resources = village.getResources()
+                            var computed = resources.getComputed()
+                            var woodComputed = computed.wood
+                            var clayComputed = computed.clay
+                            var ironComputed = computed.iron
+                            var foodComputed = computed.food
+                            villageFood1 = foodComputed.currentStock
+                            villageWood1 = woodComputed.currentStock
+                            villageClay1 = clayComputed.currentStock
+                            villageIron1 = ironComputed.currentStock
+                            barracksQueue1.forEach(function(job) {
+                                recruitingTime = job.clientRecruitingTime
+                                totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                barracksRecrutingTime1.push(recruitingTimeToFinish)
+                            })
+                            modifier1Get()
                         }
                     })
                 }, index * interval)
                 setTimeout(function() {
                     groupVillages2.forEach(function(id2) {
                         if (village.data.villageId == id2) {
-                            setInterval(function() {
-                                var spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                var swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                var axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                var archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                var light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                var mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                var ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                var catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                var heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                var Barracks2 = village.buildingData.data.barracks.level
-                                var queue2 = village.buildingQueue.data.queue
-                                var recruitingQueues = village.getRecruitingQueues()
-                                var barracksQueue2 = recruitingQueues.barracks.jobs
-                                barracksQueue2.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime2.push(recruitingTimeToFinish)
-                                })
-
-                                function modifier2Get() {
-                                    if (selectedGroup2 > 0) {
-                                        if (queue2.length >= 2) {
-                                            modifier2 = 1.0
-                                        } else if (queue2.length == 1) {
-                                            modifier2 = 0.5
-                                        } else {
-                                            modifier2 = 0.25
-                                        }
-                                    } else {
-                                        modifier2 = 0.0
-                                    }
-                                    time2GetB()
-                                }
-
-                                function time2GetB() {
-                                    if (barracksRecrutingTime2.length > 0) {
-                                        barracks2TotalJobsLength = barracksRecrutingTime2.reduce(function(a, b) {
-                                            return a + b
-                                        })
-                                    } else {
-                                        barracks2TotalJobsLength = 0
-                                    }
-                                    timeModifier2Get()
-                                }
-
-                                function timeModifier2Get() {
-                                    if (selectedGroup2 > 0) {
-                                        if (barracks2TotalJobsLength >= 93600000) {
-                                            timeModifier2 = 0.00
-                                        } else if (barracks2TotalJobsLength < 93600000 && barracks2TotalJobsLength >= 86400000) {
-                                            timeModifier2 = 0.10
-                                        } else if (barracks2TotalJobsLength < 86400000 && barracks2TotalJobsLength >= 72000000) {
-                                            timeModifier2 = 0.25
-                                        } else if (barracks2TotalJobsLength < 72000000 && barracks2TotalJobsLength >= 57600000) {
-                                            timeModifier2 = 0.40
-                                        } else if (barracks2TotalJobsLength < 57600000 && barracks2TotalJobsLength >= 43200000) {
-                                            timeModifier2 = 0.55
-                                        } else if (barracks2TotalJobsLength < 43200000 && barracks2TotalJobsLength >= 28800000) {
-                                            timeModifier2 = 0.70
-                                        } else if (barracks2TotalJobsLength < 28800000 && barracks2TotalJobsLength >= 14400000) {
-                                            timeModifier2 = 0.85
-                                        } else if (barracks2TotalJobsLength < 14400000 && barracks2TotalJobsLength >= 7200000) {
-                                            timeModifier2 = 0.925
-                                        } else if (barracks2TotalJobsLength < 7200000 && barracks2TotalJobsLength >= 3600000) {
-                                            timeModifier2 = 0.9625
-                                        } else {
-                                            timeModifier2 = 1.00
-                                        }
-                                    } else {
-                                        timeModifier2 = 0.00
-                                    }
-                                    recruitFinal2()
-                                }
-
-                                function recruitSpear2() {
-                                    var spearToRecruit2 = finalSpear2 - spearAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (spearToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && spear2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'spear',
-                                                amount: spear2
-                                            })
-                                            unit = 'spear'
-                                            logData = [
-                                                unit,
-                                                spear2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, spear2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (spearnew2 <= villageFood2 && spearnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew2
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    spearavailable2 = Math.floor(foodAvailable2 * spearnew2)
-                                                    if (spearavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable2
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (spearnew2 <= villageFood2 && spearnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew2
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    spearavailable2 = Math.floor(foodAvailable2 * spearnew2)
-                                                    if (spearavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable2
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (spearnew2 <= villageFood2 && spearnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew2
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    spearavailable2 = Math.floor(foodAvailable2 * spearnew2)
-                                                    if (spearavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable2
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitSword2() {
-                                    var swordToRecruit2 = finalSword2 - swordAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (swordToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && sword2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'sword',
-                                                amount: sword2
-                                            })
-                                            unit = 'sword'
-                                            logData = [
-                                                unit,
-                                                sword2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, sword2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (swordnew2 <= villageFood2 && swordnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew2
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    swordavailable2 = Math.floor(foodAvailable2 * swordnew2)
-                                                    if (swordavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable2
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (swordnew2 <= villageFood2 && swordnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew2
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    swordavailable2 = Math.floor(foodAvailable2 * swordnew2)
-                                                    if (swordavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable2
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (swordnew2 <= villageFood2 && swordnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew2
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    swordavailable2 = Math.floor(foodAvailable2 * swordnew2)
-                                                    if (swordavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable2
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitAxe2() {
-                                    var axeToRecruit2 = finalAxe2 - axeAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (axeToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && axe2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'axe',
-                                                amount: axe2
-                                            })
-                                            unit = 'axe'
-                                            logData = [
-                                                unit,
-                                                axe2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, axe2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (axenew2 <= villageFood2 && axenew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew2
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    axeavailable2 = Math.floor(foodAvailable2 * axenew2)
-                                                    if (axeavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable2
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (axenew2 <= villageFood2 && axenew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew2
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    axeavailable2 = Math.floor(foodAvailable2 * axenew2)
-                                                    if (axeavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable2
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (axenew2 <= villageFood2 && axenew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew2
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    axeavailable2 = Math.floor(foodAvailable2 * axenew2)
-                                                    if (axeavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable2
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitArcher2() {
-                                    var archerToRecruit2 = finalArcher2 - archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (archerToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && archer2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'archer',
-                                                amount: archer2
-                                            })
-                                            unit = 'archer'
-                                            logData = [
-                                                unit,
-                                                archer2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, archer2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (archernew2 <= villageFood2 && archernew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew2
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    archeravailable2 = Math.floor(foodAvailable2 * archernew2)
-                                                    if (archeravailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable2
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (archernew2 <= villageFood2 && archernew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew2
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    archeravailable2 = Math.floor(foodAvailable2 * archernew2)
-                                                    if (archeravailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable2
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (archernew2 <= villageFood2 && archernew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew2
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    archeravailable2 = Math.floor(foodAvailable2 * archernew2)
-                                                    if (archeravailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable2
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitLC2() {
-                                    var lcToRecruit2 = finalLC2 - light_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (lcToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && lc2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'light_cavalry',
-                                                amount: lc2
-                                            })
-                                            unit = 'light_cavalry'
-                                            logData = [
-                                                unit,
-                                                lc2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, lc2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (lcnew2 <= villageFood2 && lcnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew2
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    lcavailable2 = Math.floor(foodAvailable2 * lcnew2)
-                                                    if (lcavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable2
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (lcnew2 <= villageFood2 && lcnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew2
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    lcavailable2 = Math.floor(foodAvailable2 * lcnew2)
-                                                    if (lcavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable2
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (lcnew2 <= villageFood2 && lcnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew2
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    lcavailable2 = Math.floor(foodAvailable2 * lcnew2)
-                                                    if (lcavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable2
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitMA2() {
-                                    var maToRecruit2 = finalMA2 - mounted_archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (maToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && ma2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'mounted_archer',
-                                                amount: ma2
-                                            })
-                                            unit = 'mounted_archer'
-                                            logData = [
-                                                unit,
-                                                ma2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ma2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (manew2 <= villageFood2 && manew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew2
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    maavailable2 = Math.floor(foodAvailable2 * manew2)
-                                                    if (maavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable2
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (manew2 <= villageFood2 && manew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew2
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    maavailable2 = Math.floor(foodAvailable2 * manew2)
-                                                    if (maavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable2
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (manew2 <= villageFood2 && manew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew2
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    maavailable2 = Math.floor(foodAvailable2 * manew2)
-                                                    if (maavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable2
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitRam2() {
-                                    var ramToRecruit2 = finalRam2 - ramAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (ramToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && ram2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'ram',
-                                                amount: ram2
-                                            })
-                                            unit = 'ram'
-                                            logData = [
-                                                unit,
-                                                ram2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ram2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (ramnew2 <= villageFood2 && ramnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew2
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    ramavailable2 = Math.floor(foodAvailable2 * ramnew2)
-                                                    if (ramavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable2
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (ramnew2 <= villageFood2 && ramnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew2
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    ramavailable2 = Math.floor(foodAvailable2 * ramnew2)
-                                                    if (ramavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable2
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (ramnew2 <= villageFood2 && ramnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew2
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    ramavailable2 = Math.floor(foodAvailable2 * ramnew2)
-                                                    if (ramavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable2
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitCatapult2() {
-                                    var catapultToRecruit2 = finalCatapult2 - catapultAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (catapultToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && catapult2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'catapult',
-                                                amount: catapult2
-                                            })
-                                            unit = 'catapult'
-                                            logData = [
-                                                unit,
-                                                catapult2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, catapult2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (catapultnew2 <= villageFood2 && catapultnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew2
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    catapultavailable2 = Math.floor(foodAvailable2 * catapultnew2)
-                                                    if (catapultavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable2
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (catapultnew2 <= villageFood2 && catapultnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew2
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    catapultavailable2 = Math.floor(foodAvailable2 * catapultnew2)
-                                                    if (catapultavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable2
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (catapultnew2 <= villageFood2 && catapultnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew2
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    catapultavailable2 = Math.floor(foodAvailable2 * catapultnew2)
-                                                    if (catapultavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable2
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitHC2() {
-                                    var hcToRecruit2 = finalHC2 - heavy_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood2 = foodComputed.currentStock
-                                    var villageWood2 = woodComputed.currentStock
-                                    var villageClay2 = clayComputed.currentStock
-                                    var villageIron2 = ironComputed.currentStock
-                                    var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
-                                    var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
-                                    var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
-                                    var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
-                                    var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
-                                    var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
-                                    var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
-                                    var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
-                                    var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
-                                    var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
-                                    var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
-                                    var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
-                                    var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
-                                    if (hcToRecruit2 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood2 <= villageWood2 && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2 && hc2 > minimal2) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'heavy_cavalry',
-                                                amount: hc2
-                                            })
-                                            unit = 'heavy_cavalry'
-                                            logData = [
-                                                unit,
-                                                hc2
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, hc2)
-                                        } else {
-                                            if (villageWood2 < villageClay2 && villageWood2 < villageIron2) {
-                                                woodModifier2 = villageWood2 / wood2
-                                                spearnew2 = Math.floor(woodModifier2 * spear2)
-                                                swordnew2 = Math.floor(woodModifier2 * sword2)
-                                                axenew2 = Math.floor(woodModifier2 * axe2)
-                                                archernew2 = Math.floor(woodModifier2 * archer2)
-                                                lcnew2 = Math.floor(woodModifier2 * lc2)
-                                                manew2 = Math.floor(woodModifier2 * ma2)
-                                                hcnew2 = Math.floor(woodModifier2 * hc2)
-                                                ramnew2 = Math.floor(woodModifier2 * ram2)
-                                                catapultnew2 = Math.floor(woodModifier2 * catapult2)
-                                                if (hcnew2 <= villageFood2 && hcnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew2
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    hcavailable2 = Math.floor(foodAvailable2 * hcnew2)
-                                                    if (hcavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable2
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable2)
-                                                    }
-                                                }
-                                            } else if (villageClay2 < villageWood2 && villageClay2 < villageIron2) {
-                                                clayModifier2 = villageClay2 / clay2
-                                                spearnew2 = Math.floor(clayModifier2 * spear2)
-                                                swordnew2 = Math.floor(clayModifier2 * sword2)
-                                                axenew2 = Math.floor(clayModifier2 * axe2)
-                                                archernew2 = Math.floor(clayModifier2 * archer2)
-                                                lcnew2 = Math.floor(clayModifier2 * lc2)
-                                                manew2 = Math.floor(clayModifier2 * ma2)
-                                                hcnew2 = Math.floor(clayModifier2 * hc2)
-                                                ramnew2 = Math.floor(clayModifier2 * ram2)
-                                                catapultnew2 = Math.floor(clayModifier2 * catapult2)
-                                                if (hcnew2 <= villageFood2 && hcnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew2
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    hcavailable2 = Math.floor(foodAvailable2 * hcnew2)
-                                                    if (hcavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable2
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable2)
-                                                    }
-                                                }
-                                            } else if (villageIron2 < villageWood2 && villageClay2 > villageIron2) {
-                                                ironModifier2 = villageIron2 / iron2
-                                                spearnew2 = Math.floor(ironModifier2 * spear2)
-                                                swordnew2 = Math.floor(ironModifier2 * sword2)
-                                                axenew2 = Math.floor(ironModifier2 * axe2)
-                                                archernew2 = Math.floor(ironModifier2 * archer2)
-                                                lcnew2 = Math.floor(ironModifier2 * lc2)
-                                                manew2 = Math.floor(ironModifier2 * ma2)
-                                                hcnew2 = Math.floor(ironModifier2 * hc2)
-                                                ramnew2 = Math.floor(ironModifier2 * ram2)
-                                                catapultnew2 = Math.floor(ironModifier2 * catapult2)
-                                                if (hcnew2 <= villageFood2 && hcnew2 > minimal2) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew2
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew2
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew2)
-                                                } else {
-                                                    foodnew2 = spearnew2 * food[0] + swordnew2 * food[1] + axenew2 * food[2] + archernew2 * food[3] + lcnew2 * food[4] + manew2 * food[5] + ramnew2 * food[7] + catapultnew2 * food[8] + hcnew2 * food[6]
-                                                    foodAvailable2 = villageFood2 / foodnew2
-                                                    hcavailable2 = Math.floor(foodAvailable2 * hcnew2)
-                                                    if (hcavailable2 > minimal2) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable2
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable2
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable2)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitFinal2() {
-                                    if (Barracks2 > 0 && Barracks2 < 3) {
-                                        recruitSpear2()
-                                    } else if (Barracks2 >= 3 && Barracks2 < 5) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                    } else if (Barracks2 >= 5 && Barracks2 < 9) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe2()
-                                        }, 4000)
-                                    } else if (Barracks2 >= 9 && Barracks2 < 11) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe2()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher2()
-                                        }, 6000)
-                                    } else if (Barracks2 >= 11 && Barracks2 < 13) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe2()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher2()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC2()
-                                        }, 3000)
-                                    } else if (Barracks2 >= 13 && Barracks2 < 15) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe2()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher2()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC2()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA2()
-                                        }, 5000)
-                                    } else if (Barracks2 >= 15 && Barracks2 < 17) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe2()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher2()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC2()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA2()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam2()
-                                        }, 7000)
-                                    } else if (Barracks2 >= 17 && Barracks2 < 21) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe2()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher2()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC2()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA2()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam2()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult2()
-                                        }, 8000)
-                                    } else if (Barracks2 >= 21) {
-                                        recruitSpear2()
-                                        setTimeout(function() {
-                                            recruitSword2()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe2()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher2()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC2()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA2()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam2()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult2()
-                                        }, 8000)
-                                        setTimeout(function() {
-                                            recruitHC2()
-                                        }, 1000)
-                                    }
-                                }
-                                modifier2Get()
-                            }, 60000)
+                            spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                            swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                            axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                            archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                            light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                            mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                            ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                            catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                            heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                            Barracks2 = village.buildingData.data.barracks.level
+                            queue2 = village.buildingQueue.data.queue
+                            recruitingQueues = village.getRecruitingQueues()
+                            barracksQueue2 = recruitingQueues.barracks.jobs
+                            var resources = village.getResources()
+                            var computed = resources.getComputed()
+                            var woodComputed = computed.wood
+                            var clayComputed = computed.clay
+                            var ironComputed = computed.iron
+                            var foodComputed = computed.food
+                            villageFood2 = foodComputed.currentStock
+                            villageWood2 = woodComputed.currentStock
+                            villageClay2 = clayComputed.currentStock
+                            villageIron2 = ironComputed.currentStock
+                            barracksQueue2.forEach(function(job) {
+                                recruitingTime = job.clientRecruitingTime
+                                totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                barracksRecrutingTime2.push(recruitingTimeToFinish)
+                            })
+                            modifier2Get()
                         }
                     })
-                }, index * interval)
+                }, ((index + 1) * interval) + interval2)
                 setTimeout(function() {
                     groupVillages3.forEach(function(id3) {
                         if (village.data.villageId == id3) {
-                            setInterval(function() {
-                                var spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                var swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                var axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                var archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                var light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                var mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                var ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                var catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                var heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                var Barracks3 = village.buildingData.data.barracks.level
-                                var queue3 = village.buildingQueue.data.queue
-                                var recruitingQueues = village.getRecruitingQueues()
-                                var barracksQueue3 = recruitingQueues.barracks.jobs
-                                barracksQueue3.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime3.push(recruitingTimeToFinish)
-                                })
-
-                                function modifier3Get() {
-                                    if (selectedGroup3 > 0) {
-                                        if (queue3.length >= 2) {
-                                            modifier3 = 1.0
-                                        } else if (queue3.length == 1) {
-                                            modifier3 = 0.5
-                                        } else {
-                                            modifier3 = 0.25
-                                        }
-                                    } else {
-                                        modifier3 = 0.0
-                                    }
-                                    time3GetB()
-                                }
-
-                                function time3GetB() {
-                                    if (barracksRecrutingTime3.length > 0) {
-                                        barracks3TotalJobsLength = barracksRecrutingTime3.reduce(function(a, b) {
-                                            return a + b
-                                        })
-                                    } else {
-                                        barracks3TotalJobsLength = 0
-                                    }
-                                    timeModifier3Get()
-                                }
-
-                                function timeModifier3Get() {
-                                    if (selectedGroup3 > 0) {
-                                        if (barracks3TotalJobsLength >= 93600000) {
-                                            timeModifier3 = 0.00
-                                        } else if (barracks3TotalJobsLength < 93600000 && barracks3TotalJobsLength >= 86400000) {
-                                            timeModifier3 = 0.10
-                                        } else if (barracks3TotalJobsLength < 86400000 && barracks3TotalJobsLength >= 72000000) {
-                                            timeModifier3 = 0.25
-                                        } else if (barracks3TotalJobsLength < 72000000 && barracks3TotalJobsLength >= 57600000) {
-                                            timeModifier3 = 0.40
-                                        } else if (barracks3TotalJobsLength < 57600000 && barracks3TotalJobsLength >= 43200000) {
-                                            timeModifier3 = 0.55
-                                        } else if (barracks3TotalJobsLength < 43200000 && barracks3TotalJobsLength >= 28800000) {
-                                            timeModifier3 = 0.70
-                                        } else if (barracks3TotalJobsLength < 28800000 && barracks3TotalJobsLength >= 14400000) {
-                                            timeModifier3 = 0.85
-                                        } else if (barracks3TotalJobsLength < 14400000 && barracks3TotalJobsLength >= 7200000) {
-                                            timeModifier3 = 0.925
-                                        } else if (barracks3TotalJobsLength < 7200000 && barracks3TotalJobsLength >= 3600000) {
-                                            timeModifier3 = 0.9625
-                                        } else {
-                                            timeModifier3 = 1.00
-                                        }
-                                    } else {
-                                        timeModifier3 = 0.00
-                                    }
-                                    recruitFinal3()
-                                }
-
-                                function recruitSpear3() {
-                                    var spearToRecruit3 = finalSpear3 - spearAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (spearToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && spear3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'spear',
-                                                amount: spear3
-                                            })
-                                            unit = 'spear'
-                                            logData = [
-                                                unit,
-                                                spear3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, spear3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (spearnew3 <= villageFood3 && spearnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew3
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    spearavailable3 = Math.floor(foodAvailable3 * spearnew3)
-                                                    if (spearavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable3
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (spearnew3 <= villageFood3 && spearnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew3
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    spearavailable3 = Math.floor(foodAvailable3 * spearnew3)
-                                                    if (spearavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable3
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (spearnew3 <= villageFood3 && spearnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew3
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    spearavailable3 = Math.floor(foodAvailable3 * spearnew3)
-                                                    if (spearavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable3
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitSword3() {
-                                    var swordToRecruit3 = finalSword3 - swordAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (swordToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && sword3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'sword',
-                                                amount: sword3
-                                            })
-                                            unit = 'sword'
-                                            logData = [
-                                                unit,
-                                                sword3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, sword3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (swordnew3 <= villageFood3 && swordnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew3
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    swordavailable3 = Math.floor(foodAvailable3 * swordnew3)
-                                                    if (swordavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable3
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (swordnew3 <= villageFood3 && swordnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew3
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    swordavailable3 = Math.floor(foodAvailable3 * swordnew3)
-                                                    if (swordavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable3
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (swordnew3 <= villageFood3 && swordnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew3
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    swordavailable3 = Math.floor(foodAvailable3 * swordnew3)
-                                                    if (swordavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable3
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitAxe3() {
-                                    var axeToRecruit3 = finalAxe3 - axeAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (axeToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && axe3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'axe',
-                                                amount: axe3
-                                            })
-                                            unit = 'axe'
-                                            logData = [
-                                                unit,
-                                                axe3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, axe3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (axenew3 <= villageFood3 && axenew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew3
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    axeavailable3 = Math.floor(foodAvailable3 * axenew3)
-                                                    if (axeavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable3
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (axenew3 <= villageFood3 && axenew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew3
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    axeavailable3 = Math.floor(foodAvailable3 * axenew3)
-                                                    if (axeavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable3
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (axenew3 <= villageFood3 && axenew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew3
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    axeavailable3 = Math.floor(foodAvailable3 * axenew3)
-                                                    if (axeavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable3
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitArcher3() {
-                                    var archerToRecruit3 = finalArcher3 - archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (archerToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && archer3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'archer',
-                                                amount: archer3
-                                            })
-                                            unit = 'archer'
-                                            logData = [
-                                                unit,
-                                                archer3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, archer3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (archernew3 <= villageFood3 && archernew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew3
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    archeravailable3 = Math.floor(foodAvailable3 * archernew3)
-                                                    if (archeravailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable3
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (archernew3 <= villageFood3 && archernew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew3
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    archeravailable3 = Math.floor(foodAvailable3 * archernew3)
-                                                    if (archeravailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable3
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (archernew3 <= villageFood3 && archernew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew3
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    archeravailable3 = Math.floor(foodAvailable3 * archernew3)
-                                                    if (archeravailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable3
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitLC3() {
-                                    var lcToRecruit3 = finalLC3 - light_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (lcToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && lc3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'light_cavalry',
-                                                amount: lc3
-                                            })
-                                            unit = 'light_cavalry'
-                                            logData = [
-                                                unit,
-                                                lc3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, lc3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (lcnew3 <= villageFood3 && lcnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew3
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    lcavailable3 = Math.floor(foodAvailable3 * lcnew3)
-                                                    if (lcavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable3
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (lcnew3 <= villageFood3 && lcnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew3
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    lcavailable3 = Math.floor(foodAvailable3 * lcnew3)
-                                                    if (lcavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable3
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (lcnew3 <= villageFood3 && lcnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew3
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    lcavailable3 = Math.floor(foodAvailable3 * lcnew3)
-                                                    if (lcavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable3
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitMA3() {
-                                    var maToRecruit3 = finalMA3 - mounted_archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (maToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && ma3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'mounted_archer',
-                                                amount: ma3
-                                            })
-                                            unit = 'mounted_archer'
-                                            logData = [
-                                                unit,
-                                                ma3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ma3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (manew3 <= villageFood3 && manew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew3
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    maavailable3 = Math.floor(foodAvailable3 * manew3)
-                                                    if (maavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable3
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (manew3 <= villageFood3 && manew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew3
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    maavailable3 = Math.floor(foodAvailable3 * manew3)
-                                                    if (maavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable3
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (manew3 <= villageFood3 && manew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew3
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    maavailable3 = Math.floor(foodAvailable3 * manew3)
-                                                    if (maavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable3
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitRam3() {
-                                    var ramToRecruit3 = finalRam3 - ramAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (ramToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && ram3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'ram',
-                                                amount: ram3
-                                            })
-                                            unit = 'ram'
-                                            logData = [
-                                                unit,
-                                                ram3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ram3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (ramnew3 <= villageFood3 && ramnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew3
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    ramavailable3 = Math.floor(foodAvailable3 * ramnew3)
-                                                    if (ramavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable3
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (ramnew3 <= villageFood3 && ramnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew3
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    ramavailable3 = Math.floor(foodAvailable3 * ramnew3)
-                                                    if (ramavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable3
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (ramnew3 <= villageFood3 && ramnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew3
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    ramavailable3 = Math.floor(foodAvailable3 * ramnew3)
-                                                    if (ramavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable3
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitCatapult3() {
-                                    var catapultToRecruit3 = finalCatapult3 - catapultAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (catapultToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && catapult3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'catapult',
-                                                amount: catapult3
-                                            })
-                                            unit = 'catapult'
-                                            logData = [
-                                                unit,
-                                                catapult3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, catapult3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (catapultnew3 <= villageFood3 && catapultnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew3
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    catapultavailable3 = Math.floor(foodAvailable3 * catapultnew3)
-                                                    if (catapultavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable3
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (catapultnew3 <= villageFood3 && catapultnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew3
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    catapultavailable3 = Math.floor(foodAvailable3 * catapultnew3)
-                                                    if (catapultavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable3
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (catapultnew3 <= villageFood3 && catapultnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew3
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    catapultavailable3 = Math.floor(foodAvailable3 * catapultnew3)
-                                                    if (catapultavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable3
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitHC3() {
-                                    var hcToRecruit3 = finalHC3 - heavy_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood3 = foodComputed.currentStock
-                                    var villageWood3 = woodComputed.currentStock
-                                    var villageClay3 = clayComputed.currentStock
-                                    var villageIron3 = ironComputed.currentStock
-                                    var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
-                                    var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
-                                    var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
-                                    var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
-                                    var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
-                                    var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
-                                    var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
-                                    var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
-                                    var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
-                                    var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
-                                    var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
-                                    var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
-                                    var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
-                                    if (hcToRecruit3 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood3 <= villageWood3 && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3 && hc3 > minimal3) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'heavy_cavalry',
-                                                amount: hc3
-                                            })
-                                            unit = 'heavy_cavalry'
-                                            logData = [
-                                                unit,
-                                                hc3
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, hc3)
-                                        } else {
-                                            if (villageWood3 < villageClay3 && villageWood3 < villageIron3) {
-                                                woodModifier3 = villageWood3 / wood3
-                                                spearnew3 = Math.floor(woodModifier3 * spear3)
-                                                swordnew3 = Math.floor(woodModifier3 * sword3)
-                                                axenew3 = Math.floor(woodModifier3 * axe3)
-                                                archernew3 = Math.floor(woodModifier3 * archer3)
-                                                lcnew3 = Math.floor(woodModifier3 * lc3)
-                                                manew3 = Math.floor(woodModifier3 * ma3)
-                                                hcnew3 = Math.floor(woodModifier3 * hc3)
-                                                ramnew3 = Math.floor(woodModifier3 * ram3)
-                                                catapultnew3 = Math.floor(woodModifier3 * catapult3)
-                                                if (hcnew3 <= villageFood3 && hcnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew3
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    hcavailable3 = Math.floor(foodAvailable3 * hcnew3)
-                                                    if (hcavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable3
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable3)
-                                                    }
-                                                }
-                                            } else if (villageClay3 < villageWood3 && villageClay3 < villageIron3) {
-                                                clayModifier3 = villageClay3 / clay3
-                                                spearnew3 = Math.floor(clayModifier3 * spear3)
-                                                swordnew3 = Math.floor(clayModifier3 * sword3)
-                                                axenew3 = Math.floor(clayModifier3 * axe3)
-                                                archernew3 = Math.floor(clayModifier3 * archer3)
-                                                lcnew3 = Math.floor(clayModifier3 * lc3)
-                                                manew3 = Math.floor(clayModifier3 * ma3)
-                                                hcnew3 = Math.floor(clayModifier3 * hc3)
-                                                ramnew3 = Math.floor(clayModifier3 * ram3)
-                                                catapultnew3 = Math.floor(clayModifier3 * catapult3)
-                                                if (hcnew3 <= villageFood3 && hcnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew3
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    hcavailable3 = Math.floor(foodAvailable3 * hcnew3)
-                                                    if (hcavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable3
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable3)
-                                                    }
-                                                }
-                                            } else if (villageIron3 < villageWood3 && villageClay3 > villageIron3) {
-                                                ironModifier3 = villageIron3 / iron3
-                                                spearnew3 = Math.floor(ironModifier3 * spear3)
-                                                swordnew3 = Math.floor(ironModifier3 * sword3)
-                                                axenew3 = Math.floor(ironModifier3 * axe3)
-                                                archernew3 = Math.floor(ironModifier3 * archer3)
-                                                lcnew3 = Math.floor(ironModifier3 * lc3)
-                                                manew3 = Math.floor(ironModifier3 * ma3)
-                                                hcnew3 = Math.floor(ironModifier3 * hc3)
-                                                ramnew3 = Math.floor(ironModifier3 * ram3)
-                                                catapultnew3 = Math.floor(ironModifier3 * catapult3)
-                                                if (hcnew3 <= villageFood3 && hcnew3 > minimal3) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew3
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew3
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew3)
-                                                } else {
-                                                    foodnew3 = spearnew3 * food[0] + swordnew3 * food[1] + axenew3 * food[2] + archernew3 * food[3] + lcnew3 * food[4] + manew3 * food[5] + ramnew3 * food[7] + catapultnew3 * food[8] + hcnew3 * food[6]
-                                                    foodAvailable3 = villageFood3 / foodnew3
-                                                    hcavailable3 = Math.floor(foodAvailable3 * hcnew3)
-                                                    if (hcavailable3 > minimal3) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable3
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable3
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable3)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitFinal3() {
-                                    if (Barracks3 > 0 && Barracks3 < 3) {
-                                        recruitSpear3()
-                                    } else if (Barracks3 >= 3 && Barracks3 < 5) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                    } else if (Barracks3 >= 5 && Barracks3 < 9) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe3()
-                                        }, 4000)
-                                    } else if (Barracks3 >= 9 && Barracks3 < 11) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe3()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher3()
-                                        }, 6000)
-                                    } else if (Barracks3 >= 11 && Barracks3 < 13) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe3()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher3()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC3()
-                                        }, 3000)
-                                    } else if (Barracks3 >= 13 && Barracks3 < 15) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe3()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher3()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC3()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA3()
-                                        }, 5000)
-                                    } else if (Barracks3 >= 15 && Barracks3 < 17) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe3()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher3()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC3()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA3()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam3()
-                                        }, 7000)
-                                    } else if (Barracks3 >= 17 && Barracks3 < 21) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe3()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher3()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC3()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA3()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam3()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult3()
-                                        }, 8000)
-                                    } else if (Barracks3 >= 21) {
-                                        recruitSpear3()
-                                        setTimeout(function() {
-                                            recruitSword3()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe3()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher3()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC3()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA3()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam3()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult3()
-                                        }, 8000)
-                                        setTimeout(function() {
-                                            recruitHC3()
-                                        }, 1000)
-                                    }
-                                }
-                                modifier3Get()
-                            }, 60000)
+                            spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                            swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                            axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                            archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                            light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                            mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                            ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                            catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                            heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                            Barracks3 = village.buildingData.data.barracks.level
+                            queue3 = village.buildingQueue.data.queue
+                            recruitingQueues = village.getRecruitingQueues()
+                            barracksQueue3 = recruitingQueues.barracks.jobs
+                            var resources = village.getResources()
+                            var computed = resources.getComputed()
+                            var woodComputed = computed.wood
+                            var clayComputed = computed.clay
+                            var ironComputed = computed.iron
+                            var foodComputed = computed.food
+                            villageFood3 = foodComputed.currentStock
+                            villageWood3 = woodComputed.currentStock
+                            villageClay3 = clayComputed.currentStock
+                            villageIron3 = ironComputed.currentStock
+                            barracksQueue3.forEach(function(job) {
+                                recruitingTime = job.clientRecruitingTime
+                                totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                barracksRecrutingTime3.push(recruitingTimeToFinish)
+                            })
+                            modifier3Get()
                         }
                     })
-                }, index * interval)
+                }, ((index + 2) * interval) + interval3)
                 setTimeout(function() {
                     groupVillages4.forEach(function(id4) {
                         if (village.data.villageId == id4) {
-                            setInterval(function() {
-                                var spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                var swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                var axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                var archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                var light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                var mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                var ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                var catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                var heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                var Barracks4 = village.buildingData.data.barracks.level
-                                var queue4 = village.buildingQueue.data.queue
-                                var recruitingQueues = village.getRecruitingQueues()
-                                var barracksQueue4 = recruitingQueues.barracks.jobs
-                                barracksQueue4.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime4.push(recruitingTimeToFinish)
-                                })
-
-                                function modifier4Get() {
-                                    if (selectedGroup4 > 0) {
-                                        if (queue4.length >= 2) {
-                                            modifier4 = 1.0
-                                        } else if (queue4.length == 1) {
-                                            modifier4 = 0.5
-                                        } else {
-                                            modifier4 = 0.25
-                                        }
-                                    } else {
-                                        modifier4 = 0.0
-                                    }
-                                    time4GetB()
-                                }
-
-                                function time4GetB() {
-                                    if (barracksRecrutingTime4.length > 0) {
-                                        barracks4TotalJobsLength = barracksRecrutingTime4.reduce(function(a, b) {
-                                            return a + b
-                                        })
-                                    } else {
-                                        barracks4TotalJobsLength = 0
-                                    }
-                                    timeModifier4Get()
-                                }
-
-                                function timeModifier4Get() {
-                                    if (selectedGroup4 > 0) {
-                                        if (barracks4TotalJobsLength >= 93600000) {
-                                            timeModifier4 = 0.00
-                                        } else if (barracks4TotalJobsLength < 93600000 && barracks4TotalJobsLength >= 86400000) {
-                                            timeModifier4 = 0.10
-                                        } else if (barracks4TotalJobsLength < 86400000 && barracks4TotalJobsLength >= 72000000) {
-                                            timeModifier4 = 0.25
-                                        } else if (barracks4TotalJobsLength < 72000000 && barracks4TotalJobsLength >= 57600000) {
-                                            timeModifier4 = 0.40
-                                        } else if (barracks4TotalJobsLength < 57600000 && barracks4TotalJobsLength >= 43200000) {
-                                            timeModifier4 = 0.55
-                                        } else if (barracks4TotalJobsLength < 43200000 && barracks4TotalJobsLength >= 28800000) {
-                                            timeModifier4 = 0.70
-                                        } else if (barracks4TotalJobsLength < 28800000 && barracks4TotalJobsLength >= 14400000) {
-                                            timeModifier4 = 0.85
-                                        } else if (barracks4TotalJobsLength < 14400000 && barracks4TotalJobsLength >= 7200000) {
-                                            timeModifier4 = 0.925
-                                        } else if (barracks4TotalJobsLength < 7200000 && barracks4TotalJobsLength >= 3600000) {
-                                            timeModifier4 = 0.9625
-                                        } else {
-                                            timeModifier4 = 1.00
-                                        }
-                                    } else {
-                                        timeModifier4 = 0.00
-                                    }
-                                    recruitFinal4()
-                                }
-
-                                function recruitSpear4() {
-                                    var spearToRecruit4 = finalSpear4 - spearAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (spearToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && spear4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'spear',
-                                                amount: spear4
-                                            })
-                                            unit = 'spear'
-                                            logData = [
-                                                unit,
-                                                spear4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, spear4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (spearnew4 <= villageFood4 && spearnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew4
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    spearavailable4 = Math.floor(foodAvailable4 * spearnew4)
-                                                    if (spearavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable4
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (spearnew4 <= villageFood4 && spearnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew4
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    spearavailable4 = Math.floor(foodAvailable4 * spearnew4)
-                                                    if (spearavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable4
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (spearnew4 <= villageFood4 && spearnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'spear',
-                                                        amount: spearnew4
-                                                    })
-                                                    unit = 'spear'
-                                                    logData = [
-                                                        unit,
-                                                        spearnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, spearnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    spearavailable4 = Math.floor(foodAvailable4 * spearnew4)
-                                                    if (spearavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'spear',
-                                                            amount: spearavailable4
-                                                        })
-                                                        unit = 'spear'
-                                                        logData = [
-                                                            unit,
-                                                            spearavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, spearavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitSword4() {
-                                    var swordToRecruit4 = finalSword4 - swordAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (swordToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && sword4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'sword',
-                                                amount: sword4
-                                            })
-                                            unit = 'sword'
-                                            logData = [
-                                                unit,
-                                                sword4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, sword4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (swordnew4 <= villageFood4 && swordnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew4
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    swordavailable4 = Math.floor(foodAvailable4 * swordnew4)
-                                                    if (swordavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable4
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (swordnew4 <= villageFood4 && swordnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew4
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    swordavailable4 = Math.floor(foodAvailable4 * swordnew4)
-                                                    if (swordavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable4
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (swordnew4 <= villageFood4 && swordnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'sword',
-                                                        amount: swordnew4
-                                                    })
-                                                    unit = 'sword'
-                                                    logData = [
-                                                        unit,
-                                                        swordnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, swordnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    swordavailable4 = Math.floor(foodAvailable4 * swordnew4)
-                                                    if (swordavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'sword',
-                                                            amount: swordavailable4
-                                                        })
-                                                        unit = 'sword'
-                                                        logData = [
-                                                            unit,
-                                                            swordavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, swordavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitAxe4() {
-                                    var axeToRecruit4 = finalAxe4 - axeAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (axeToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && axe4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'axe',
-                                                amount: axe4
-                                            })
-                                            unit = 'axe'
-                                            logData = [
-                                                unit,
-                                                axe4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, axe4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (axenew4 <= villageFood4 && axenew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew4
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    axeavailable4 = Math.floor(foodAvailable4 * axenew4)
-                                                    if (axeavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable4
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (axenew4 <= villageFood4 && axenew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew4
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    axeavailable4 = Math.floor(foodAvailable4 * axenew4)
-                                                    if (axeavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable4
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (axenew4 <= villageFood4 && axenew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'axe',
-                                                        amount: axenew4
-                                                    })
-                                                    unit = 'axe'
-                                                    logData = [
-                                                        unit,
-                                                        axenew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, axenew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    axeavailable4 = Math.floor(foodAvailable4 * axenew4)
-                                                    if (axeavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'axe',
-                                                            amount: axeavailable4
-                                                        })
-                                                        unit = 'axe'
-                                                        logData = [
-                                                            unit,
-                                                            axeavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, axeavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitArcher4() {
-                                    var archerToRecruit4 = finalArcher4 - archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (archerToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && archer4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'archer',
-                                                amount: archer4
-                                            })
-                                            unit = 'archer'
-                                            logData = [
-                                                unit,
-                                                archer4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, archer4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (archernew4 <= villageFood4 && archernew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew4
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    archeravailable4 = Math.floor(foodAvailable4 * archernew4)
-                                                    if (archeravailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable4
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (archernew4 <= villageFood4 && archernew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew4
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    archeravailable4 = Math.floor(foodAvailable4 * archernew4)
-                                                    if (archeravailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable4
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (archernew4 <= villageFood4 && archernew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'archer',
-                                                        amount: archernew4
-                                                    })
-                                                    unit = 'archer'
-                                                    logData = [
-                                                        unit,
-                                                        archernew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, archernew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    archeravailable4 = Math.floor(foodAvailable4 * archernew4)
-                                                    if (archeravailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'archer',
-                                                            amount: archeravailable4
-                                                        })
-                                                        unit = 'archer'
-                                                        logData = [
-                                                            unit,
-                                                            archeravailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, archeravailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitLC4() {
-                                    var lcToRecruit4 = finalLC4 - light_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (lcToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && lc4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'light_cavalry',
-                                                amount: lc4
-                                            })
-                                            unit = 'light_cavalry'
-                                            logData = [
-                                                unit,
-                                                lc4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, lc4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (lcnew4 <= villageFood4 && lcnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew4
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    lcavailable4 = Math.floor(foodAvailable4 * lcnew4)
-                                                    if (lcavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable4
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (lcnew4 <= villageFood4 && lcnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew4
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    lcavailable4 = Math.floor(foodAvailable4 * lcnew4)
-                                                    if (lcavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable4
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (lcnew4 <= villageFood4 && lcnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'light_cavalry',
-                                                        amount: lcnew4
-                                                    })
-                                                    unit = 'light_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        lcnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, lcnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    lcavailable4 = Math.floor(foodAvailable4 * lcnew4)
-                                                    if (lcavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'light_cavalry',
-                                                            amount: lcavailable4
-                                                        })
-                                                        unit = 'light_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            lcavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, lcavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitMA4() {
-                                    var maToRecruit4 = finalMA4 - mounted_archerAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (maToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && ma4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'mounted_archer',
-                                                amount: ma4
-                                            })
-                                            unit = 'mounted_archer'
-                                            logData = [
-                                                unit,
-                                                ma4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ma4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (manew4 <= villageFood4 && manew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew4
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    maavailable4 = Math.floor(foodAvailable4 * manew4)
-                                                    if (maavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable4
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (manew4 <= villageFood4 && manew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew4
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    maavailable4 = Math.floor(foodAvailable4 * manew4)
-                                                    if (maavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable4
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (manew4 <= villageFood4 && manew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'mounted_archer',
-                                                        amount: manew4
-                                                    })
-                                                    unit = 'mounted_archer'
-                                                    logData = [
-                                                        unit,
-                                                        manew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, manew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    maavailable4 = Math.floor(foodAvailable4 * manew4)
-                                                    if (maavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'mounted_archer',
-                                                            amount: maavailable4
-                                                        })
-                                                        unit = 'mounted_archer'
-                                                        logData = [
-                                                            unit,
-                                                            maavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, maavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitRam4() {
-                                    var ramToRecruit4 = finalRam4 - ramAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (ramToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && ram4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'ram',
-                                                amount: ram4
-                                            })
-                                            unit = 'ram'
-                                            logData = [
-                                                unit,
-                                                ram4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, ram4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (ramnew4 <= villageFood4 && ramnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew4
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    ramavailable4 = Math.floor(foodAvailable4 * ramnew4)
-                                                    if (ramavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable4
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (ramnew4 <= villageFood4 && ramnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew4
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    ramavailable4 = Math.floor(foodAvailable4 * ramnew4)
-                                                    if (ramavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable4
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (ramnew4 <= villageFood4 && ramnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'ram',
-                                                        amount: ramnew4
-                                                    })
-                                                    unit = 'ram'
-                                                    logData = [
-                                                        unit,
-                                                        ramnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, ramnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    ramavailable4 = Math.floor(foodAvailable4 * ramnew4)
-                                                    if (ramavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'ram',
-                                                            amount: ramavailable4
-                                                        })
-                                                        unit = 'ram'
-                                                        logData = [
-                                                            unit,
-                                                            ramavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, ramavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitCatapult4() {
-                                    var catapultToRecruit4 = finalCatapult4 - catapultAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (catapultToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && catapult4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'catapult',
-                                                amount: catapult4
-                                            })
-                                            unit = 'catapult'
-                                            logData = [
-                                                unit,
-                                                catapult4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, catapult4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (catapultnew4 <= villageFood4 && catapultnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew4
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    catapultavailable4 = Math.floor(foodAvailable4 * catapultnew4)
-                                                    if (catapultavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable4
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (catapultnew4 <= villageFood4 && catapultnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew4
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    catapultavailable4 = Math.floor(foodAvailable4 * catapultnew4)
-                                                    if (catapultavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable4
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (catapultnew4 <= villageFood4 && catapultnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'catapult',
-                                                        amount: catapultnew4
-                                                    })
-                                                    unit = 'catapult'
-                                                    logData = [
-                                                        unit,
-                                                        catapultnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, catapultnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    catapultavailable4 = Math.floor(foodAvailable4 * catapultnew4)
-                                                    if (catapultavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'catapult',
-                                                            amount: catapultavailable4
-                                                        })
-                                                        unit = 'catapult'
-                                                        logData = [
-                                                            unit,
-                                                            catapultavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, catapultavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitHC4() {
-                                    var hcToRecruit4 = finalHC4 - heavy_cavalryAmount
-                                    var resources = village.getResources()
-                                    var computed = resources.getComputed()
-                                    var woodComputed = computed.wood
-                                    var clayComputed = computed.clay
-                                    var ironComputed = computed.iron
-                                    var foodComputed = computed.food
-                                    var villageFood4 = foodComputed.currentStock
-                                    var villageWood4 = woodComputed.currentStock
-                                    var villageClay4 = clayComputed.currentStock
-                                    var villageIron4 = ironComputed.currentStock
-                                    var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
-                                    var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
-                                    var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
-                                    var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
-                                    var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
-                                    var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
-                                    var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
-                                    var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
-                                    var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
-                                    var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
-                                    var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
-                                    var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
-                                    var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
-                                    if (hcToRecruit4 <= 0) {
-                                        console.log('Brak możliwości rekrutacji')
-                                    } else {
-                                        if (wood4 <= villageWood4 && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4 && hc4 > minimal4) {
-                                            socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                village_id: village.getId(),
-                                                unit_type: 'heavy_cavalry',
-                                                amount: hc4
-                                            })
-                                            unit = 'heavy_cavalry'
-                                            logData = [
-                                                unit,
-                                                hc4
-                                            ]
-                                            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                            addLog(village.getId(), unit, hc4)
-                                        } else {
-                                            if (villageWood4 < villageClay4 && villageWood4 < villageIron4) {
-                                                woodModifier4 = villageWood4 / wood4
-                                                spearnew4 = Math.floor(woodModifier4 * spear4)
-                                                swordnew4 = Math.floor(woodModifier4 * sword4)
-                                                axenew4 = Math.floor(woodModifier4 * axe4)
-                                                archernew4 = Math.floor(woodModifier4 * archer4)
-                                                lcnew4 = Math.floor(woodModifier4 * lc4)
-                                                manew4 = Math.floor(woodModifier4 * ma4)
-                                                hcnew4 = Math.floor(woodModifier4 * hc4)
-                                                ramnew4 = Math.floor(woodModifier4 * ram4)
-                                                catapultnew4 = Math.floor(woodModifier4 * catapult4)
-                                                if (hcnew4 <= villageFood4 && hcnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew4
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    hcavailable4 = Math.floor(foodAvailable4 * hcnew4)
-                                                    if (hcavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable4
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable4)
-                                                    }
-                                                }
-                                            } else if (villageClay4 < villageWood4 && villageClay4 < villageIron4) {
-                                                clayModifier4 = villageClay4 / clay4
-                                                spearnew4 = Math.floor(clayModifier4 * spear4)
-                                                swordnew4 = Math.floor(clayModifier4 * sword4)
-                                                axenew4 = Math.floor(clayModifier4 * axe4)
-                                                archernew4 = Math.floor(clayModifier4 * archer4)
-                                                lcnew4 = Math.floor(clayModifier4 * lc4)
-                                                manew4 = Math.floor(clayModifier4 * ma4)
-                                                hcnew4 = Math.floor(clayModifier4 * hc4)
-                                                ramnew4 = Math.floor(clayModifier4 * ram4)
-                                                catapultnew4 = Math.floor(clayModifier4 * catapult4)
-                                                if (hcnew4 <= villageFood4 && hcnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew4
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    hcavailable4 = Math.floor(foodAvailable4 * hcnew4)
-                                                    if (hcavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable4
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable4)
-                                                    }
-                                                }
-                                            } else if (villageIron4 < villageWood4 && villageClay4 > villageIron4) {
-                                                ironModifier4 = villageIron4 / iron4
-                                                spearnew4 = Math.floor(ironModifier4 * spear4)
-                                                swordnew4 = Math.floor(ironModifier4 * sword4)
-                                                axenew4 = Math.floor(ironModifier4 * axe4)
-                                                archernew4 = Math.floor(ironModifier4 * archer4)
-                                                lcnew4 = Math.floor(ironModifier4 * lc4)
-                                                manew4 = Math.floor(ironModifier4 * ma4)
-                                                hcnew4 = Math.floor(ironModifier4 * hc4)
-                                                ramnew4 = Math.floor(ironModifier4 * ram4)
-                                                catapultnew4 = Math.floor(ironModifier4 * catapult4)
-                                                if (hcnew4 <= villageFood4 && hcnew4 > minimal4) {
-                                                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                        village_id: village.getId(),
-                                                        unit_type: 'heavy_cavalry',
-                                                        amount: hcnew4
-                                                    })
-                                                    unit = 'heavy_cavalry'
-                                                    logData = [
-                                                        unit,
-                                                        hcnew4
-                                                    ]
-                                                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                    addLog(village.getId(), unit, hcnew4)
-                                                } else {
-                                                    foodnew4 = spearnew4 * food[0] + swordnew4 * food[1] + axenew4 * food[2] + archernew4 * food[3] + lcnew4 * food[4] + manew4 * food[5] + ramnew4 * food[7] + catapultnew4 * food[8] + hcnew4 * food[6]
-                                                    foodAvailable4 = villageFood4 / foodnew4
-                                                    hcavailable4 = Math.floor(foodAvailable4 * hcnew4)
-                                                    if (hcavailable4 > minimal4) {
-                                                        socketService.emit(routeProvider.BARRACKS_RECRUIT, {
-                                                            village_id: village.getId(),
-                                                            unit_type: 'heavy_cavalry',
-                                                            amount: hcavailable4
-                                                        })
-                                                        unit = 'heavy_cavalry'
-                                                        logData = [
-                                                            unit,
-                                                            hcavailable4
-                                                        ]
-                                                        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
-                                                        addLog(village.getId(), unit, hcavailable4)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                function recruitFinal4() {
-                                    if (Barracks4 > 0 && Barracks4 < 3) {
-                                        recruitSpear4()
-                                    } else if (Barracks4 >= 3 && Barracks4 < 5) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                    } else if (Barracks4 >= 5 && Barracks4 < 9) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe4()
-                                        }, 4000)
-                                    } else if (Barracks4 >= 9 && Barracks4 < 11) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe4()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher4()
-                                        }, 6000)
-                                    } else if (Barracks4 >= 11 && Barracks4 < 13) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe4()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher4()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC4()
-                                        }, 3000)
-                                    } else if (Barracks4 >= 13 && Barracks4 < 15) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe4()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher4()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC4()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA4()
-                                        }, 5000)
-                                    } else if (Barracks4 >= 15 && Barracks4 < 17) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe4()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher4()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC4()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA4()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam4()
-                                        }, 7000)
-                                    } else if (Barracks4 >= 17 && Barracks4 < 21) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe4()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher4()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC4()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA4()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam4()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult4()
-                                        }, 8000)
-                                    } else if (Barracks4 >= 21) {
-                                        recruitSpear4()
-                                        setTimeout(function() {
-                                            recruitSword4()
-                                        }, 2000)
-                                        setTimeout(function() {
-                                            recruitAxe4()
-                                        }, 4000)
-                                        setTimeout(function() {
-                                            recruitArcher4()
-                                        }, 6000)
-                                        setTimeout(function() {
-                                            recruitLC4()
-                                        }, 3000)
-                                        setTimeout(function() {
-                                            recruitMA4()
-                                        }, 5000)
-                                        setTimeout(function() {
-                                            recruitRam4()
-                                        }, 7000)
-                                        setTimeout(function() {
-                                            recruitCatapult4()
-                                        }, 8000)
-                                        setTimeout(function() {
-                                            recruitHC4()
-                                        }, 1000)
-                                    }
-                                }
-                                modifier4Get()
-                            }, 60000)
+                            spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                            swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                            axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                            archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                            light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                            mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                            ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                            catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                            heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                            Barracks4 = village.buildingData.data.barracks.level
+                            queue4 = village.buildingQueue.data.queue
+                            recruitingQueues = village.getRecruitingQueues()
+                            barracksQueue4 = recruitingQueues.barracks.jobs
+                            var resources = village.getResources()
+                            var computed = resources.getComputed()
+                            var woodComputed = computed.wood
+                            var clayComputed = computed.clay
+                            var ironComputed = computed.iron
+                            var foodComputed = computed.food
+                            villageFood4 = foodComputed.currentStock
+                            villageWood4 = woodComputed.currentStock
+                            villageClay4 = clayComputed.currentStock
+                            villageIron4 = ironComputed.currentStock
+                            barracksQueue4.forEach(function(job) {
+                                recruitingTime = job.clientRecruitingTime
+                                totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                barracksRecrutingTime4.push(recruitingTimeToFinish)
+                            })
+                            modifier4Get()
                         }
                     })
-                }, index * interval)
+                }, ((index + 3) * interval) + interval4)
             })
         }
         getVillageData()
@@ -31799,11 +27344,11 @@ define('two/recruitQueue/ui', [
             }
             setTimeout(function () {            
                 $scope.showCycleTimer = true
-                $scope.nextCycleCountdown = 60000
+                $scope.nextCycleCountdown = 66000
                 cycleCountdownTimer = setInterval(function () {
                     $scope.nextCycleCountdown -= 1000
                 }, 1000)
-            }, 60000)
+            }, 66000)
         }
     }
     const init = function() {
