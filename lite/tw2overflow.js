@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 04 Dec 2020 22:53:13 GMT
+ * Fri, 04 Dec 2020 23:21:34 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -27051,14 +27051,10 @@ define('two/recruitQueue', [
                 }
             })
         }
+        getVillageData()
         setInterval(function() {
-            if (running == true) {
-                getVillageData()
-            }
-        }, recruitQueue.getCycleInterval)
-        if (running == true) {
             getVillageData()
-        }
+        }, getCycleInterval)
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END)
     }
     recruitQueue.getLogs = function() {
