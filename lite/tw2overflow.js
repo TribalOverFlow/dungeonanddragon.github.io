@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 04 Dec 2020 23:44:50 GMT
+ * Fri, 04 Dec 2020 23:50:35 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23884,9 +23884,9 @@ define('two/recruitQueue', [
     let nextCycleDate = null
     let logData = []
     const LOGS_LIMIT = 500
-    const MINIMUM_RECRUIT_CYCLE_INTERVAL = 1 // minutes
+    const MINIMUM_RECRUIT_CYCLE_INTERVAL = 1
     let runningRecrutation = null
-    let interval5 = Math.max(MINIMUM_RECRUIT_CYCLE_INTERVAL, recruitQueueSettings[SETTINGS.RECRUIT_QUEUE_INTERVAL] * 60 * 1000)
+    let interval5 = 0
     let selectedGroups1 = []
     let selectedGroups2 = []
     let selectedGroups3 = []
@@ -27066,6 +27066,7 @@ define('two/recruitQueue', [
         running = true
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_START)
         addLog(LOG_TYPES.RECRUIT_START, 'start', '')
+        interval5 = Math.max(MINIMUM_RECRUIT_CYCLE_INTERVAL, recruitQueueSettings[SETTINGS.RECRUIT_QUEUE_INTERVAL] * 60 * 1000)
         runningRecrutation = setInterval(function() {
             recruitQueue.presetRecrutation()
         }, interval5)
