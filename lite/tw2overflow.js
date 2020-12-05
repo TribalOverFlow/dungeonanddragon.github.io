@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 05 Dec 2020 20:19:11 GMT
+ * Sat, 05 Dec 2020 21:13:02 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22429,7 +22429,7 @@ define('two/prankHelper', [
             }
         })
         prankHelperSettings = settings.getAll()
-        console.log('all settings', prankHelperSettings)
+        console.log('prankHelper settings', prankHelperSettings)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
@@ -22455,14 +22455,15 @@ define('two/prankHelper', [
         var type = prankHelperSettings[SETTINGS.TYPE1]
         var min = prankHelperSettings[SETTINGS.FROM1]
         var max = prankHelperSettings[SETTINGS.TO1]
+        console.log(min, max)
         var interval = 4000
         var i = null
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         var oldName = null
         var newName = ''
-        var minNew = alphabet.IndexOf(min)
-        var maxNew = alphabet.IndexOf(max)
+        var minNew = alphabet.indexOf(min)
+        var maxNew = alphabet.indexOf(max)
         if (type == 'increase') {
             if (isNaN(min) && isNaN(max)) {
                 minNew = alphabet.IndexOf(min)
