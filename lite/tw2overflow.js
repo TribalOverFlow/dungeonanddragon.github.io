@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 05 Dec 2020 00:46:42 GMT
+ * Sat, 05 Dec 2020 19:42:00 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1429,6 +1429,7 @@ define('two/language', [
         "prank_helper": {
             "title": "Błazen",
             "rename": "Nazwy wiosek",
+            "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
             "rename.type": "Typ",
             "rename.prologue": "Prefix/Przedrostek",
@@ -1441,6 +1442,7 @@ define('two/language', [
             "rename.tip": "Litera lub liczba",
             "rename.clear": "Wyczyść",
             "rename.start": "Zmień",
+            "rename.stop": "Zatrzymaj",
             "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
             "rename.add_village": "Wybierz wioskę...",
             "rename.no_village": "Nie wybrano wioski",
@@ -1457,7 +1459,9 @@ define('two/language', [
             "logs.clear": "Wyczyść logi",
             "decrease": "Malejąco/Z-A",
             "increase": "Rosnąco/A-Z",
-            "random": "Domyślnie"
+            "random": "Bez Iteracji",
+            "rename_started": "Przemianowanie wiosek rozpoczęte",
+            "rename_stopped": "Przemianowanie wiosek zakończone"
         },
         "preset_asigner": {
             "title": "Administrator",
@@ -1492,7 +1496,12 @@ define('two/language', [
             "title": "Kapitan",
             "presets": "Szablonowa",
             "recruit_cycle_interval": "Cykl rekrutacji(w minutach)",
-            "reseted_logs": "Zarejestrowane logi zostały wyczyszczone.",
+            "unit_cycle_interval": "Odstęp rekrutacji jednostek(w sekundach)",
+            "group_cycle_interval": "Czas na analize wioski(w sekundach)",
+            "recruit_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich wiosek  - domyślnie 60 minut. Uwaga! Jeśli zabraknie czasu na wszystkie wioski rekrutcja będzie się dublować.",
+            "unit_cycle_tooltip": "Odstęp w jakim mają zostać dodane do rekrutacji pojedyncze typy jednostek - domyślnie 6 sekund",
+            "group_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich jednostek na pojedyńczej wiosce(domyślnie 60 sekund - 9 typów jednostek * domyslny odstep rekrutacji jednostek = 58",
+            "reseted_logs": "Logi wyczyszczone.",
             "recrutation_in": "Cykl rekrutacji potrwa",
             "preset.settings": "Ustawienia główne",
             "presets.recruit": "Rekrutacja z szablonów",
@@ -1525,6 +1534,7 @@ define('two/language', [
             "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
             "start": "Roczpoczęto rekrutację",
             "stop": "Zatrzymano rekrutację",
+            "cycle.end": "Kończenie bierzącego cyklu",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -2792,6 +2802,7 @@ define('two/language', [
         "prank_helper": {
             "title": "Błazen",
             "rename": "Nazwy wiosek",
+            "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
             "rename.type": "Typ",
             "rename.prologue": "Prefix/Przedrostek",
@@ -2804,6 +2815,7 @@ define('two/language', [
             "rename.tip": "Litera lub liczba",
             "rename.clear": "Wyczyść",
             "rename.start": "Zmień",
+            "rename.stop": "Zatrzymaj",
             "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
             "rename.add_village": "Wybierz wioskę...",
             "rename.no_village": "Nie wybrano wioski",
@@ -2820,7 +2832,9 @@ define('two/language', [
             "logs.clear": "Wyczyść logi",
             "decrease": "Malejąco/Z-A",
             "increase": "Rosnąco/A-Z",
-            "random": "Domyślnie"
+            "random": "Domyślnie",
+            "rename_started": "Przemianowanie wiosek rozpoczęte",
+            "rename_stopped": "Przemianowanie wiosek zakończone"
         },
         "preset_asigner": {
             "title": "Administrator",
@@ -2855,7 +2869,12 @@ define('two/language', [
             "title": "Kapitan",
             "presets": "Szablonowa",
             "recruit_cycle_interval": "Cykl rekrutacji(w minutach)",
-            "reseted_logs": "Zarejestrowane logi zostały wyczyszczone.",
+            "unit_cycle_interval": "Odstęp rekrutacji jednostek(w sekundach)",
+            "group_cycle_interval": "Czas na analize wioski(w sekundach)",
+            "recruit_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich wiosek  - domyślnie 60 minut. Uwaga! Jeśli zabraknie czasu na wszystkie wioski rekrutcja będzie się dublować.",
+            "unit_cycle_tooltip": "Odstęp w jakim mają zostać dodane do rekrutacji pojedyncze typy jednostek - domyślnie 6 sekund",
+            "group_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich jednostek na pojedyńczej wiosce(domyślnie 60 sekund - 9 typów jednostek * domyslny odstep rekrutacji jednostek = 58",
+            "reseted_logs": "Logi wyczyszczone.",
             "recrutation_in": "Cykl rekrutacji potrwa",
             "preset.settings": "Ustawienia główne",
             "presets.recruit": "Rekrutacja z szablonów",
@@ -2888,6 +2907,7 @@ define('two/language', [
             "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
             "start": "Roczpoczęto rekrutację",
             "stop": "Zatrzymano rekrutację",
+            "cycle.end": "Kończenie bierzącego cyklu",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -22341,104 +22361,212 @@ define('two/prankHelper', [
     'two/prankHelper/settings/updates',
     'two/prankHelper/types/type',
     'two/ready',
-    'queues/EventQueue'
-], function (
+    'helper/time',
+    'queues/EventQueue',
+    'Lockr'
+], function(
     Settings,
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
     PH_TYPE,
     ready,
-    eventQueue
+    timeHelper,
+    eventQueue,
+    Lockr
 ) {
     let initialized = false
     let running = false
+    const LOGS_LIMIT = 500
     let settings
     let prankHelperSettings
-
+    let logs = []
     let selectedGroups = []
-
     const STORAGE_KEYS = {
+        LOGS: 'prank_helper_logs',
         SETTINGS: 'prank_helper_settings'
     }
-	
     const RENAME_TYPE = {
         [PH_TYPE.INCREASE]: 'increase',
         [PH_TYPE.DECREASE]: 'decrease',
         [PH_TYPE.RANDOM]: 'random'
     }
-
     console.log(RENAME_TYPE)
-
-    const updateGroups = function () {
+    const updateGroups = function() {
         selectedGroups = []
-
         const allGroups = modelDataService.getGroupList().getGroups()
         const groupsSelectedByTheUser = prankHelperSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
+        groupsSelectedByTheUser.forEach(function(groupId) {
             selectedGroups.push(allGroups[groupId])
         })
     }
-
+    const addLog = function(villageId, oldname, newname) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            oldname: oldname,
+            newname: newname
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_LOGS_UPDATED)
+        return true
+    }
+    prankHelper.renameGroup = function renameGroup() {}
+    prankHelper.renameProvince = function renameProvince() {}
+    prankHelper.renameAll = function renameAll() {
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        var validName = prankHelperSettings[SETTINGS.CENTER1]
+        var prefix = prankHelperSettings[SETTINGS.PROLOGUE1]
+        var sufix = prankHelperSettings[SETTINGS.EPILOGUE1]
+        var type = prankHelperSettings[SETTINGS.TYPE1]
+        var min = prankHelperSettings[SETTINGS.FROM1]
+        var max = prankHelperSettings[SETTINGS.TO1]
+        var interval = 4000
+        var i = null
+        var villageIdSet = 0
+        var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        var oldName = null
+        var newName = ''
+        var minNew = alphabet.IndexOf(min)
+        var maxNew = alphabet.IndexOf(max)
+        if (type == 'increase') {
+            if (typeof min == 'number' && typeof max == 'number') {
+                for (i = min; i <= max; i++) {
+                    newName = prefix + validName + sufix + ' ' + i
+                    villages.forEach(function(village, index) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    })
+                }
+            } else {
+                villages.forEach(function(village, index) {
+                    villageIdSet = village.getId()
+                    oldName = village.getName()
+                    for (i = minNew; i <= maxNew; i++) {
+                        newName = prefix + validName + sufix + ' ' + alphabet[i]
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    }
+                })
+            }
+        } else if (type == 'decrease') {
+            if (typeof min == 'number' && typeof max == 'number') {
+                for (i = max; i >= min; i--) {
+                    newName = prefix + validName + sufix + ' ' + i
+                    villages.forEach(function(village, index) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    })
+                }
+            } else {
+                villages.forEach(function(village, index) {
+                    villageIdSet = village.getId()
+                    oldName = village.getName()
+                    for (i = maxNew; i >= minNew; i--) {
+                        newName = prefix + validName + sufix + ' ' + alphabet[i]
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    }
+                })
+            }
+        } else {
+            newName = prefix + validName + sufix
+            villages.forEach(function(village, index) {
+                villageIdSet = village.getId()
+                oldName = village.getName()
+                setTimeout(function() {
+                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                        village_id: village.getId(),
+                        name: newName
+                    })
+                    addLog(villageIdSet, newName, oldName)
+                }, index * interval)
+            })
+        }
+    }
     const prankHelper = {}
-
-    prankHelper.init = function () {
+    prankHelper.init = function() {
         initialized = true
-
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function(changes, updates) {
             prankHelperSettings = settings.getAll()
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
         })
-
         prankHelperSettings = settings.getAll()
-
         console.log('all settings', prankHelperSettings)
-
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
-
-    prankHelper.start = function () {
+    prankHelper.start = function() {
         running = true
-
+        addLog('Rozpoczęto przemianowanie', '', '')
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
     }
-
-    prankHelper.stop = function () {
+    prankHelper.stop = function() {
         running = false
-
+        addLog('Zatrzymano przemianowanie', '', '')
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
     }
-
-    prankHelper.getSettings = function () {
+    prankHelper.getSettings = function() {
         return settings
     }
-
-    prankHelper.isInitialized = function () {
+    prankHelper.isInitialized = function() {
         return initialized
     }
-
-    prankHelper.isRunning = function () {
+    prankHelper.isRunning = function() {
         return running
     }
-
+    prankHelper.getLogs = function() {
+        return logs
+    }
+    prankHelper.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_LOGS_UPDATED)
+        return logs
+    }
     return prankHelper
 })
-
 define('two/prankHelper/events', [], function () {
     angular.extend(eventTypeProvider, {
         PRANK_HELPER_START: 'prank_helper_start',
-        PRANK_HELPER_STOP: 'prank_helper_stop'
+        PRANK_HELPER_STOP: 'prank_helper_stop',
+        PRANK_HELPER_LOGS_UPDATED: 'prank_helper_logs_updated'
     })
 })
 
@@ -22450,8 +22578,9 @@ define('two/prankHelper/ui', [
     'two/prankHelper/types/type',
     'two/Settings',
     'two/EventScope',
-    'two/utils'
-], function (
+    'two/utils',
+    'queues/EventQueue'
+], function(
     interfaceOverflow,
     prankHelper,
     SETTINGS,
@@ -22459,105 +22588,189 @@ define('two/prankHelper/ui', [
     PH_TYPE,
     Settings,
     EventScope,
-    utils
+    utils,
+    eventQueue
 ) {
     let $scope
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    
+    let villagesInfo = {}
+    let villagesLabel = {}
     const TAB_TYPES = {
         RENAME: 'rename',
         LOGS: 'logs'
     }
-
-    const selectTab = function (tabType) {
+    const updateVisibleLogs = function() {
+        const offset = $scope.pagination.offset
+        const limit = $scope.pagination.limit
+        $scope.visibleLogs = $scope.logs.slice(offset, offset + limit)
+        $scope.pagination.count = $scope.logs.length
+        $scope.visibleLogs.forEach(function(log) {
+            if (log.villageId) {
+                loadVillageInfo(log.villageId)
+            }
+        })
+    }
+    const selectTab = function(tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
+    const renameAll = function() {
         if (prankHelper.isRunning()) {
             prankHelper.stop()
         } else {
             prankHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            prankHelper.renameAll()
         }
     }
-
+    const renameProvince = function() {
+        if (prankHelper.isRunning()) {
+            prankHelper.stop()
+        } else {
+            prankHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            prankHelper.renameProvince()
+        }
+    }
+    const renameGroup = function() {
+        if (prankHelper.isRunning()) {
+            prankHelper.stop()
+        } else {
+            prankHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            prankHelper.renameGroup()
+        }
+    }
+    const clear = function() {
+        $scope.settings[SETTINGS.GROUPS] = false
+        $scope.settings[SETTINGS.TYPE1] = false
+        $scope.settings[SETTINGS.TYPE2] = false
+        $scope.settings[SETTINGS.TYPE3] = false
+        $scope.settings[SETTINGS.CENTER1] = ''
+        $scope.settings[SETTINGS.CENTER2] = ''
+        $scope.settings[SETTINGS.CENTER3] = ''
+        $scope.settings[SETTINGS.PROLOGUE1] = ''
+        $scope.settings[SETTINGS.PROLOGUE2] = ''
+        $scope.settings[SETTINGS.PROLOGUE3] = ''
+        $scope.settings[SETTINGS.EPILOGUE1] = ''
+        $scope.settings[SETTINGS.EPILOGUE2] = ''
+        $scope.settings[SETTINGS.EPILOGUE3] = ''
+        $scope.settings[SETTINGS.FROM1] = ''
+        $scope.settings[SETTINGS.FROM2] = ''
+        $scope.settings[SETTINGS.FROM3] = ''
+        $scope.settings[SETTINGS.TO1] = ''
+        $scope.settings[SETTINGS.TO2] = ''
+        $scope.settings[SETTINGS.TO3] = ''
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ładowanie...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
     const eventHandlers = {
-        updateGroups: function () {
+        updateGroups: function() {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
                 type: 'groups'
             })
         },
-        start: function () {
+        start: function() {
             $scope.running = true
-
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
+            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'prank_helper'))
         },
-        stop: function () {
+        stop: function() {
             $scope.running = false
-
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
+            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'prank_helper'))
+        },
+        updateLogs: function() {
+            $scope.logs = angular.copy(prankHelper.getLogs())
+            updateVisibleLogs()
+            if (!$scope.logs.length) {
+                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'prank_helper'))
+            }
         }
     }
-
-    const init = function () {
+    const init = function() {
         settings = prankHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Błazen', 80)
+        $button = interfaceOverflow.addMenuButton3('Błazen', 80, $filter('i18n')('description', $rootScope.loc.ale, 'prank_helper'))
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'rename.add_village' | i18n:loc.ale:'prank_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody class=\"renameLog\"><tr class=\"noRenames\"><td colspan=\"4\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .renameLog td{text-align:center}#two-prank-helper .renameLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-prank-helper .renameLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-prank-helper .noRenames td{height:26px;text-align:center}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
+        eventQueue.register(eventTypeProvider.PRANK_HELPER_START, function() {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+        eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'rename.add_village' | i18n:loc.ale:'prank_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleLogs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"log-list tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in visibleLogs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.oldname }}<td>{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-prank-helper .logs .status tr{height:25px}#two-prank-helper .logs .status td{padding:0 6px}#two-prank-helper .logs .log-list{margin-bottom:10px}#two-prank-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-prank-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-prank-helper .icon-20x20-village:before{margin-top:-11px}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = prankHelper.isRunning()
         $scope.selectedTab = TAB_TYPES.RENAME
+        $scope.villagesLabel = villagesLabel
+        $scope.villagesInfo = villagesInfo
+        $scope.logs = prankHelper.getLogs()
+        $scope.visibleLogs = []
         $scope.settingsMap = SETTINGS_MAP
+        $scope.pagination = {
+            count: $scope.logs.length,
+            offset: 0,
+            loader: updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
         $scope.type = Settings.encodeList(PH_TYPE, {
             textObject: 'prank_helper',
             disabled: true
         })
-
         settings.injectScope($scope)
         eventHandlers.updateGroups()
-
+        updateVisibleLogs()
         $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_prank_helper_window', function onDestroy () {
+        $scope.clear = clear
+        $scope.clearLogs = prankHelper.clearLogs
+        $scope.renameAll = renameAll
+        $scope.renameProvince = renameProvince
+        $scope.renameGroup = renameGroup
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        let eventScope = new EventScope('twoverflow_prank_helper_window', function onDestroy() {
             console.log('example window closed')
         })
-
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.PRANK_HELPER_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.PRANK_HELPER_STOP, eventHandlers.stop)
-        
+        eventScope.register(eventTypeProvider.PRANK_HELPER_LOGS_UPDATED, eventHandlers.updateLogs)
         windowManagerService.getScreenWithInjectedScope('!twoverflow_prank_helper_window', $scope)
     }
-
     return init
 })
-
 define('two/prankHelper/settings', [], function () {
     return {
         GROUPS: 'groups',
@@ -22620,6 +22833,66 @@ define('two/prankHelper/settings/map', [
             default: false,
             disabledOption: true,
             inputType: 'select'
+        },
+        [SETTINGS.CENTER1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.CENTER2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.CENTER3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.TO1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.TO2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.TO3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.FROM1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.FROM2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.FROM3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.EPILOGUE1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.EPILOGUE2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.EPILOGUE3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.PROLOGUE1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.PROLOGUE2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.PROLOGUE3]: {
+            default: '',
+            inputType: 'text'
         }
     }
 })
@@ -22648,7 +22921,7 @@ require([
     ready(function () {
         prankHelper.init()
         prankHelperInterface()
-    })
+    }, ['map'])
 })
 
 define('two/presetAsigner', [
@@ -23911,6 +24184,7 @@ define('two/recruitQueue', [
     let selectedGroups22 = []
     let selectedGroups23 = []
     let selectedGroups24 = []
+    let unitInterval = 6000
     const STORAGE_KEYS = {
         SETTINGS: 'recruit_queue_settings',
         LOGS: 'recruit_queue_log',
@@ -24735,47 +25009,47 @@ define('two/recruitQueue', [
                 }, 5000)
                 setTimeout(function() {
                     recruitSpear1()
-                }, 6000)
+                }, unitInterval)
                 setTimeout(function() {
                     if (Barracks1 >= 3) {
                         recruitSword1()
                     }
-                }, 12000)
+                }, unitInterval * 2)
                 setTimeout(function() {
                     if (Barracks1 >= 5) {
                         recruitAxe1()
                     }
-                }, 18000)
+                }, unitInterval * 3)
                 setTimeout(function() {
                     if (Barracks1 >= 9) {
                         recruitArcher1()
                     }
-                }, 24000)
+                }, unitInterval * 4)
                 setTimeout(function() {
                     if (Barracks1 >= 11) {
                         recruitLc1()
                     }
-                }, 30000)
+                }, unitInterval * 5)
                 setTimeout(function() {
                     if (Barracks1 >= 13) {
                         recruitMa1()
                     }
-                }, 36000)
+                }, unitInterval * 6)
                 setTimeout(function() {
                     if (Barracks1 >= 15) {
                         recruitRam1()
                     }
-                }, 42000)
+                }, unitInterval * 7)
                 setTimeout(function() {
                     if (Barracks1 >= 17) {
                         recruitCatapult1()
                     }
-                }, 48000)
+                }, unitInterval * 8)
                 setTimeout(function() {
                     if (Barracks1 >= 21) {
                         recruitHc1()
                     }
-                }, 54000)
+                }, unitInterval * 9)
             } else {
                 console.log('Brak jednostek do rekrutacji')
             }
@@ -25386,47 +25660,47 @@ define('two/recruitQueue', [
                 }, 5000)
                 setTimeout(function() {
                     recruitSpear2()
-                }, 6000)
+                }, unitInterval)
                 setTimeout(function() {
                     if (Barracks2 >= 3) {
                         recruitSword2()
                     }
-                }, 12000)
+                }, unitInterval * 2)
                 setTimeout(function() {
                     if (Barracks2 >= 5) {
                         recruitAxe2()
                     }
-                }, 18000)
+                }, unitInterval * 3)
                 setTimeout(function() {
                     if (Barracks2 >= 9) {
                         recruitArcher2()
                     }
-                }, 24000)
+                }, unitInterval * 4)
                 setTimeout(function() {
                     if (Barracks2 >= 11) {
                         recruitLc2()
                     }
-                }, 30000)
+                }, unitInterval * 5)
                 setTimeout(function() {
                     if (Barracks2 >= 13) {
                         recruitMa2()
                     }
-                }, 36000)
+                }, unitInterval * 6)
                 setTimeout(function() {
                     if (Barracks2 >= 15) {
                         recruitRam2()
                     }
-                }, 42000)
+                }, unitInterval * 7)
                 setTimeout(function() {
                     if (Barracks2 >= 17) {
                         recruitCatapult2()
                     }
-                }, 48000)
+                }, unitInterval * 8)
                 setTimeout(function() {
                     if (Barracks2 >= 21) {
                         recruitHc2()
                     }
-                }, 54000)
+                }, unitInterval * 9)
             } else {
                 console.log('Brak jednostek do rekrutacji')
             }
@@ -26037,47 +26311,47 @@ define('two/recruitQueue', [
                 }, 5000)
                 setTimeout(function() {
                     recruitSpear3()
-                }, 6000)
+                }, unitInterval)
                 setTimeout(function() {
                     if (Barracks3 >= 3) {
                         recruitSword3()
                     }
-                }, 12000)
+                }, unitInterval * 2)
                 setTimeout(function() {
                     if (Barracks3 >= 5) {
                         recruitAxe3()
                     }
-                }, 18000)
+                }, unitInterval * 3)
                 setTimeout(function() {
                     if (Barracks3 >= 9) {
                         recruitArcher3()
                     }
-                }, 24000)
+                }, unitInterval * 4)
                 setTimeout(function() {
                     if (Barracks3 >= 11) {
                         recruitLc3()
                     }
-                }, 30000)
+                }, unitInterval * 5)
                 setTimeout(function() {
                     if (Barracks3 >= 13) {
                         recruitMa3()
                     }
-                }, 36000)
+                }, unitInterval * 6)
                 setTimeout(function() {
                     if (Barracks3 >= 15) {
                         recruitRam3()
                     }
-                }, 42000)
+                }, unitInterval * 7)
                 setTimeout(function() {
                     if (Barracks3 >= 17) {
                         recruitCatapult3()
                     }
-                }, 48000)
+                }, unitInterval * 8)
                 setTimeout(function() {
                     if (Barracks3 >= 21) {
                         recruitHc3()
                     }
-                }, 54000)
+                }, unitInterval * 9)
             } else {
                 console.log('Brak jednostek do rekrutacji')
             }
@@ -26690,47 +26964,47 @@ define('two/recruitQueue', [
                 }, 5000)
                 setTimeout(function() {
                     recruitSpear4()
-                }, 6000)
+                }, unitInterval)
                 setTimeout(function() {
                     if (Barracks4 >= 3) {
                         recruitSword4()
                     }
-                }, 12000)
+                }, unitInterval * 2)
                 setTimeout(function() {
                     if (Barracks4 >= 5) {
                         recruitAxe4()
                     }
-                }, 18000)
+                }, unitInterval * 3)
                 setTimeout(function() {
                     if (Barracks4 >= 9) {
                         recruitArcher4()
                     }
-                }, 24000)
+                }, unitInterval * 4)
                 setTimeout(function() {
                     if (Barracks4 >= 11) {
                         recruitLc4()
                     }
-                }, 30000)
+                }, unitInterval * 5)
                 setTimeout(function() {
                     if (Barracks4 >= 13) {
                         recruitMa4()
                     }
-                }, 36000)
+                }, unitInterval * 6)
                 setTimeout(function() {
                     if (Barracks4 >= 15) {
                         recruitRam4()
                     }
-                }, 42000)
+                }, unitInterval * 7)
                 setTimeout(function() {
                     if (Barracks4 >= 17) {
                         recruitCatapult4()
                     }
-                }, 48000)
+                }, unitInterval * 8)
                 setTimeout(function() {
                     if (Barracks4 >= 21) {
                         recruitHc4()
                     }
-                }, 54000)
+                }, unitInterval * 9)
             }
 
             function recruitSpear4() {
@@ -26908,11 +27182,11 @@ define('two/recruitQueue', [
         function getVillageData() {
             var player = modelDataService.getSelectedCharacter()
             var villages = player.getVillageList()
-            console.log(villages)
-            var interval = 60000
-            var interval2 = (villages.length * 60000)
-            var interval3 = (villages.length * 60000) + (villages.length * 60000)
-            var interval4 = (villages.length * 60000) + (villages.length * 60000) + (villages.length * 60000)
+            unitInterval = recruitQueueSettings[SETTINGS.UNIT_QUEUE_INTERVAL] * 1000
+            var interval = recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000
+            var interval2 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            var interval3 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            var interval4 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
             villages.forEach(function(village, index) {
                 if (selectedGroup1) {
                     setTimeout(function() {
@@ -27113,6 +27387,7 @@ define('two/recruitQueue', [
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END, reason)
         if (reason === STATUS.USER_STOP) {
             addLog(LOG_TYPES.RECRUIT_STOP, 'stop', '')
+            addLog(LOG_TYPES.RECRUIT_STOP, 'cycle.end', '')
         }
     }
     recruitQueue.getSettings = function() {
@@ -27466,7 +27741,7 @@ define('two/recruitQueue/ui', [
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
         })
-        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><p ng-show=\"showCycleTimer\" class=\"text-center timer\">{{ 'recrutation_in' | i18n:loc.ale:'recruit_queue' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}<h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tbody><tr><th colspan=\"3\">{{ 'preset.settings' | i18n:loc.ale:'recruit_queue' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'recruit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.RECRUIT_QUEUE_INTERVAL]\"><tr><th colspan=\"3\">{{ 'preset.recruit1' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK1]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><th colspan=\"3\">{{ 'preset.recruit2' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK2]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><th colspan=\"3\">{{ 'preset.recruit3' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK3]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><th colspan=\"3\">{{ 'preset.recruit4' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK4]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }} Nie działa jeszcze</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text logs\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"link\" ng-class=\"{
+        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><p ng-show=\"showCycleTimer\" class=\"text-center timer\">{{ 'recrutation_in' | i18n:loc.ale:'recruit_queue' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}<h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tbody><tr><th colspan=\"3\">{{ 'preset.settings' | i18n:loc.ale:'recruit_queue' }}<tr><td tooltip=\"\" tooltip-content=\"{{ 'recruit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'recruit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.RECRUIT_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'group_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'group_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.GROUP_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'unit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'unit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.UNIT_QUEUE_INTERVAL]\"><tr><th colspan=\"3\">{{ 'preset.recruit1' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK1]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><th colspan=\"3\">{{ 'preset.recruit2' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK2]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><th colspan=\"3\">{{ 'preset.recruit3' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK3]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><th colspan=\"3\">{{ 'preset.recruit4' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK4]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }} Nie działa jeszcze</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text logs\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"link\" ng-class=\"{
                                 'icon-bg-black icon-26x26-dot-green': log.unit === 'start',
                                 'icon-bg-black icon-26x26-dot-red': log.unit === 'stop',
 								'icon-20x20-village': log.unit === 'spear' || log.unit === 'sword' || log.unit === 'axe' || log.unit === 'archer' || log.unit === 'light_cavalry' || log.unit === 'mounted_archer' || log.unit === 'heavy_cavalry' || log.unit === 'ram' || log.unit === 'catapult'}\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'recruit_queue' }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
@@ -27529,6 +27804,8 @@ define('two/recruitQueue/settings', [], function() {
         MIN_PACK3: 'minpack3',
         MIN_PACK4: 'minpack4',
         RECRUIT_QUEUE_INTERVAL: 'recruit_cycle_interval',
+        GROUP_QUEUE_INTERVAL: 'group_cycle_interval',
+        UNIT_QUEUE_INTERVAL: 'unit_cycle_interval',
         GROUP1: 'group1',
         GROUP2: 'group2',
         GROUP3: 'group3',
@@ -28611,11 +28888,25 @@ define('two/recruitQueue/settings/map', [
             inputType: 'number'
         },
         [SETTINGS.RECRUIT_QUEUE_INTERVAL]: {
-            default: 5,
+            default: 60,
             updates: [UPDATES.INTERVAL_TIMERS],
             inputType: 'number',
             min: 1,
-            max: 120
+            max: 240
+        },
+        [SETTINGS.UNIT_QUEUE_INTERVAL]: {
+            default: 6,
+            updates: [UPDATES.INTERVAL_TIMERS],
+            inputType: 'number',
+            min: 2,
+            max: 30
+        },
+        [SETTINGS.GROUP_QUEUE_INTERVAL]: {
+            default: 60,
+            updates: [UPDATES.INTERVAL_TIMERS],
+            inputType: 'number',
+            min: 20,
+            max: 240
         }
     }
 })
