@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 05 Dec 2020 00:21:40 GMT
+ * Sat, 05 Dec 2020 00:46:42 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24728,6 +24728,11 @@ define('two/recruitQueue', [
                         console.log('Nie znam przyczyny :P')
                     }
                 }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
                 setTimeout(function() {
                     recruitSpear1()
                 }, 6000)
@@ -25374,6 +25379,11 @@ define('two/recruitQueue', [
                         console.log('Nie znam przyczyny :P')
                     }
                 }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
                 setTimeout(function() {
                     recruitSpear2()
                 }, 6000)
@@ -26020,6 +26030,11 @@ define('two/recruitQueue', [
                         console.log('Nie znam przyczyny :P')
                     }
                 }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
                 setTimeout(function() {
                     recruitSpear3()
                 }, 6000)
@@ -26668,6 +26683,11 @@ define('two/recruitQueue', [
                         console.log('Nie znam przyczyny :P')
                     }
                 }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
                 setTimeout(function() {
                     recruitSpear4()
                 }, 6000)
@@ -27050,6 +27070,11 @@ define('two/recruitQueue', [
                 }
             })
         }
+        setInterval(function() {
+            if (running == false) {
+                return
+            }
+        }, 5000)
         getVillageData()
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END)
     }
@@ -27072,11 +27097,11 @@ define('two/recruitQueue', [
         }, interval5)
     }
     recruitQueue.stop = function(reason = STATUS.USER_STOP) {
-        if (nextCycleDate) {
+        if (interval5) {
             if (reason !== STATUS.USER_STOP) {
                 nextCycleDate = timeHelper.gameTime() + getCycleInterval()
             }
-            eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_CYCLE_END, reason)
+            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END, reason)
         } else {
             nextCycleDate = null
         }
@@ -27167,6 +27192,7 @@ define('two/recruitQueue/ui', [
     const switchRecruiterP = function() {
         if (recruitQueue.isRunning()) {
             recruitQueue.stop()
+            running = false
         } else {
             recruitQueue.start()
             settings.setAll(settings.decode($scope.settings))
