@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 05 Dec 2020 19:55:50 GMT
+ * Sat, 05 Dec 2020 20:19:11 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22464,22 +22464,9 @@ define('two/prankHelper', [
         var minNew = alphabet.IndexOf(min)
         var maxNew = alphabet.IndexOf(max)
         if (type == 'increase') {
-            if (typeof min == 'number' && typeof max == 'number') {
-                for (i = min; i <= max; i++) {
-                    newName = prefix + validName + sufix + ' ' + i
-                    villages.forEach(function(village, index) {
-                        villageIdSet = village.getId()
-                        oldName = village.getName()
-                        setTimeout(function() {
-                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                                village_id: village.getId(),
-                                name: newName
-                            })
-                            addLog(villageIdSet, newName, oldName)
-                        }, index * interval)
-                    })
-                }
-            } else {
+            if (isNaN(min) && isNaN(max)) {
+                minNew = alphabet.IndexOf(min)
+                maxNew = alphabet.IndexOf(max)
                 villages.forEach(function(village, index) {
                     villageIdSet = village.getId()
                     oldName = village.getName()
@@ -22494,10 +22481,8 @@ define('two/prankHelper', [
                         }, index * interval)
                     }
                 })
-            }
-        } else if (type == 'decrease') {
-            if (typeof min == 'number' && typeof max == 'number') {
-                for (i = max; i >= min; i--) {
+            } else {
+                for (i = min; i <= max; i++) {
                     newName = prefix + validName + sufix + ' ' + i
                     villages.forEach(function(village, index) {
                         villageIdSet = village.getId()
@@ -22511,7 +22496,11 @@ define('two/prankHelper', [
                         }, index * interval)
                     })
                 }
-            } else {
+            }
+        } else if (type == 'decrease') {
+            if (isNaN(min) && isNaN(max)) {
+                minNew = alphabet.IndexOf(min)
+                maxNew = alphabet.IndexOf(max)
                 villages.forEach(function(village, index) {
                     villageIdSet = village.getId()
                     oldName = village.getName()
@@ -22526,6 +22515,21 @@ define('two/prankHelper', [
                         }, index * interval)
                     }
                 })
+            } else {
+                for (i = max; i >= min; i--) {
+                    newName = prefix + validName + sufix + ' ' + i
+                    villages.forEach(function(village, index) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    })
+                }
             }
         } else {
             newName = prefix + validName + sufix
