@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 05 Dec 2020 19:42:00 GMT
+ * Sat, 05 Dec 2020 19:55:50 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22415,6 +22415,35 @@ define('two/prankHelper', [
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_LOGS_UPDATED)
         return true
     }
+    const prankHelper = {}
+    prankHelper.init = function() {
+        initialized = true
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+        settings.onChange(function(changes, updates) {
+            prankHelperSettings = settings.getAll()
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+        prankHelperSettings = settings.getAll()
+        console.log('all settings', prankHelperSettings)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+    prankHelper.start = function() {
+        running = true
+        addLog('Rozpoczęto przemianowanie', '', '')
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+    }
+    prankHelper.stop = function() {
+        running = false
+        addLog('Zatrzymano przemianowanie', '', '')
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
+    }
     prankHelper.renameGroup = function renameGroup() {}
     prankHelper.renameProvince = function renameProvince() {}
     prankHelper.renameAll = function renameAll() {
@@ -22512,35 +22541,6 @@ define('two/prankHelper', [
                 }, index * interval)
             })
         }
-    }
-    const prankHelper = {}
-    prankHelper.init = function() {
-        initialized = true
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-        settings.onChange(function(changes, updates) {
-            prankHelperSettings = settings.getAll()
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-        prankHelperSettings = settings.getAll()
-        console.log('all settings', prankHelperSettings)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-    prankHelper.start = function() {
-        running = true
-        addLog('Rozpoczęto przemianowanie', '', '')
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
-    }
-    prankHelper.stop = function() {
-        running = false
-        addLog('Zatrzymano przemianowanie', '', '')
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
     }
     prankHelper.getSettings = function() {
         return settings
