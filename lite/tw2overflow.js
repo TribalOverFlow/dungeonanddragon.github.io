@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 03:37:12 GMT
+ * Sun, 06 Dec 2020 04:00:14 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22464,55 +22464,75 @@ define('two/prankHelper', [
         var newName = null
         var minNew = alphabet.indexOf(min)
         var maxNew = alphabet.indexOf(max)
-        villages.forEach(function(village, index) {
-            villageIdSet = village.getId()
-            oldName = village.getName()
-            if (type == 'increase') {
-                setTimeout(function() {
-                    if (isNaN(min) && isNaN(max)) {
-                        for (i = minNew; i <= maxNew; i++) {
-                            newName += prefix + validName + sufix + ' ' + alphabet[i]
+        if (type == 'increase') {
+            if (isNaN(min) && isNaN(max)) {
+                for (i = minNew; i <= maxNew; i++) {
+                    newName += prefix + validName + sufix + ' ' + alphabet[i]
+                    villages.forEach(function(village, index) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        setTimeout(function() {
                             socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                                 village_id: village.getId(),
                                 name: newName
                             })
                             addLog(villageIdSet, newName, oldName)
-                        }
-                    } else {
-                        for (i = min; i <= max; i++) {
-                            newName += prefix + validName + sufix + ' ' + i
-                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                                village_id: village.getId(),
-                                name: newName
-                            })
-                            addLog(villageIdSet, newName, oldName)
-                        }
-                    }
-                }, index * interval)
-            } else if (type == 'decrease') {
-                setTimeout(function() {
-                    if (isNaN(min) && isNaN(max)) {
-                        for (i = maxNew; i >= minNew; i--) {
-                            newName -= prefix + validName + sufix + ' ' + alphabet[i]
-                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                                village_id: village.getId(),
-                                name: newName
-                            })
-                            addLog(villageIdSet, newName, oldName)
-                        }
-                    } else {
-                        for (i = max; i >= min; i--) {
-                            newName -= prefix + validName + sufix + ' ' + i
-                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                                village_id: village.getId(),
-                                name: newName
-                            })
-                            addLog(villageIdSet, newName, oldName)
-                        }
-                    }
-                }, index * interval)
+                        }, index * interval)
+                    })
+                }
             } else {
-                newName = prefix + validName + sufix
+                for (i = min; i <= max; i++) {
+                    newName += prefix + validName + sufix + ' ' + i
+                    villages.forEach(function(village, index) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    })
+                }
+            }
+        } else if (type == 'decrease') {
+            if (isNaN(min) && isNaN(max)) {
+                for (i = maxNew; i >= minNew; i--) {
+                    newName -= prefix + validName + sufix + ' ' + alphabet[i]
+                    villages.forEach(function(village, index) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    })
+                }
+            } else {
+                for (i = max; i >= min; i--) {
+                    newName -= prefix + validName + sufix + ' ' + i
+                    villages.forEach(function(village, index) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        setTimeout(function() {
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    })
+                }
+            }
+        } else {
+            newName = prefix + validName + sufix
+            villages.forEach(function(village, index) {
+                villageIdSet = village.getId()
+                oldName = village.getName()
                 setTimeout(function() {
                     socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                         village_id: village.getId(),
@@ -22520,8 +22540,8 @@ define('two/prankHelper', [
                     })
                     addLog(villageIdSet, newName, oldName)
                 }, index * interval)
-            }
-        })
+            })
+        }
     }
     prankHelper.getSettings = function() {
         return settings
