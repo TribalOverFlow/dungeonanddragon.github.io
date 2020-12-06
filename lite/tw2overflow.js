@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 04:30:51 GMT
+ * Sun, 06 Dec 2020 04:36:51 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22457,7 +22457,7 @@ define('two/prankHelper', [
         var min = prankHelperSettings[SETTINGS.FROM1]
         var max = prankHelperSettings[SETTINGS.TO1]
         var interval = 4000
-        let newName
+        var newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         var oldName = null
@@ -22509,9 +22509,9 @@ define('two/prankHelper', [
                 oldName = village.getName()
                 socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                     village_id: village.getId(),
-                    name: nameSet[index]
+                    name: nameSet[index + 1]
                 })
-                addLog(villageIdSet, nameSet[index], oldName)
+                addLog(villageIdSet, nameSet[index + 1], oldName)
             }, index * interval)
         })
     }
