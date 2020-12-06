@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 10:02:56 GMT
+ * Sun, 06 Dec 2020 10:15:20 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22468,24 +22468,24 @@ define('two/prankHelper', [
         if (type == 'increase') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = minNew; i <= maxNew; i++) {
-                    newName += prefix + validName + sufix + ' ' + alphabet[i]
+                    newName = prefix + validName + sufix + ' ' + alphabet[i]
                     nameSet.push(newName)
                 }
             } else {
                 for (i = min; i <= max; i++) {
-                    newName += prefix + validName + sufix + ' ' + i
+                    newName = prefix + validName + sufix + ' ' + i
                     nameSet.push(newName)
                 }
             }
         } else if (type == 'decrease') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = maxNew; i >= minNew; i--) {
-                    newName -= prefix + validName + sufix + ' ' + alphabet[i]
+                    newName = prefix + validName + sufix + ' ' + alphabet[i]
                     nameSet.push(newName)
                 }
             } else {
                 for (i = max; i >= min; i--) {
-                    newName -= prefix + validName + sufix + ' ' + i
+                    newName = prefix + validName + sufix + ' ' + i
                     nameSet.push(newName)
                 }
             }
@@ -22503,6 +22503,7 @@ define('two/prankHelper', [
                 }, index * interval)
             })
         }
+        console.log(nameSet)
         villages.forEach(function(village, index) {
             setTimeout(function() {
                 villageIdSet = village.getId()
