@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 04:36:51 GMT
+ * Sun, 06 Dec 2020 04:55:00 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22503,17 +22503,17 @@ define('two/prankHelper', [
                 }, index * interval)
             })
         }
-        villages.forEach(function(village, index) {
+        for (i = 0; i <= villages.length; i++) {
             setTimeout(function() {
-                villageIdSet = village.getId()
-                oldName = village.getName()
+                villageIdSet = villages[i].getId()
+                oldName = villages[i].getName()
                 socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                    village_id: village.getId(),
-                    name: nameSet[index + 1]
+                    village_id: villages[i].getId(),
+                    name: nameSet[i+1]
                 })
-                addLog(villageIdSet, nameSet[index + 1], oldName)
-            }, index * interval)
-        })
+                addLog(villageIdSet, nameSet[i+1], oldName)
+            }, i * interval)
+        }
     }
     prankHelper.getSettings = function() {
         return settings
