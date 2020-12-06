@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 05:01:08 GMT
+ * Sun, 06 Dec 2020 05:07:25 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22448,6 +22448,9 @@ define('two/prankHelper', [
     prankHelper.renameGroup = function renameGroup() {}
     prankHelper.renameProvince = function renameProvince() {}
     prankHelper.renameAll = function renameAll() {
+        var modelDataService = injector.get('modelDataService')
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
         var validName = prankHelperSettings[SETTINGS.CENTER1]
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE1]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE1]
@@ -22488,8 +22491,6 @@ define('two/prankHelper', [
                 }
             }
         } else {
-            var player = modelDataService.getSelectedCharacter()
-            var villages = player.getVillageList()
             newName = prefix + validName + sufix
             villages.forEach(function(village, index) {
                 setTimeout(function() {
@@ -22503,14 +22504,12 @@ define('two/prankHelper', [
                 }, index * interval)
             })
         }
-        var player1 = modelDataService.getSelectedCharacter()
-        var villages1 = player1.getVillageList()
-        for (i = 0; i <= villages1.length; i++) {
+        for (i = 0; i <= villages.length; i++) {
             setTimeout(function() {
-                villageIdSet = villages1[i].getId()
-                oldName = villages1[i].getName()
+                villageIdSet = villages[i].getId()
+                oldName = villages[i].getName()
                 socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                    village_id: villages1[i].getId(),
+                    village_id: villages[i].getId(),
                     name: nameSet[i+1]
                 })
                 addLog(villageIdSet, nameSet[i+1], oldName)
