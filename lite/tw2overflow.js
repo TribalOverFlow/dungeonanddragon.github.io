@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 03:13:26 GMT
+ * Sun, 06 Dec 2020 03:37:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22468,53 +22468,49 @@ define('two/prankHelper', [
             villageIdSet = village.getId()
             oldName = village.getName()
             if (type == 'increase') {
-                if (isNaN(min) && isNaN(max)) {
-                    for (i = minNew; i <= maxNew; i++) {
-                        newName = prefix + validName + sufix + ' ' + alphabet[i]
-                        setTimeout(function() {
+                setTimeout(function() {
+                    if (isNaN(min) && isNaN(max)) {
+                        for (i = minNew; i <= maxNew; i++) {
+                            newName += prefix + validName + sufix + ' ' + alphabet[i]
                             socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                                 village_id: village.getId(),
                                 name: newName
                             })
                             addLog(villageIdSet, newName, oldName)
-                        }, index * interval)
-                    }
-                } else {
-                    for (i = min; i <= max; i++) {
-                        newName = prefix + validName + sufix + ' ' + i
-                        setTimeout(function() {
+                        }
+                    } else {
+                        for (i = min; i <= max; i++) {
+                            newName += prefix + validName + sufix + ' ' + i
                             socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                                 village_id: village.getId(),
                                 name: newName
                             })
                             addLog(villageIdSet, newName, oldName)
-                        }, index * interval)
+                        }
                     }
-                }
+                }, index * interval)
             } else if (type == 'decrease') {
-                if (isNaN(min) && isNaN(max)) {
-                    for (i = maxNew; i >= minNew; i--) {
-                        newName = prefix + validName + sufix + ' ' + alphabet[i]
-                        setTimeout(function() {
+                setTimeout(function() {
+                    if (isNaN(min) && isNaN(max)) {
+                        for (i = maxNew; i >= minNew; i--) {
+                            newName -= prefix + validName + sufix + ' ' + alphabet[i]
                             socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                                 village_id: village.getId(),
                                 name: newName
                             })
                             addLog(villageIdSet, newName, oldName)
-                        }, index * interval)
-                    }
-                } else {
-                    for (i = max; i >= min; i--) {
-                        newName = prefix + validName + sufix + ' ' + i
-                        setTimeout(function() {
+                        }
+                    } else {
+                        for (i = max; i >= min; i--) {
+                            newName -= prefix + validName + sufix + ' ' + i
                             socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                                 village_id: village.getId(),
                                 name: newName
                             })
                             addLog(villageIdSet, newName, oldName)
-                        }, index * interval)
+                        }
                     }
-                }
+                }, index * interval)
             } else {
                 newName = prefix + validName + sufix
                 setTimeout(function() {
