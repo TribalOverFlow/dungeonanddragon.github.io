@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 04:16:36 GMT
+ * Sun, 06 Dec 2020 04:30:51 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -22401,7 +22401,7 @@ define('two/prankHelper', [
             selectedGroups.push(allGroups[groupId])
         })
     }
-    const addLog = function(villageId, oldname, newname) {
+    const addLog = function(villageId, newname, oldname) {
         let data = {
             time: timeHelper.gameTime(),
             villageId: villageId,
@@ -22457,12 +22457,12 @@ define('two/prankHelper', [
         var min = prankHelperSettings[SETTINGS.FROM1]
         var max = prankHelperSettings[SETTINGS.TO1]
         var interval = 4000
-        var i = null
+        let newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         var oldName = null
-        var newName = null
         var nameSet = []
+        var i = 0
         var minNew = alphabet.indexOf(min)
         var maxNew = alphabet.indexOf(max)
         if (type == 'increase') {
