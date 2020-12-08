@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 08 Dec 2020 02:25:31 GMT
+ * Tue, 08 Dec 2020 02:45:37 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -28122,7 +28122,7 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages1.forEach(function(id1) {
                             if (village.data.villageId == id1) {
-                                console.log('wioska:' + village.data.villageId)
+                                console.log('wioska:' + village.getName())
                                 villageIdSet = village.getId()
                                 spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
                                 swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
