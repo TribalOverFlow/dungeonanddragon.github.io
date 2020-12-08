@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 08 Dec 2020 02:45:37 GMT
+ * Tue, 08 Dec 2020 07:20:52 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4520,7 +4520,6 @@ define('two/alertSender', [
             'command_types': ['attack'],
             'villages': villagesIds
         }, sendAlerts)
-        alertSender.stop()
     }
     var sendAlerts = function sendAlerts(data) {
         var alertText = []
@@ -6730,7 +6729,6 @@ define('two/autoFoundator', [
             }, index * Math.random() * interval)
             console.log('Wykonano darowizne na plemię: ' + village.getName() + ' drewno: ' + woodCalculated + ', glina: ' + clayCalculated + ', żelazo: ' + ironCalculated)
         })
-        autoFoundator.stop()
     }
     let autoFoundator = {}
     autoFoundator.init = function() {
@@ -6888,7 +6886,6 @@ define('two/autoHealer', [
                 }, index * interval)
             }
         })
-        autoHealer.stop()
     }
     let autoHealer = {}
     autoHealer.init = function() {
@@ -17539,7 +17536,6 @@ define('two/faithChecker', [
                 }
             })
         })
-        faithChecker.stop()
     }
     let faithChecker = {}
     faithChecker.init = function() {
@@ -22608,7 +22604,6 @@ define('two/mintHelper', [
                 }
             }, interval)
         })
-        mintHelper.stop()
     }
     let mintHelper = {}
     mintHelper.init = function() {
@@ -25060,7 +25055,7 @@ define('two/recruitQueue', [
     'two/recruitQueue/settings/map',
     'two/recruitQueue/settings/updates',
     'two/recruitQueue/types/units',
-    'two/farmOverflow/types/logs',
+    'two/recruitQueue/types/logs',
     'two/ready',
     'queues/EventQueue',
     'Lockr',
@@ -28166,6 +28161,8 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages2.forEach(function(id2) {
                             if (village.data.villageId == id2) {
+                                console.log('wioska:' + village.getName())
+                                villageIdSet = village.getId()
                                 spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
                                 swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
                                 axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
@@ -28208,6 +28205,8 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages3.forEach(function(id3) {
                             if (village.data.villageId == id3) {
+                                console.log('wioska:' + village.getName())
+                                villageIdSet = village.getId()
                                 spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
                                 swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
                                 axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
@@ -28250,6 +28249,8 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages4.forEach(function(id4) {
                             if (village.data.villageId == id4) {
+                                console.log('wioska:' + village.getName())
+                                villageIdSet = village.getId()
                                 spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
                                 swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
                                 axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
@@ -28288,7 +28289,6 @@ define('two/recruitQueue', [
                 console.log('Nie wybrano grupy nr4')
             }
         }
-        recruitQueue.stop()
         setInterval(function() {
             if (running == false) {
                 return
@@ -30324,7 +30324,6 @@ define('two/reportSender', [
                 }
             }
         })
-        reportSender.stop()
     }
     var sendInfoScout = function sendInfoScout(data) {
         var alertText = []
@@ -31998,7 +31997,6 @@ define('two/spyRecruiter', [
             }
         })
         utils.notif('success', $filter('i18n')('revived', $rootScope.loc.ale, 'spy_recruiter'))
-        spyRecruiter.stop()
     }
     let spyRecruiter = {}
     spyRecruiter.init = function() {
