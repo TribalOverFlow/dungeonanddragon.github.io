@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 06 Dec 2020 22:17:07 GMT
+ * Tue, 08 Dec 2020 02:25:31 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4450,7 +4450,7 @@ define('two/alertSender', [
     eventQueue,
     CommandModel,
     UNIT_TYPES
-) { 
+) {
     let convert
     var overviewService = injector.get('overviewService')
     var initialized = false
@@ -4494,8 +4494,10 @@ define('two/alertSender', [
         returnString = convert
         return returnString
     }
-
     var checkincomingsAttacks = function() {
+        if (!running) {
+            return false
+        }
         socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
             tribe: tribeId
         }, function(data) {
@@ -4509,7 +4511,6 @@ define('two/alertSender', [
         })
         var incomingCommands = globalInfoModel.getCommandListModel().getIncomingCommands().length
         var count = incomingCommands > 25 ? incomingCommands : 25
-
         socketService.emit(routeProvider.OVERVIEW_GET_INCOMING, {
             'count': count,
             'offset': 0,
@@ -4519,9 +4520,8 @@ define('two/alertSender', [
             'command_types': ['attack'],
             'villages': villagesIds
         }, sendAlerts)
-        setTimeout(checkincomingsAttacks, 60000)
+        alertSender.stop()
     }
-
     var sendAlerts = function sendAlerts(data) {
         var alertText = []
         var commands = data.commands
@@ -4582,7 +4582,6 @@ define('two/alertSender', [
             }
         }
     }
-
     var getSlowestUnit = function(command) {
         const origin = {
             x: command.origin_x,
@@ -4592,21 +4591,20 @@ define('two/alertSender', [
             x: command.target_x,
             y: command.target_y
         }
-        const unitDurationDiff = UNIT_SPEED_ORDER.map(function (unit) {
-            const travelTime = utils.getTravelTime(origin, target, {[unit]: 1}, command.command_type, {}, false)
+        const unitDurationDiff = UNIT_SPEED_ORDER.map(function(unit) {
+            const travelTime = utils.getTravelTime(origin, target, {
+                [unit]: 1
+            }, command.command_type, {}, false)
             const durationDiff = Math.abs(travelTime - command.model.duration)
-
             return {
                 unit: unit,
                 diff: durationDiff
             }
-        }).sort(function (a, b) {
+        }).sort(function(a, b) {
             return a.diff - b.diff
         })
-
         return unitDurationDiff[0].unit
     }
-
     var alertSender = {}
     alertSender.init = function() {
         initialized = true
@@ -4614,6 +4612,10 @@ define('two/alertSender', [
     alertSender.start = function() {
         eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STARTED)
         running = true
+        setInterval(function() {
+            running = true
+            checkincomingsAttacks()
+        }, 60000)
         checkincomingsAttacks()
     }
     alertSender.stop = function() {
@@ -4727,7 +4729,9 @@ define('two/armyHelper', [
     'two/armyHelper/settings/updates',
     'two/armyHelper/types/unit',
     'two/ready',
-    'queues/EventQueue'
+    'queues/EventQueue',
+    'Lockr',
+    'helper/time'
 ], function (
     Settings,
     SETTINGS,
@@ -4735,20 +4739,102 @@ define('two/armyHelper', [
     UPDATES,
     B_UNIT,
     ready,
-    eventQueue
+    eventQueue,
+    Lockr,
+    timeHelper
 ) {
     let initialized = false
     let running = false
     let settings
+    const LOGS_LIMIT = 500
     let armyHelperSettings
-
+    let logs
     let byGroupBalance = []
     let byUnitAndGroupBalance = []
+    var SpearA = 0
+    var SpearO = 0
+    var SpearI = 0
+    var SpearS = 0
+    var SpearR = 0
+    var SpearT = 0
+    var SwordA = 0
+    var SwordO = 0
+    var SwordI = 0
+    var SwordS = 0
+    var SwordR = 0
+    var SwordT = 0
+    var AxeA = 0
+    var AxeO = 0
+    var AxeI = 0
+    var AxeS = 0
+    var AxeR = 0
+    var AxeT = 0
+    var ArcherA = 0
+    var ArcherO = 0
+    var ArcherI = 0
+    var ArcherS = 0
+    var ArcherR = 0
+    var ArcherT = 0
+    var LightCavalryA = 0
+    var LightCavalryO = 0
+    var LightCavalryI = 0
+    var LightCavalryS = 0
+    var LightCavalryR = 0
+    var LightCavalryT = 0
+    var MountedArcherA = 0
+    var MountedArcherO = 0
+    var MountedArcherI = 0
+    var MountedArcherS = 0
+    var MountedArcherR = 0
+    var MountedArcherT = 0
+    var HeavyCavalryA = 0
+    var HeavyCavalryO = 0
+    var HeavyCavalryI = 0
+    var HeavyCavalryS = 0
+    var HeavyCavalryR = 0
+    var HeavyCavalryT = 0
+    var RamA = 0
+    var RamO = 0
+    var RamI = 0
+    var RamS = 0
+    var RamR = 0
+    var RamT = 0
+    var CatapultA = 0
+    var CatapultO = 0
+    var CatapultI = 0
+    var CatapultS = 0
+    var CatapultR = 0
+    var CatapultT = 0
+    var TrebuchetA = 0
+    var TrebuchetO = 0
+    var TrebuchetI = 0
+    var TrebuchetS = 0
+    var TrebuchetR = 0
+    var TrebuchetT = 0
+    var BerserkerA = 0
+    var BerserkerO = 0
+    var BerserkerI = 0
+    var BerserkerS = 0
+    var BerserkerR = 0
+    var BerserkerT = 0
+    var SnobA = 0
+    var SnobO = 0
+    var SnobI = 0
+    var SnobS = 0
+    var SnobR = 0
+    var SnobT = 0
+    var KnightA = 0
+    var KnightO = 0
+    var KnightI = 0
+    var KnightS = 0
+    var KnightR = 0
+    var KnightT = 0
 
     const STORAGE_KEYS = {
+        LOGS: 'army_helper_logs',
         SETTINGS: 'army_helper_settings'
     }
-	
+    
     const BALANCER_UNIT = {
         [B_UNIT.SPEAR]: 'spear',
         [B_UNIT.SWORD]: 'sword',
@@ -4765,7 +4851,7 @@ define('two/armyHelper', [
         [B_UNIT.KNIGHT]: 'knight'
     }
     console.log(BALANCER_UNIT)
-	
+    
     const updateGroups = function () {
         byGroupBalance = []
         byUnitAndGroupBalance = []
@@ -4781,12 +4867,27 @@ define('two/armyHelper', [
             byUnitAndGroupBalance.push(allGroups[groupId])
         })
     }
+    const addLog = function(villageId, targetId, unit, group) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            targetId: targetId,
+            unit: unit,
+            group: group
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        return true
+    }
 
     const armyHelper = {}
 
     armyHelper.init = function () {
         initialized = true
-
+        logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
@@ -4794,7 +4895,6 @@ define('two/armyHelper', [
 
         settings.onChange(function (changes, updates) {
             armyHelperSettings = settings.getAll()
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
@@ -4811,6 +4911,7 @@ define('two/armyHelper', [
 
     armyHelper.start = function () {
         running = true
+        addLog('Rozpoczęto balansowanie wojsk', '', '', '')
 
         eventQueue.trigger(eventTypeProvider.ARMY_HELPER_START)
     }
@@ -4818,6 +4919,7 @@ define('two/armyHelper', [
     armyHelper.stop = function () {
         running = false
 
+        addLog('Zatrzymano balansowanie wojsk', '', '', '')
         eventQueue.trigger(eventTypeProvider.ARMY_HELPER_STOP)
     }
 
@@ -4831,6 +4933,352 @@ define('two/armyHelper', [
 
     armyHelper.isRunning = function () {
         return running
+    }
+    armyHelper.getLogs = function() {
+        return logs
+    }
+    armyHelper.checkArmy = function() {
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+
+        function checkArmy() {
+            villages.forEach(function(village) {
+                var unitInfo = village.unitInfo
+                var units = unitInfo.units
+                var spear = units.spear
+                var sword = units.sword
+                var axe = units.axe
+                var archer = units.archer
+                var light_cavalry = units.light_cavalry
+                var mounted_archer = units.mounted_archer
+                var heavy_cavalry = units.heavy_cavalry
+                var ram = units.ram
+                var catapult = units.catapult
+                var trebuchet = units.trebuchet
+                var doppelsoldner = units.doppelsoldner
+                var snob = units.snob
+                var knight = units.knight
+                SpearA += spear.available
+                SpearO += spear.own
+                SpearI += spear.in_town
+                SpearS += spear.support
+                SpearR += spear.recruiting
+                SpearT += spear.total
+                SwordA += sword.available
+                SwordO += sword.own
+                SwordI += sword.in_town
+                SwordS += sword.support
+                SwordR += sword.recruiting
+                SwordT += sword.total
+                AxeA += axe.available
+                AxeO += axe.own
+                AxeI += axe.in_town
+                AxeS += axe.support
+                AxeR += axe.recruiting
+                AxeT += axe.total
+                ArcherA += archer.available
+                ArcherO += archer.own
+                ArcherI += archer.in_town
+                ArcherS += archer.support
+                ArcherR += archer.recruiting
+                ArcherT += archer.total
+                LightCavalryA += light_cavalry.available
+                LightCavalryO += light_cavalry.own
+                LightCavalryI += light_cavalry.in_town
+                LightCavalryS += light_cavalry.support
+                LightCavalryR += light_cavalry.recruiting
+                LightCavalryT += light_cavalry.total
+                MountedArcherA += mounted_archer.available
+                MountedArcherO += mounted_archer.own
+                MountedArcherI += mounted_archer.in_town
+                MountedArcherS += mounted_archer.support
+                MountedArcherR += mounted_archer.recruiting
+                MountedArcherT += mounted_archer.total
+                HeavyCavalryA += heavy_cavalry.available
+                HeavyCavalryO += heavy_cavalry.own
+                HeavyCavalryI += heavy_cavalry.in_town
+                HeavyCavalryS += heavy_cavalry.support
+                HeavyCavalryR += heavy_cavalry.recruiting
+                HeavyCavalryT += heavy_cavalry.total
+                RamA += ram.available
+                RamO += ram.own
+                RamI += ram.in_town
+                RamS += ram.support
+                RamR += ram.recruiting
+                RamT += ram.total
+                CatapultA += catapult.available
+                CatapultO += catapult.own
+                CatapultI += catapult.in_town
+                CatapultS += catapult.support
+                CatapultR += catapult.recruiting
+                CatapultT += catapult.total
+                TrebuchetA += trebuchet.available
+                TrebuchetO += trebuchet.own
+                TrebuchetI += trebuchet.in_town
+                TrebuchetS += trebuchet.support
+                TrebuchetR += trebuchet.recruiting
+                TrebuchetT += trebuchet.total
+                BerserkerA += doppelsoldner.available
+                BerserkerO += doppelsoldner.own
+                BerserkerI += doppelsoldner.in_town
+                BerserkerS += doppelsoldner.support
+                BerserkerR += doppelsoldner.recruiting
+                BerserkerT += doppelsoldner.total
+                SnobA += snob.available
+                SnobO += snob.own
+                SnobI += snob.in_town
+                SnobS += snob.support
+                SnobR += snob.recruiting
+                SnobT += snob.total
+                KnightA += knight.available
+                KnightO += knight.own
+                KnightI += knight.in_town
+                KnightS += knight.support
+                KnightR += knight.recruiting
+                KnightT += knight.total
+            })
+        }
+        checkArmy()
+    }
+    armyHelper.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_LOGS_UPDATED)
+        return logs
+    }
+    armyHelper.getSpearTotal = function() {
+        return SpearT
+    }
+    armyHelper.getSpearSupport = function() {
+        return SpearS
+    }
+    armyHelper.getSpearOwn = function() {
+        return SpearO
+    }
+    armyHelper.getSpearInTown = function() {
+        return SpearI
+    }
+    armyHelper.getSpearRecruting = function() {
+        return SpearR
+    }
+    armyHelper.getSpearAvailable = function() {
+        return SpearA
+    }
+    armyHelper.getswordTotal = function() {
+        return SwordT
+    }
+    armyHelper.getswordSupport = function() {
+        return SwordS
+    }
+    armyHelper.getswordOwn = function() {
+        return SwordO
+    }
+    armyHelper.getswordInTown = function() {
+        return SwordI
+    }
+    armyHelper.getswordRecruting = function() {
+        return SwordR
+    }
+    armyHelper.getswordAvailable = function() {
+        return SwordA
+    }
+    armyHelper.getaxeTotal = function() {
+        return AxeT
+    }
+    armyHelper.getaxeSupport = function() {
+        return AxeS
+    }
+    armyHelper.getaxeOwn = function() {
+        return AxeO
+    }
+    armyHelper.getaxeInTown = function() {
+        return AxeI
+    }
+    armyHelper.getaxeRecruting = function() {
+        return AxeR
+    }
+    armyHelper.getaxeAvailable = function() {
+        return AxeA
+    }
+    armyHelper.getarcherTotal = function() {
+        return ArcherT
+    }
+    armyHelper.getarcherSupport = function() {
+        return ArcherS
+    }
+    armyHelper.getarcherOwn = function() {
+        return ArcherO
+    }
+    armyHelper.getarcherInTown = function() {
+        return ArcherI
+    }
+    armyHelper.getarcherRecruting = function() {
+        return ArcherR
+    }
+    armyHelper.getarcherAvailable = function() {
+        return ArcherA
+    }
+    armyHelper.getlcTotal = function() {
+        return LightCavalryT
+    }
+    armyHelper.getlcSupport = function() {
+        return LightCavalryS
+    }
+    armyHelper.getlcOwn = function() {
+        return LightCavalryO
+    }
+    armyHelper.getlcInTown = function() {
+        return LightCavalryI
+    }
+    armyHelper.getlcRecruting = function() {
+        return LightCavalryR
+    }
+    armyHelper.getlcAvailable = function() {
+        return LightCavalryA
+    }
+    armyHelper.getmaTotal = function() {
+        return MountedArcherT
+    }
+    armyHelper.getmaSupport = function() {
+        return MountedArcherS
+    }
+    armyHelper.getmaOwn = function() {
+        return MountedArcherO
+    }
+    armyHelper.getmaInTown = function() {
+        return MountedArcherI
+    }
+    armyHelper.getmaRecruting = function() {
+        return MountedArcherR
+    }
+    armyHelper.getmaAvailable = function() {
+        return MountedArcherA
+    }
+    armyHelper.gethcTotal = function() {
+        return HeavyCavalryT
+    }
+    armyHelper.gethcSupport = function() {
+        return HeavyCavalryS
+    }
+    armyHelper.gethcOwn = function() {
+        return HeavyCavalryO
+    }
+    armyHelper.gethcInTown = function() {
+        return HeavyCavalryI
+    }
+    armyHelper.gethcRecruting = function() {
+        return HeavyCavalryR
+    }
+    armyHelper.gethcAvailable = function() {
+        return HeavyCavalryA
+    }
+    armyHelper.getramTotal = function() {
+        return RamT
+    }
+    armyHelper.getramSupport = function() {
+        return RamS
+    }
+    armyHelper.getramOwn = function() {
+        return RamO
+    }
+    armyHelper.getramInTown = function() {
+        return RamI
+    }
+    armyHelper.getramRecruting = function() {
+        return RamR
+    }
+    armyHelper.getramAvailable = function() {
+        return RamA
+    }
+    armyHelper.getcatapultTotal = function() {
+        return CatapultT
+    }
+    armyHelper.getcatapultSupport = function() {
+        return CatapultS
+    }
+    armyHelper.getcatapultOwn = function() {
+        return CatapultO
+    }
+    armyHelper.getcatapultInTown = function() {
+        return CatapultI
+    }
+    armyHelper.getcatapultRecruting = function() {
+        return CatapultR
+    }
+    armyHelper.getcatapultAvailable = function() {
+        return CatapultA
+    }
+    armyHelper.getberserkerTotal = function() {
+        return BerserkerT
+    }
+    armyHelper.getberserkerSupport = function() {
+        return BerserkerS
+    }
+    armyHelper.getberserkerOwn = function() {
+        return BerserkerO
+    }
+    armyHelper.getberserkerInTown = function() {
+        return BerserkerI
+    }
+    armyHelper.getberserkerRecruting = function() {
+        return BerserkerR
+    }
+    armyHelper.getberserkerAvailable = function() {
+        return BerserkerA
+    }
+    armyHelper.gettrebuchetTotal = function() {
+        return TrebuchetT
+    }
+    armyHelper.gettrebuchetSupport = function() {
+        return TrebuchetS
+    }
+    armyHelper.gettrebuchetOwn = function() {
+        return TrebuchetO
+    }
+    armyHelper.gettrebuchetInTown = function() {
+        return TrebuchetI
+    }
+    armyHelper.gettrebuchetRecruting = function() {
+        return TrebuchetR
+    }
+    armyHelper.gettrebuchetAvailable = function() {
+        return TrebuchetA
+    }
+    armyHelper.getsnobTotal = function() {
+        return SnobT
+    }
+    armyHelper.getsnobSupport = function() {
+        return SnobS
+    }
+    armyHelper.getsnobOwn = function() {
+        return SnobO
+    }
+    armyHelper.getsnobInTown = function() {
+        return SnobI
+    }
+    armyHelper.getsnobRecruting = function() {
+        return SnobR
+    }
+    armyHelper.getsnobAvailable = function() {
+        return SnobA
+    }
+    armyHelper.getknightTotal = function() {
+        return KnightT
+    }
+    armyHelper.getknightSupport = function() {
+        return KnightS
+    }
+    armyHelper.getknightOwn = function() {
+        return KnightO
+    }
+    armyHelper.getknightInTown = function() {
+        return KnightI
+    }
+    armyHelper.getknightRecruting = function() {
+        return KnightR
+    }
+    armyHelper.getknightAvailable = function() {
+        return KnightA
     }
 
     return armyHelper
@@ -4850,7 +5298,9 @@ define('two/armyHelper/ui', [
     'two/armyHelper/settings/map',
     'two/armyHelper/types/unit',
     'two/Settings',
+    'queues/EventQueue',
     'two/EventScope',
+    'struct/MapData',
     'two/utils'
 ], function (
     interfaceOverflow,
@@ -4859,13 +5309,21 @@ define('two/armyHelper/ui', [
     SETTINGS_MAP,
     B_UNIT,
     Settings,
+    eventQueue,
     EventScope,
+    mapData,
     utils
 ) {
     let $scope
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
+    let running = false
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    let armyVillage
+    let mapSelectedVillage = false
     
     const TAB_TYPES = {
         ARMY: 'army',
@@ -4876,19 +5334,183 @@ define('two/armyHelper/ui', [
     const selectTab = function (tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
+    const checkArmy = function() {
         settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
+        armyHelper.checkArmy()
+        $scope.spearTotal = armyHelper.getSpearTotal()
+        $scope.spearSupport = armyHelper.getSpearSupport()
+        $scope.spearOwn = armyHelper.getSpearOwn()
+        $scope.spearInTown = armyHelper.getSpearInTown()
+        $scope.spearRecruting = armyHelper.getSpearRecruting()
+        $scope.spearAvailable = armyHelper.getSpearAvailable()
+        $scope.swordTotal = armyHelper.getswordTotal()
+        $scope.swordSupport = armyHelper.getswordSupport()
+        $scope.swordOwn = armyHelper.getswordOwn()
+        $scope.swordInTown = armyHelper.getswordInTown()
+        $scope.swordRecruting = armyHelper.getswordRecruting()
+        $scope.swordAvailable = armyHelper.getswordAvailable()
+        $scope.axeTotal = armyHelper.getaxeTotal()
+        $scope.axeSupport = armyHelper.getaxeSupport()
+        $scope.axeOwn = armyHelper.getaxeOwn()
+        $scope.axeInTown = armyHelper.getaxeInTown()
+        $scope.axeRecruting = armyHelper.getaxeRecruting()
+        $scope.axeAvailable = armyHelper.getaxeAvailable()
+        $scope.archerTotal = armyHelper.getarcherTotal()
+        $scope.archerSupport = armyHelper.getarcherSupport()
+        $scope.archerOwn = armyHelper.getarcherOwn()
+        $scope.archerInTown = armyHelper.getarcherInTown()
+        $scope.archerRecruting = armyHelper.getarcherRecruting()
+        $scope.archerAvailable = armyHelper.getarcherAvailable()
+        $scope.lcTotal = armyHelper.getlcTotal()
+        $scope.lcSupport = armyHelper.getlcSupport()
+        $scope.lcOwn = armyHelper.getlcOwn()
+        $scope.lcInTown = armyHelper.getlcInTown()
+        $scope.lcRecruting = armyHelper.getlcRecruting()
+        $scope.lcAvailable = armyHelper.getlcAvailable()
+        $scope.maTotal = armyHelper.getmaTotal()
+        $scope.maSupport = armyHelper.getmaSupport()
+        $scope.maOwn = armyHelper.getmaOwn()
+        $scope.maInTown = armyHelper.getmaInTown()
+        $scope.maRecruting = armyHelper.getmaRecruting()
+        $scope.maAvailable = armyHelper.getmaAvailable()
+        $scope.hcTotal = armyHelper.gethcTotal()
+        $scope.hcSupport = armyHelper.gethcSupport()
+        $scope.hcOwn = armyHelper.gethcOwn()
+        $scope.hcInTown = armyHelper.gethcInTown()
+        $scope.hcRecruting = armyHelper.gethcRecruting()
+        $scope.hcAvailable = armyHelper.gethcAvailable()
+        $scope.ramTotal = armyHelper.getramTotal()
+        $scope.ramSupport = armyHelper.getramSupport()
+        $scope.ramOwn = armyHelper.getramOwn()
+        $scope.ramInTown = armyHelper.getramInTown()
+        $scope.ramRecruting = armyHelper.getramRecruting()
+        $scope.ramAvailable = armyHelper.getramAvailable()
+        $scope.catapultTotal = armyHelper.getcatapultTotal()
+        $scope.catapultSupport = armyHelper.getcatapultSupport()
+        $scope.catapultOwn = armyHelper.getcatapultOwn()
+        $scope.catapultInTown = armyHelper.getcatapultInTown()
+        $scope.catapultRecruting = armyHelper.getcatapultRecruting()
+        $scope.catapultAvailable = armyHelper.getcatapultAvailable()
+        $scope.berserkerTotal = armyHelper.getberserkerTotal()
+        $scope.berserkerSupport = armyHelper.getberserkerSupport()
+        $scope.berserkerOwn = armyHelper.getberserkerOwn()
+        $scope.berserkerInTown = armyHelper.getberserkerInTown()
+        $scope.berserkerRecruting = armyHelper.getberserkerRecruting()
+        $scope.berserkerAvailable = armyHelper.getberserkerAvailable()
+        $scope.trebuchetTotal = armyHelper.gettrebuchetTotal()
+        $scope.trebuchetSupport = armyHelper.gettrebuchetSupport()
+        $scope.trebuchetOwn = armyHelper.gettrebuchetOwn()
+        $scope.trebuchetInTown = armyHelper.gettrebuchetInTown()
+        $scope.trebuchetRecruting = armyHelper.gettrebuchetRecruting()
+        $scope.trebuchetAvailable = armyHelper.gettrebuchetAvailable()
+        $scope.snobTotal = armyHelper.getsnobTotal()
+        $scope.snobSupport = armyHelper.getsnobSupport()
+        $scope.snobOwn = armyHelper.getsnobOwn()
+        $scope.snobInTown = armyHelper.getsnobInTown()
+        $scope.snobRecruting = armyHelper.getsnobRecruting()
+        $scope.snobAvailable = armyHelper.getsnobAvailable()
+        $scope.knightTotal = armyHelper.getknightTotal()
+        $scope.knightSupport = armyHelper.getknightSupport()
+        $scope.knightOwn = armyHelper.getknightOwn()
+        $scope.knightInTown = armyHelper.getknightInTown()
+        $scope.knightRecruting = armyHelper.getknightRecruting()
+        $scope.knightAvailable = armyHelper.getknightAvailable()
     }
 
-    const switchState = function () {
+    const clear = function() {
+        $scope.settings[SETTINGS.GROUP3] = false
+        $scope.settings[SETTINGS.GROUP4] = false
+        $scope.settings[SETTINGS.UNIT_TYPE2] = false
+        $scope.settings[SETTINGS.UNIT_TYPE1] = false
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const balanceAll = function () {
         if (armyHelper.isRunning()) {
             armyHelper.stop()
+            running = false
         } else {
             armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceAll()
         }
+    }
+    const balanceUnit = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+            running = false
+        } else {
+            armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceUnit()
+        }
+    }
+    const balanceGroup = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+            running = false
+        } else {
+            armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceGroup()
+        }
+    }
+    const balanceUnitAndGroup = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+            running = false
+        } else {
+            armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceUnitAndGroup()
+        }
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'army_helper'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            armyVillage.origin = data
+        })
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ładowanie...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId) {
+                loadVillageInfo(log.villageId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        armyHelper.clearLogs()
     }
 
     const eventHandlers = {
@@ -4898,21 +5520,45 @@ define('two/armyHelper/ui', [
                 type: 'groups'
             })
         },
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'armyhelper_village_search') {
+                return false
+            }
+            armyVillage[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+        },
+        onAutoCompleteVillage: function(data) {
+            armyVillage.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.ARMY_HELPER_ID] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
         start: function () {
             $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
 
             utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
         },
         stop: function () {
             $scope.running = false
 
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
             utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
+        },
+        updateLogs: function() {
+            $scope.logs = armyHelper.getLogs()
+            logsView.updateVisibleLogs()
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'army_helper'))
+            eventHandlers.updateLogs()
         }
     }
 
@@ -4920,38 +5566,73 @@ define('two/armyHelper/ui', [
         settings = armyHelper.getSettings()
         $button = interfaceOverflow.addMenuButton('Hetman', 90, $filter('i18n')('description', $rootScope.loc.ale, 'army_helper'))
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td class=\"item-spear-a\"><td class=\"item-spear-o\"><td class=\"item-spear-i\"><td class=\"item-spear-s\"><td class=\"item-spear-r\"><td class=\"item-spear-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td class=\"item-sword-a\"><td class=\"item-sword-o\"><td class=\"item-sword-i\"><td class=\"item-sword-s\"><td class=\"item-sword-r\"><td class=\"item-sword-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td class=\"item-archer-a\"><td class=\"item-archer-o\"><td class=\"item-archer-i\"><td class=\"item-archer-s\"><td class=\"item-archer-r\"><td class=\"item-archer-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-hc-a\"><td class=\"item-hc-o\"><td class=\"item-hc-i\"><td class=\"item-hc-s\"><td class=\"item-hc-r\"><td class=\"item-hc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td class=\"item-trebuchet-a\"><td class=\"item-trebuchet-o\"><td class=\"item-trebuchet-i\"><td class=\"item-trebuchet-s\"><td class=\"item-trebuchet-r\"><td class=\"item-trebuchet-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td class=\"item-axe-a\"><td class=\"item-axe-o\"><td class=\"item-axe-i\"><td class=\"item-axe-s\"><td class=\"item-axe-r\"><td class=\"item-axe-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"item-lc-a\"><td class=\"item-lc-o\"><td class=\"item-lc-i\"><td class=\"item-lc-s\"><td class=\"item-lc-r\"><td class=\"item-lc-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"item-ma-a\"><td class=\"item-ma-o\"><td class=\"item-ma-i\"><td class=\"item-ma-s\"><td class=\"item-ma-r\"><td class=\"item-ma-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td class=\"item-ram-a\"><td class=\"item-ram-o\"><td class=\"item-ram-i\"><td class=\"item-ram-s\"><td class=\"item-ram-r\"><td class=\"item-ram-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"item-catapult-a\"><td class=\"item-catapult-o\"><td class=\"item-catapult-i\"><td class=\"item-catapult-s\"><td class=\"item-catapult-r\"><td class=\"item-catapult-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td class=\"item-berserker-a\"><td class=\"item-berserker-o\"><td class=\"item-berserker-i\"><td class=\"item-berserker-s\"><td class=\"item-berserker-r\"><td class=\"item-berserker-t\"><tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td class=\"item-snob-a\"><td class=\"item-snob-o\"><td class=\"item-snob-i\"><td class=\"item-snob-s\"><td class=\"item-snob-r\"><td class=\"item-snob-t\"><tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td class=\"item-knight-a\"><td class=\"item-knight-o\"><td class=\"item-knight-i\"><td class=\"item-knight-s\"><td class=\"item-knight-r\"><td class=\"item-knight-t\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody class=\"balancerLog\"><tr class=\"noBalances\"><td colspan=\"5\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .balancerLog td{text-align:center}#two-army-helper .balancerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-army-helper .balancerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-army-helper .noBalances td{height:26px;text-align:center}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
+        eventQueue.register(eventTypeProvider.ARMY_HELPER_START, function() {
+            running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+        eventQueue.register(eventTypeProvider.ARMY_HELPER_STOP, function() {
+            running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearSupport }}<td>{{ spearRecruting }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordSupport }}<td>{{ swordRecruting }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerSupport }}<td>{{ archerRecruting }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcSupport }}<td>{{ hcRecruting }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetSupport }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeSupport }}<td>{{ axeRecruting }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcSupport }}<td>{{ lcRecruting }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maSupport }}<td>{{ maRecruting }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramSupport }}<td>{{ ramRecruting }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultSupport }}<td>{{ catapultRecruting }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerSupport }}<td>{{ berserkerRecruting }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobSupport }}<td>{{ snobRecruting }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightSupport }}<td>{{ knightRecruting }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'prank_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .logs .status tr{height:25px}#two-army-helper .logs .status td{padding:0 6px}#two-army-helper .logs .log-list{margin-bottom:10px}#two-army-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-army-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-army-helper .icon-20x20-village:before{margin-top:-11px}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = armyHelper.isRunning()
+        $scope.running = running
+        $scope.pagination = {}
         $scope.selectedTab = TAB_TYPES.ARMY
+        $scope.villagesLabel = villagesLabel
+        $scope.villagesInfo = villagesInfo
+        $scope.logsView = logsView
+        $scope.logsView.logs = armyHelper.getLogs()
+        $scope.visibleLogs = []
         $scope.settingsMap = SETTINGS_MAP
         $scope.unit = Settings.encodeList(B_UNIT, {
             textObject: 'army_helper',
             disabled: true
         })
+        $scope.autoCompleteVillage = {
+            type: ['village'],
+            placeholder: $filter('i18n')('balance.add_village_search', $rootScope.loc.ale, 'army_helper'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('balance.add_origin', $rootScope.loc.ale, 'army_helper'),
+            dropDown: true
+        }
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
 
         settings.injectScope($scope)
         eventHandlers.updateGroups()
-
+        logsView.updateVisibleLogs()
         $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
+        $scope.armyVillage = armyVillage
+        $scope.check = checkArmy
+        $scope.balanceAll = balanceAll
+        $scope.balanceGroup = balanceGroup
+        $scope.balanceUnit = balanceUnit
+        $scope.balanceUnitAndGroup = balanceUnitAndGroup
+        $scope.clearLogs = armyHelper.clearLogs()
+        $scope.clear = clear
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.addMapSelected = addMapSelected
 
         let eventScope = new EventScope('twoverflow_army_helper_window', function onDestroy () {
             console.log('armyHelper window closed')
         })
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.ARMY_HELPER_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.ARMY_HELPER_STOP, eventHandlers.stop)
+        eventScope.register(eventTypeProvider.ARMY_HELPER_LOGS_UPDATED, eventHandlers.updateLogs)
         
         windowManagerService.getScreenWithInjectedScope('!twoverflow_army_helper_window', $scope)
     }
@@ -6010,21 +6691,18 @@ require([
 define('two/autoFoundator', [
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     utils,
     eventQueue
 ) {
     let initialized = false
     let running = false
-	
     let interval = 3000
-
-    const donateTribe = function () {
+    const donateTribe = function() {
         if (!running) {
             return false
         }
         console.log('Fundator uruchomiony')
-		
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
         villages.forEach(function(village, index) {
@@ -6052,13 +6730,8 @@ define('two/autoFoundator', [
             }, index * Math.random() * interval)
             console.log('Wykonano darowizne na plemię: ' + village.getName() + ' drewno: ' + woodCalculated + ', glina: ' + clayCalculated + ', żelazo: ' + ironCalculated)
         })
-        setTimeout(doAgain, 1000)
+        autoFoundator.stop()
     }
-
-    function doAgain() {
-        setTimeout(donateTribe, 3600000)
-    }
-
     let autoFoundator = {}
     autoFoundator.init = function() {
         initialized = true
@@ -6066,6 +6739,10 @@ define('two/autoFoundator', [
     autoFoundator.start = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
         running = true
+        setInterval (function() {
+            running = true
+            donateTribe()
+        }, 3600000)
         donateTribe()
     }
     autoFoundator.stop = function() {
@@ -6211,7 +6888,6 @@ define('two/autoHealer', [
                 }, index * interval)
             }
         })
-        console.log('Medyk zatrzymany')
         autoHealer.stop()
     }
     let autoHealer = {}
@@ -6222,6 +6898,10 @@ define('two/autoHealer', [
         eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STARTED)
         running = true
         heal()
+        setInterval(function() {
+            running = true
+            heal()
+        }, 3600000)
     }
     autoHealer.stop = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STOPPED)
@@ -16736,14 +17416,11 @@ define('two/faithChecker', [
     let requestVillageProvinceNeighbours
     let highestChapelLevel
     let bonus
-	
     let chapelBlockade = 0
-	
     getHighestGodsHouseLevel = function getHighestGodsHouseLevel(villages) {
         let villageIdx,
             highestLevel = 0,
             tmpLevel
-
         for (villageIdx = 0; villageIdx < villages.length; villageIdx++) {
             tmpLevel = villages[villageIdx].chapel || villages[villageIdx].church
             if (tmpLevel && (tmpLevel > highestLevel)) {
@@ -16752,7 +17429,6 @@ define('two/faithChecker', [
         }
         return highestLevel
     }
-	
     getMoralBonus = function getMoralBonus(level, opt_isChapel) {
         let bonusLookUp = modelDataService.getWorldConfig().getChurchBonus(),
             bonusFactor = 0
@@ -16766,7 +17442,6 @@ define('two/faithChecker', [
         }
         return Math.floor(bonusFactor * 100)
     }
-	
     requestVillageProvinceNeighbours = function requestVillageProvinceNeighbours(villageId, callback) {
         socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
             'village_id': villageId
@@ -16774,9 +17449,11 @@ define('two/faithChecker', [
     }
 
     function faithInfo() {
+        if (!running) {
+            return false
+        }
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
-
         villages.forEach(function(village) {
             let villageid = village.data.villageId
             let isChapel = village.data.buildings.chapel.level
@@ -16798,7 +17475,6 @@ define('two/faithChecker', [
             if (isChapel == 1) {
                 chapelBlockade = 1
             }
-
             requestVillageProvinceNeighbours(villageid, function(responseData) {
                 highestChapelLevel = getHighestGodsHouseLevel(responseData.villages)
                 bonus = getMoralBonus(highestChapelLevel, isChapel === 1)
@@ -16832,7 +17508,6 @@ define('two/faithChecker', [
                 } else if (bonus == 50 && buildingQueue) {
                     buildingQueue.forEach(function(queue) {
                         let faithMax = queue.building
-
                         if ((faithMax != 'chapel' || faithMax != 'church') && chapelBlockade == 0) {
                             if (villageWood >= woodCost[0] && villageClay >= clayCost[0] && villageIron >= ironCost[0] && villageFood >= foodCost[0]) {
                                 socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
@@ -16864,8 +17539,8 @@ define('two/faithChecker', [
                 }
             })
         })
+        faithChecker.stop()
     }
-
     let faithChecker = {}
     faithChecker.init = function() {
         initialized = true
@@ -16874,6 +17549,10 @@ define('two/faithChecker', [
         eventQueue.trigger(eventTypeProvider.FAITH_CHECKER_STARTED)
         running = true
         faithInfo()
+        setInterval(function() {
+            running = true
+            faithInfo()
+        }, 60000)
     }
     faithChecker.stop = function() {
         eventQueue.trigger(eventTypeProvider.FAITH_CHECKER_STOPPED)
@@ -21870,8 +22549,11 @@ define('two/mintHelper', [
     let initialized = false
     let running = false
     let interval = 3000
-	
+
     function mintCoins() {
+        if (!running) {
+            return false
+        }
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
         villages.forEach(function(village) {
@@ -21919,14 +22601,14 @@ define('two/mintHelper', [
                             console.log('W wiosce ' + village.getName() + ' wybito ' + amountIron + ' monet.')
                         }
                     } else {
-                        console.log('Za mało surowców żeby wybić monety w wiosce' + village.getName())
+                        console.log('Za mało surowców żeby wybić monety w wiosce ' + village.getName())
                     }
                 } else {
                     console.log('W wiosce ' + village.getName() + ' brak akademi')
                 }
             }, interval)
         })
-        setTimeout(mintCoins, 30000)
+        mintHelper.stop()
     }
     let mintHelper = {}
     mintHelper.init = function() {
@@ -21935,6 +22617,11 @@ define('two/mintHelper', [
     mintHelper.start = function() {
         eventQueue.trigger(eventTypeProvider.MINT_HELPER_STARTED)
         running = true
+        mintCoins()
+        setInterval(function() {
+            running = true
+            mintCoins()
+        }, 1800000)
         mintCoins()
     }
     mintHelper.stop = function() {
@@ -22524,9 +23211,10 @@ define('two/prankHelper', [
                 }
             })
         })
+        prankHelper.stop()
     }
     prankHelper.renameProvince = function renameProvince() {
-        var selectedVillage = prankHelperSettings[SETTINGS.BATTLE_VILLAGE_ID]
+        var selectedVillage = prankHelperSettings[SETTINGS.VILLAGE_ID]
         var villages = []
         socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
             'village_id': selectedVillage
@@ -22598,6 +23286,7 @@ define('two/prankHelper', [
                 addLog(villageIdSet, nameSet[index], oldName)
             }, index * interval)
         })
+        prankHelper.stop()
     }
     prankHelper.renameAll = function renameAll() {
         var player = modelDataService.getSelectedCharacter()
@@ -22667,6 +23356,7 @@ define('two/prankHelper', [
                 addLog(villageIdSet, nameSet[index], oldName)
             }, index * interval)
         })
+        prankHelper.stop()
     }
     prankHelper.getSettings = function() {
         return settings
@@ -22938,7 +23628,7 @@ define('two/prankHelper/ui', [
         $scope.selectTab = selectTab
         $scope.prankVillage = prankVillage
         $scope.clear = clear
-        $scope.clearLogs = prankHelper.clearLogs
+        $scope.clearLogs = prankHelper.clearLogs()
         $scope.renameAll = renameAll
         $scope.renameProvince = renameProvince
         $scope.renameGroup = renameGroup
@@ -23467,7 +24157,6 @@ define('two/presetCreator', [
 ) {
     var initialized = false
     var running = false
-	
     var player = modelDataService.getSelectedCharacter()
     var villages = player.getVillageList()
     var pikinier = '060504'
@@ -23496,6 +24185,7 @@ define('two/presetCreator', [
     var karetatreb = '030d0e'
 
     function createPresets() {
+        const allPresets = modelDataService.getPresetList().getPresets()
         pikinier = typeof pikinier === 'string' ? parseInt(pikinier, 16) : pikinier
         miecznik = typeof miecznik === 'string' ? parseInt(miecznik, 16) : miecznik
         topornik = typeof topornik === 'string' ? parseInt(topornik, 16) : topornik
@@ -23520,680 +24210,728 @@ define('two/presetCreator', [
         karetatar = typeof karetatar === 'string' ? parseInt(karetatar, 16) : karetatar
         karetakat = typeof karetakat === 'string' ? parseInt(karetakat, 16) : karetakat
         karetatreb = typeof karetatreb === 'string' ? parseInt(karetatreb, 16) : karetatreb
-
-
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (pik)',
-            icon: pikinier,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 20,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
+        allPresets.forEach(function(preset) {
+            if (preset.name != 'Farma (pik)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (pik)',
+                    icon: pikinier,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 20,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (miecz)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (miecz)',
+                    icon: miecznik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 33,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (top)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (top)',
+                    icon: topornik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 25,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (łuk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (łuk)',
+                    icon: łucznik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 50,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (lk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (lk)',
+                    icon: lk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 10,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (łk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (łk)',
+                    icon: łk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 10,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (ck)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (ck)',
+                    icon: ck,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 10,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'PartDeff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'PartDeff',
+                    icon: partDeff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 180,
+                        sword: 140,
+                        axe: 0,
+                        archer: 100,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'FullDeff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'FullDeff',
+                    icon: fullDeff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 9000,
+                        sword: 7000,
+                        axe: 0,
+                        archer: 5000,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'PartOff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'PartOff',
+                    icon: partOff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 200,
+                        archer: 0,
+                        light_cavalry: 75,
+                        mounted_archer: 87,
+                        heavy_cavalry: 0,
+                        ram: 15,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'FullOff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'FullOff',
+                    icon: fullOff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 4000,
+                        archer: 0,
+                        light_cavalry: 1500,
+                        mounted_archer: 1750,
+                        heavy_cavalry: 0,
+                        ram: 300,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (pik)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (pik)',
+                    icon: fejkpik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 1,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (miecz)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (miecz)',
+                    icon: fejkmiecz,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 1,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (top)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (top)',
+                    icon: fejktop,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 1,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (łuk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (łuk)',
+                    icon: fejkłuk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 1,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (lk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (lk)',
+                    icon: fejklk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 1,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (łk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (łk)',
+                    icon: fejkłk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 1,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (ck)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (ck)',
+                    icon: fejkck,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 1,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (tar)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (tar)',
+                    icon: fejktar,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 1,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (kat)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (kat)',
+                    icon: fejkkat,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 1,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (treb)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (treb)',
+                    icon: fejktreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 1,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'kareta (tar)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'kareta (tar)',
+                    icon: karetatreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 1,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'kareta (kat)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'kareta (kat)',
+                    icon: karetatreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 1,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'kareta (treb)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'kareta (treb)',
+                    icon: karetatreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 1,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
             }
         })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (miecz)',
-            icon: miecznik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 33,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (top)',
-            icon: topornik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 25,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (łuk)',
-            icon: łucznik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 50,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (lk)',
-            icon: lk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 10,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (łk)',
-            icon: łk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 10,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (ck)',
-            icon: ck,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 10,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'PartDeff',
-            icon: partDeff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 180,
-                sword: 140,
-                axe: 0,
-                archer: 100,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'FullDeff',
-            icon: fullDeff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 9000,
-                sword: 7000,
-                axe: 0,
-                archer: 5000,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'PartOff',
-            icon: partOff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 200,
-                archer: 0,
-                light_cavalry: 75,
-                mounted_archer: 87,
-                heavy_cavalry: 0,
-                ram: 15,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'FullOff',
-            icon: fullOff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 4000,
-                archer: 0,
-                light_cavalry: 1500,
-                mounted_archer: 1750,
-                heavy_cavalry: 0,
-                ram: 300,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (pik)',
-            icon: fejkpik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 1,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (miecz)',
-            icon: fejkmiecz,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 1,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (top)',
-            icon: fejktop,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 1,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (łuk)',
-            icon: fejkłuk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 1,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (lk)',
-            icon: fejklk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 1,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (łk)',
-            icon: fejkłk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 1,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (ck)',
-            icon: fejkck,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 1,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (tar)',
-            icon: fejktar,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 1,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (kat)',
-            icon: fejkkat,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 1,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (treb)',
-            icon: fejktreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 1,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })	
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'kareta (tar)',
-            icon: karetatreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 1,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })	
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'kareta (kat)',
-            icon: karetatreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 1,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })	
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'kareta (treb)',
-            icon: karetatreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 1,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })		
         utils.notif('success', $filter('i18n')('done', $rootScope.loc.ale, 'preset_creator'))
         utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'preset_creator'))
         presetCreator.stop()
@@ -25261,7 +25999,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, spearnew1)
                 } else {
-                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
                 }
             }
 
@@ -25280,7 +26018,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, swordnew1)
                 } else {
-                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -25299,7 +26037,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, axenew1)
                 } else {
-                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
                 }
             }
 
@@ -25318,7 +26056,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, archernew1)
                 } else {
-                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -25337,7 +26075,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, lcnew1)
                 } else {
-                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
                 }
             }
 
@@ -25356,7 +26094,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, manew1)
                 } else {
-                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
                 }
             }
 
@@ -25375,7 +26113,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, ramnew1)
                 } else {
-                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
                 }
             }
 
@@ -25394,7 +26132,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, catapultnew1)
                 } else {
-                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
                 }
             }
 
@@ -25413,7 +26151,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, hcnew1)
                 } else {
-                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
                 }
             }
         }
@@ -25912,7 +26650,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, spearnew2)
                 } else {
-                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
                 }
             }
 
@@ -25931,7 +26669,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, swordnew2)
                 } else {
-                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -25950,7 +26688,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, axenew2)
                 } else {
-                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
                 }
             }
 
@@ -25969,7 +26707,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, archernew2)
                 } else {
-                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -25988,7 +26726,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, lcnew2)
                 } else {
-                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
                 }
             }
 
@@ -26007,7 +26745,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, manew2)
                 } else {
-                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
                 }
             }
 
@@ -26026,7 +26764,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, ramnew2)
                 } else {
-                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
                 }
             }
 
@@ -26045,7 +26783,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, catapultnew2)
                 } else {
-                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
                 }
             }
 
@@ -26064,7 +26802,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, hcnew2)
                 } else {
-                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
                 }
             }
         }
@@ -26563,7 +27301,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, spearnew3)
                 } else {
-                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
                 }
             }
 
@@ -26582,7 +27320,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, swordnew3)
                 } else {
-                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -26601,7 +27339,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, axenew3)
                 } else {
-                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
                 }
             }
 
@@ -26620,7 +27358,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, archernew3)
                 } else {
-                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -26639,7 +27377,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, lcnew3)
                 } else {
-                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
                 }
             }
 
@@ -26658,7 +27396,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, manew3)
                 } else {
-                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
                 }
             }
 
@@ -26677,7 +27415,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, ramnew3)
                 } else {
-                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
                 }
             }
 
@@ -26696,7 +27434,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, catapultnew3)
                 } else {
-                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
                 }
             }
 
@@ -26715,7 +27453,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, hcnew3)
                 } else {
-                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
                 }
             }
         }
@@ -27214,7 +27952,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, spearnew4)
                 } else {
-                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
                 }
             }
 
@@ -27233,7 +27971,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, swordnew4)
                 } else {
-                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -27252,7 +27990,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, axenew4)
                 } else {
-                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
                 }
             }
 
@@ -27271,7 +28009,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, archernew4)
                 } else {
-                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
                 }
             }
 
@@ -27290,7 +28028,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, lcnew4)
                 } else {
-                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
                 }
             }
 
@@ -27309,7 +28047,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, manew4)
                 } else {
-                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
                 }
             }
 
@@ -27328,7 +28066,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, ramnew4)
                 } else {
-                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
                 }
             }
 
@@ -27347,7 +28085,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, catapultnew4)
                 } else {
-                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
                 }
             }
 
@@ -27366,7 +28104,7 @@ define('two/recruitQueue', [
                     eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
                     addLog(villageIdSet, unit, hcnew4)
                 } else {
-                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum lub zbyt niski poziom koszar')
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
                 }
             }
         }
@@ -27376,11 +28114,11 @@ define('two/recruitQueue', [
             var villages = player.getVillageList()
             unitInterval = recruitQueueSettings[SETTINGS.UNIT_QUEUE_INTERVAL] * 1000
             var interval = recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000
-            var interval2 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
-            var interval3 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
-            var interval4 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
-            villages.forEach(function(village, index) {
-                if (selectedGroup1) {
+            var interval2 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            var interval3 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000 * 2) + (recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            var interval4 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000 * 3) + (recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            if (selectedGroup1) {
+                villages.forEach(function(village, index) {
                     setTimeout(function() {
                         groupVillages1.forEach(function(id1) {
                             if (village.data.villageId == id1) {
@@ -27419,8 +28157,12 @@ define('two/recruitQueue', [
                             }
                         })
                     }, index * interval)
-                }
-                if (selectedGroup2) {
+                })
+            } else {
+                console.log('Nie wybrano grupy nr1')
+            }
+            if (selectedGroup2) {
+                villages.forEach(function(village, index) {
                     setTimeout(function() {
                         groupVillages2.forEach(function(id2) {
                             if (village.data.villageId == id2) {
@@ -27456,9 +28198,13 @@ define('two/recruitQueue', [
                                 modifier2Get()
                             }
                         })
-                    }, ((index + 1) * interval) + interval2)
-                }
-                if (selectedGroup3) {
+                    }, (index * interval) + interval2)
+                })
+            } else {
+                console.log('Nie wybrano grupy nr2')
+            }
+            if (selectedGroup3) {
+                villages.forEach(function(village, index) {
                     setTimeout(function() {
                         groupVillages3.forEach(function(id3) {
                             if (village.data.villageId == id3) {
@@ -27494,9 +28240,13 @@ define('two/recruitQueue', [
                                 modifier3Get()
                             }
                         })
-                    }, ((index + 2) * interval) + interval3)
-                }
-                if (selectedGroup4) {
+                    }, (index * interval) + interval3)
+                })
+            } else {
+                console.log('Nie wybrano grupy nr3')
+            }
+            if (selectedGroup4) {
+                villages.forEach(function(village, index) {
                     setTimeout(function() {
                         groupVillages4.forEach(function(id4) {
                             if (village.data.villageId == id4) {
@@ -27532,15 +28282,18 @@ define('two/recruitQueue', [
                                 modifier4Get()
                             }
                         })
-                    }, ((index + 3) * interval) + interval4)
-                }
-            })
+                    }, (index * interval) + interval4)
+                })
+            } else {
+                console.log('Nie wybrano grupy nr4')
+            }
         }
+        recruitQueue.stop()
         setInterval(function() {
             if (running == false) {
                 return
             }
-        }, 5000)
+        }, 60000)
         getVillageData()
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END)
     }
@@ -27559,6 +28312,7 @@ define('two/recruitQueue', [
         addLog(LOG_TYPES.RECRUIT_START, 'start', '')
         interval5 = Math.max(MINIMUM_RECRUIT_CYCLE_INTERVAL, recruitQueueSettings[SETTINGS.RECRUIT_QUEUE_INTERVAL] * 60 * 1000)
         runningRecrutation = setInterval(function() {
+            running = true
             recruitQueue.presetRecrutation()
         }, interval5)
     }
@@ -29498,7 +30252,6 @@ define('two/reportSender', [
 ) {
     var player = modelDataService.getSelectedCharacter()
     var playerId = player.data.character_id
-    var playerName = player.data.character_name
     var initialized = false
     var running = false
     var scoutReportsId = []
@@ -29513,8 +30266,10 @@ define('two/reportSender', [
         returnString = convert
         return returnString
     }
-
     var checkNewReports = function() {
+        if (!running) {
+            return false
+        }
         socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
             offset: 0,
             count: 50,
@@ -29533,7 +30288,6 @@ define('two/reportSender', [
                 }
             }
         })
-
         socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
             offset: 0,
             count: 100,
@@ -29552,7 +30306,6 @@ define('two/reportSender', [
                 }
             }
         })
-
         socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
             offset: 0,
             count: 100,
@@ -29571,10 +30324,8 @@ define('two/reportSender', [
                 }
             }
         })
-
-        setTimeout(checkNewReports, 30000)
+        reportSender.stop()
     }
-
     var sendInfoScout = function sendInfoScout(data) {
         var alertText = []
         var result = data.result
@@ -29651,42 +30402,26 @@ define('two/reportSender', [
             origin = '[village=' + attVillageId + ']' + attVillageName + '[/village]'
         }
         time = Math.floor((dateNow / 1000) - timecreated)
-
         alertText.push('[size=XL][b]Raport szpiegowski: [report]' + newToken + '[/report][br]' + resultString + ' --- Typ: ' + type + '[/b][/size][br][b][size=large] Czas wejścia szpiegów: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Liczba szpiegów: [b]' + defScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + defScoutsLossesFinal + '[/color][/b][br]Wioska pochodzenia: [/b]' + origin + '[b] Gracz szpiegujący: [/b]' + gamer + '[br]Liczba szpiegów: [b]' + attScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + attScoutsLossesFinal + '[/color][/b][/size]')
         var message = alertText.join()
         if (defCharacterId != playerId) {
             if (time < 10800) {
-                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 14383,
-                        message: message
-                    })
-                } else {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 6467,
-                        message: message
-                    })
-                }
+                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                    message_id: 8462,
+                    message: message
+                })
                 alertText = []
             }
         } else {
             if (time < 10800) {
-                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 14382,
-                        message: message
-                    })
-                } else {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 6466,
-                        message: message
-                    })
-                }
+                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                    message_id: 8463,
+                    message: message
+                })
                 alertText = []
             }
         }
     }
-
     var sendInfoDefense = function sendInfoDefense(data) {
         var alertText = []
         var result = data.result
@@ -29903,28 +30638,17 @@ define('two/reportSender', [
                 origin = '[village=' + attVillageId + ']' + attVillageName + '[/village]'
             }
             time = Math.floor((dateNow / 1000) - timecreated)
-
             alertText.push('[size=XL][b]Raport obronny: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersF + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
-
             var message = alertText.join()
             if (time < 10800) {
-                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 14381,
-                        message: message
-                    })
-                } else {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 6982,
-                        message: message
-                    })
-                }
+                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                    message_id: 8461,
+                    message: message
+                })
                 alertText = []
             }
         }
     }
-
-
     var sendInfoAttack = function sendInfoAttack(data) {
         var alertText = []
         var result = data.result
@@ -30181,29 +30905,19 @@ define('two/reportSender', [
             }
             time = Math.floor((dateNow / 1000) - timecreated)
             officersD = officersF.join()
-
             if (defCharacterName != null) {
                 alertText.push('[size=XL][b]Raport z ataku: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersD + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
-
                 var message = alertText.join()
                 if (time < 10800) {
-                    if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                        socketService.emit(routeProvider.MESSAGE_REPLY, {
-                            message_id: 14380,
-                            message: message
-                        })
-                    } else {
-                        socketService.emit(routeProvider.MESSAGE_REPLY, {
-                            message_id: 6983,
-                            message: message
-                        })
-                    }
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 8460,
+                        message: message
+                    })
                     alertText = []
                 }
             }
         }
     }
-
     var reportSender = {}
     reportSender.init = function() {
         initialized = true
@@ -30211,6 +30925,10 @@ define('two/reportSender', [
     reportSender.start = function() {
         eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STARTED)
         running = true
+        setInterval(function() {
+            running = true
+            checkNewReports()
+        }, 60000)
         checkNewReports()
     }
     reportSender.stop = function() {
@@ -30981,307 +31699,307 @@ require([
 define('two/spyRecruiter', [
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     utils,
     eventQueue
 ) {
     let initialized = false
     let running = false
-
     var recruitSpy = function recruitSpy() {
-        setInterval(function() {
-            var player = modelDataService.getSelectedCharacter()
-            var villages = player.getVillageList()
-            villages.forEach(function(village) {
-                var data = village.data
-                var buildings = data.buildings
-                var tavern = buildings.tavern
-                var level = tavern.level
-                var scoutingInfo = village.scoutingInfo
-                var spies = scoutingInfo.spies
-                var resources = village.getResources()
-                var computed = resources.getComputed()
-                var wood = computed.wood
-                var clay = computed.clay
-                var iron = computed.iron
-                var villageWood = wood.currentStock
-                var villageClay = clay.currentStock
-                var villageIron = iron.currentStock
-                var woodCost = [500, 1000, 2200, 7000, 12000]
-                var clayCost = [500, 800, 2000, 6500, 10000]
-                var ironCost = [500, 1200, 2400, 8000, 18000]
-                if (level < 1) {
-                    console.log('Brak tawerny w wiosce:' + village.getName())
-                } else if (level >= 1 && level < 3) {
-                    spies.forEach(function(spy) {
-                        if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                        }
-                    })
-                    console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                } else if (level >= 3 && level < 6) {
-                    spies.forEach(function(spy) {
-                        if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        }
-                    })
-                } else if (level >= 6 && level < 9) {
-                    spies.forEach(function(spy) {
-                        if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        }
-                    })
-                } else if (level >= 9 && level < 12) {
-                    spies.forEach(function(spy) {
-                        if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
-                        }
-                    })
-                } else if (level >= 12) {
-                    spies.forEach(function(spy) {
-                        if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 4 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
-                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
-                        } else if (spy.id == 5 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[5] && villageClay >= clayCost[5] && villageIron >= ironCost[5])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 5) w wiosce:' + village.getName())
-                        }
-                    })
-                }
-            })
-            utils.notif('success',  $filter('i18n')('revived', $rootScope.loc.ale, 'spy_recruiter'))
-        }, 120000)
+        if (!running) {
+            return false
+        }
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        villages.forEach(function(village) {
+            var data = village.data
+            var buildings = data.buildings
+            var tavern = buildings.tavern
+            var level = tavern.level
+            var scoutingInfo = village.scoutingInfo
+            var spies = scoutingInfo.spies
+            var resources = village.getResources()
+            var computed = resources.getComputed()
+            var wood = computed.wood
+            var clay = computed.clay
+            var iron = computed.iron
+            var villageWood = wood.currentStock
+            var villageClay = clay.currentStock
+            var villageIron = iron.currentStock
+            var woodCost = [500, 1000, 2200, 7000, 12000]
+            var clayCost = [500, 800, 2000, 6500, 10000]
+            var ironCost = [500, 1200, 2400, 8000, 18000]
+            if (level < 1) {
+                console.log('Brak tawerny w wiosce:' + village.getName())
+            } else if (level >= 1 && level < 3) {
+                spies.forEach(function(spy) {
+                    if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                    }
+                })
+                console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+            } else if (level >= 3 && level < 6) {
+                spies.forEach(function(spy) {
+                    if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    }
+                })
+            } else if (level >= 6 && level < 9) {
+                spies.forEach(function(spy) {
+                    if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    }
+                })
+            } else if (level >= 9 && level < 12) {
+                spies.forEach(function(spy) {
+                    if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
+                    }
+                })
+            } else if (level >= 12) {
+                spies.forEach(function(spy) {
+                    if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 4 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
+                    } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
+                    } else if (spy.id == 5 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[5] && villageClay >= clayCost[5] && villageIron >= ironCost[5])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 5) w wiosce:' + village.getName())
+                    }
+                })
+            }
+        })
+        utils.notif('success', $filter('i18n')('revived', $rootScope.loc.ale, 'spy_recruiter'))
+        spyRecruiter.stop()
     }
-	
     let spyRecruiter = {}
     spyRecruiter.init = function() {
         initialized = true
@@ -31289,6 +32007,10 @@ define('two/spyRecruiter', [
     spyRecruiter.start = function() {
         eventQueue.trigger(eventTypeProvider.SPY_RECRUITER_STARTED)
         running = true
+        setInterval (function() {
+            running = true
+            recruitSpy()
+        }, 120000)
         recruitSpy()
     }
     spyRecruiter.stop = function() {
