@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Dec 2020 07:53:25 GMT
+ * Wed, 09 Dec 2020 08:50:38 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4763,7 +4763,7 @@ define('two/armyHelper', [
     'queues/EventQueue',
     'Lockr',
     'helper/time'
-], function (
+], function(
     Settings,
     SETTINGS,
     SETTINGS_MAP,
@@ -4860,12 +4860,10 @@ define('two/armyHelper', [
     var KnightS = 0
     var KnightR = 0
     var KnightT = 0
-
     const STORAGE_KEYS = {
         LOGS: 'army_helper_logs',
         SETTINGS: 'army_helper_settings'
     }
-    
     const BALANCER_UNIT = {
         [B_UNIT.SPEAR]: 'spear',
         [B_UNIT.SWORD]: 'sword',
@@ -4882,19 +4880,16 @@ define('two/armyHelper', [
         [B_UNIT.KNIGHT]: 'knight'
     }
     console.log(BALANCER_UNIT)
-    
-    const updateGroups = function () {
+    const updateGroups = function() {
         byGroupBalance = []
         byUnitAndGroupBalance = []
-
         const allGroups = modelDataService.getGroupList().getGroups()
         const groupsSelectedByTheUser3 = armyHelperSettings[SETTINGS.GROUP3]
         const groupsSelectedByTheUser4 = armyHelperSettings[SETTINGS.GROUP4]
-
-        groupsSelectedByTheUser3.forEach(function (groupId) {
+        groupsSelectedByTheUser3.forEach(function(groupId) {
             byGroupBalance.push(allGroups[groupId])
         })
-        groupsSelectedByTheUser4.forEach(function (groupId) {
+        groupsSelectedByTheUser4.forEach(function(groupId) {
             byUnitAndGroupBalance.push(allGroups[groupId])
         })
     }
@@ -4913,56 +4908,43 @@ define('two/armyHelper', [
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         return true
     }
-
     const armyHelper = {}
-
-    armyHelper.init = function () {
+    armyHelper.init = function() {
         initialized = true
         logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function(changes, updates) {
             armyHelperSettings = settings.getAll()
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
         })
-
         armyHelperSettings = settings.getAll()
-
         console.log('armyHelper settings', armyHelperSettings)
-
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
-
-    armyHelper.start = function () {
+    armyHelper.start = function() {
         running = true
         addLog('Rozpoczęto balansowanie wojsk', '', '', '')
-
         eventQueue.trigger(eventTypeProvider.ARMY_HELPER_START)
     }
-
-    armyHelper.stop = function () {
+    armyHelper.stop = function() {
         running = false
-
         addLog('Zatrzymano balansowanie wojsk', '', '', '')
         eventQueue.trigger(eventTypeProvider.ARMY_HELPER_STOP)
     }
-
-    armyHelper.getSettings = function () {
+    armyHelper.getSettings = function() {
         return settings
     }
-
-    armyHelper.isInitialized = function () {
+    armyHelper.isInitialized = function() {
         return initialized
     }
-
-    armyHelper.isRunning = function () {
+    armyHelper.isRunning = function() {
         return running
     }
     armyHelper.getLogs = function() {
@@ -4989,84 +4971,239 @@ define('two/armyHelper', [
                 var doppelsoldner = units.doppelsoldner
                 var snob = units.snob
                 var knight = units.knight
-                SpearA += spear.available
-                SpearO += spear.own
-                SpearI += spear.in_town
-                SpearS += spear.support
-                SpearR += spear.recruiting
-                SpearT += spear.total
-                SwordA += sword.available
-                SwordO += sword.own
-                SwordI += sword.in_town
-                SwordS += sword.support
-                SwordR += sword.recruiting
-                SwordT += sword.total
-                AxeA += axe.available
-                AxeO += axe.own
-                AxeI += axe.in_town
-                AxeS += axe.support
-                AxeR += axe.recruiting
-                AxeT += axe.total
-                ArcherA += archer.available
-                ArcherO += archer.own
-                ArcherI += archer.in_town
-                ArcherS += archer.support
-                ArcherR += archer.recruiting
-                ArcherT += archer.total
-                LightCavalryA += light_cavalry.available
-                LightCavalryO += light_cavalry.own
-                LightCavalryI += light_cavalry.in_town
-                LightCavalryS += light_cavalry.support
-                LightCavalryR += light_cavalry.recruiting
-                LightCavalryT += light_cavalry.total
-                MountedArcherA += mounted_archer.available
-                MountedArcherO += mounted_archer.own
-                MountedArcherI += mounted_archer.in_town
-                MountedArcherS += mounted_archer.support
-                MountedArcherR += mounted_archer.recruiting
-                MountedArcherT += mounted_archer.total
-                HeavyCavalryA += heavy_cavalry.available
-                HeavyCavalryO += heavy_cavalry.own
-                HeavyCavalryI += heavy_cavalry.in_town
-                HeavyCavalryS += heavy_cavalry.support
-                HeavyCavalryR += heavy_cavalry.recruiting
-                HeavyCavalryT += heavy_cavalry.total
-                RamA += ram.available
-                RamO += ram.own
-                RamI += ram.in_town
-                RamS += ram.support
-                RamR += ram.recruiting
-                RamT += ram.total
-                CatapultA += catapult.available
-                CatapultO += catapult.own
-                CatapultI += catapult.in_town
-                CatapultS += catapult.support
-                CatapultR += catapult.recruiting
-                CatapultT += catapult.total
-                TrebuchetA += trebuchet.available
-                TrebuchetO += trebuchet.own
-                TrebuchetI += trebuchet.in_town
-                TrebuchetS += trebuchet.support
-                TrebuchetR += trebuchet.recruiting
-                TrebuchetT += trebuchet.total
-                BerserkerA += doppelsoldner.available
-                BerserkerO += doppelsoldner.own
-                BerserkerI += doppelsoldner.in_town
-                BerserkerS += doppelsoldner.support
-                BerserkerR += doppelsoldner.recruiting
-                BerserkerT += doppelsoldner.total
-                SnobA += snob.available
-                SnobO += snob.own
-                SnobI += snob.in_town
-                SnobS += snob.support
-                SnobR += snob.recruiting
-                SnobT += snob.total
-                KnightA += knight.available
-                KnightO += knight.own
-                KnightI += knight.in_town
-                KnightS += knight.support
-                KnightR += knight.recruiting
-                KnightT += knight.total
+                var calcSpearA = 0
+                var calcSpearO = 0
+                var calcSpearI = 0
+                var calcSpearS = 0
+                var calcSpearR = 0
+                var calcSpearT = 0
+                var calcSwordA = 0
+                var calcSwordO = 0
+                var calcSwordI = 0
+                var calcSwordS = 0
+                var calcSwordR = 0
+                var calcSwordT = 0
+                var calcAxeA = 0
+                var calcAxeO = 0
+                var calcAxeI = 0
+                var calcAxeS = 0
+                var calcAxeR = 0
+                var calcAxeT = 0
+                var calcArcherA = 0
+                var calcArcherO = 0
+                var calcArcherI = 0
+                var calcArcherS = 0
+                var calcArcherR = 0
+                var calcArcherT = 0
+                var calcLightCavalryA = 0
+                var calcLightCavalryO = 0
+                var calcLightCavalryI = 0
+                var calcLightCavalryS = 0
+                var calcLightCavalryR = 0
+                var calcLightCavalryT = 0
+                var calcMountedArcherA = 0
+                var calcMountedArcherO = 0
+                var calcMountedArcherI = 0
+                var calcMountedArcherS = 0
+                var calcMountedArcherR = 0
+                var calcMountedArcherT = 0
+                var calcHeavyCavalryA = 0
+                var calcHeavyCavalryO = 0
+                var calcHeavyCavalryI = 0
+                var calcHeavyCavalryS = 0
+                var calcHeavyCavalryR = 0
+                var calcHeavyCavalryT = 0
+                var calcRamA = 0
+                var calcRamO = 0
+                var calcRamI = 0
+                var calcRamS = 0
+                var calcRamR = 0
+                var calcRamT = 0
+                var calcCatapultA = 0
+                var calcCatapultO = 0
+                var calcCatapultI = 0
+                var calcCatapultS = 0
+                var calcCatapultR = 0
+                var calcCatapultT = 0
+                var calcTrebuchetA = 0
+                var calcTrebuchetO = 0
+                var calcTrebuchetI = 0
+                var calcTrebuchetS = 0
+                var calcTrebuchetR = 0
+                var calcTrebuchetT = 0
+                var calcBerserkerA = 0
+                var calcBerserkerO = 0
+                var calcBerserkerI = 0
+                var calcBerserkerS = 0
+                var calcBerserkerR = 0
+                var calcBerserkerT = 0
+                var calcSnobA = 0
+                var calcSnobO = 0
+                var calcSnobI = 0
+                var calcSnobS = 0
+                var calcSnobR = 0
+                var calcSnobT = 0
+                var calcKnightA = 0
+                var calcKnightO = 0
+                var calcKnightI = 0
+                var calcKnightS = 0
+                var calcKnightR = 0
+                var calcKnightT = 0
+                calcSpearA += spear.available
+                calcSpearO += spear.own
+                calcSpearI += spear.in_town
+                calcSpearS += spear.support
+                calcSpearR += spear.recruiting
+                calcSpearT += spear.total
+                calcSwordA += sword.available
+                calcSwordO += sword.own
+                calcSwordI += sword.in_town
+                calcSwordS += sword.support
+                calcSwordR += sword.recruiting
+                calcSwordT += sword.total
+                calcAxeA += axe.available
+                calcAxeO += axe.own
+                calcAxeI += axe.in_town
+                calcAxeS += axe.support
+                calcAxeR += axe.recruiting
+                calcAxeT += axe.total
+                calcArcherA += archer.available
+                calcArcherO += archer.own
+                calcArcherI += archer.in_town
+                calcArcherS += archer.support
+                calcArcherR += archer.recruiting
+                calcArcherT += archer.total
+                calcLightCavalryA += light_cavalry.available
+                calcLightCavalryO += light_cavalry.own
+                calcLightCavalryI += light_cavalry.in_town
+                calcLightCavalryS += light_cavalry.support
+                calcLightCavalryR += light_cavalry.recruiting
+                calcLightCavalryT += light_cavalry.total
+                calcMountedArcherA += mounted_archer.available
+                calcMountedArcherO += mounted_archer.own
+                calcMountedArcherI += mounted_archer.in_town
+                calcMountedArcherS += mounted_archer.support
+                calcMountedArcherR += mounted_archer.recruiting
+                calcMountedArcherT += mounted_archer.total
+                calcHeavyCavalryA += heavy_cavalry.available
+                calcHeavyCavalryO += heavy_cavalry.own
+                calcHeavyCavalryI += heavy_cavalry.in_town
+                calcHeavyCavalryS += heavy_cavalry.support
+                calcHeavyCavalryR += heavy_cavalry.recruiting
+                calcHeavyCavalryT += heavy_cavalry.total
+                calcRamA += ram.available
+                calcRamO += ram.own
+                calcRamI += ram.in_town
+                calcRamS += ram.support
+                calcRamR += ram.recruiting
+                calcRamT += ram.total
+                calcCatapultA += catapult.available
+                calcCatapultO += catapult.own
+                calcCatapultI += catapult.in_town
+                calcCatapultS += catapult.support
+                calcCatapultR += catapult.recruiting
+                calcCatapultT += catapult.total
+                calcTrebuchetA += trebuchet.available
+                calcTrebuchetO += trebuchet.own
+                calcTrebuchetI += trebuchet.in_town
+                calcTrebuchetS += trebuchet.support
+                calcTrebuchetR += trebuchet.recruiting
+                calcTrebuchetT += trebuchet.total
+                calcBerserkerA += doppelsoldner.available
+                calcBerserkerO += doppelsoldner.own
+                calcBerserkerI += doppelsoldner.in_town
+                calcBerserkerS += doppelsoldner.support
+                calcBerserkerR += doppelsoldner.recruiting
+                calcBerserkerT += doppelsoldner.total
+                calcSnobA += snob.available
+                calcSnobO += snob.own
+                calcSnobI += snob.in_town
+                calcSnobS += snob.support
+                calcSnobR += snob.recruiting
+                calcSnobT += snob.total
+                calcKnightA += knight.available
+                calcKnightO += knight.own
+                calcKnightI += knight.in_town
+                calcKnightS += knight.support
+                calcKnightR += knight.recruiting
+                calcKnightT += knight.totalSpearA = calcSpearA
+                SpearO = calcSpearO
+                SpearI = calcSpearI
+                SpearS = calcSpearS
+                SpearR = calcSpearR
+                SpearT = calcSpearT
+                SwordA = calcSwordA
+                SwordO = calcSwordO
+                SwordI = calcSwordI
+                SwordS = calcSwordS
+                SwordR = calcSwordR
+                SwordT = calcSwordT
+                AxeA = calcAxeA
+                AxeO = calcAxeO
+                AxeI = calcAxeI
+                AxeS = calcAxeS
+                AxeR = calcAxeR
+                AxeT = calcAxeT
+                ArcherA = calcArcherA
+                ArcherO = calcArcherO
+                ArcherI = calcArcherI
+                ArcherS = calcArcherS
+                ArcherR = calcArcherR
+                ArcherT = calcArcherT
+                LightCavalryA = calcLightCavalryA
+                LightCavalryO = calcLightCavalryO
+                LightCavalryI = calcLightCavalryI
+                LightCavalryS = calcLightCavalryS
+                LightCavalryR = calcLightCavalryR
+                LightCavalryT = calcLightCavalryT
+                MountedArcherA = calcMountedArcherA
+                MountedArcherO = calcMountedArcherO
+                MountedArcherI = calcMountedArcherI
+                MountedArcherS = calcMountedArcherS
+                MountedArcherR = calcMountedArcherR
+                MountedArcherT = calcMountedArcherT
+                HeavyCavalryA = calcHeavyCavalryA
+                HeavyCavalryO = calcHeavyCavalryO
+                HeavyCavalryI = calcHeavyCavalryI
+                HeavyCavalryS = calcHeavyCavalryS
+                HeavyCavalryR = calcHeavyCavalryR
+                HeavyCavalryT = calcHeavyCavalryT
+                RamA = calcRamA
+                RamO = calcRamO
+                RamI = calcRamI
+                RamS = calcRamS
+                RamR = calcRamR
+                RamT = calcRamT
+                CatapultA = calcCatapultA
+                CatapultO = calcCatapultO
+                CatapultI = calcCatapultI
+                CatapultS = calcCatapultS
+                CatapultR = calcCatapultR
+                CatapultT = calcCatapultT
+                TrebuchetA = calcTrebuchetA
+                TrebuchetO = calcTrebuchetO
+                TrebuchetI = calcTrebuchetI
+                TrebuchetS = calcTrebuchetS
+                TrebuchetR = calcTrebuchetR
+                TrebuchetT = calcTrebuchetT
+                BerserkerA = calcBerserkerA
+                BerserkerO = calcBerserkerO
+                BerserkerI = calcBerserkerI
+                BerserkerS = calcBerserkerS
+                BerserkerR = calcBerserkerR
+                BerserkerT = calcBerserkerT
+                SnobA = calcSnobA
+                SnobO = calcSnobO
+                SnobI = calcSnobI
+                SnobS = calcSnobS
+                SnobR = calcSnobR
+                SnobT = calcSnobT
+                KnightA = calcKnightA
+                KnightO = calcKnightO
+                KnightI = calcKnightI
+                KnightS = calcKnightS
+                KnightR = calcKnightR
+                KnightT = calcKnightT
             })
         }
         checkArmy()
@@ -5311,10 +5448,8 @@ define('two/armyHelper', [
     armyHelper.getknightAvailable = function() {
         return KnightA
     }
-
     return armyHelper
 })
-
 define('two/armyHelper/events', [], function () {
     angular.extend(eventTypeProvider, {
         ARMY_HELPER_START: 'army_helper_start',
