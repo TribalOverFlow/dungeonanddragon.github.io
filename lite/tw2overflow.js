@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Dec 2020 19:25:51 GMT
+ * Wed, 09 Dec 2020 19:32:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -5814,7 +5814,7 @@ define('two/armyHelper/ui', [
             textObject: 'army_helper',
             disabled: true
         })
-        $scope.autoCompleteVillage = {
+        $scope.autoCompleteProvince = {
             type: ['village'],
             placeholder: $filter('i18n')('balance.add_village_search', $rootScope.loc.ale, 'army_helper'),
             onEnter: eventHandlers.onAutoCompleteVillage,
