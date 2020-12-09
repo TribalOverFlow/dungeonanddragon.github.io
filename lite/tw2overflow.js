@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Dec 2020 15:14:04 GMT
+ * Wed, 09 Dec 2020 15:37:21 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1450,7 +1450,7 @@ define('two/language', [
             "rename.start": "Zmień",
             "rename.stop": "Zatrzymaj",
             "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
-            "rename.add_village": "Wybierz wioskę...",
+            "rename.add_origin": "Wybierz wioskę...",
             "rename.no_village": "Nie wybrano wioski",
             "rename.add_map_selected": "Wybrana wioska z mapy",
             "rename.selected": "Wybierz",
@@ -2845,7 +2845,7 @@ define('two/language', [
             "rename.start": "Zmień",
             "rename.stop": "Zatrzymaj",
             "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
-            "rename.add_village": "Wybierz wioskę...",
+            "rename.add_origin": "Wybierz wioskę...",
             "rename.no_village": "Nie wybrano wioski",
             "rename.add_map_selected": "Wybrana wioska z mapy",
             "rename.selected": "Wybierz",
@@ -5045,19 +5045,19 @@ define('two/armyHelper', [
             var calcKnightS = 0
             var calcKnightR = 0
             var calcKnightT = 0
-            var calcSpearInside = 0
-            var calcSwordInside = 0
-            var calcAxeInside = 0
-            var calcArcherInside = 0
-            var calcLightCavalryInside = 0
-            var calcMountedArcherInside = 0
-            var calcRamInside = 0
-            var calcCatapultInside = 0
-            var calcHeavyCavalryInside = 0
-            var calcTrebuchetInside = 0
-            var calcBerserkerInside = 0
-            var calcSnobInside = 0
-            var calcKnightInside = 0
+            var calcSpearPlayers = 0
+            var calcSwordPlayers = 0
+            var calcAxePlayers = 0
+            var calcArcherPlayers = 0
+            var calcLightCavalryPlayers = 0
+            var calcMountedArcherPlayers = 0
+            var calcRamPlayers = 0
+            var calcCatapultPlayers = 0
+            var calcHeavyCavalryPlayers = 0
+            var calcTrebuchetPlayers = 0
+            var calcBerserkerPlayers = 0
+            var calcSnobPlayers = 0
+            var calcKnightPlayers = 0
             villages.forEach(function(village) {
                 var unitInfo = village.unitInfo
                 var units = unitInfo.units
@@ -5075,91 +5075,91 @@ define('two/armyHelper', [
                 var snob = units.snob
                 var knight = units.knight
                 calcSpearA += spear.available
-                calcSpearInside += spear.inside
+                calcSpearPlayers += spear.inside
                 calcSpearO += spear.own
                 calcSpearI += spear.in_town
                 calcSpearS += spear.support
                 calcSpearR += spear.recruiting
                 calcSpearT += spear.total
                 calcSwordA += sword.available
-                calcSwordInside += sword.inside
+                calcSwordPlayers += sword.inside
                 calcSwordO += sword.own
                 calcSwordI += sword.in_town
                 calcSwordS += sword.support
                 calcSwordR += sword.recruiting
                 calcSwordT += sword.total
                 calcAxeA += axe.available
-                calcAxeInside += axe.inside
+                calcAxePlayers += axe.inside
                 calcAxeO += axe.own
                 calcAxeI += axe.in_town
                 calcAxeS += axe.support
                 calcAxeR += axe.recruiting
                 calcAxeT += axe.total
                 calcArcherA += archer.available
-                calcArcherInside += archer.inside
+                calcArcherPlayers += archer.inside
                 calcArcherO += archer.own
                 calcArcherI += archer.in_town
                 calcArcherS += archer.support
                 calcArcherR += archer.recruiting
                 calcArcherT += archer.total
                 calcLightCavalryA += light_cavalry.available
-                calcLightCavalryInside += light_cavalry.inside
+                calcLightCavalryPlayers += light_cavalry.inside
                 calcLightCavalryO += light_cavalry.own
                 calcLightCavalryI += light_cavalry.in_town
                 calcLightCavalryS += light_cavalry.support
                 calcLightCavalryR += light_cavalry.recruiting
                 calcLightCavalryT += light_cavalry.total
                 calcMountedArcherA += mounted_archer.available
-                calcMountedArcherInside += mounted_archer.inside
+                calcMountedArcherPlayers += mounted_archer.inside
                 calcMountedArcherO += mounted_archer.own
                 calcMountedArcherI += mounted_archer.in_town
                 calcMountedArcherS += mounted_archer.support
                 calcMountedArcherR += mounted_archer.recruiting
                 calcMountedArcherT += mounted_archer.total
                 calcHeavyCavalryA += heavy_cavalry.available
-                calcHeavyCavalryInside += heavy_cavalry.inside
+                calcHeavyCavalryPlayers += heavy_cavalry.inside
                 calcHeavyCavalryO += heavy_cavalry.own
                 calcHeavyCavalryI += heavy_cavalry.in_town
                 calcHeavyCavalryS += heavy_cavalry.support
                 calcHeavyCavalryR += heavy_cavalry.recruiting
                 calcHeavyCavalryT += heavy_cavalry.total
                 calcRamA += ram.available
-                calcRamInside += ram.inside
+                calcRamPlayers += ram.inside
                 calcRamO += ram.own
                 calcRamI += ram.in_town
                 calcRamS += ram.support
                 calcRamR += ram.recruiting
                 calcRamT += ram.total
                 calcCatapultA += catapult.available
-                calcCatapultInside += catapult.inside
+                calcCatapultPlayers += catapult.inside
                 calcCatapultO += catapult.own
                 calcCatapultI += catapult.in_town
                 calcCatapultS += catapult.support
                 calcCatapultR += catapult.recruiting
                 calcCatapultT += catapult.total
                 calcTrebuchetA += trebuchet.available
-                calcTrebuchetInside += trebuchet.inside
+                calcTrebuchetPlayers += trebuchet.inside
                 calcTrebuchetO += trebuchet.own
                 calcTrebuchetI += trebuchet.in_town
                 calcTrebuchetS += trebuchet.support
                 calcTrebuchetR += trebuchet.recruiting
                 calcTrebuchetT += trebuchet.total
                 calcBerserkerA += doppelsoldner.available
-                calcBerserkerInside += doppelsoldner.inside
+                calcBerserkerPlayers += doppelsoldner.inside
                 calcBerserkerO += doppelsoldner.own
                 calcBerserkerI += doppelsoldner.in_town
                 calcBerserkerS += doppelsoldner.support
                 calcBerserkerR += doppelsoldner.recruiting
                 calcBerserkerT += doppelsoldner.total
                 calcSnobA += snob.available
-                calcSnobInside += snob.inside
+                calcSnobPlayers += snob.inside
                 calcSnobO += snob.own
                 calcSnobI += snob.in_town
                 calcSnobS += snob.support
                 calcSnobR += snob.recruiting
                 calcSnobT += snob.total
                 calcKnightA += knight.available
-                calcKnightInside += knight.inside
+                calcKnightPlayers += knight.inside
                 calcKnightO += knight.own
                 calcKnightI += knight.in_town
                 calcKnightS += knight.support
@@ -5168,82 +5168,83 @@ define('two/armyHelper', [
             })
             SpearA = calcSpearA
             SpearO = calcSpearO
-            SpearI = calcSpearI + calcSpearInside
+            SpearI = calcSpearPlayers
             SpearS = calcSpearS
             SpearR = calcSpearR
             SpearT = calcSpearT + calcSpearR
             SwordA = calcSwordA
             SwordO = calcSwordO
-            SwordI = calcSwordI + calcSwordInside
+            SwordI = calcSwordPlayers
             SwordS = calcSwordS
             SwordR = calcSwordR
             SwordT = calcSwordT + calcSwordR
             AxeA = calcAxeA
             AxeO = calcAxeO
-            AxeI = calcAxeI + calcAxeInside
+            AxeI = calcAxePlayers
             AxeS = calcAxeS
             AxeR = calcAxeR
             AxeT = calcAxeT + calcAxeR
             ArcherA = calcArcherA
             ArcherO = calcArcherO
-            ArcherI = calcArcherI + calcArcherInside
+            ArcherI = calcArcherPlayers
             ArcherS = calcArcherS
             ArcherR = calcArcherR
             ArcherT = calcArcherT + calcArcherR
             LightCavalryA = calcLightCavalryA
             LightCavalryO = calcLightCavalryO
-            LightCavalryI = calcLightCavalryI + calcLightCavalryInside
+            LightCavalryI = calcLightCavalryPlayers
             LightCavalryS = calcLightCavalryS
             LightCavalryR = calcLightCavalryR
             LightCavalryT = calcLightCavalryT + calcLightCavalryR
             MountedArcherA = calcMountedArcherA
             MountedArcherO = calcMountedArcherO
-            MountedArcherI = calcMountedArcherI + calcMountedArcherInside
+            MountedArcherI = calcMountedArcherPlayers
             MountedArcherS = calcMountedArcherS
             MountedArcherR = calcMountedArcherR
             MountedArcherT = calcMountedArcherT + calcMountedArcherR
             HeavyCavalryA = calcHeavyCavalryA
             HeavyCavalryO = calcHeavyCavalryO
-            HeavyCavalryI = calcHeavyCavalryI + calcHeavyCavalryInside
+            HeavyCavalryI = calcHeavyCavalryPlayers
             HeavyCavalryS = calcHeavyCavalryS
             HeavyCavalryR = calcHeavyCavalryR
             HeavyCavalryT = calcHeavyCavalryT + calcHeavyCavalryR
             RamA = calcRamA
             RamO = calcRamO
-            RamI = calcRamI + calcRamInside
+            RamI = calcRamPlayers
             RamS = calcRamS
             RamR = calcRamR
             RamT = calcRamT + calcRamR
             CatapultA = calcCatapultA
             CatapultO = calcCatapultO
-            CatapultI = calcCatapultI + calcCatapultInside
+            CatapultI = calcCatapultPlayers
             CatapultS = calcCatapultS
             CatapultR = calcCatapultR
             CatapultT = calcCatapultT + calcCatapultR
             TrebuchetA = calcTrebuchetA
             TrebuchetO = calcTrebuchetO
-            TrebuchetI = calcTrebuchetI + calcTrebuchetInside
+            TrebuchetI = calcTrebuchetPlayers
             TrebuchetS = calcTrebuchetS
             TrebuchetR = calcTrebuchetR
             TrebuchetT = calcTrebuchetT + calcTrebuchetR
             BerserkerA = calcBerserkerA
             BerserkerO = calcBerserkerO
-            BerserkerI = calcBerserkerI + calcBerserkerInside
+            BerserkerI = calcBerserkerPlayers
             BerserkerS = calcBerserkerS
             BerserkerR = calcBerserkerR
             BerserkerT = calcBerserkerT + calcBerserkerR
             SnobA = calcSnobA
             SnobO = calcSnobO
-            SnobI = calcSnobI + calcSnobInside
+            SnobI = calcSnobPlayers
             SnobS = calcSnobS
             SnobR = calcSnobR
             SnobT = calcSnobT + calcSnobR
             KnightA = calcKnightA
             KnightO = calcKnightO
-            KnightI = calcKnightI + calcKnightInside
+            KnightI = calcKnightPlayers
             KnightS = calcKnightS
             KnightR = calcKnightR
             KnightT = calcKnightT + calcKnightR
+            console.log(calcArcherI, calcAxeI, calcSpearI, calcSwordI, calcLightCavalryI, calcMountedArcherI, calcHeavyCavalryI, calcRamI, calcCatapultI, calcTrebuchetI, calcBerserkerI, calcKnightI, calcSnobI)
         }
         checkArmy()
     }
@@ -5940,7 +5941,7 @@ require([
     ready(function () {
         armyHelper.init()
         armyHelperInterface()
-    }, ['map', 'world_config'])
+    }, ['map'])
 })
 
 define('two/attackView', [
@@ -13607,7 +13608,7 @@ require([
     ready(function () {
         battleCalculator.init()
         battleCalculatorInterface()
-    }, ['map', 'world_config'])
+    }, ['map', 'presets'])
 })
 
 define('two/builderQueue', [
@@ -23758,7 +23759,7 @@ define('two/prankHelper/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.PRANK_HELPER_ID] = data.id
+            $scope.settings[SETTINGS.VILLAGE_ID] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         start: function() {
