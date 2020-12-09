@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 08 Dec 2020 07:20:52 GMT
+ * Wed, 09 Dec 2020 07:53:25 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1882,6 +1882,22 @@ define('two/language', [
             "snob": "Szlachcic",
             "knight": "Rycerz",
             "firefox_shill": ""
+        },
+        "unit_names": {
+            "none": "",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "trebuchet": "Trebuszet",
+            "doppelsoldner": "Berserker",
+            "knight": "Rycerz",
+            "snob": "Szlachcic"
         }
     },
     "pl_pl": {
@@ -1905,7 +1921,7 @@ define('two/language', [
             "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
         },
         "activity_tool": {
-            "title": "Kwatermistrz",
+            "title": "Statystyki",
             "data": "Dane",
             "data.attention": "Ważne informacje",
             "data.text": "Narzędzie to tworzy pliki które można wczytać w programie Tw2-Statistics (by DirtyPrank). Po wykonaniu zrzutów umieść je w folderze Dane. Uwaga! Akcje te wymagają dobrej jakości komputera w innym wypadku potrwa to bardzo długo.",
@@ -1931,7 +1947,7 @@ define('two/language', [
         },
         "alert_sender": {
             "title": "Wartownik",
-            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw z 'Attacks' w nazwie.",
+            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw.",
             "activated": "Wartownik aktywowany",
             "deactivated": "Wartownik skończył działanie"
         },
@@ -2021,7 +2037,7 @@ define('two/language', [
         },
         "auto_collector": {
             "title": "Kolekcjoner",
-            "description": "Automatyczny kolekcjoner depozytu/drugiej wioski.",
+            "description": "Wykonuje zadania drugiej wioski oraz zbiera nagrody z depozytu.",
             "activated": "Kolekcjoner aktywowany",
             "deactivated": "Kolekcjoner deaktywowany"
         },
@@ -2033,7 +2049,7 @@ define('two/language', [
         },
         "auto_healer": {
             "title": "Medyk",
-            "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
+            "description": "Przywraca uzdrowione jednostki ze szpitala.",
             "activated": "Medyk aktywowany",
             "deactivated": "Medyk skończył działanie"
         },
@@ -2437,8 +2453,8 @@ define('two/language', [
             "loading_targets": "Ładowanie celów...",
             "checking_targets": "Sprawdzanie celów...",
             "restarting_commands": "Restartowanie poleceń...",
-            "ignored_village": "Cel %{target} dodany do listy pominiętych.(straty)",
-            "included_village": "Cel %{target} dodany do listy zawartych",
+            "ignored_village": "Cel dodany do listy pominiętych.(straty)",
+            "included_village": "Cel dodany do listy zawartych",
             "ignored_village_removed": "usunięty z listy ignorowanych",
             "included_village_removed": "usunięty z listy zawartych",
             "priority_target": "dodany do priorytetowych.",
@@ -2724,7 +2740,7 @@ define('two/language', [
             "settings_colors_barbarian": "Wioski barbarzyńskie",
             "settings_colors_view_reference": "Wskaźnik obecnej pozycji",
             "settings_reset": "Ustawienia zresetowane",
-            "no_highlights": "Brak utworzonych podświetleń",
+            "no_highlights": "Nie utworzono podświetleń",
             "reset_confirm_title": "Resetuj ustawienia",
             "reset_confirm_text": "Wszystkie ustawienia zostaną przywrócone do domyślnych.",
             "reset_confirm_highlights_text": "Jak również wszystkie podświetlenia zostaną usunięte.",
@@ -2832,7 +2848,7 @@ define('two/language', [
             "logs.clear": "Wyczyść logi",
             "decrease": "Malejąco/Z-A",
             "increase": "Rosnąco/A-Z",
-            "random": "Domyślnie",
+            "random": "Bez Iteracji",
             "rename_started": "Przemianowanie wiosek rozpoczęte",
             "rename_stopped": "Przemianowanie wiosek zakończone"
         },
@@ -3162,7 +3178,7 @@ define('two/language', [
         },
         "tutorial_helper": {
             "title": "Giermek",
-            "description": "Automatycznie wykonuje zadania z tutoriala.",
+            "description": "Wykonuje zadania z tutoriala.",
             "activated": "Giermek aktywowany",
             "deactivated": "Giermek skończył działanie"
         },
@@ -3255,6 +3271,22 @@ define('two/language', [
             "snob": "Szlachcic",
             "knight": "Rycerz",
             "firefox_shill": ""
+        },
+        "unit_names": {
+            "none": "",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "trebuchet": "Trebuszet",
+            "doppelsoldner": "Berserker",
+            "knight": "Rycerz",
+            "snob": "Szlachcic"
         }
     }
 } // eslint-disable-line
@@ -5606,7 +5638,12 @@ define('two/armyHelper/ui', [
             dropDown: true
         }
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
-
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
         settings.injectScope($scope)
         eventHandlers.updateGroups()
         logsView.updateVisibleLogs()
