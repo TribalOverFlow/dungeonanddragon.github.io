@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Dec 2020 08:57:21 GMT
+ * Wed, 09 Dec 2020 14:55:40 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -576,6 +576,12 @@ define('two/language', [
             "army.support": "Wsparcie",
             "army.recruiting": "Rekrutacja",
             "army.total": "Wszystko",
+            "army.available-tip": "Wojsko obecnie stacjonujące w wiosce(bez wysłanego/farmiącego)",
+            "army.own-tip": "Całkowite posiadane przez nas wojsko.",
+            "army.in-town-tip": "Wojsko stacjonujące w wioskach łącznie z wsparciem obcym",
+            "army.support-tip": "Wojsko z wsparć - własnego oraz obcego",
+            "army.recruiting-tip": "Wojsko z rekrutacji",
+            "army.total-tip": "Całkowite wojsko własne łącznie z rekrutacją.",
             "army.deffensive": "Defensywne jednostki",
             "army.offensive": "Ofensywne jednostki",
             "army.special-troops": "Specjalne jednostki",
@@ -1965,6 +1971,12 @@ define('two/language', [
             "army.support": "Wsparcie",
             "army.recruiting": "Rekrutacja",
             "army.total": "Wszystko",
+            "army.available-tip": "Wojsko obecnie stacjonujące w wiosce(bez wysłanego/farmiącego)",
+            "army.own-tip": "Całkowite posiadane przez nas wojsko.",
+            "army.in-town-tip": "Wojsko stacjonujące w wioskach łącznie z wsparciem obcym",
+            "army.support-tip": "Wojsko z wsparć - własnego oraz obcego",
+            "army.recruiting-tip": "Wojsko z rekrutacji",
+            "army.total-tip": "Całkowite wojsko własne łącznie z rekrutacją.",
             "army.deffensive": "Defensywne jednostki",
             "army.offensive": "Ofensywne jednostki",
             "army.special-troops": "Specjalne jednostki",
@@ -5033,6 +5045,19 @@ define('two/armyHelper', [
             var calcKnightS = 0
             var calcKnightR = 0
             var calcKnightT = 0
+            var calcSpearIn = 0
+            var calcSwordIn = 0
+            var calcAxeIn = 0
+            var calcArcherIn = 0
+            var calcLightCavalryIn = 0
+            var calcMountedArcherIn = 0
+            var calcRamIn = 0
+            var calcCatapultIn = 0
+            var calcHeavyCavalryIn = 0
+            var calcTrebuchetIn = 0
+            var calcBerserkerIn = 0
+            var calcSnobIn = 0
+            var calcKnightIn = 0
             villages.forEach(function(village) {
                 var unitInfo = village.unitInfo
                 var units = unitInfo.units
@@ -5050,78 +5075,91 @@ define('two/armyHelper', [
                 var snob = units.snob
                 var knight = units.knight
                 calcSpearA += spear.available
+                calcSpearIn += spear.inside
                 calcSpearO += spear.own
                 calcSpearI += spear.in_town
                 calcSpearS += spear.support
                 calcSpearR += spear.recruiting
                 calcSpearT += spear.total
                 calcSwordA += sword.available
+                calcSwordIn += sword.inside
                 calcSwordO += sword.own
                 calcSwordI += sword.in_town
                 calcSwordS += sword.support
                 calcSwordR += sword.recruiting
                 calcSwordT += sword.total
                 calcAxeA += axe.available
+                calcAxeIn += axe.inside
                 calcAxeO += axe.own
                 calcAxeI += axe.in_town
                 calcAxeS += axe.support
                 calcAxeR += axe.recruiting
                 calcAxeT += axe.total
                 calcArcherA += archer.available
+                calcArcherIn += archer.inside
                 calcArcherO += archer.own
                 calcArcherI += archer.in_town
                 calcArcherS += archer.support
                 calcArcherR += archer.recruiting
                 calcArcherT += archer.total
                 calcLightCavalryA += light_cavalry.available
+                calcLightCavalryIn += light_cavalry.inside
                 calcLightCavalryO += light_cavalry.own
                 calcLightCavalryI += light_cavalry.in_town
                 calcLightCavalryS += light_cavalry.support
                 calcLightCavalryR += light_cavalry.recruiting
                 calcLightCavalryT += light_cavalry.total
                 calcMountedArcherA += mounted_archer.available
+                calcMountedArcherIn += mounted_archer.inside
                 calcMountedArcherO += mounted_archer.own
                 calcMountedArcherI += mounted_archer.in_town
                 calcMountedArcherS += mounted_archer.support
                 calcMountedArcherR += mounted_archer.recruiting
                 calcMountedArcherT += mounted_archer.total
                 calcHeavyCavalryA += heavy_cavalry.available
+                calcHeavyCavalryIn += heavy_cavalry.inside
                 calcHeavyCavalryO += heavy_cavalry.own
                 calcHeavyCavalryI += heavy_cavalry.in_town
                 calcHeavyCavalryS += heavy_cavalry.support
                 calcHeavyCavalryR += heavy_cavalry.recruiting
                 calcHeavyCavalryT += heavy_cavalry.total
                 calcRamA += ram.available
+                calcRamIn += ram.inside
                 calcRamO += ram.own
                 calcRamI += ram.in_town
                 calcRamS += ram.support
                 calcRamR += ram.recruiting
                 calcRamT += ram.total
                 calcCatapultA += catapult.available
+                calcCatapultIn += catapult.inside
                 calcCatapultO += catapult.own
                 calcCatapultI += catapult.in_town
                 calcCatapultS += catapult.support
                 calcCatapultR += catapult.recruiting
                 calcCatapultT += catapult.total
                 calcTrebuchetA += trebuchet.available
+                calcTrebuchetIn += trebuchet.inside
                 calcTrebuchetO += trebuchet.own
                 calcTrebuchetI += trebuchet.in_town
                 calcTrebuchetS += trebuchet.support
                 calcTrebuchetR += trebuchet.recruiting
                 calcTrebuchetT += trebuchet.total
                 calcBerserkerA += doppelsoldner.available
+                calcBerserkerIn += doppelsoldner.inside
                 calcBerserkerO += doppelsoldner.own
                 calcBerserkerI += doppelsoldner.in_town
                 calcBerserkerS += doppelsoldner.support
                 calcBerserkerR += doppelsoldner.recruiting
                 calcBerserkerT += doppelsoldner.total
                 calcSnobA += snob.available
+                calcSnobIn += snob.inside
                 calcSnobO += snob.own
                 calcSnobI += snob.in_town
                 calcSnobS += snob.support
                 calcSnobR += snob.recruiting
                 calcSnobT += snob.total
                 calcKnightA += knight.available
+                calcKnightIn += knight.inside
                 calcKnightO += knight.own
                 calcKnightI += knight.in_town
                 calcKnightS += knight.support
@@ -5130,82 +5168,82 @@ define('two/armyHelper', [
             })
             SpearA = calcSpearA
             SpearO = calcSpearO
-            SpearI = calcSpearI
+            SpearI = calcSpearI + calcSpearIn
             SpearS = calcSpearS
             SpearR = calcSpearR
-            SpearT = calcSpearT
+            SpearT = calcSpearT + calcSpearR
             SwordA = calcSwordA
             SwordO = calcSwordO
-            SwordI = calcSwordI
+            SwordI = calcSwordI + calcSwordIn
             SwordS = calcSwordS
             SwordR = calcSwordR
-            SwordT = calcSwordT
+            SwordT = calcSwordT + calcSwordR
             AxeA = calcAxeA
             AxeO = calcAxeO
-            AxeI = calcAxeI
+            AxeI = calcAxeI + calcAxeIn
             AxeS = calcAxeS
             AxeR = calcAxeR
-            AxeT = calcAxeT
+            AxeT = calcAxeT + calcAxeR
             ArcherA = calcArcherA
             ArcherO = calcArcherO
-            ArcherI = calcArcherI
+            ArcherI = calcArcherI + calcArcherIn
             ArcherS = calcArcherS
             ArcherR = calcArcherR
-            ArcherT = calcArcherT
+            ArcherT = calcArcherT + calcArcherR
             LightCavalryA = calcLightCavalryA
             LightCavalryO = calcLightCavalryO
-            LightCavalryI = calcLightCavalryI
+            LightCavalryI = calcLightCavalryI + calcLightCavalryIn
             LightCavalryS = calcLightCavalryS
             LightCavalryR = calcLightCavalryR
-            LightCavalryT = calcLightCavalryT
+            LightCavalryT = calcLightCavalryT + calcLightCavalryR
             MountedArcherA = calcMountedArcherA
             MountedArcherO = calcMountedArcherO
-            MountedArcherI = calcMountedArcherI
+            MountedArcherI = calcMountedArcherI + calcMountedArcherIn
             MountedArcherS = calcMountedArcherS
             MountedArcherR = calcMountedArcherR
-            MountedArcherT = calcMountedArcherT
+            MountedArcherT = calcMountedArcherT + calcMountedArcherR
             HeavyCavalryA = calcHeavyCavalryA
             HeavyCavalryO = calcHeavyCavalryO
-            HeavyCavalryI = calcHeavyCavalryI
+            HeavyCavalryI = calcHeavyCavalryI + calcHeavyCavalryIn
             HeavyCavalryS = calcHeavyCavalryS
             HeavyCavalryR = calcHeavyCavalryR
-            HeavyCavalryT = calcHeavyCavalryT
+            HeavyCavalryT = calcHeavyCavalryT + calcHeavyCavalryR
             RamA = calcRamA
             RamO = calcRamO
-            RamI = calcRamI
+            RamI = calcRamI + calcRamIn
             RamS = calcRamS
             RamR = calcRamR
-            RamT = calcRamT
+            RamT = calcRamT + calcRamR
             CatapultA = calcCatapultA
             CatapultO = calcCatapultO
-            CatapultI = calcCatapultI
+            CatapultI = calcCatapultI + calcCatapultIn
             CatapultS = calcCatapultS
             CatapultR = calcCatapultR
-            CatapultT = calcCatapultT
+            CatapultT = calcCatapultT + calcCatapultR
             TrebuchetA = calcTrebuchetA
             TrebuchetO = calcTrebuchetO
-            TrebuchetI = calcTrebuchetI
+            TrebuchetI = calcTrebuchetI + calcTrebuchetIn
             TrebuchetS = calcTrebuchetS
             TrebuchetR = calcTrebuchetR
-            TrebuchetT = calcTrebuchetT
+            TrebuchetT = calcTrebuchetT + calcTrebuchetR
             BerserkerA = calcBerserkerA
             BerserkerO = calcBerserkerO
-            BerserkerI = calcBerserkerI
+            BerserkerI = calcBerserkerI + calcBerserkerIn
             BerserkerS = calcBerserkerS
             BerserkerR = calcBerserkerR
-            BerserkerT = calcBerserkerT
+            BerserkerT = calcBerserkerT + calcBerserkerR
             SnobA = calcSnobA
             SnobO = calcSnobO
-            SnobI = calcSnobI
+            SnobI = calcSnobI + calcSnobIn
             SnobS = calcSnobS
             SnobR = calcSnobR
-            SnobT = calcSnobT
+            SnobT = calcSnobT + calcSnobR
             KnightA = calcKnightA
             KnightO = calcKnightO
-            KnightI = calcKnightI
+            KnightI = calcKnightI + calcKnightIn
             KnightS = calcKnightS
             KnightR = calcKnightR
-            KnightT = calcKnightT
+            KnightT = calcKnightT + calcKnightR
         }
         checkArmy()
     }
@@ -5745,7 +5783,7 @@ define('two/armyHelper/ui', [
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearSupport }}<td>{{ spearRecruting }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordSupport }}<td>{{ swordRecruting }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerSupport }}<td>{{ archerRecruting }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcSupport }}<td>{{ hcRecruting }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetSupport }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeSupport }}<td>{{ axeRecruting }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcSupport }}<td>{{ lcRecruting }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maSupport }}<td>{{ maRecruting }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramSupport }}<td>{{ ramRecruting }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultSupport }}<td>{{ catapultRecruting }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerSupport }}<td>{{ berserkerRecruting }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobSupport }}<td>{{ snobRecruting }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightSupport }}<td>{{ knightRecruting }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'prank_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'prank_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .logs .status tr{height:25px}#two-army-helper .logs .status td{padding:0 6px}#two-army-helper .logs .log-list{margin-bottom:10px}#two-army-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-army-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-army-helper .icon-20x20-village:before{margin-top:-11px}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
