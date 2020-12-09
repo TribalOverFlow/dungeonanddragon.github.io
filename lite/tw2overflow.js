@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Dec 2020 19:32:48 GMT
+ * Wed, 09 Dec 2020 19:43:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -593,7 +593,9 @@ define('two/language', [
             "balancer.unit": "Jednostka",
             "balancer.one-province": "Wybierz prowincję w której chcesz zbalansować wojska(opcjonalnie)",
             "balancer.add_village": "Wybierz wioskę...",
+            "balance.add_village_search": "Znajdź wioskę...",
             "balancer.no_village": "Nie wybrano wioski",
+            "balance.add_origin": "Źródło",
             "balancer.add_map_selected": "Wybrana wioska z mapy",
             "balancer.selected": "Wybierz",
             "balancer.additional": "Dodatkowe ustawienia",
@@ -1991,7 +1993,9 @@ define('two/language', [
             "balancer.unit": "Jednostka",
             "balancer.one-province": "Wybierz prowincję w której chcesz zbalansować wojska(opcjonalnie)",
             "balancer.add_village": "Wybierz wioskę...",
+            "balance.add_village_search": "Znajdź wioskę...",
             "balancer.no_village": "Nie wybrano wioski",
+            "balance.add_origin": "Źródło",
             "balancer.add_map_selected": "Wybrana wioska z mapy",
             "balancer.selected": "Wybierz",
             "balancer.additional": "Dodatkowe ustawienia",
@@ -5250,8 +5254,8 @@ define('two/armyHelper', [
             KnightR = calcKnightR
             KnightT = calcKnightT + calcKnightR
             console.log(calcArcherI, calcAxeI, calcSpearI, calcSwordI, calcLightCavalryI, calcMountedArcherI, calcHeavyCavalryI, calcRamI, calcCatapultI, calcTrebuchetI, calcBerserkerI, calcKnightI, calcSnobI)
+            addLog('Policzono wojsko', '', '')
         }
-        addLog('Policzono wojsko', '', '')
         checkArmy()
     }
     armyHelper.clearLogs = function() {
