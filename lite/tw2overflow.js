@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 11:38:19 GMT
+ * Thu, 10 Dec 2020 11:49:51 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6350,6 +6350,7 @@ define('two/attackView', [
     attackView.setQueueBunkerCommand = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
+            var id = closestVillage.id
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
@@ -6359,6 +6360,19 @@ define('two/attackView', [
             const commandType = COMMAND_TYPES.SUPPORT
             let units = {}
 
+            function unitInfo() {
+                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                    village_id: id
+                }, function(data) {
+                    Archer = data.available_units.archer.total
+                    HC = data.available_units.heavy_cavalry.total
+                    Spear = data.available_units.spear.total
+                    Sword = data.available_units.sword.total
+                    Trebuchet = data.available_units.trebuchet.total
+                })
+                setTimeout(addCommandCheck, 2000)
+            }
+			
             function addCommandCheck() {
                 if (HC >= 38) {
                     units = {archer: '', axe: '', catapult: '', doppelsoldner: '',  heavy_cavalry: '-38', knight: '', light_cavalry: '', mounted_archer: '', ram: '', snob: '', spear: '', sword: '', trebuchet: ''}
@@ -6403,7 +6417,7 @@ define('two/attackView', [
                     }
                 }
             }
-            addCommandCheck()
+            unitInfo()
         })
     }
     attackView.setQueueSupportCommand = function(command, date) {
