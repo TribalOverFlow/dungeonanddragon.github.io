@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 12:51:39 GMT
+ * Thu, 10 Dec 2020 12:53:57 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6374,19 +6374,7 @@ define('two/attackView', [
                         })
                         if (HC >= 38) {
                             units = {
-                                archer: 0,
-                                axe: 0,
-                                catapult: 0,
-                                doppelsoldner: 0,
-                                heavy_cavalry: '-38',
-                                knight: 0,
-                                light_cavalry: 0,
-                                mounted_archer: 0,
-                                ram: 0,
-                                snob: 0,
-                                spear: 0,
-                                sword: 0,
-                                trebuchet: 0
+                                heavy_cavalry: '-38'
                             }
                             console.log(origin, origin[index], target)
                             commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
