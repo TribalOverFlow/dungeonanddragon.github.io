@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 09 Dec 2020 19:43:05 GMT
+ * Thu, 10 Dec 2020 10:09:58 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -5976,7 +5976,7 @@ define('two/attackView', [
     'helper/mapconvert',
     'struct/MapData',
     'queues/EventQueue'
-], function (
+], function(
     ready,
     utils,
     COLUMN_TYPES,
@@ -6008,19 +6008,16 @@ define('two/attackView', [
     }
     const INCOMING_UNITS_FILTER = {}
     const COMMAND_TYPES_FILTER = {}
-
-    const formatFilters = function () {
+    const formatFilters = function() {
         const toArray = [FILTER_TYPES.COMMAND_TYPES]
         const currentVillageId = modelDataService.getSelectedVillage().getId()
         let arrays = {}
-
         // format filters for backend
         for (let i = 0; i < toArray.length; i++) {
             for (let j in filters[toArray[i]]) {
                 if (!arrays[toArray[i]]) {
                     arrays[toArray[i]] = []
                 }
-
                 if (filters[toArray[i]][j]) {
                     switch (toArray[i]) {
                         case FILTER_TYPES.COMMAND_TYPES: {
@@ -6037,52 +6034,46 @@ define('two/attackView', [
                 }
             }
         }
-
         filterParams = arrays
         filterParams.village = filters[FILTER_TYPES.VILLAGE] ? [currentVillageId] : []
     }
-
     /**
      * Command was sent.
      */
-    const onCommandIncomming = function () {
+    const onCommandIncomming = function() {
         // we can never know if the command is currently visible (because of filters, sorting and stuff) -> reload
         attackView.loadCommands()
     }
-
     /**
      * Command was cancelled.
      *
      * @param {Object} event unused
      * @param {Object} data The backend-data
      */
-    const onCommandCancelled = function (event, data) {
+    const onCommandCancelled = function(event, data) {
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_COMMAND_CANCELLED, [data.id || data.command_id])
     }
-
     /**
      * Command ignored.
      *
      * @param {Object} event unused
      * @param {Object} data The backend-data
      */
-    const onCommandIgnored = function (event, data) {
+    const onCommandIgnored = function(event, data) {
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].command_id === data.command_id) {
                 commands.splice(i, 1)
             }
         }
-
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_COMMAND_IGNORED, [data.command_id])
     }
-
     /**
      * Village name changed.
      *
      * @param {Object} event unused
      * @param {Object} data The backend-data
      */
-    const onVillageNameChanged = function (event, data) {
+    const onVillageNameChanged = function(event, data) {
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].target_village_id === data.village_id) {
                 commands[i].target_village_name = data.name
@@ -6092,23 +6083,19 @@ define('two/attackView', [
                 commands[i].originVillage.name = data.name
             }
         }
-
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_VILLAGE_RENAMED, [data])
     }
-
-    const onVillageSwitched = function (e, newVillageId) {
+    const onVillageSwitched = function(e, newVillageId) {
         if (filterParams[FILTER_TYPES.VILLAGE].length) {
             filterParams[FILTER_TYPES.VILLAGE] = [newVillageId]
-
             attackView.loadCommands()
         }
     }
-
     /**
      * @param {CommandModel} command
      * @return {String} Slowest unit
      */
-    const getSlowestUnit = function (command) {
+    const getSlowestUnit = function(command) {
         const origin = {
             x: command.origin_x,
             y: command.origin_y
@@ -6117,21 +6104,20 @@ define('two/attackView', [
             x: command.target_x,
             y: command.target_y
         }
-        const unitDurationDiff = UNIT_SPEED_ORDER.map(function (unit) {
-            const travelTime = utils.getTravelTime(origin, target, {[unit]: 1}, command.command_type, {}, false)
+        const unitDurationDiff = UNIT_SPEED_ORDER.map(function(unit) {
+            const travelTime = utils.getTravelTime(origin, target, {
+                [unit]: 1
+            }, command.command_type, {}, false)
             const durationDiff = Math.abs(travelTime - command.model.duration)
-
             return {
                 unit: unit,
                 diff: durationDiff
             }
-        }).sort(function (a, b) {
+        }).sort(function(a, b) {
             return a.diff - b.diff
         })
-
         return unitDurationDiff[0].unit
     }
-
     /**
      * Sort a set of villages by distance from a specified village.
      *
@@ -6139,15 +6125,13 @@ define('two/attackView', [
      * @param {VillageModel} origin
      * @return {Array} Sorted villages
      */
-    const sortByDistance = function (villages, origin) {
-        return villages.sort(function (villageA, villageB) {
+    const sortByDistance = function(villages, origin) {
+        return villages.sort(function(villageA, villageB) {
             let distA = math.actualDistance(origin, villageA)
             let distB = math.actualDistance(origin, villageB)
-
             return distA - distB
         })
     }
-
     /**
      * Order:
      * - Barbarian villages.
@@ -6157,43 +6141,36 @@ define('two/attackView', [
      * @param {VillageModel} origin
      * @param {Function} callback
      */
-    const closestNonHostileVillage = function (origin, callback) {
+    const closestNonHostileVillage = function(origin, callback) {
         const size = 25
         let loadBlockIndex = 0
-
         if (mapData.hasTownDataInChunk(origin.x, origin.y)) {
             const sectors = mapData.loadTownData(origin.x, origin.y, size, size, size)
             const tribeId = modelDataService.getSelectedCharacter().getTribeId()
             const playerId = modelDataService.getSelectedCharacter().getId()
             let targets = []
             let closestTargets
-
-            sectors.forEach(function (sector) {
+            sectors.forEach(function(sector) {
                 for (let x in sector.data) {
                     for (let y in sector.data[x]) {
                         targets.push(sector.data[x][y])
                     }
                 }
             })
-
-
-            const barbs = targets.filter(function (target) {
+            const barbs = targets.filter(function(target) {
                 return target.character_id === null && target.id > 0
             })
-
-            const own = targets.filter(function (target) {
+            const own = targets.filter(function(target) {
                 return target.character_id === playerId && origin.id !== target.id
             })
-
             if (barbs.length) {
                 closestTargets = sortByDistance(barbs, origin)
             } else if (own.length) {
                 closestTargets = sortByDistance(own, origin)
             } else if (tribeId) {
-                const tribe = targets.filter(function (target) {
+                const tribe = targets.filter(function(target) {
                     return target.tribe_id === tribeId
                 })
-
                 if (tribe.length) {
                     closestTargets = sortByDistance(tribe, origin)
                 } else {
@@ -6202,43 +6179,33 @@ define('two/attackView', [
             } else {
                 return callback(false)
             }
-
             return callback(closestTargets[0])
         }
-        
         const loads = convert.scaledGridCoordinates(origin.x, origin.y, size, size, size)
-
-        mapData.loadTownDataAsync(origin.x, origin.y, size, size, function () {
+        mapData.loadTownDataAsync(origin.x, origin.y, size, size, function() {
             if (++loadBlockIndex === loads.length) {
                 closestNonHostileVillage(origin, callback)
             }
         })
     }
-
     /**
      * @param {Object} data The data-object from the backend
      */
-    const onOverviewIncomming = function (data) {
+    const onOverviewIncomming = function(data) {
         commands = data.commands
-
         for (let i = 0; i < commands.length; i++) {
             overviewService.formatCommand(commands[i])
             commands[i].slowestUnit = getSlowestUnit(commands[i])
         }
-
-        commands = commands.filter(function (command) {
+        commands = commands.filter(function(command) {
             return filters[FILTER_TYPES.INCOMING_UNITS][command.slowestUnit]
         })
-
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_COMMANDS_LOADED, [commands])
     }
-
     let attackView = {}
-
-    attackView.loadCommands = function () { 
+    attackView.loadCommands = function() {
         const incomingCommands = globalInfoModel.getCommandListModel().getIncomingCommands().length
         const count = incomingCommands > 25 ? incomingCommands : 25
-
         socketService.emit(routeProvider.OVERVIEW_GET_INCOMING, {
             'count': count,
             'offset': 0,
@@ -6249,49 +6216,41 @@ define('two/attackView', [
             'villages': filterParams[FILTER_TYPES.VILLAGE]
         }, onOverviewIncomming)
     }
-
-    attackView.getCommands = function () {
+    attackView.getCommands = function() {
         return commands
     }
-
-    attackView.getFilters = function () {
+    attackView.getFilters = function() {
         return filters
     }
-
-    attackView.getSortings = function () {
+    attackView.getSortings = function() {
         return sorting
     }
-
     /**
      * Toggles the given filter.
      *
      * @param {string} type The category of the filter (see FILTER_TYPES)
      * @param {string} opt_filter The filter to be toggled.
      */
-    attackView.toggleFilter = function (type, opt_filter) {
+    attackView.toggleFilter = function(type, opt_filter) {
         if (!opt_filter) {
             filters[type] = !filters[type]
         } else {
             filters[type][opt_filter] = !filters[type][opt_filter]
         }
-
         // format filters for the backend
         formatFilters()
         Lockr.set(STORAGE_KEYS.FILTERS, filters)
         attackView.loadCommands()
     }
-
-    attackView.toggleSorting = function (newColumn) {
+    attackView.toggleSorting = function(newColumn) {
         if (newColumn === sorting.column) {
             sorting.reverse = !sorting.reverse
         } else {
             sorting.column = newColumn
             sorting.reverse = false
         }
-
         attackView.loadCommands()
     }
-
     /**
      * Set an automatic command with all units from the village
      * and start the CommandQueue module if it's disabled.
@@ -6299,73 +6258,473 @@ define('two/attackView', [
      * @param {Object} command Data of the command like origin, target.
      * @param {String} date Date that the command has to leave.
      */
-    attackView.setCommander = function (command, date) {
-        closestNonHostileVillage(command.targetVillage, function (closestVillage) {
+    attackView.setCommander = function(command, date) {
+        closestNonHostileVillage(command.targetVillage, function(closestVillage) {
             const origin = command.targetVillage
             const target = closestVillage
             const commandType = target.character_id ? COMMAND_TYPES.SUPPORT : COMMAND_TYPES.ATTACK
             let units = {}
-
-            utils.each(UNIT_TYPES, function (unit) {
+            utils.each(UNIT_TYPES, function(unit) {
                 units[unit] = '*'
             })
-
-            commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType , BUILDING_TYPES.WALL)
-
+            commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
             if (!commandQueue.isRunning()) {
                 commandQueue.start()
             }
         })
     }
+    // Bunkier
+    const closestOwnVillageBunker = function(target, callback) {
+        var size = 50
+        if (mapData.hasTownDataInChunk(target.x, target.y)) {
+            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
+            var origins = []
+            var closestOrigins
+            var own = []
+            var playerId = modelDataService.getSelectedCharacter().getId()
+            sectors.forEach(function(sector) {
+                for (let x in sector.data) {
+                    for (let y in sector.data[x]) {
+                        origins.push(sector.data[x][y])
+                    }
+                }
+            })
+            own = origins.filter(function(origin) {
+                return origin.character_id === playerId && target.id !== origin.id
+            })
+            if (own.length) {
+                closestOrigins = sortByDistanceTarget(own, target)
+            } else {
+                return callback(false)
+            }
+            return callback(closestOrigins)
+        }
+        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
+        var index = 0
+        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
+            if (++index === loads.length) {
+                closestOwnVillageBunker(target, callback)
+            }
+        })
+    }
+    attackView.setQueueBunkerCommand = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+            var Trebuchet = 0
 
-    attackView.commandQueueEnabled = function () {
+            function addCommandCheck() {
+                if (HC >= 38) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            heavy_cavalry: '-38'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                }
+                if (Spear >= 500 && Archer < 500) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            spear: '-500',
+                            archer: '*'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                }
+                if (Spear < 500 && Archer >= 500) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            spear: '*',
+                            archer: '-500'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                }
+                if (Sword >=500) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            sword: '-500'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                }
+                if (Trebuchet >= 100) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            sword: '*'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                }
+            }
+            addCommandCheck()
+        })
+    }
+    // Klin
+    const sortByDistanceTarget = function(villages, target) {
+        return villages.sort(function(villageA, villageB) {
+            var distA = math.actualDistance(target, villageA)
+            var distB = math.actualDistance(target, villageB)
+            return distA - distB
+        })
+    }
+    const closestOwnVillage = function(target, callback) {
+        var size = 40
+        if (mapData.hasTownDataInChunk(target.x, target.y)) {
+            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
+            var origins = []
+            var closestOrigins
+            var own = []
+            var playerId = modelDataService.getSelectedCharacter().getId()
+            sectors.forEach(function(sector) {
+                for (let x in sector.data) {
+                    for (let y in sector.data[x]) {
+                        origins.push(sector.data[x][y])
+                    }
+                }
+            })
+            own = origins.filter(function(origin) {
+                return origin.character_id === playerId && target.id !== origin.id
+            })
+            if (own.length) {
+                closestOrigins = sortByDistanceTarget(own, target)
+            } else {
+                return callback(false)
+            }
+            return callback(closestOrigins[0])
+        }
+        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
+        var index = 0
+        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
+            if (++index === loads.length) {
+                closestOwnVillage(target, callback)
+            }
+        })
+    }
+    attackView.setQueueSupportCommand = function(command, date) {
+        closestOwnVillage(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var id = closestVillage.id
+            console.log(id)
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+
+            function unitInfo() {
+                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                    village_id: id
+                }, function(data) {
+                    Archer = data.available_units.archer.total
+                    HC = data.available_units.heavy_cavalry.total
+                    Spear = data.available_units.spear.total
+                    Sword = data.available_units.sword.total
+                })
+                setTimeout(addCommandCheck, 2000)
+            }
+
+            function addCommandCheck() {
+                if (HC >= 20) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            heavy_cavalry: '20'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 38 ciężkich kawalerzystów')
+                }
+                if (Spear >= 50 && Archer >= 50) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            spear: '50',
+                            archer: '50'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 50 pik i 50 łuczników')
+                }
+                if (Spear >= 100 && Archer < 100) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            spear: '100'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 100 pik')
+                }
+                if (Spear < 100 && Archer >= 100) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            archer: '100'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 100 łuczników')
+                }
+                if (Sword >= 100) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            sword: '100'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 100 mieczy')
+                }
+            }
+            unitInfo()
+        })
+    }
+    attackView.setQueueSupportBigCommand = function(command, date) {
+        closestOwnVillage(command.targetVillage, function(closestVillageOwn) {
+            var origin = closestVillageOwn
+            var id = closestVillageOwn.id
+            console.log(id)
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+
+            function unitInfoBig() {
+                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                    village_id: id
+                }, function(data) {
+                    Archer = data.available_units.archer.total
+                    HC = data.available_units.heavy_cavalry.total
+                    Spear = data.available_units.spear.total
+                    Sword = data.available_units.sword.total
+                })
+                setTimeout(addCommandCheckBig, 2000)
+            }
+
+            function addCommandCheckBig() {
+                if (HC >= 80) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            heavy_cavalry: '80'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała duży klin 80 ciężkich kawalerzystów')
+                }
+                if (Spear >= 1200 && Archer >= 1200) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            spear: '1000',
+                            archer: '1000'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała duży klin 1000 pik i 1000 łuczników')
+                }
+                if (Spear >= 1200 && Archer < 1200) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            spear: '1000'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 1000 pik')
+                }
+                if (Spear < 1200 && Archer >= 1200) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            archer: '1000'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 1000 łuczników')
+                }
+                if (Sword >= 1200) {
+                    commandQueue.addCommand({
+                        origin: origin,
+                        target: target,
+                        date: date,
+                        dateType: 'arrive',
+                        units: {
+                            sword: '1000'
+                        },
+                        officers: {},
+                        type: 'support',
+                        catapultTarget: ''
+                    })
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                    utils.emitNotif('success', 'Dodano do Generała mały klin 1000 mieczy')
+                }
+            }
+            unitInfoBig()
+        })
+    }
+    attackView.commandQueueEnabled = function() {
         return !!commandQueue
     }
-
-    attackView.isInitialized = function () {
+    attackView.isInitialized = function() {
         return initialized
     }
-
-    attackView.init = function () {
+    attackView.init = function() {
         for (let i = 0; i < UNIT_SPEED_ORDER.length; i++) {
             INCOMING_UNITS_FILTER[UNIT_SPEED_ORDER[i]] = true
         }
-
         for (let i in COMMAND_TYPES) {
             COMMAND_TYPES_FILTER[COMMAND_TYPES[i]] = true
         }
-
         try {
             commandQueue = require('two/commandQueue')
             COMMAND_QUEUE_DATE_TYPES = require('two/commandQueue/types/dates')
         } catch (e) {}
-
         const defaultFilters = {
             [FILTER_TYPES.COMMAND_TYPES]: angular.copy(COMMAND_TYPES_FILTER),
             [FILTER_TYPES.INCOMING_UNITS]: angular.copy(INCOMING_UNITS_FILTER),
             [FILTER_TYPES.VILLAGE]: false
         }
-
         initialized = true
         globalInfoModel = modelDataService.getSelectedCharacter().getGlobalInfo()
         filters = Lockr.get(STORAGE_KEYS.FILTERS, defaultFilters, true)
-
-        ready(function () {
+        ready(function() {
             formatFilters()
-
             $rootScope.$on(eventTypeProvider.COMMAND_INCOMING, onCommandIncomming)
             $rootScope.$on(eventTypeProvider.COMMAND_CANCELLED, onCommandCancelled)
             $rootScope.$on(eventTypeProvider.MAP_SELECTED_VILLAGE, onVillageSwitched)
             $rootScope.$on(eventTypeProvider.VILLAGE_NAME_CHANGED, onVillageNameChanged)
             $rootScope.$on(eventTypeProvider.COMMAND_IGNORED, onCommandIgnored)
-
             attackView.loadCommands()
         }, ['initial_village'])
     }
-
     return attackView
 })
-
 define('two/attackView/events', [], function () {
     angular.extend(eventTypeProvider, {
         ATTACK_VIEW_FILTERS_CHANGED: 'attack_view_filters_changed',
@@ -6390,7 +6749,7 @@ define('two/attackView/ui', [
     'queues/EventQueue',
     'helper/time',
     'battlecat'
-], function (
+], function(
     interfaceOverflow,
     attackView,
     EventScope,
@@ -6406,83 +6765,117 @@ define('two/attackView/ui', [
 ) {
     let $scope
     let $button
-
-    const nowSeconds = function () {
+    const nowSeconds = function() {
         return Date.now() / 1000
     }
-
-    const copyTimeModal = function (time) {
+    const copyTimeModal = function(time) {
         let modalScope = $rootScope.$new()
         modalScope.text = $filter('readableDateFilter')(time * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         modalScope.title = $filter('i18n')('copy', $rootScope.loc.ale, 'attack_view')
         windowManagerService.getModal('!twoverflow_attack_view_show_text_modal', modalScope)
     }
-
-    const removeTroops = function (command) {
+    const removeTroops = function(command) {
         const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         console.log(formatedDate)
         attackView.setCommander(command, formatedDate)
     }
-
-    const switchWindowSize = function () {
+    const killNobleman = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueSupportCommand(command, formatedDate)
+    }
+    const killNoblemanBig = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueSupportBigCommand(command, formatedDate)
+    }
+    const bunkerVillage = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 20) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueBunkerCommand(command, formatedDate)
+    }
+    const spyVillage = function(command) {
+        var villageId = command.originVillage.id
+        var villageName = command.originVillage.name
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        var interval = 5000
+        var interval1 = 7000
+        var Liczba = 0
+        villages.forEach(function(village, index) {
+            var scoutingInfo = village.scoutingInfo
+            var spies = scoutingInfo.spies
+            setTimeout(function() {
+                spies.forEach(function(available, index) {
+                    if (available.type == 1) {
+                        Liczba = Liczba + 1
+                        if (Liczba <= 7) {
+                            setTimeout(function() {
+                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                    startVillage: village.getId(),
+                                    targetVillage: villageId,
+                                    spys: 1,
+                                    type: 'units'
+                                })
+                            }, index * interval * Math.random())
+                            utils.emitNotif('success', 'Szpieg nr ' + Liczba + ' wysłany na ' + villageName)
+                        }
+                    }
+                })
+            }, index * interval1 * Math.random())
+        })
+    }
+    const withdrawArmy = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setCommander(command, formatedDate)
+    }
+    const switchWindowSize = function() {
         let $window = $('#two-attack-view').parent()
         let $wrapper = $('#wrapper')
-
         $window.toggleClass('fullsize')
         $wrapper.toggleClass('window-fullsize')
     }
-
-    const updateVisibileCommands = function () {
+    const updateVisibileCommands = function() {
         const offset = $scope.pagination.offset
         const limit = $scope.pagination.limit
-
         $scope.visibleCommands = $scope.commands.slice(offset, offset + limit)
         $scope.pagination.count = $scope.commands.length
     }
-
-    const checkCommands = function () {
+    const checkCommands = function() {
         const now = Date.now()
-
         for (let i = 0; i < $scope.commands.length; i++) {
             if ($scope.commands[i].model.percent(now) === 100) {
                 $scope.commands.splice(i, 1)
             }
         }
-
         updateVisibileCommands()
     }
-
     // scope functions
-
-    const toggleFilter = function (type, _filter) {
+    const toggleFilter = function(type, _filter) {
         attackView.toggleFilter(type, _filter)
         $scope.filters = attackView.getFilters()
     }
-
-    const toggleSorting = function (column) {
+    const toggleSorting = function(column) {
         attackView.toggleSorting(column)
         $scope.sorting = attackView.getSortings()
     }
-
     const eventHandlers = {
-        updateCommands: function () {
+        updateCommands: function() {
             $scope.commands = attackView.getCommands()
         },
-        onVillageSwitched: function () {
+        onVillageSwitched: function() {
             $scope.selectedVillageId = modelDataService.getSelectedVillage().getId()
         }
     }
-
-    const init = function () {
+    const init = function() {
         $button = interfaceOverflow.addMenuButton('Strażnik', 30, $filter('i18n')('description', $rootScope.loc.ale, 'attack_view'))
         $button.addEventListener('click', buildWindow)
-
         interfaceOverflow.addTemplate('twoverflow_attack_view_main', `<div id=\"two-attack-view\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'attack_view' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-orange icon-26x26-double-arrow\" ng-click=\"switchWindowSize()\"></a><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap rich-text\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.VILLAGE)\" tooltip=\"\" tooltip-content=\"{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}<tr><td><div ng-repeat=\"unit in ::UNIT_SPEED_ORDER\" class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}\" ng-click=\"toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)\" tooltip=\"\" tooltip-content=\"{{ unit | i18n:loc.ale:'unit_names' }}\"><span class=\"icon-34x34-unit-{{ unit }} icon-bg-black\"></span></div></table></div><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleCommands.length\">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}<table class=\"tbl-border-light commands-table\" ng-show=\"visibleCommands.length\"><col width=\"7%\"><col width=\"15%\"><col><col><col width=\"5%\"><col width=\"13%\"><col width=\"29%\"><thead class=\"sorting\"><tr><th ng-click=\"toggleSorting(COLUMN_TYPES.COMMAND_TYPE)\" tooltip=\"\" tooltip-content=\"{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'command_type' | i18n:loc.ale:'attack_view' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.COMMAND_TYPE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)\">{{ 'player' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)\">{{ 'origin' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)\">{{ 'target' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TARGET_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th tooltip=\"\" tooltip-content=\"{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}<th ng-click=\"toggleSorting(COLUMN_TYPES.TIME_COMPLETED)\">{{ 'arrive' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TIME_COMPLETED\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th>{{ 'actions' | i18n:loc.ale:'attack_view' }}<tbody><tr ng-repeat=\"command in visibleCommands\" class=\"{{ command.command_type }}\" ng-class=\"{'trebuchet': command.slowestUnit === UNIT_TYPES.TREBUCHET}\"><td><span class=\"icon-20x20-{{ command.command_type }}\"></span><td ng-click=\"openCharacterProfile(command.originCharacter.id)\" class=\"character\"><span class=\"name\">{{ command.originCharacter.name }}</span><td ng-class=\"{'selected': command.originVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.originVillage.id)\">{{ command.originVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.originVillage.x, command.originVillage.y)\">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span><td ng-class=\"{'selected': command.targetVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.targetVillage.id)\">{{ command.targetVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.targetVillage.x, command.targetVillage.y)\">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span><td><span class=\"icon-20x20-unit-{{ command.slowestUnit }}\"></span><td><div class=\"progress-wrapper\" tooltip=\"\" tooltip-content=\"{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}\"><div class=\"progress-bar\" ng-style=\"{width: command.model.percent() + '%'}\"></div><div class=\"progress-text\"><span>{{ command.model.countdown() }}</span></div></div><td><a ng-click=\"copyTimeModal(command.time_completed)\" class=\"btn btn-orange size-20x20 icon-20x20-arrivetime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-click=\"copyTimeModal(command.time_completed + (command.time_completed - command.time_start))\" class=\"btn btn-red size-20x20 icon-20x20-backtime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"removeTroops(command)\" class=\"btn btn-orange size-20x20 icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNobleman(command)\" class=\"btn btn-orange size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_nobleman_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNoblemanBig(command)\" class=\"btn btn-red size-20x20 icon-20x20-killBig\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_noblemanBig_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"withdrawArmy(command)\" class=\"btn btn-orange size-20x20 icon-20x20-withdraw\" tooltip=\"\" tooltip-content=\"{{ 'commands_withdraw_army_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"spyVillage(command)\" class=\"btn btn-orange size-20x20 icon-20x20-spy\" tooltip=\"\" tooltip-content=\"{{ 'commands_spy_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div>`)
         interfaceOverflow.addTemplate('twoverflow_attack_view_show_text_modal', `<div id=\"show-text-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ title }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><form ng-submit=\"closeWindow()\"><input class=\"input-border text-center\" ng-model=\"text\"></form></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-green btn-border\" ng-click=\"closeWindow()\">OK</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-attack-view table.commands-table{table-layout:fixed;font-size:13px;margin-bottom:10px}#two-attack-view table.commands-table th{text-align:center;padding:0px}#two-attack-view table.commands-table td{padding:1px 0;min-height:initial;border:none;text-align:center}#two-attack-view table.commands-table tr.support td{background:#6884ea}#two-attack-view table.commands-table tr.relocate td{background:#afea68}#two-attack-view table.commands-table tr.attack.snob td{background:#ea7d69}#two-attack-view table.commands-table tr.attack.trebuchet td{background:#eab268}#two-attack-view table.commands-table tr.attack.tribemate td{background:#cccccc}#two-attack-view table.commands-table .empty td{height:32px}#two-attack-view table.commands-table .sorting .arrow{margin-top:-4px}#two-attack-view .village .coords{font-size:11px;color:#71471a}#two-attack-view .village .coords:hover{color:#ffde00;text-shadow:0 1px 0 #000}#two-attack-view .village .name:hover{color:#fff;text-shadow:0 1px 0 #000}#two-attack-view .village.selected .name{font-weight:bold}#two-attack-view .character .name:hover{color:#fff;text-shadow:1px 1px 0 #000}#two-attack-view .progress-wrapper{height:20px;margin-bottom:0}#two-attack-view .progress-wrapper .progress-text{position:absolute;width:100%;height:100%;text-align:center;z-index:10;padding:0 5px;line-height:20px;color:#f0ffc9;overflow:hidden}#two-attack-view .filters{height:95px;margin-bottom:10px}#two-attack-view .filters table{width:auto;float:left;margin:5px}#two-attack-view .filters .icon{width:38px;float:left;margin:0 6px}#two-attack-view .filters .icon.active:before{box-shadow:0 0 0 1px #000,-1px -1px 0 2px #ac9c44,0 0 0 3px #ac9c44,0 0 0 4px #000;border-radius:1px;content:"";position:absolute;width:38px;height:38px;left:-1px;top:-1px}#two-attack-view .filters td{padding:6px}#two-attack-view .icon-20x20-backtime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEMklEQVQ4y42US2xUdRTGf3funZn/PHqnnVdpKZZ2RCWBVESgoZogSAKKEEAlGhVNLMGg0QiJKxYudIdoTEyDj8SFGo2seDUGhEQqRHk/UimDpdAptHMr8+jM3Dv35QJbi9KEszzJ+eU753z5JKYuOQGBUpAa2SLiuPgBPBKGrZAPlSlmoQLYk4ekqUCmEHHL0pslRb7fsNwWF8L/DIz5Fanftey0oogBr65rk8HS3WC6jyY8ckfZdNtfWdX++tzGIDMabAJmArte4my/l/c//vaLoFc6jmP3iCqD41B5Mi0BId1Hk+V6ljfEQlvWL2xZoY/lKOTLGCY01tZhVLMkRJEtqzoeyUvSnN70SNZRXC1iUylDVZmszhQiDmbH9Lrgpta4mKPlCjy95D6Wrn8GAKFEEfEmdG2Qowd+4I0XFrUC7+w7eL5sCu8hdL3imaQuYFl6c9l021vjYk7Y72Xjq4/z1IaNCCVKMRckq+moiQDJ2bN48uV3GbnSx9b1ra1l0223LL05AYF/Vw4S80jyonnN6paq5YTe3LyU2rpaYrFpJGfPItlcTzI1H8R8cC38NTFiaojhSzeJJ8KNJ/4YOmP43GsTCmWLiGG5LTUBb2LuzGm3e3Ij3321m5Hey6A0AVAcPjmhQcSbuDyU5sF6e5phuS2yRWQC6Lj4x62h1vjJ3BwjlUoiYn52ffolmUtnuXj4ADu2b7/DFoN9RVQ1gAthx8U/+Sk4LiGAQtFAHzXIajpr16yiu/tX98euzyWAzrc6Abj8+1G0TIZ8uYx/xJpgjANlWfEKqjaZbIlixQQgdDHDyuULWLFisZTVdBJxQTIVA2uQ+qZ6KoU0nhqV09f+QoIxj4ThAWRVJWLZToNXUaarYR8Hdm+iZBic7N5LbmgI0xclERcAFLIVAHRtkFOHjwBwNHNryK9I/bZCXlFVIk6ZuSbukidmR1Z+/cliAHzRBjKjBTq37bz9gEAAgA+2vQjAjb4j9F6pUCga/Hzm5v6A5KRDFkXF1UnWRcRj256d/vam9zrJXT0GwGc7V+ONRwAwtTwAa9bs4ND+PTy8MMW5az7+vJ7lXKZ4IeiVjsuIgaylVxTHxf/S84+u3bh5Mbmrx/D6Y1hjGtaYBjduH9g0RonNSmH4o/T1j9JzeoBixSRbsi9ktNIuRXJ6vFVbA2ypVoiZNuay+qj62r6u1R0ee4i65Iw7rDEOnLegC4CSqwxf18b23C0cFMenF5wKJzLZfLDtuW/4pWt1Ry6XY8/ug8jRB6gN3GI0k6VtXcq9csvqtm2rTyjS+YDkpGXEgLdq/z++EhA2hYjbmMtMx7P8+4/Wbdj64U89/cP5Xlli2HGcUsAnjziulMGxbrheRu4lYH21QjSarvXQoraZbQC/nUoflzwMyx6hVz26MRVkysROQNhQ8XmqQr1XwH/rb2Du69Eebp25AAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-arrivetime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEW0lEQVQ4y4WUWWxUZRiGn7PMnNPOVtvODHQBSlulAUFBoQiEaBHBhCsSFaIhIe6JSyAkRkO8NpErY2KoYuINISkkRFAjEUyAUCQsBSu1BVpKZ2DmTNuZzsyZMz3L70Vbgkjqe/Ul//89//K9eSX+KyUKFcVKQopDxBNoALJE2VXJBUzyBpQA9xG9SA+DbF2vdRxrvqQqLWVHNAkITm8saKo0KBz3hqrqt32WlXkUWHoQZvlpQFbWmLZo//zj7W8ua7JRUoKSz+DOXYVrSZMfjnV/W+mTuvHcs/okIw9DFYAoBCw/DY6QX9yycemer9/p6KiQE7ilIj4vwNXBFIO3M1iFLKta4suNvLUwZzpZTxWZiEvJhMkHgYpf1+cKSazfsnHpnve2rVqYTg2xdvMrPL76JWKNNSxesYB1LyyDiQQ9fWkCmhxzkRuLZTcpVC1lOU4eEDNPDUzitJVc6eUDn6zuSAwl2PDGLqrnx9ECPob6kkxaPiLBEK1LniIaFVz/c4SAJsf6U2ZaEfZwxMOYuaVCJTWypKz68LXV7y6sigWf7thMdfMKkMOgryA2r5pYYwWBaA3FzBhFM8uiRXFOnumn/jGt0SjYl8t+MWzbFABkxSFSdkTTE3F3zkDyBnptw/2J5VMXpwq1gfT1AQ4eOIyi1AHw5II5hCp80bIjmhSHyEyP7Ak0AcFwuIKR/vy/PLVv7156T/1M4u8e9n/1HXqNRnNzjMS9AuGQBlMfF5zxKoA6U2hph5xp0nv+ErX1KVqfXctbH+yk65tOAOa1tolNm56TjIyFNVpmIl8GwBMEHnSzKkuUJUHh8vAYcihMIFQi3hAHZ4T65hq27dyKkbGI1uqS7a/mXO8F+gZGuDZ0j4nClFsU1adj2wrgyq5KTlOlwTOJ8STApVO/Y2VGAJgwSgBEa3VsfzXZZJKLvxyjWC7z8+G3CQf9+FS13nG9ueEwEUBRqmywEfrAvWLF4rqq5fmiwCvcIjuqYCTu8v5nnXQd7+bgoZ/48dduXF8F4ZpaNj0/j60bgly+YLTeNMyUYosxPUhONaBUpeq3K7G7T/Ym2pfWh5ZU1MzBX/0XV/64iVYe4+jR3QD4aqeGaWdylPNjABw9upv9X3R+9GVXwsjmrZQCiJDjOI4scjnTyZZc0ZhKJmM9PcNYlsu4CLJjez3jt65ij45jpZPYhVG8SRNFrcQc7eeZ9evIl9xI96Xh4yqAAaXoJCOW3zuRGjfNwbRob6wNbkkYxTizaDx9B0+pY93rnWdTYxPf+xQ9p0yvCRPciEtJqFpKEfZwyXaupArOYLbM+JK2lS3HDhyRbgwanO6eoPvEaWLxOixLY+WOrrP5onUI4Z2TdMeQZgtYySaGrM6VJVFfmnRjsiwHXEG8KR5p2/fpxjWv7jpyyCd7JxR8v03nY0Fidt2H+z1dcz1LFx7xlctb2gHO9wz1+CS1L2tZSabD4f+Asx7g+a0JbYJJg6lgAPgHUh4QWRIJr4EAAAAASUVORK5CYII=")}#two-attack-view .icon-20x20-spy{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAN9SURBVDhPrZVLbBtVFIb/mTt+xC/GdlzHSZw2jhMIIbRENG5JsVFbFiAWSOy6SlnwqlggFgiJBQuW7BArNiwBCSGxYFGhSpRWTlrHSUxCGjt1Yzt+JX5nJuPHPMgMTqWqadpF/s3VPfecT0c6j0u98/FnOE7R3fPYpGX414/fU6IosoSmgxSFFxUF/0qyfJNhmFpo9prS9X0mkbGz53E/ErYzhP7oq8+v/nDlYt8lo8UcWEsUhX1oPBNbaJ06M911f7o04EZkbuL1SfcXV4LEMzrmQQ9N7C7XwFuR1U09oWBMRufq6dgC/yxgDfhgcc7vYQ1Xh57bta4meLhffhesvolLr7rOsw5boFYT3HWumUrH7uxDA51u7KHSgJnlCFFE8TQtSs+XdygwrQQuvCLDP+yBiwh2M+kJ5MrcVJ1vJdOxu/mjoBowu3yXqwriYrWpm9LpFO+gsYxensVWo4FIkiiCuZ/y9du9PG0OFvPb1tTSnWIuFqkOnZmWu5yH0oDqg+qw0xCiHZoJDjuoXomu4Pa6ghfenKUk2oh0Ng+vVWEnRwdCDUk3WqlUCodlqwFVqdDNxflmnWvZ+mxsqLTbwg4ZRJsrY/NBEp9MOzFItWFs8xge8fiILEykilxChaaWIuJBwR4CVeVjC6IMeXUtzwku1hZSKIJ0Jo/LLhH9nl6YbRboJAmdWo1ye8yeTrtzOVsW0pIkbx201yNANUu1PQB5baO4R044We2x3yhDEQSwp9owG90wujpwiSZ4LAar2USfu1/kFVGSVnxT55qPjZ46GYQwRQNDvpv/J/lT14xUqYHo3zVUxLx2X0kVEE4WYHdYB0bGxz9UoLyk2g+dZRXKUFRGlqRvc7lCmJcKmr2x14RUoPHH9QzWOREFyxgcF97HG2+/d3J/bL2qzxOXw8zsNdGgJ2vZMvf1UsEQVaENQcTP8/fAEYKKyQ/aPoSWbQAGcRdQ0KvGHbltQrOf7hFC37q1Uvzy12X5Xq21jXa5AYPVgR6TCTNnJzHu6sHmVjb+2vSET4156vpSoQbC3Mhu1z+4uSGH9U4bTozPIBC8CN+IH9bGMqqplXjfyZG46v9IlZ8ktfr7LZWr8q3bvIgpp77ppZWOkluPUNd//y2q6CxLf94If/NY2xyl/1sqUqpyQtzhZF2FfDZRKpXibv/pX1TYwd485i8A+A/DgaisICBxKQAAAABJRU5ErkJggg==")}#two-attack-view .icon-20x20-withdraw{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQRSURBVDhPlZRtTBxFGMf/s7sc3AsHnBwHR6GHwcJBxLbQ1lYTFCsJidb4Qf2gxEox0WihEL+YmH6oxpjUtJCWJlarrUZj/GBjfaGlqSmvhRZqQQOIpdxxlAKF4+DeWO52x51luUKiqf6SzTzPf2f+OzP7zJBn3qzD/6H1i+M5kiztBkhn2b6aQU2OwWntf6akMPuFhqbjJzOt5jc0aR3/ath6uol0nm4StFTJjxlaTjYUFz/9fFWaPRuyTF/89VRjuvY6xjpDthw2iMVUlveEJfkyM7r0WWMKBblW9059L09p3tGD9Sgqyrdl5TjOqAPXsM4wStGk0wlfMmNw5ENK8djSstwAjv86PiHBac/fjJEbnaBm+0r/gDebfUxNNGKGlz8/9pyyjIpIlBZEZPoVazda4mA2G6uZbrFtIAPdbWrfQ4ePYCEcBR8V8wWeW7eXMcNlSS7VQhiN+l2stVtMaKwvJSz2Tk/Qm72tLETrL2eRpBewIa8Q6cl6pypqqJvO9o1wfF1V+UN4wGanfj6FSAEvpMU7qCjPQEvBKzjwsYv8MdxHDXeDJMX6O+KNZkizLozPBl15qtUKqiHHwWA06ekHBx8nRnOQcCabomYpzyPwTwawc3sKzh7JxatvT5LJII9QKMSGIeydhk7gwmqioS6ZI+QvixD56faYB0NXhuBq74HPNYaQVwdD2oOqaXryIL4/UYqXdtlp36AHd9wuSEYLIpLUoTppcKzelL8pgo/zMcGYoEdCigm8zqp2EBd9SLSbMNLvxXuHOtDe7yF5qQQF6TyyM20QON6idtTgy1+vgWegT5z1ixW51qTiieFbcHsWMDoaQlfXKNJTjfjz6ggq3+3ArXAy/BEO2fwCwkER4UUvxufCA44tO2Kz5Ddt2wnH5u0Yu96z7dJv00Jzf+jMz72B0vPXpgZFUfKkxkcyXn7/6rRflMfjdILVKs/BEF6CFBYxvSRjZnH5XM7WHT2a372yIYReFAgO6+K4jziONEclOm9zPnrquw6/8pbOKflAiTMLoz6ZXrgtNruSctyZm5xQatax4rCCasj2cXf1gfYnqvb/ULp3f0iSpGGmz5sdJ1q6h4+yU8JyVsyBQJjwoJ8EZybOMY3juAzWrqIalu59i6qZhsDhPAdZPacsFpfEmSyLPlKypYialPKSqZw2ObvYbXE8DKargzRiS15L2b7aFuX5VEsRleSbU77w0NwST9JSE4kMrkwptY1x+kStxz3+0XAtPM91ECo/K1PqDt51KxdC4Ioy+zqWj1xvQ4azuHL1hmLc15Dt6VPVtfNZqYlun6gcrOjyrDL7qSerar7p6r7xrcFggMCTrau3zn0NV8nd81pn28ULhVN+qVaToOe5SqYp4Y8JgqCUA/A3Zu24cT81pCsAAAAASUVORK5CYII=")}#two-attack-view .icon-20x20-bunker{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOpSURBVDhPrZVvTBNnHMe/d9dBaUtharBSwOsUZAwEGoECMUE0ZsSRZYvJtqjZJmOJY7ExkRczMe7VlizxxeaWGbNFXZbBZsziotmmAzVzVBQUwYppgRWo/Se29drrX67dc+eJMBzZCz/Jk+e55/l9v/f8ued31Ct79uFZQsv1kvR++7lOLPLjkjAlNfVyczGXj39pmBzq31NcVnY04A98aL9u0TqHBxxsdW1QDlnE3JL/OvGVIi4IJal0ajlD04WJ2XSTTr+q3bCmGGWVRoz+eRYunoHf60xzHP9NhoK6JKRS0zRFP8hkGFvjOx2zoo9CciPwiWRl88stA9aRW/C5vXh9xy40bNoMjVqD82fP4O3XGnHo2HnUNGykEiFfu9vtag/HKUnrvefaQKpBsT1n+JyCXldZ/iJatr8Fll0NU/V6rNBmwzpqRdieiy2NAjoPc2kSSuWtWAa2qEDSjd0Lkll71pHmQkMRlVqFv8fGEQ2HcO1qPzKSHCz9gzh2sBXaLAeWZ8xS4gqUKi0K89QQjRVCWFY/YsEpR/gIYjyH5MRFvGHogfnVBLo/qYC+vFga//HTUpz7rAI9R7egtRyIk9h/M2dIgeJnghzYNWsRy6vFoeNB/NJ1CZnaXDkCUCuzyAtzsb/zNL6/JmAZW4FZRiNp5ZAnhuR0o2IdCvPI0+nQ9GYHPv5dgbujIWlciPmhfF6DzoM/Yzy9EpWlq5Hm70tLfqwVmbdkyjk0OACPwybtoVhK8nOgz76DxP3r6BvkodSosO+DeuSoGEQiETimnLA73JL2kcc8Q4ahHNbhkW67zQ6PxwfH+Bg6tuWi73IQxq1HsN38E34758bGigIIZO+KCgvEE8eM1/erqJVMCHM3ha2qS07csPj0Rey74nMsGsVLqml8dNKG9fVb4X/gRe8Ih4k7VmRlqWFzBSlxdnzoYVvzbvO4ZEJYcPVeMJqm+s6cCmTn5LTosoGLdhpVpiYYTQ0YtlxATXU5kmo9YikaY64QfNOT5s3vmU/JcokFn43Ipra9X9y0XDkQiCvAFpdCqdZKt0WVmSmNuwIJ3J58SPbafoBmmCNS5zyemhzY6rorPV0nA7r8/BalUol4IgmPbQgeLokk5yUf/4S5affew2xVrax4wn9mG4Oxrv+PrhMuYtp6l9wOnvPD5+cwNel8v7nN/LUctogl05fBaLrR2/3dUCrqr4pFYsLMTGAn2ZIf5OGn8r8y9uPkSmbmkTqW4Bn/AoB/AEiQfn1r/m4bAAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-kill{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARYSURBVDhPrVVtTFNXGH4uvZTSQgstpUKBUQQa0PFlBBzBZTB+bMMl02XBhbk6NhfjotFly2L2Yz/moiGZIZsxWSaRLRrJNtwSTIYwFBlBDCAwyrdQpIV+QmnpB+29ves9IJppsj8+ycn7vuec9+s5N++lqo+exPNExKZ8bniqwp7LF2g/w8RSFHbzdkXdiZtdly9QoRB7sHhnesq9UYOR4zBUUXd8jDj8B09VWL3/jSPdXUeXF7rr2tRKWTW/RwOCI5XKty4eXD83cCbpyrl3M1v4fT4RXwCvP4Ige/ceovz1Y0O8OtJz1mk2rqcwzqrJJj1kKaGF69dvZybGiT7UJkYVGQeg6B7yUCtcyNHyx63G0l059S+qIn74p7e3QN/X05ZeUBIkLXdeath2qvaVxRj3fWrIKDYVsqHkQx8UU8KkGJIstkgJ77IQ+uZLxJ7uleHqqndwX55U8r7OrzWYc3Dg077vtG/qjpOWw62dPvlxBkV0/5r6sIylBL/1gv2+HQ7PLFobruHa+Ub+eAvFS6tF3jF39sXPg5x7pB9gmTh+n7TsmBx6TXXfXJJrY7FfvkGJKCcTXM0uTNf3QzTPQWGj8KDPhwmLmEveE6SS8kSYmPFR8ys+amCUAa2MZe92dDVuPcq+sxWIT0vbtIBgpQbDZ9phsHmI/UgqbS5q+g7FWe0MsvIjkSCj8cX5t5EeIy5iEBJuBRQnZsCEAOx7d5DFB9spC796pmTzxmNYg17K50vF67oaSFOS8efVETh9PnJGAmo0as26ywn9QxvHZAmRqcvHS02VaJ3xYDwvG3s7vsKh4XrU3vkI+rgwJYpEHD5dBad5Gi7jIrQFa4h2uB4H3CG1++cGbqLms2gqThaCe3ENAUsPucCDMXVjebgN355qgn2VARxWdP78E2b6h3Him2KMDNpBq2kwTCiKBGwdXl9SZ72AmLQKSJML4fGJwi1oSTWDm62YpucRJxEQ3R2rgDMQCZ7H0SED8ooS4PaLyZnAph+kc3O3Vx14Nb40UpKKKGkc6AgWFOeCSuXH2qoTgRU7ggEGIpkI0hgG+VksHhp9EIWfIIpisLjgxYJPBsOi60tSIeW1lf9ywwuxPECyBFyTMJv8RNdu38jMQ+ZeJnJqfp3IWStLpNPDhqlwD4bJYCPKdMeYv0et7xmmbHAa5iCgrfCveaHWpEKplEMcGw1FcA2w2Inzk8hIFJC2bSsJCFLi5pd1xzjyYWuKSmx3O291WCYsZRKOTYiXR8A8OwPauoRInxeO5Y1qLWHeJOIIKMLc8ouTpqN/ToARo2NpeMr2TlpBcWhrOMi1hQstv9++MWf0luvHA0lCWgxangThtiREqZLhFSSAE6zjgUOJ8QUJJsw02u8Zlxz+yK8Hpiy15bpPCA/PnNj8sKAoqiI5QVqqUYnK5FECVYgJqa3ewBJ/bnKyvwrANc9bXWMimnbztBHHMP73F8DPPH4e8vqTjs8G8C/hq9/zbfBsvwAAAABJRU5ErkJggg==")}#two-attack-view .icon-20x20-killBig{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARYSURBVDhPrVVtTFNXGH4uvZTSQgstpUKBUQQa0PFlBBzBZTB+bMMl02XBhbk6NhfjotFly2L2Yz/moiGZIZsxWSaRLRrJNtwSTIYwFBlBDCAwyrdQpIV+QmnpB+29ves9IJppsj8+ycn7vuec9+s5N++lqo+exPNExKZ8bniqwp7LF2g/w8RSFHbzdkXdiZtdly9QoRB7sHhnesq9UYOR4zBUUXd8jDj8B09VWL3/jSPdXUeXF7rr2tRKWTW/RwOCI5XKty4eXD83cCbpyrl3M1v4fT4RXwCvP4Ige/ceovz1Y0O8OtJz1mk2rqcwzqrJJj1kKaGF69dvZybGiT7UJkYVGQeg6B7yUCtcyNHyx63G0l059S+qIn74p7e3QN/X05ZeUBIkLXdeath2qvaVxRj3fWrIKDYVsqHkQx8UU8KkGJIstkgJ77IQ+uZLxJ7uleHqqndwX55U8r7OrzWYc3Dg077vtG/qjpOWw62dPvlxBkV0/5r6sIylBL/1gv2+HQ7PLFobruHa+Ub+eAvFS6tF3jF39sXPg5x7pB9gmTh+n7TsmBx6TXXfXJJrY7FfvkGJKCcTXM0uTNf3QzTPQWGj8KDPhwmLmEveE6SS8kSYmPFR8ys+amCUAa2MZe92dDVuPcq+sxWIT0vbtIBgpQbDZ9phsHmI/UgqbS5q+g7FWe0MsvIjkSCj8cX5t5EeIy5iEBJuBRQnZsCEAOx7d5DFB9spC796pmTzxmNYg17K50vF67oaSFOS8efVETh9PnJGAmo0as26ywn9QxvHZAmRqcvHS02VaJ3xYDwvG3s7vsKh4XrU3vkI+rgwJYpEHD5dBad5Gi7jIrQFa4h2uB4H3CG1++cGbqLms2gqThaCe3ENAUsPucCDMXVjebgN355qgn2VARxWdP78E2b6h3Him2KMDNpBq2kwTCiKBGwdXl9SZ72AmLQKSJML4fGJwi1oSTWDm62YpucRJxEQ3R2rgDMQCZ7H0SED8ooS4PaLyZnAph+kc3O3Vx14Nb40UpKKKGkc6AgWFOeCSuXH2qoTgRU7ggEGIpkI0hgG+VksHhp9EIWfIIpisLjgxYJPBsOi60tSIeW1lf9ywwuxPECyBFyTMJv8RNdu38jMQ+ZeJnJqfp3IWStLpNPDhqlwD4bJYCPKdMeYv0et7xmmbHAa5iCgrfCveaHWpEKplEMcGw1FcA2w2Inzk8hIFJC2bSsJCFLi5pd1xzjyYWuKSmx3O291WCYsZRKOTYiXR8A8OwPauoRInxeO5Y1qLWHeJOIIKMLc8ouTpqN/ToARo2NpeMr2TlpBcWhrOMi1hQstv9++MWf0luvHA0lCWgxangThtiREqZLhFSSAE6zjgUOJ8QUJJsw02u8Zlxz+yK8Hpiy15bpPCA/PnNj8sKAoqiI5QVqqUYnK5FECVYgJqa3ewBJ/bnKyvwrANc9bXWMimnbztBHHMP73F8DPPH4e8vqTjs8G8C/hq9/zbfBsvwAAAABJRU5ErkJggg==")}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.commandQueueEnabled = attackView.commandQueueEnabled()
         $scope.commands = attackView.getCommands()
@@ -6500,7 +6893,6 @@ define('two/attackView/ui', [
             loader: updateVisibileCommands,
             limit: storageService.getPaginationLimit()
         }
-
         // functions
         $scope.openCharacterProfile = windowDisplayService.openCharacterProfile
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
@@ -6508,12 +6900,15 @@ define('two/attackView/ui', [
         $scope.now = nowSeconds
         $scope.copyTimeModal = copyTimeModal
         $scope.removeTroops = removeTroops
+        $scope.killNobleman = killNobleman
+        $scope.killNoblemanBig = killNoblemanBig
+        $scope.bunkerVillage = bunkerVillage
+        $scope.withdrawArmy = withdrawArmy
+        $scope.spyVillage = spyVillage
         $scope.switchWindowSize = switchWindowSize
         $scope.toggleFilter = toggleFilter
         $scope.toggleSorting = toggleSorting
-
         updateVisibileCommands()
-
         let eventScope = new EventScope('twoverflow_queue_window', function onWindowClose() {
             timeHelper.timer.remove(checkCommands)
         })
@@ -6522,15 +6917,11 @@ define('two/attackView/ui', [
         eventScope.register(eventTypeProvider.ATTACK_VIEW_COMMAND_CANCELLED, eventHandlers.updateCommands)
         eventScope.register(eventTypeProvider.ATTACK_VIEW_COMMAND_IGNORED, eventHandlers.updateCommands)
         eventScope.register(eventTypeProvider.ATTACK_VIEW_VILLAGE_RENAMED, eventHandlers.updateCommands)
-
         windowManagerService.getScreenWithInjectedScope('!twoverflow_attack_view_main', $scope)
-
         timeHelper.timer.add(checkCommands)
     }
-
     return init
 })
-
 define('two/attackView/types/columns', [], function () {
     return {
         'ORIGIN_VILLAGE': 'origin_village_name',
@@ -12181,10 +12572,10 @@ define('two/battleCalculator/ui', [
         let bashpointsAtt = battleCalculator.getBashpointsAtt()
         let bashpointsDef = battleCalculator.getBashpointsDef()
         if (bashpointsAtt) {
-            $scope.totalAtt = bashpointsAtt
+            $scope.totalAtt = bashpointsDef
         }
         if (bashpointsDef) {
-            $scope.totalDef = bashpointsDef
+            $scope.totalDef = bashpointsAtt
         }
     }
     const clearBashpoints = function() {
