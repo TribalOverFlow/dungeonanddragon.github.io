@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 10:09:58 GMT
+ * Thu, 10 Dec 2020 10:41:26 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6316,91 +6316,57 @@ define('two/attackView', [
             var Spear = 0
             var Sword = 0
             var Trebuchet = 0
+            const commandType = COMMAND_TYPES.SUPPORT
+            let units = {}
 
             function addCommandCheck() {
                 if (HC >= 38) {
-                    commandQueue.addCommand({
-                        origin: origin,
-                        target: target,
-                        date: date,
-                        dateType: 'arrive',
-                        units: {
-                            heavy_cavalry: '-38'
-                        },
-                        officers: {},
-                        type: 'support',
-                        catapultTarget: ''
-                    })
+                    units = {heavy_cavalry: '-38'}
+                    commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
+                    if (!commandQueue.isRunning()) {
+                        commandQueue.start()
+                    }
+                }
+                if (Spear >= 500 && Archer >= 500) {
+                    units = {
+                        spear: '-500',
+                        archer: '-500'
+                    }
+                    commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Spear >= 500 && Archer < 500) {
-                    commandQueue.addCommand({
-                        origin: origin,
-                        target: target,
-                        date: date,
-                        dateType: 'arrive',
-                        units: {
-                            spear: '-500',
-                            archer: '*'
-                        },
-                        officers: {},
-                        type: 'support',
-                        catapultTarget: ''
-                    })
+                    units = {
+                        spear: '-500',
+                        archer: '*'
+                    }
+                    commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Spear < 500 && Archer >= 500) {
-                    commandQueue.addCommand({
-                        origin: origin,
-                        target: target,
-                        date: date,
-                        dateType: 'arrive',
-                        units: {
-                            spear: '*',
-                            archer: '-500'
-                        },
-                        officers: {},
-                        type: 'support',
-                        catapultTarget: ''
-                    })
+                    units = {
+                        spear: '*',
+                        archer: '-500'
+                    }
+                    commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Sword >=500) {
-                    commandQueue.addCommand({
-                        origin: origin,
-                        target: target,
-                        date: date,
-                        dateType: 'arrive',
-                        units: {
-                            sword: '-500'
-                        },
-                        officers: {},
-                        type: 'support',
-                        catapultTarget: ''
-                    })
+                    units = {sword: '-500'}
+                    commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Trebuchet >= 100) {
-                    commandQueue.addCommand({
-                        origin: origin,
-                        target: target,
-                        date: date,
-                        dateType: 'arrive',
-                        units: {
-                            sword: '*'
-                        },
-                        officers: {},
-                        type: 'support',
-                        catapultTarget: ''
-                    })
+                    units = {trebuchet: '*'}
+                    commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
@@ -6490,7 +6456,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 38 ciężkich kawalerzystów')
+                    utils.notif('success', 'Dodano do Generała mały klin 38 ciężkich kawalerzystów')
                 }
                 if (Spear >= 50 && Archer >= 50) {
                     commandQueue.addCommand({
@@ -6509,7 +6475,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 50 pik i 50 łuczników')
+                    utils.notif('success', 'Dodano do Generała mały klin 50 pik i 50 łuczników')
                 }
                 if (Spear >= 100 && Archer < 100) {
                     commandQueue.addCommand({
@@ -6527,7 +6493,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 100 pik')
+                    utils.notif('success', 'Dodano do Generała mały klin 100 pik')
                 }
                 if (Spear < 100 && Archer >= 100) {
                     commandQueue.addCommand({
@@ -6545,7 +6511,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 100 łuczników')
+                    utils.notif('success', 'Dodano do Generała mały klin 100 łuczników')
                 }
                 if (Sword >= 100) {
                     commandQueue.addCommand({
@@ -6563,7 +6529,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 100 mieczy')
+                    utils.notif('success', 'Dodano do Generała mały klin 100 mieczy')
                 }
             }
             unitInfo()
@@ -6609,7 +6575,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała duży klin 80 ciężkich kawalerzystów')
+                    utils.notif('success', 'Dodano do Generała duży klin 80 ciężkich kawalerzystów')
                 }
                 if (Spear >= 1200 && Archer >= 1200) {
                     commandQueue.addCommand({
@@ -6628,7 +6594,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała duży klin 1000 pik i 1000 łuczników')
+                    utils.notif('success', 'Dodano do Generała duży klin 1000 pik i 1000 łuczników')
                 }
                 if (Spear >= 1200 && Archer < 1200) {
                     commandQueue.addCommand({
@@ -6646,7 +6612,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 1000 pik')
+                    utils.notif('success', 'Dodano do Generała mały klin 1000 pik')
                 }
                 if (Spear < 1200 && Archer >= 1200) {
                     commandQueue.addCommand({
@@ -6664,7 +6630,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 1000 łuczników')
+                    utils.notif('success', 'Dodano do Generała mały klin 1000 łuczników')
                 }
                 if (Sword >= 1200) {
                     commandQueue.addCommand({
@@ -6682,7 +6648,7 @@ define('two/attackView', [
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
-                    utils.emitNotif('success', 'Dodano do Generała mały klin 1000 mieczy')
+                    utils.notif('success', 'Dodano do Generała mały klin 1000 mieczy')
                 }
             }
             unitInfoBig()
