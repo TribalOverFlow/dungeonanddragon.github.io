@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 11:49:51 GMT
+ * Thu, 10 Dec 2020 11:56:35 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6351,6 +6351,7 @@ define('two/attackView', [
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
             var id = closestVillage.id
+            console.log(id, origin)
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
