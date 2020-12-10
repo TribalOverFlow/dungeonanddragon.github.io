@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 11:13:22 GMT
+ * Thu, 10 Dec 2020 11:38:19 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6132,6 +6132,13 @@ define('two/attackView', [
             return distA - distB
         })
     }
+    const sortByDistanceTarget = function(villages, target) {
+        return villages.sort(function(villageA, villageB) {
+            var distA = math.actualDistance(target, villageA)
+            var distB = math.actualDistance(target, villageB)
+            return distA - distB
+        })
+    }
     /**
      * Order:
      * - Barbarian villages.
@@ -6185,6 +6192,72 @@ define('two/attackView', [
         mapData.loadTownDataAsync(origin.x, origin.y, size, size, function() {
             if (++loadBlockIndex === loads.length) {
                 closestNonHostileVillage(origin, callback)
+            }
+        })
+    }
+    const closestOwnVillageBunker = function(target, callback) {
+        var size = 40
+        if (mapData.hasTownDataInChunk(target.x, target.y)) {
+            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
+            var origins = []
+            var closestOrigins
+            var own = []
+            var playerId = modelDataService.getSelectedCharacter().getId()
+            sectors.forEach(function(sector) {
+                for (let x in sector.data) {
+                    for (let y in sector.data[x]) {
+                        origins.push(sector.data[x][y])
+                    }
+                }
+            })
+            own = origins.filter(function(origin) {
+                return origin.character_id === playerId && target.id !== origin.id
+            })
+            if (own.length) {
+                closestOrigins = sortByDistanceTarget(own, target)
+            } else {
+                return callback(false)
+            }
+            return callback(closestOrigins)
+        }
+        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
+        var index = 0
+        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
+            if (++index === loads.length) {
+                closestOwnVillageBunker(target, callback)
+            }
+        })
+    }
+    const closestOwnVillage = function(target, callback) {
+        var size = 40
+        if (mapData.hasTownDataInChunk(target.x, target.y)) {
+            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
+            var origins = []
+            var closestOrigins
+            var own = []
+            var playerId = modelDataService.getSelectedCharacter().getId()
+            sectors.forEach(function(sector) {
+                for (let x in sector.data) {
+                    for (let y in sector.data[x]) {
+                        origins.push(sector.data[x][y])
+                    }
+                }
+            })
+            own = origins.filter(function(origin) {
+                return origin.character_id === playerId && target.id !== origin.id
+            })
+            if (own.length) {
+                closestOrigins = sortByDistanceTarget(own, target)
+            } else {
+                return callback(false)
+            }
+            return callback(closestOrigins[0])
+        }
+        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
+        var index = 0
+        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
+            if (++index === loads.length) {
+                closestOwnVillage(target, callback)
             }
         })
     }
@@ -6274,40 +6347,6 @@ define('two/attackView', [
             }
         })
     }
-    // Bunkier
-    const closestOwnVillageBunker = function(target, callback) {
-        var size = 50
-        if (mapData.hasTownDataInChunk(target.x, target.y)) {
-            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
-            var origins = []
-            var closestOrigins
-            var own = []
-            var playerId = modelDataService.getSelectedCharacter().getId()
-            sectors.forEach(function(sector) {
-                for (let x in sector.data) {
-                    for (let y in sector.data[x]) {
-                        origins.push(sector.data[x][y])
-                    }
-                }
-            })
-            own = origins.filter(function(origin) {
-                return origin.character_id === playerId && target.id !== origin.id
-            })
-            if (own.length) {
-                closestOrigins = sortByDistanceTarget(own, target)
-            } else {
-                return callback(false)
-            }
-            return callback(closestOrigins)
-        }
-        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
-        var index = 0
-        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
-            if (++index === loads.length) {
-                closestOwnVillageBunker(target, callback)
-            }
-        })
-    }
     attackView.setQueueBunkerCommand = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
@@ -6365,47 +6404,6 @@ define('two/attackView', [
                 }
             }
             addCommandCheck()
-        })
-    }
-    // Klin
-    const sortByDistanceTarget = function(villages, target) {
-        return villages.sort(function(villageA, villageB) {
-            var distA = math.actualDistance(target, villageA)
-            var distB = math.actualDistance(target, villageB)
-            return distA - distB
-        })
-    }
-    const closestOwnVillage = function(target, callback) {
-        var size = 40
-        if (mapData.hasTownDataInChunk(target.x, target.y)) {
-            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
-            var origins = []
-            var closestOrigins
-            var own = []
-            var playerId = modelDataService.getSelectedCharacter().getId()
-            sectors.forEach(function(sector) {
-                for (let x in sector.data) {
-                    for (let y in sector.data[x]) {
-                        origins.push(sector.data[x][y])
-                    }
-                }
-            })
-            own = origins.filter(function(origin) {
-                return origin.character_id === playerId && target.id !== origin.id
-            })
-            if (own.length) {
-                closestOrigins = sortByDistanceTarget(own, target)
-            } else {
-                return callback(false)
-            }
-            return callback(closestOrigins[0])
-        }
-        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
-        var index = 0
-        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
-            if (++index === loads.length) {
-                closestOwnVillage(target, callback)
-            }
         })
     }
     attackView.setQueueSupportCommand = function(command, date) {
