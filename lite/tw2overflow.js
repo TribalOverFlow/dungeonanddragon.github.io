@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 18:59:41 GMT
+ * Thu, 10 Dec 2020 20:56:26 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6148,7 +6148,7 @@ define('two/attackView', [
             var distA = math.actualDistance(target, villageA)
             var distB = math.actualDistance(target, villageB)
             return distA - distB
-        })
+        }).reverse()
     }
     /**
      * Order:
@@ -6360,7 +6360,7 @@ define('two/attackView', [
     }
     attackView.setQueueBunkerCommand = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
-            var origin = closestVillage.reverse()
+            var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
@@ -6461,7 +6461,7 @@ define('two/attackView', [
     }
     attackView.setQueueSupportCommand = function(command, date) {
         closestOwnVillage(command.targetVillage, function(closestVillage) {
-            var origin = closestVillage.reverse()
+            var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
@@ -6571,7 +6571,7 @@ define('two/attackView', [
     }
     attackView.setQueueSupportCommand5 = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
-            var origin = closestVillage.reverse()
+            var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
@@ -6681,7 +6681,7 @@ define('two/attackView', [
     }
     attackView.setQueueSupportCommand10 = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
-            var origin = closestVillage.reverse()
+            var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
@@ -6791,7 +6791,7 @@ define('two/attackView', [
     }
     attackView.setQueueSupportCommand20 = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
-            var origin = closestVillage.reverse()
+            var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
@@ -6901,7 +6901,7 @@ define('two/attackView', [
     }
     attackView.setQueueSupportBigCommand = function(command, date) {
         closestOwnVillage(command.targetVillage, function(closestVillage) {
-            var origin = closestVillage.reverse()
+            var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
