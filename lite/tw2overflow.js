@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 12:24:30 GMT
+ * Thu, 10 Dec 2020 12:39:11 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -5995,6 +5995,7 @@ define('two/attackView', [
     let overviewService = injector.get('overviewService')
     let globalInfoModel
     let commands = []
+    let interval = 2000
     let commandQueue = false
     let filters = {}
     let filterParams = {}
@@ -6361,141 +6362,144 @@ define('two/attackView', [
 
             function unitInfo() {
                 origin.forEach(function(village, index) {
-                    socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
-                        village_id: village.id
-                    }, function(data) {
-                        Archer = data.available_units.archer.total
-                        HC = data.available_units.heavy_cavalry.total
-                        Spear = data.available_units.spear.total
-                        Sword = data.available_units.sword.total
-                        Trebuchet = data.available_units.trebuchet.total
-                    })
-                    if (HC >= 38) {
-                        units = {
-                            archer: '',
-                            axe: '',
-                            catapult: '',
-                            doppelsoldner: '',
-                            heavy_cavalry: '-38',
-                            knight: '',
-                            light_cavalry: '',
-                            mounted_archer: '',
-                            ram: '',
-                            snob: '',
-                            spear: '',
-                            sword: '',
-                            trebuchet: ''
+                    setInterval(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                            Trebuchet = data.available_units.trebuchet.total
+                        })
+                        if (HC >= 38) {
+                            units = {
+                                archer: 0,
+                                axe: 0,
+                                catapult: 0,
+                                doppelsoldner: 0,
+                                heavy_cavalry: '-38',
+                                knight: 0,
+                                light_cavalry: 0,
+                                mounted_archer: 0,
+                                ram: 0,
+                                snob: 0,
+                                spear: 0,
+                                sword: 0,
+                                trebuchet: 0
+                            }
+                            console.log(origin, origin[index], target)
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, '')
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
-                        if (!commandQueue.isRunning()) {
-                            commandQueue.start()
+                        if (Spear >= 500 && Archer >= 500) {
+                            units = {
+                                archer: '-500',
+                                axe: 0,
+                                catapult: 0,
+                                doppelsoldner: 0,
+                                heavy_cavalry: 0,
+                                knight: 0,
+                                light_cavalry: 0,
+                                mounted_archer: 0,
+                                ram: 0,
+                                snob: 0,
+                                spear: '-500',
+                                sword: 0,
+                                trebuchet: 0
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, '')
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
                         }
-                    }
-                    if (Spear >= 500 && Archer >= 500) {
-                        units = {
-                            archer: '-500',
-                            axe: '',
-                            catapult: '',
-                            doppelsoldner: '',
-                            heavy_cavalry: '',
-                            knight: '',
-                            light_cavalry: '',
-                            mounted_archer: '',
-                            ram: '',
-                            snob: '',
-                            spear: '-500',
-                            sword: '',
-                            trebuchet: ''
+                        if (Spear >= 500 && Archer < 500) {
+                            units = {
+                                archer: '*',
+                                axe: '',
+                                catapult: '',
+                                doppelsoldner: '',
+                                heavy_cavalry: '',
+                                knight: '',
+                                light_cavalry: '',
+                                mounted_archer: '',
+                                ram: '',
+                                snob: '',
+                                spear: '-500',
+                                sword: '',
+                                trebuchet: ''
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, '')
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
-                        if (!commandQueue.isRunning()) {
-                            commandQueue.start()
+                        if (Spear < 500 && Archer >= 500) {
+                            units = {
+                                archer: '-500',
+                                axe: 0,
+                                catapult: 0,
+                                doppelsoldner: 0,
+                                heavy_cavalry: 0,
+                                knight: 0,
+                                light_cavalry: 0,
+                                mounted_archer: 0,
+                                ram: 0,
+                                snob: 0,
+                                spear: '*',
+                                sword: 0,
+                                trebuchet: 0
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
                         }
-                    }
-                    if (Spear >= 500 && Archer < 500) {
-                        units = {
-                            archer: '*',
-                            axe: '',
-                            catapult: '',
-                            doppelsoldner: '',
-                            heavy_cavalry: '',
-                            knight: '',
-                            light_cavalry: '',
-                            mounted_archer: '',
-                            ram: '',
-                            snob: '',
-                            spear: '-500',
-                            sword: '',
-                            trebuchet: ''
+                        if (Sword >= 500) {
+                            units = {
+                                archer: '',
+                                axe: '',
+                                catapult: '',
+                                doppelsoldner: '',
+                                heavy_cavalry: '',
+                                knight: '',
+                                light_cavalry: '',
+                                mounted_archer: '',
+                                ram: '',
+                                snob: '',
+                                spear: '',
+                                sword: '-500',
+                                trebuchet: ''
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
-                        if (!commandQueue.isRunning()) {
-                            commandQueue.start()
+                        if (Trebuchet >= 100) {
+                            units = {
+                                archer: '',
+                                axe: '',
+                                catapult: '',
+                                doppelsoldner: '',
+                                heavy_cavalry: '',
+                                knight: '',
+                                light_cavalry: '',
+                                mounted_archer: '',
+                                ram: '',
+                                snob: '',
+                                spear: '',
+                                sword: '',
+                                trebuchet: '*'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
                         }
-                    }
-                    if (Spear < 500 && Archer >= 500) {
-                        units = {
-                            archer: '-500',
-                            axe: '',
-                            catapult: '',
-                            doppelsoldner: '',
-                            heavy_cavalry: '',
-                            knight: '',
-                            light_cavalry: '',
-                            mounted_archer: '',
-                            ram: '',
-                            snob: '',
-                            spear: '*',
-                            sword: '',
-                            trebuchet: ''
-                        }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
-                        if (!commandQueue.isRunning()) {
-                            commandQueue.start()
-                        }
-                    }
-                    if (Sword >= 500) {
-                        units = {
-                            archer: '',
-                            axe: '',
-                            catapult: '',
-                            doppelsoldner: '',
-                            heavy_cavalry: '',
-                            knight: '',
-                            light_cavalry: '',
-                            mounted_archer: '',
-                            ram: '',
-                            snob: '',
-                            spear: '',
-                            sword: '-500',
-                            trebuchet: ''
-                        }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
-                        if (!commandQueue.isRunning()) {
-                            commandQueue.start()
-                        }
-                    }
-                    if (Trebuchet >= 100) {
-                        units = {
-                            archer: '',
-                            axe: '',
-                            catapult: '',
-                            doppelsoldner: '',
-                            heavy_cavalry: '',
-                            knight: '',
-                            light_cavalry: '',
-                            mounted_archer: '',
-                            ram: '',
-                            snob: '',
-                            spear: '',
-                            sword: '',
-                            trebuchet: '*'
-                        }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
-                        if (!commandQueue.isRunning()) {
-                            commandQueue.start()
-                        }
-                    }
+                    }, index * interval)
                 })
             }
             unitInfo()
