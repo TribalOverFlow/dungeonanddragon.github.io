@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 21:15:01 GMT
+ * Thu, 10 Dec 2020 21:53:47 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6976,7 +6976,70 @@ define('two/attackView', [
             unitInfo()
         })
     }
-    attackView.setQueueConquerBack = function() {
+    attackView.setQueueConquerBack = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var LC = 0
+            var Snob = 0
+            var MA = 0
+            var HC = 0
+            var Archer = 0
+            var Axe = 0
+            var Spear = 0
+            var Sword = 0
+            var Berserker = 0
+            var sent = 0
+            const commandType = COMMAND_TYPES.ATTACK
+            let units = {}
+
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            Snob = data.available_units.snob.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                            Axe = data.available_units.axe.total
+                            LC = data.available_units.light_cavalry.total
+                            MA = data.available_units.mounted_archer.total
+                            Berserker = data.available_units.doppelsoldner.total
+                        })
+                        if (Snob > 0 && (Spear >= 500 || Sword >= 300 || Axe >= 100 || Archer >= 300 || LC >= 50 || MA >= 50 || HC >= 50 || Berserker >= 30)) {
+                            units = {
+                                archer: '*',
+                                axe: '*',
+                                doppelsoldner: '*',
+                                heavy_cavalry: '*',
+                                light_cavalry: '*',
+                                mounted_archer: '*',
+                                snob: '1',
+                                spear: '*',
+                                sword: '*'
+                            }
+                            if (sent < 3) {
+                                if (Snob >= 2 && sent == 0) {
+                                    commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                    commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                    sent += 2
+                                } else {
+                                    commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                    sent += 1
+                                }
+                            }
+                        }
+                        if (!commandQueue.isRunning()) {
+                            commandQueue.start()
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
     }
     attackView.commandQueueEnabled = function() {
         return !!commandQueue
@@ -7100,7 +7163,7 @@ define('two/attackView/ui', [
         attackView.setQueueBunkerCommand20(command, formatedDate)
     }
     const conquerBack = function(command) {
-        const formatedDate = $filter('readableDateFilter')(command.time_completed * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        const formatedDate = $filter('readableDateFilter')((command.time_completed + 2) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         console.log(formatedDate)
         attackView.setQueueConquerBack(command, formatedDate)
     }
@@ -7214,9 +7277,9 @@ define('two/attackView/ui', [
         $scope.killNobleman = killNobleman
         $scope.killNoblemanBig = killNoblemanBig
         $scope.bunkerVillage = bunkerVillage
-        $scope.bunkerVillage5 = bunkerVillage5
-        $scope.bunkerVillage10 = bunkerVillage10
-        $scope.bunkerVillage20 = bunkerVillage20
+        $scope.bunkerVillage5k = bunkerVillage5
+        $scope.bunkerVillage10k = bunkerVillage10
+        $scope.bunkerVillage20k = bunkerVillage20
         $scope.withdrawArmy = withdrawArmy
         $scope.spyVillage = spyVillage
         $scope.switchWindowSize = switchWindowSize
