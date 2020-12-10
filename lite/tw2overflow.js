@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 12:13:38 GMT
+ * Thu, 10 Dec 2020 12:24:30 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6350,8 +6350,6 @@ define('two/attackView', [
     attackView.setQueueBunkerCommand = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
-            var id = closestVillage.id
-            console.log(id, origin)
             var target = command.targetVillage
             var Archer = 0
             var HC = 0
@@ -6388,7 +6386,7 @@ define('two/attackView', [
                             sword: '',
                             trebuchet: ''
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
+                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
                         if (!commandQueue.isRunning()) {
                             commandQueue.start()
                         }
@@ -6409,7 +6407,7 @@ define('two/attackView', [
                             sword: '',
                             trebuchet: ''
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
+                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
                         if (!commandQueue.isRunning()) {
                             commandQueue.start()
                         }
@@ -6430,7 +6428,7 @@ define('two/attackView', [
                             sword: '',
                             trebuchet: ''
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
+                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
                         if (!commandQueue.isRunning()) {
                             commandQueue.start()
                         }
@@ -6451,7 +6449,7 @@ define('two/attackView', [
                             sword: '',
                             trebuchet: ''
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
+                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
                         if (!commandQueue.isRunning()) {
                             commandQueue.start()
                         }
@@ -6472,7 +6470,7 @@ define('two/attackView', [
                             sword: '-500',
                             trebuchet: ''
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
+                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
                         if (!commandQueue.isRunning()) {
                             commandQueue.start()
                         }
@@ -6493,7 +6491,7 @@ define('two/attackView', [
                             sword: '',
                             trebuchet: '*'
                         }
-                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
+                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, BUILDING_TYPES.WALL)
                         if (!commandQueue.isRunning()) {
                             commandQueue.start()
                         }
