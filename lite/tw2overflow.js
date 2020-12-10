@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 10:53:12 GMT
+ * Thu, 10 Dec 2020 11:13:22 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6322,51 +6322,42 @@ define('two/attackView', [
 
             function addCommandCheck() {
                 if (HC >= 38) {
-                    units = {heavy_cavalry: '-38'}
+                    units = {archer: '', axe: '', catapult: '', doppelsoldner: '',  heavy_cavalry: '-38', knight: '', light_cavalry: '', mounted_archer: '', ram: '', snob: '', spear: '', sword: '', trebuchet: ''}
                     commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Spear >= 500 && Archer >= 500) {
-                    units = {
-                        spear: '-500',
-                        archer: '-500'
-                    }
+                    units = {archer: '-500', axe: '', catapult: '', doppelsoldner: '',  heavy_cavalry: '', knight: '', light_cavalry: '', mounted_archer: '', ram: '', snob: '', spear: '-500', sword: '', trebuchet: ''}
                     commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Spear >= 500 && Archer < 500) {
-                    units = {
-                        spear: '-500',
-                        archer: '*'
-                    }
+                    units = {archer: '*', axe: '', catapult: '', doppelsoldner: '',  heavy_cavalry: '', knight: '', light_cavalry: '', mounted_archer: '', ram: '', snob: '', spear: '-500', sword: '', trebuchet: ''}
                     commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Spear < 500 && Archer >= 500) {
-                    units = {
-                        spear: '*',
-                        archer: '-500'
-                    }
+                    units = {archer: '-500', axe: '', catapult: '', doppelsoldner: '',  heavy_cavalry: '', knight: '', light_cavalry: '', mounted_archer: '', ram: '', snob: '', spear: '*', sword: '', trebuchet: ''}
                     commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Sword >=500) {
-                    units = {sword: '-500'}
+                    units = {archer: '', axe: '', catapult: '', doppelsoldner: '',  heavy_cavalry: '', knight: '', light_cavalry: '', mounted_archer: '', ram: '', snob: '', spear: '', sword: '-500', trebuchet: ''}
                     commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
                     }
                 }
                 if (Trebuchet >= 100) {
-                    units = {trebuchet: '*'}
+                    units = {archer: '', axe: '', catapult: '', doppelsoldner: '',  heavy_cavalry: '', knight: '', light_cavalry: '', mounted_archer: '', ram: '', snob: '', spear: '', sword: '', trebuchet: '*'}
                     commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
                     if (!commandQueue.isRunning()) {
                         commandQueue.start()
