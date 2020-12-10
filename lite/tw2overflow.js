@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 20:56:26 GMT
+ * Thu, 10 Dec 2020 21:15:01 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6239,39 +6239,6 @@ define('two/attackView', [
             }
         })
     }
-    const closestOwnVillage = function(target, callback) {
-        var size = 40
-        if (mapData.hasTownDataInChunk(target.x, target.y)) {
-            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
-            var origins = []
-            var closestOrigins
-            var own = []
-            var playerId = modelDataService.getSelectedCharacter().getId()
-            sectors.forEach(function(sector) {
-                for (let x in sector.data) {
-                    for (let y in sector.data[x]) {
-                        origins.push(sector.data[x][y])
-                    }
-                }
-            })
-            own = origins.filter(function(origin) {
-                return origin.character_id === playerId && target.id !== origin.id
-            })
-            if (own.length) {
-                closestOrigins = sortByDistanceTarget(own, target)
-            } else {
-                return callback(false)
-            }
-            return callback(closestOrigins[0])
-        }
-        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
-        var index = 0
-        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
-            if (++index === loads.length) {
-                closestOwnVillage(target, callback)
-            }
-        })
-    }
     /**
      * @param {Object} data The data-object from the backend
      */
@@ -6460,7 +6427,7 @@ define('two/attackView', [
         })
     }
     attackView.setQueueSupportCommand = function(command, date) {
-        closestOwnVillage(command.targetVillage, function(closestVillage) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
@@ -6569,7 +6536,7 @@ define('two/attackView', [
             unitInfo()
         })
     }
-    attackView.setQueueSupportCommand5 = function(command, date) {
+    attackView.setQueueBunkerCommand5 = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
             var target = command.targetVillage
@@ -6679,7 +6646,7 @@ define('two/attackView', [
             unitInfo()
         })
     }
-    attackView.setQueueSupportCommand10 = function(command, date) {
+    attackView.setQueueBunkerCommand10 = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
             var target = command.targetVillage
@@ -6789,7 +6756,7 @@ define('two/attackView', [
             unitInfo()
         })
     }
-    attackView.setQueueSupportCommand20 = function(command, date) {
+    attackView.setQueueBunkerCommand20 = function(command, date) {
         closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
             var target = command.targetVillage
@@ -6900,7 +6867,7 @@ define('two/attackView', [
         })
     }
     attackView.setQueueSupportBigCommand = function(command, date) {
-        closestOwnVillage(command.targetVillage, function(closestVillage) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
             var origin = closestVillage
             var target = command.targetVillage
             var Archer = 0
