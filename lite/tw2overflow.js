@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 10:41:26 GMT
+ * Thu, 10 Dec 2020 10:53:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6267,6 +6267,7 @@ define('two/attackView', [
             utils.each(UNIT_TYPES, function(unit) {
                 units[unit] = '*'
             })
+            console.log(units)
             commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
             if (!commandQueue.isRunning()) {
                 commandQueue.start()
