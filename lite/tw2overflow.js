@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 13:40:17 GMT
+ * Thu, 10 Dec 2020 13:58:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6364,7 +6364,7 @@ define('two/attackView', [
 
             function unitInfo() {
                 origin.forEach(function(village, index) {
-                    setInterval(function() {
+                    setTimeout(function() {
                         socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
                             village_id: village.id
                         }, function(data) {
@@ -17173,6 +17173,7 @@ define('two/commandQueue', [
     commandQueue.clearWaitings = function () {
         Lockr.set(STORAGE_KEYS.QUEUE_COMMANDS, [])
         waitingCommands = []
+        waitingCommandsObject = {}
     }
 
     commandQueue.clearRegisters = function () {
@@ -17593,7 +17594,7 @@ define('two/commandQueue/ui', [
     }
     const clearWaitings = function () {
         commandQueue.clearWaitings()
-        updateWaitingCommands
+        updateWaitingCommands()
     }
 
     const switchCommandQueue = function () {
