@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 02 Dec 2020 20:06:58 GMT
+ * Fri, 11 Dec 2020 10:10:41 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -558,13 +558,14 @@ define('two/language', [
         },
         "alert_sender": {
             "title": "Wartownik",
-            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw z 'Attacks' w nazwie.",
+            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw.",
             "activated": "Wartownik aktywowany",
             "deactivated": "Wartownik skończył działanie"
         },
         "army_helper": {
             "title": "Hetman",
             "army": "Wojsko",
+            "description": "Narzędzie do organizacji i liczenia wojsk",
             "army.header": "Sprawdź ilość jednostek w wioskach",
             "army.check": "Zlicz",
             "army.troops": "Wojsko",
@@ -575,17 +576,26 @@ define('two/language', [
             "army.support": "Wsparcie",
             "army.recruiting": "Rekrutacja",
             "army.total": "Wszystko",
+            "army.available-tip": "Wojsko obecnie stacjonujące w wiosce(bez wysłanego/farmiącego)",
+            "army.own-tip": "Całkowite posiadane przez nas wojsko.",
+            "army.in-town-tip": "Wojsko stacjonujące w wioskach łącznie z wsparciem obcym",
+            "army.support-tip": "Wojsko z wsparć - własnego oraz obcego",
+            "army.recruiting-tip": "Wojsko z rekrutacji",
+            "army.total-tip": "Całkowite wojsko własne łącznie z rekrutacją.",
             "army.deffensive": "Defensywne jednostki",
             "army.offensive": "Ofensywne jednostki",
             "army.special-troops": "Specjalne jednostki",
             "balancer": "Balanser",
             "balancer.balance": "Balansuj",
+            "balance.clear": "Wyczyść",
             "balancer.all": "Wszystkie typy wojsk",
             "balancer.textall": "Zbalansuj po równo całe swoje wojsko.",
             "balancer.unit": "Jednostka",
             "balancer.one-province": "Wybierz prowincję w której chcesz zbalansować wojska(opcjonalnie)",
             "balancer.add_village": "Wybierz wioskę...",
+            "balance.add_village_search": "Znajdź wioskę...",
             "balancer.no_village": "Nie wybrano wioski",
+            "balance.add_origin": "Źródło",
             "balancer.add_map_selected": "Wybrana wioska z mapy",
             "balancer.selected": "Wybierz",
             "balancer.additional": "Dodatkowe ustawienia",
@@ -618,6 +628,7 @@ define('two/language', [
         },
         "attack_view": {
             "title": "Strażnik",
+            "description": "Narzędzie wspomagające rozpoznawać komendy ataków/wsparć",
             "filter_types": "Rodzaj",
             "filter_show_attacks_tooltip": "Pokaż ataki",
             "filter_show_supports_tooltip": "Pokaż wsparcia",
@@ -638,10 +649,14 @@ define('two/language', [
             "arrivetime": "Czas dotarcia skopiowany!",
             "backtime": "Czas powrotu skopiowany!",
             "spyorigin": "Szpiedzy wysłani do %{name}!",
-            "commands_kill_nobleman_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN.",
-            "commands_kill_noblemanBig_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN.",
+            "commands_kill_nobleman_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN(100 jednostek naraz - maks 6k).",
+            "commands_kill_noblemanBig_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN(500 jednostek naraz - maks 30k).",
             "commands_bunker_village_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem. Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_bunker_village_5_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 5k każdej jednostki). Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_bunker_village_10_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 10k). Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_bunker_village_20_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 20k). Uwaga! robisz to na własną odpowiedzialność.",
             "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
+            "commands_conquer_village_tooltip": "Odbij wioske po straceniu(sekunde do minuty po straceniu w zależności od tego czy zdąży szlachcic).",
             "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
         },
         "auto_collector": {
@@ -887,6 +902,7 @@ define('two/language', [
         "command_queue": {
             "title": "Generał",
             "attack": "Atak",
+            "description": "Służy do organizacji komend(ataków, wsparć, przeniesień)",
             "support": "Wsparcie",
             "relocate": "Przeniesienie",
             "sent": "wysłany/e",
@@ -912,6 +928,7 @@ define('two/language', [
             "add_no_village": "Wybierz wioskę...",
             "add_village_search": "Znajdź wioskę...",
             "add_clear": "Wyczyść pola",
+            "clear": "Wyczyść",
             "add_insert_preset": "Wybierz szablon",
             "queue_waiting": "Rozkazy",
             "queue_none_added": "Brak dodanych rozkazów.",
@@ -958,6 +975,7 @@ define('two/language', [
         },
         "fake_sender": {
             "title": "Watażka",
+            "description": "Automatycznie wysyła fejki na wskazane cele",
             "fake": "Fejki",
             "fake.send": "Wyślij",
             "fake.send_villages": "Fejki na wskazane cele(maks 10)",
@@ -1021,6 +1039,7 @@ define('two/language', [
             "no_report": "Nie ma raportu",
             "reports": "Raporty",
             "date": "Data",
+            "description": "Narzędzie do farmienia",
             "status_time_limit": "Cel jest zbyt daleko",
             "status_command_limit": "Limit poleceń",
             "status_full_storage": "Magazyn jest pełny",
@@ -1173,6 +1192,7 @@ define('two/language', [
         "market_helper": {
             "title": "Handlarz",
             "trade": "Handel",
+            "description": "Narzędzie do organizacji handlu",
             "trade.villages": "Automatyzacja handlu",
             "trade.origin": "Handluj we wskazanej wiosce",
             "trade.province": "Handluj w wioskach we wskazanej prowincji",
@@ -1423,6 +1443,7 @@ define('two/language', [
         "prank_helper": {
             "title": "Błazen",
             "rename": "Nazwy wiosek",
+            "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
             "rename.type": "Typ",
             "rename.prologue": "Prefix/Przedrostek",
@@ -1435,8 +1456,11 @@ define('two/language', [
             "rename.tip": "Litera lub liczba",
             "rename.clear": "Wyczyść",
             "rename.start": "Zmień",
+            "rename.stop": "Zatrzymaj",
             "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
-            "rename.add_village": "Wybierz wioskę...",
+            "rename.add_village": "Źródło",
+            "rename.add_origin": "Wybierz wioskę...",
+            "rename.add_village_search": "Znajdź wioskę...",
             "rename.no_village": "Nie wybrano wioski",
             "rename.add_map_selected": "Wybrana wioska z mapy",
             "rename.selected": "Wybierz",
@@ -1451,7 +1475,9 @@ define('two/language', [
             "logs.clear": "Wyczyść logi",
             "decrease": "Malejąco/Z-A",
             "increase": "Rosnąco/A-Z",
-            "random": "Domyślnie"
+            "random": "Bez Iteracji",
+            "rename_started": "Przemianowanie wiosek rozpoczęte",
+            "rename_stopped": "Przemianowanie wiosek zakończone"
         },
         "preset_asigner": {
             "title": "Administrator",
@@ -1485,12 +1511,29 @@ define('two/language', [
         "recruit_queue": {
             "title": "Kapitan",
             "presets": "Szablonowa",
+            "description": "Narzędzie do automatycznej rekrutacji wskazanych jednostek we wskazanych grupach.",
+            "recruit_cycle_interval": "Cykl rekrutacji(w minutach)",
+            "unit_cycle_interval": "Odstęp rekrutacji jednostek(w sekundach)",
+            "group_cycle_interval": "Czas na analize wioski(w sekundach)",
+            "recruit_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich wiosek  - domyślnie 60 minut. Uwaga! Jeśli zabraknie czasu na wszystkie wioski rekrutcja będzie się dublować.",
+            "unit_cycle_tooltip": "Odstęp w jakim mają zostać dodane do rekrutacji pojedyncze typy jednostek - domyślnie 6 sekund",
+            "group_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich jednostek na pojedyńczej wiosce(domyślnie 60 sekund - 9 typów jednostek * domyslny odstep rekrutacji jednostek = 58",
+            "reseted_logs": "Logi wyczyszczone.",
+            "recrutation_in": "Cykl rekrutacji potrwa",
+            "preset.settings": "Ustawienia główne",
             "presets.recruit": "Rekrutacja z szablonów",
+            "preset.recruit1": "Szablon nr1 - Ustawienia",
+            "preset.recruit2": "Szablon nr2 - Ustawienia",
+            "preset.recruit3": "Szablon nr3 - Ustawienia",
+            "preset.recruit4": "Szablon nr4 - Ustawienia",
             "presets.group": "Grupa wiosek",
             "presets.preset": "Szablon cząstkowy",
             "presets.presetfinal": "Szablon docelowy",
+            "presets.preset-tip": "Maksymalna ilość danej jednostki dodana do rekrutacji",
+            "presets.presetfinal-tip": "Ilość całkowita jednostek na wiosce we wskazanej grupie",
             "presets.start": "Rekrutuj",
             "presets.clear": "Wyczyść",
+            "presets.packs": "Minimalna ilość do rekrutacji",
             "own": "Własne ustawienia",
             "own.recruit": "Rekrutacja wg własnych ustawień",
             "own.group": "Grupa wiosek",
@@ -1504,7 +1547,11 @@ define('two/language', [
             "logs.date": "Data",
             "logs.unit": "Jednostka",
             "logs.village": "Wioska",
+            "logs.cleared": "Kapitan - Logi wyczyszczone",
             "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
+            "start": "Roczpoczęto rekrutację",
+            "stop": "Zatrzymano rekrutację",
+            "cycle.end": "Kończenie bierzącego cyklu",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -1852,6 +1899,22 @@ define('two/language', [
             "snob": "Szlachcic",
             "knight": "Rycerz",
             "firefox_shill": ""
+        },
+        "unit_names": {
+            "none": "",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "trebuchet": "Trebuszet",
+            "doppelsoldner": "Berserker",
+            "knight": "Rycerz",
+            "snob": "Szlachcic"
         }
     },
     "pl_pl": {
@@ -1875,7 +1938,7 @@ define('two/language', [
             "donate": "Jeśli wesprzesz mnie donacją $, mogę stworzyć indywidualne skrypty dla ciebie."
         },
         "activity_tool": {
-            "title": "Kwatermistrz",
+            "title": "Statystyki",
             "data": "Dane",
             "data.attention": "Ważne informacje",
             "data.text": "Narzędzie to tworzy pliki które można wczytać w programie Tw2-Statistics (by DirtyPrank). Po wykonaniu zrzutów umieść je w folderze Dane. Uwaga! Akcje te wymagają dobrej jakości komputera w innym wypadku potrwa to bardzo długo.",
@@ -1901,13 +1964,14 @@ define('two/language', [
         },
         "alert_sender": {
             "title": "Wartownik",
-            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw z 'Attacks' w nazwie.",
+            "description": "Automatycznie wysyła informacje o nadchodzacych atakach do pw.",
             "activated": "Wartownik aktywowany",
             "deactivated": "Wartownik skończył działanie"
         },
         "army_helper": {
             "title": "Hetman",
             "army": "Wojsko",
+            "description": "Narzędzie do organizacji i liczenia wojsk",
             "army.header": "Sprawdź ilość jednostek w wioskach",
             "army.check": "Zlicz",
             "army.troops": "Wojsko",
@@ -1918,17 +1982,26 @@ define('two/language', [
             "army.support": "Wsparcie",
             "army.recruiting": "Rekrutacja",
             "army.total": "Wszystko",
+            "army.available-tip": "Wojsko obecnie stacjonujące w wiosce(bez wysłanego/farmiącego)",
+            "army.own-tip": "Całkowite posiadane przez nas wojsko.",
+            "army.in-town-tip": "Wojsko stacjonujące w wioskach łącznie z wsparciem obcym",
+            "army.support-tip": "Wojsko z wsparć - własnego oraz obcego",
+            "army.recruiting-tip": "Wojsko z rekrutacji",
+            "army.total-tip": "Całkowite wojsko własne łącznie z rekrutacją.",
             "army.deffensive": "Defensywne jednostki",
             "army.offensive": "Ofensywne jednostki",
             "army.special-troops": "Specjalne jednostki",
             "balancer": "Balanser",
             "balancer.balance": "Balansuj",
+            "balance.clear": "Wyczyść",
             "balancer.all": "Wszystkie typy wojsk",
             "balancer.textall": "Zbalansuj po równo całe swoje wojsko.",
             "balancer.unit": "Jednostka",
             "balancer.one-province": "Wybierz prowincję w której chcesz zbalansować wojska(opcjonalnie)",
             "balancer.add_village": "Wybierz wioskę...",
+            "balance.add_village_search": "Znajdź wioskę...",
             "balancer.no_village": "Nie wybrano wioski",
+            "balance.add_origin": "Źródło",
             "balancer.add_map_selected": "Wybrana wioska z mapy",
             "balancer.selected": "Wybierz",
             "balancer.additional": "Dodatkowe ustawienia",
@@ -1961,6 +2034,7 @@ define('two/language', [
         },
         "attack_view": {
             "title": "Strażnik",
+            "description": "Narzędzie wspomagające rozpoznawać komendy ataków/wsparć",
             "filter_types": "Rodzaj",
             "filter_show_attacks_tooltip": "Pokaż ataki",
             "filter_show_supports_tooltip": "Pokaż wsparcia",
@@ -1981,15 +2055,19 @@ define('two/language', [
             "arrivetime": "Czas dotarcia skopiowany!",
             "backtime": "Czas powrotu skopiowany!",
             "spyorigin": "Szpiedzy wysłani do %{name}!",
-            "commands_kill_nobleman_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN.",
-            "commands_kill_noblemanBig_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN.",
+            "commands_kill_nobleman_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. MAŁY KLIN(100 jednostek naraz - maks 6k).",
+            "commands_kill_noblemanBig_tooltip": "Wstaw rozkaz klinowania do Kolejki rozkazów. DUŻY KLIN(500 jednostek naraz - maks 30k).",
             "commands_bunker_village_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem. Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_bunker_village_5_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 5k każdej jednostki). Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_bunker_village_10_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 10k). Uwaga! robisz to na własną odpowiedzialność.",
+            "commands_bunker_village_20_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 20k). Uwaga! robisz to na własną odpowiedzialność.",
             "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
+            "commands_conquer_village_tooltip": "Odbij wioske po straceniu(sekunde do minuty po straceniu w zależności od tego czy zdąży szlachcic).",
             "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
         },
         "auto_collector": {
             "title": "Kolekcjoner",
-            "description": "Automatyczny kolekcjoner depozytu/drugiej wioski.",
+            "description": "Wykonuje zadania drugiej wioski oraz zbiera nagrody z depozytu.",
             "activated": "Kolekcjoner aktywowany",
             "deactivated": "Kolekcjoner deaktywowany"
         },
@@ -2001,7 +2079,7 @@ define('two/language', [
         },
         "auto_healer": {
             "title": "Medyk",
-            "description": "Automatycznie przywraca uzdrowione jednostki ze szpitala.",
+            "description": "Przywraca uzdrowione jednostki ze szpitala.",
             "activated": "Medyk aktywowany",
             "deactivated": "Medyk skończył działanie"
         },
@@ -2230,6 +2308,7 @@ define('two/language', [
         "command_queue": {
             "title": "Generał",
             "attack": "Atak",
+            "description": "Służy do organizacji komend(ataków, wsparć, przeniesień)",
             "support": "Wsparcie",
             "relocate": "Przeniesienie",
             "sent": "wysłany/e",
@@ -2255,6 +2334,7 @@ define('two/language', [
             "add_no_village": "Wybierz wioskę...",
             "add_village_search": "Znajdź wioskę...",
             "add_clear": "Wyczyść pola",
+            "clear": "Wyczyść",
             "add_insert_preset": "Wybierz szablon",
             "queue_waiting": "Rozkazy",
             "queue_none_added": "Brak dodanych rozkazów.",
@@ -2301,6 +2381,7 @@ define('two/language', [
         },
         "fake_sender": {
             "title": "Watażka",
+            "description": "Automatycznie wysyła fejki na wskazane cele",
             "fake": "Fejki",
             "fake.send": "Wyślij",
             "fake.send_villages": "Fejki na wskazane cele(maks 10)",
@@ -2364,6 +2445,7 @@ define('two/language', [
             "no_report": "Nie ma raportu",
             "reports": "Raporty",
             "date": "Data",
+            "description": "Narzędzie do farmienia",
             "status_time_limit": "Cel jest zbyt daleko",
             "status_command_limit": "Limit poleceń",
             "status_full_storage": "Magazyn jest pełny",
@@ -2402,8 +2484,8 @@ define('two/language', [
             "loading_targets": "Ładowanie celów...",
             "checking_targets": "Sprawdzanie celów...",
             "restarting_commands": "Restartowanie poleceń...",
-            "ignored_village": "Cel %{target} dodany do listy pominiętych.(straty)",
-            "included_village": "Cel %{target} dodany do listy zawartych",
+            "ignored_village": "Cel dodany do listy pominiętych.(straty)",
+            "included_village": "Cel dodany do listy zawartych",
             "ignored_village_removed": "usunięty z listy ignorowanych",
             "included_village_removed": "usunięty z listy zawartych",
             "priority_target": "dodany do priorytetowych.",
@@ -2516,6 +2598,7 @@ define('two/language', [
         "market_helper": {
             "title": "Handlarz",
             "trade": "Handel",
+            "description": "Narzędzie do organizacji handlu",
             "trade.villages": "Automatyzacja handlu",
             "trade.origin": "Handluj we wskazanej wiosce",
             "trade.province": "Handluj w wioskach we wskazanej prowincji",
@@ -2688,7 +2771,7 @@ define('two/language', [
             "settings_colors_barbarian": "Wioski barbarzyńskie",
             "settings_colors_view_reference": "Wskaźnik obecnej pozycji",
             "settings_reset": "Ustawienia zresetowane",
-            "no_highlights": "Brak utworzonych podświetleń",
+            "no_highlights": "Nie utworzono podświetleń",
             "reset_confirm_title": "Resetuj ustawienia",
             "reset_confirm_text": "Wszystkie ustawienia zostaną przywrócone do domyślnych.",
             "reset_confirm_highlights_text": "Jak również wszystkie podświetlenia zostaną usunięte.",
@@ -2766,6 +2849,7 @@ define('two/language', [
         "prank_helper": {
             "title": "Błazen",
             "rename": "Nazwy wiosek",
+            "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
             "rename.type": "Typ",
             "rename.prologue": "Prefix/Przedrostek",
@@ -2778,8 +2862,11 @@ define('two/language', [
             "rename.tip": "Litera lub liczba",
             "rename.clear": "Wyczyść",
             "rename.start": "Zmień",
+            "rename.stop": "Zatrzymaj",
             "rename.province": "Zmień nazwy wiosek w wybranej prowincji",
-            "rename.add_village": "Wybierz wioskę...",
+            "rename.add_village": "Źródło",
+            "rename.add_origin": "Wybierz wioskę...",
+            "rename.add_village_search": "Znajdź wioskę...",
             "rename.no_village": "Nie wybrano wioski",
             "rename.add_map_selected": "Wybrana wioska z mapy",
             "rename.selected": "Wybierz",
@@ -2794,7 +2881,9 @@ define('two/language', [
             "logs.clear": "Wyczyść logi",
             "decrease": "Malejąco/Z-A",
             "increase": "Rosnąco/A-Z",
-            "random": "Domyślnie"
+            "random": "Bez Iteracji",
+            "rename_started": "Przemianowanie wiosek rozpoczęte",
+            "rename_stopped": "Przemianowanie wiosek zakończone"
         },
         "preset_asigner": {
             "title": "Administrator",
@@ -2828,12 +2917,29 @@ define('two/language', [
         "recruit_queue": {
             "title": "Kapitan",
             "presets": "Szablonowa",
+            "description": "Narzędzie do automatycznej rekrutacji wskazanych jednostek we wskazanych grupach.",
+            "recruit_cycle_interval": "Cykl rekrutacji(w minutach)",
+            "unit_cycle_interval": "Odstęp rekrutacji jednostek(w sekundach)",
+            "group_cycle_interval": "Czas na analize wioski(w sekundach)",
+            "recruit_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich wiosek  - domyślnie 60 minut. Uwaga! Jeśli zabraknie czasu na wszystkie wioski rekrutcja będzie się dublować.",
+            "unit_cycle_tooltip": "Odstęp w jakim mają zostać dodane do rekrutacji pojedyncze typy jednostek - domyślnie 6 sekund",
+            "group_cycle_tooltip": "Czas potrzebny na przeanalizowanie wszystkich jednostek na pojedyńczej wiosce(domyślnie 60 sekund - 9 typów jednostek * domyslny odstep rekrutacji jednostek = 58",
+            "reseted_logs": "Logi wyczyszczone.",
+            "recrutation_in": "Cykl rekrutacji potrwa",
+            "preset.settings": "Ustawienia główne",
             "presets.recruit": "Rekrutacja z szablonów",
+            "preset.recruit1": "Szablon nr1 - Ustawienia",
+            "preset.recruit2": "Szablon nr2 - Ustawienia",
+            "preset.recruit3": "Szablon nr3 - Ustawienia",
+            "preset.recruit4": "Szablon nr4 - Ustawienia",
             "presets.group": "Grupa wiosek",
             "presets.preset": "Szablon cząstkowy",
             "presets.presetfinal": "Szablon docelowy",
+            "presets.preset-tip": "Maksymalna ilość danej jednostki dodana do rekrutacji",
+            "presets.presetfinal-tip": "Ilość całkowita jednostek na wiosce we wskazanej grupie",
             "presets.start": "Rekrutuj",
             "presets.clear": "Wyczyść",
+            "presets.packs": "Minimalna ilość do rekrutacji",
             "own": "Własne ustawienia",
             "own.recruit": "Rekrutacja wg własnych ustawień",
             "own.group": "Grupa wiosek",
@@ -2847,7 +2953,11 @@ define('two/language', [
             "logs.date": "Data",
             "logs.unit": "Jednostka",
             "logs.village": "Wioska",
+            "logs.cleared": "Kapitan - Logi wyczyszczone",
             "logs.noRecruits": "Nie rozpoczęto żadnych rekrutacji",
+            "start": "Roczpoczęto rekrutację",
+            "stop": "Zatrzymano rekrutację",
+            "cycle.end": "Kończenie bierzącego cyklu",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -3102,7 +3212,7 @@ define('two/language', [
         },
         "tutorial_helper": {
             "title": "Giermek",
-            "description": "Automatycznie wykonuje zadania z tutoriala.",
+            "description": "Wykonuje zadania z tutoriala.",
             "activated": "Giermek aktywowany",
             "deactivated": "Giermek skończył działanie"
         },
@@ -3195,6 +3305,22 @@ define('two/language', [
             "snob": "Szlachcic",
             "knight": "Rycerz",
             "firefox_shill": ""
+        },
+        "unit_names": {
+            "none": "",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "axe": "Topornik",
+            "archer": "Łucznik",
+            "light_cavalry": "Lekki kawalerzysta",
+            "mounted_archer": "Łucznik konny",
+            "ram": "Taran",
+            "catapult": "Katapulta",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "trebuchet": "Trebuszet",
+            "doppelsoldner": "Berserker",
+            "knight": "Rycerz",
+            "snob": "Szlachcic"
         }
     }
 } // eslint-disable-line
@@ -4119,6 +4245,74 @@ define('Lockr', function(root, Lockr) {
     return Lockr
 })
 
+define('two/about', [], function () {
+    let initialized = false
+
+    let about = {}
+
+    about.isInitialized = function () {
+        return initialized
+    }
+
+    about.init = function () {
+        initialized = true
+    }
+
+    return about
+})
+
+define('two/about/ui', [
+    'two/ui'
+], function (
+    interfaceOverflow
+) {
+    let $scope
+    
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const init = function () {
+        interfaceOverflow.addDivisor4(189)
+        const $button = interfaceOverflow.addMenuButton4('O mnie', 190)
+
+        $button.addEventListener('click', function () {
+            buildWindow()
+        })
+
+        interfaceOverflow.addTemplate('twoverflow_about_window', `<div id=\"two-about\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'version' | i18n:loc.ale:'about' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"logo\"><img src=\"https://i.imgur.com/iNcVMvw.png\"></div><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'contact' | i18n:loc.ale:'about' }}<tr><td>{{ 'email' | i18n:loc.ale:'about' }}<td>twoverflow@outlook.com<tr><td colspan=\"2\" class=\"text-center\">{{ 'donate' | i18n:loc.ale:'about' }}</table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'links' | i18n:loc.ale:'about' }}<tr><td>{{ 'autor' | i18n:loc.ale:'about' }}<td>{{ 'source_autor' | i18n:loc.ale:'about' }}<tr><td>{{ 'source_code' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/</a><tr><td>{{ 'issues_suggestions' | i18n:loc.ale:'about' }}<td><a href=\"https://gitlab.com/relaxeaza/twoverflow/issues\" target=\"_blank\">https://gitlab.com/relaxeaza/twoverflow/issues</a><tr><td>{{ 'translations' | i18n:loc.ale:'about' }}<td><a href=\"https://crowdin.com/project/twoverflow\" target=\"_blank\">https://crowdin.com/project/twoverflow</a></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><tr><th colspan=\"2\">{{ 'edit' | i18n:loc.ale:'about' }}<tr><td>{{ 'editor' | i18n:loc.ale:'about' }}<td>{{ 'edit_autor' | i18n:loc.ale:'about' }}<tr><td>{{ 'credits' | i18n:loc.ale:'about' }}<td>{{ 'assisters' | i18n:loc.ale:'about' }}<tr><td colspan=\"2\">{{ 'text' | i18n:loc.ale:'about' }}</table></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"closeWindow()\">{{ 'close' | i18n:loc.ale:'about' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-about{padding:42px 0 0px 0;position:relative;height:100%}#two-about .box-paper a{font-weight:bold;color:#3f2615;text-decoration:none}#two-about .box-paper a:hover{text-shadow:0 1px 0 #000;color:#fff}#two-about .logo{text-align:center;margin-bottom:8px}#two-about table td{padding:0 10px}#two-about table td:first-child{text-align:right;width:20%}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.selectTab = selectTab
+
+        windowManagerService.getModal('!twoverflow_about_window', $scope)
+    }
+
+    return init
+})
+
+require([
+    'two/ready',
+    'two/about',
+    'two/about/ui'
+], function (
+    ready,
+    about,
+    aboutInterface
+) {
+    if (about.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        about.init()
+        aboutInterface()
+    }, ['map'])
+})
+
 define('two/alertSender', [
     'two/utils',
     'queues/EventQueue',
@@ -4129,7 +4323,7 @@ define('two/alertSender', [
     eventQueue,
     CommandModel,
     UNIT_TYPES
-) { 
+) {
     let convert
     var overviewService = injector.get('overviewService')
     var initialized = false
@@ -4173,8 +4367,10 @@ define('two/alertSender', [
         returnString = convert
         return returnString
     }
-
     var checkincomingsAttacks = function() {
+        if (!running) {
+            return false
+        }
         socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
             tribe: tribeId
         }, function(data) {
@@ -4188,7 +4384,6 @@ define('two/alertSender', [
         })
         var incomingCommands = globalInfoModel.getCommandListModel().getIncomingCommands().length
         var count = incomingCommands > 25 ? incomingCommands : 25
-
         socketService.emit(routeProvider.OVERVIEW_GET_INCOMING, {
             'count': count,
             'offset': 0,
@@ -4198,9 +4393,7 @@ define('two/alertSender', [
             'command_types': ['attack'],
             'villages': villagesIds
         }, sendAlerts)
-        setTimeout(checkincomingsAttacks, 60000)
     }
-
     var sendAlerts = function sendAlerts(data) {
         var alertText = []
         var commands = data.commands
@@ -4261,7 +4454,6 @@ define('two/alertSender', [
             }
         }
     }
-
     var getSlowestUnit = function(command) {
         const origin = {
             x: command.origin_x,
@@ -4271,21 +4463,20 @@ define('two/alertSender', [
             x: command.target_x,
             y: command.target_y
         }
-        const unitDurationDiff = UNIT_SPEED_ORDER.map(function (unit) {
-            const travelTime = utils.getTravelTime(origin, target, {[unit]: 1}, command.command_type, {}, false)
+        const unitDurationDiff = UNIT_SPEED_ORDER.map(function(unit) {
+            const travelTime = utils.getTravelTime(origin, target, {
+                [unit]: 1
+            }, command.command_type, {}, false)
             const durationDiff = Math.abs(travelTime - command.model.duration)
-
             return {
                 unit: unit,
                 diff: durationDiff
             }
-        }).sort(function (a, b) {
+        }).sort(function(a, b) {
             return a.diff - b.diff
         })
-
         return unitDurationDiff[0].unit
     }
-
     var alertSender = {}
     alertSender.init = function() {
         initialized = true
@@ -4293,6 +4484,10 @@ define('two/alertSender', [
     alertSender.start = function() {
         eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STARTED)
         running = true
+        setInterval(function() {
+            running = true
+            checkincomingsAttacks()
+        }, 60000)
         checkincomingsAttacks()
     }
     alertSender.stop = function() {
@@ -4399,6 +4594,1193 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/armyHelper', [
+    'two/Settings',
+    'two/armyHelper/settings',
+    'two/armyHelper/settings/map',
+    'two/armyHelper/settings/updates',
+    'two/armyHelper/types/unit',
+    'two/ready',
+    'queues/EventQueue',
+    'Lockr',
+    'helper/time'
+], function(
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    B_UNIT,
+    ready,
+    eventQueue,
+    Lockr,
+    timeHelper
+) {
+    let initialized = false
+    let running = false
+    let settings
+    const LOGS_LIMIT = 500
+    let armyHelperSettings
+    let logs
+    let byGroupBalance = []
+    let byUnitAndGroupBalance = []
+    var SpearA = 0
+    var SpearO = 0
+    var SpearI = 0
+    var SpearS = 0
+    var SpearR = 0
+    var SpearT = 0
+    var SwordA = 0
+    var SwordO = 0
+    var SwordI = 0
+    var SwordS = 0
+    var SwordR = 0
+    var SwordT = 0
+    var AxeA = 0
+    var AxeO = 0
+    var AxeI = 0
+    var AxeS = 0
+    var AxeR = 0
+    var AxeT = 0
+    var ArcherA = 0
+    var ArcherO = 0
+    var ArcherI = 0
+    var ArcherS = 0
+    var ArcherR = 0
+    var ArcherT = 0
+    var LightCavalryA = 0
+    var LightCavalryO = 0
+    var LightCavalryI = 0
+    var LightCavalryS = 0
+    var LightCavalryR = 0
+    var LightCavalryT = 0
+    var MountedArcherA = 0
+    var MountedArcherO = 0
+    var MountedArcherI = 0
+    var MountedArcherS = 0
+    var MountedArcherR = 0
+    var MountedArcherT = 0
+    var HeavyCavalryA = 0
+    var HeavyCavalryO = 0
+    var HeavyCavalryI = 0
+    var HeavyCavalryS = 0
+    var HeavyCavalryR = 0
+    var HeavyCavalryT = 0
+    var RamA = 0
+    var RamO = 0
+    var RamI = 0
+    var RamS = 0
+    var RamR = 0
+    var RamT = 0
+    var CatapultA = 0
+    var CatapultO = 0
+    var CatapultI = 0
+    var CatapultS = 0
+    var CatapultR = 0
+    var CatapultT = 0
+    var TrebuchetA = 0
+    var TrebuchetO = 0
+    var TrebuchetI = 0
+    var TrebuchetS = 0
+    var TrebuchetR = 0
+    var TrebuchetT = 0
+    var BerserkerA = 0
+    var BerserkerO = 0
+    var BerserkerI = 0
+    var BerserkerS = 0
+    var BerserkerR = 0
+    var BerserkerT = 0
+    var SnobA = 0
+    var SnobO = 0
+    var SnobI = 0
+    var SnobS = 0
+    var SnobR = 0
+    var SnobT = 0
+    var KnightA = 0
+    var KnightO = 0
+    var KnightI = 0
+    var KnightS = 0
+    var KnightR = 0
+    var KnightT = 0
+    const STORAGE_KEYS = {
+        LOGS: 'army_helper_logs',
+        SETTINGS: 'army_helper_settings'
+    }
+    const BALANCER_UNIT = {
+        [B_UNIT.SPEAR]: 'spear',
+        [B_UNIT.SWORD]: 'sword',
+        [B_UNIT.AXE]: 'axe',
+        [B_UNIT.ARCHER]: 'archer',
+        [B_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [B_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [B_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [B_UNIT.RAM]: 'ram',
+        [B_UNIT.CATAPULT]: 'catapult',
+        [B_UNIT.TREBUCHET]: 'trebuchet',
+        [B_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
+        [B_UNIT.SNOB]: 'snob',
+        [B_UNIT.KNIGHT]: 'knight'
+    }
+    console.log(BALANCER_UNIT)
+    const updateGroups = function() {
+        byGroupBalance = []
+        byUnitAndGroupBalance = []
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser3 = armyHelperSettings[SETTINGS.GROUP3]
+        const groupsSelectedByTheUser4 = armyHelperSettings[SETTINGS.GROUP4]
+        groupsSelectedByTheUser3.forEach(function(groupId) {
+            byGroupBalance.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser4.forEach(function(groupId) {
+            byUnitAndGroupBalance.push(allGroups[groupId])
+        })
+    }
+    const addLog = function(villageId, unit, group) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            unit: unit,
+            group: group
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        return true
+    }
+    const armyHelper = {}
+    armyHelper.init = function() {
+        initialized = true
+        logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+        settings.onChange(function(changes, updates) {
+            armyHelperSettings = settings.getAll()
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+        armyHelperSettings = settings.getAll()
+        console.log('armyHelper settings', armyHelperSettings)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+    armyHelper.start = function() {
+        running = true
+        addLog('Rozpoczęto balansowanie wojsk', '', '', '')
+        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_START)
+    }
+    armyHelper.stop = function() {
+        running = false
+        addLog('Zatrzymano balansowanie wojsk', '', '', '')
+        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_STOP)
+    }
+    armyHelper.getSettings = function() {
+        return settings
+    }
+    armyHelper.isInitialized = function() {
+        return initialized
+    }
+    armyHelper.isRunning = function() {
+        return running
+    }
+    armyHelper.getLogs = function() {
+        return logs
+    }
+    armyHelper.checkArmy = function() {
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+
+        function checkArmy() {
+            var calcSpearA = 0
+            var calcSpearO = 0
+            var calcSpearI = 0
+            var calcSpearS = 0
+            var calcSpearR = 0
+            var calcSpearT = 0
+            var calcSwordA = 0
+            var calcSwordO = 0
+            var calcSwordI = 0
+            var calcSwordS = 0
+            var calcSwordR = 0
+            var calcSwordT = 0
+            var calcAxeA = 0
+            var calcAxeO = 0
+            var calcAxeI = 0
+            var calcAxeS = 0
+            var calcAxeR = 0
+            var calcAxeT = 0
+            var calcArcherA = 0
+            var calcArcherO = 0
+            var calcArcherI = 0
+            var calcArcherS = 0
+            var calcArcherR = 0
+            var calcArcherT = 0
+            var calcLightCavalryA = 0
+            var calcLightCavalryO = 0
+            var calcLightCavalryI = 0
+            var calcLightCavalryS = 0
+            var calcLightCavalryR = 0
+            var calcLightCavalryT = 0
+            var calcMountedArcherA = 0
+            var calcMountedArcherO = 0
+            var calcMountedArcherI = 0
+            var calcMountedArcherS = 0
+            var calcMountedArcherR = 0
+            var calcMountedArcherT = 0
+            var calcHeavyCavalryA = 0
+            var calcHeavyCavalryO = 0
+            var calcHeavyCavalryI = 0
+            var calcHeavyCavalryS = 0
+            var calcHeavyCavalryR = 0
+            var calcHeavyCavalryT = 0
+            var calcRamA = 0
+            var calcRamO = 0
+            var calcRamI = 0
+            var calcRamS = 0
+            var calcRamR = 0
+            var calcRamT = 0
+            var calcCatapultA = 0
+            var calcCatapultO = 0
+            var calcCatapultI = 0
+            var calcCatapultS = 0
+            var calcCatapultR = 0
+            var calcCatapultT = 0
+            var calcTrebuchetA = 0
+            var calcTrebuchetO = 0
+            var calcTrebuchetI = 0
+            var calcTrebuchetS = 0
+            var calcTrebuchetR = 0
+            var calcTrebuchetT = 0
+            var calcBerserkerA = 0
+            var calcBerserkerO = 0
+            var calcBerserkerI = 0
+            var calcBerserkerS = 0
+            var calcBerserkerR = 0
+            var calcBerserkerT = 0
+            var calcSnobA = 0
+            var calcSnobO = 0
+            var calcSnobI = 0
+            var calcSnobS = 0
+            var calcSnobR = 0
+            var calcSnobT = 0
+            var calcKnightA = 0
+            var calcKnightO = 0
+            var calcKnightI = 0
+            var calcKnightS = 0
+            var calcKnightR = 0
+            var calcKnightT = 0
+            var calcSpearPlayers = 0
+            var calcSwordPlayers = 0
+            var calcAxePlayers = 0
+            var calcArcherPlayers = 0
+            var calcLightCavalryPlayers = 0
+            var calcMountedArcherPlayers = 0
+            var calcRamPlayers = 0
+            var calcCatapultPlayers = 0
+            var calcHeavyCavalryPlayers = 0
+            var calcTrebuchetPlayers = 0
+            var calcBerserkerPlayers = 0
+            var calcSnobPlayers = 0
+            var calcKnightPlayers = 0
+            villages.forEach(function(village) {
+                var unitInfo = village.unitInfo
+                var units = unitInfo.units
+                var spear = units.spear
+                var sword = units.sword
+                var axe = units.axe
+                var archer = units.archer
+                var light_cavalry = units.light_cavalry
+                var mounted_archer = units.mounted_archer
+                var heavy_cavalry = units.heavy_cavalry
+                var ram = units.ram
+                var catapult = units.catapult
+                var trebuchet = units.trebuchet
+                var doppelsoldner = units.doppelsoldner
+                var snob = units.snob
+                var knight = units.knight
+                calcSpearA += spear.available
+                calcSpearPlayers += spear.inside
+                calcSpearO += spear.own
+                calcSpearI += spear.in_town
+                calcSpearS += spear.support
+                calcSpearR += spear.recruiting
+                calcSpearT += spear.total
+                calcSwordA += sword.available
+                calcSwordPlayers += sword.inside
+                calcSwordO += sword.own
+                calcSwordI += sword.in_town
+                calcSwordS += sword.support
+                calcSwordR += sword.recruiting
+                calcSwordT += sword.total
+                calcAxeA += axe.available
+                calcAxePlayers += axe.inside
+                calcAxeO += axe.own
+                calcAxeI += axe.in_town
+                calcAxeS += axe.support
+                calcAxeR += axe.recruiting
+                calcAxeT += axe.total
+                calcArcherA += archer.available
+                calcArcherPlayers += archer.inside
+                calcArcherO += archer.own
+                calcArcherI += archer.in_town
+                calcArcherS += archer.support
+                calcArcherR += archer.recruiting
+                calcArcherT += archer.total
+                calcLightCavalryA += light_cavalry.available
+                calcLightCavalryPlayers += light_cavalry.inside
+                calcLightCavalryO += light_cavalry.own
+                calcLightCavalryI += light_cavalry.in_town
+                calcLightCavalryS += light_cavalry.support
+                calcLightCavalryR += light_cavalry.recruiting
+                calcLightCavalryT += light_cavalry.total
+                calcMountedArcherA += mounted_archer.available
+                calcMountedArcherPlayers += mounted_archer.inside
+                calcMountedArcherO += mounted_archer.own
+                calcMountedArcherI += mounted_archer.in_town
+                calcMountedArcherS += mounted_archer.support
+                calcMountedArcherR += mounted_archer.recruiting
+                calcMountedArcherT += mounted_archer.total
+                calcHeavyCavalryA += heavy_cavalry.available
+                calcHeavyCavalryPlayers += heavy_cavalry.inside
+                calcHeavyCavalryO += heavy_cavalry.own
+                calcHeavyCavalryI += heavy_cavalry.in_town
+                calcHeavyCavalryS += heavy_cavalry.support
+                calcHeavyCavalryR += heavy_cavalry.recruiting
+                calcHeavyCavalryT += heavy_cavalry.total
+                calcRamA += ram.available
+                calcRamPlayers += ram.inside
+                calcRamO += ram.own
+                calcRamI += ram.in_town
+                calcRamS += ram.support
+                calcRamR += ram.recruiting
+                calcRamT += ram.total
+                calcCatapultA += catapult.available
+                calcCatapultPlayers += catapult.inside
+                calcCatapultO += catapult.own
+                calcCatapultI += catapult.in_town
+                calcCatapultS += catapult.support
+                calcCatapultR += catapult.recruiting
+                calcCatapultT += catapult.total
+                calcTrebuchetA += trebuchet.available
+                calcTrebuchetPlayers += trebuchet.inside
+                calcTrebuchetO += trebuchet.own
+                calcTrebuchetI += trebuchet.in_town
+                calcTrebuchetS += trebuchet.support
+                calcTrebuchetR += trebuchet.recruiting
+                calcTrebuchetT += trebuchet.total
+                calcBerserkerA += doppelsoldner.available
+                calcBerserkerPlayers += doppelsoldner.inside
+                calcBerserkerO += doppelsoldner.own
+                calcBerserkerI += doppelsoldner.in_town
+                calcBerserkerS += doppelsoldner.support
+                calcBerserkerR += doppelsoldner.recruiting
+                calcBerserkerT += doppelsoldner.total
+                calcSnobA += snob.available
+                calcSnobPlayers += snob.inside
+                calcSnobO += snob.own
+                calcSnobI += snob.in_town
+                calcSnobS += snob.support
+                calcSnobR += snob.recruiting
+                calcSnobT += snob.total
+                calcKnightA += knight.available
+                calcKnightPlayers += knight.inside
+                calcKnightO += knight.own
+                calcKnightI += knight.in_town
+                calcKnightS += knight.support
+                calcKnightR += knight.recruiting
+                calcKnightT += knight.total
+            })
+            SpearA = calcSpearA
+            SpearO = calcSpearO
+            SpearI = calcSpearPlayers
+            SpearS = calcSpearS
+            SpearR = calcSpearR
+            SpearT = calcSpearT + calcSpearR
+            SwordA = calcSwordA
+            SwordO = calcSwordO
+            SwordI = calcSwordPlayers
+            SwordS = calcSwordS
+            SwordR = calcSwordR
+            SwordT = calcSwordT + calcSwordR
+            AxeA = calcAxeA
+            AxeO = calcAxeO
+            AxeI = calcAxePlayers
+            AxeS = calcAxeS
+            AxeR = calcAxeR
+            AxeT = calcAxeT + calcAxeR
+            ArcherA = calcArcherA
+            ArcherO = calcArcherO
+            ArcherI = calcArcherPlayers
+            ArcherS = calcArcherS
+            ArcherR = calcArcherR
+            ArcherT = calcArcherT + calcArcherR
+            LightCavalryA = calcLightCavalryA
+            LightCavalryO = calcLightCavalryO
+            LightCavalryI = calcLightCavalryPlayers
+            LightCavalryS = calcLightCavalryS
+            LightCavalryR = calcLightCavalryR
+            LightCavalryT = calcLightCavalryT + calcLightCavalryR
+            MountedArcherA = calcMountedArcherA
+            MountedArcherO = calcMountedArcherO
+            MountedArcherI = calcMountedArcherPlayers
+            MountedArcherS = calcMountedArcherS
+            MountedArcherR = calcMountedArcherR
+            MountedArcherT = calcMountedArcherT + calcMountedArcherR
+            HeavyCavalryA = calcHeavyCavalryA
+            HeavyCavalryO = calcHeavyCavalryO
+            HeavyCavalryI = calcHeavyCavalryPlayers
+            HeavyCavalryS = calcHeavyCavalryS
+            HeavyCavalryR = calcHeavyCavalryR
+            HeavyCavalryT = calcHeavyCavalryT + calcHeavyCavalryR
+            RamA = calcRamA
+            RamO = calcRamO
+            RamI = calcRamPlayers
+            RamS = calcRamS
+            RamR = calcRamR
+            RamT = calcRamT + calcRamR
+            CatapultA = calcCatapultA
+            CatapultO = calcCatapultO
+            CatapultI = calcCatapultPlayers
+            CatapultS = calcCatapultS
+            CatapultR = calcCatapultR
+            CatapultT = calcCatapultT + calcCatapultR
+            TrebuchetA = calcTrebuchetA
+            TrebuchetO = calcTrebuchetO
+            TrebuchetI = calcTrebuchetPlayers
+            TrebuchetS = calcTrebuchetS
+            TrebuchetR = calcTrebuchetR
+            TrebuchetT = calcTrebuchetT + calcTrebuchetR
+            BerserkerA = calcBerserkerA
+            BerserkerO = calcBerserkerO
+            BerserkerI = calcBerserkerPlayers
+            BerserkerS = calcBerserkerS
+            BerserkerR = calcBerserkerR
+            BerserkerT = calcBerserkerT + calcBerserkerR
+            SnobA = calcSnobA
+            SnobO = calcSnobO
+            SnobI = calcSnobPlayers
+            SnobS = calcSnobS
+            SnobR = calcSnobR
+            SnobT = calcSnobT + calcSnobR
+            KnightA = calcKnightA
+            KnightO = calcKnightO
+            KnightI = calcKnightPlayers
+            KnightS = calcKnightS
+            KnightR = calcKnightR
+            KnightT = calcKnightT + calcKnightR
+            console.log(calcArcherI, calcAxeI, calcSpearI, calcSwordI, calcLightCavalryI, calcMountedArcherI, calcHeavyCavalryI, calcRamI, calcCatapultI, calcTrebuchetI, calcBerserkerI, calcKnightI, calcSnobI)
+            addLog('Policzono wojsko', '', '')
+        }
+        checkArmy()
+    }
+    armyHelper.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.ARMY_HELPER_LOGS_UPDATED)
+        return logs
+    }
+    armyHelper.getSpearTotal = function() {
+        return SpearT
+    }
+    armyHelper.getSpearSupport = function() {
+        return SpearS
+    }
+    armyHelper.getSpearOwn = function() {
+        return SpearO
+    }
+    armyHelper.getSpearInTown = function() {
+        return SpearI
+    }
+    armyHelper.getSpearRecruting = function() {
+        return SpearR
+    }
+    armyHelper.getSpearAvailable = function() {
+        return SpearA
+    }
+    armyHelper.getswordTotal = function() {
+        return SwordT
+    }
+    armyHelper.getswordSupport = function() {
+        return SwordS
+    }
+    armyHelper.getswordOwn = function() {
+        return SwordO
+    }
+    armyHelper.getswordInTown = function() {
+        return SwordI
+    }
+    armyHelper.getswordRecruting = function() {
+        return SwordR
+    }
+    armyHelper.getswordAvailable = function() {
+        return SwordA
+    }
+    armyHelper.getaxeTotal = function() {
+        return AxeT
+    }
+    armyHelper.getaxeSupport = function() {
+        return AxeS
+    }
+    armyHelper.getaxeOwn = function() {
+        return AxeO
+    }
+    armyHelper.getaxeInTown = function() {
+        return AxeI
+    }
+    armyHelper.getaxeRecruting = function() {
+        return AxeR
+    }
+    armyHelper.getaxeAvailable = function() {
+        return AxeA
+    }
+    armyHelper.getarcherTotal = function() {
+        return ArcherT
+    }
+    armyHelper.getarcherSupport = function() {
+        return ArcherS
+    }
+    armyHelper.getarcherOwn = function() {
+        return ArcherO
+    }
+    armyHelper.getarcherInTown = function() {
+        return ArcherI
+    }
+    armyHelper.getarcherRecruting = function() {
+        return ArcherR
+    }
+    armyHelper.getarcherAvailable = function() {
+        return ArcherA
+    }
+    armyHelper.getlcTotal = function() {
+        return LightCavalryT
+    }
+    armyHelper.getlcSupport = function() {
+        return LightCavalryS
+    }
+    armyHelper.getlcOwn = function() {
+        return LightCavalryO
+    }
+    armyHelper.getlcInTown = function() {
+        return LightCavalryI
+    }
+    armyHelper.getlcRecruting = function() {
+        return LightCavalryR
+    }
+    armyHelper.getlcAvailable = function() {
+        return LightCavalryA
+    }
+    armyHelper.getmaTotal = function() {
+        return MountedArcherT
+    }
+    armyHelper.getmaSupport = function() {
+        return MountedArcherS
+    }
+    armyHelper.getmaOwn = function() {
+        return MountedArcherO
+    }
+    armyHelper.getmaInTown = function() {
+        return MountedArcherI
+    }
+    armyHelper.getmaRecruting = function() {
+        return MountedArcherR
+    }
+    armyHelper.getmaAvailable = function() {
+        return MountedArcherA
+    }
+    armyHelper.gethcTotal = function() {
+        return HeavyCavalryT
+    }
+    armyHelper.gethcSupport = function() {
+        return HeavyCavalryS
+    }
+    armyHelper.gethcOwn = function() {
+        return HeavyCavalryO
+    }
+    armyHelper.gethcInTown = function() {
+        return HeavyCavalryI
+    }
+    armyHelper.gethcRecruting = function() {
+        return HeavyCavalryR
+    }
+    armyHelper.gethcAvailable = function() {
+        return HeavyCavalryA
+    }
+    armyHelper.getramTotal = function() {
+        return RamT
+    }
+    armyHelper.getramSupport = function() {
+        return RamS
+    }
+    armyHelper.getramOwn = function() {
+        return RamO
+    }
+    armyHelper.getramInTown = function() {
+        return RamI
+    }
+    armyHelper.getramRecruting = function() {
+        return RamR
+    }
+    armyHelper.getramAvailable = function() {
+        return RamA
+    }
+    armyHelper.getcatapultTotal = function() {
+        return CatapultT
+    }
+    armyHelper.getcatapultSupport = function() {
+        return CatapultS
+    }
+    armyHelper.getcatapultOwn = function() {
+        return CatapultO
+    }
+    armyHelper.getcatapultInTown = function() {
+        return CatapultI
+    }
+    armyHelper.getcatapultRecruting = function() {
+        return CatapultR
+    }
+    armyHelper.getcatapultAvailable = function() {
+        return CatapultA
+    }
+    armyHelper.getberserkerTotal = function() {
+        return BerserkerT
+    }
+    armyHelper.getberserkerSupport = function() {
+        return BerserkerS
+    }
+    armyHelper.getberserkerOwn = function() {
+        return BerserkerO
+    }
+    armyHelper.getberserkerInTown = function() {
+        return BerserkerI
+    }
+    armyHelper.getberserkerRecruting = function() {
+        return BerserkerR
+    }
+    armyHelper.getberserkerAvailable = function() {
+        return BerserkerA
+    }
+    armyHelper.gettrebuchetTotal = function() {
+        return TrebuchetT
+    }
+    armyHelper.gettrebuchetSupport = function() {
+        return TrebuchetS
+    }
+    armyHelper.gettrebuchetOwn = function() {
+        return TrebuchetO
+    }
+    armyHelper.gettrebuchetInTown = function() {
+        return TrebuchetI
+    }
+    armyHelper.gettrebuchetRecruting = function() {
+        return TrebuchetR
+    }
+    armyHelper.gettrebuchetAvailable = function() {
+        return TrebuchetA
+    }
+    armyHelper.getsnobTotal = function() {
+        return SnobT
+    }
+    armyHelper.getsnobSupport = function() {
+        return SnobS
+    }
+    armyHelper.getsnobOwn = function() {
+        return SnobO
+    }
+    armyHelper.getsnobInTown = function() {
+        return SnobI
+    }
+    armyHelper.getsnobRecruting = function() {
+        return SnobR
+    }
+    armyHelper.getsnobAvailable = function() {
+        return SnobA
+    }
+    armyHelper.getknightTotal = function() {
+        return KnightT
+    }
+    armyHelper.getknightSupport = function() {
+        return KnightS
+    }
+    armyHelper.getknightOwn = function() {
+        return KnightO
+    }
+    armyHelper.getknightInTown = function() {
+        return KnightI
+    }
+    armyHelper.getknightRecruting = function() {
+        return KnightR
+    }
+    armyHelper.getknightAvailable = function() {
+        return KnightA
+    }
+    return armyHelper
+})
+define('two/armyHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        ARMY_HELPER_START: 'army_helper_start',
+        ARMY_HELPER_STOP: 'army_helper_stop'
+    })
+})
+
+define('two/armyHelper/ui', [
+    'two/ui',
+    'two/armyHelper',
+    'two/armyHelper/settings',
+    'two/armyHelper/settings/map',
+    'two/armyHelper/types/unit',
+    'two/Settings',
+    'queues/EventQueue',
+    'two/EventScope',
+    'struct/MapData',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    armyHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    B_UNIT,
+    Settings,
+    eventQueue,
+    EventScope,
+    mapData,
+    utils
+) {
+    let $scope
+    let settings
+    let groupList = modelDataService.getGroupList()
+    let $button
+    let running = false
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    let armyVillage
+    let mapSelectedVillage = false
+    
+    const TAB_TYPES = {
+        ARMY: 'army',
+        BALANCER: 'balancer',
+        LOGS: 'logs'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+    const checkArmy = function() {
+        settings.setAll(settings.decode($scope.settings))
+        armyHelper.checkArmy()
+        $scope.spearTotal = armyHelper.getSpearTotal()
+        $scope.spearSupport = armyHelper.getSpearSupport()
+        $scope.spearOwn = armyHelper.getSpearOwn()
+        $scope.spearInTown = armyHelper.getSpearInTown()
+        $scope.spearRecruting = armyHelper.getSpearRecruting()
+        $scope.spearAvailable = armyHelper.getSpearAvailable()
+        $scope.swordTotal = armyHelper.getswordTotal()
+        $scope.swordSupport = armyHelper.getswordSupport()
+        $scope.swordOwn = armyHelper.getswordOwn()
+        $scope.swordInTown = armyHelper.getswordInTown()
+        $scope.swordRecruting = armyHelper.getswordRecruting()
+        $scope.swordAvailable = armyHelper.getswordAvailable()
+        $scope.axeTotal = armyHelper.getaxeTotal()
+        $scope.axeSupport = armyHelper.getaxeSupport()
+        $scope.axeOwn = armyHelper.getaxeOwn()
+        $scope.axeInTown = armyHelper.getaxeInTown()
+        $scope.axeRecruting = armyHelper.getaxeRecruting()
+        $scope.axeAvailable = armyHelper.getaxeAvailable()
+        $scope.archerTotal = armyHelper.getarcherTotal()
+        $scope.archerSupport = armyHelper.getarcherSupport()
+        $scope.archerOwn = armyHelper.getarcherOwn()
+        $scope.archerInTown = armyHelper.getarcherInTown()
+        $scope.archerRecruting = armyHelper.getarcherRecruting()
+        $scope.archerAvailable = armyHelper.getarcherAvailable()
+        $scope.lcTotal = armyHelper.getlcTotal()
+        $scope.lcSupport = armyHelper.getlcSupport()
+        $scope.lcOwn = armyHelper.getlcOwn()
+        $scope.lcInTown = armyHelper.getlcInTown()
+        $scope.lcRecruting = armyHelper.getlcRecruting()
+        $scope.lcAvailable = armyHelper.getlcAvailable()
+        $scope.maTotal = armyHelper.getmaTotal()
+        $scope.maSupport = armyHelper.getmaSupport()
+        $scope.maOwn = armyHelper.getmaOwn()
+        $scope.maInTown = armyHelper.getmaInTown()
+        $scope.maRecruting = armyHelper.getmaRecruting()
+        $scope.maAvailable = armyHelper.getmaAvailable()
+        $scope.hcTotal = armyHelper.gethcTotal()
+        $scope.hcSupport = armyHelper.gethcSupport()
+        $scope.hcOwn = armyHelper.gethcOwn()
+        $scope.hcInTown = armyHelper.gethcInTown()
+        $scope.hcRecruting = armyHelper.gethcRecruting()
+        $scope.hcAvailable = armyHelper.gethcAvailable()
+        $scope.ramTotal = armyHelper.getramTotal()
+        $scope.ramSupport = armyHelper.getramSupport()
+        $scope.ramOwn = armyHelper.getramOwn()
+        $scope.ramInTown = armyHelper.getramInTown()
+        $scope.ramRecruting = armyHelper.getramRecruting()
+        $scope.ramAvailable = armyHelper.getramAvailable()
+        $scope.catapultTotal = armyHelper.getcatapultTotal()
+        $scope.catapultSupport = armyHelper.getcatapultSupport()
+        $scope.catapultOwn = armyHelper.getcatapultOwn()
+        $scope.catapultInTown = armyHelper.getcatapultInTown()
+        $scope.catapultRecruting = armyHelper.getcatapultRecruting()
+        $scope.catapultAvailable = armyHelper.getcatapultAvailable()
+        $scope.berserkerTotal = armyHelper.getberserkerTotal()
+        $scope.berserkerSupport = armyHelper.getberserkerSupport()
+        $scope.berserkerOwn = armyHelper.getberserkerOwn()
+        $scope.berserkerInTown = armyHelper.getberserkerInTown()
+        $scope.berserkerRecruting = armyHelper.getberserkerRecruting()
+        $scope.berserkerAvailable = armyHelper.getberserkerAvailable()
+        $scope.trebuchetTotal = armyHelper.gettrebuchetTotal()
+        $scope.trebuchetSupport = armyHelper.gettrebuchetSupport()
+        $scope.trebuchetOwn = armyHelper.gettrebuchetOwn()
+        $scope.trebuchetInTown = armyHelper.gettrebuchetInTown()
+        $scope.trebuchetRecruting = armyHelper.gettrebuchetRecruting()
+        $scope.trebuchetAvailable = armyHelper.gettrebuchetAvailable()
+        $scope.snobTotal = armyHelper.getsnobTotal()
+        $scope.snobSupport = armyHelper.getsnobSupport()
+        $scope.snobOwn = armyHelper.getsnobOwn()
+        $scope.snobInTown = armyHelper.getsnobInTown()
+        $scope.snobRecruting = armyHelper.getsnobRecruting()
+        $scope.snobAvailable = armyHelper.getsnobAvailable()
+        $scope.knightTotal = armyHelper.getknightTotal()
+        $scope.knightSupport = armyHelper.getknightSupport()
+        $scope.knightOwn = armyHelper.getknightOwn()
+        $scope.knightInTown = armyHelper.getknightInTown()
+        $scope.knightRecruting = armyHelper.getknightRecruting()
+        $scope.knightAvailable = armyHelper.getknightAvailable()
+    }
+
+    const clear = function() {
+        $scope.settings[SETTINGS.GROUP3] = false
+        $scope.settings[SETTINGS.GROUP4] = false
+        $scope.settings[SETTINGS.UNIT_TYPE2] = false
+        $scope.settings[SETTINGS.UNIT_TYPE1] = false
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const balanceAll = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+            running = false
+        } else {
+            armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceAll()
+        }
+    }
+    const balanceUnit = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+            running = false
+        } else {
+            armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceUnit()
+        }
+    }
+    const balanceGroup = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+            running = false
+        } else {
+            armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceGroup()
+        }
+    }
+    const balanceUnitAndGroup = function () {
+        if (armyHelper.isRunning()) {
+            armyHelper.stop()
+            running = false
+        } else {
+            armyHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            armyHelper.balanceUnitAndGroup()
+        }
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'army_helper'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            armyVillage.origin = data
+        })
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ładowanie...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId) {
+                loadVillageInfo(log.villageId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        armyHelper.clearLogs()
+    }
+
+    const eventHandlers = {
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'armyhelper_village_search') {
+                return false
+            }
+            armyVillage[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+        },
+        onAutoCompleteVillage: function(data) {
+            armyVillage.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.VILLAGE_ID] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        start: function () {
+            $scope.running = true
+
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
+        },
+        stop: function () {
+            $scope.running = false
+
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
+        },
+        updateLogs: function() {
+            $scope.logs = armyHelper.getLogs()
+            logsView.updateVisibleLogs()
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'army_helper'))
+            eventHandlers.updateLogs()
+        }
+    }
+
+    const init = function () {
+        settings = armyHelper.getSettings()
+        armyVillage = {
+            origin: false
+        }
+        $button = interfaceOverflow.addMenuButton('Hetman', 90, $filter('i18n')('description', $rootScope.loc.ale, 'army_helper'))
+        $button.addEventListener('click', buildWindow)
+        eventQueue.register(eventTypeProvider.ARMY_HELPER_START, function() {
+            running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+        eventQueue.register(eventTypeProvider.ARMY_HELPER_STOP, function() {
+            running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }} jeszcze nie działa</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .logs .status tr{height:25px}#two-army-helper .logs .status td{padding:0 6px}#two-army-helper .logs .log-list{margin-bottom:10px}#two-army-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-army-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-army-helper .icon-20x20-village:before{margin-top:-11px}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = running
+        $scope.pagination = {}
+        $scope.selectedTab = TAB_TYPES.ARMY
+        $scope.villagesLabel = villagesLabel
+        $scope.villagesInfo = villagesInfo
+        $scope.logsView = logsView
+        $scope.logsView.logs = armyHelper.getLogs()
+        $scope.visibleLogs = []
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.unit = Settings.encodeList(B_UNIT, {
+            textObject: 'army_helper',
+            disabled: true
+        })
+        $scope.autoCompleteProvince = {
+            type: ['village'],
+            placeholder: $filter('i18n')('balance.add_village_search', $rootScope.loc.ale, 'army_helper'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('balance.add_origin', $rootScope.loc.ale, 'army_helper'),
+            dropDown: true
+        }
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        settings.injectScope($scope)
+        eventHandlers.updateGroups()
+        logsView.updateVisibleLogs()
+        $scope.selectTab = selectTab
+        $scope.armyVillage = armyVillage
+        $scope.check = checkArmy
+        $scope.balanceAll = balanceAll
+        $scope.balanceGroup = balanceGroup
+        $scope.balanceUnit = balanceUnit
+        $scope.balanceUnitAndGroup = balanceUnitAndGroup
+        $scope.clearLogs = armyHelper.clearLogs()
+        $scope.clear = clear
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.addMapSelected = addMapSelected
+
+        let eventScope = new EventScope('twoverflow_army_helper_window', function onDestroy () {
+            console.log('armyHelper window closed')
+        })
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.ARMY_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.ARMY_HELPER_STOP, eventHandlers.stop)
+        eventScope.register(eventTypeProvider.ARMY_HELPER_LOGS_UPDATED, eventHandlers.updateLogs)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_army_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/armyHelper/settings', [], function () {
+    return {
+        VILLAGE_ID: 'village_id',
+        GROUP3: 'group3',
+        GROUP4: 'group4',
+        UNIT_TYPE1: 'unit_type1',
+        UNIT_TYPE2: 'unit_type2'
+    }
+})
+
+define('two/armyHelper/settings/updates', function () {
+    return {
+        GROUPS: 'groups'
+    }
+})
+
+define('two/armyHelper/settings/map', [
+    'two/armyHelper/settings',
+    'two/armyHelper/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.GROUP3]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: false,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP4]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: false,
+            type: 'groups'
+        },
+        [SETTINGS.UNIT_TYPE1]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_TYPE2]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.VILLAGE_ID]: {
+            default: 0,
+            inputType: 'number'
+        }
+    }
+})
+
+define('two/armyHelper/types/unit', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+require([
+    'two/ready',
+    'two/armyHelper',
+    'two/armyHelper/ui',
+    'two/armyHelper/events'
+], function (
+    ready,
+    armyHelper,
+    armyHelperInterface
+) {
+    if (armyHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        armyHelper.init()
+        armyHelperInterface()
+    }, ['map'])
+})
+
 define('two/attackView', [
     'two/ready',
     'two/utils',
@@ -4413,7 +5795,7 @@ define('two/attackView', [
     'helper/mapconvert',
     'struct/MapData',
     'queues/EventQueue'
-], function (
+], function(
     ready,
     utils,
     COLUMN_TYPES,
@@ -4432,6 +5814,7 @@ define('two/attackView', [
     let overviewService = injector.get('overviewService')
     let globalInfoModel
     let commands = []
+    let interval = 2000
     let commandQueue = false
     let filters = {}
     let filterParams = {}
@@ -4445,19 +5828,16 @@ define('two/attackView', [
     }
     const INCOMING_UNITS_FILTER = {}
     const COMMAND_TYPES_FILTER = {}
-
-    const formatFilters = function () {
+    const formatFilters = function() {
         const toArray = [FILTER_TYPES.COMMAND_TYPES]
         const currentVillageId = modelDataService.getSelectedVillage().getId()
         let arrays = {}
-
         // format filters for backend
         for (let i = 0; i < toArray.length; i++) {
             for (let j in filters[toArray[i]]) {
                 if (!arrays[toArray[i]]) {
                     arrays[toArray[i]] = []
                 }
-
                 if (filters[toArray[i]][j]) {
                     switch (toArray[i]) {
                         case FILTER_TYPES.COMMAND_TYPES: {
@@ -4474,52 +5854,46 @@ define('two/attackView', [
                 }
             }
         }
-
         filterParams = arrays
         filterParams.village = filters[FILTER_TYPES.VILLAGE] ? [currentVillageId] : []
     }
-
     /**
      * Command was sent.
      */
-    const onCommandIncomming = function () {
+    const onCommandIncomming = function() {
         // we can never know if the command is currently visible (because of filters, sorting and stuff) -> reload
         attackView.loadCommands()
     }
-
     /**
      * Command was cancelled.
      *
      * @param {Object} event unused
      * @param {Object} data The backend-data
      */
-    const onCommandCancelled = function (event, data) {
+    const onCommandCancelled = function(event, data) {
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_COMMAND_CANCELLED, [data.id || data.command_id])
     }
-
     /**
      * Command ignored.
      *
      * @param {Object} event unused
      * @param {Object} data The backend-data
      */
-    const onCommandIgnored = function (event, data) {
+    const onCommandIgnored = function(event, data) {
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].command_id === data.command_id) {
                 commands.splice(i, 1)
             }
         }
-
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_COMMAND_IGNORED, [data.command_id])
     }
-
     /**
      * Village name changed.
      *
      * @param {Object} event unused
      * @param {Object} data The backend-data
      */
-    const onVillageNameChanged = function (event, data) {
+    const onVillageNameChanged = function(event, data) {
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].target_village_id === data.village_id) {
                 commands[i].target_village_name = data.name
@@ -4529,23 +5903,19 @@ define('two/attackView', [
                 commands[i].originVillage.name = data.name
             }
         }
-
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_VILLAGE_RENAMED, [data])
     }
-
-    const onVillageSwitched = function (e, newVillageId) {
+    const onVillageSwitched = function(e, newVillageId) {
         if (filterParams[FILTER_TYPES.VILLAGE].length) {
             filterParams[FILTER_TYPES.VILLAGE] = [newVillageId]
-
             attackView.loadCommands()
         }
     }
-
     /**
      * @param {CommandModel} command
      * @return {String} Slowest unit
      */
-    const getSlowestUnit = function (command) {
+    const getSlowestUnit = function(command) {
         const origin = {
             x: command.origin_x,
             y: command.origin_y
@@ -4554,21 +5924,20 @@ define('two/attackView', [
             x: command.target_x,
             y: command.target_y
         }
-        const unitDurationDiff = UNIT_SPEED_ORDER.map(function (unit) {
-            const travelTime = utils.getTravelTime(origin, target, {[unit]: 1}, command.command_type, {}, false)
+        const unitDurationDiff = UNIT_SPEED_ORDER.map(function(unit) {
+            const travelTime = utils.getTravelTime(origin, target, {
+                [unit]: 1
+            }, command.command_type, {}, false)
             const durationDiff = Math.abs(travelTime - command.model.duration)
-
             return {
                 unit: unit,
                 diff: durationDiff
             }
-        }).sort(function (a, b) {
+        }).sort(function(a, b) {
             return a.diff - b.diff
         })
-
         return unitDurationDiff[0].unit
     }
-
     /**
      * Sort a set of villages by distance from a specified village.
      *
@@ -4576,15 +5945,20 @@ define('two/attackView', [
      * @param {VillageModel} origin
      * @return {Array} Sorted villages
      */
-    const sortByDistance = function (villages, origin) {
-        return villages.sort(function (villageA, villageB) {
+    const sortByDistance = function(villages, origin) {
+        return villages.sort(function(villageA, villageB) {
             let distA = math.actualDistance(origin, villageA)
             let distB = math.actualDistance(origin, villageB)
-
             return distA - distB
         })
     }
-
+    const sortByDistanceTarget = function(villages, target) {
+        return villages.sort(function(villageA, villageB) {
+            var distA = math.actualDistance(target, villageA)
+            var distB = math.actualDistance(target, villageB)
+            return distA - distB
+        }).reverse()
+    }
     /**
      * Order:
      * - Barbarian villages.
@@ -4594,43 +5968,36 @@ define('two/attackView', [
      * @param {VillageModel} origin
      * @param {Function} callback
      */
-    const closestNonHostileVillage = function (origin, callback) {
+    const closestNonHostileVillage = function(origin, callback) {
         const size = 25
         let loadBlockIndex = 0
-
         if (mapData.hasTownDataInChunk(origin.x, origin.y)) {
             const sectors = mapData.loadTownData(origin.x, origin.y, size, size, size)
             const tribeId = modelDataService.getSelectedCharacter().getTribeId()
             const playerId = modelDataService.getSelectedCharacter().getId()
             let targets = []
             let closestTargets
-
-            sectors.forEach(function (sector) {
+            sectors.forEach(function(sector) {
                 for (let x in sector.data) {
                     for (let y in sector.data[x]) {
                         targets.push(sector.data[x][y])
                     }
                 }
             })
-
-
-            const barbs = targets.filter(function (target) {
+            const barbs = targets.filter(function(target) {
                 return target.character_id === null && target.id > 0
             })
-
-            const own = targets.filter(function (target) {
+            const own = targets.filter(function(target) {
                 return target.character_id === playerId && origin.id !== target.id
             })
-
             if (barbs.length) {
                 closestTargets = sortByDistance(barbs, origin)
             } else if (own.length) {
                 closestTargets = sortByDistance(own, origin)
             } else if (tribeId) {
-                const tribe = targets.filter(function (target) {
+                const tribe = targets.filter(function(target) {
                     return target.tribe_id === tribeId
                 })
-
                 if (tribe.length) {
                     closestTargets = sortByDistance(tribe, origin)
                 } else {
@@ -4639,43 +6006,66 @@ define('two/attackView', [
             } else {
                 return callback(false)
             }
-
             return callback(closestTargets[0])
         }
-        
         const loads = convert.scaledGridCoordinates(origin.x, origin.y, size, size, size)
-
-        mapData.loadTownDataAsync(origin.x, origin.y, size, size, function () {
+        mapData.loadTownDataAsync(origin.x, origin.y, size, size, function() {
             if (++loadBlockIndex === loads.length) {
                 closestNonHostileVillage(origin, callback)
             }
         })
     }
-
+    const closestOwnVillageBunker = function(target, callback) {
+        var size = 40
+        if (mapData.hasTownDataInChunk(target.x, target.y)) {
+            var sectors = mapData.loadTownData(target.x, target.y, size, size, size)
+            var origins = []
+            var closestOrigins
+            var own = []
+            var playerId = modelDataService.getSelectedCharacter().getId()
+            sectors.forEach(function(sector) {
+                for (let x in sector.data) {
+                    for (let y in sector.data[x]) {
+                        origins.push(sector.data[x][y])
+                    }
+                }
+            })
+            own = origins.filter(function(origin) {
+                return origin.character_id === playerId && target.id !== origin.id
+            })
+            if (own.length) {
+                closestOrigins = sortByDistanceTarget(own, target)
+            } else {
+                return callback(false)
+            }
+            return callback(closestOrigins)
+        }
+        var loads = convert.scaledGridCoordinates(target.x, target.y, size, size, size)
+        var index = 0
+        mapData.loadTownDataAsync(target.x, target.y, size, size, function() {
+            if (++index === loads.length) {
+                closestOwnVillageBunker(target, callback)
+            }
+        })
+    }
     /**
      * @param {Object} data The data-object from the backend
      */
-    const onOverviewIncomming = function (data) {
+    const onOverviewIncomming = function(data) {
         commands = data.commands
-
         for (let i = 0; i < commands.length; i++) {
             overviewService.formatCommand(commands[i])
             commands[i].slowestUnit = getSlowestUnit(commands[i])
         }
-
-        commands = commands.filter(function (command) {
+        commands = commands.filter(function(command) {
             return filters[FILTER_TYPES.INCOMING_UNITS][command.slowestUnit]
         })
-
         eventQueue.trigger(eventTypeProvider.ATTACK_VIEW_COMMANDS_LOADED, [commands])
     }
-
     let attackView = {}
-
-    attackView.loadCommands = function () { 
+    attackView.loadCommands = function() {
         const incomingCommands = globalInfoModel.getCommandListModel().getIncomingCommands().length
         const count = incomingCommands > 25 ? incomingCommands : 25
-
         socketService.emit(routeProvider.OVERVIEW_GET_INCOMING, {
             'count': count,
             'offset': 0,
@@ -4686,49 +6076,41 @@ define('two/attackView', [
             'villages': filterParams[FILTER_TYPES.VILLAGE]
         }, onOverviewIncomming)
     }
-
-    attackView.getCommands = function () {
+    attackView.getCommands = function() {
         return commands
     }
-
-    attackView.getFilters = function () {
+    attackView.getFilters = function() {
         return filters
     }
-
-    attackView.getSortings = function () {
+    attackView.getSortings = function() {
         return sorting
     }
-
     /**
      * Toggles the given filter.
      *
      * @param {string} type The category of the filter (see FILTER_TYPES)
      * @param {string} opt_filter The filter to be toggled.
      */
-    attackView.toggleFilter = function (type, opt_filter) {
+    attackView.toggleFilter = function(type, opt_filter) {
         if (!opt_filter) {
             filters[type] = !filters[type]
         } else {
             filters[type][opt_filter] = !filters[type][opt_filter]
         }
-
         // format filters for the backend
         formatFilters()
         Lockr.set(STORAGE_KEYS.FILTERS, filters)
         attackView.loadCommands()
     }
-
-    attackView.toggleSorting = function (newColumn) {
+    attackView.toggleSorting = function(newColumn) {
         if (newColumn === sorting.column) {
             sorting.reverse = !sorting.reverse
         } else {
             sorting.column = newColumn
             sorting.reverse = false
         }
-
         attackView.loadCommands()
     }
-
     /**
      * Set an automatic command with all units from the village
      * and start the CommandQueue module if it's disabled.
@@ -4736,73 +6118,775 @@ define('two/attackView', [
      * @param {Object} command Data of the command like origin, target.
      * @param {String} date Date that the command has to leave.
      */
-    attackView.setCommander = function (command, date) {
-        closestNonHostileVillage(command.targetVillage, function (closestVillage) {
+    attackView.setCommander = function(command, date) {
+        closestNonHostileVillage(command.targetVillage, function(closestVillage) {
             const origin = command.targetVillage
             const target = closestVillage
             const commandType = target.character_id ? COMMAND_TYPES.SUPPORT : COMMAND_TYPES.ATTACK
             let units = {}
-
-            utils.each(UNIT_TYPES, function (unit) {
+            utils.each(UNIT_TYPES, function(unit) {
                 units[unit] = '*'
             })
-
-            commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType , BUILDING_TYPES.WALL)
-
+            console.log(units)
+            commandQueue.addCommand(origin, target, date, COMMAND_QUEUE_DATE_TYPES.OUT, units, {}, commandType, BUILDING_TYPES.WALL)
             if (!commandQueue.isRunning()) {
                 commandQueue.start()
             }
         })
     }
+    attackView.setQueueBunkerCommand = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+            var Trebuchet = 0
+            const commandType = COMMAND_TYPES.SUPPORT
+            let units = {}
 
-    attackView.commandQueueEnabled = function () {
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                            Trebuchet = data.available_units.trebuchet.total
+                        })
+                        if (HC >= 38) {
+                            units = {
+                                heavy_cavalry: '-38'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (Spear >= 500 && Archer >= 500) {
+                            units = {
+                                archer: '-500',
+                                spear: '-500'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        } else if (Spear >= 500 && Archer < 500) {
+                            units = {
+                                archer: '*',
+                                spear: '-500'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        } else if (Spear < 500 && Archer >= 500) {
+                            units = {
+                                archer: '-500',
+                                spear: '*'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        } else if (Spear == 0 && Archer >= 500) {
+                            units = {
+                                archer: '-500'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        } else if (Spear >= 500 && Archer == 0) {
+                            units = {
+                                spear: '-500'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (Sword >= 500) {
+                            units = {
+                                sword: '-500'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (Trebuchet >= 100) {
+                            units = {
+                                trebuchet: '*'
+                            }
+                            commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
+    }
+    attackView.setQueueSupportCommand = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+            var totalSpear = 0
+            var totalSword = 0
+            var totalArcher = 0
+            var totalHC = 0
+            const commandType = COMMAND_TYPES.SUPPORT
+            let units = {}
+
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                        })
+                        if (HC >= 30 || Spear >= 100 || Sword >= 100 || Archer >= 100) {
+                            var availableHc = HC / 30
+                            var doHc = 0
+                            var availableSpear = Spear / 100
+                            var doSpear = 0
+                            var availableSword = Sword / 100
+                            var doSword = 0
+                            var availableArcher = Archer / 100
+                            var doArcher = 0
+                            var maks = 10
+                            if (availableSpear >= maks) {
+                                doSpear = maks
+                            } else {
+                                doSpear = Math.floor(availableSpear)
+                            }
+                            if (availableSword >= maks) {
+                                doSword = maks
+                            } else {
+                                doSword = Math.floor(availableSword)
+                            }
+                            if (availableArcher >= maks) {
+                                doArcher = maks
+                            } else {
+                                doArcher = Math.floor(availableArcher)
+                            }
+                            if (availableHc >= maks) {
+                                doHc = maks
+                            } else {
+                                doHc = Math.floor(availableHc)
+                            }
+                            if (doHc > 0) {
+                                for (let step = 0; step < doHc; step++) {
+                                    units = {
+                                        heavy_cavalry: '30'
+                                    }
+                                    if (totalHC < 1800) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalHC += 30
+                                    }
+                                }
+                            }
+                            if (doSpear > 0) {
+                                for (let step = 0; step < doSpear; step++) {
+                                    units = {
+                                        spear: '100'
+                                    }
+                                    if (totalSpear < 6000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSpear += 100
+                                    }
+                                }
+                            }
+                            if (doSword > 0) {
+                                for (let step = 0; step < doSword; step++) {
+                                    units = {
+                                        sword: '100'
+                                    }
+                                    if (totalSword < 6000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSword += 100
+                                    }
+                                }
+                            }
+                            if (doArcher > 0) {
+                                for (let step = 0; step < doArcher; step++) {
+                                    units = {
+                                        archer: '100'
+                                    }
+                                    if (totalArcher < 6000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalArcher += 100
+                                    }
+                                }
+                            }
+                        }
+                        if (!commandQueue.isRunning()) {
+                            commandQueue.start()
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
+    }
+    attackView.setQueueBunkerCommand5 = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+            var totalSpear = 0
+            var totalSword = 0
+            var totalArcher = 0
+            var totalHC = 0
+            const commandType = COMMAND_TYPES.SUPPORT
+            let units = {}
+
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                        })
+                        if (HC >= 300 || Spear >= 1000 || Sword >= 1000 || Archer >= 1000) {
+                            var availableHc = HC / 300
+                            var doHc = 0
+                            var availableSpear = Spear / 1000
+                            var doSpear = 0
+                            var availableSword = Sword / 1000
+                            var doSword = 0
+                            var availableArcher = Archer / 1000
+                            var doArcher = 0
+                            var maks = 10
+                            if (availableSpear >= maks) {
+                                doSpear = maks
+                            } else {
+                                doSpear = Math.floor(availableSpear)
+                            }
+                            if (availableSword >= maks) {
+                                doSword = maks
+                            } else {
+                                doSword = Math.floor(availableSword)
+                            }
+                            if (availableArcher >= maks) {
+                                doArcher = maks
+                            } else {
+                                doArcher = Math.floor(availableArcher)
+                            }
+                            if (availableHc >= maks) {
+                                doHc = maks
+                            } else {
+                                doHc = Math.floor(availableHc)
+                            }
+                            if (doHc > 0) {
+                                for (let step = 0; step < doHc; step++) {
+                                    units = {
+                                        heavy_cavalry: '300'
+                                    }
+                                    if (totalHC < 1500) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalHC += 300
+                                    }
+                                }
+                            }
+                            if (doSpear > 0) {
+                                for (let step = 0; step < doSpear; step++) {
+                                    units = {
+                                        spear: '1000'
+                                    }
+                                    if (totalSpear < 5000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSpear += 1000
+                                    }
+                                }
+                            }
+                            if (doSword > 0) {
+                                for (let step = 0; step < doSword; step++) {
+                                    units = {
+                                        sword: '1000'
+                                    }
+                                    if (totalSword < 5000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSword += 1000
+                                    }
+                                }
+                            }
+                            if (doArcher > 0) {
+                                for (let step = 0; step < doArcher; step++) {
+                                    units = {
+                                        archer: '1000'
+                                    }
+                                    if (totalArcher < 5000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalArcher += 1000
+                                    }
+                                }
+                            }
+                        }
+                        if (!commandQueue.isRunning()) {
+                            commandQueue.start()
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
+    }
+    attackView.setQueueBunkerCommand10 = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+            var totalSpear = 0
+            var totalSword = 0
+            var totalArcher = 0
+            var totalHC = 0
+            const commandType = COMMAND_TYPES.SUPPORT
+            let units = {}
+
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                        })
+                        if (HC >= 300 || Spear >= 1000 || Sword >= 1000 || Archer >= 1000) {
+                            var availableHc = HC / 300
+                            var doHc = 0
+                            var availableSpear = Spear / 1000
+                            var doSpear = 0
+                            var availableSword = Sword / 1000
+                            var doSword = 0
+                            var availableArcher = Archer / 1000
+                            var doArcher = 0
+                            var maks = 10
+                            if (availableSpear >= maks) {
+                                doSpear = maks
+                            } else {
+                                doSpear = Math.floor(availableSpear)
+                            }
+                            if (availableSword >= maks) {
+                                doSword = maks
+                            } else {
+                                doSword = Math.floor(availableSword)
+                            }
+                            if (availableArcher >= maks) {
+                                doArcher = maks
+                            } else {
+                                doArcher = Math.floor(availableArcher)
+                            }
+                            if (availableHc >= maks) {
+                                doHc = maks
+                            } else {
+                                doHc = Math.floor(availableHc)
+                            }
+                            if (doHc > 0) {
+                                for (let step = 0; step < doHc; step++) {
+                                    units = {
+                                        heavy_cavalry: '300'
+                                    }
+                                    if (totalHC < 3000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalHC += 300
+                                    }
+                                }
+                            }
+                            if (doSpear > 0) {
+                                for (let step = 0; step < doSpear; step++) {
+                                    units = {
+                                        spear: '1000'
+                                    }
+                                    if (totalSpear < 10000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSpear += 1000
+                                    }
+                                }
+                            }
+                            if (doSword > 0) {
+                                for (let step = 0; step < doSword; step++) {
+                                    units = {
+                                        sword: '1000'
+                                    }
+                                    if (totalSword < 10000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSword += 1000
+                                    }
+                                }
+                            }
+                            if (doArcher > 0) {
+                                for (let step = 0; step < doArcher; step++) {
+                                    units = {
+                                        archer: '1000'
+                                    }
+                                    if (totalArcher < 10000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalArcher += 1000
+                                    }
+                                }
+                            }
+                        }
+                        if (!commandQueue.isRunning()) {
+                            commandQueue.start()
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
+    }
+    attackView.setQueueBunkerCommand20 = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+            var totalSpear = 0
+            var totalSword = 0
+            var totalArcher = 0
+            var totalHC = 0
+            const commandType = COMMAND_TYPES.SUPPORT
+            let units = {}
+
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                        })
+                        if (HC >= 300 || Spear >= 1000 || Sword >= 1000 || Archer >= 1000) {
+                            var availableHc = HC / 300
+                            var doHc = 0
+                            var availableSpear = Spear / 1000
+                            var doSpear = 0
+                            var availableSword = Sword / 1000
+                            var doSword = 0
+                            var availableArcher = Archer / 1000
+                            var doArcher = 0
+                            var maks = 10
+                            if (availableSpear >= maks) {
+                                doSpear = maks
+                            } else {
+                                doSpear = Math.floor(availableSpear)
+                            }
+                            if (availableSword >= maks) {
+                                doSword = maks
+                            } else {
+                                doSword = Math.floor(availableSword)
+                            }
+                            if (availableArcher >= maks) {
+                                doArcher = maks
+                            } else {
+                                doArcher = Math.floor(availableArcher)
+                            }
+                            if (availableHc >= maks) {
+                                doHc = maks
+                            } else {
+                                doHc = Math.floor(availableHc)
+                            }
+                            if (doHc > 0) {
+                                for (let step = 0; step < doHc; step++) {
+                                    units = {
+                                        heavy_cavalry: '300'
+                                    }
+                                    if (totalHC < 6000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalHC += 300
+                                    }
+                                }
+                            }
+                            if (doSpear > 0) {
+                                for (let step = 0; step < doSpear; step++) {
+                                    units = {
+                                        spear: '1000'
+                                    }
+                                    if (totalSpear < 20000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSpear += 1000
+                                    }
+                                }
+                            }
+                            if (doSword > 0) {
+                                for (let step = 0; step < doSword; step++) {
+                                    units = {
+                                        sword: '1000'
+                                    }
+                                    if (totalSword < 20000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSword += 1000
+                                    }
+                                }
+                            }
+                            if (doArcher > 0) {
+                                for (let step = 0; step < doArcher; step++) {
+                                    units = {
+                                        archer: '1000'
+                                    }
+                                    if (totalArcher < 20000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalArcher += 1000
+                                    }
+                                }
+                            }
+                        }
+                        if (!commandQueue.isRunning()) {
+                            commandQueue.start()
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
+    }
+    attackView.setQueueSupportBigCommand = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var Archer = 0
+            var HC = 0
+            var Spear = 0
+            var Sword = 0
+            var totalSpear = 0
+            var totalSword = 0
+            var totalArcher = 0
+            var totalHC = 0
+            const commandType = COMMAND_TYPES.SUPPORT
+            let units = {}
+
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                        })
+                        if (HC >= 150 || Spear >= 500 || Sword >= 500 || Archer >= 500) {
+                            var availableHc = HC / 150
+                            var doHc = 0
+                            var availableSpear = Spear / 500
+                            var doSpear = 0
+                            var availableSword = Sword / 500
+                            var doSword = 0
+                            var availableArcher = Archer / 500
+                            var doArcher = 0
+                            var maks = 10
+                            if (availableSpear >= maks) {
+                                doSpear = maks
+                            } else {
+                                doSpear = Math.floor(availableSpear)
+                            }
+                            if (availableSword >= maks) {
+                                doSword = maks
+                            } else {
+                                doSword = Math.floor(availableSword)
+                            }
+                            if (availableArcher >= maks) {
+                                doArcher = maks
+                            } else {
+                                doArcher = Math.floor(availableArcher)
+                            }
+                            if (availableHc >= maks) {
+                                doHc = maks
+                            } else {
+                                doHc = Math.floor(availableHc)
+                            }
+                            if (doHc > 0) {
+                                for (let step = 0; step < doHc; step++) {
+                                    units = {
+                                        heavy_cavalry: '150'
+                                    }
+                                    if (totalHC < 9000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalHC += 150
+                                    }
+                                }
+                            }
+                            if (doSpear > 0) {
+                                for (let step = 0; step < doSpear; step++) {
+                                    units = {
+                                        spear: '500'
+                                    }
+                                    if (totalSpear < 30000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSpear += 500
+                                    }
+                                }
+                            }
+                            if (doSword > 0) {
+                                for (let step = 0; step < doSword; step++) {
+                                    units = {
+                                        sword: '500'
+                                    }
+                                    if (totalSword < 30000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalSword += 500
+                                    }
+                                }
+                            }
+                            if (doArcher > 0) {
+                                for (let step = 0; step < doArcher; step++) {
+                                    units = {
+                                        archer: '500'
+                                    }
+                                    if (totalArcher < 30000) {
+                                        commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                        totalArcher += 500
+                                    }
+                                }
+                            }
+                        }
+                        if (!commandQueue.isRunning()) {
+                            commandQueue.start()
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
+    }
+    attackView.setQueueConquerBack = function(command, date) {
+        closestOwnVillageBunker(command.targetVillage, function(closestVillage) {
+            var origin = closestVillage
+            var target = command.targetVillage
+            var LC = 0
+            var Snob = 0
+            var MA = 0
+            var HC = 0
+            var Archer = 0
+            var Axe = 0
+            var Spear = 0
+            var Sword = 0
+            var Berserker = 0
+            var sent = 0
+            const commandType = COMMAND_TYPES.ATTACK
+            let units = {}
+
+            function unitInfo() {
+                origin.forEach(function(village, index) {
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            Archer = data.available_units.archer.total
+                            Snob = data.available_units.snob.total
+                            HC = data.available_units.heavy_cavalry.total
+                            Spear = data.available_units.spear.total
+                            Sword = data.available_units.sword.total
+                            Axe = data.available_units.axe.total
+                            LC = data.available_units.light_cavalry.total
+                            MA = data.available_units.mounted_archer.total
+                            Berserker = data.available_units.doppelsoldner.total
+                        })
+                        if (Snob > 0 && (Spear >= 500 || Sword >= 300 || Axe >= 100 || Archer >= 300 || LC >= 50 || MA >= 50 || HC >= 50 || Berserker >= 30)) {
+                            units = {
+                                archer: '*',
+                                axe: '*',
+                                doppelsoldner: '*',
+                                heavy_cavalry: '*',
+                                light_cavalry: '*',
+                                mounted_archer: '*',
+                                snob: '1',
+                                spear: '*',
+                                sword: '*'
+                            }
+                            if (sent < 3) {
+                                if (Snob >= 2 && sent == 0) {
+                                    commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                    commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                    sent += 2
+                                } else {
+                                    commandQueue.addCommand(origin[index], target, date, COMMAND_QUEUE_DATE_TYPES.ARRIVE, units, {}, commandType, false)
+                                    sent += 1
+                                }
+                            }
+                        }
+                        if (!commandQueue.isRunning()) {
+                            commandQueue.start()
+                        }
+                    }, index * interval)
+                })
+            }
+            unitInfo()
+        })
+    }
+    attackView.commandQueueEnabled = function() {
         return !!commandQueue
     }
-
-    attackView.isInitialized = function () {
+    attackView.isInitialized = function() {
         return initialized
     }
-
-    attackView.init = function () {
+    attackView.init = function() {
         for (let i = 0; i < UNIT_SPEED_ORDER.length; i++) {
             INCOMING_UNITS_FILTER[UNIT_SPEED_ORDER[i]] = true
         }
-
         for (let i in COMMAND_TYPES) {
             COMMAND_TYPES_FILTER[COMMAND_TYPES[i]] = true
         }
-
         try {
             commandQueue = require('two/commandQueue')
             COMMAND_QUEUE_DATE_TYPES = require('two/commandQueue/types/dates')
         } catch (e) {}
-
         const defaultFilters = {
             [FILTER_TYPES.COMMAND_TYPES]: angular.copy(COMMAND_TYPES_FILTER),
             [FILTER_TYPES.INCOMING_UNITS]: angular.copy(INCOMING_UNITS_FILTER),
             [FILTER_TYPES.VILLAGE]: false
         }
-
         initialized = true
         globalInfoModel = modelDataService.getSelectedCharacter().getGlobalInfo()
         filters = Lockr.get(STORAGE_KEYS.FILTERS, defaultFilters, true)
-
-        ready(function () {
+        ready(function() {
             formatFilters()
-
             $rootScope.$on(eventTypeProvider.COMMAND_INCOMING, onCommandIncomming)
             $rootScope.$on(eventTypeProvider.COMMAND_CANCELLED, onCommandCancelled)
             $rootScope.$on(eventTypeProvider.MAP_SELECTED_VILLAGE, onVillageSwitched)
             $rootScope.$on(eventTypeProvider.VILLAGE_NAME_CHANGED, onVillageNameChanged)
             $rootScope.$on(eventTypeProvider.COMMAND_IGNORED, onCommandIgnored)
-
             attackView.loadCommands()
         }, ['initial_village'])
     }
-
     return attackView
 })
-
 define('two/attackView/events', [], function () {
     angular.extend(eventTypeProvider, {
         ATTACK_VIEW_FILTERS_CHANGED: 'attack_view_filters_changed',
@@ -4827,7 +6911,7 @@ define('two/attackView/ui', [
     'queues/EventQueue',
     'helper/time',
     'battlecat'
-], function (
+], function(
     interfaceOverflow,
     attackView,
     EventScope,
@@ -4843,83 +6927,137 @@ define('two/attackView/ui', [
 ) {
     let $scope
     let $button
-
-    const nowSeconds = function () {
+    const nowSeconds = function() {
         return Date.now() / 1000
     }
-
-    const copyTimeModal = function (time) {
+    const copyTimeModal = function(time) {
         let modalScope = $rootScope.$new()
         modalScope.text = $filter('readableDateFilter')(time * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         modalScope.title = $filter('i18n')('copy', $rootScope.loc.ale, 'attack_view')
         windowManagerService.getModal('!twoverflow_attack_view_show_text_modal', modalScope)
     }
-
-    const removeTroops = function (command) {
+    const removeTroops = function(command) {
         const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         console.log(formatedDate)
         attackView.setCommander(command, formatedDate)
     }
-
-    const switchWindowSize = function () {
+    const killNobleman = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueSupportCommand(command, formatedDate)
+    }
+    const killNoblemanBig = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueSupportBigCommand(command, formatedDate)
+    }
+    const bunkerVillage = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 20) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueBunkerCommand(command, formatedDate)
+    }
+    const bunkerVillage5 = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 20) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueBunkerCommand5(command, formatedDate)
+    }
+    const bunkerVillage10 = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 20) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueBunkerCommand10(command, formatedDate)
+    }
+    const bunkerVillage20 = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 20) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueBunkerCommand20(command, formatedDate)
+    }
+    const conquerBack = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed + 2) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.setQueueConquerBack(command, formatedDate)
+    }
+    const spyVillage = function(command) {
+        var villageId = command.originVillage.id
+        var villageName = command.originVillage.name
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        var interval = 5000
+        var interval1 = 7000
+        var Liczba = 0
+        villages.forEach(function(village, index) {
+            var scoutingInfo = village.scoutingInfo
+            var spies = scoutingInfo.spies
+            setTimeout(function() {
+                spies.forEach(function(available, index) {
+                    if (available.type == 1) {
+                        Liczba = Liczba + 1
+                        if (Liczba <= 7) {
+                            setTimeout(function() {
+                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                    startVillage: village.getId(),
+                                    targetVillage: villageId,
+                                    spys: 1,
+                                    type: 'units'
+                                })
+                            }, index * interval * Math.random())
+                            utils.emitNotif('success', 'Szpieg nr ' + Liczba + ' wysłany na ' + villageName)
+                        }
+                    }
+                })
+            }, index * interval1 * Math.random())
+        })
+    }
+    const withdrawArmy = function(command) {
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        console.log(formatedDate)
+        attackView.withdrawArmy(command, formatedDate)
+    }
+    const switchWindowSize = function() {
         let $window = $('#two-attack-view').parent()
         let $wrapper = $('#wrapper')
-
         $window.toggleClass('fullsize')
         $wrapper.toggleClass('window-fullsize')
     }
-
-    const updateVisibileCommands = function () {
+    const updateVisibileCommands = function() {
         const offset = $scope.pagination.offset
         const limit = $scope.pagination.limit
-
         $scope.visibleCommands = $scope.commands.slice(offset, offset + limit)
         $scope.pagination.count = $scope.commands.length
     }
-
-    const checkCommands = function () {
+    const checkCommands = function() {
         const now = Date.now()
-
         for (let i = 0; i < $scope.commands.length; i++) {
             if ($scope.commands[i].model.percent(now) === 100) {
                 $scope.commands.splice(i, 1)
             }
         }
-
         updateVisibileCommands()
     }
-
     // scope functions
-
-    const toggleFilter = function (type, _filter) {
+    const toggleFilter = function(type, _filter) {
         attackView.toggleFilter(type, _filter)
         $scope.filters = attackView.getFilters()
     }
-
-    const toggleSorting = function (column) {
+    const toggleSorting = function(column) {
         attackView.toggleSorting(column)
         $scope.sorting = attackView.getSortings()
     }
-
     const eventHandlers = {
-        updateCommands: function () {
+        updateCommands: function() {
             $scope.commands = attackView.getCommands()
         },
-        onVillageSwitched: function () {
+        onVillageSwitched: function() {
             $scope.selectedVillageId = modelDataService.getSelectedVillage().getId()
         }
     }
-
-    const init = function () {
-        $button = interfaceOverflow.addMenuButton('Strażnik', 30)
+    const init = function() {
+        $button = interfaceOverflow.addMenuButton('Strażnik', 30, $filter('i18n')('description', $rootScope.loc.ale, 'attack_view'))
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_attack_view_main', `<div id=\"two-attack-view\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'attack_view' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-orange icon-26x26-double-arrow\" ng-click=\"switchWindowSize()\"></a><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap rich-text\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.VILLAGE)\" tooltip=\"\" tooltip-content=\"{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}<tr><td><div ng-repeat=\"unit in ::UNIT_SPEED_ORDER\" class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}\" ng-click=\"toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)\" tooltip=\"\" tooltip-content=\"{{ unit | i18n:loc.ale:'unit_names' }}\"><span class=\"icon-34x34-unit-{{ unit }} icon-bg-black\"></span></div></table></div><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleCommands.length\">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}<table class=\"tbl-border-light commands-table\" ng-show=\"visibleCommands.length\"><col width=\"7%\"><col width=\"15%\"><col><col><col width=\"5%\"><col width=\"13%\"><col width=\"29%\"><thead class=\"sorting\"><tr><th ng-click=\"toggleSorting(COLUMN_TYPES.COMMAND_TYPE)\" tooltip=\"\" tooltip-content=\"{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'command_type' | i18n:loc.ale:'attack_view' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.COMMAND_TYPE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)\">{{ 'player' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)\">{{ 'origin' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)\">{{ 'target' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TARGET_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th tooltip=\"\" tooltip-content=\"{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}<th ng-click=\"toggleSorting(COLUMN_TYPES.TIME_COMPLETED)\">{{ 'arrive' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TIME_COMPLETED\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th>{{ 'actions' | i18n:loc.ale:'attack_view' }}<tbody><tr ng-repeat=\"command in visibleCommands\" class=\"{{ command.command_type }}\" ng-class=\"{'trebuchet': command.slowestUnit === UNIT_TYPES.TREBUCHET}\"><td><span class=\"icon-20x20-{{ command.command_type }}\"></span><td ng-click=\"openCharacterProfile(command.originCharacter.id)\" class=\"character\"><span class=\"name\">{{ command.originCharacter.name }}</span><td ng-class=\"{'selected': command.originVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.originVillage.id)\">{{ command.originVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.originVillage.x, command.originVillage.y)\">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span><td ng-class=\"{'selected': command.targetVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.targetVillage.id)\">{{ command.targetVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.targetVillage.x, command.targetVillage.y)\">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span><td><span class=\"icon-20x20-unit-{{ command.slowestUnit }}\"></span><td><div class=\"progress-wrapper\" tooltip=\"\" tooltip-content=\"{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}\"><div class=\"progress-bar\" ng-style=\"{width: command.model.percent() + '%'}\"></div><div class=\"progress-text\"><span>{{ command.model.countdown() }}</span></div></div><td><a ng-click=\"copyTimeModal(command.time_completed)\" class=\"btn btn-orange size-20x20 icon-20x20-arrivetime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-click=\"copyTimeModal(command.time_completed + (command.time_completed - command.time_start))\" class=\"btn btn-red size-20x20 icon-20x20-backtime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"removeTroops(command)\" class=\"btn btn-orange size-20x20 icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNobleman(command)\" class=\"btn btn-orange size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_nobleman_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNoblemanBig(command)\" class=\"btn btn-red size-20x20 icon-20x20-killBig\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_noblemanBig_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"withdrawArmy(command)\" class=\"btn btn-orange size-20x20 icon-20x20-withdraw\" tooltip=\"\" tooltip-content=\"{{ 'commands_withdraw_army_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"spyVillage(command)\" class=\"btn btn-orange size-20x20 icon-20x20-spy\" tooltip=\"\" tooltip-content=\"{{ 'commands_spy_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div>`)
+        interfaceOverflow.addTemplate('twoverflow_attack_view_main', `<div id=\"two-attack-view\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'attack_view' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-orange icon-26x26-double-arrow\" ng-click=\"switchWindowSize()\"></a><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap rich-text\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.VILLAGE)\" tooltip=\"\" tooltip-content=\"{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}<tr><td><div ng-repeat=\"unit in ::UNIT_SPEED_ORDER\" class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}\" ng-click=\"toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)\" tooltip=\"\" tooltip-content=\"{{ unit | i18n:loc.ale:'unit_names' }}\"><span class=\"icon-34x34-unit-{{ unit }} icon-bg-black\"></span></div></table></div><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleCommands.length\">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}<table class=\"tbl-border-light commands-table\" ng-show=\"visibleCommands.length\"><col width=\"7%\"><col width=\"15%\"><col><col><col width=\"5%\"><col width=\"13%\"><col width=\"22%\"><thead class=\"sorting\"><tr><th ng-click=\"toggleSorting(COLUMN_TYPES.COMMAND_TYPE)\" tooltip=\"\" tooltip-content=\"{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'command_type' | i18n:loc.ale:'attack_view' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.COMMAND_TYPE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)\">{{ 'player' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)\">{{ 'origin' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)\">{{ 'target' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TARGET_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th tooltip=\"\" tooltip-content=\"{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}<th ng-click=\"toggleSorting(COLUMN_TYPES.TIME_COMPLETED)\">{{ 'arrive' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TIME_COMPLETED\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th>{{ 'actions' | i18n:loc.ale:'attack_view' }}<tbody><tr ng-repeat=\"command in visibleCommands\" class=\"{{ command.command_type }}\" ng-class=\"{'trebuchet': command.slowestUnit === UNIT_TYPES.TREBUCHET}\"><td><span class=\"icon-20x20-{{ command.command_type }}\"></span><td ng-click=\"openCharacterProfile(command.originCharacter.id)\" class=\"character\"><span class=\"name\">{{ command.originCharacter.name }}</span><td ng-class=\"{'selected': command.originVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.originVillage.id)\">{{ command.originVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.originVillage.x, command.originVillage.y)\">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span><td ng-class=\"{'selected': command.targetVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.targetVillage.id)\">{{ command.targetVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.targetVillage.x, command.targetVillage.y)\">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span><td><span class=\"icon-20x20-unit-{{ command.slowestUnit }}\"></span><td><div class=\"progress-wrapper\" tooltip=\"\" tooltip-content=\"{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}\"><div class=\"progress-bar\" ng-style=\"{width: command.model.percent() + '%'}\"></div><div class=\"progress-text\"><span>{{ command.model.countdown() }}</span></div></div><td><a ng-click=\"copyTimeModal(command.time_completed)\" class=\"btn btn-orange size-20x20 icon-20x20-arrivetime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-click=\"copyTimeModal(command.time_completed + (command.time_completed - command.time_start))\" class=\"btn btn-red size-20x20 icon-20x20-backtime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"removeTroops(command)\" class=\"btn btn-orange size-20x20 icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"withdrawArmy(command)\" class=\"btn btn-orange size-20x20 icon-20x20-withdraw\" tooltip=\"\" tooltip-content=\"{{ 'commands_withdraw_army_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"spyVillage(command)\" class=\"btn btn-orange size-20x20 icon-20x20-spy\" tooltip=\"\" tooltip-content=\"{{ 'commands_spy_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"conquerBack(command)\" class=\"btn btn-green size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_conquer_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage5k(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_5_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage10k(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_10_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage20k(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_20_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNobleman(command)\" class=\"btn btn-orange size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_nobleman_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNoblemanBig(command)\" class=\"btn btn-red size-20x20 icon-20x20-killBig\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_noblemanBig_tooltip' | i18n:loc.ale:'attack_view' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div>`)
         interfaceOverflow.addTemplate('twoverflow_attack_view_show_text_modal', `<div id=\"show-text-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ title }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><form ng-submit=\"closeWindow()\"><input class=\"input-border text-center\" ng-model=\"text\"></form></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-green btn-border\" ng-click=\"closeWindow()\">OK</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-attack-view table.commands-table{table-layout:fixed;font-size:13px;margin-bottom:10px}#two-attack-view table.commands-table th{text-align:center;padding:0px}#two-attack-view table.commands-table td{padding:1px 0;min-height:initial;border:none;text-align:center}#two-attack-view table.commands-table tr.support td{background:#6884ea}#two-attack-view table.commands-table tr.relocate td{background:#afea68}#two-attack-view table.commands-table tr.attack.snob td{background:#ea7d69}#two-attack-view table.commands-table tr.attack.trebuchet td{background:#eab268}#two-attack-view table.commands-table tr.attack.tribemate td{background:#cccccc}#two-attack-view table.commands-table .empty td{height:32px}#two-attack-view table.commands-table .sorting .arrow{margin-top:-4px}#two-attack-view .village .coords{font-size:11px;color:#71471a}#two-attack-view .village .coords:hover{color:#ffde00;text-shadow:0 1px 0 #000}#two-attack-view .village .name:hover{color:#fff;text-shadow:0 1px 0 #000}#two-attack-view .village.selected .name{font-weight:bold}#two-attack-view .character .name:hover{color:#fff;text-shadow:1px 1px 0 #000}#two-attack-view .progress-wrapper{height:20px;margin-bottom:0}#two-attack-view .progress-wrapper .progress-text{position:absolute;width:100%;height:100%;text-align:center;z-index:10;padding:0 5px;line-height:20px;color:#f0ffc9;overflow:hidden}#two-attack-view .filters{height:95px;margin-bottom:10px}#two-attack-view .filters table{width:auto;float:left;margin:5px}#two-attack-view .filters .icon{width:38px;float:left;margin:0 6px}#two-attack-view .filters .icon.active:before{box-shadow:0 0 0 1px #000,-1px -1px 0 2px #ac9c44,0 0 0 3px #ac9c44,0 0 0 4px #000;border-radius:1px;content:"";position:absolute;width:38px;height:38px;left:-1px;top:-1px}#two-attack-view .filters td{padding:6px}#two-attack-view .icon-20x20-backtime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEMklEQVQ4y42US2xUdRTGf3funZn/PHqnnVdpKZZ2RCWBVESgoZogSAKKEEAlGhVNLMGg0QiJKxYudIdoTEyDj8SFGo2seDUGhEQqRHk/UimDpdAptHMr8+jM3Dv35QJbi9KEszzJ+eU753z5JKYuOQGBUpAa2SLiuPgBPBKGrZAPlSlmoQLYk4ekqUCmEHHL0pslRb7fsNwWF8L/DIz5Fanftey0oogBr65rk8HS3WC6jyY8ckfZdNtfWdX++tzGIDMabAJmArte4my/l/c//vaLoFc6jmP3iCqD41B5Mi0BId1Hk+V6ljfEQlvWL2xZoY/lKOTLGCY01tZhVLMkRJEtqzoeyUvSnN70SNZRXC1iUylDVZmszhQiDmbH9Lrgpta4mKPlCjy95D6Wrn8GAKFEEfEmdG2Qowd+4I0XFrUC7+w7eL5sCu8hdL3imaQuYFl6c9l021vjYk7Y72Xjq4/z1IaNCCVKMRckq+moiQDJ2bN48uV3GbnSx9b1ra1l0223LL05AYF/Vw4S80jyonnN6paq5YTe3LyU2rpaYrFpJGfPItlcTzI1H8R8cC38NTFiaojhSzeJJ8KNJ/4YOmP43GsTCmWLiGG5LTUBb2LuzGm3e3Ij3321m5Hey6A0AVAcPjmhQcSbuDyU5sF6e5phuS2yRWQC6Lj4x62h1vjJ3BwjlUoiYn52ffolmUtnuXj4ADu2b7/DFoN9RVQ1gAthx8U/+Sk4LiGAQtFAHzXIajpr16yiu/tX98euzyWAzrc6Abj8+1G0TIZ8uYx/xJpgjANlWfEKqjaZbIlixQQgdDHDyuULWLFisZTVdBJxQTIVA2uQ+qZ6KoU0nhqV09f+QoIxj4ThAWRVJWLZToNXUaarYR8Hdm+iZBic7N5LbmgI0xclERcAFLIVAHRtkFOHjwBwNHNryK9I/bZCXlFVIk6ZuSbukidmR1Z+/cliAHzRBjKjBTq37bz9gEAAgA+2vQjAjb4j9F6pUCga/Hzm5v6A5KRDFkXF1UnWRcRj256d/vam9zrJXT0GwGc7V+ONRwAwtTwAa9bs4ND+PTy8MMW5az7+vJ7lXKZ4IeiVjsuIgaylVxTHxf/S84+u3bh5Mbmrx/D6Y1hjGtaYBjduH9g0RonNSmH4o/T1j9JzeoBixSRbsi9ktNIuRXJ6vFVbA2ypVoiZNuay+qj62r6u1R0ee4i65Iw7rDEOnLegC4CSqwxf18b23C0cFMenF5wKJzLZfLDtuW/4pWt1Ry6XY8/ug8jRB6gN3GI0k6VtXcq9csvqtm2rTyjS+YDkpGXEgLdq/z++EhA2hYjbmMtMx7P8+4/Wbdj64U89/cP5Xlli2HGcUsAnjziulMGxbrheRu4lYH21QjSarvXQoraZbQC/nUoflzwMyx6hVz26MRVkysROQNhQ8XmqQr1XwH/rb2Du69Eebp25AAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-arrivetime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEW0lEQVQ4y4WUWWxUZRiGn7PMnNPOVtvODHQBSlulAUFBoQiEaBHBhCsSFaIhIe6JSyAkRkO8NpErY2KoYuINISkkRFAjEUyAUCQsBSu1BVpKZ2DmTNuZzsyZMz3L70Vbgkjqe/Ul//89//K9eSX+KyUKFcVKQopDxBNoALJE2VXJBUzyBpQA9xG9SA+DbF2vdRxrvqQqLWVHNAkITm8saKo0KBz3hqrqt32WlXkUWHoQZvlpQFbWmLZo//zj7W8ua7JRUoKSz+DOXYVrSZMfjnV/W+mTuvHcs/okIw9DFYAoBCw/DY6QX9yycemer9/p6KiQE7ilIj4vwNXBFIO3M1iFLKta4suNvLUwZzpZTxWZiEvJhMkHgYpf1+cKSazfsnHpnve2rVqYTg2xdvMrPL76JWKNNSxesYB1LyyDiQQ9fWkCmhxzkRuLZTcpVC1lOU4eEDNPDUzitJVc6eUDn6zuSAwl2PDGLqrnx9ECPob6kkxaPiLBEK1LniIaFVz/c4SAJsf6U2ZaEfZwxMOYuaVCJTWypKz68LXV7y6sigWf7thMdfMKkMOgryA2r5pYYwWBaA3FzBhFM8uiRXFOnumn/jGt0SjYl8t+MWzbFABkxSFSdkTTE3F3zkDyBnptw/2J5VMXpwq1gfT1AQ4eOIyi1AHw5II5hCp80bIjmhSHyEyP7Ak0AcFwuIKR/vy/PLVv7156T/1M4u8e9n/1HXqNRnNzjMS9AuGQBlMfF5zxKoA6U2hph5xp0nv+ErX1KVqfXctbH+yk65tOAOa1tolNm56TjIyFNVpmIl8GwBMEHnSzKkuUJUHh8vAYcihMIFQi3hAHZ4T65hq27dyKkbGI1uqS7a/mXO8F+gZGuDZ0j4nClFsU1adj2wrgyq5KTlOlwTOJ8STApVO/Y2VGAJgwSgBEa3VsfzXZZJKLvxyjWC7z8+G3CQf9+FS13nG9ueEwEUBRqmywEfrAvWLF4rqq5fmiwCvcIjuqYCTu8v5nnXQd7+bgoZ/48dduXF8F4ZpaNj0/j60bgly+YLTeNMyUYosxPUhONaBUpeq3K7G7T/Ym2pfWh5ZU1MzBX/0XV/64iVYe4+jR3QD4aqeGaWdylPNjABw9upv9X3R+9GVXwsjmrZQCiJDjOI4scjnTyZZc0ZhKJmM9PcNYlsu4CLJjez3jt65ij45jpZPYhVG8SRNFrcQc7eeZ9evIl9xI96Xh4yqAAaXoJCOW3zuRGjfNwbRob6wNbkkYxTizaDx9B0+pY93rnWdTYxPf+xQ9p0yvCRPciEtJqFpKEfZwyXaupArOYLbM+JK2lS3HDhyRbgwanO6eoPvEaWLxOixLY+WOrrP5onUI4Z2TdMeQZgtYySaGrM6VJVFfmnRjsiwHXEG8KR5p2/fpxjWv7jpyyCd7JxR8v03nY0Fidt2H+z1dcz1LFx7xlctb2gHO9wz1+CS1L2tZSabD4f+Asx7g+a0JbYJJg6lgAPgHUh4QWRIJr4EAAAAASUVORK5CYII=")}#two-attack-view .icon-20x20-spy{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAN9SURBVDhPrZVLbBtVFIb/mTt+xC/GdlzHSZw2jhMIIbRENG5JsVFbFiAWSOy6SlnwqlggFgiJBQuW7BArNiwBCSGxYFGhSpRWTlrHSUxCGjt1Yzt+JX5nJuPHPMgMTqWqadpF/s3VPfecT0c6j0u98/FnOE7R3fPYpGX414/fU6IosoSmgxSFFxUF/0qyfJNhmFpo9prS9X0mkbGz53E/ErYzhP7oq8+v/nDlYt8lo8UcWEsUhX1oPBNbaJ06M911f7o04EZkbuL1SfcXV4LEMzrmQQ9N7C7XwFuR1U09oWBMRufq6dgC/yxgDfhgcc7vYQ1Xh57bta4meLhffhesvolLr7rOsw5boFYT3HWumUrH7uxDA51u7KHSgJnlCFFE8TQtSs+XdygwrQQuvCLDP+yBiwh2M+kJ5MrcVJ1vJdOxu/mjoBowu3yXqwriYrWpm9LpFO+gsYxensVWo4FIkiiCuZ/y9du9PG0OFvPb1tTSnWIuFqkOnZmWu5yH0oDqg+qw0xCiHZoJDjuoXomu4Pa6ghfenKUk2oh0Ng+vVWEnRwdCDUk3WqlUCodlqwFVqdDNxflmnWvZ+mxsqLTbwg4ZRJsrY/NBEp9MOzFItWFs8xge8fiILEykilxChaaWIuJBwR4CVeVjC6IMeXUtzwku1hZSKIJ0Jo/LLhH9nl6YbRboJAmdWo1ye8yeTrtzOVsW0pIkbx201yNANUu1PQB5baO4R044We2x3yhDEQSwp9owG90wujpwiSZ4LAar2USfu1/kFVGSVnxT55qPjZ46GYQwRQNDvpv/J/lT14xUqYHo3zVUxLx2X0kVEE4WYHdYB0bGxz9UoLyk2g+dZRXKUFRGlqRvc7lCmJcKmr2x14RUoPHH9QzWOREFyxgcF97HG2+/d3J/bL2qzxOXw8zsNdGgJ2vZMvf1UsEQVaENQcTP8/fAEYKKyQ/aPoSWbQAGcRdQ0KvGHbltQrOf7hFC37q1Uvzy12X5Xq21jXa5AYPVgR6TCTNnJzHu6sHmVjb+2vSET4156vpSoQbC3Mhu1z+4uSGH9U4bTozPIBC8CN+IH9bGMqqplXjfyZG46v9IlZ8ktfr7LZWr8q3bvIgpp77ppZWOkluPUNd//y2q6CxLf94If/NY2xyl/1sqUqpyQtzhZF2FfDZRKpXibv/pX1TYwd485i8A+A/DgaisICBxKQAAAABJRU5ErkJggg==")}#two-attack-view .icon-20x20-withdraw{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQRSURBVDhPlZRtTBxFGMf/s7sc3AsHnBwHR6GHwcJBxLbQ1lYTFCsJidb4Qf2gxEox0WihEL+YmH6oxpjUtJCWJlarrUZj/GBjfaGlqSmvhRZqQQOIpdxxlAKF4+DeWO52x51luUKiqf6SzTzPf2f+OzP7zJBn3qzD/6H1i+M5kiztBkhn2b6aQU2OwWntf6akMPuFhqbjJzOt5jc0aR3/ath6uol0nm4StFTJjxlaTjYUFz/9fFWaPRuyTF/89VRjuvY6xjpDthw2iMVUlveEJfkyM7r0WWMKBblW9059L09p3tGD9Sgqyrdl5TjOqAPXsM4wStGk0wlfMmNw5ENK8djSstwAjv86PiHBac/fjJEbnaBm+0r/gDebfUxNNGKGlz8/9pyyjIpIlBZEZPoVazda4mA2G6uZbrFtIAPdbWrfQ4ePYCEcBR8V8wWeW7eXMcNlSS7VQhiN+l2stVtMaKwvJSz2Tk/Qm72tLETrL2eRpBewIa8Q6cl6pypqqJvO9o1wfF1V+UN4wGanfj6FSAEvpMU7qCjPQEvBKzjwsYv8MdxHDXeDJMX6O+KNZkizLozPBl15qtUKqiHHwWA06ekHBx8nRnOQcCabomYpzyPwTwawc3sKzh7JxatvT5LJII9QKMSGIeydhk7gwmqioS6ZI+QvixD56faYB0NXhuBq74HPNYaQVwdD2oOqaXryIL4/UYqXdtlp36AHd9wuSEYLIpLUoTppcKzelL8pgo/zMcGYoEdCigm8zqp2EBd9SLSbMNLvxXuHOtDe7yF5qQQF6TyyM20QON6idtTgy1+vgWegT5z1ixW51qTiieFbcHsWMDoaQlfXKNJTjfjz6ggq3+3ArXAy/BEO2fwCwkER4UUvxufCA44tO2Kz5Ddt2wnH5u0Yu96z7dJv00Jzf+jMz72B0vPXpgZFUfKkxkcyXn7/6rRflMfjdILVKs/BEF6CFBYxvSRjZnH5XM7WHT2a372yIYReFAgO6+K4jziONEclOm9zPnrquw6/8pbOKflAiTMLoz6ZXrgtNruSctyZm5xQatax4rCCasj2cXf1gfYnqvb/ULp3f0iSpGGmz5sdJ1q6h4+yU8JyVsyBQJjwoJ8EZybOMY3juAzWrqIalu59i6qZhsDhPAdZPacsFpfEmSyLPlKypYialPKSqZw2ObvYbXE8DKargzRiS15L2b7aFuX5VEsRleSbU77w0NwST9JSE4kMrkwptY1x+kStxz3+0XAtPM91ECo/K1PqDt51KxdC4Ioy+zqWj1xvQ4azuHL1hmLc15Dt6VPVtfNZqYlun6gcrOjyrDL7qSerar7p6r7xrcFggMCTrau3zn0NV8nd81pn28ULhVN+qVaToOe5SqYp4Y8JgqCUA/A3Zu24cT81pCsAAAAASUVORK5CYII=")}#two-attack-view .icon-20x20-bunker{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOpSURBVDhPrZVvTBNnHMe/d9dBaUtharBSwOsUZAwEGoECMUE0ZsSRZYvJtqjZJmOJY7ExkRczMe7VlizxxeaWGbNFXZbBZsziotmmAzVzVBQUwYppgRWo/Se29drrX67dc+eJMBzZCz/Jk+e55/l9v/f8ued31Ct79uFZQsv1kvR++7lOLPLjkjAlNfVyczGXj39pmBzq31NcVnY04A98aL9u0TqHBxxsdW1QDlnE3JL/OvGVIi4IJal0ajlD04WJ2XSTTr+q3bCmGGWVRoz+eRYunoHf60xzHP9NhoK6JKRS0zRFP8hkGFvjOx2zoo9CciPwiWRl88stA9aRW/C5vXh9xy40bNoMjVqD82fP4O3XGnHo2HnUNGykEiFfu9vtag/HKUnrvefaQKpBsT1n+JyCXldZ/iJatr8Fll0NU/V6rNBmwzpqRdieiy2NAjoPc2kSSuWtWAa2qEDSjd0Lkll71pHmQkMRlVqFv8fGEQ2HcO1qPzKSHCz9gzh2sBXaLAeWZ8xS4gqUKi0K89QQjRVCWFY/YsEpR/gIYjyH5MRFvGHogfnVBLo/qYC+vFga//HTUpz7rAI9R7egtRyIk9h/M2dIgeJnghzYNWsRy6vFoeNB/NJ1CZnaXDkCUCuzyAtzsb/zNL6/JmAZW4FZRiNp5ZAnhuR0o2IdCvPI0+nQ9GYHPv5dgbujIWlciPmhfF6DzoM/Yzy9EpWlq5Hm70tLfqwVmbdkyjk0OACPwybtoVhK8nOgz76DxP3r6BvkodSosO+DeuSoGEQiETimnLA73JL2kcc8Q4ahHNbhkW67zQ6PxwfH+Bg6tuWi73IQxq1HsN38E34758bGigIIZO+KCgvEE8eM1/erqJVMCHM3ha2qS07csPj0Rey74nMsGsVLqml8dNKG9fVb4X/gRe8Ih4k7VmRlqWFzBSlxdnzoYVvzbvO4ZEJYcPVeMJqm+s6cCmTn5LTosoGLdhpVpiYYTQ0YtlxATXU5kmo9YikaY64QfNOT5s3vmU/JcokFn43Ipra9X9y0XDkQiCvAFpdCqdZKt0WVmSmNuwIJ3J58SPbafoBmmCNS5zyemhzY6rorPV0nA7r8/BalUol4IgmPbQgeLokk5yUf/4S5affew2xVrax4wn9mG4Oxrv+PrhMuYtp6l9wOnvPD5+cwNel8v7nN/LUctogl05fBaLrR2/3dUCrqr4pFYsLMTGAn2ZIf5OGn8r8y9uPkSmbmkTqW4Bn/AoB/AEiQfn1r/m4bAAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-kill{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARYSURBVDhPrVVtTFNXGH4uvZTSQgstpUKBUQQa0PFlBBzBZTB+bMMl02XBhbk6NhfjotFly2L2Yz/moiGZIZsxWSaRLRrJNtwSTIYwFBlBDCAwyrdQpIV+QmnpB+29ves9IJppsj8+ycn7vuec9+s5N++lqo+exPNExKZ8bniqwp7LF2g/w8RSFHbzdkXdiZtdly9QoRB7sHhnesq9UYOR4zBUUXd8jDj8B09VWL3/jSPdXUeXF7rr2tRKWTW/RwOCI5XKty4eXD83cCbpyrl3M1v4fT4RXwCvP4Ige/ceovz1Y0O8OtJz1mk2rqcwzqrJJj1kKaGF69dvZybGiT7UJkYVGQeg6B7yUCtcyNHyx63G0l059S+qIn74p7e3QN/X05ZeUBIkLXdeath2qvaVxRj3fWrIKDYVsqHkQx8UU8KkGJIstkgJ77IQ+uZLxJ7uleHqqndwX55U8r7OrzWYc3Dg077vtG/qjpOWw62dPvlxBkV0/5r6sIylBL/1gv2+HQ7PLFobruHa+Ub+eAvFS6tF3jF39sXPg5x7pB9gmTh+n7TsmBx6TXXfXJJrY7FfvkGJKCcTXM0uTNf3QzTPQWGj8KDPhwmLmEveE6SS8kSYmPFR8ys+amCUAa2MZe92dDVuPcq+sxWIT0vbtIBgpQbDZ9phsHmI/UgqbS5q+g7FWe0MsvIjkSCj8cX5t5EeIy5iEBJuBRQnZsCEAOx7d5DFB9spC796pmTzxmNYg17K50vF67oaSFOS8efVETh9PnJGAmo0as26ywn9QxvHZAmRqcvHS02VaJ3xYDwvG3s7vsKh4XrU3vkI+rgwJYpEHD5dBad5Gi7jIrQFa4h2uB4H3CG1++cGbqLms2gqThaCe3ENAUsPucCDMXVjebgN355qgn2VARxWdP78E2b6h3Him2KMDNpBq2kwTCiKBGwdXl9SZ72AmLQKSJML4fGJwi1oSTWDm62YpucRJxEQ3R2rgDMQCZ7H0SED8ooS4PaLyZnAph+kc3O3Vx14Nb40UpKKKGkc6AgWFOeCSuXH2qoTgRU7ggEGIpkI0hgG+VksHhp9EIWfIIpisLjgxYJPBsOi60tSIeW1lf9ywwuxPECyBFyTMJv8RNdu38jMQ+ZeJnJqfp3IWStLpNPDhqlwD4bJYCPKdMeYv0et7xmmbHAa5iCgrfCveaHWpEKplEMcGw1FcA2w2Inzk8hIFJC2bSsJCFLi5pd1xzjyYWuKSmx3O291WCYsZRKOTYiXR8A8OwPauoRInxeO5Y1qLWHeJOIIKMLc8ouTpqN/ToARo2NpeMr2TlpBcWhrOMi1hQstv9++MWf0luvHA0lCWgxangThtiREqZLhFSSAE6zjgUOJ8QUJJsw02u8Zlxz+yK8Hpiy15bpPCA/PnNj8sKAoqiI5QVqqUYnK5FECVYgJqa3ewBJ/bnKyvwrANc9bXWMimnbztBHHMP73F8DPPH4e8vqTjs8G8C/hq9/zbfBsvwAAAABJRU5ErkJggg==")}#two-attack-view .icon-20x20-killBig{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARYSURBVDhPrVVtTFNXGH4uvZTSQgstpUKBUQQa0PFlBBzBZTB+bMMl02XBhbk6NhfjotFly2L2Yz/moiGZIZsxWSaRLRrJNtwSTIYwFBlBDCAwyrdQpIV+QmnpB+29ves9IJppsj8+ycn7vuec9+s5N++lqo+exPNExKZ8bniqwp7LF2g/w8RSFHbzdkXdiZtdly9QoRB7sHhnesq9UYOR4zBUUXd8jDj8B09VWL3/jSPdXUeXF7rr2tRKWTW/RwOCI5XKty4eXD83cCbpyrl3M1v4fT4RXwCvP4Ige/ceovz1Y0O8OtJz1mk2rqcwzqrJJj1kKaGF69dvZybGiT7UJkYVGQeg6B7yUCtcyNHyx63G0l059S+qIn74p7e3QN/X05ZeUBIkLXdeath2qvaVxRj3fWrIKDYVsqHkQx8UU8KkGJIstkgJ77IQ+uZLxJ7uleHqqndwX55U8r7OrzWYc3Dg077vtG/qjpOWw62dPvlxBkV0/5r6sIylBL/1gv2+HQ7PLFobruHa+Ub+eAvFS6tF3jF39sXPg5x7pB9gmTh+n7TsmBx6TXXfXJJrY7FfvkGJKCcTXM0uTNf3QzTPQWGj8KDPhwmLmEveE6SS8kSYmPFR8ys+amCUAa2MZe92dDVuPcq+sxWIT0vbtIBgpQbDZ9phsHmI/UgqbS5q+g7FWe0MsvIjkSCj8cX5t5EeIy5iEBJuBRQnZsCEAOx7d5DFB9spC796pmTzxmNYg17K50vF67oaSFOS8efVETh9PnJGAmo0as26ywn9QxvHZAmRqcvHS02VaJ3xYDwvG3s7vsKh4XrU3vkI+rgwJYpEHD5dBad5Gi7jIrQFa4h2uB4H3CG1++cGbqLms2gqThaCe3ENAUsPucCDMXVjebgN355qgn2VARxWdP78E2b6h3Him2KMDNpBq2kwTCiKBGwdXl9SZ72AmLQKSJML4fGJwi1oSTWDm62YpucRJxEQ3R2rgDMQCZ7H0SED8ooS4PaLyZnAph+kc3O3Vx14Nb40UpKKKGkc6AgWFOeCSuXH2qoTgRU7ggEGIpkI0hgG+VksHhp9EIWfIIpisLjgxYJPBsOi60tSIeW1lf9ywwuxPECyBFyTMJv8RNdu38jMQ+ZeJnJqfp3IWStLpNPDhqlwD4bJYCPKdMeYv0et7xmmbHAa5iCgrfCveaHWpEKplEMcGw1FcA2w2Inzk8hIFJC2bSsJCFLi5pd1xzjyYWuKSmx3O291WCYsZRKOTYiXR8A8OwPauoRInxeO5Y1qLWHeJOIIKMLc8ouTpqN/ToARo2NpeMr2TlpBcWhrOMi1hQstv9++MWf0luvHA0lCWgxangThtiREqZLhFSSAE6zjgUOJ8QUJJsw02u8Zlxz+yK8Hpiy15bpPCA/PnNj8sKAoqiI5QVqqUYnK5FECVYgJqa3ewBJ/bnKyvwrANc9bXWMimnbztBHHMP73F8DPPH4e8vqTjs8G8C/hq9/zbfBsvwAAAABJRU5ErkJggg==")}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.commandQueueEnabled = attackView.commandQueueEnabled()
         $scope.commands = attackView.getCommands()
@@ -4937,7 +7075,6 @@ define('two/attackView/ui', [
             loader: updateVisibileCommands,
             limit: storageService.getPaginationLimit()
         }
-
         // functions
         $scope.openCharacterProfile = windowDisplayService.openCharacterProfile
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
@@ -4945,12 +7082,19 @@ define('two/attackView/ui', [
         $scope.now = nowSeconds
         $scope.copyTimeModal = copyTimeModal
         $scope.removeTroops = removeTroops
+        $scope.conquerBack = conquerBack
+        $scope.killNobleman = killNobleman
+        $scope.killNoblemanBig = killNoblemanBig
+        $scope.bunkerVillage = bunkerVillage
+        $scope.bunkerVillage5k = bunkerVillage5
+        $scope.bunkerVillage10k = bunkerVillage10
+        $scope.bunkerVillage20k = bunkerVillage20
+        $scope.withdrawArmy = withdrawArmy
+        $scope.spyVillage = spyVillage
         $scope.switchWindowSize = switchWindowSize
         $scope.toggleFilter = toggleFilter
         $scope.toggleSorting = toggleSorting
-
         updateVisibileCommands()
-
         let eventScope = new EventScope('twoverflow_queue_window', function onWindowClose() {
             timeHelper.timer.remove(checkCommands)
         })
@@ -4959,15 +7103,11 @@ define('two/attackView/ui', [
         eventScope.register(eventTypeProvider.ATTACK_VIEW_COMMAND_CANCELLED, eventHandlers.updateCommands)
         eventScope.register(eventTypeProvider.ATTACK_VIEW_COMMAND_IGNORED, eventHandlers.updateCommands)
         eventScope.register(eventTypeProvider.ATTACK_VIEW_VILLAGE_RENAMED, eventHandlers.updateCommands)
-
         windowManagerService.getScreenWithInjectedScope('!twoverflow_attack_view_main', $scope)
-
         timeHelper.timer.add(checkCommands)
     }
-
     return init
 })
-
 define('two/attackView/types/columns', [], function () {
     return {
         'ORIGIN_VILLAGE': 'origin_village_name',
@@ -5354,6 +7494,167 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/autoFoundator', [
+    'two/utils',
+    'queues/EventQueue'
+], function(
+    utils,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let interval = 3000
+    const donateTribe = function() {
+        if (!running) {
+            return false
+        }
+        console.log('Fundator uruchomiony')
+        let player = modelDataService.getSelectedCharacter()
+        let villages = player.getVillageList()
+        villages.forEach(function(village, index) {
+            var resources = village.getResources()
+            var computed = resources.getComputed()
+            var wood = computed.wood
+            var clay = computed.clay
+            var iron = computed.iron
+            var villageWood = wood.currentStock
+            var villageClay = clay.currentStock
+            var villageIron = iron.currentStock
+            var woodCalculated = Math.round(villageWood * 0.02) + 1
+            var ironCalculated = Math.round(villageIron * 0.02) + 1
+            var clayCalculated = Math.round(villageClay * 0.02) + 1
+            setTimeout(function() {
+                socketService.emit(routeProvider.TRIBE_SKILL_DONATE, {
+                    village_id: village.getId(),
+                    crowns: 0,
+                    resources: {
+                        wood: woodCalculated,
+                        clay: clayCalculated,
+                        iron: ironCalculated
+                    }
+                })
+            }, index * Math.random() * interval)
+            console.log('Wykonano darowizne na plemię: ' + village.getName() + ' drewno: ' + woodCalculated + ', glina: ' + clayCalculated + ', żelazo: ' + ironCalculated)
+        })
+    }
+    let autoFoundator = {}
+    autoFoundator.init = function() {
+        initialized = true
+    }
+    autoFoundator.start = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
+        running = true
+        setInterval (function() {
+            running = true
+            donateTribe()
+        }, 3600000)
+        donateTribe()
+    }
+    autoFoundator.stop = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STOPPED)
+        running = false
+    }
+    autoFoundator.isRunning = function() {
+        return running
+    }
+    autoFoundator.isInitialized = function() {
+        return initialized
+    }
+    return autoFoundator
+})
+define('two/autoFoundator/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        AUTO_FOUNDATOR_STARTED: 'auto_foundator_started',
+        AUTO_FOUNDATOR_STOPPED: 'auto_foundator_stopped'
+    })
+})
+
+define('two/autoFoundator/ui', [
+    'two/ui',
+    'two/autoFoundator',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    autoFoundator,
+    utils,
+    eventQueue
+) {
+    let $button
+
+    const init = function () {
+        interfaceOverflow.addDivisor3(71)
+        $button = interfaceOverflow.addMenuButton3('Fundator', 70, $filter('i18n')('description', $rootScope.loc.ale, 'auto_foundator'))
+
+        $button.addEventListener('click', function () {
+            if (autoFoundator.isRunning()) {
+                autoFoundator.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_foundator'))
+            } else {
+                autoFoundator.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_foundator'))
+            }
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+
+        eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+
+        if (autoFoundator.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
+        }
+
+        return opener
+    }
+
+    return init
+})
+require([
+    'two/ready',
+    'two/autoFoundator',
+    'two/autoFoundator/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/autoFoundator/events'
+], function(
+    ready,
+    autoFoundator,
+    autoFoundatorInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'auto_foundator_active'
+    }
+	
+    if (autoFoundator.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        autoFoundator.init()
+        autoFoundatorInterface()
+
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                autoFoundator.start()
+            }
+
+            eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+
+            eventQueue.register(eventTypeProvider.AUTO_FOUNDATOR_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
 define('two/autoHealer', [
     'two/utils',
     'queues/EventQueue'
@@ -5392,8 +7693,6 @@ define('two/autoHealer', [
                 }, index * interval)
             }
         })
-        console.log('Medyk zatrzymany')
-        autoHealer.stop()
     }
     let autoHealer = {}
     autoHealer.init = function() {
@@ -5403,6 +7702,10 @@ define('two/autoHealer', [
         eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STARTED)
         running = true
         heal()
+        setInterval(function() {
+            running = true
+            heal()
+        }, 3600000)
     }
     autoHealer.stop = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_HEALER_STOPPED)
@@ -5537,7 +7840,8 @@ define('two/battleCalculator', [
     let running = false
     let settings
     let battleCalculatorSettings
-    let presetSelected = []
+    let presetSelecteds = []
+    let presetSelected = null
     // Bashpoints
     let pointsatt = null
     let pointsdef = null
@@ -5816,12 +8120,10 @@ define('two/battleCalculator', [
     }
     console.log(BATTLE_HOSPITAL_LEVEL, BATTLE_SKILL_CLINIQUE_LEVEL, BATTLE_SKILL_IRON_WALLS_LEVEL, BATTLE_SKILL_WEAPON_MASTER_LEVEL, BATTLE_WALLS, BATTLE_CHURCHES, BATTLE_ITEMS_LEVELS, BATTLE_ITEMS, BATTLE_CAT_TARGET)
     const updatePresets = function() {
-        presetSelected = []
+        presetSelecteds = []
         const allPresets = modelDataService.getPresetList().getPresets()
         const presetsSelectedByTheUser = battleCalculatorSettings[SETTINGS.PRESET]
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            presetSelected.push(allPresets[presetId])
-        })
+        presetSelecteds.push(allPresets[presetsSelectedByTheUser])
     }
     const battleCalculator = {}
     battleCalculator.init = function() {
@@ -10334,10 +12636,10 @@ define('two/battleCalculator/ui', [
         let bashpointsAtt = battleCalculator.getBashpointsAtt()
         let bashpointsDef = battleCalculator.getBashpointsDef()
         if (bashpointsAtt) {
-            $scope.totalAtt = bashpointsAtt
+            $scope.totalAtt = bashpointsDef
         }
         if (bashpointsDef) {
-            $scope.totalDef = bashpointsDef
+            $scope.totalDef = bashpointsAtt
         }
     }
     const clearBashpoints = function() {
@@ -10920,7 +13222,7 @@ define('two/battleCalculator/ui', [
         battleVillage = {
             origin: false
         }
-        $button = interfaceOverflow.addMenuButton4('Kalkulator', 10)
+        $button = interfaceOverflow.addMenuButton4('Kalkulator', 10, $filter('i18n')('description', $rootScope.loc.ale, 'battle_calculator'))
         $button.addEventListener('click', buildWindow)
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
@@ -11777,7 +14079,7 @@ require([
     ready(function () {
         battleCalculator.init()
         battleCalculatorInterface()
-    }, ['map', 'world_config'])
+    }, ['map', 'presets'])
 })
 
 define('two/builderQueue', [
@@ -14287,7 +16589,7 @@ define('two/builderQueue/ui', [
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('stopped', $rootScope.loc.ale, 'builder_queue'))
         })
-        interfaceOverflow.addTemplate('twoverflow_builder_queue_window', `<div id=\"two-builder-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'builder_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SEQUENCES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}\">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><h5 class=\"twx-section\">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5><table class=\"settings tbl-border-light tbl-striped\"><col width=\"40%\"><col><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_VILLAGES]\" drop-down=\"true\"></div><tr ng-show=\"settingsView.sequencesAvail\"><td><span class=\"ff-cell-fix\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"sequences\" selected=\"settings[SETTINGS.ACTIVE_SEQUENCE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_WOOD].min\" max=\"settingsMap[SETTINGS.PRESERVE_WOOD].max\" value=\"settings[SETTINGS.PRESERVE_WOOD]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_WOOD]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_CLAY].min\" max=\"settingsMap[SETTINGS.PRESERVE_CLAY].max\" value=\"settings[SETTINGS.PRESERVE_CLAY]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_CLAY]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_IRON].min\" max=\"settingsMap[SETTINGS.PRESERVE_IRON].max\" value=\"settings[SETTINGS.PRESERVE_IRON]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_IRON]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span><td class=\"text-center\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORIZE_FARM]\" vertical=\"false\" size=\"'56x28'\"></div></table><h5 class=\"twx-section\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!settingsView.sequencesAvail\" class=\"text-center\"><a href=\"#\" class=\"btn-orange btn-border create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><div ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div><table class=\"tbl-border-light header-center building-sequence\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"13%\"><col width=\"8%\"><col width=\"9%\"><col width=\"9%\"><col width=\"9%\"><col width=\"6%\"><tr><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.visibleBuildingSequence track by $index\" class=\"{{ item.state }}\"><td>{{ pagination.buildingSequence.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.duration }}<td class=\"green\">+{{ item.levelPoints | number }}<td>{{ item.price.wood | number }}<td>{{ item.price.clay | number }}<td>{{ item.price.iron | number }}<td>{{ item.price.food | number }}</table><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div></div><h5 ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"twx-section\">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5><table ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-final\"><col><col width=\"5%\"><col width=\"12%\"><col width=\"8%\"><col width=\"11%\"><col width=\"11%\"><col width=\"11%\"><col width=\"7%\"><tr><th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.buildingSequenceFinal | orderBy:'order'\"><td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.build_time | readableSecondsFilter }}<td class=\"green\">+{{ item.points | number }}<td>{{ item.resources.wood | number }}<td>{{ item.resources.clay | number }}<td>{{ item.resources.iron | number }}<td>{{ item.resources.food | number }}</table><p ng-show=\"settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length\" class=\"text-center\">{{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}</div><div ng-show=\"selectedTab === TAB_TYPES.SEQUENCES\"><h5 class=\"twx-section\">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!editorView.sequencesAvail\" class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><table ng-if=\"editorView.sequencesAvail\" class=\"tbl-border-light tbl-striped editor-select-sequence\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span><td><div class=\"select-sequence-editor\" select=\"\" list=\"sequences\" selected=\"editorView.selectedSequence\" drop-down=\"true\"></div><tr><td class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-orange clone-sequence\" ng-click=\"editorView.modal.nameSequence()\">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-red remove-sequence\" ng-click=\"editorView.modal.removeSequence()\">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></table><div ng-if=\"editorView.sequencesAvail\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><table ng-show=\"editorView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-editor\"><col width=\"5%\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"10%\"><tr><th><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'actions' | i18n:loc.ale:'common' }}<tr ng-repeat=\"item in editorView.visibleBuildingSequence track by $index\" ng-class=\"{'selected': item.checked}\"><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" ng-class=\"{'icon-26x26-checkbox-checked': item.checked}\"><input type=\"checkbox\" ng-model=\"item.checked\"></label><td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)\" tooltip=\"\" tooltip-content=\"{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><p ng-show=\"!editorView.visibleBuildingSequence.length\" class=\"text-center\"><a class=\"btn btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a></div></div><div ng-show=\"selectedTab === TAB_TYPES.LOGS\" class=\"rich-text\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'started_at' | i18n:loc.ale:'common' }}<tbody><tr ng-repeat=\"log in logsView.logs\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"building-icon icon-20x20-building-{{ log.building }}\"></span> {{ log.building | i18n:loc.ale:'building_names' }}<td>{{ log.level }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchBuilder()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveUp()\">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveDown()\">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"editorView.updateBuildingSequence()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_builder_queue_window', `<div id=\"two-builder-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'builder_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SEQUENCES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}\">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><h5 class=\"twx-section\">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5><table class=\"settings tbl-border-light tbl-striped\"><col width=\"40%\"><col><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_VILLAGES]\" drop-down=\"true\"></div><tr ng-show=\"settingsView.sequencesAvail\"><td><span class=\"ff-cell-fix\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"sequences\" selected=\"settings[SETTINGS.ACTIVE_SEQUENCE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_WOOD].min\" max=\"settingsMap[SETTINGS.PRESERVE_WOOD].max\" value=\"settings[SETTINGS.PRESERVE_WOOD]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_WOOD]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_CLAY].min\" max=\"settingsMap[SETTINGS.PRESERVE_CLAY].max\" value=\"settings[SETTINGS.PRESERVE_CLAY]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_CLAY]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_IRON].min\" max=\"settingsMap[SETTINGS.PRESERVE_IRON].max\" value=\"settings[SETTINGS.PRESERVE_IRON]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_IRON]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span><td class=\"text-center\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORIZE_FARM]\" vertical=\"false\" size=\"'56x28'\"></div></table><h5 class=\"twx-section\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!settingsView.sequencesAvail\" class=\"text-center\"><a href=\"#\" class=\"btn-orange btn-border create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><div ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div><table class=\"tbl-border-light header-center building-sequence\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"13%\"><col width=\"8%\"><col width=\"9%\"><col width=\"9%\"><col width=\"9%\"><col width=\"6%\"><tr><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.visibleBuildingSequence track by $index\" class=\"{{ item.state }}\"><td>{{ pagination.buildingSequence.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.duration }}<td class=\"green\">+{{ item.levelPoints | number }}<td>{{ item.price.wood | number }}<td>{{ item.price.clay | number }}<td>{{ item.price.iron | number }}<td>{{ item.price.food | number }}</table><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div></div><h5 ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"twx-section\">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5><table ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-final\"><col><col width=\"5%\"><col width=\"12%\"><col width=\"8%\"><col width=\"11%\"><col width=\"11%\"><col width=\"11%\"><col width=\"7%\"><tr><th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.buildingSequenceFinal | orderBy:'order'\"><td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.build_time | readableSecondsFilter }}<td class=\"green\">+{{ item.points | number }}<td>{{ item.resources.wood | number }}<td>{{ item.resources.clay | number }}<td>{{ item.resources.iron | number }}<td>{{ item.resources.food | number }}</table><p ng-show=\"settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length\" class=\"text-center\">{{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}</div><div ng-show=\"selectedTab === TAB_TYPES.SEQUENCES\"><h5 class=\"twx-section\">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!editorView.sequencesAvail\" class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><table ng-if=\"editorView.sequencesAvail\" class=\"tbl-border-light tbl-striped editor-select-sequence\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span><td><div class=\"select-sequence-editor\" select=\"\" list=\"sequences\" selected=\"editorView.selectedSequence\" drop-down=\"true\"></div><tr><td class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-orange clone-sequence\" ng-click=\"editorView.modal.nameSequence()\">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-red remove-sequence\" ng-click=\"editorView.modal.removeSequence()\">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></table><div ng-if=\"editorView.sequencesAvail\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><table ng-show=\"editorView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-editor\"><col width=\"5%\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"10%\"><tr><th><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'actions' | i18n:loc.ale:'common' }}<tr ng-repeat=\"item in editorView.visibleBuildingSequence track by $index\" ng-class=\"{'selected': item.checked}\"><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" ng-class=\"{'icon-26x26-checkbox-checked': item.checked}\"><input type=\"checkbox\" ng-model=\"item.checked\"></label><td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)\" tooltip=\"\" tooltip-content=\"{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><p ng-show=\"!editorView.visibleBuildingSequence.length\" class=\"text-center\"><a class=\"btn btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a></div></div><div ng-show=\"selectedTab === TAB_TYPES.LOGS\" class=\"rich-text\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'started_at' | i18n:loc.ale:'common' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"building-icon icon-20x20-building-{{ log.building }}\"></span> {{ log.building | i18n:loc.ale:'building_names' }}<td>{{ log.level }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchBuilder()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveUp()\">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveDown()\">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"editorView.updateBuildingSequence()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_add_building_modal', `<div id=\"add-building-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_add_building_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap unit-operate-slider\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"15%\"><col><col width=\"15%\"><tr><td>{{ 'building' | i18n:loc.ale:'common' }}<td colspan=\"2\"><div select=\"\" list=\"buildings\" selected=\"selectedBuilding\" drop-down=\"true\"></div><tr><td>{{ 'position' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"indexLimit\" value=\"position\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"position\"><tr><td>{{ 'amount' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"buildingsData[selectedBuilding.value].max_level\" value=\"amount\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"amount\"></table></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"add()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_name_sequence_modal', `<div id=\"name-sequence-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_name_sequence_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><div class=\"box-border-light input-wrapper name_preset\"><form ng-submit=\"submit()\"><input focus=\"true\" ng-model=\"name\" minlength=\"3\"></form></div></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"submit()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-builder-queue tr.reached td{background-color:#b9af7e}#two-builder-queue tr.progress td{background-color:#af9d57}#two-builder-queue .building-sequence,#two-builder-queue .building-sequence-final,#two-builder-queue .building-sequence-editor,#two-builder-queue .logs{margin-bottom:10px}#two-builder-queue .building-sequence td,#two-builder-queue .building-sequence-final td,#two-builder-queue .building-sequence-editor td,#two-builder-queue .logs td,#two-builder-queue .building-sequence th,#two-builder-queue .building-sequence-final th,#two-builder-queue .building-sequence-editor th,#two-builder-queue .logs th{text-align:center;line-height:20px}#two-builder-queue .building-sequence-editor .selected td{background-color:#b9af7e}#two-builder-queue .editor-select-sequence{margin-bottom:13px}#two-builder-queue a.btn{height:28px;line-height:28px;padding:0 10px}#two-builder-queue .select-sequence-editor{text-align:center;margin-top:1px}#two-builder-queue .create-sequence{padding:8px 20px 8px 20px}#two-builder-queue table.settings td{padding:1px 5px}#two-builder-queue table.settings td.text-right{text-align:right}#two-builder-queue table.settings div[switch-slider]{display:inline-block;margin-top:2px}#two-builder-queue .small-select a.select-handler{height:28px;line-height:28px}#two-builder-queue .small-select a.select-button{height:28px}#two-builder-queue input.preserve-resource{width:70px;height:32px}#two-builder-queue .icon-26x26-resource-wood,#two-builder-queue .icon-26x26-resource-clay,#two-builder-queue .icon-26x26-resource-iron,#two-builder-queue .icon-26x26-resource-food{transform:scale(.8);top:-1px}#add-building-modal td{text-align:center}#add-building-modal .select-wrapper{width:250px}#add-building-modal input[type="text"]{width:60px}')
@@ -14930,6 +17232,12 @@ define('two/commandQueue', [
         return removed
     }
 
+    commandQueue.clearWaitings = function () {
+        Lockr.set(STORAGE_KEYS.QUEUE_COMMANDS, [])
+        waitingCommands = []
+        waitingCommandsObject = {}
+    }
+
     commandQueue.clearRegisters = function () {
         Lockr.set(STORAGE_KEYS.QUEUE_EXPIRED, [])
         Lockr.set(STORAGE_KEYS.QUEUE_SENT, [])
@@ -15346,6 +17654,10 @@ define('two/commandQueue/ui', [
         updateSentCommands()
         updateExpiredCommands()
     }
+    const clearWaitings = function () {
+        commandQueue.clearWaitings()
+        updateWaitingCommands()
+    }
 
     const switchCommandQueue = function () {
         if (commandQueue.isRunning()) {
@@ -15532,7 +17844,7 @@ define('two/commandQueue/ui', [
             [FILTER_TYPES.TEXT_MATCH]: ''
         }
 
-        $button = interfaceOverflow.addMenuButton('Generał', 10)
+        $button = interfaceOverflow.addMenuButton('Generał', 10, $filter('i18n')('description', $rootScope.loc.ale, 'command_queue'))
         $button.addEventListener('click', buildWindow)
 
         eventQueue.register(eventTypeProvider.COMMAND_QUEUE_START, function () {
@@ -15548,7 +17860,7 @@ define('two/commandQueue/ui', [
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
 
-        interfaceOverflow.addTemplate('twoverflow_queue_window', `<div id=\"two-command-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'command_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ADD)\" ng-class=\"{true:'tab-active', false:''}[selectedTab == TAB_TYPES.ADD]\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ADD}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ADD}\">{{ 'tab_add' | i18n:loc.ale:'command_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.WAITING)\" ng-class=\"{true:'tab-active', false:''}[selectedTab == TAB_TYPES.WAITING]\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.WAITING}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.WAITING}\">{{ 'tab_waiting' | i18n:loc.ale:'command_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{true:'tab-active', false:''}[selectedTab == TAB_TYPES.LOGS]\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'tab_logs' | i18n:loc.ale:'command_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"add\" ng-show=\"selectedTab === TAB_TYPES.ADD\"><form class=\"addForm\"><div><table class=\"tbl-border-light tbl-striped basic-config\"><col width=\"30%\"><col width=\"5%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompleteOrigin\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'command_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_selected' | i18n:loc.ale:'command_queue' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.target\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'command_queue' }}<td ng-if=\"commandData.target\" class=\"command-village\">{{ commandData.target.name }} ({{ commandData.target.x }}|{{ commandData.target.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'command_queue' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'add_date' | i18n:loc.ale:'command_queue' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td><div select=\"\" list=\"dateTypes\" selected=\"selectedDateType\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_minus' | i18n:loc.ale:'command_queue' }}\">-</a><a class=\"btn btn-orange\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date' | i18n:loc.ale:'command_queue' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_plus' | i18n:loc.ale:'command_queue' }}\">+</a></table><table ng-show=\"commandData.origin && commandData.target\" class=\"tbl-border-light tbl-units tbl-speed screen-village-info\"><thead><tr><th colspan=\"7\">{{ 'speed_title' | i18n:loc.ale:'screen_village_info' }}<tbody><tr><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-34x34-unit-knight\"></span> <span class=\"icon icon-34x34-unit-light_cavalry\"></span> <span class=\"icon icon-34x34-unit-mounted_archer\"></span></div><div><div class=\"box-time-sub-icon time-attack {{ travelTimes.attack.light_cavalry.status }}\"><div class=\"time-icon icon-20x20-attack-check\" tooltip=\"\" tooltip-content=\"{{ 'travel_time_attack' | i18n:loc.ale:'military_operations' }}\"></div>{{ travelTimes.attack.light_cavalry.travelTime }}</div><div class=\"box-time-sub-icon time-support {{ travelTimes.support.light_cavalry.status }}\"><div class=\"time-icon icon-20x20-support-check\" tooltip=\"\" tooltip-content=\"{{ 'travel_time_support' | i18n:loc.ale:'military_operations' }}\"></div>{{ travelTimes.support.light_cavalry.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub-icon time-relocate {{ travelTimes.relocate.light_cavalry.status }}\"><div class=\"time-icon icon-20x20-relocate\" tooltip=\"\" tooltip-content=\"{{ 'travel_time_relocate' | i18n:loc.ale:'military_operations' }}\"></div>{{ travelTimes.relocate.light_cavalry.travelTime }}</div></div><td><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-heavy_cavalry\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.heavy_cavalry.status }}\">{{ travelTimes.attack.heavy_cavalry.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.heavy_cavalry.status }}\">{{ travelTimes.support.heavy_cavalry.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.heavy_cavalry.status }}\">{{ travelTimes.relocate.heavy_cavalry.travelTime }}</div></div><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-34x34-unit-archer\"></span> <span class=\"icon icon-34x34-unit-spear\"></span> <span class=\"icon icon-34x34-unit-axe\"></span> <span class=\"icon icon-34x34-unit-doppelsoldner\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.archer.status }}\">{{ travelTimes.attack.archer.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.archer.status }}\">{{ travelTimes.support.archer.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.archer.status }}\">{{ travelTimes.relocate.archer.travelTime }}</div></div><td><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-sword\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.sword.status }}\">{{ travelTimes.attack.sword.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.sword.status }}\">{{ travelTimes.support.sword.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.sword.status }}\">{{ travelTimes.relocate.sword.travelTime }}</div></div><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-34x34-unit-catapult\"></span> <span class=\"icon icon-34x34-unit-ram\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.ram.status }}\">{{ travelTimes.attack.ram.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.ram.status }}\">{{ travelTimes.support.ram.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.ram.status }}\">{{ travelTimes.relocate.ram.travelTime }}</div></div><td><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-snob\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.snob.status }}\">{{ travelTimes.attack.snob.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.snob.status }}\">{{ travelTimes.support.snob.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.snob.status }}\">-</div></div><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-trebuchet\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.trebuchet.status }}\">{{ travelTimes.attack.trebuchet.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.trebuchet.status }}\">{{ travelTimes.support.trebuchet.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.trebuchet.status }}\">{{ travelTimes.relocate.trebuchet.travelTime }}</div></div></table></div><h5 class=\"twx-section\">{{ 'units' | i18n:loc.ale:'common' }}</h5><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"25%\"><col width=\"25%\"><col width=\"25%\"><tbody class=\"add-units\"><tr><td colspan=\"4\" class=\"actions\"><ul class=\"list-btn list-center\"><li><div select=\"\" list=\"presets\" selected=\"selectedInsertPreset\" drop-down=\"true\"></div><li><a class=\"clear-units btn btn-orange\" ng-click=\"cleanUnitInputs()\">{{ 'add_clear' | i18n:loc.ale:'command_queue' }}</a></ul><tr ng-repeat=\"i in [] | range:(unitOrder.length / 4);\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4])\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4 + 1]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4 + 1] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4 + 1]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4 + 1]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4 + 1])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4 + 1])\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4 + 2]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4 + 2] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4 + 2]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4 + 2]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4 + 2])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4 + 2])\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4 + 3]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4 + 3] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4 + 3]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4 + 3]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4 + 3])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4 + 3])\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"\" tooltip-content=\"{{ 'catapult' | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units.catapult\" maxlength=\"5\" placeholder=\"{{ commandData.units.catapult }}\" ng-keyup=\"catapultTargetVisibility()\" ng-focus=\"onUnitInputFocus('catapult')\" ng-blur=\"onUnitInputBlur('catapult')\"><td colspan=\"3\"><div ng-visible=\"showCatapultSelect\"><div class=\"unit-border box-slider\"><div class=\"height-wrapper\"><div select=\"\" list=\"attackableBuildings\" selected=\"catapultTarget\"></div></div></div></div></table><h5 class=\"twx-section\">{{ 'officers' | i18n:loc.ale:'common' }}</h5><table class=\"add-officers margin-top tbl-border-light tbl-officers\"><tr><td class=\"cell-officers\" ng-repeat=\"officer in officers\"><table class=\"tbl-border-dark tbl-officer\"><tr><td class=\"cell-space\"><span class=\"icon-44x44-premium_officer_{{ officer }}\"></span><td class=\"cell-officer-switch\" rowspan=\"2\"><div switch-slider=\"\" enabled=\"true\" value=\"commandData.officers[officer]\" vertical=\"true\" size=\"'34x66'\"></div><tr><td tooltip=\"\" tooltip-content=\"{{ 'available_officers' | i18n:loc.ale:'modal_preset_edit' }}\"><div class=\"amount\">{{ inventory.getItemAmountByType('premium_officer_' + officer) | number }}</div></table></table></form></div><div class=\"waiting rich-text\" ng-show=\"selectedTab === TAB_TYPES.WAITING\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><td><div ng-class=\"{'active': activeFilters[FILTER_TYPES.SELECTED_VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.SELECTED_VILLAGE)\" class=\"box-border-dark icon selectedVillage\" tooltip=\"\" tooltip-content=\"{{ 'filters_selected_village' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div><div ng-class=\"{'active': activeFilters[FILTER_TYPES.BARBARIAN_TARGET]}\" ng-click=\"toggleFilter(FILTER_TYPES.BARBARIAN_TARGET)\" class=\"box-border-dark icon barbarianTarget\" tooltip=\"\" tooltip-content=\"{{ 'filters_barbarian_target' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-barbarian-village icon-bg-black\"></span></div><div ng-class=\"{'active': activeFilters[FILTER_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.ATTACK, true)\" class=\"box-border-dark icon allowedTypes\" tooltip=\"\" tooltip-content=\"{{ 'filters_attack' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div ng-class=\"{'active': activeFilters[FILTER_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.SUPPORT, true)\" class=\"box-border-dark icon allowedTypes\" tooltip=\"\" tooltip-content=\"{{ 'filters_support' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div ng-if=\"relocateEnabled\" ng-class=\"{'active': activeFilters[FILTER_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.RELOCATE, true)\" class=\"box-border-dark icon allowedTypes\" tooltip=\"\" tooltip-content=\"{{ 'filters_relocate' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div><div class=\"text\"><input ng-model=\"filtersData[FILTER_TYPES.TEXT_MATCH]\" class=\"box-border-dark\" placeholder=\"{{ 'filters_text_match' | i18n:loc.ale:'command_queue' }}\"></div></table></div><div class=\"queue\"><h5 class=\"twx-section\">{{ 'queue_waiting' | i18n:loc.ale:'command_queue' }}</h5><p class=\"text-center\" ng-show=\"!visibleWaitingCommands.length\">{{ 'queue_none_added' | i18n:loc.ale:'command_queue' }}<table class=\"tbl-border-light\" ng-repeat=\"command in visibleWaitingCommands\"><col width=\"100px\"><tr><th colspan=\"2\"><span ng-class=\"{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]\" class=\"icon-26x26-{{ command.type }}\" tooltip=\"\" tooltip-content=\"{{ command.type | i18n:loc.ale:'common' }}\"></span> <span class=\"size-26x26 icon-bg-black icon-26x26-time-duration\" tooltip=\"\" tooltip-content=\"{{ 'command_time_left' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"time-left\">{{ command.countdown | readableMillisecondsFilter }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'command_out' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"sent-time\">{{ command.sendTime | readableDateFilter:loc.ale }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-time-arrival\" tooltip=\"\" tooltip-content=\"{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"arrive-time\">{{ command.arriveTime | readableDateFilter:loc.ale }}</span> <a href=\"#\" class=\"remove-command size-20x20 btn-red icon-20x20-close\" ng-click=\"removeCommand(command, EVENT_CODES.COMMAND_REMOVED)\" tooltip=\"\" tooltip-content=\"{{ 'queue_remove' | i18n:loc.ale:'command_queue' }}\"></a><tr><td>{{ 'villages' | i18n:loc.ale:'common' }}<td><a class=\"origin\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.origin.id)\">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a> <span class=\"size-20x20 icon-26x26-{{ command.type }}\"></span> <a class=\"target\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.target.id)\">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a><tr><td>{{ 'units' | i18n:loc.ale:'common' }}<td class=\"units\"><div class=\"unit\" ng-repeat=\"(unit, amount) in command.units\"><span class=\"icon-34x34-unit-{{ unit }} icon\"></span> <span class=\"amount\">{{ amount }}</span> <span ng-if=\"unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK\">({{ command.catapultTarget | i18n:loc.ale:'building_names' }})</span></div><div class=\"officer\" ng-repeat=\"(officer, enabled) in command.officers\"><span class=\"icon-34x34-premium_officer_{{ officer }}\"></span></div></table></div></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><h5 class=\"twx-section\">{{ 'queue_sent' | i18n:loc.ale:'command_queue' }}</h5><p class=\"text-center\" ng-show=\"!sentCommands.length\">{{ 'queue_none_sent' | i18n:loc.ale:'command_queue' }}<table class=\"tbl-border-light\" ng-repeat=\"command in sentCommands track by $index\"><col width=\"100px\"><tr><th colspan=\"2\"><span ng-class=\"{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]\" class=\"icon-26x26-{{ command.type }}\" tooltip=\"\" tooltip-content=\"{{ command.type | i18n:loc.ale:'common' }}\"></span> <span class=\"size-26x26 icon-bg-black icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'command_out' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"sent-time\">{{ command.sendTime | readableDateFilter:loc.ale }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-time-arrival\" tooltip=\"\" tooltip-content=\"{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"arrive-time\">{{ command.arriveTime | readableDateFilter:loc.ale }}</span><tr><td>{{ 'villages' | i18n:loc.ale:'common' }}<td><a class=\"origin\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.origin.id)\">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a> <span class=\"size-20x20 icon-26x26-{{ command.type }}\"></span> <a class=\"target\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.target.id)\">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a><tr><td>{{ 'units' | i18n:loc.ale:'common' }}<td class=\"units\"><div class=\"unit\" ng-repeat=\"(unit, amount) in command.units\"><span class=\"icon-34x34-unit-{{ unit }} icon\"></span> <span class=\"amount\">{{ amount }}</span> <span ng-if=\"unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK\">({{ command.catapultTarget | i18n:loc.ale:'common' }})</span></div><div class=\"officer\" ng-repeat=\"(officer, enabled) in command.officers\"><span class=\"icon-34x34-premium_officer_{{ officer }}\"></span></div></table><h5 class=\"twx-section\">{{ 'queue_expired' | i18n:loc.ale:'command_queue' }}</h5><p class=\"text-center\" ng-show=\"!expiredCommands.length\">{{ 'queue_none_expired' | i18n:loc.ale:'command_queue' }}<table class=\"tbl-border-light\" ng-repeat=\"command in expiredCommands track by $index\"><col width=\"100px\"><tr><th colspan=\"2\"><span ng-class=\"{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]\" class=\"icon-26x26-{{ command.type }}\" tooltip=\"\" tooltip-content=\"{{ command.type | i18n:loc.ale:'common' }}\"></span> <span class=\"size-26x26 icon-bg-black icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'command_out' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"sent-time\">{{ command.sendTime | readableDateFilter:loc.ale }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-time-arrival\" tooltip=\"\" tooltip-content=\"{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"arrive-time\">{{ command.arriveTime | readableDateFilter:loc.ale }}</span><tr><td>{{ 'villages' | i18n:loc.ale:'common' }}<td><a class=\"origin\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.origin.id)\">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a> <span class=\"size-20x20 icon-26x26-{{ command.type }}\"></span> <a class=\"target\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.target.id)\">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a><tr><td>{{ 'units' | i18n:loc.ale:'common' }}<td class=\"units\"><div class=\"unit\" ng-repeat=\"(unit, amount) in command.units\"><span class=\"icon-34x34-unit-{{ unit }} icon\"></span> <span class=\"amount\">{{ amount }}</span> <span ng-if=\"unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK\">({{ command.catapultTarget | i18n:loc.ale:'common' }})</span></div><div class=\"officer\" ng-repeat=\"(officer, enabled) in command.officers\"><span class=\"icon-34x34-premium_officer_{{ officer }}\"></span></div></table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a class=\"btn-orange btn-border\" ng-click=\"clearRegisters()\">{{ 'general_clear' | i18n:loc.ale:'command_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.ADD\"><a class=\"btn-orange btn-border add\" ng-click=\"addCommand(COMMAND_TYPES.ATTACK)\"><span class=\"icon-26x26-attack-small\"></span> {{ COMMAND_TYPES.ATTACK | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.ADD\"><a class=\"btn-orange btn-border add\" ng-click=\"addCommand(COMMAND_TYPES.SUPPORT)\"><span class=\"icon-26x26-support\"></span> {{ COMMAND_TYPES.SUPPORT | i18n:loc.ale:'common' }}</a><li ng-show=\"relocateEnabled && selectedTab === TAB_TYPES.ADD\"><a class=\"btn-orange btn-border add\" ng-click=\"addCommand(COMMAND_TYPES.RELOCATE)\"><span class=\"icon-26x26-relocate\"></span> {{ COMMAND_TYPES.RELOCATE | i18n:loc.ale:'common' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchCommandQueue()\"><span ng-show=\"running\">{{ 'deactivate' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'activate' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_queue_window', `<div id=\"two-command-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'command_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ADD)\" ng-class=\"{true:'tab-active', false:''}[selectedTab == TAB_TYPES.ADD]\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ADD}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ADD}\">{{ 'tab_add' | i18n:loc.ale:'command_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.WAITING)\" ng-class=\"{true:'tab-active', false:''}[selectedTab == TAB_TYPES.WAITING]\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.WAITING}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.WAITING}\">{{ 'tab_waiting' | i18n:loc.ale:'command_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{true:'tab-active', false:''}[selectedTab == TAB_TYPES.LOGS]\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'tab_logs' | i18n:loc.ale:'command_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"add\" ng-show=\"selectedTab === TAB_TYPES.ADD\"><form class=\"addForm\"><div><table class=\"tbl-border-light tbl-striped basic-config\"><col width=\"30%\"><col width=\"5%\"><col><col width=\"18%\"><tr><td><div auto-complete=\"autoCompleteOrigin\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'command_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_selected' | i18n:loc.ale:'command_queue' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.target\" class=\"command-village\">{{ 'add_no_village' | i18n:loc.ale:'command_queue' }}<td ng-if=\"commandData.target\" class=\"command-village\">{{ commandData.target.name }} ({{ commandData.target.x }}|{{ commandData.target.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'add_map_selected' | i18n:loc.ale:'command_queue' }}\">{{ 'selected' | i18n:loc.ale:'common' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'add_date' | i18n:loc.ale:'command_queue' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td><div select=\"\" list=\"dateTypes\" selected=\"selectedDateType\" drop-down=\"true\"></div><td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_minus' | i18n:loc.ale:'command_queue' }}\">-</a><a class=\"btn btn-orange\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date' | i18n:loc.ale:'command_queue' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'add_current_date_plus' | i18n:loc.ale:'command_queue' }}\">+</a></table><table ng-show=\"commandData.origin && commandData.target\" class=\"tbl-border-light tbl-units tbl-speed screen-village-info\"><thead><tr><th colspan=\"7\">{{ 'speed_title' | i18n:loc.ale:'screen_village_info' }}<tbody><tr><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-34x34-unit-knight\"></span> <span class=\"icon icon-34x34-unit-light_cavalry\"></span> <span class=\"icon icon-34x34-unit-mounted_archer\"></span></div><div><div class=\"box-time-sub-icon time-attack {{ travelTimes.attack.light_cavalry.status }}\"><div class=\"time-icon icon-20x20-attack-check\" tooltip=\"\" tooltip-content=\"{{ 'travel_time_attack' | i18n:loc.ale:'military_operations' }}\"></div>{{ travelTimes.attack.light_cavalry.travelTime }}</div><div class=\"box-time-sub-icon time-support {{ travelTimes.support.light_cavalry.status }}\"><div class=\"time-icon icon-20x20-support-check\" tooltip=\"\" tooltip-content=\"{{ 'travel_time_support' | i18n:loc.ale:'military_operations' }}\"></div>{{ travelTimes.support.light_cavalry.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub-icon time-relocate {{ travelTimes.relocate.light_cavalry.status }}\"><div class=\"time-icon icon-20x20-relocate\" tooltip=\"\" tooltip-content=\"{{ 'travel_time_relocate' | i18n:loc.ale:'military_operations' }}\"></div>{{ travelTimes.relocate.light_cavalry.travelTime }}</div></div><td><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-heavy_cavalry\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.heavy_cavalry.status }}\">{{ travelTimes.attack.heavy_cavalry.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.heavy_cavalry.status }}\">{{ travelTimes.support.heavy_cavalry.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.heavy_cavalry.status }}\">{{ travelTimes.relocate.heavy_cavalry.travelTime }}</div></div><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-34x34-unit-archer\"></span> <span class=\"icon icon-34x34-unit-spear\"></span> <span class=\"icon icon-34x34-unit-axe\"></span> <span class=\"icon icon-34x34-unit-doppelsoldner\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.archer.status }}\">{{ travelTimes.attack.archer.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.archer.status }}\">{{ travelTimes.support.archer.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.archer.status }}\">{{ travelTimes.relocate.archer.travelTime }}</div></div><td><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-sword\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.sword.status }}\">{{ travelTimes.attack.sword.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.sword.status }}\">{{ travelTimes.support.sword.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.sword.status }}\">{{ travelTimes.relocate.sword.travelTime }}</div></div><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-34x34-unit-catapult\"></span> <span class=\"icon icon-34x34-unit-ram\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.ram.status }}\">{{ travelTimes.attack.ram.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.ram.status }}\">{{ travelTimes.support.ram.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.ram.status }}\">{{ travelTimes.relocate.ram.travelTime }}</div></div><td><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-snob\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.snob.status }}\">{{ travelTimes.attack.snob.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.snob.status }}\">{{ travelTimes.support.snob.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.snob.status }}\">-</div></div><td class=\"odd\"><div class=\"unit-wrap\"><span class=\"icon icon-single icon-34x34-unit-trebuchet\"></span></div><div><div class=\"box-time-sub time-attack {{ travelTimes.attack.trebuchet.status }}\">{{ travelTimes.attack.trebuchet.travelTime }}</div><div class=\"box-time-sub time-support {{ travelTimes.support.trebuchet.status }}\">{{ travelTimes.support.trebuchet.travelTime }}</div><div ng-if=\"relocateEnabled\" class=\"box-time-sub time-relocate {{ travelTimes.relocate.trebuchet.status }}\">{{ travelTimes.relocate.trebuchet.travelTime }}</div></div></table></div><h5 class=\"twx-section\">{{ 'units' | i18n:loc.ale:'common' }}</h5><table class=\"tbl-border-light tbl-striped\"><col width=\"25%\"><col width=\"25%\"><col width=\"25%\"><col width=\"25%\"><tbody class=\"add-units\"><tr><td colspan=\"4\" class=\"actions\"><ul class=\"list-btn list-center\"><li><div select=\"\" list=\"presets\" selected=\"selectedInsertPreset\" drop-down=\"true\"></div><li><a class=\"clear-units btn btn-orange\" ng-click=\"cleanUnitInputs()\">{{ 'add_clear' | i18n:loc.ale:'command_queue' }}</a></ul><tr ng-repeat=\"i in [] | range:(unitOrder.length / 4);\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4])\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4 + 1]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4 + 1] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4 + 1]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4 + 1]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4 + 1])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4 + 1])\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4 + 2]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4 + 2] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4 + 2]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4 + 2]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4 + 2])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4 + 2])\"><td><span class=\"icon-bg-black\" ng-class=\"'icon-34x34-unit-' + unitOrder[i * 4 + 3]\" tooltip=\"\" tooltip-content=\"{{ unitOrder[i * 4 + 3] | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units[unitOrder[i * 4 + 3]]\" maxlength=\"5\" placeholder=\"{{ commandData.units[unitOrder[i * 4 + 3]] }}\" ng-focus=\"onUnitInputFocus(unitOrder[i * 4 + 3])\" ng-blur=\"onUnitInputBlur(unitOrder[i * 4 + 3])\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"\" tooltip-content=\"{{ 'catapult' | i18n:loc.ale:'unit_names' }}\"></span> <input remove-zero=\"\" ng-model=\"commandData.units.catapult\" maxlength=\"5\" placeholder=\"{{ commandData.units.catapult }}\" ng-keyup=\"catapultTargetVisibility()\" ng-focus=\"onUnitInputFocus('catapult')\" ng-blur=\"onUnitInputBlur('catapult')\"><td colspan=\"3\"><div ng-visible=\"showCatapultSelect\"><div class=\"unit-border box-slider\"><div class=\"height-wrapper\"><div select=\"\" list=\"attackableBuildings\" selected=\"catapultTarget\"></div></div></div></div></table><h5 class=\"twx-section\">{{ 'officers' | i18n:loc.ale:'common' }}</h5><table class=\"add-officers margin-top tbl-border-light tbl-officers\"><tr><td class=\"cell-officers\" ng-repeat=\"officer in officers\"><table class=\"tbl-border-dark tbl-officer\"><tr><td class=\"cell-space\"><span class=\"icon-44x44-premium_officer_{{ officer }}\"></span><td class=\"cell-officer-switch\" rowspan=\"2\"><div switch-slider=\"\" enabled=\"true\" value=\"commandData.officers[officer]\" vertical=\"true\" size=\"'34x66'\"></div><tr><td tooltip=\"\" tooltip-content=\"{{ 'available_officers' | i18n:loc.ale:'modal_preset_edit' }}\"><div class=\"amount\">{{ inventory.getItemAmountByType('premium_officer_' + officer) | number }}</div></table></table></form></div><div class=\"waiting rich-text\" ng-show=\"selectedTab === TAB_TYPES.WAITING\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><td><div ng-class=\"{'active': activeFilters[FILTER_TYPES.SELECTED_VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.SELECTED_VILLAGE)\" class=\"box-border-dark icon selectedVillage\" tooltip=\"\" tooltip-content=\"{{ 'filters_selected_village' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div><div ng-class=\"{'active': activeFilters[FILTER_TYPES.BARBARIAN_TARGET]}\" ng-click=\"toggleFilter(FILTER_TYPES.BARBARIAN_TARGET)\" class=\"box-border-dark icon barbarianTarget\" tooltip=\"\" tooltip-content=\"{{ 'filters_barbarian_target' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-barbarian-village icon-bg-black\"></span></div><div ng-class=\"{'active': activeFilters[FILTER_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.ATTACK, true)\" class=\"box-border-dark icon allowedTypes\" tooltip=\"\" tooltip-content=\"{{ 'filters_attack' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div ng-class=\"{'active': activeFilters[FILTER_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.SUPPORT, true)\" class=\"box-border-dark icon allowedTypes\" tooltip=\"\" tooltip-content=\"{{ 'filters_support' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div ng-if=\"relocateEnabled\" ng-class=\"{'active': activeFilters[FILTER_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.RELOCATE, true)\" class=\"box-border-dark icon allowedTypes\" tooltip=\"\" tooltip-content=\"{{ 'filters_relocate' | i18n:loc.ale:'command_queue' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div><div class=\"text\"><input ng-model=\"filtersData[FILTER_TYPES.TEXT_MATCH]\" class=\"box-border-dark\" placeholder=\"{{ 'filters_text_match' | i18n:loc.ale:'command_queue' }}\"></div></table></div><div class=\"queue\"><h5 class=\"twx-section\">{{ 'queue_waiting' | i18n:loc.ale:'command_queue' }}</h5><p class=\"text-center\" ng-show=\"!visibleWaitingCommands.length\">{{ 'queue_none_added' | i18n:loc.ale:'command_queue' }}<table class=\"tbl-border-light\" ng-repeat=\"command in visibleWaitingCommands track by $index\"><col width=\"100px\"><tr><th colspan=\"2\"><span ng-class=\"{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]\" class=\"icon-26x26-{{ command.type }}\" tooltip=\"\" tooltip-content=\"{{ command.type | i18n:loc.ale:'common' }}\"></span> <span class=\"size-26x26 icon-bg-black icon-26x26-time-duration\" tooltip=\"\" tooltip-content=\"{{ 'command_time_left' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"time-left\">{{ command.countdown | readableMillisecondsFilter }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'command_out' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"sent-time\">{{ command.sendTime | readableDateFilter:loc.ale }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-time-arrival\" tooltip=\"\" tooltip-content=\"{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"arrive-time\">{{ command.arriveTime | readableDateFilter:loc.ale }}</span> <a href=\"#\" class=\"remove-command size-20x20 btn-red icon-20x20-close\" ng-click=\"removeCommand(command, EVENT_CODES.COMMAND_REMOVED)\" tooltip=\"\" tooltip-content=\"{{ 'queue_remove' | i18n:loc.ale:'command_queue' }}\"></a><tr><td>{{ 'villages' | i18n:loc.ale:'common' }}<td><a class=\"origin\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.origin.id)\">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a> <span class=\"size-20x20 icon-26x26-{{ command.type }}\"></span> <a class=\"target\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.target.id)\">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a><tr><td>{{ 'units' | i18n:loc.ale:'common' }}<td class=\"units\"><div class=\"unit\" ng-repeat=\"(unit, amount) in command.units\"><span class=\"icon-34x34-unit-{{ unit }} icon\"></span> <span class=\"amount\">{{ amount }}</span> <span ng-if=\"unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK\">({{ command.catapultTarget | i18n:loc.ale:'building_names' }})</span></div><div class=\"officer\" ng-repeat=\"(officer, enabled) in command.officers\"><span class=\"icon-34x34-premium_officer_{{ officer }}\"></span></div></table></div></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><h5 class=\"twx-section\">{{ 'queue_sent' | i18n:loc.ale:'command_queue' }}</h5><p class=\"text-center\" ng-show=\"!sentCommands.length\">{{ 'queue_none_sent' | i18n:loc.ale:'command_queue' }}<table class=\"tbl-border-light\" ng-repeat=\"command in sentCommands track by $index\"><col width=\"100px\"><tr><th colspan=\"2\"><span ng-class=\"{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]\" class=\"icon-26x26-{{ command.type }}\" tooltip=\"\" tooltip-content=\"{{ command.type | i18n:loc.ale:'common' }}\"></span> <span class=\"size-26x26 icon-bg-black icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'command_out' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"sent-time\">{{ command.sendTime | readableDateFilter:loc.ale }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-time-arrival\" tooltip=\"\" tooltip-content=\"{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"arrive-time\">{{ command.arriveTime | readableDateFilter:loc.ale }}</span><tr><td>{{ 'villages' | i18n:loc.ale:'common' }}<td><a class=\"origin\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.origin.id)\">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a> <span class=\"size-20x20 icon-26x26-{{ command.type }}\"></span> <a class=\"target\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.target.id)\">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a><tr><td>{{ 'units' | i18n:loc.ale:'common' }}<td class=\"units\"><div class=\"unit\" ng-repeat=\"(unit, amount) in command.units\"><span class=\"icon-34x34-unit-{{ unit }} icon\"></span> <span class=\"amount\">{{ amount }}</span> <span ng-if=\"unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK\">({{ command.catapultTarget | i18n:loc.ale:'common' }})</span></div><div class=\"officer\" ng-repeat=\"(officer, enabled) in command.officers\"><span class=\"icon-34x34-premium_officer_{{ officer }}\"></span></div></table><h5 class=\"twx-section\">{{ 'queue_expired' | i18n:loc.ale:'command_queue' }}</h5><p class=\"text-center\" ng-show=\"!expiredCommands.length\">{{ 'queue_none_expired' | i18n:loc.ale:'command_queue' }}<table class=\"tbl-border-light\" ng-repeat=\"command in expiredCommands track by $index\"><col width=\"100px\"><tr><th colspan=\"2\"><span ng-class=\"{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]\" class=\"icon-26x26-{{ command.type }}\" tooltip=\"\" tooltip-content=\"{{ command.type | i18n:loc.ale:'common' }}\"></span> <span class=\"size-26x26 icon-bg-black icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'command_out' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"sent-time\">{{ command.sendTime | readableDateFilter:loc.ale }}</span> <span class=\"size-26x26 icon-bg-black icon-20x20-time-arrival\" tooltip=\"\" tooltip-content=\"{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}\"></span> <span class=\"arrive-time\">{{ command.arriveTime | readableDateFilter:loc.ale }}</span><tr><td>{{ 'villages' | i18n:loc.ale:'common' }}<td><a class=\"origin\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.origin.id)\">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a> <span class=\"size-20x20 icon-26x26-{{ command.type }}\"></span> <a class=\"target\"><span class=\"village-link img-link icon-20x20-village btn btn-orange padded\" ng-click=\"openVillageInfo(command.target.id)\">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a><tr><td>{{ 'units' | i18n:loc.ale:'common' }}<td class=\"units\"><div class=\"unit\" ng-repeat=\"(unit, amount) in command.units\"><span class=\"icon-34x34-unit-{{ unit }} icon\"></span> <span class=\"amount\">{{ amount }}</span> <span ng-if=\"unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK\">({{ command.catapultTarget | i18n:loc.ale:'common' }})</span></div><div class=\"officer\" ng-repeat=\"(officer, enabled) in command.officers\"><span class=\"icon-34x34-premium_officer_{{ officer }}\"></span></div></table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.WAITING\"><a class=\"btn-orange btn-border\" ng-click=\"clearWaitings()\">{{ 'clear' | i18n:loc.ale:'command_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a class=\"btn-orange btn-border\" ng-click=\"clearRegisters()\">{{ 'general_clear' | i18n:loc.ale:'command_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.ADD\"><a class=\"btn-orange btn-border add\" ng-click=\"addCommand(COMMAND_TYPES.ATTACK)\"><span class=\"icon-26x26-attack-small\"></span> {{ COMMAND_TYPES.ATTACK | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.ADD\"><a class=\"btn-orange btn-border add\" ng-click=\"addCommand(COMMAND_TYPES.SUPPORT)\"><span class=\"icon-26x26-support\"></span> {{ COMMAND_TYPES.SUPPORT | i18n:loc.ale:'common' }}</a><li ng-show=\"relocateEnabled && selectedTab === TAB_TYPES.ADD\"><a class=\"btn-orange btn-border add\" ng-click=\"addCommand(COMMAND_TYPES.RELOCATE)\"><span class=\"icon-26x26-relocate\"></span> {{ COMMAND_TYPES.RELOCATE | i18n:loc.ale:'common' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchCommandQueue()\"><span ng-show=\"running\">{{ 'deactivate' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'activate' | i18n:loc.ale:'common' }}</span></a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-command-queue input.unit{width:80px;height:34px}#two-command-queue form .padded{padding:2px 8px}#two-command-queue .basic-config input{width:200px;height:28px;font-weight:bold;padding:1px 8px 0 8px;outline:none;border:none;color:#000;resize:none}#two-command-queue span.select-wrapper{height:27px}#two-command-queue span.select-wrapper a.select-button{height:23px}#two-command-queue span.select-wrapper a.select-handler{-webkit-box-shadow:none;box-shadow:none;height:23px;line-height:23px;margin-bottom:-1px}#two-command-queue .custom-select{width:240px}#two-command-queue .originVillage,#two-command-queue .targetVillage{padding:0 7px}#two-command-queue a.btn{height:28px;line-height:28px;padding:0 10px}#two-command-queue .actions{text-align:center;user-select:none}#two-command-queue .command-village{padding-left:5px;padding-right:5px}#two-command-queue .add-units td{padding:2px 0;text-align:center}#two-command-queue .add-units .unit-icon{top:-1px}#two-command-queue .add-units span[class*="icon-34x34"]{margin-top:-2px !important}#two-command-queue .add-units input{height:34px;color:#fff3d0;border:none;outline:none;font-size:14px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAABGdBTUEAALGPC/xhBQAAALRQTFRFr6+vmJiYoKCgrKysq6urpaWltLS0s7OzsLCwpKSkm5ubqKiojY2NlZWVk5OTqampbGxsWFhYUVFRhISEgYGBmpqaUFBQnp6eYmJidnZ2nZ2dY2NjW1tbZ2dnoaGhe3t7l5eXg4ODVVVVWVlZj4+PXFxcVlZWkpKSZmZmdXV1ZWVlc3NzjIyMXl5eVFRUeHh4hoaGYWFhXV1dbW1tampqb29veXl5fHx8gICAiYmJcnJyTk5Ooj6l1wAAADx0Uk5TGhkZGhoaGxoaGRkaGRkZGhkbHBgYGR0ZGhkZGhsZGRgZGRwbGRscGRoZGhkZGhwZGRobGRkZGRkZGRkeyXExWQAABOJJREFUSMeNVgdy4zgQxIW9TQ7KOVEUo5gz0f//1/WA0sple6+OLokQiUk9PQ2rvlzvT0vA6xDXU3R5hQmqddDVaIELsMl3KLUGoFHugUphjt25PWkE6KMAqPkO/Qh7HRadPmTNxKJpWuhSjLZAoSZmXYoPXh0w2R2z10rjBxpMNRfomhbNFUfUFbfUCh6TWmO4ZqNn6Jxekx6lte3h9IgYv9ZwzIZXfhQ/bejmsYkgOeVInoDGT6KGP9MMbsj7mtEKphKgVFKkJGUM+r/00zybNkPMFWYske+jY9hUblbrK4YosyPtrxl+5kNRWSb2B3+pceKT05SQRPZY8pVSGoWutgen2junRVKPZJ0v5Nu9HAk/CFPr+T1XTkXYFWSJXfTyLPcpcPXtBZIPONq/cFQ0Y0Lr1GF6f5doHdm2RLTbQMpMmCIf/HGm53OLFPiiEOsBKtgHccgKTVwn8l7kbt3iPvqniMX4jgWj4aqlX43xLwXVet5XTG1cYp/29m58q6ULSa7V0M3UQFyjd+AD+1W9WLBpDd9uej7emFbea/+Yw8faySElQQrBDksTpTOVIG/SE2HpPvZsplJWsblRLEGXATEW9YLUY1rPSdivBDmuK3exNiAysfPALfYZFWJrsA4Zt+fftEeRY0UsMDqfyNCKJpdrtI1r2k0vp9LMSwdO0u5SpjBeEYz5ebhWNbwT2g7OJXy1vjW+pEwyd1FTkAtbzzcbmX1yZlkR2pPiXZ/mDbPNWvHRsaKfLH8+FqiZbnodbOK9RGWlNMli8k+wsgbSNwS35QB6qxn53xhu2DFqUilisB9q2Zqw4nNI9tOB2z8GbkvEdNjPaD2j+9pwEC+YlWJvI7xN7xMC09eqhq/qwRvz3JWcFWmkjrWBWSiOysEmc4LmMb0iSsxR8+Z8pk3+oE39cdAmh1xSDXuAryRLZgpp9V62+8IOeBSICjs8LlbtKGN4E7XGoGASIJ+vronVa5mjagPHIFJA2b+BKkZC5I/78wOqmzYp1N8vzTkWIWz6YfsS3eh3w8pBkfKz6TSLxK9Qai5DUGTMZ8NNmrW8ldNudIJq+eJycwjv+xbeOJwPv1jjsSV/rCBaS/IBrafaUQ+5ksHwwl9y9X7kmvvIKWoBDFvbWySGyMU3XflxZRkNeRU63otWb0+P8H8BrRokbJivpWkk6m6LccSlrC2K0i6+4otx4dN3mbAVKt0wbaqBab4/MW8rgrS8JP06HU6UYSTYsQ5pYETpo87ZonORvbPlvYbXwmsMgoQGKr8PUQ5dDEO0EcXp2oOfSk+YpR/Eg4R46O0/Sf7jVnbqbXBrRkCPsZFOQTN8h+aqlcRw9FjJ/j8V7SXZ3hVNXYsOYcxzpfPNgFrvB9S6Dej2PqDqq0su+5ng0WMi527p/pA+OiW0fsYzDa6sPS9C1qxTtxVRMuySrwPD6qGPRKc4uIx4oceJ9FPjxWaqPPebzyXxU7W1jNqqOw+9z6X/k+Na3SBa0v+VjgoaULR30G1nxvZN1vsha2UaSrKy/PyCaHK5zAYnJzm9RSpSPDWbDVu0dkUujMmB/ly4w8EnDdXXoyX/VfhB3yKzMJ2BSaZO+A9GiNQMbll+6z1WGLWpEGMeEg85MESSep0IPFaHYZZ1QOW/xcjfxGhNjP0tRtbhFHOmhhjAv/p77JrCX3+ZAAAAAElFTkSuQmCC) top left #b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:80px}#two-command-queue .add-officers .cell-officers{padding:7px 11px 5px 11px}#two-command-queue .add-officers .amount{color:#fff;text-align:center}#two-command-queue .command{margin-bottom:10px}#two-command-queue .command .time-left{width:93px;display:inline-block;padding:0 0 0 3px}#two-command-queue .command .sent-time,#two-command-queue .command .arrive-time{width:160px;display:inline-block;padding:0 0 0 5px}#two-command-queue .command td{padding:3px 6px}#two-command-queue .officers td{width:111px;text-align:center}#two-command-queue .officers label{margin-left:5px}#two-command-queue .officers span{margin-left:2px}#two-command-queue .units div.unit{float:left}#two-command-queue .units div.unit span.icon{transform:scale(.7);width:25px;height:25px}#two-command-queue .units div.unit span.amount{vertical-align:-2px;margin:0 5px 0 2px}#two-command-queue .units div.officer{float:left;margin:0 2px}#two-command-queue .units div.officer span{transform:scale(.7);width:25px;height:25px}#two-command-queue .remove-command{float:right;margin-top:3px}#two-command-queue .tbl-units td{text-align:center}#two-command-queue .tbl-speed{margin-top:10px}#two-command-queue .tbl-speed th{text-align:center}#two-command-queue .tbl-speed td{font-size:12px}#two-command-queue .tbl-speed .box-time-sub-icon{position:relative}#two-command-queue .tbl-speed .box-time-sub-icon .time-icon{position:absolute;top:-3px;left:27px;transform:scale(.7)}#two-command-queue .tbl-speed .box-time-sub-icon.time-relocate .time-icon{top:-6px;left:26px}#two-command-queue .tbl-speed .valid{color:#16600a}#two-command-queue .tbl-speed .invalid{color:#a1251f}#two-command-queue .tbl-speed .neutral{color:#000}#two-command-queue .dateType{width:200px}#two-command-queue .dateType .custom-select-handler{text-align:left}#two-command-queue .filters .icon{width:38px;float:left;margin:0 6px}#two-command-queue .filters .icon.active:before{box-shadow:0 0 0 1px #000,-1px -1px 0 2px #ac9c44,0 0 0 3px #ac9c44,0 0 0 4px #000;border-radius:1px;content:"";position:absolute;width:38px;height:38px;left:-1px;top:-1px}#two-command-queue .filters .text{margin-left:262px}#two-command-queue .filters .text input{height:36px;margin-top:1px;width:100%;text-align:left;padding:0 5px}#two-command-queue .filters .text input::placeholder{color:white}#two-command-queue .filters .text input:focus::placeholder{color:transparent}#two-command-queue .filters td{padding:6px}#two-command-queue .icon-34x34-barbarian-village:before{filter:grayscale(100%);background-image:url(https://i.imgur.com/ozI4k0h.png);background-position:-220px -906px}#two-command-queue .icon-20x20-time-arrival:before{transform:scale(.8);background-image:url(https://i.imgur.com/ozI4k0h.png);background-position:-529px -454px}#two-command-queue .icon-20x20-attack:before{transform:scale(.8);background-image:url(https://i.imgur.com/ozI4k0h.png);background-position:-546px -1086px;width:26px;height:26px}#two-command-queue .icon-20x20-support:before{transform:scale(.8);background-image:url(https://i.imgur.com/ozI4k0h.png);background-position:-462px -360px;width:26px;height:26px}#two-command-queue .icon-20x20-relocate:before{transform:scale(.8);background-image:url(https://i.imgur.com/ozI4k0h.png);background-position:-1090px -130px;width:26px;height:26px}#two-command-queue .icon-26x26-attack:before{background-image:url(https://i.imgur.com/ozI4k0h.png);background-position:-546px -1086px}')
     }
 
@@ -15633,6 +17945,7 @@ define('two/commandQueue/ui', [
         $scope.reduceDate = reduceDate
         $scope.cleanUnitInputs = cleanUnitInputs
         $scope.addCommand = addCommand
+        $scope.clearWaitings = clearWaitings
         $scope.clearRegisters = clearRegisters
         $scope.switchCommandQueue = switchCommandQueue
         $scope.removeCommand = commandQueue.removeCommand
@@ -15794,14 +18107,11 @@ define('two/faithChecker', [
     let requestVillageProvinceNeighbours
     let highestChapelLevel
     let bonus
-	
     let chapelBlockade = 0
-	
     getHighestGodsHouseLevel = function getHighestGodsHouseLevel(villages) {
         let villageIdx,
             highestLevel = 0,
             tmpLevel
-
         for (villageIdx = 0; villageIdx < villages.length; villageIdx++) {
             tmpLevel = villages[villageIdx].chapel || villages[villageIdx].church
             if (tmpLevel && (tmpLevel > highestLevel)) {
@@ -15810,7 +18120,6 @@ define('two/faithChecker', [
         }
         return highestLevel
     }
-	
     getMoralBonus = function getMoralBonus(level, opt_isChapel) {
         let bonusLookUp = modelDataService.getWorldConfig().getChurchBonus(),
             bonusFactor = 0
@@ -15824,7 +18133,6 @@ define('two/faithChecker', [
         }
         return Math.floor(bonusFactor * 100)
     }
-	
     requestVillageProvinceNeighbours = function requestVillageProvinceNeighbours(villageId, callback) {
         socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
             'village_id': villageId
@@ -15832,9 +18140,11 @@ define('two/faithChecker', [
     }
 
     function faithInfo() {
+        if (!running) {
+            return false
+        }
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
-
         villages.forEach(function(village) {
             let villageid = village.data.villageId
             let isChapel = village.data.buildings.chapel.level
@@ -15856,7 +18166,6 @@ define('two/faithChecker', [
             if (isChapel == 1) {
                 chapelBlockade = 1
             }
-
             requestVillageProvinceNeighbours(villageid, function(responseData) {
                 highestChapelLevel = getHighestGodsHouseLevel(responseData.villages)
                 bonus = getMoralBonus(highestChapelLevel, isChapel === 1)
@@ -15890,7 +18199,6 @@ define('two/faithChecker', [
                 } else if (bonus == 50 && buildingQueue) {
                     buildingQueue.forEach(function(queue) {
                         let faithMax = queue.building
-
                         if ((faithMax != 'chapel' || faithMax != 'church') && chapelBlockade == 0) {
                             if (villageWood >= woodCost[0] && villageClay >= clayCost[0] && villageIron >= ironCost[0] && villageFood >= foodCost[0]) {
                                 socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
@@ -15923,7 +18231,6 @@ define('two/faithChecker', [
             })
         })
     }
-
     let faithChecker = {}
     faithChecker.init = function() {
         initialized = true
@@ -15932,6 +18239,10 @@ define('two/faithChecker', [
         eventQueue.trigger(eventTypeProvider.FAITH_CHECKER_STARTED)
         running = true
         faithInfo()
+        setInterval(function() {
+            running = true
+            faithInfo()
+        }, 60000)
     }
     faithChecker.stop = function() {
         eventQueue.trigger(eventTypeProvider.FAITH_CHECKER_STOPPED)
@@ -17792,7 +20103,7 @@ define('two/farmOverflow/ui', [
 
     const init = function () {
         settings = farmOverflow.getSettings()
-        $button = interfaceOverflow.addMenuButton2('Farmer', 10)
+        $button = interfaceOverflow.addMenuButton2('Farmer', 10, $filter('i18n')('description', $rootScope.loc.ale, 'farm_overflow'))
 
         $button.addEventListener('click', function () {
             buildWindow()
@@ -19473,8 +21784,11 @@ define('two/mintHelper', [
     let initialized = false
     let running = false
     let interval = 3000
-	
+
     function mintCoins() {
+        if (!running) {
+            return false
+        }
         let player = modelDataService.getSelectedCharacter()
         let villages = player.getVillageList()
         villages.forEach(function(village) {
@@ -19522,14 +21836,13 @@ define('two/mintHelper', [
                             console.log('W wiosce ' + village.getName() + ' wybito ' + amountIron + ' monet.')
                         }
                     } else {
-                        console.log('Za mało surowców żeby wybić monety w wiosce' + village.getName())
+                        console.log('Za mało surowców żeby wybić monety w wiosce ' + village.getName())
                     }
                 } else {
                     console.log('W wiosce ' + village.getName() + ' brak akademi')
                 }
             }, interval)
         })
-        setTimeout(mintCoins, 30000)
     }
     let mintHelper = {}
     mintHelper.init = function() {
@@ -19538,6 +21851,11 @@ define('two/mintHelper', [
     mintHelper.start = function() {
         eventQueue.trigger(eventTypeProvider.MINT_HELPER_STARTED)
         running = true
+        mintCoins()
+        setInterval(function() {
+            running = true
+            mintCoins()
+        }, 1800000)
         mintCoins()
     }
     mintHelper.stop = function() {
@@ -19645,346 +21963,770 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/presetAsigner', [
+define('two/prankHelper', [
     'two/Settings',
-    'two/presetAsigner/settings',
-    'two/presetAsigner/settings/map',
-    'two/presetAsigner/settings/updates',
+    'two/prankHelper/settings',
+    'two/prankHelper/settings/map',
+    'two/prankHelper/settings/updates',
+    'two/prankHelper/types/type',
     'two/ready',
-    'queues/EventQueue'
-], function (
+    'helper/time',
+    'queues/EventQueue',
+    'Lockr'
+], function(
     Settings,
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
+    PH_TYPE,
     ready,
-    eventQueue
+    timeHelper,
+    eventQueue,
+    Lockr
 ) {
     let initialized = false
     let running = false
+    const LOGS_LIMIT = 500
     let settings
-    let presetAsignerSettings
-
-    let byPresetSelected = []
-    let byPresetAndGroupSelected = []
-    let byGroupSelectedGroup = []
-    let byPresetAndGroupSelectedGroup = []
-
+    let prankHelperSettings
+    let logs
+    let selectedGroups = []
     const STORAGE_KEYS = {
-        SETTINGS: 'preset_asigner_settings'
+        SETTINGS: 'prank_helper_settings',
+        LOGS: 'prank_helper_log'
     }
-	
-    const updatePresets = function () {
-        byPresetSelected = []
-        byPresetAndGroupSelected = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser1 = presetAsignerSettings[SETTINGS.PRESETS1]
-        const presetsSelectedByTheUser2 = presetAsignerSettings[SETTINGS.PRESETS2]
-
-        presetsSelectedByTheUser1.forEach(function (presetId) {
-            byPresetSelected.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser2.forEach(function (presetId) {
-            byPresetAndGroupSelected.push(allPresets[presetId])
-        })
+    const RENAME_TYPE = {
+        [PH_TYPE.INCREASE]: 'increase',
+        [PH_TYPE.DECREASE]: 'decrease',
+        [PH_TYPE.RANDOM]: 'random'
     }
-	
-    const updateGroups = function () {
-        byGroupSelectedGroup = []
-        byPresetAndGroupSelectedGroup = []
-
+    console.log(RENAME_TYPE)
+    const updateGroups = function() {
+        selectedGroups = []
         const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser1 = presetAsignerSettings[SETTINGS.GROUP1]
-        const groupsSelectedByTheUser2 = presetAsignerSettings[SETTINGS.GROUP2]
-
-        groupsSelectedByTheUser1.forEach(function (groupId) {
-            byGroupSelectedGroup.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser2.forEach(function (groupId) {
-            byPresetAndGroupSelectedGroup.push(allGroups[groupId])
-        })
+        const groupsSelectedByTheUser = prankHelperSettings[SETTINGS.GROUPS]
+        selectedGroups.push(allGroups[groupsSelectedByTheUser])
     }
-
-    const presetAsigner = {}
-
-    presetAsigner.init = function () {
+    const requestVillageProvinceNeighbours = function(villageId, callback) {
+        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
+            'village_id': villageId
+        }, callback)
+    }
+    const addLog = function(villageId, newname, oldname) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            oldname: oldname,
+            newname: newname
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        return true
+    }
+    const prankHelper = {}
+    prankHelper.init = function() {
         initialized = true
-
+        logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates) {
-            presetAsignerSettings = settings.getAll()
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
+        settings.onChange(function(changes, updates) {
+            prankHelperSettings = settings.getAll()
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
         })
-
-        presetAsignerSettings = settings.getAll()
-
-        console.log('presetAsigner settings', presetAsignerSettings)
-
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
+        prankHelperSettings = settings.getAll()
+        console.log('prankHelper settings', prankHelperSettings)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
-
-    presetAsigner.start = function () {
+    prankHelper.renameGroup = function renameGroup() {
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        var validName = prankHelperSettings[SETTINGS.CENTER3]
+        var prefix = prankHelperSettings[SETTINGS.PROLOGUE3]
+        var sufix = prankHelperSettings[SETTINGS.EPILOGUE3]
+        var type = prankHelperSettings[SETTINGS.TYPE3]
+        var min = prankHelperSettings[SETTINGS.FROM3]
+        var max = prankHelperSettings[SETTINGS.TO3]
+        var selectedGroup = prankHelperSettings[SETTINGS.GROUPS]
+        const groupList = modelDataService.getGroupList()
+        var groupVillages = groupList.getGroupVillageIds(selectedGroup)
+        var interval = 4000
+        var newName
+        var villageIdSet = 0
+        var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        var oldName = null
+        var nameSet = []
+        var i = 0
+        var minNew = alphabet.indexOf(min)
+        var maxNew = alphabet.indexOf(max)
+        if (type == 'increase') {
+            if (isNaN(min) && isNaN(max)) {
+                for (i = minNew; i <= maxNew; i++) {
+                    newName = prefix + validName + sufix + ' ' + alphabet[i]
+                    nameSet.push(newName)
+                }
+            } else {
+                for (i = min; i <= max; i++) {
+                    newName = prefix + validName + sufix + ' ' + i
+                    nameSet.push(newName)
+                }
+            }
+        } else if (type == 'decrease') {
+            if (isNaN(min) && isNaN(max)) {
+                for (i = maxNew; i >= minNew; i--) {
+                    newName = prefix + validName + sufix + ' ' + alphabet[i]
+                    nameSet.push(newName)
+                }
+            } else {
+                for (i = max; i >= min; i--) {
+                    newName = prefix + validName + sufix + ' ' + i
+                    nameSet.push(newName)
+                }
+            }
+        } else {
+            newName = prefix + validName + sufix
+            villages.forEach(function(village) {
+                groupVillages.forEach(function(id, index) {
+                    if (village.data.villageId == id) {
+                        setTimeout(function() {
+                            villageIdSet = village.getId()
+                            oldName = village.getName()
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                        }, index * interval)
+                    }
+                })
+            })
+        }
+        villages.forEach(function(village) {
+            groupVillages.forEach(function(id, index) {
+                if (village.data.villageId == id) {
+                    setTimeout(function() {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.getId(),
+                            name: nameSet[index]
+                        })
+                        addLog(villageIdSet, nameSet[index], oldName)
+                    }, index * interval)
+                }
+            })
+        })
+        prankHelper.stop()
+    }
+    prankHelper.renameProvince = function renameProvince() {
+        var selectedVillage = prankHelperSettings[SETTINGS.VILLAGE_ID]
+        var villages = []
+        var validName = prankHelperSettings[SETTINGS.CENTER2]
+        var prefix = prankHelperSettings[SETTINGS.PROLOGUE2]
+        var sufix = prankHelperSettings[SETTINGS.EPILOGUE2]
+        var type = prankHelperSettings[SETTINGS.TYPE2]
+        var min = prankHelperSettings[SETTINGS.FROM2]
+        var max = prankHelperSettings[SETTINGS.TO2]
+        var interval = 4000
+        var newName
+        var villageIdSet = 0
+        var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        var oldName = null
+        var nameSet = []
+        var i = 0
+        var minNew = alphabet.indexOf(min)
+        var maxNew = alphabet.indexOf(max)
+        requestVillageProvinceNeighbours(selectedVillage, function(responseData) {
+            villages = responseData.villages
+            if (type == 'increase') {
+                if (isNaN(min) && isNaN(max)) {
+                    for (i = minNew; i <= maxNew; i++) {
+                        newName = prefix + validName + sufix + ' ' + alphabet[i]
+                        nameSet.push(newName)
+                    }
+                } else {
+                    for (i = min; i <= max; i++) {
+                        newName = prefix + validName + sufix + ' ' + i
+                        nameSet.push(newName)
+                    }
+                }
+            } else if (type == 'decrease') {
+                if (isNaN(min) && isNaN(max)) {
+                    for (i = maxNew; i >= minNew; i--) {
+                        newName = prefix + validName + sufix + ' ' + alphabet[i]
+                        nameSet.push(newName)
+                    }
+                } else {
+                    for (i = max; i >= min; i--) {
+                        newName = prefix + validName + sufix + ' ' + i
+                        nameSet.push(newName)
+                    }
+                }
+            } else {
+                newName = prefix + validName + sufix
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        villageIdSet = village.id
+                        oldName = village.name
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.id,
+                            name: newName
+                        })
+                        addLog(villageIdSet, newName, oldName)
+                    }, index * interval)
+                })
+            }
+            villages.forEach(function(village, index) {
+                setTimeout(function() {
+                    villageIdSet = village.id
+                    oldName = village.name
+                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                        village_id: village.id,
+                        name: nameSet[index]
+                    })
+                    addLog(villageIdSet, nameSet[index], oldName)
+                }, index * interval)
+            })
+        })
+        prankHelper.stop()
+    }
+    prankHelper.renameAll = function renameAll() {
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        var validName = prankHelperSettings[SETTINGS.CENTER1]
+        var prefix = prankHelperSettings[SETTINGS.PROLOGUE1]
+        var sufix = prankHelperSettings[SETTINGS.EPILOGUE1]
+        var type = prankHelperSettings[SETTINGS.TYPE1]
+        var min = prankHelperSettings[SETTINGS.FROM1]
+        var max = prankHelperSettings[SETTINGS.TO1]
+        var interval = 4000
+        var newName
+        var villageIdSet = 0
+        var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        var oldName = null
+        var nameSet = []
+        var i = 0
+        var minNew = alphabet.indexOf(min)
+        var maxNew = alphabet.indexOf(max)
+        if (type == 'increase') {
+            if (isNaN(min) && isNaN(max)) {
+                for (i = minNew; i <= maxNew; i++) {
+                    newName = prefix + validName + sufix + ' ' + alphabet[i]
+                    nameSet.push(newName)
+                }
+            } else {
+                for (i = min; i <= max; i++) {
+                    newName = prefix + validName + sufix + ' ' + i
+                    nameSet.push(newName)
+                }
+            }
+        } else if (type == 'decrease') {
+            if (isNaN(min) && isNaN(max)) {
+                for (i = maxNew; i >= minNew; i--) {
+                    newName = prefix + validName + sufix + ' ' + alphabet[i]
+                    nameSet.push(newName)
+                }
+            } else {
+                for (i = max; i >= min; i--) {
+                    newName = prefix + validName + sufix + ' ' + i
+                    nameSet.push(newName)
+                }
+            }
+        } else {
+            newName = prefix + validName + sufix
+            villages.forEach(function(village, index) {
+                setTimeout(function() {
+                    villageIdSet = village.getId()
+                    oldName = village.getName()
+                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                        village_id: village.getId(),
+                        name: newName
+                    })
+                    addLog(villageIdSet, newName, oldName)
+                }, index * interval)
+            })
+        }
+        villages.forEach(function(village, index) {
+            setTimeout(function() {
+                villageIdSet = village.getId()
+                oldName = village.getName()
+                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                    village_id: village.getId(),
+                    name: nameSet[index]
+                })
+                addLog(villageIdSet, nameSet[index], oldName)
+            }, index * interval)
+        })
+        prankHelper.stop()
+    }
+    prankHelper.getLogs = function() {
+        return logs
+    }
+    prankHelper.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_CLEAR_LOGS)
+        return logs
+    }
+    prankHelper.start = function() {
         running = true
-
-        eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_START)
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('', 'Rozpoczęto przemianowanie', '')
     }
-
-    presetAsigner.stop = function () {
+    prankHelper.stop = function() {
         running = false
-
-        console.log('presetAsigner stop')
-
-        eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_STOP)
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
+        addLog('', 'Zatrzymano przemianowanie', '')
     }
-
-    presetAsigner.getSettings = function () {
+    prankHelper.getSettings = function() {
         return settings
     }
-
-    presetAsigner.isInitialized = function () {
+    prankHelper.isInitialized = function() {
         return initialized
     }
-
-    presetAsigner.isRunning = function () {
+    prankHelper.isRunning = function() {
         return running
     }
-
-    return presetAsigner
+    return prankHelper
 })
-
-define('two/presetAsigner/events', [], function () {
+define('two/prankHelper/events', [], function () {
     angular.extend(eventTypeProvider, {
-        PRESET_ASIGNER_START: 'preset_asigner_start',
-        PRESET_ASIGNER_STOP: 'preset_asigner_stop'
+        PRANK_HELPER_START: 'prank_helper_start',
+        PRANK_HELPER_STOP: 'prank_helper_stop',
+        PRANK_HELPER_LOGS_UPDATED: 'prank_helper_logs_updated'
     })
 })
-define('two/presetAsigner/ui', [
+
+define('two/prankHelper/ui', [
     'two/ui',
-    'two/presetAsigner',
-    'two/presetAsigner/settings',
-    'two/presetAsigner/settings/map',
+    'two/prankHelper',
+    'two/prankHelper/settings',
+    'two/prankHelper/settings/map',
+    'two/prankHelper/types/type',
     'two/Settings',
+    'queues/EventQueue',
     'two/EventScope',
-    'two/utils'
-], function (
+    'two/utils',
+    'struct/MapData'
+], function(
     interfaceOverflow,
-    presetAsigner,
+    prankHelper,
     SETTINGS,
     SETTINGS_MAP,
+    PH_TYPE,
     Settings,
+    eventQueue,
     EventScope,
-    utils
+    utils,
+    mapData
 ) {
     let $scope
     let settings
-    let presetList = modelDataService.getPresetList()
     let groupList = modelDataService.getGroupList()
     let $button
-    
+    let running = false
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    let prankVillage
+    let mapSelectedVillage = false
     const TAB_TYPES = {
-        PRESETS: 'presets',
+        RENAME: 'rename',
         LOGS: 'logs'
     }
-
-    const selectTab = function (tabType) {
+    const selectTab = function(tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (presetAsigner.isRunning()) {
-            presetAsigner.stop()
+    const renameAll = function() {
+        if (prankHelper.isRunning()) {
+            prankHelper.stop()
+            running = false
         } else {
-            presetAsigner.start()
+            prankHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            prankHelper.renameAll()
         }
     }
-
+    const renameProvince = function() {
+        if (prankHelper.isRunning()) {
+            prankHelper.stop()
+            running = false
+        } else {
+            prankHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            prankHelper.renameProvince()
+        }
+    }
+    const renameGroup = function() {
+        if (prankHelper.isRunning()) {
+            prankHelper.stop()
+            running = false
+        } else {
+            prankHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            prankHelper.renameGroup()
+        }
+    }
+    const clear = function() {
+        $scope.settings[SETTINGS.GROUPS] = false
+        $scope.settings[SETTINGS.TYPE1] = false
+        $scope.settings[SETTINGS.TYPE2] = false
+        $scope.settings[SETTINGS.TYPE3] = false
+        $scope.settings[SETTINGS.CENTER1] = ''
+        $scope.settings[SETTINGS.CENTER2] = ''
+        $scope.settings[SETTINGS.CENTER3] = ''
+        $scope.settings[SETTINGS.PROLOGUE1] = ''
+        $scope.settings[SETTINGS.PROLOGUE2] = ''
+        $scope.settings[SETTINGS.PROLOGUE3] = ''
+        $scope.settings[SETTINGS.EPILOGUE1] = ''
+        $scope.settings[SETTINGS.EPILOGUE2] = ''
+        $scope.settings[SETTINGS.EPILOGUE3] = ''
+        $scope.settings[SETTINGS.FROM1] = ''
+        $scope.settings[SETTINGS.FROM2] = ''
+        $scope.settings[SETTINGS.FROM3] = ''
+        $scope.settings[SETTINGS.TO1] = ''
+        $scope.settings[SETTINGS.TO2] = ''
+        $scope.settings[SETTINGS.TO3] = ''
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'prank_helper'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            prankVillage.origin = data
+        })
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ładowanie...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId) {
+                loadVillageInfo(log.villageId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        prankHelper.clearLogs()
+    }
     const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
+        updateGroups: function() {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
                 type: 'groups'
             })
         },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
+        updateLogs: function() {
+            $scope.logs = prankHelper.getLogs()
+            logsView.updateVisibleLogs()
+            if (!$scope.logs.length) {
+                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'recruit_queue'))
+            }
         },
-        stop: function () {
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'prankhelper_village_search') {
+                return false
+            }
+            prankVillage[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+        },
+        onAutoCompleteVillage: function(data) {
+            prankVillage.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.VILLAGE_ID] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'prank_helper'))
+            $scope.visibleLogs = []
+            eventHandlers.updateLogs()
+        },
+        start: function() {
+            $scope.running = true
+        },
+        stop: function() {
             $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
         }
     }
-
-    const init = function () {
-        settings = presetAsigner.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Administrator', 30)
+    const init = function() {
+        settings = prankHelper.getSettings()
+        prankVillage = {
+            origin: false
+        }
+        $button = interfaceOverflow.addMenuButton3('Błazen', 80, $filter('i18n')('description', $rootScope.loc.ale, 'prank_helper'))
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_preset_asigner_window', `<div id=\"two-preset-asigner\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'preset_asigner' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'preset_asigner' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'preset_asigner' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.all' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textall' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets.name' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'preset_asigner' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME1]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'preset_asigner' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.group' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textgroup' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.name-group' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname-group' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'preset_asigner' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME2]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'preset_asigner' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS2]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col width=\"30%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.preset' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.group' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.date' | i18n:loc.ale:'preset_asigner' }}<tbody class=\"asignerLog\"><tr class=\"noAsigns\"><td colspan=\"5\">{{ 'logs.noAsigns' | i18n:loc.ale:'preset_asigner' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'preset_asigner' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-preset-asigner div[select] .select-wrapper{height:34px}#two-preset-asigner div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-preset-asigner div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-preset-asigner .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-preset-asigner .textfield-border.fit{width:33%}#two-preset-asigner .addForm .item-asign{text-align:center}#two-preset-asigner .addForm .item-asign span{height:30px;text-align:center;line-height:30px;width:115px}#two-preset-asigner .addForm td{text-align:left}#two-preset-asigner .addForm td .sel{text-align:center}#two-preset-asigner .addForm td.center{text-align:center}#two-preset-asigner .addForm th{text-align:center;padding:0px}#two-preset-asigner .asignerLog td{text-align:center}#two-preset-asigner .asignerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-preset-asigner .asignerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-preset-asigner .noAsigns td{height:26px;text-align:center}#two-preset-asigner .force-26to20{transform:scale(.8);width:20px;height:20px}')
+        eventQueue.register(eventTypeProvider.PRANK_HELPER_START, function() {
+            running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'recruit_queue'))
+        })
+        eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
+            running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'recruit_queue'))
+        })
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!prankVillage.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"prankVillage.origin\" class=\"command-village\">{{ prankVillage.origin.name }} ({{ prankVillage.origin.x }}|{{ prankVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.oldname }}<td>{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-prank-helper .logs .status tr{height:25px}#two-prank-helper .logs .status td{padding:0 6px}#two-prank-helper .logs .log-list{margin-bottom:10px}#two-prank-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-prank-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-prank-helper .icon-20x20-village:before{margin-top:-11px}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = presetAsigner.isRunning()
-        $scope.selectedTab = TAB_TYPES.PRESETS
+        $scope.running = running
+        $scope.selectedTab = TAB_TYPES.RENAME
         $scope.settingsMap = SETTINGS_MAP
-
-        settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_preset_asigner_window', function onDestroy () {
-            console.log('presetAsigner closed')
+        $scope.pagination = {}
+        $scope.prankVillage = prankVillage
+        $scope.clear = clear
+        $scope.autoCompleteVillage = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'prank_helper'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'prank_helper'),
+            dropDown: true
+        }
+        $scope.type = Settings.encodeList(PH_TYPE, {
+            textObject: 'prank_helper',
+            disabled: true
         })
-
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
+        settings.injectScope($scope)
+        eventHandlers.updateGroups()
+        $scope.selectTab = selectTab
+        $scope.addMapSelected = addMapSelected
+        $scope.renameAll = renameAll
+        $scope.renameProvince = renameProvince
+        $scope.renameGroup = renameGroup
+        $scope.logsView = logsView
+        $scope.logsView.logs = prankHelper.getLogs()
+        $scope.villagesInfo = villagesInfo
+        $scope.villagesLabel = villagesLabel
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        logsView.updateVisibleLogs()
+        let eventScope = new EventScope('twoverflow_prank_helper_window', function onDestroy() {
+            console.log('prankHelper window closed')
+        })
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.PRESET_ASIGNER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.PRESET_ASIGNER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_preset_asigner_window', $scope)
+        eventScope.register(eventTypeProvider.PRANK_HELPER_CLEAR_LOGS, eventHandlers.clearLogs)
+        eventScope.register(eventTypeProvider.PRANK_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.PRANK_HELPER_STOP, eventHandlers.stop)
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_prank_helper_window', $scope)
     }
-
     return init
 })
-
-define('two/presetAsigner/settings', [], function () {
+define('two/prankHelper/settings', [], function () {
     return {
-        PRESETS1: 'presets1',
-        PRESETS2: 'presets2',
-        PRESET_NAME1: 'preset1',
-        PRESET_NAME2: 'preset2',
-        GROUP1: 'group1',
-        GROUP2: 'group2'
+        GROUPS: 'groups',
+        VILLAGE_ID: 'village_id',
+        TYPE1: 'type1',
+        TYPE2: 'type2',
+        TYPE3: 'type3',
+        CENTER1: 'center1',
+        CENTER2: 'center2',
+        CENTER3: 'center3',
+        PROLOGUE1: 'prologue1',
+        PROLOGUE2: 'prologue2',
+        PROLOGUE3: 'prologue3',
+        EPILOGUE1: 'epilogue1',
+        EPILOGUE2: 'epilogue2',
+        EPILOGUE3: 'epilogue3',
+        FROM1: 'from1',
+        FROM2: 'from2',
+        FROM3: 'from3',
+        TO1: 'to1',
+        TO2: 'to2',
+        TO3: 'to3'
     }
 })
 
-define('two/presetAsigner/settings/updates', function () {
+define('two/prankHelper/settings/updates', function () {
     return {
-        PRESETS: 'presets',
         GROUPS: 'groups'
     }
 })
 
-define('two/presetAsigner/settings/map', [
-    'two/presetAsigner/settings',
-    'two/presetAsigner/settings/updates'
+define('two/prankHelper/settings/map', [
+    'two/prankHelper/settings',
+    'two/prankHelper/settings/updates'
 ], function (
     SETTINGS,
     UPDATES
 ) {
     return {
-        [SETTINGS.PRESETS1]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESETS2]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.GROUP1]: {
+        [SETTINGS.GROUPS]: {
             default: [],
             updates: [
                 UPDATES.GROUPS,
             ],
             disabledOption: true,
             inputType: 'select',
-            multiSelect: false,
             type: 'groups'
         },
-        [SETTINGS.GROUP2]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
+        [SETTINGS.TYPE1]: {
+            default: false,
             disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'groups'
+            inputType: 'select'
+        },
+        [SETTINGS.TYPE2]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.TYPE3]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.CENTER1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.CENTER2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.CENTER3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.TO1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.TO2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.TO3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.FROM1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.FROM2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.FROM3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.EPILOGUE1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.EPILOGUE2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.EPILOGUE3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.PROLOGUE1]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.PROLOGUE2]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.PROLOGUE3]: {
+            default: '',
+            inputType: 'text'
+        },
+        [SETTINGS.VILLAGE_ID]: {
+            default: '0',
+            inputType: 'text'
         }
     }
 })
 
+define('two/prankHelper/types/type', [], function () {
+    return {
+        INCREASE: 'increase',
+        DECREASE: 'decrease',
+        RANDOM: 'random'
+    }
+})
 require([
     'two/ready',
-    'two/presetAsigner',
-    'two/presetAsigner/ui',
-    'two/presetAsigner/events'
+    'two/prankHelper',
+    'two/prankHelper/ui',
+    'two/prankHelper/events'
 ], function (
     ready,
-    presetAsigner,
-    presetAsignerInterface
+    prankHelper,
+    prankHelperInterface
 ) {
-    if (presetAsigner.isInitialized()) {
+    if (prankHelper.isInitialized()) {
         return false
     }
 
     ready(function () {
-        presetAsigner.init()
-        presetAsignerInterface()
-    })
+        prankHelper.init()
+        prankHelperInterface()
+    }, ['map'])
 })
 
 define('two/presetCreator', [
@@ -19996,7 +22738,6 @@ define('two/presetCreator', [
 ) {
     var initialized = false
     var running = false
-	
     var player = modelDataService.getSelectedCharacter()
     var villages = player.getVillageList()
     var pikinier = '060504'
@@ -20025,6 +22766,7 @@ define('two/presetCreator', [
     var karetatreb = '030d0e'
 
     function createPresets() {
+        const allPresets = modelDataService.getPresetList().getPresets()
         pikinier = typeof pikinier === 'string' ? parseInt(pikinier, 16) : pikinier
         miecznik = typeof miecznik === 'string' ? parseInt(miecznik, 16) : miecznik
         topornik = typeof topornik === 'string' ? parseInt(topornik, 16) : topornik
@@ -20049,680 +22791,728 @@ define('two/presetCreator', [
         karetatar = typeof karetatar === 'string' ? parseInt(karetatar, 16) : karetatar
         karetakat = typeof karetakat === 'string' ? parseInt(karetakat, 16) : karetakat
         karetatreb = typeof karetatreb === 'string' ? parseInt(karetatreb, 16) : karetatreb
-
-
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (pik)',
-            icon: pikinier,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 20,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
+        allPresets.forEach(function(preset) {
+            if (preset.name != 'Farma (pik)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (pik)',
+                    icon: pikinier,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 20,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (miecz)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (miecz)',
+                    icon: miecznik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 33,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (top)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (top)',
+                    icon: topornik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 25,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (łuk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (łuk)',
+                    icon: łucznik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 50,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (lk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (lk)',
+                    icon: lk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 10,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (łk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (łk)',
+                    icon: łk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 10,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'Farma (ck)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'Farma (ck)',
+                    icon: ck,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 10,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'PartDeff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'PartDeff',
+                    icon: partDeff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 180,
+                        sword: 140,
+                        axe: 0,
+                        archer: 100,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'FullDeff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'FullDeff',
+                    icon: fullDeff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 9000,
+                        sword: 7000,
+                        axe: 0,
+                        archer: 5000,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'PartOff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'PartOff',
+                    icon: partOff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 200,
+                        archer: 0,
+                        light_cavalry: 75,
+                        mounted_archer: 87,
+                        heavy_cavalry: 0,
+                        ram: 15,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'FullOff') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'FullOff',
+                    icon: fullOff,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 4000,
+                        archer: 0,
+                        light_cavalry: 1500,
+                        mounted_archer: 1750,
+                        heavy_cavalry: 0,
+                        ram: 300,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (pik)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (pik)',
+                    icon: fejkpik,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 1,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (miecz)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (miecz)',
+                    icon: fejkmiecz,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 1,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (top)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (top)',
+                    icon: fejktop,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 1,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (łuk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (łuk)',
+                    icon: fejkłuk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 1,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (lk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (lk)',
+                    icon: fejklk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 1,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (łk)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (łk)',
+                    icon: fejkłk,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 1,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (ck)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (ck)',
+                    icon: fejkck,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 1,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (tar)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (tar)',
+                    icon: fejktar,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 1,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (kat)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (kat)',
+                    icon: fejkkat,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 1,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'fejk (treb)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'fejk (treb)',
+                    icon: fejktreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 1,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'kareta (tar)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'kareta (tar)',
+                    icon: karetatreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 1,
+                        catapult: 0,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'kareta (kat)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'kareta (kat)',
+                    icon: karetatreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 1,
+                        trebuchet: 0,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
+            }
+            if (preset.name != 'kareta (treb)') {
+                socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+                    village_id: villages[0].data.villageId,
+                    name: 'kareta (treb)',
+                    icon: karetatreb,
+                    officers: {
+                        leader: false,
+                        loot_master: false,
+                        medic: false,
+                        scout: false,
+                        supporter: false,
+                        bastard: false
+                    },
+                    units: {
+                        spear: 0,
+                        sword: 0,
+                        axe: 0,
+                        archer: 0,
+                        light_cavalry: 0,
+                        mounted_archer: 0,
+                        heavy_cavalry: 0,
+                        ram: 0,
+                        catapult: 0,
+                        trebuchet: 1,
+                        doppelsoldner: 0,
+                        snob: 0,
+                        knight: 0
+                    }
+                })
             }
         })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (miecz)',
-            icon: miecznik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 33,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (top)',
-            icon: topornik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 25,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (łuk)',
-            icon: łucznik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 50,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (lk)',
-            icon: lk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 10,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (łk)',
-            icon: łk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 10,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'Farma (ck)',
-            icon: ck,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 10,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'PartDeff',
-            icon: partDeff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 180,
-                sword: 140,
-                axe: 0,
-                archer: 100,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'FullDeff',
-            icon: fullDeff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 9000,
-                sword: 7000,
-                axe: 0,
-                archer: 5000,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'PartOff',
-            icon: partOff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 200,
-                archer: 0,
-                light_cavalry: 75,
-                mounted_archer: 87,
-                heavy_cavalry: 0,
-                ram: 15,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'FullOff',
-            icon: fullOff,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 4000,
-                archer: 0,
-                light_cavalry: 1500,
-                mounted_archer: 1750,
-                heavy_cavalry: 0,
-                ram: 300,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (pik)',
-            icon: fejkpik,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 1,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (miecz)',
-            icon: fejkmiecz,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 1,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (top)',
-            icon: fejktop,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 1,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (łuk)',
-            icon: fejkłuk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 1,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (lk)',
-            icon: fejklk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 1,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (łk)',
-            icon: fejkłk,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 1,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (ck)',
-            icon: fejkck,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 1,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (tar)',
-            icon: fejktar,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 1,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (kat)',
-            icon: fejkkat,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 1,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'fejk (treb)',
-            icon: fejktreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 1,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })	
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'kareta (tar)',
-            icon: karetatreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 1,
-                catapult: 0,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })	
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'kareta (kat)',
-            icon: karetatreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 1,
-                trebuchet: 0,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })	
-        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-            village_id: villages[0].data.villageId,
-            name: 'kareta (treb)',
-            icon: karetatreb,
-            officers: {
-                leader: false,
-                loot_master: false,
-                medic: false,
-                scout: false,
-                supporter: false,
-                bastard: false
-            },
-            units: {
-                spear: 0,
-                sword: 0,
-                axe: 0,
-                archer: 0,
-                light_cavalry: 0,
-                mounted_archer: 0,
-                heavy_cavalry: 0,
-                ram: 0,
-                catapult: 0,
-                trebuchet: 1,
-                doppelsoldner: 0,
-                snob: 0,
-                knight: 0
-            }
-        })		
         utils.notif('success', $filter('i18n')('done', $rootScope.loc.ale, 'preset_creator'))
         utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'preset_creator'))
         presetCreator.stop()
@@ -20843,6 +23633,4863 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/recruitQueue', [
+    'two/Settings',
+    'two/recruitQueue/types/errors',
+    'two/recruitQueue/types/status',
+    'two/recruitQueue/settings',
+    'two/recruitQueue/settings/map',
+    'two/recruitQueue/settings/updates',
+    'two/recruitQueue/types/units',
+    'two/recruitQueue/types/logs',
+    'two/ready',
+    'queues/EventQueue',
+    'Lockr',
+    'helper/time'
+], function(
+    Settings,
+    ERROR_TYPES,
+    STATUS,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    RQ_UNIT,
+    LOG_TYPES,
+    ready,
+    eventQueue,
+    Lockr,
+    timeHelper
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let recruitQueueSettings
+    let logs
+    let nextCycleDate = null
+    let logData = []
+    const LOGS_LIMIT = 500
+    const MINIMUM_RECRUIT_CYCLE_INTERVAL = 1
+    let runningRecrutation = null
+    let interval5 = 0
+    let selectedGroups1 = []
+    let selectedGroups2 = []
+    let selectedGroups3 = []
+    let selectedGroups4 = []
+    let selectedGroups5 = []
+    let selectedGroups6 = []
+    let selectedGroups7 = []
+    let selectedGroups8 = []
+    let selectedGroups9 = []
+    let selectedGroups10 = []
+    let selectedGroups11 = []
+    let selectedGroups12 = []
+    let selectedGroups13 = []
+    let selectedGroups14 = []
+    let selectedGroups15 = []
+    let selectedGroups16 = []
+    let selectedGroups17 = []
+    let selectedGroups18 = []
+    let selectedGroups19 = []
+    let selectedGroups20 = []
+    let selectedGroups21 = []
+    let selectedGroups22 = []
+    let selectedGroups23 = []
+    let selectedGroups24 = []
+    let unitInterval = 6000
+    const STORAGE_KEYS = {
+        SETTINGS: 'recruit_queue_settings',
+        LOGS: 'recruit_queue_log',
+    }
+    const RECRUIT_UNIT = {
+        [RQ_UNIT.SPEAR]: 'spear',
+        [RQ_UNIT.SWORD]: 'sword',
+        [RQ_UNIT.AXE]: 'axe',
+        [RQ_UNIT.ARCHER]: 'archer',
+        [RQ_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [RQ_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [RQ_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [RQ_UNIT.RAM]: 'ram',
+        [RQ_UNIT.CATAPULT]: 'catapult'
+    }
+    console.log(RECRUIT_UNIT)
+    const updateGroups = function() {
+        selectedGroups1 = []
+        selectedGroups2 = []
+        selectedGroups3 = []
+        selectedGroups4 = []
+        selectedGroups5 = []
+        selectedGroups6 = []
+        selectedGroups7 = []
+        selectedGroups8 = []
+        selectedGroups9 = []
+        selectedGroups10 = []
+        selectedGroups11 = []
+        selectedGroups12 = []
+        selectedGroups13 = []
+        selectedGroups14 = []
+        selectedGroups15 = []
+        selectedGroups16 = []
+        selectedGroups17 = []
+        selectedGroups18 = []
+        selectedGroups19 = []
+        selectedGroups20 = []
+        selectedGroups21 = []
+        selectedGroups22 = []
+        selectedGroups23 = []
+        selectedGroups24 = []
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser1 = recruitQueueSettings[SETTINGS.GROUP1]
+        const groupsSelectedByTheUser2 = recruitQueueSettings[SETTINGS.GROUP2]
+        const groupsSelectedByTheUser3 = recruitQueueSettings[SETTINGS.GROUP3]
+        const groupsSelectedByTheUser4 = recruitQueueSettings[SETTINGS.GROUP4]
+        const groupsSelectedByTheUser5 = recruitQueueSettings[SETTINGS.GROUP5]
+        const groupsSelectedByTheUser6 = recruitQueueSettings[SETTINGS.GROUP6]
+        const groupsSelectedByTheUser7 = recruitQueueSettings[SETTINGS.GROUP7]
+        const groupsSelectedByTheUser8 = recruitQueueSettings[SETTINGS.GROUP8]
+        const groupsSelectedByTheUser9 = recruitQueueSettings[SETTINGS.GROUP9]
+        const groupsSelectedByTheUser10 = recruitQueueSettings[SETTINGS.GROUP10]
+        const groupsSelectedByTheUser11 = recruitQueueSettings[SETTINGS.GROUP11]
+        const groupsSelectedByTheUser12 = recruitQueueSettings[SETTINGS.GROUP12]
+        const groupsSelectedByTheUser13 = recruitQueueSettings[SETTINGS.GROUP13]
+        const groupsSelectedByTheUser14 = recruitQueueSettings[SETTINGS.GROUP14]
+        const groupsSelectedByTheUser15 = recruitQueueSettings[SETTINGS.GROUP15]
+        const groupsSelectedByTheUser16 = recruitQueueSettings[SETTINGS.GROUP16]
+        const groupsSelectedByTheUser17 = recruitQueueSettings[SETTINGS.GROUP17]
+        const groupsSelectedByTheUser18 = recruitQueueSettings[SETTINGS.GROUP18]
+        const groupsSelectedByTheUser19 = recruitQueueSettings[SETTINGS.GROUP19]
+        const groupsSelectedByTheUser20 = recruitQueueSettings[SETTINGS.GROUP20]
+        const groupsSelectedByTheUser21 = recruitQueueSettings[SETTINGS.GROUP21]
+        const groupsSelectedByTheUser22 = recruitQueueSettings[SETTINGS.GROUP22]
+        const groupsSelectedByTheUser23 = recruitQueueSettings[SETTINGS.GROUP23]
+        const groupsSelectedByTheUser24 = recruitQueueSettings[SETTINGS.GROUP24]
+        groupsSelectedByTheUser1.forEach(function(groupId) {
+            selectedGroups1.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser2.forEach(function(groupId) {
+            selectedGroups2.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser3.forEach(function(groupId) {
+            selectedGroups3.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser4.forEach(function(groupId) {
+            selectedGroups4.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser5.forEach(function(groupId) {
+            selectedGroups5.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser6.forEach(function(groupId) {
+            selectedGroups6.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser7.forEach(function(groupId) {
+            selectedGroups7.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser8.forEach(function(groupId) {
+            selectedGroups8.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser9.forEach(function(groupId) {
+            selectedGroups9.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser10.forEach(function(groupId) {
+            selectedGroups10.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser11.forEach(function(groupId) {
+            selectedGroups11.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser12.forEach(function(groupId) {
+            selectedGroups12.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser13.forEach(function(groupId) {
+            selectedGroups13.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser14.forEach(function(groupId) {
+            selectedGroups14.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser15.forEach(function(groupId) {
+            selectedGroups15.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser16.forEach(function(groupId) {
+            selectedGroups16.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser17.forEach(function(groupId) {
+            selectedGroups17.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser18.forEach(function(groupId) {
+            selectedGroups18.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser19.forEach(function(groupId) {
+            selectedGroups19.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser20.forEach(function(groupId) {
+            selectedGroups20.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser21.forEach(function(groupId) {
+            selectedGroups21.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser22.forEach(function(groupId) {
+            selectedGroups22.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser23.forEach(function(groupId) {
+            selectedGroups23.push(allGroups[groupId])
+        })
+        groupsSelectedByTheUser24.forEach(function(groupId) {
+            selectedGroups24.push(allGroups[groupId])
+        })
+    }
+    const getCycleInterval = function() {
+        return Math.max(MINIMUM_RECRUIT_CYCLE_INTERVAL, recruitQueueSettings[SETTINGS.RECRUIT_QUEUE_INTERVAL] * 60 * 1000)
+    }
+    const addLog = function(villageId, unit, amount) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            unit: unit,
+            amount: amount
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        return true
+    }
+    const recruitQueue = {}
+    recruitQueue.init = function() {
+        initialized = true
+        logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+        settings.onChange(function(changes, updates) {
+            recruitQueueSettings = settings.getAll()
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+        recruitQueueSettings = settings.getAll()
+        console.log('recruitQueue settings', recruitQueueSettings)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+    recruitQueue.ownRecrutation = function() {}
+    recruitQueue.presetRecrutation = function() {
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_BEGIN)
+        nextCycleDate = timeHelper.gameTime() + getCycleInterval()
+        const groupList = modelDataService.getGroupList()
+        const selectedGroup1 = recruitQueueSettings[SETTINGS.GROUP1]
+        const selectedGroup2 = recruitQueueSettings[SETTINGS.GROUP2]
+        const selectedGroup3 = recruitQueueSettings[SETTINGS.GROUP3]
+        const selectedGroup4 = recruitQueueSettings[SETTINGS.GROUP4]
+        var groupVillages1 = groupList.getGroupVillageIds(selectedGroup1)
+        var groupVillages2 = groupList.getGroupVillageIds(selectedGroup2)
+        var groupVillages3 = groupList.getGroupVillageIds(selectedGroup3)
+        var groupVillages4 = groupList.getGroupVillageIds(selectedGroup4)
+        const minimal1 = recruitQueueSettings[SETTINGS.MIN_PACK1]
+        const minimal2 = recruitQueueSettings[SETTINGS.MIN_PACK2]
+        const minimal3 = recruitQueueSettings[SETTINGS.MIN_PACK3]
+        const minimal4 = recruitQueueSettings[SETTINGS.MIN_PACK4]
+        const Archer1 = recruitQueueSettings[SETTINGS.START_AMOUNT4]
+        const Axe1 = recruitQueueSettings[SETTINGS.START_AMOUNT3]
+        const Catapult1 = recruitQueueSettings[SETTINGS.START_AMOUNT9]
+        const HC1 = recruitQueueSettings[SETTINGS.START_AMOUNT7]
+        const LC1 = recruitQueueSettings[SETTINGS.START_AMOUNT5]
+        const MA1 = recruitQueueSettings[SETTINGS.START_AMOUNT6]
+        const Ram1 = recruitQueueSettings[SETTINGS.START_AMOUNT8]
+        const Spear1 = recruitQueueSettings[SETTINGS.START_AMOUNT1]
+        const Sword1 = recruitQueueSettings[SETTINGS.START_AMOUNT2]
+        const Archer2 = recruitQueueSettings[SETTINGS.START_AMOUNT14]
+        const Axe2 = recruitQueueSettings[SETTINGS.START_AMOUNT13]
+        const Catapult2 = recruitQueueSettings[SETTINGS.START_AMOUNT19]
+        const HC2 = recruitQueueSettings[SETTINGS.START_AMOUNT17]
+        const LC2 = recruitQueueSettings[SETTINGS.START_AMOUNT15]
+        const MA2 = recruitQueueSettings[SETTINGS.START_AMOUNT16]
+        const Ram2 = recruitQueueSettings[SETTINGS.START_AMOUNT18]
+        const Spear2 = recruitQueueSettings[SETTINGS.START_AMOUNT11]
+        const Sword2 = recruitQueueSettings[SETTINGS.START_AMOUNT12]
+        const Archer3 = recruitQueueSettings[SETTINGS.START_AMOUNT24]
+        const Axe3 = recruitQueueSettings[SETTINGS.START_AMOUNT23]
+        const Catapult3 = recruitQueueSettings[SETTINGS.START_AMOUNT29]
+        const HC3 = recruitQueueSettings[SETTINGS.START_AMOUNT27]
+        const LC3 = recruitQueueSettings[SETTINGS.START_AMOUNT25]
+        const MA3 = recruitQueueSettings[SETTINGS.START_AMOUNT26]
+        const Ram3 = recruitQueueSettings[SETTINGS.START_AMOUNT28]
+        const Spear3 = recruitQueueSettings[SETTINGS.START_AMOUNT21]
+        const Sword3 = recruitQueueSettings[SETTINGS.START_AMOUNT22]
+        const Archer4 = recruitQueueSettings[SETTINGS.START_AMOUNT34]
+        const Axe4 = recruitQueueSettings[SETTINGS.START_AMOUNT33]
+        const Catapult4 = recruitQueueSettings[SETTINGS.START_AMOUNT39]
+        const HC4 = recruitQueueSettings[SETTINGS.START_AMOUNT37]
+        const LC4 = recruitQueueSettings[SETTINGS.START_AMOUNT35]
+        const MA4 = recruitQueueSettings[SETTINGS.START_AMOUNT36]
+        const Ram4 = recruitQueueSettings[SETTINGS.START_AMOUNT38]
+        const Spear4 = recruitQueueSettings[SETTINGS.START_AMOUNT31]
+        const Sword4 = recruitQueueSettings[SETTINGS.START_AMOUNT32]
+        const finalArcher1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT4]
+        const finalAxe1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT3]
+        const finalCatapult1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT9]
+        const finalHC1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT7]
+        const finalLC1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT5]
+        const finalMA1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT6]
+        const finalRam1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT8]
+        const finalSpear1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT1]
+        const finalSword1 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT2]
+        const finalArcher2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT14]
+        const finalAxe2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT13]
+        const finalCatapult2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT19]
+        const finalHC2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT17]
+        const finalLC2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT15]
+        const finalMA2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT16]
+        const finalRam2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT18]
+        const finalSpear2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT11]
+        const finalSword2 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT12]
+        const finalArcher3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT24]
+        const finalAxe3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT23]
+        const finalCatapult3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT29]
+        const finalHC3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT27]
+        const finalLC3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT25]
+        const finalMA3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT26]
+        const finalRam3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT28]
+        const finalSpear3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT21]
+        const finalSword3 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT22]
+        const finalArcher4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT34]
+        const finalAxe4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT33]
+        const finalCatapult4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT39]
+        const finalHC4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT37]
+        const finalLC4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT35]
+        const finalMA4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT36]
+        const finalRam4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT38]
+        const finalSpear4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT31]
+        const finalSword4 = recruitQueueSettings[SETTINGS.FINAL_AMOUNT32]
+        var wood = [50, 30, 60, 80, 125, 250, 200, 300, 320, 0, 40000, 4000, 1200]
+        var clay = [30, 30, 30, 30, 100, 100, 150, 200, 400, 0, 50000, 2000, 1200]
+        var iron = [20, 70, 40, 60, 250, 150, 600, 200, 100, 0, 50000, 2000, 2400]
+        var food = [1, 1, 1, 1, 4, 5, 6, 5, 8, 1, 100, 10, 6]
+        var spearAmount = 0
+        var swordAmount = 0
+        var axeAmount = 0
+        var archerAmount = 0
+        var light_cavalryAmount = 0
+        var mounted_archerAmount = 0
+        var ramAmount = 0
+        var catapultAmount = 0
+        var heavy_cavalryAmount = 0
+        var Barracks1 = 0
+        var queue1 = 0
+        var recruitingQueues = 0
+        var barracksQueue1 = 0
+        var unit = ''
+        var woodModifier1 = 0
+        var woodModifier2 = 0
+        var woodModifier3 = 0
+        var woodModifier4 = 0
+        var archernew1 = 0
+        var archernew2 = 0
+        var archernew3 = 0
+        var archernew4 = 0
+        var axenew1 = 0
+        var axenew2 = 0
+        var axenew3 = 0
+        var axenew4 = 0
+        var catapultnew1 = 0
+        var catapultnew2 = 0
+        var catapultnew3 = 0
+        var catapultnew4 = 0
+        var clayModifier1 = 0
+        var clayModifier2 = 0
+        var clayModifier3 = 0
+        var clayModifier4 = 0
+        var foodModifier1 = 0
+        var foodModifier2 = 0
+        var foodModifier3 = 0
+        var foodModifier4 = 0
+        var generalModifier1 = 0
+        var generalModifier2 = 0
+        var generalModifier3 = 0
+        var generalModifier4 = 0
+        var hcnew1 = 0
+        var hcnew2 = 0
+        var hcnew3 = 0
+        var hcnew4 = 0
+        var ironModifier1 = 0
+        var ironModifier2 = 0
+        var ironModifier3 = 0
+        var ironModifier4 = 0
+        var lcnew1 = 0
+        var lcnew2 = 0
+        var lcnew3 = 0
+        var lcnew4 = 0
+        var manew1 = 0
+        var manew2 = 0
+        var manew3 = 0
+        var manew4 = 0
+        var ramnew1 = 0
+        var ramnew2 = 0
+        var ramnew3 = 0
+        var ramnew4 = 0
+        var recruitingTime = 0
+        var recruitingTimeToFinish = 0
+        var spearnew1 = 0
+        var spearnew2 = 0
+        var spearnew3 = 0
+        var spearnew4 = 0
+        var swordnew1 = 0
+        var swordnew2 = 0
+        var swordnew3 = 0
+        var swordnew4 = 0
+        var totalRecruitingTime = 0
+        var barracksRecrutingTime1 = []
+        var barracks1TotalJobsLength = 0
+        var modifier1 = 0
+        var timeModifier1 = 0
+        var barracksRecrutingTime2 = []
+        var barracks2TotalJobsLength = 0
+        var modifier2 = 0
+        var timeModifier2 = 0
+        var barracksRecrutingTime3 = []
+        var barracks3TotalJobsLength = 0
+        var modifier3 = 0
+        var timeModifier3 = 0
+        var barracksRecrutingTime4 = []
+        var barracks4TotalJobsLength = 0
+        var modifier4 = 0
+        var timeModifier4 = 0
+        var wood1 = 0
+        var clay1 = 0
+        var food1 = 0
+        var iron1 = 0
+        var villageFood1 = 0
+        var villageWood1 = 0
+        var villageClay1 = 0
+        var villageIron1 = 0
+        var villageIdSet = 0
+        var Barracks2 = 0
+        var queue2 = 0
+        var barracksQueue2 = 0
+        var villageFood2 = 0
+        var villageWood2 = 0
+        var villageClay2 = 0
+        var villageIron2 = 0
+        var Barracks3 = 0
+        var queue3 = 0
+        var barracksQueue3 = 0
+        var villageFood3 = 0
+        var villageWood3 = 0
+        var villageClay3 = 0
+        var villageIron3 = 0
+        var Barracks4 = 0
+        var queue4 = 0
+        var barracksQueue4 = 0
+        var villageFood4 = 0
+        var villageWood4 = 0
+        var villageClay4 = 0
+        var villageIron4 = 0
+
+        function modifier1Get() {
+            if (selectedGroup1 > 0) {
+                if (queue1.length >= 2) {
+                    modifier1 = 1.0
+                } else if (queue1.length == 1) {
+                    modifier1 = 0.5
+                } else {
+                    modifier1 = 0.25
+                }
+            } else {
+                modifier1 = 0.0
+            }
+            time1GetB()
+        }
+
+        function time1GetB() {
+            if (barracksRecrutingTime1.length > 0) {
+                barracks1TotalJobsLength = barracksRecrutingTime1.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks1TotalJobsLength = 0
+            }
+            timeModifier1Get()
+        }
+
+        function timeModifier1Get() {
+            if (selectedGroup1 > 0) {
+                if (barracks1TotalJobsLength >= 93600000) {
+                    timeModifier1 = 0.00
+                } else if (barracks1TotalJobsLength < 93600000 && barracks1TotalJobsLength >= 86400000) {
+                    timeModifier1 = 0.10
+                } else if (barracks1TotalJobsLength < 86400000 && barracks1TotalJobsLength >= 72000000) {
+                    timeModifier1 = 0.25
+                } else if (barracks1TotalJobsLength < 72000000 && barracks1TotalJobsLength >= 57600000) {
+                    timeModifier1 = 0.40
+                } else if (barracks1TotalJobsLength < 57600000 && barracks1TotalJobsLength >= 43200000) {
+                    timeModifier1 = 0.55
+                } else if (barracks1TotalJobsLength < 43200000 && barracks1TotalJobsLength >= 28800000) {
+                    timeModifier1 = 0.70
+                } else if (barracks1TotalJobsLength < 28800000 && barracks1TotalJobsLength >= 14400000) {
+                    timeModifier1 = 0.85
+                } else if (barracks1TotalJobsLength < 14400000 && barracks1TotalJobsLength >= 7200000) {
+                    timeModifier1 = 0.925
+                } else if (barracks1TotalJobsLength < 7200000 && barracks1TotalJobsLength >= 3600000) {
+                    timeModifier1 = 0.9625
+                } else {
+                    timeModifier1 = 1.00
+                }
+            } else {
+                timeModifier1 = 0.00
+            }
+            recruit1()
+        }
+
+        function recruit1() {
+            var spearToRecruit1 = finalSpear1 - spearAmount
+            var swordToRecruit1 = finalSword1 - swordAmount
+            var axeToRecruit1 = finalAxe1 - axeAmount
+            var archerToRecruit1 = finalArcher1 - archerAmount
+            var lcToRecruit1 = finalLC1 - light_cavalryAmount
+            var maToRecruit1 = finalMA1 - mounted_archerAmount
+            var ramToRecruit1 = finalRam1 - ramAmount
+            var catapultToRecruit1 = finalCatapult1 - catapultAmount
+            var hcToRecruit1 = finalHC1 - heavy_cavalryAmount
+            var spear1 = Math.floor(Spear1 * timeModifier1 * modifier1)
+            var sword1 = Math.floor(Sword1 * timeModifier1 * modifier1)
+            var axe1 = Math.floor(Axe1 * timeModifier1 * modifier1)
+            var archer1 = Math.floor(Archer1 * timeModifier1 * modifier1)
+            var lc1 = Math.floor(LC1 * timeModifier1 * modifier1)
+            var ma1 = Math.floor(MA1 * timeModifier1 * modifier1)
+            var ram1 = Math.floor(Ram1 * timeModifier1 * modifier1)
+            var catapult1 = Math.floor(Catapult1 * timeModifier1 * modifier1)
+            var hc1 = Math.floor(HC1 * timeModifier1 * modifier1)
+            console.log(spear1, sword1, axe1, archer1, lc1, ma1, ram1, hc1, catapult1)
+            wood1 = spear1 * wood[0] + sword1 * wood[1] + axe1 * wood[2] + archer1 * wood[3] + lc1 * wood[4] + ma1 * wood[5] + ram1 * wood[7] + catapult1 * wood[8] + hc1 * wood[6]
+            clay1 = spear1 * clay[0] + sword1 * clay[1] + axe1 * clay[2] + archer1 * clay[3] + lc1 * clay[4] + ma1 * clay[5] + ram1 * clay[7] + catapult1 * clay[8] + hc1 * clay[6]
+            iron1 = spear1 * iron[0] + sword1 * iron[1] + axe1 * iron[2] + archer1 * iron[3] + lc1 * iron[4] + ma1 * iron[5] + ram1 * iron[7] + catapult1 * iron[8] + hc1 * iron[6]
+            food1 = spear1 * food[0] + sword1 * food[1] + axe1 * food[2] + archer1 * food[3] + lc1 * food[4] + ma1 * food[5] + ram1 * food[7] + catapult1 * food[8] + hc1 * food[6]
+            console.log(wood1, clay1, iron1, food1)
+            if (spearToRecruit1 > 0 || hcToRecruit1 > 0 || catapultToRecruit1 > 0 || swordToRecruit1 > 0 || axeToRecruit1 > 0 || archerToRecruit1 > 0 || lcToRecruit1 > 0 || maToRecruit1 > 0 || ramToRecruit1 > 0) {
+                if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    spearnew1 = spear1
+                    swordnew1 = sword1
+                    axenew1 = axe1
+                    archernew1 = archer1
+                    lcnew1 = lc1
+                    manew1 = ma1
+                    ramnew1 = ram1
+                    catapultnew1 = catapult1
+                    hcnew1 = hc1
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    generalModifier1 = villageWood1 / wood1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    generalModifier1 = villageClay1 / clay1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    generalModifier1 = villageIron1 / iron1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    generalModifier1 = villageFood1 / food1
+                    spearnew1 = Math.floor(generalModifier1 * spear1) - 1
+                    swordnew1 = Math.floor(generalModifier1 * sword1) - 1
+                    axenew1 = Math.floor(generalModifier1 * axe1) - 1
+                    archernew1 = Math.floor(generalModifier1 * archer1) - 1
+                    lcnew1 = Math.floor(generalModifier1 * lc1) - 1
+                    manew1 = Math.floor(generalModifier1 * ma1) - 1
+                    ramnew1 = Math.floor(generalModifier1 * ram1) - 1
+                    catapultnew1 = Math.floor(generalModifier1 * catapult1) - 1
+                    hcnew1 = Math.floor(generalModifier1 * hc1) - 1
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 <= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    ironModifier1 = villageIron1 / iron1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    foodModifier1 = villageFood1 / food1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    ironModifier1 = villageIron1 / iron1
+                    if (ironModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1) {
+                    foodModifier1 = villageFood1 / food1
+                    ironModifier1 = villageIron1 / iron1
+                    if (ironModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    foodModifier1 = villageFood1 / food1
+                    if (foodModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 <= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    ironModifier1 = villageIron1 / iron1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > ironModifier1 && woodModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else if (ironModifier1 > clayModifier1 && woodModifier1 > clayModifier1) {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    } else if (ironModifier1 > woodModifier1 && clayModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 <= villageIron1 && food1 >= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    foodModifier1 = villageFood1 / food1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > foodModifier1 && woodModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else if (foodModifier1 > clayModifier1 && woodModifier1 > clayModifier1) {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    } else if (foodModifier1 > woodModifier1 && clayModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood1 >= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 <= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1) {
+                    woodModifier1 = villageWood1 / wood1
+                    foodModifier1 = villageFood1 / food1
+                    ironModifier1 = villageIron1 / iron1
+                    if (foodModifier1 > ironModifier1 && woodModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else if (ironModifier1 > foodModifier1 && woodModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else if (ironModifier1 > woodModifier1 && foodModifier1 > woodModifier1) {
+                        spearnew1 = Math.floor(woodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(woodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(woodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(woodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(woodModifier1 * lc1) - 1
+                        manew1 = Math.floor(woodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(woodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(woodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(woodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood1 <= villageWood1 && (spearToRecruit1 >= minimal1 || hcToRecruit1 >= minimal1 || catapultToRecruit1 >= minimal1 || swordToRecruit1 >= minimal1 || axeToRecruit1 >= minimal1 || archerToRecruit1 >= minimal1 || lcToRecruit1 >= minimal1 || maToRecruit1 >= minimal1 || ramToRecruit1 >= minimal1) && clay1 >= villageClay1 && iron1 >= villageIron1 && food1 >= villageFood1) {
+                    foodModifier1 = villageFood1 / food1
+                    ironModifier1 = villageIron1 / iron1
+                    clayModifier1 = villageClay1 / clay1
+                    if (clayModifier1 > ironModifier1 && foodModifier1 > ironModifier1) {
+                        spearnew1 = Math.floor(ironModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(ironModifier1 * sword1) - 1
+                        axenew1 = Math.floor(ironModifier1 * axe1) - 1
+                        archernew1 = Math.floor(ironModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(ironModifier1 * lc1) - 1
+                        manew1 = Math.floor(ironModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(ironModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(ironModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(ironModifier1 * hc1) - 1
+                    } else if (ironModifier1 > clayModifier1 && foodModifier1 > clayModifier1) {
+                        spearnew1 = Math.floor(clayModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(clayModifier1 * sword1) - 1
+                        axenew1 = Math.floor(clayModifier1 * axe1) - 1
+                        archernew1 = Math.floor(clayModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(clayModifier1 * lc1) - 1
+                        manew1 = Math.floor(clayModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(clayModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(clayModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(clayModifier1 * hc1) - 1
+                    } else if (ironModifier1 > foodModifier1 && clayModifier1 > foodModifier1) {
+                        spearnew1 = Math.floor(foodModifier1 * spear1) - 1
+                        swordnew1 = Math.floor(foodModifier1 * sword1) - 1
+                        axenew1 = Math.floor(foodModifier1 * axe1) - 1
+                        archernew1 = Math.floor(foodModifier1 * archer1) - 1
+                        lcnew1 = Math.floor(foodModifier1 * lc1) - 1
+                        manew1 = Math.floor(foodModifier1 * ma1) - 1
+                        ramnew1 = Math.floor(foodModifier1 * ram1) - 1
+                        catapultnew1 = Math.floor(foodModifier1 * catapult1) - 1
+                        hcnew1 = Math.floor(foodModifier1 * hc1) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
+                setTimeout(function() {
+                    recruitSpear1()
+                }, unitInterval)
+                setTimeout(function() {
+                    if (Barracks1 >= 3) {
+                        recruitSword1()
+                    }
+                }, unitInterval * 2)
+                setTimeout(function() {
+                    if (Barracks1 >= 5) {
+                        recruitAxe1()
+                    }
+                }, unitInterval * 3)
+                setTimeout(function() {
+                    if (Barracks1 >= 9) {
+                        recruitArcher1()
+                    }
+                }, unitInterval * 4)
+                setTimeout(function() {
+                    if (Barracks1 >= 11) {
+                        recruitLc1()
+                    }
+                }, unitInterval * 5)
+                setTimeout(function() {
+                    if (Barracks1 >= 13) {
+                        recruitMa1()
+                    }
+                }, unitInterval * 6)
+                setTimeout(function() {
+                    if (Barracks1 >= 15) {
+                        recruitRam1()
+                    }
+                }, unitInterval * 7)
+                setTimeout(function() {
+                    if (Barracks1 >= 17) {
+                        recruitCatapult1()
+                    }
+                }, unitInterval * 8)
+                setTimeout(function() {
+                    if (Barracks1 >= 21) {
+                        recruitHc1()
+                    }
+                }, unitInterval * 9)
+            } else {
+                console.log('Brak jednostek do rekrutacji')
+            }
+
+            function recruitSpear1() {
+                if (spearnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew1
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew1)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitSword1() {
+                if (swordnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew1
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew1)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitAxe1() {
+                if (axenew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew1
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew1)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitArcher1() {
+                if (archernew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew1
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew1)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitLc1() {
+                if (lcnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew1
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew1)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitMa1() {
+                if (manew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew1
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew1)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitRam1() {
+                if (ramnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew1
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew1)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitCatapult1() {
+                if (catapultnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew1
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew1)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitHc1() {
+                if (hcnew1 >= minimal1) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew1
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew1
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew1)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
+                }
+            }
+        }
+
+        function modifier2Get() {
+            if (selectedGroup2 > 0) {
+                if (queue2.length >= 2) {
+                    modifier2 = 1.0
+                } else if (queue2.length == 1) {
+                    modifier2 = 0.5
+                } else {
+                    modifier2 = 0.25
+                }
+            } else {
+                modifier2 = 0.0
+            }
+            time2GetB()
+        }
+
+        function time2GetB() {
+            if (barracksRecrutingTime2.length > 0) {
+                barracks2TotalJobsLength = barracksRecrutingTime2.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks2TotalJobsLength = 0
+            }
+            timeModifier2Get()
+        }
+
+        function timeModifier2Get() {
+            if (selectedGroup2 > 0) {
+                if (barracks2TotalJobsLength >= 93600000) {
+                    timeModifier2 = 0.00
+                } else if (barracks2TotalJobsLength < 93600000 && barracks2TotalJobsLength >= 86400000) {
+                    timeModifier2 = 0.10
+                } else if (barracks2TotalJobsLength < 86400000 && barracks2TotalJobsLength >= 72000000) {
+                    timeModifier2 = 0.25
+                } else if (barracks2TotalJobsLength < 72000000 && barracks2TotalJobsLength >= 57600000) {
+                    timeModifier2 = 0.40
+                } else if (barracks2TotalJobsLength < 57600000 && barracks2TotalJobsLength >= 43200000) {
+                    timeModifier2 = 0.55
+                } else if (barracks2TotalJobsLength < 43200000 && barracks2TotalJobsLength >= 28800000) {
+                    timeModifier2 = 0.70
+                } else if (barracks2TotalJobsLength < 28800000 && barracks2TotalJobsLength >= 14400000) {
+                    timeModifier2 = 0.85
+                } else if (barracks2TotalJobsLength < 14400000 && barracks2TotalJobsLength >= 7200000) {
+                    timeModifier2 = 0.925
+                } else if (barracks2TotalJobsLength < 7200000 && barracks2TotalJobsLength >= 3600000) {
+                    timeModifier2 = 0.9625
+                } else {
+                    timeModifier2 = 1.00
+                }
+            } else {
+                timeModifier2 = 0.00
+            }
+            recruit2()
+        }
+
+        function recruit2() {
+            var spearToRecruit2 = finalSpear2 - spearAmount
+            var swordToRecruit2 = finalSword2 - swordAmount
+            var axeToRecruit2 = finalAxe2 - axeAmount
+            var archerToRecruit2 = finalArcher2 - archerAmount
+            var lcToRecruit2 = finalLC2 - light_cavalryAmount
+            var maToRecruit2 = finalMA2 - mounted_archerAmount
+            var ramToRecruit2 = finalRam2 - ramAmount
+            var catapultToRecruit2 = finalCatapult2 - catapultAmount
+            var hcToRecruit2 = finalHC2 - heavy_cavalryAmount
+            var spear2 = Math.floor(Spear2 * timeModifier2 * modifier2)
+            var sword2 = Math.floor(Sword2 * timeModifier2 * modifier2)
+            var axe2 = Math.floor(Axe2 * timeModifier2 * modifier2)
+            var archer2 = Math.floor(Archer2 * timeModifier2 * modifier2)
+            var lc2 = Math.floor(LC2 * timeModifier2 * modifier2)
+            var ma2 = Math.floor(MA2 * timeModifier2 * modifier2)
+            var ram2 = Math.floor(Ram2 * timeModifier2 * modifier2)
+            var catapult2 = Math.floor(Catapult2 * timeModifier2 * modifier2)
+            var hc2 = Math.floor(HC2 * timeModifier2 * modifier2)
+            var wood2 = spear2 * wood[0] + sword2 * wood[1] + axe2 * wood[2] + archer2 * wood[3] + lc2 * wood[4] + ma2 * wood[5] + ram2 * wood[7] + catapult2 * wood[8] + hc2 * wood[6]
+            var clay2 = spear2 * clay[0] + sword2 * clay[1] + axe2 * clay[2] + archer2 * clay[3] + lc2 * clay[4] + ma2 * clay[5] + ram2 * clay[7] + catapult2 * clay[8] + hc2 * clay[6]
+            var iron2 = spear2 * iron[0] + sword2 * iron[1] + axe2 * iron[2] + archer2 * iron[3] + lc2 * iron[4] + ma2 * iron[5] + ram2 * iron[7] + catapult2 * iron[8] + hc2 * iron[6]
+            var food2 = spear2 * food[0] + sword2 * food[1] + axe2 * food[2] + archer2 * food[3] + lc2 * food[4] + ma2 * food[5] + ram2 * food[7] + catapult2 * food[8] + hc2 * food[6]
+            console.log(wood2, clay2, iron2, food2)
+            if (spearToRecruit2 > 0 || hcToRecruit2 > 0 || catapultToRecruit2 > 0 || swordToRecruit2 > 0 || axeToRecruit2 > 0 || archerToRecruit2 > 0 || lcToRecruit2 > 0 || maToRecruit2 > 0 || ramToRecruit2 > 0) {
+                if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    spearnew2 = spear2
+                    swordnew2 = sword2
+                    axenew2 = axe2
+                    archernew2 = archer2
+                    lcnew2 = lc2
+                    manew2 = ma2
+                    ramnew2 = ram2
+                    catapultnew2 = catapult2
+                    hcnew2 = hc2
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    generalModifier2 = villageWood2 / wood2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    generalModifier2 = villageClay2 / clay2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    generalModifier2 = villageIron2 / iron2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    generalModifier2 = villageFood2 / food2
+                    spearnew2 = Math.floor(generalModifier2 * spear2) - 1
+                    swordnew2 = Math.floor(generalModifier2 * sword2) - 1
+                    axenew2 = Math.floor(generalModifier2 * axe2) - 1
+                    archernew2 = Math.floor(generalModifier2 * archer2) - 1
+                    lcnew2 = Math.floor(generalModifier2 * lc2) - 1
+                    manew2 = Math.floor(generalModifier2 * ma2) - 1
+                    ramnew2 = Math.floor(generalModifier2 * ram2) - 1
+                    catapultnew2 = Math.floor(generalModifier2 * catapult2) - 1
+                    hcnew2 = Math.floor(generalModifier2 * hc2) - 1
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 <= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    ironModifier2 = villageIron2 / iron2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    foodModifier2 = villageFood2 / food2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    ironModifier2 = villageIron2 / iron2
+                    if (ironModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 >= villageFood2) {
+                    foodModifier2 = villageFood2 / food2
+                    ironModifier2 = villageIron2 / iron2
+                    if (ironModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    foodModifier2 = villageFood2 / food2
+                    if (foodModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 >= villageIron2 && food2 <= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    ironModifier2 = villageIron2 / iron2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > ironModifier2 && woodModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else if (ironModifier2 > clayModifier2 && woodModifier2 > clayModifier2) {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    } else if (ironModifier2 > woodModifier2 && clayModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 <= villageIron2 && food2 >= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    foodModifier2 = villageFood2 / food2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > foodModifier2 && woodModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else if (foodModifier2 > clayModifier2 && woodModifier2 > clayModifier2) {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    } else if (foodModifier2 > woodModifier2 && clayModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood2 >= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 <= villageClay2 && iron2 >= villageIron2 && food2 >= villageFood2) {
+                    woodModifier2 = villageWood2 / wood2
+                    foodModifier2 = villageFood2 / food2
+                    ironModifier2 = villageIron2 / iron2
+                    if (foodModifier2 > ironModifier2 && woodModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else if (ironModifier2 > foodModifier2 && woodModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else if (ironModifier2 > woodModifier2 && foodModifier2 > woodModifier2) {
+                        spearnew2 = Math.floor(woodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(woodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(woodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(woodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(woodModifier2 * lc2) - 1
+                        manew2 = Math.floor(woodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(woodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(woodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(woodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood2 <= villageWood2 && (spearToRecruit2 >= minimal2 || hcToRecruit2 >= minimal2 || catapultToRecruit2 >= minimal2 || swordToRecruit2 >= minimal2 || axeToRecruit2 >= minimal2 || archerToRecruit2 >= minimal2 || lcToRecruit2 >= minimal2 || maToRecruit2 >= minimal2 || ramToRecruit2 >= minimal2) && clay2 >= villageClay2 && iron2 >= villageIron2 && food2 >= villageFood2) {
+                    foodModifier2 = villageFood2 / food2
+                    ironModifier2 = villageIron2 / iron2
+                    clayModifier2 = villageClay2 / clay2
+                    if (clayModifier2 > ironModifier2 && foodModifier2 > ironModifier2) {
+                        spearnew2 = Math.floor(ironModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(ironModifier2 * sword2) - 1
+                        axenew2 = Math.floor(ironModifier2 * axe2) - 1
+                        archernew2 = Math.floor(ironModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(ironModifier2 * lc2) - 1
+                        manew2 = Math.floor(ironModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(ironModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(ironModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(ironModifier2 * hc2) - 1
+                    } else if (ironModifier2 > clayModifier2 && foodModifier2 > clayModifier2) {
+                        spearnew2 = Math.floor(clayModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(clayModifier2 * sword2) - 1
+                        axenew2 = Math.floor(clayModifier2 * axe2) - 1
+                        archernew2 = Math.floor(clayModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(clayModifier2 * lc2) - 1
+                        manew2 = Math.floor(clayModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(clayModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(clayModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(clayModifier2 * hc2) - 1
+                    } else if (ironModifier2 > foodModifier2 && clayModifier2 > foodModifier2) {
+                        spearnew2 = Math.floor(foodModifier2 * spear2) - 1
+                        swordnew2 = Math.floor(foodModifier2 * sword2) - 1
+                        axenew2 = Math.floor(foodModifier2 * axe2) - 1
+                        archernew2 = Math.floor(foodModifier2 * archer2) - 1
+                        lcnew2 = Math.floor(foodModifier2 * lc2) - 1
+                        manew2 = Math.floor(foodModifier2 * ma2) - 1
+                        ramnew2 = Math.floor(foodModifier2 * ram2) - 1
+                        catapultnew2 = Math.floor(foodModifier2 * catapult2) - 1
+                        hcnew2 = Math.floor(foodModifier2 * hc2) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
+                setTimeout(function() {
+                    recruitSpear2()
+                }, unitInterval)
+                setTimeout(function() {
+                    if (Barracks2 >= 3) {
+                        recruitSword2()
+                    }
+                }, unitInterval * 2)
+                setTimeout(function() {
+                    if (Barracks2 >= 5) {
+                        recruitAxe2()
+                    }
+                }, unitInterval * 3)
+                setTimeout(function() {
+                    if (Barracks2 >= 9) {
+                        recruitArcher2()
+                    }
+                }, unitInterval * 4)
+                setTimeout(function() {
+                    if (Barracks2 >= 11) {
+                        recruitLc2()
+                    }
+                }, unitInterval * 5)
+                setTimeout(function() {
+                    if (Barracks2 >= 13) {
+                        recruitMa2()
+                    }
+                }, unitInterval * 6)
+                setTimeout(function() {
+                    if (Barracks2 >= 15) {
+                        recruitRam2()
+                    }
+                }, unitInterval * 7)
+                setTimeout(function() {
+                    if (Barracks2 >= 17) {
+                        recruitCatapult2()
+                    }
+                }, unitInterval * 8)
+                setTimeout(function() {
+                    if (Barracks2 >= 21) {
+                        recruitHc2()
+                    }
+                }, unitInterval * 9)
+            } else {
+                console.log('Brak jednostek do rekrutacji')
+            }
+
+            function recruitSpear2() {
+                if (spearnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew2
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew2)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitSword2() {
+                if (swordnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew2
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew2)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitAxe2() {
+                if (axenew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew2
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew2)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitArcher2() {
+                if (archernew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew2
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew2)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitLc2() {
+                if (lcnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew2
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew2)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitMa2() {
+                if (manew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew2
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew2)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitRam2() {
+                if (ramnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew2
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew2)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitCatapult2() {
+                if (catapultnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew2
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew2)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitHc2() {
+                if (hcnew2 >= minimal2) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew2
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew2
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew2)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
+                }
+            }
+        }
+
+        function modifier3Get() {
+            if (selectedGroup3 > 0) {
+                if (queue3.length >= 2) {
+                    modifier3 = 1.0
+                } else if (queue3.length == 1) {
+                    modifier3 = 0.5
+                } else {
+                    modifier3 = 0.25
+                }
+            } else {
+                modifier3 = 0.0
+            }
+            time3GetB()
+        }
+
+        function time3GetB() {
+            if (barracksRecrutingTime3.length > 0) {
+                barracks3TotalJobsLength = barracksRecrutingTime3.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks3TotalJobsLength = 0
+            }
+            timeModifier3Get()
+        }
+
+        function timeModifier3Get() {
+            if (selectedGroup3 > 0) {
+                if (barracks3TotalJobsLength >= 93600000) {
+                    timeModifier3 = 0.00
+                } else if (barracks3TotalJobsLength < 93600000 && barracks3TotalJobsLength >= 86400000) {
+                    timeModifier3 = 0.10
+                } else if (barracks3TotalJobsLength < 86400000 && barracks3TotalJobsLength >= 72000000) {
+                    timeModifier3 = 0.25
+                } else if (barracks3TotalJobsLength < 72000000 && barracks3TotalJobsLength >= 57600000) {
+                    timeModifier3 = 0.40
+                } else if (barracks3TotalJobsLength < 57600000 && barracks3TotalJobsLength >= 43200000) {
+                    timeModifier3 = 0.55
+                } else if (barracks3TotalJobsLength < 43200000 && barracks3TotalJobsLength >= 28800000) {
+                    timeModifier3 = 0.70
+                } else if (barracks3TotalJobsLength < 28800000 && barracks3TotalJobsLength >= 14400000) {
+                    timeModifier3 = 0.85
+                } else if (barracks3TotalJobsLength < 14400000 && barracks3TotalJobsLength >= 7200000) {
+                    timeModifier3 = 0.925
+                } else if (barracks3TotalJobsLength < 7200000 && barracks3TotalJobsLength >= 3600000) {
+                    timeModifier3 = 0.9625
+                } else {
+                    timeModifier3 = 1.00
+                }
+            } else {
+                timeModifier3 = 0.00
+            }
+            recruit3()
+        }
+
+        function recruit3() {
+            var spearToRecruit3 = finalSpear3 - spearAmount
+            var swordToRecruit3 = finalSword3 - swordAmount
+            var axeToRecruit3 = finalAxe3 - axeAmount
+            var archerToRecruit3 = finalArcher3 - archerAmount
+            var lcToRecruit3 = finalLC3 - light_cavalryAmount
+            var maToRecruit3 = finalMA3 - mounted_archerAmount
+            var ramToRecruit3 = finalRam3 - ramAmount
+            var catapultToRecruit3 = finalCatapult3 - catapultAmount
+            var hcToRecruit3 = finalHC3 - heavy_cavalryAmount
+            var spear3 = Math.floor(Spear3 * timeModifier3 * modifier3)
+            var sword3 = Math.floor(Sword3 * timeModifier3 * modifier3)
+            var axe3 = Math.floor(Axe3 * timeModifier3 * modifier3)
+            var archer3 = Math.floor(Archer3 * timeModifier3 * modifier3)
+            var lc3 = Math.floor(LC3 * timeModifier3 * modifier3)
+            var ma3 = Math.floor(MA3 * timeModifier3 * modifier3)
+            var ram3 = Math.floor(Ram3 * timeModifier3 * modifier3)
+            var catapult3 = Math.floor(Catapult3 * timeModifier3 * modifier3)
+            var hc3 = Math.floor(HC3 * timeModifier3 * modifier3)
+            var wood3 = spear3 * wood[0] + sword3 * wood[1] + axe3 * wood[2] + archer3 * wood[3] + lc3 * wood[4] + ma3 * wood[5] + ram3 * wood[7] + catapult3 * wood[8] + hc3 * wood[6]
+            var clay3 = spear3 * clay[0] + sword3 * clay[1] + axe3 * clay[2] + archer3 * clay[3] + lc3 * clay[4] + ma3 * clay[5] + ram3 * clay[7] + catapult3 * clay[8] + hc3 * clay[6]
+            var iron3 = spear3 * iron[0] + sword3 * iron[1] + axe3 * iron[2] + archer3 * iron[3] + lc3 * iron[4] + ma3 * iron[5] + ram3 * iron[7] + catapult3 * iron[8] + hc3 * iron[6]
+            var food3 = spear3 * food[0] + sword3 * food[1] + axe3 * food[2] + archer3 * food[3] + lc3 * food[4] + ma3 * food[5] + ram3 * food[7] + catapult3 * food[8] + hc3 * food[6]
+            console.log(wood3, clay3, iron3, food3)
+            if (spearToRecruit3 > 0 || hcToRecruit3 > 0 || catapultToRecruit3 > 0 || swordToRecruit3 > 0 || axeToRecruit3 > 0 || archerToRecruit3 > 0 || lcToRecruit3 > 0 || maToRecruit3 > 0 || ramToRecruit3 > 0) {
+                if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    spearnew3 = spear3
+                    swordnew3 = sword3
+                    axenew3 = axe3
+                    archernew3 = archer3
+                    lcnew3 = lc3
+                    manew3 = ma3
+                    ramnew3 = ram3
+                    catapultnew3 = catapult3
+                    hcnew3 = hc3
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    generalModifier3 = villageWood3 / wood3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    generalModifier3 = villageClay3 / clay3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    generalModifier3 = villageIron3 / iron3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    generalModifier3 = villageFood3 / food3
+                    spearnew3 = Math.floor(generalModifier3 * spear3) - 1
+                    swordnew3 = Math.floor(generalModifier3 * sword3) - 1
+                    axenew3 = Math.floor(generalModifier3 * axe3) - 1
+                    archernew3 = Math.floor(generalModifier3 * archer3) - 1
+                    lcnew3 = Math.floor(generalModifier3 * lc3) - 1
+                    manew3 = Math.floor(generalModifier3 * ma3) - 1
+                    ramnew3 = Math.floor(generalModifier3 * ram3) - 1
+                    catapultnew3 = Math.floor(generalModifier3 * catapult3) - 1
+                    hcnew3 = Math.floor(generalModifier3 * hc3) - 1
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 <= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    ironModifier3 = villageIron3 / iron3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    foodModifier3 = villageFood3 / food3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    ironModifier3 = villageIron3 / iron3
+                    if (ironModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 >= villageFood3) {
+                    foodModifier3 = villageFood3 / food3
+                    ironModifier3 = villageIron3 / iron3
+                    if (ironModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    foodModifier3 = villageFood3 / food3
+                    if (foodModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 >= villageIron3 && food3 <= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    ironModifier3 = villageIron3 / iron3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > ironModifier3 && woodModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else if (ironModifier3 > clayModifier3 && woodModifier3 > clayModifier3) {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    } else if (ironModifier3 > woodModifier3 && clayModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 <= villageIron3 && food3 >= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    foodModifier3 = villageFood3 / food3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > foodModifier3 && woodModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else if (foodModifier3 > clayModifier3 && woodModifier3 > clayModifier3) {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    } else if (foodModifier3 > woodModifier3 && clayModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood3 >= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 <= villageClay3 && iron3 >= villageIron3 && food3 >= villageFood3) {
+                    woodModifier3 = villageWood3 / wood3
+                    foodModifier3 = villageFood3 / food3
+                    ironModifier3 = villageIron3 / iron3
+                    if (foodModifier3 > ironModifier3 && woodModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else if (ironModifier3 > foodModifier3 && woodModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else if (ironModifier3 > woodModifier3 && foodModifier3 > woodModifier3) {
+                        spearnew3 = Math.floor(woodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(woodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(woodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(woodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(woodModifier3 * lc3) - 1
+                        manew3 = Math.floor(woodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(woodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(woodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(woodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood3 <= villageWood3 && (spearToRecruit3 >= minimal3 || hcToRecruit3 >= minimal3 || catapultToRecruit3 >= minimal3 || swordToRecruit3 >= minimal3 || axeToRecruit3 >= minimal3 || archerToRecruit3 >= minimal3 || lcToRecruit3 >= minimal3 || maToRecruit3 >= minimal3 || ramToRecruit3 >= minimal3) && clay3 >= villageClay3 && iron3 >= villageIron3 && food3 >= villageFood3) {
+                    foodModifier3 = villageFood3 / food3
+                    ironModifier3 = villageIron3 / iron3
+                    clayModifier3 = villageClay3 / clay3
+                    if (clayModifier3 > ironModifier3 && foodModifier3 > ironModifier3) {
+                        spearnew3 = Math.floor(ironModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(ironModifier3 * sword3) - 1
+                        axenew3 = Math.floor(ironModifier3 * axe3) - 1
+                        archernew3 = Math.floor(ironModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(ironModifier3 * lc3) - 1
+                        manew3 = Math.floor(ironModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(ironModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(ironModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(ironModifier3 * hc3) - 1
+                    } else if (ironModifier3 > clayModifier3 && foodModifier3 > clayModifier3) {
+                        spearnew3 = Math.floor(clayModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(clayModifier3 * sword3) - 1
+                        axenew3 = Math.floor(clayModifier3 * axe3) - 1
+                        archernew3 = Math.floor(clayModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(clayModifier3 * lc3) - 1
+                        manew3 = Math.floor(clayModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(clayModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(clayModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(clayModifier3 * hc3) - 1
+                    } else if (ironModifier3 > foodModifier3 && clayModifier3 > foodModifier3) {
+                        spearnew3 = Math.floor(foodModifier3 * spear3) - 1
+                        swordnew3 = Math.floor(foodModifier3 * sword3) - 1
+                        axenew3 = Math.floor(foodModifier3 * axe3) - 1
+                        archernew3 = Math.floor(foodModifier3 * archer3) - 1
+                        lcnew3 = Math.floor(foodModifier3 * lc3) - 1
+                        manew3 = Math.floor(foodModifier3 * ma3) - 1
+                        ramnew3 = Math.floor(foodModifier3 * ram3) - 1
+                        catapultnew3 = Math.floor(foodModifier3 * catapult3) - 1
+                        hcnew3 = Math.floor(foodModifier3 * hc3) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
+                setTimeout(function() {
+                    recruitSpear3()
+                }, unitInterval)
+                setTimeout(function() {
+                    if (Barracks3 >= 3) {
+                        recruitSword3()
+                    }
+                }, unitInterval * 2)
+                setTimeout(function() {
+                    if (Barracks3 >= 5) {
+                        recruitAxe3()
+                    }
+                }, unitInterval * 3)
+                setTimeout(function() {
+                    if (Barracks3 >= 9) {
+                        recruitArcher3()
+                    }
+                }, unitInterval * 4)
+                setTimeout(function() {
+                    if (Barracks3 >= 11) {
+                        recruitLc3()
+                    }
+                }, unitInterval * 5)
+                setTimeout(function() {
+                    if (Barracks3 >= 13) {
+                        recruitMa3()
+                    }
+                }, unitInterval * 6)
+                setTimeout(function() {
+                    if (Barracks3 >= 15) {
+                        recruitRam3()
+                    }
+                }, unitInterval * 7)
+                setTimeout(function() {
+                    if (Barracks3 >= 17) {
+                        recruitCatapult3()
+                    }
+                }, unitInterval * 8)
+                setTimeout(function() {
+                    if (Barracks3 >= 21) {
+                        recruitHc3()
+                    }
+                }, unitInterval * 9)
+            } else {
+                console.log('Brak jednostek do rekrutacji')
+            }
+
+            function recruitSpear3() {
+                if (spearnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew3
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew3)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitSword3() {
+                if (swordnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew3
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew3)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitAxe3() {
+                if (axenew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew3
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew3)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitArcher3() {
+                if (archernew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew3
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew3)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitLc3() {
+                if (lcnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew3
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew3)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitMa3() {
+                if (manew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew3
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew3)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitRam3() {
+                if (ramnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew3
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew3)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitCatapult3() {
+                if (catapultnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew3
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew3)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitHc3() {
+                if (hcnew3 >= minimal3) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew3
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew3
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew3)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
+                }
+            }
+        }
+
+        function modifier4Get() {
+            if (selectedGroup4 > 0) {
+                if (queue4.length >= 2) {
+                    modifier4 = 1.0
+                } else if (queue4.length == 1) {
+                    modifier4 = 0.5
+                } else {
+                    modifier4 = 0.25
+                }
+            } else {
+                modifier4 = 0.0
+            }
+            time4GetB()
+        }
+
+        function time4GetB() {
+            if (barracksRecrutingTime4.length > 0) {
+                barracks4TotalJobsLength = barracksRecrutingTime4.reduce(function(a, b) {
+                    return a + b
+                })
+            } else {
+                barracks4TotalJobsLength = 0
+            }
+            timeModifier4Get()
+        }
+
+        function timeModifier4Get() {
+            if (selectedGroup4 > 0) {
+                if (barracks4TotalJobsLength >= 93600000) {
+                    timeModifier4 = 0.00
+                } else if (barracks4TotalJobsLength < 93600000 && barracks4TotalJobsLength >= 86400000) {
+                    timeModifier4 = 0.10
+                } else if (barracks4TotalJobsLength < 86400000 && barracks4TotalJobsLength >= 72000000) {
+                    timeModifier4 = 0.25
+                } else if (barracks4TotalJobsLength < 72000000 && barracks4TotalJobsLength >= 57600000) {
+                    timeModifier4 = 0.40
+                } else if (barracks4TotalJobsLength < 57600000 && barracks4TotalJobsLength >= 43200000) {
+                    timeModifier4 = 0.55
+                } else if (barracks4TotalJobsLength < 43200000 && barracks4TotalJobsLength >= 28800000) {
+                    timeModifier4 = 0.70
+                } else if (barracks4TotalJobsLength < 28800000 && barracks4TotalJobsLength >= 14400000) {
+                    timeModifier4 = 0.85
+                } else if (barracks4TotalJobsLength < 14400000 && barracks4TotalJobsLength >= 7200000) {
+                    timeModifier4 = 0.925
+                } else if (barracks4TotalJobsLength < 7200000 && barracks4TotalJobsLength >= 3600000) {
+                    timeModifier4 = 0.9625
+                } else {
+                    timeModifier4 = 1.00
+                }
+            } else {
+                timeModifier4 = 0.00
+            }
+            recruit4()
+        }
+
+        function recruit4() {
+            var spearToRecruit4 = finalSpear4 - spearAmount
+            var swordToRecruit4 = finalSword4 - swordAmount
+            var axeToRecruit4 = finalAxe4 - axeAmount
+            var archerToRecruit4 = finalArcher4 - archerAmount
+            var lcToRecruit4 = finalLC4 - light_cavalryAmount
+            var maToRecruit4 = finalMA4 - mounted_archerAmount
+            var ramToRecruit4 = finalRam4 - ramAmount
+            var catapultToRecruit4 = finalCatapult4 - catapultAmount
+            var hcToRecruit4 = finalHC4 - heavy_cavalryAmount
+            var spear4 = Math.floor(Spear4 * timeModifier4 * modifier4)
+            var sword4 = Math.floor(Sword4 * timeModifier4 * modifier4)
+            var axe4 = Math.floor(Axe4 * timeModifier4 * modifier4)
+            var archer4 = Math.floor(Archer4 * timeModifier4 * modifier4)
+            var lc4 = Math.floor(LC4 * timeModifier4 * modifier4)
+            var ma4 = Math.floor(MA4 * timeModifier4 * modifier4)
+            var ram4 = Math.floor(Ram4 * timeModifier4 * modifier4)
+            var catapult4 = Math.floor(Catapult4 * timeModifier4 * modifier4)
+            var hc4 = Math.floor(HC4 * timeModifier4 * modifier4)
+            var wood4 = spear4 * wood[0] + sword4 * wood[1] + axe4 * wood[2] + archer4 * wood[3] + lc4 * wood[4] + ma4 * wood[5] + ram4 * wood[7] + catapult4 * wood[8] + hc4 * wood[6]
+            var clay4 = spear4 * clay[0] + sword4 * clay[1] + axe4 * clay[2] + archer4 * clay[3] + lc4 * clay[4] + ma4 * clay[5] + ram4 * clay[7] + catapult4 * clay[8] + hc4 * clay[6]
+            var iron4 = spear4 * iron[0] + sword4 * iron[1] + axe4 * iron[2] + archer4 * iron[3] + lc4 * iron[4] + ma4 * iron[5] + ram4 * iron[7] + catapult4 * iron[8] + hc4 * iron[6]
+            var food4 = spear4 * food[0] + sword4 * food[1] + axe4 * food[2] + archer4 * food[3] + lc4 * food[4] + ma4 * food[5] + ram4 * food[7] + catapult4 * food[8] + hc4 * food[6]
+            console.log(wood4, clay4, iron4, food4)
+            if (spearToRecruit4 <= 0 || hcToRecruit4 <= 0 || catapultToRecruit4 <= 0 || swordToRecruit4 <= 0 || axeToRecruit4 <= 0 || archerToRecruit4 <= 0 || lcToRecruit4 <= 0 || maToRecruit4 <= 0 || ramToRecruit4 <= 0) {
+                console.log('Brak jednostek do rekrutacji')
+            } else {
+                if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    spearnew4 = spear4
+                    swordnew4 = sword4
+                    axenew4 = axe4
+                    archernew4 = archer4
+                    lcnew4 = lc4
+                    manew4 = ma4
+                    ramnew4 = ram4
+                    catapultnew4 = catapult4
+                    hcnew4 = hc4
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    generalModifier4 = villageWood4 / wood4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    generalModifier4 = villageClay4 / clay4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    generalModifier4 = villageIron4 / iron4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    generalModifier4 = villageFood4 / food4
+                    spearnew4 = Math.floor(generalModifier4 * spear4) - 1
+                    swordnew4 = Math.floor(generalModifier4 * sword4) - 1
+                    axenew4 = Math.floor(generalModifier4 * axe4) - 1
+                    archernew4 = Math.floor(generalModifier4 * archer4) - 1
+                    lcnew4 = Math.floor(generalModifier4 * lc4) - 1
+                    manew4 = Math.floor(generalModifier4 * ma4) - 1
+                    ramnew4 = Math.floor(generalModifier4 * ram4) - 1
+                    catapultnew4 = Math.floor(generalModifier4 * catapult4) - 1
+                    hcnew4 = Math.floor(generalModifier4 * hc4) - 1
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 <= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    ironModifier4 = villageIron4 / iron4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    foodModifier4 = villageFood4 / food4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    ironModifier4 = villageIron4 / iron4
+                    if (ironModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 >= villageFood4) {
+                    foodModifier4 = villageFood4 / food4
+                    ironModifier4 = villageIron4 / iron4
+                    if (ironModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    foodModifier4 = villageFood4 / food4
+                    if (foodModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 >= villageIron4 && food4 <= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    ironModifier4 = villageIron4 / iron4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > ironModifier4 && woodModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else if (ironModifier4 > clayModifier4 && woodModifier4 > clayModifier4) {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    } else if (ironModifier4 > woodModifier4 && clayModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 <= villageIron4 && food4 >= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    foodModifier4 = villageFood4 / food4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > foodModifier4 && woodModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else if (foodModifier4 > clayModifier4 && woodModifier4 > clayModifier4) {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    } else if (foodModifier4 > woodModifier4 && clayModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood4 >= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 <= villageClay4 && iron4 >= villageIron4 && food4 >= villageFood4) {
+                    woodModifier4 = villageWood4 / wood4
+                    foodModifier4 = villageFood4 / food4
+                    ironModifier4 = villageIron4 / iron4
+                    if (foodModifier4 > ironModifier4 && woodModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else if (ironModifier4 > foodModifier4 && woodModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else if (ironModifier4 > woodModifier4 && foodModifier4 > woodModifier4) {
+                        spearnew4 = Math.floor(woodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(woodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(woodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(woodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(woodModifier4 * lc4) - 1
+                        manew4 = Math.floor(woodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(woodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(woodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(woodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                } else if (wood4 <= villageWood4 && (spearToRecruit4 >= minimal4 || hcToRecruit4 >= minimal4 || catapultToRecruit4 >= minimal4 || swordToRecruit4 >= minimal4 || axeToRecruit4 >= minimal4 || archerToRecruit4 >= minimal4 || lcToRecruit4 >= minimal4 || maToRecruit4 >= minimal4 || ramToRecruit4 >= minimal4) && clay4 >= villageClay4 && iron4 >= villageIron4 && food4 >= villageFood4) {
+                    foodModifier4 = villageFood4 / food4
+                    ironModifier4 = villageIron4 / iron4
+                    clayModifier4 = villageClay4 / clay4
+                    if (clayModifier4 > ironModifier4 && foodModifier4 > ironModifier4) {
+                        spearnew4 = Math.floor(ironModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(ironModifier4 * sword4) - 1
+                        axenew4 = Math.floor(ironModifier4 * axe4) - 1
+                        archernew4 = Math.floor(ironModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(ironModifier4 * lc4) - 1
+                        manew4 = Math.floor(ironModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(ironModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(ironModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(ironModifier4 * hc4) - 1
+                    } else if (ironModifier4 > clayModifier4 && foodModifier4 > clayModifier4) {
+                        spearnew4 = Math.floor(clayModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(clayModifier4 * sword4) - 1
+                        axenew4 = Math.floor(clayModifier4 * axe4) - 1
+                        archernew4 = Math.floor(clayModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(clayModifier4 * lc4) - 1
+                        manew4 = Math.floor(clayModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(clayModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(clayModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(clayModifier4 * hc4) - 1
+                    } else if (ironModifier4 > foodModifier4 && clayModifier4 > foodModifier4) {
+                        spearnew4 = Math.floor(foodModifier4 * spear4) - 1
+                        swordnew4 = Math.floor(foodModifier4 * sword4) - 1
+                        axenew4 = Math.floor(foodModifier4 * axe4) - 1
+                        archernew4 = Math.floor(foodModifier4 * archer4) - 1
+                        lcnew4 = Math.floor(foodModifier4 * lc4) - 1
+                        manew4 = Math.floor(foodModifier4 * ma4) - 1
+                        ramnew4 = Math.floor(foodModifier4 * ram4) - 1
+                        catapultnew4 = Math.floor(foodModifier4 * catapult4) - 1
+                        hcnew4 = Math.floor(foodModifier4 * hc4) - 1
+                    } else {
+                        console.log('Nie znam przyczyny :P')
+                    }
+                }
+                setInterval(function() {
+                    if (running == false) {
+                        return
+                    }
+                }, 5000)
+                setTimeout(function() {
+                    recruitSpear4()
+                }, unitInterval)
+                setTimeout(function() {
+                    if (Barracks4 >= 3) {
+                        recruitSword4()
+                    }
+                }, unitInterval * 2)
+                setTimeout(function() {
+                    if (Barracks4 >= 5) {
+                        recruitAxe4()
+                    }
+                }, unitInterval * 3)
+                setTimeout(function() {
+                    if (Barracks4 >= 9) {
+                        recruitArcher4()
+                    }
+                }, unitInterval * 4)
+                setTimeout(function() {
+                    if (Barracks4 >= 11) {
+                        recruitLc4()
+                    }
+                }, unitInterval * 5)
+                setTimeout(function() {
+                    if (Barracks4 >= 13) {
+                        recruitMa4()
+                    }
+                }, unitInterval * 6)
+                setTimeout(function() {
+                    if (Barracks4 >= 15) {
+                        recruitRam4()
+                    }
+                }, unitInterval * 7)
+                setTimeout(function() {
+                    if (Barracks4 >= 17) {
+                        recruitCatapult4()
+                    }
+                }, unitInterval * 8)
+                setTimeout(function() {
+                    if (Barracks4 >= 21) {
+                        recruitHc4()
+                    }
+                }, unitInterval * 9)
+            }
+
+            function recruitSpear4() {
+                if (spearnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'spear',
+                        amount: spearnew4
+                    })
+                    unit = 'spear'
+                    logData = [
+                        unit,
+                        spearnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, spearnew4)
+                } else {
+                    console.log('Niezrekrutowano pikinierów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitSword4() {
+                if (swordnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'sword',
+                        amount: swordnew4
+                    })
+                    unit = 'sword'
+                    logData = [
+                        unit,
+                        swordnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, swordnew4)
+                } else {
+                    console.log('Niezrekrutowano mieczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitAxe4() {
+                if (axenew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'axe',
+                        amount: axenew4
+                    })
+                    unit = 'axe'
+                    logData = [
+                        unit,
+                        axenew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, axenew4)
+                } else {
+                    console.log('Niezrekrutowano toporników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitArcher4() {
+                if (archernew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'archer',
+                        amount: archernew4
+                    })
+                    unit = 'archer'
+                    logData = [
+                        unit,
+                        archernew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, archernew4)
+                } else {
+                    console.log('Niezrekrutowano łuczników - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitLc4() {
+                if (lcnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'light_cavalry',
+                        amount: lcnew4
+                    })
+                    unit = 'light_cavalry'
+                    logData = [
+                        unit,
+                        lcnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, lcnew4)
+                } else {
+                    console.log('Niezrekrutowano lk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitMa4() {
+                if (manew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'mounted_archer',
+                        amount: manew4
+                    })
+                    unit = 'mounted_archer'
+                    logData = [
+                        unit,
+                        manew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, manew4)
+                } else {
+                    console.log('Niezrekrutowano łk - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitRam4() {
+                if (ramnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'ram',
+                        amount: ramnew4
+                    })
+                    unit = 'ram'
+                    logData = [
+                        unit,
+                        ramnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, ramnew4)
+                } else {
+                    console.log('Niezrekrutowano taranów - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitCatapult4() {
+                if (catapultnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'catapult',
+                        amount: catapultnew4
+                    })
+                    unit = 'catapult'
+                    logData = [
+                        unit,
+                        catapultnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, catapultnew4)
+                } else {
+                    console.log('Niezrekrutowano katapult - mniej niż wskazane minimum')
+                }
+            }
+
+            function recruitHc4() {
+                if (hcnew4 >= minimal4) {
+                    socketService.emit(routeProvider.BARRACKS_RECRUIT, {
+                        village_id: villageIdSet,
+                        unit_type: 'heavy_cavalry',
+                        amount: hcnew4
+                    })
+                    unit = 'heavy_cavalry'
+                    logData = [
+                        unit,
+                        hcnew4
+                    ]
+                    eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, logData)
+                    addLog(villageIdSet, unit, hcnew4)
+                } else {
+                    console.log('Niezrekrutowano ck - mniej niż wskazane minimum')
+                }
+            }
+        }
+
+        function getVillageData() {
+            var player = modelDataService.getSelectedCharacter()
+            var villages = player.getVillageList()
+            unitInterval = recruitQueueSettings[SETTINGS.UNIT_QUEUE_INTERVAL] * 1000
+            var interval = recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000
+            var interval2 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000) + (recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            var interval3 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000 * 2) + (recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            var interval4 = (villages.length * recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000 * 3) + (recruitQueueSettings[SETTINGS.GROUP_QUEUE_INTERVAL] * 1000)
+            if (selectedGroup1) {
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        groupVillages1.forEach(function(id1) {
+                            if (village.data.villageId == id1) {
+                                console.log('wioska:' + village.getName())
+                                villageIdSet = village.getId()
+                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                Barracks1 = village.buildingData.data.barracks.level
+                                queue1 = village.buildingQueue.data.queue
+                                recruitingQueues = village.getRecruitingQueues()
+                                barracksQueue1 = recruitingQueues.barracks.jobs
+                                var resources = village.getResources()
+                                var computed = resources.getComputed()
+                                var woodComputed = computed.wood
+                                var clayComputed = computed.clay
+                                var ironComputed = computed.iron
+                                var foodComputed = computed.food
+                                villageFood1 = foodComputed.currentStock
+                                villageWood1 = woodComputed.currentStock
+                                villageClay1 = clayComputed.currentStock
+                                villageIron1 = ironComputed.currentStock
+                                barracksQueue1.forEach(function(job) {
+                                    recruitingTime = job.clientRecruitingTime
+                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                    barracksRecrutingTime1.push(recruitingTimeToFinish)
+                                })
+                                modifier1Get()
+                            }
+                        })
+                    }, index * interval)
+                })
+            } else {
+                console.log('Nie wybrano grupy nr1')
+            }
+            if (selectedGroup2) {
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        groupVillages2.forEach(function(id2) {
+                            if (village.data.villageId == id2) {
+                                console.log('wioska:' + village.getName())
+                                villageIdSet = village.getId()
+                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                Barracks2 = village.buildingData.data.barracks.level
+                                queue2 = village.buildingQueue.data.queue
+                                recruitingQueues = village.getRecruitingQueues()
+                                barracksQueue2 = recruitingQueues.barracks.jobs
+                                var resources = village.getResources()
+                                var computed = resources.getComputed()
+                                var woodComputed = computed.wood
+                                var clayComputed = computed.clay
+                                var ironComputed = computed.iron
+                                var foodComputed = computed.food
+                                villageFood2 = foodComputed.currentStock
+                                villageWood2 = woodComputed.currentStock
+                                villageClay2 = clayComputed.currentStock
+                                villageIron2 = ironComputed.currentStock
+                                barracksQueue2.forEach(function(job) {
+                                    recruitingTime = job.clientRecruitingTime
+                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                    barracksRecrutingTime2.push(recruitingTimeToFinish)
+                                })
+                                modifier2Get()
+                            }
+                        })
+                    }, (index * interval) + interval2)
+                })
+            } else {
+                console.log('Nie wybrano grupy nr2')
+            }
+            if (selectedGroup3) {
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        groupVillages3.forEach(function(id3) {
+                            if (village.data.villageId == id3) {
+                                console.log('wioska:' + village.getName())
+                                villageIdSet = village.getId()
+                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                Barracks3 = village.buildingData.data.barracks.level
+                                queue3 = village.buildingQueue.data.queue
+                                recruitingQueues = village.getRecruitingQueues()
+                                barracksQueue3 = recruitingQueues.barracks.jobs
+                                var resources = village.getResources()
+                                var computed = resources.getComputed()
+                                var woodComputed = computed.wood
+                                var clayComputed = computed.clay
+                                var ironComputed = computed.iron
+                                var foodComputed = computed.food
+                                villageFood3 = foodComputed.currentStock
+                                villageWood3 = woodComputed.currentStock
+                                villageClay3 = clayComputed.currentStock
+                                villageIron3 = ironComputed.currentStock
+                                barracksQueue3.forEach(function(job) {
+                                    recruitingTime = job.clientRecruitingTime
+                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                    barracksRecrutingTime3.push(recruitingTimeToFinish)
+                                })
+                                modifier3Get()
+                            }
+                        })
+                    }, (index * interval) + interval3)
+                })
+            } else {
+                console.log('Nie wybrano grupy nr3')
+            }
+            if (selectedGroup4) {
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        groupVillages4.forEach(function(id4) {
+                            if (village.data.villageId == id4) {
+                                console.log('wioska:' + village.getName())
+                                villageIdSet = village.getId()
+                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                Barracks4 = village.buildingData.data.barracks.level
+                                queue4 = village.buildingQueue.data.queue
+                                recruitingQueues = village.getRecruitingQueues()
+                                barracksQueue4 = recruitingQueues.barracks.jobs
+                                var resources = village.getResources()
+                                var computed = resources.getComputed()
+                                var woodComputed = computed.wood
+                                var clayComputed = computed.clay
+                                var ironComputed = computed.iron
+                                var foodComputed = computed.food
+                                villageFood4 = foodComputed.currentStock
+                                villageWood4 = woodComputed.currentStock
+                                villageClay4 = clayComputed.currentStock
+                                villageIron4 = ironComputed.currentStock
+                                barracksQueue4.forEach(function(job) {
+                                    recruitingTime = job.clientRecruitingTime
+                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                    barracksRecrutingTime4.push(recruitingTimeToFinish)
+                                })
+                                modifier4Get()
+                            }
+                        })
+                    }, (index * interval) + interval4)
+                })
+            } else {
+                console.log('Nie wybrano grupy nr4')
+            }
+        }
+        setInterval(function() {
+            if (running == false) {
+                return
+            }
+        }, 60000)
+        getVillageData()
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END)
+    }
+    recruitQueue.getLogs = function() {
+        return logs
+    }
+    recruitQueue.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
+        return logs
+    }
+    recruitQueue.start = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_START)
+        addLog(LOG_TYPES.RECRUIT_START, 'start', '')
+        interval5 = Math.max(MINIMUM_RECRUIT_CYCLE_INTERVAL, recruitQueueSettings[SETTINGS.RECRUIT_QUEUE_INTERVAL] * 60 * 1000)
+        runningRecrutation = setInterval(function() {
+            running = true
+            recruitQueue.presetRecrutation()
+        }, interval5)
+    }
+    recruitQueue.stop = function(reason = STATUS.USER_STOP) {
+        if (interval5) {
+            if (reason !== STATUS.USER_STOP) {
+                nextCycleDate = timeHelper.gameTime() + getCycleInterval()
+            }
+            eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END, reason)
+        } else {
+            nextCycleDate = null
+        }
+        running = false
+        clearInterval(runningRecrutation)
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_STOP, {
+            reason: reason
+        })
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END, reason)
+        if (reason === STATUS.USER_STOP) {
+            addLog(LOG_TYPES.RECRUIT_STOP, 'stop', '')
+            addLog(LOG_TYPES.RECRUIT_STOP, 'cycle.end', '')
+        }
+    }
+    recruitQueue.getSettings = function() {
+        return settings
+    }
+    recruitQueue.isInitialized = function() {
+        return initialized
+    }
+    recruitQueue.isRunning = function() {
+        return running
+    }
+    recruitQueue.getNextCycleDate = function() {
+        return nextCycleDate
+    }
+    recruitQueue.getCycleInterval = getCycleInterval
+    return recruitQueue
+})
+define('two/recruitQueue/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        RECRUIT_QUEUE_JOB_STARTED: 'recruit_queue_job_started',
+        RECRUIT_QUEUE_START: 'recruit_queue_start',
+        RECRUIT_QUEUE_STOP: 'recruit_queue_stop',
+        RECRUIT_QUEUE_CLEAR_LOGS: 'recruit_queue_clear_logs',
+        RECRUIT_QUEUE_CYCLE_BEGIN: 'recruit_queue_cycle_begin',
+        RECRUIT_QUEUE_CYCLE_END: 'recruit_queue_cycle_end'
+    })
+})
+
+define('two/recruitQueue/ui', [
+    'two/ui',
+    'two/recruitQueue',
+    'two/recruitQueue/settings',
+    'two/recruitQueue/settings/map',
+    'two/recruitQueue/types/units',
+    'two/recruitQueue/types/status',
+    'two/recruitQueue/types/errors',
+    'two/Settings',
+    'queues/EventQueue',
+    'two/EventScope',
+    'helper/time',
+    'two/utils'
+], function(
+    interfaceOverflow,
+    recruitQueue,
+    SETTINGS,
+    SETTINGS_MAP,
+    RQ_UNIT,
+    STATUS,
+    ERROR_TYPES,
+    Settings,
+    eventQueue,
+    EventScope,
+    timeHelper,
+    utils
+) {
+    let $scope
+    let settings
+    let groupList = modelDataService.getGroupList()
+    let $button
+    let running = false
+    let cycleCountdownTimer = null
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    const TAB_TYPES = {
+        PRESETS: 'presets',
+        OWN: 'own',
+        LOGS: 'logs'
+    }
+    const selectTab = function(tabType) {
+        $scope.selectedTab = tabType
+    }
+    const switchRecruiterP = function() {
+        if (recruitQueue.isRunning()) {
+            recruitQueue.stop()
+            running = false
+        } else {
+            recruitQueue.start()
+            settings.setAll(settings.decode($scope.settings))
+            recruitQueue.presetRecrutation()
+        }
+    }
+    const switchRecruiterO = function() {
+        if (recruitQueue.isRunning()) {
+            recruitQueue.stop()
+            running = false
+        } else {
+            recruitQueue.start()
+            settings.setAll(settings.decode($scope.settings))
+            recruitQueue.ownRecrutation()
+        }
+    }
+    const clearP = function() {
+        $scope.settings[SETTINGS.GROUP1] = false
+        $scope.settings[SETTINGS.GROUP2] = false
+        $scope.settings[SETTINGS.GROUP3] = false
+        $scope.settings[SETTINGS.GROUP4] = false
+        $scope.settings[SETTINGS.FINAL_AMOUNT1] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT2] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT3] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT4] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT5] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT6] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT7] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT8] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT9] = 0
+        $scope.settings[SETTINGS.START_AMOUNT1] = 0
+        $scope.settings[SETTINGS.START_AMOUNT2] = 0
+        $scope.settings[SETTINGS.START_AMOUNT3] = 0
+        $scope.settings[SETTINGS.START_AMOUNT4] = 0
+        $scope.settings[SETTINGS.START_AMOUNT5] = 0
+        $scope.settings[SETTINGS.START_AMOUNT6] = 0
+        $scope.settings[SETTINGS.START_AMOUNT7] = 0
+        $scope.settings[SETTINGS.START_AMOUNT8] = 0
+        $scope.settings[SETTINGS.START_AMOUNT9] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT11] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT12] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT13] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT14] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT15] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT16] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT17] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT18] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT19] = 0
+        $scope.settings[SETTINGS.START_AMOUNT11] = 0
+        $scope.settings[SETTINGS.START_AMOUNT12] = 0
+        $scope.settings[SETTINGS.START_AMOUNT13] = 0
+        $scope.settings[SETTINGS.START_AMOUNT14] = 0
+        $scope.settings[SETTINGS.START_AMOUNT15] = 0
+        $scope.settings[SETTINGS.START_AMOUNT16] = 0
+        $scope.settings[SETTINGS.START_AMOUNT17] = 0
+        $scope.settings[SETTINGS.START_AMOUNT18] = 0
+        $scope.settings[SETTINGS.START_AMOUNT19] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT21] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT22] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT23] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT24] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT25] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT26] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT27] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT28] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT29] = 0
+        $scope.settings[SETTINGS.START_AMOUNT21] = 0
+        $scope.settings[SETTINGS.START_AMOUNT22] = 0
+        $scope.settings[SETTINGS.START_AMOUNT23] = 0
+        $scope.settings[SETTINGS.START_AMOUNT24] = 0
+        $scope.settings[SETTINGS.START_AMOUNT25] = 0
+        $scope.settings[SETTINGS.START_AMOUNT26] = 0
+        $scope.settings[SETTINGS.START_AMOUNT27] = 0
+        $scope.settings[SETTINGS.START_AMOUNT28] = 0
+        $scope.settings[SETTINGS.START_AMOUNT29] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT31] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT32] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT33] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT34] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT35] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT36] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT37] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT38] = 0
+        $scope.settings[SETTINGS.FINAL_AMOUNT39] = 0
+        $scope.settings[SETTINGS.START_AMOUNT31] = 0
+        $scope.settings[SETTINGS.START_AMOUNT32] = 0
+        $scope.settings[SETTINGS.START_AMOUNT33] = 0
+        $scope.settings[SETTINGS.START_AMOUNT34] = 0
+        $scope.settings[SETTINGS.START_AMOUNT35] = 0
+        $scope.settings[SETTINGS.START_AMOUNT36] = 0
+        $scope.settings[SETTINGS.START_AMOUNT37] = 0
+        $scope.settings[SETTINGS.START_AMOUNT38] = 0
+        $scope.settings[SETTINGS.START_AMOUNT39] = 0
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const clearO = function() {
+        $scope.settings[SETTINGS.GROUP5] = false
+        $scope.settings[SETTINGS.GROUP6] = false
+        $scope.settings[SETTINGS.GROUP7] = false
+        $scope.settings[SETTINGS.GROUP8] = false
+        $scope.settings[SETTINGS.GROUP9] = false
+        $scope.settings[SETTINGS.GROUP10] = false
+        $scope.settings[SETTINGS.GROUP11] = false
+        $scope.settings[SETTINGS.GROUP12] = false
+        $scope.settings[SETTINGS.GROUP13] = false
+        $scope.settings[SETTINGS.GROUP14] = false
+        $scope.settings[SETTINGS.GROUP15] = false
+        $scope.settings[SETTINGS.GROUP16] = false
+        $scope.settings[SETTINGS.GROUP17] = false
+        $scope.settings[SETTINGS.GROUP18] = false
+        $scope.settings[SETTINGS.GROUP19] = false
+        $scope.settings[SETTINGS.GROUP20] = false
+        $scope.settings[SETTINGS.GROUP21] = false
+        $scope.settings[SETTINGS.GROUP22] = false
+        $scope.settings[SETTINGS.GROUP23] = false
+        $scope.settings[SETTINGS.GROUP24] = false
+        $scope.settings[SETTINGS.UNIT1] = false
+        $scope.settings[SETTINGS.UNIT2] = false
+        $scope.settings[SETTINGS.UNIT3] = false
+        $scope.settings[SETTINGS.UNIT4] = false
+        $scope.settings[SETTINGS.UNIT5] = false
+        $scope.settings[SETTINGS.UNIT6] = false
+        $scope.settings[SETTINGS.UNIT7] = false
+        $scope.settings[SETTINGS.UNIT8] = false
+        $scope.settings[SETTINGS.UNIT9] = false
+        $scope.settings[SETTINGS.UNIT10] = false
+        $scope.settings[SETTINGS.UNIT11] = false
+        $scope.settings[SETTINGS.UNIT12] = false
+        $scope.settings[SETTINGS.UNIT13] = false
+        $scope.settings[SETTINGS.UNIT14] = false
+        $scope.settings[SETTINGS.UNIT15] = false
+        $scope.settings[SETTINGS.UNIT16] = false
+        $scope.settings[SETTINGS.UNIT17] = false
+        $scope.settings[SETTINGS.UNIT18] = false
+        $scope.settings[SETTINGS.UNIT19] = false
+        $scope.settings[SETTINGS.UNIT20] = false
+        $scope.settings[SETTINGS.AMOUNT1] = 1
+        $scope.settings[SETTINGS.AMOUNT2] = 1
+        $scope.settings[SETTINGS.AMOUNT3] = 1
+        $scope.settings[SETTINGS.AMOUNT4] = 1
+        $scope.settings[SETTINGS.AMOUNT5] = 1
+        $scope.settings[SETTINGS.AMOUNT6] = 1
+        $scope.settings[SETTINGS.AMOUNT7] = 1
+        $scope.settings[SETTINGS.AMOUNT8] = 1
+        $scope.settings[SETTINGS.AMOUNT9] = 1
+        $scope.settings[SETTINGS.AMOUNT10] = 1
+        $scope.settings[SETTINGS.AMOUNT11] = 1
+        $scope.settings[SETTINGS.AMOUNT12] = 1
+        $scope.settings[SETTINGS.AMOUNT13] = 1
+        $scope.settings[SETTINGS.AMOUNT14] = 1
+        $scope.settings[SETTINGS.AMOUNT15] = 1
+        $scope.settings[SETTINGS.AMOUNT16] = 1
+        $scope.settings[SETTINGS.AMOUNT17] = 1
+        $scope.settings[SETTINGS.AMOUNT18] = 1
+        $scope.settings[SETTINGS.AMOUNT19] = 1
+        $scope.settings[SETTINGS.AMOUNT20] = 1
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ŁADOWANIE...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId) {
+                loadVillageInfo(log.villageId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        recruitQueue.clearLogs()
+    }
+    const checkCycleInterval = function() {
+        if (running == true) {
+            let nextCycleDate = recruitQueue.getNextCycleDate()
+            let terminateDate = nextCycleDate - timeHelper.gameTime()
+            if (nextCycleDate) {
+                $scope.showCycleTimer = true
+                $scope.nextCycleCountdown = terminateDate
+                cycleCountdownTimer = setInterval(function() {
+                    $scope.nextCycleCountdown -= 1000
+                    if (terminateDate < 0) {
+                        clearInterval(cycleCountdownTimer)
+                        $scope.nextCycleCountdown = 'Cykl zakończony'
+                    }
+                }, 1000)
+            }
+        } else {
+            $scope.showCycleTimer = false
+        }
+    }
+    const eventHandlers = {
+        updateGroups: function() {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        updateLogs: function() {
+            $scope.logs = recruitQueue.getLogs()
+            logsView.updateVisibleLogs()
+            if (!$scope.logs.length) {
+                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'recruit_queue'))
+            }
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs.cleared', $rootScope.loc.ale, 'recruit_queue'))
+            $scope.visibleLogs = []
+            eventHandlers.updateLogs()
+        },
+        start: function() {
+            $scope.running = true
+        },
+        stop: function(event, data) {
+            $scope.running = false
+            $scope.showCycleTimer = false
+            clearInterval(cycleCountdownTimer)
+            switch (data.reason) {
+                case ERROR_TYPES.USER_STOP: {
+                    utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
+                    break
+                }
+            }
+        },
+        onCycleBegin: function() {
+            $scope.showCycleTimer = false
+            clearInterval(cycleCountdownTimer)
+        },
+        onCycleEnd: function(event, reason) {
+            if (reason === STATUS.USER_STOP) {
+                return
+            }
+            $scope.showCycleTimer = true
+            $scope.nextCycleCountdown = recruitQueue.getCycleInterval()
+            cycleCountdownTimer = setInterval(function() {
+                $scope.nextCycleCountdown -= 1000
+            }, 1000)
+        }
+    }
+    const init = function() {
+        settings = recruitQueue.getSettings()
+        $button = interfaceOverflow.addMenuButton('Kapitan', 80, $filter('i18n')('description', $rootScope.loc.ale, 'recruit_queue'))
+        $button.addEventListener('click', buildWindow)
+        eventQueue.register(eventTypeProvider.RECRUIT_QUEUE_START, function() {
+            running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'recruit_queue'))
+        })
+        eventQueue.register(eventTypeProvider.RECRUIT_QUEUE_STOP, function() {
+            running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
+        })
+        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><p ng-show=\"showCycleTimer\" class=\"text-center timer\">{{ 'recrutation_in' | i18n:loc.ale:'recruit_queue' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}<h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tbody><tr><th colspan=\"3\">{{ 'preset.settings' | i18n:loc.ale:'recruit_queue' }}<tr><td tooltip=\"\" tooltip-content=\"{{ 'recruit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'recruit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.RECRUIT_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'group_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'group_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.GROUP_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'unit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'unit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.UNIT_QUEUE_INTERVAL]\"><tr><th colspan=\"3\">{{ 'preset.recruit1' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK1]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><th colspan=\"3\">{{ 'preset.recruit2' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK2]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><th colspan=\"3\">{{ 'preset.recruit3' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK3]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><th colspan=\"3\">{{ 'preset.recruit4' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK4]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }} Nie działa jeszcze</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text logs\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"link\" ng-class=\"{
+                                'icon-bg-black icon-26x26-dot-green': log.unit === 'start',
+                                'icon-bg-black icon-26x26-dot-red': log.unit === 'stop',
+								'icon-20x20-village': log.unit === 'spear' || log.unit === 'sword' || log.unit === 'axe' || log.unit === 'archer' || log.unit === 'light_cavalry' || log.unit === 'mounted_archer' || log.unit === 'heavy_cavalry' || log.unit === 'ram' || log.unit === 'catapult'}\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'recruit_queue' }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-recruit-queue div[select]{text-align:center}#two-recruit-queue div[select] .select-wrapper{height:34px;width:164px;min-width:164px}#two-recruit-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-recruit-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:160px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .addForm th{text-align:center}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}#two-recruit-queue .timer{line-height:34px}#two-recruit-queue .logs{margin-bottom:10px}#two-recruit-queue .logs td,#two-recruit-queue .logs th{text-align:center;line-height:30px}#two-recruit-queue .icon-20x20-village:before{margin-top:-11px}')
+    }
+    const buildWindow = function() {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = running
+        $scope.selectedTab = TAB_TYPES.PRESETS
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.pagination = {}
+        $scope.clearP = clearP
+        $scope.clearO = clearO
+        $scope.units = Settings.encodeList(RQ_UNIT, {
+            textObject: 'recruit_queue',
+            disabled: true
+        })
+        settings.injectScope($scope)
+        eventHandlers.updateGroups()
+        checkCycleInterval()
+        $scope.selectTab = selectTab
+        $scope.switchRecruiterO = switchRecruiterO
+        $scope.switchRecruiterP = switchRecruiterP
+        $scope.logsView = logsView
+        $scope.logsView.logs = recruitQueue.getLogs()
+        $scope.villagesInfo = villagesInfo
+        $scope.villagesLabel = villagesLabel
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        logsView.updateVisibleLogs()
+        let eventScope = new EventScope('twoverflow_recruit_queue_window', function onDestroy() {
+            console.log('recruitQueue window closed')
+            clearInterval(cycleCountdownTimer)
+        })
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.RECRUIT_QUEUE_JOB_STARTED, eventHandlers.updateLogs)
+        eventScope.register(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS, eventHandlers.clearLogs)
+        eventScope.register(eventTypeProvider.RECRUIT_QUEUE_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.RECRUIT_QUEUE_STOP, eventHandlers.stop)
+        eventScope.register(eventTypeProvider.RECRUIT_QUEUE_CYCLE_BEGIN, eventHandlers.onCycleBegin)
+        eventScope.register(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END, eventHandlers.onCycleEnd)
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_recruit_queue_window', $scope)
+    }
+    return init
+})
+define('two/recruitQueue/settings', [], function() {
+    return {
+        MIN_PACK1: 'minpack1',
+        MIN_PACK2: 'minpack2',
+        MIN_PACK3: 'minpack3',
+        MIN_PACK4: 'minpack4',
+        RECRUIT_QUEUE_INTERVAL: 'recruit_cycle_interval',
+        GROUP_QUEUE_INTERVAL: 'group_cycle_interval',
+        UNIT_QUEUE_INTERVAL: 'unit_cycle_interval',
+        GROUP1: 'group1',
+        GROUP2: 'group2',
+        GROUP3: 'group3',
+        GROUP4: 'group4',
+        GROUP5: 'group5',
+        GROUP6: 'group6',
+        GROUP7: 'group7',
+        GROUP8: 'group8',
+        GROUP9: 'group9',
+        GROUP10: 'group10',
+        GROUP11: 'group11',
+        GROUP12: 'group12',
+        GROUP13: 'group13',
+        GROUP14: 'group14',
+        GROUP15: 'group15',
+        GROUP16: 'group16',
+        GROUP17: 'group17',
+        GROUP18: 'group18',
+        GROUP19: 'group19',
+        GROUP20: 'group20',
+        GROUP21: 'group21',
+        GROUP22: 'group22',
+        GROUP23: 'group23',
+        GROUP24: 'group24',
+        UNIT1: 'unit1',
+        UNIT2: 'unit2',
+        UNIT3: 'unit3',
+        UNIT4: 'unit4',
+        UNIT5: 'unit5',
+        UNIT6: 'unit6',
+        UNIT7: 'unit7',
+        UNIT8: 'unit8',
+        UNIT9: 'unit9',
+        UNIT10: 'unit10',
+        UNIT11: 'unit11',
+        UNIT12: 'unit12',
+        UNIT13: 'unit13',
+        UNIT14: 'unit14',
+        UNIT15: 'unit15',
+        UNIT16: 'unit16',
+        UNIT17: 'unit17',
+        UNIT18: 'unit18',
+        UNIT19: 'unit19',
+        UNIT20: 'unit20',
+        START_AMOUNT1: 'startamount1',
+        START_AMOUNT2: 'startamount2',
+        START_AMOUNT3: 'startamount3',
+        START_AMOUNT4: 'startamount4',
+        START_AMOUNT5: 'startamount5',
+        START_AMOUNT6: 'startamount6',
+        START_AMOUNT7: 'startamount7',
+        START_AMOUNT8: 'startamount8',
+        START_AMOUNT9: 'startamount9',
+        START_AMOUNT11: 'startamount11',
+        START_AMOUNT12: 'startamount12',
+        START_AMOUNT13: 'startamount13',
+        START_AMOUNT14: 'startamount14',
+        START_AMOUNT15: 'startamount15',
+        START_AMOUNT16: 'startamount16',
+        START_AMOUNT17: 'startamount17',
+        START_AMOUNT18: 'startamount18',
+        START_AMOUNT19: 'startamount19',
+        START_AMOUNT21: 'startamount21',
+        START_AMOUNT22: 'startamount22',
+        START_AMOUNT23: 'startamount23',
+        START_AMOUNT24: 'startamount24',
+        START_AMOUNT25: 'startamount25',
+        START_AMOUNT26: 'startamount26',
+        START_AMOUNT27: 'startamount27',
+        START_AMOUNT28: 'startamount28',
+        START_AMOUNT29: 'startamount29',
+        START_AMOUNT31: 'startamount31',
+        START_AMOUNT32: 'startamount32',
+        START_AMOUNT33: 'startamount33',
+        START_AMOUNT34: 'startamount34',
+        START_AMOUNT35: 'startamount35',
+        START_AMOUNT36: 'startamount36',
+        START_AMOUNT37: 'startamount37',
+        START_AMOUNT38: 'startamount38',
+        START_AMOUNT39: 'startamount39',
+        FINAL_AMOUNT1: 'finalamount1',
+        FINAL_AMOUNT2: 'finalamount2',
+        FINAL_AMOUNT3: 'finalamount3',
+        FINAL_AMOUNT4: 'finalamount4',
+        FINAL_AMOUNT5: 'finalamount5',
+        FINAL_AMOUNT6: 'finalamount6',
+        FINAL_AMOUNT7: 'finalamount7',
+        FINAL_AMOUNT8: 'finalamount8',
+        FINAL_AMOUNT9: 'finalamount9',
+        FINAL_AMOUNT11: 'finalamount11',
+        FINAL_AMOUNT12: 'finalamount12',
+        FINAL_AMOUNT13: 'finalamount13',
+        FINAL_AMOUNT14: 'finalamount14',
+        FINAL_AMOUNT15: 'finalamount15',
+        FINAL_AMOUNT16: 'finalamount16',
+        FINAL_AMOUNT17: 'finalamount17',
+        FINAL_AMOUNT18: 'finalamount18',
+        FINAL_AMOUNT19: 'finalamount19',
+        FINAL_AMOUNT21: 'finalamount21',
+        FINAL_AMOUNT22: 'finalamount22',
+        FINAL_AMOUNT23: 'finalamount23',
+        FINAL_AMOUNT24: 'finalamount24',
+        FINAL_AMOUNT25: 'finalamount25',
+        FINAL_AMOUNT26: 'finalamount26',
+        FINAL_AMOUNT27: 'finalamount27',
+        FINAL_AMOUNT28: 'finalamount28',
+        FINAL_AMOUNT29: 'finalamount29',
+        FINAL_AMOUNT31: 'finalamount31',
+        FINAL_AMOUNT32: 'finalamount32',
+        FINAL_AMOUNT33: 'finalamount33',
+        FINAL_AMOUNT34: 'finalamount34',
+        FINAL_AMOUNT35: 'finalamount35',
+        FINAL_AMOUNT36: 'finalamount36',
+        FINAL_AMOUNT37: 'finalamount37',
+        FINAL_AMOUNT38: 'finalamount38',
+        FINAL_AMOUNT39: 'finalamount39',
+        AMOUNT1: 'amount1',
+        AMOUNT2: 'amount2',
+        AMOUNT3: 'amount3',
+        AMOUNT4: 'amount4',
+        AMOUNT5: 'amount5',
+        AMOUNT6: 'amount6',
+        AMOUNT7: 'amount7',
+        AMOUNT8: 'amount8',
+        AMOUNT9: 'amount9',
+        AMOUNT10: 'amount10',
+        AMOUNT11: 'amount11',
+        AMOUNT12: 'amount12',
+        AMOUNT13: 'amount13',
+        AMOUNT14: 'amount14',
+        AMOUNT15: 'amount15',
+        AMOUNT16: 'amount16',
+        AMOUNT17: 'amount17',
+        AMOUNT18: 'amount18',
+        AMOUNT19: 'amount19',
+        AMOUNT20: 'amount20'
+    }
+})
+define('two/recruitQueue/settings/updates', function() {
+    return {
+        GROUPS: 'groups',
+        INTERVAL_TIMERS: 'interval_timers'
+    }
+})
+define('two/recruitQueue/settings/map', [
+    'two/recruitQueue/settings',
+    'two/recruitQueue/settings/updates'
+], function(
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.GROUP1]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP2]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP3]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP4]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP5]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP6]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP7]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP8]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP9]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP10]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP11]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP12]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP13]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP14]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP15]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP16]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP17]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP18]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP19]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP20]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP21]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP22]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP23]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.GROUP24]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            type: 'groups'
+        },
+        [SETTINGS.AMOUNT1]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT2]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT3]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT4]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT5]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT6]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT7]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT8]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT9]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT10]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT11]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT12]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT13]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT14]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT15]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT16]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT17]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT18]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT19]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.AMOUNT20]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.UNIT1]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT2]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT3]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT4]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT5]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT6]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT7]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT8]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT9]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT10]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT11]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT12]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT13]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT14]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT15]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT16]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT17]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT18]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT19]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT20]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET1]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET2]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET3]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET4]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET5]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET6]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET7]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET8]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_PRESET9]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.FINAL_AMOUNT1]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT2]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT3]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT4]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT5]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT6]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT7]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT8]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT9]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT1]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT2]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT3]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT4]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT5]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT6]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT7]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT8]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT9]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT11]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT12]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT13]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT14]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT15]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT16]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT17]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT18]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT19]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT11]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT12]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT13]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT14]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT15]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT16]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT17]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT18]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT19]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT21]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT22]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT23]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT24]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT25]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT26]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT27]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT28]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT29]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT21]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT22]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT23]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT24]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT25]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT26]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT27]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT28]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT29]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT31]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT32]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT33]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT34]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT35]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT36]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT37]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT38]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.FINAL_AMOUNT39]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT31]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT32]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT33]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT34]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT35]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT36]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT37]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT38]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.START_AMOUNT39]: {
+            default: 0,
+            inputType: 'number',
+            min: 0,
+            max: 24000
+        },
+        [SETTINGS.MIN_PACK1]: {
+            default: 10,
+            inputType: 'number'
+        },
+        [SETTINGS.MIN_PACK2]: {
+            default: 10,
+            inputType: 'number'
+        },
+        [SETTINGS.MIN_PACK3]: {
+            default: 10,
+            inputType: 'number'
+        },
+        [SETTINGS.MIN_PACK4]: {
+            default: 10,
+            inputType: 'number'
+        },
+        [SETTINGS.RECRUIT_QUEUE_INTERVAL]: {
+            default: 60,
+            updates: [UPDATES.INTERVAL_TIMERS],
+            inputType: 'number',
+            min: 1,
+            max: 240
+        },
+        [SETTINGS.UNIT_QUEUE_INTERVAL]: {
+            default: 6,
+            updates: [UPDATES.INTERVAL_TIMERS],
+            inputType: 'number',
+            min: 2,
+            max: 30
+        },
+        [SETTINGS.GROUP_QUEUE_INTERVAL]: {
+            default: 60,
+            updates: [UPDATES.INTERVAL_TIMERS],
+            inputType: 'number',
+            min: 20,
+            max: 240
+        }
+    }
+})
+define('two/recruitQueue/types/units', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult'
+    }
+})
+define('two/recruitQueue/types/errors', [], function () {
+    return {
+        USER_STOP: 'user_stop'
+    }
+})
+
+define('two/recruitQueue/types/status', [], function () {
+    return {
+        USER_STOP: 'user_stop'
+    }
+})
+define('two/recruitQueue/types/logs', [], function () {
+    return {
+        RECRUIT_START: 'recruit_start',
+        RECRUIT_STOP: 'recruit_stop',
+    }
+})
+
+require([
+    'two/ready',
+    'two/recruitQueue',
+    'two/recruitQueue/ui',
+    'two/recruitQueue/events'
+], function (
+    ready,
+    recruitQueue,
+    recruitQueueInterface
+) {
+    if (recruitQueue.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        recruitQueue.init()
+        recruitQueueInterface()
+    })
+})
+
 define('two/reportSender', [
     'queues/EventQueue'
 ], function(
@@ -20850,7 +28497,6 @@ define('two/reportSender', [
 ) {
     var player = modelDataService.getSelectedCharacter()
     var playerId = player.data.character_id
-    var playerName = player.data.character_name
     var initialized = false
     var running = false
     var scoutReportsId = []
@@ -20865,8 +28511,10 @@ define('two/reportSender', [
         returnString = convert
         return returnString
     }
-
     var checkNewReports = function() {
+        if (!running) {
+            return false
+        }
         socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
             offset: 0,
             count: 50,
@@ -20885,7 +28533,6 @@ define('two/reportSender', [
                 }
             }
         })
-
         socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
             offset: 0,
             count: 100,
@@ -20904,7 +28551,6 @@ define('two/reportSender', [
                 }
             }
         })
-
         socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
             offset: 0,
             count: 100,
@@ -20923,10 +28569,7 @@ define('two/reportSender', [
                 }
             }
         })
-
-        setTimeout(checkNewReports, 30000)
     }
-
     var sendInfoScout = function sendInfoScout(data) {
         var alertText = []
         var result = data.result
@@ -21003,42 +28646,26 @@ define('two/reportSender', [
             origin = '[village=' + attVillageId + ']' + attVillageName + '[/village]'
         }
         time = Math.floor((dateNow / 1000) - timecreated)
-
         alertText.push('[size=XL][b]Raport szpiegowski: [report]' + newToken + '[/report][br]' + resultString + ' --- Typ: ' + type + '[/b][/size][br][b][size=large] Czas wejścia szpiegów: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Liczba szpiegów: [b]' + defScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + defScoutsLossesFinal + '[/color][/b][br]Wioska pochodzenia: [/b]' + origin + '[b] Gracz szpiegujący: [/b]' + gamer + '[br]Liczba szpiegów: [b]' + attScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + attScoutsLossesFinal + '[/color][/b][/size]')
         var message = alertText.join()
         if (defCharacterId != playerId) {
             if (time < 10800) {
-                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 14383,
-                        message: message
-                    })
-                } else {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 6467,
-                        message: message
-                    })
-                }
+                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                    message_id: 8462,
+                    message: message
+                })
                 alertText = []
             }
         } else {
             if (time < 10800) {
-                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 14382,
-                        message: message
-                    })
-                } else {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 6466,
-                        message: message
-                    })
-                }
+                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                    message_id: 8463,
+                    message: message
+                })
                 alertText = []
             }
         }
     }
-
     var sendInfoDefense = function sendInfoDefense(data) {
         var alertText = []
         var result = data.result
@@ -21255,28 +28882,17 @@ define('two/reportSender', [
                 origin = '[village=' + attVillageId + ']' + attVillageName + '[/village]'
             }
             time = Math.floor((dateNow / 1000) - timecreated)
-
             alertText.push('[size=XL][b]Raport obronny: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersF + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
-
             var message = alertText.join()
             if (time < 10800) {
-                if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 14381,
-                        message: message
-                    })
-                } else {
-                    socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 6982,
-                        message: message
-                    })
-                }
+                socketService.emit(routeProvider.MESSAGE_REPLY, {
+                    message_id: 8461,
+                    message: message
+                })
                 alertText = []
             }
         }
     }
-
-
     var sendInfoAttack = function sendInfoAttack(data) {
         var alertText = []
         var result = data.result
@@ -21533,29 +29149,19 @@ define('two/reportSender', [
             }
             time = Math.floor((dateNow / 1000) - timecreated)
             officersD = officersF.join()
-
             if (defCharacterName != null) {
                 alertText.push('[size=XL][b]Raport z ataku: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersD + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
-
                 var message = alertText.join()
                 if (time < 10800) {
-                    if (playerName == 'Hajduk Split' || playerName == 'halfsack' || playerName == 'Black Rider') {
-                        socketService.emit(routeProvider.MESSAGE_REPLY, {
-                            message_id: 14380,
-                            message: message
-                        })
-                    } else {
-                        socketService.emit(routeProvider.MESSAGE_REPLY, {
-                            message_id: 6983,
-                            message: message
-                        })
-                    }
+                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                        message_id: 8460,
+                        message: message
+                    })
                     alertText = []
                 }
             }
         }
     }
-
     var reportSender = {}
     reportSender.init = function() {
         initialized = true
@@ -21563,6 +29169,10 @@ define('two/reportSender', [
     reportSender.start = function() {
         eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STARTED)
         running = true
+        setInterval(function() {
+            running = true
+            checkNewReports()
+        }, 60000)
         checkNewReports()
     }
     reportSender.stop = function() {
@@ -21670,596 +29280,309 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/spyMaster', [
-    'two/Settings',
-    'two/spyMaster/settings',
-    'two/spyMaster/settings/map',
-    'two/spyMaster/types/building',
-    'two/spyMaster/types/unit',
-    'two/ready',
-    'queues/EventQueue'
-], function(
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    C_BUILDING,
-    C_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let spyMasterSettings
-    const STORAGE_KEYS = {
-        SETTINGS: 'spy_master_settings'
-    }
-    const COUNTERMEASURES_BUILDING = {
-        [C_BUILDING.HEADQUARTER]: 'headquarter',
-        [C_BUILDING.WAREHOUSE]: 'warehouse',
-        [C_BUILDING.FARM]: 'farm',
-        [C_BUILDING.RALLY_POINT]: 'rally_point',
-        [C_BUILDING.STATUE]: 'statue',
-        [C_BUILDING.WALL]: 'wall',
-        [C_BUILDING.TAVERN]: 'tavern',
-        [C_BUILDING.BARRACKS]: 'barracks',
-        [C_BUILDING.PRECEPTORY]: 'preceptory',
-        [C_BUILDING.HOSPITAL]: 'hospital',
-        [C_BUILDING.CLAY_PIT]: 'clay_pit',
-        [C_BUILDING.IRON_MINE]: 'iron_mine',
-        [C_BUILDING.TIMBER_CAMP]: 'timber_camp',
-        [C_BUILDING.CHAPEL]: 'chapel',
-        [C_BUILDING.CHURCH]: 'church',
-        [C_BUILDING.MARKET]: 'market',
-        [C_BUILDING.ACADEMY]: 'academy'
-    }
-    const COUNTERMEASURES_UNIT = {
-        [C_UNIT.SPEAR]: 'spear',
-        [C_UNIT.SWORD]: 'sword',
-        [C_UNIT.AXE]: 'axe',
-        [C_UNIT.ARCHER]: 'archer',
-        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [C_UNIT.RAM]: 'ram',
-        [C_UNIT.CATAPULT]: 'catapult',
-        [C_UNIT.TREBUCHET]: 'trebuchet',
-        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [C_UNIT.SNOB]: 'snob',
-        [C_UNIT.KNIGHT]: 'knight'
-    }
-    console.log(COUNTERMEASURES_UNIT, COUNTERMEASURES_BUILDING)
-    const spyMaster = {}
-    spyMaster.init = function() {
-        initialized = true
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-        spyMasterSettings = settings.getAll()
-        console.log('spyMaster settings', spyMasterSettings)
-    }
-    spyMaster.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
-    }
-    spyMaster.stop = function() {
-        running = false
-        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
-    }
-    spyMaster.getSettings = function() {
-        return settings
-    }
-    spyMaster.isInitialized = function() {
-        return initialized
-    }
-    spyMaster.isRunning = function() {
-        return running
-    }
-    return spyMaster
-})
-define('two/spyMaster/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        SPY_MASTER_START: 'spy_master_start',
-        SPY_MASTER_STOP: 'spy_master_stop'
-    })
-})
-
-define('two/spyMaster/ui', [
-    'two/ui',
-    'two/spyMaster',
-    'two/spyMaster/settings',
-    'two/spyMaster/settings/map',
-    'two/spyMaster/types/building',
-    'two/spyMaster/types/unit',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function(
-    interfaceOverflow,
-    spyMaster,
-    SETTINGS,
-    SETTINGS_MAP,
-    C_BUILDING,
-    C_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    const TAB_TYPES = {
-        SPY: 'spy',
-        COUNTERMEASURES: 'countermeasures',
-        LOGS: 'logs'
-    }
-    const selectTab = function(tabType) {
-        $scope.selectedTab = tabType
-    }
-    const saveSettings = function() {
-        settings.setAll(settings.decode($scope.settings))
-        utils.notif('success', 'Settings saved')
-    }
-    const switchState = function() {
-        if (spyMaster.isRunning()) {
-            spyMaster.stop()
-        } else {
-            spyMaster.start()
-        }
-    }
-    const eventHandlers = {
-        start: function() {
-            $scope.running = true
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'spy_master'))
-        },
-        stop: function() {
-            $scope.running = false
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'spy_master'))
-        }
-    }
-    const init = function() {
-        settings = spyMaster.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Zwiadowca', 10)
-        $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'spy_master' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ 'spy' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ 'countermeasures' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spy.units' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetU\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textunits' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.building' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetB\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textbuildings' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.all' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetA\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textall' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetS\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textsabotage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.player' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'spy.add_player' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textplayer' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'countermeasures.camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\" placeholder=\"{{ 'countermeasures.level' | i18n:loc.ale:'spy_master' }}\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textcamouflage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipcamouflage' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btncamouflage' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textswitch' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipswitch' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btnswitch' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"4\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textdummies' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipdummies' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btndummies' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textexchange' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipexchange' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btnexchange' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.target' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.type' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'spy.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'countermeasures.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-spy-master div[select]{text-align:center}#two-spy-master div[select] .select-wrapper{height:34px}#two-spy-master div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-spy-master div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px}#two-spy-master .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-spy-master .actions a{width:100px}#two-spy-master .item-send{text-align:center}#two-spy-master .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-camouflage{text-align:center}#two-spy-master .item-camouflage span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-exchange{text-align:center}#two-spy-master .item-exchange span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-dummies{text-align:center}#two-spy-master .item-dummies span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-switch{text-align:center}#two-spy-master .item-switch span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .spyLog td{text-align:center}#two-spy-master .spyLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-spy-master .spyLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}')
-    }
-    const buildWindow = function() {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = spyMaster.isRunning()
-        $scope.selectedTab = TAB_TYPES.SPY
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.building = Settings.encodeList(C_BUILDING, {
-            textObject: 'spy_master',
-            disabled: true
-        })
-        $scope.unit = Settings.encodeList(C_UNIT, {
-            textObject: 'spy_master',
-            disabled: true
-        })
-        settings.injectScope($scope)
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-        let eventScope = new EventScope('twoverflow_spy_master_window', function onDestroy() {
-            console.log('spyMaster window closed')
-        })
-        eventScope.register(eventTypeProvider.SPY_MASTER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.SPY_MASTER_STOP, eventHandlers.stop)
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_spy_master_window', $scope)
-    }
-    return init
-})
-define('two/spyMaster/settings', [], function () {
-    return {
-        BUILDING: 'building',
-        BUILDING_LEVEL: 'building_level',
-        REPLACEMENT: 'replacement',
-        UNIT: 'unit',
-        DUMMIES: 'dummies'
-        
-    }
-})
-
-define('two/spyMaster/settings/map', [
-    'two/spyMaster/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.BUILDING]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.REPLACEMENT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.DUMMIES]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/spyMaster/types/building', [], function () {
-    return {
-        HEADQUARTER: 'headquarter',
-        WAREHOUSE: 'warehouse',
-        FARM: 'farm',
-        RALLY_POINT: 'rally_point',
-        STATUE: 'statue',
-        WALL: 'wall',
-        TAVERN: 'tavern',
-        BARRACKS: 'barracks',
-        PRECEPTORY: 'preceptory',
-        HOSPITAL: 'hospital',
-        CLAY_PIT: 'clay_pit',
-        IRON_MINE: 'iron_mine',
-        TIMBER_CAMP: 'timber_camp',
-        CHAPEL: 'chapel',
-        CHURCH: 'church',
-        MARKET: 'market',
-        ACADEMY: 'academy'
-    }
-})
-
-define('two/spyMaster/types/unit', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-require([
-    'two/ready',
-    'two/spyMaster',
-    'two/spyMaster/ui',
-    'two/spyMaster/events'
-], function (
-    ready,
-    spyMaster,
-    spyMasterInterface
-) {
-    if (spyMaster.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        spyMaster.init()
-        spyMasterInterface()
-    }, ['map', 'world_config'])
-})
-
 define('two/spyRecruiter', [
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     utils,
     eventQueue
 ) {
     let initialized = false
     let running = false
-
     var recruitSpy = function recruitSpy() {
-        setInterval(function() {
-            var player = modelDataService.getSelectedCharacter()
-            var villages = player.getVillageList()
-            villages.forEach(function(village) {
-                var data = village.data
-                var buildings = data.buildings
-                var tavern = buildings.tavern
-                var level = tavern.level
-                var scoutingInfo = village.scoutingInfo
-                var spies = scoutingInfo.spies
-                var resources = village.getResources()
-                var computed = resources.getComputed()
-                var wood = computed.wood
-                var clay = computed.clay
-                var iron = computed.iron
-                var villageWood = wood.currentStock
-                var villageClay = clay.currentStock
-                var villageIron = iron.currentStock
-                var woodCost = [500, 1000, 2200, 7000, 12000]
-                var clayCost = [500, 800, 2000, 6500, 10000]
-                var ironCost = [500, 1200, 2400, 8000, 18000]
-                if (level < 1) {
-                    console.log('Brak tawerny w wiosce:' + village.getName())
-                } else if (level >= 1 && level < 3) {
-                    spies.forEach(function(spy) {
-                        if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                        }
-                    })
-                    console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                } else if (level >= 3 && level < 6) {
-                    spies.forEach(function(spy) {
-                        if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        }
-                    })
-                } else if (level >= 6 && level < 9) {
-                    spies.forEach(function(spy) {
-                        if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        }
-                    })
-                } else if (level >= 9 && level < 12) {
-                    spies.forEach(function(spy) {
-                        if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
-                        }
-                    })
-                } else if (level >= 12) {
-                    spies.forEach(function(spy) {
-                        if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 4 && spy.active != true)) {
-                            socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
-                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
-                        } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 1
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
-                        } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 2
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
-                        } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 3
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
-                        } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 4
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
-                        } else if (spy.id == 5 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[5] && villageClay >= clayCost[5] && villageIron >= ironCost[5])) {
-                            socketService.emit(routeProvider.SCOUTING_RECRUIT, {
-                                village_id: village.getId(),
-                                slot: 5
-                            })
-                            console.log('Dodano do rekrutacji szpiega (slot 5) w wiosce:' + village.getName())
-                        }
-                    })
-                }
-            })
-            utils.notif('success',  $filter('i18n')('revived', $rootScope.loc.ale, 'spy_recruiter'))
-        }, 120000)
+        if (!running) {
+            return false
+        }
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        villages.forEach(function(village) {
+            var data = village.data
+            var buildings = data.buildings
+            var tavern = buildings.tavern
+            var level = tavern.level
+            var scoutingInfo = village.scoutingInfo
+            var spies = scoutingInfo.spies
+            var resources = village.getResources()
+            var computed = resources.getComputed()
+            var wood = computed.wood
+            var clay = computed.clay
+            var iron = computed.iron
+            var villageWood = wood.currentStock
+            var villageClay = clay.currentStock
+            var villageIron = iron.currentStock
+            var woodCost = [500, 1000, 2200, 7000, 12000]
+            var clayCost = [500, 800, 2000, 6500, 10000]
+            var ironCost = [500, 1200, 2400, 8000, 18000]
+            if (level < 1) {
+                console.log('Brak tawerny w wiosce:' + village.getName())
+            } else if (level >= 1 && level < 3) {
+                spies.forEach(function(spy) {
+                    if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                    }
+                })
+                console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+            } else if (level >= 3 && level < 6) {
+                spies.forEach(function(spy) {
+                    if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    }
+                })
+            } else if (level >= 6 && level < 9) {
+                spies.forEach(function(spy) {
+                    if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    }
+                })
+            } else if (level >= 9 && level < 12) {
+                spies.forEach(function(spy) {
+                    if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
+                    }
+                })
+            } else if (level >= 12) {
+                spies.forEach(function(spy) {
+                    if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 1 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if ((spy.id == 3 && spy.recruitingInProgress == true) && (spy.id == 2 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 3) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if ((spy.id == 4 && spy.recruitingInProgress == true) && (spy.id == 3 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 4) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if ((spy.id == 5 && spy.recruitingInProgress == true) && (spy.id == 4 && spy.active != true)) {
+                        socketService.emit(routeProvider.SCOUTING_CANCEL_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        console.log('Anulowano rekrutację szpiega (slot 5) w wiosce:' + village.getName())
+                        console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
+                    } else if (spy.id == 1 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[1] && villageClay >= clayCost[1] && villageIron >= ironCost[1])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 1
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 1) w wiosce:' + village.getName())
+                    } else if (spy.id == 2 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[2] && villageClay >= clayCost[2] && villageIron >= ironCost[2])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 2
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 2) w wiosce:' + village.getName())
+                    } else if (spy.id == 3 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[3] && villageClay >= clayCost[3] && villageIron >= ironCost[3])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 3
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 3) w wiosce:' + village.getName())
+                    } else if (spy.id == 4 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[4] && villageClay >= clayCost[4] && villageIron >= ironCost[4])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 4
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 4) w wiosce:' + village.getName())
+                    } else if (spy.id == 5 && spy.active != true && spy.recruitingInProgress != true && (villageWood >= woodCost[5] && villageClay >= clayCost[5] && villageIron >= ironCost[5])) {
+                        socketService.emit(routeProvider.SCOUTING_RECRUIT, {
+                            village_id: village.getId(),
+                            slot: 5
+                        })
+                        console.log('Dodano do rekrutacji szpiega (slot 5) w wiosce:' + village.getName())
+                    }
+                })
+            }
+        })
+        utils.notif('success', $filter('i18n')('revived', $rootScope.loc.ale, 'spy_recruiter'))
     }
-	
     let spyRecruiter = {}
     spyRecruiter.init = function() {
         initialized = true
@@ -22267,6 +29590,10 @@ define('two/spyRecruiter', [
     spyRecruiter.start = function() {
         eventQueue.trigger(eventTypeProvider.SPY_RECRUITER_STARTED)
         running = true
+        setInterval (function() {
+            running = true
+            recruitSpy()
+        }, 120000)
         recruitSpy()
     }
     spyRecruiter.stop = function() {
