@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 10 Dec 2020 21:53:47 GMT
+ * Fri, 11 Dec 2020 08:11:13 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24073,8 +24073,8 @@ define('two/prankHelper', [
     let logs
     let selectedGroups = []
     const STORAGE_KEYS = {
-        LOGS: 'prank_helper_logs',
-        SETTINGS: 'prank_helper_settings'
+        SETTINGS: 'prank_helper_settings',
+        LOGS: 'prank_helper_logs'
     }
     const RENAME_TYPE = {
         [PH_TYPE.INCREASE]: 'increase',
@@ -24086,9 +24086,7 @@ define('two/prankHelper', [
         selectedGroups = []
         const allGroups = modelDataService.getGroupList().getGroups()
         const groupsSelectedByTheUser = prankHelperSettings[SETTINGS.GROUPS]
-        groupsSelectedByTheUser.forEach(function(groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
+        selectedGroups.push(allGroups[groupsSelectedByTheUser])
     }
     const addLog = function(villageId, newname, oldname) {
         let data = {
@@ -24223,6 +24221,7 @@ define('two/prankHelper', [
         }, function(data) {
             villages = data.villages
         })
+        console.log(villages, selectedVillage)
         var validName = prankHelperSettings[SETTINGS.CENTER2]
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE2]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE2]
@@ -24458,20 +24457,6 @@ define('two/prankHelper/ui', [
             prankHelper.renameGroup()
         }
     }
-    const setMapSelectedVillage = function(event, menu) {
-        mapSelectedVillage = menu.data
-    }
-    const unsetMapSelectedVillage = function() {
-        mapSelectedVillage = false
-    }
-    const addMapSelected = function() {
-        if (!mapSelectedVillage) {
-            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'prank_helper'))
-        }
-        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
-            prankVillage.origin = data
-        })
-    }
     const clear = function() {
         $scope.settings[SETTINGS.GROUPS] = false
         $scope.settings[SETTINGS.TYPE1] = false
@@ -24493,6 +24478,20 @@ define('two/prankHelper/ui', [
         $scope.settings[SETTINGS.TO2] = ''
         $scope.settings[SETTINGS.TO3] = ''
         settings.setAll(settings.decode($scope.settings))
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'prank_helper'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            prankVillage.origin = data
+        })
     }
     const loadVillageInfo = function(villageId) {
         if (villagesInfo[villageId]) {
@@ -24535,6 +24534,13 @@ define('two/prankHelper/ui', [
                 type: 'groups'
             })
         },
+        updateLogs: function() {
+            $scope.logs = prankHelper.getLogs()
+            logsView.updateVisibleLogs()
+            if (!$scope.logs.length) {
+                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'recruit_queue'))
+            }
+        },
         autoCompleteSelected: function(event, id, data, type) {
             if (id !== 'prankhelper_village_search') {
                 return false
@@ -24565,12 +24571,9 @@ define('two/prankHelper/ui', [
             $scope.running = false
             utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'prank_helper'))
         },
-        updateLogs: function() {
-            $scope.logs = prankHelper.getLogs()
-            logsView.updateVisibleLogs()
-        },
         clearLogs: function() {
             utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'prank_helper'))
+            $scope.visibleLogs = []
             eventHandlers.updateLogs()
         }
     }
@@ -24585,15 +24588,17 @@ define('two/prankHelper/ui', [
             running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'recruit_queue'))
         })
         eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
             running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!prankVillage.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"prankVillage.origin\" class=\"command-village\">{{ prankVillage.origin.name }} ({{ prankVillage.origin.x }}|{{ prankVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.oldname }}<td>{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!prankVillage.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"prankVillage.origin\" class=\"command-village\">{{ prankVillage.origin.name }} ({{ prankVillage.origin.x }}|{{ prankVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.oldname }}<td>{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-prank-helper .logs .status tr{height:25px}#two-prank-helper .logs .status td{padding:0 6px}#two-prank-helper .logs .log-list{margin-bottom:10px}#two-prank-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-prank-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-prank-helper .icon-20x20-village:before{margin-top:-11px}')
     }
     const buildWindow = function() {
@@ -24601,14 +24606,9 @@ define('two/prankHelper/ui', [
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
         $scope.running = running
-        $scope.pagination = {}
         $scope.selectedTab = TAB_TYPES.RENAME
-        $scope.villagesLabel = villagesLabel
-        $scope.villagesInfo = villagesInfo
-        $scope.logsView = logsView
-        $scope.logsView.logs = prankHelper.getLogs()
-        $scope.visibleLogs = []
         $scope.settingsMap = SETTINGS_MAP
+        $scope.pagination = {}
         $scope.autoCompleteVillage = {
             type: ['village'],
             placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'prank_helper'),
@@ -24617,19 +24617,12 @@ define('two/prankHelper/ui', [
             dropDown: true
         }
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
-        $scope.pagination.logs = {
-            count: logsView.logs.length,
-            offset: 0,
-            loader: logsView.updateVisibleLogs,
-            limit: storageService.getPaginationLimit()
-        }
         $scope.type = Settings.encodeList(PH_TYPE, {
             textObject: 'prank_helper',
             disabled: true
         })
         settings.injectScope($scope)
         eventHandlers.updateGroups()
-        logsView.updateVisibleLogs()
         $scope.selectTab = selectTab
         $scope.prankVillage = prankVillage
         $scope.clear = clear
@@ -24637,8 +24630,19 @@ define('two/prankHelper/ui', [
         $scope.renameAll = renameAll
         $scope.renameProvince = renameProvince
         $scope.renameGroup = renameGroup
+        $scope.logsView = logsView
+        $scope.logsView.logs = prankHelper.getLogs()
+        $scope.villagesLabel = villagesLabel
+        $scope.villagesInfo = villagesInfo
         $scope.jumpToVillage = mapService.jumpToVillage
         $scope.addMapSelected = addMapSelected
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        logsView.updateVisibleLogs()
         let eventScope = new EventScope('twoverflow_prank_helper_window', function onDestroy() {
             console.log('prankHelper window closed')
         })
@@ -29415,10 +29419,6 @@ define('two/recruitQueue/ui', [
     const selectTab = function(tabType) {
         $scope.selectedTab = tabType
     }
-    const saveSettings = function() {
-        settings.setAll(settings.decode($scope.settings))
-        utils.notif('success', 'Settings saved')
-    }
     const switchRecruiterP = function() {
         if (recruitQueue.isRunning()) {
             recruitQueue.stop()
@@ -29432,6 +29432,7 @@ define('two/recruitQueue/ui', [
     const switchRecruiterO = function() {
         if (recruitQueue.isRunning()) {
             recruitQueue.stop()
+            running = false
         } else {
             recruitQueue.start()
             settings.setAll(settings.decode($scope.settings))
@@ -29720,7 +29721,6 @@ define('two/recruitQueue/ui', [
         eventHandlers.updateGroups()
         checkCycleInterval()
         $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
         $scope.switchRecruiterO = switchRecruiterO
         $scope.switchRecruiterP = switchRecruiterP
         $scope.logsView = logsView
