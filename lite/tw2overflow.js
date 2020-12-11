@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 11 Dec 2020 08:59:38 GMT
+ * Fri, 11 Dec 2020 09:40:47 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24088,6 +24088,11 @@ define('two/prankHelper', [
         const groupsSelectedByTheUser = prankHelperSettings[SETTINGS.GROUPS]
         selectedGroups.push(allGroups[groupsSelectedByTheUser])
     }
+    const requestVillageProvinceNeighbours = function(villageId, callback) {
+        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
+            'village_id': villageId
+        }, callback)
+    }
     const addLog = function(villageId, newname, oldname) {
         let data = {
             time: timeHelper.gameTime(),
@@ -24221,60 +24226,59 @@ define('two/prankHelper', [
         var i = 0
         var minNew = alphabet.indexOf(min)
         var maxNew = alphabet.indexOf(max)
-        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
-            'village_id': selectedVillage
-        }, function(data) {
-            villages.push(data.villages)
-        })
-        if (type == 'increase') {
-            if (isNaN(min) && isNaN(max)) {
-                for (i = minNew; i <= maxNew; i++) {
-                    newName = prefix + validName + sufix + ' ' + alphabet[i]
-                    nameSet.push(newName)
+        requestVillageProvinceNeighbours(selectedVillage, function(responseData) {
+            villages = responseData.villages
+            console.log(villages)
+            if (type == 'increase') {
+                if (isNaN(min) && isNaN(max)) {
+                    for (i = minNew; i <= maxNew; i++) {
+                        newName = prefix + validName + sufix + ' ' + alphabet[i]
+                        nameSet.push(newName)
+                    }
+                } else {
+                    for (i = min; i <= max; i++) {
+                        newName = prefix + validName + sufix + ' ' + i
+                        nameSet.push(newName)
+                    }
+                }
+            } else if (type == 'decrease') {
+                if (isNaN(min) && isNaN(max)) {
+                    for (i = maxNew; i >= minNew; i--) {
+                        newName = prefix + validName + sufix + ' ' + alphabet[i]
+                        nameSet.push(newName)
+                    }
+                } else {
+                    for (i = max; i >= min; i--) {
+                        newName = prefix + validName + sufix + ' ' + i
+                        nameSet.push(newName)
+                    }
                 }
             } else {
-                for (i = min; i <= max; i++) {
-                    newName = prefix + validName + sufix + ' ' + i
-                    nameSet.push(newName)
-                }
+                newName = prefix + validName + sufix
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        villageIdSet = village.id
+                        oldName = village.name
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.id,
+                            name: newName
+                        })
+                        addLog(villageIdSet, newName, oldName)
+                    }, index * interval)
+                })
             }
-        } else if (type == 'decrease') {
-            if (isNaN(min) && isNaN(max)) {
-                for (i = maxNew; i >= minNew; i--) {
-                    newName = prefix + validName + sufix + ' ' + alphabet[i]
-                    nameSet.push(newName)
-                }
-            } else {
-                for (i = max; i >= min; i--) {
-                    newName = prefix + validName + sufix + ' ' + i
-                    nameSet.push(newName)
-                }
-            }
-        } else {
-            newName = prefix + validName + sufix
+            console.log(nameSet)
             villages.forEach(function(village, index) {
                 setTimeout(function() {
                     villageIdSet = village.id
                     oldName = village.name
                     socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                         village_id: village.id,
-                        name: newName
+                        name: nameSet[index]
                     })
-                    addLog(villageIdSet, newName, oldName)
+                    addLog(villageIdSet, nameSet[index], oldName)
                 }, index * interval)
             })
-        }
-        console.log(nameSet)
-        villages.forEach(function(village, index) {
-            setTimeout(function() {
-                villageIdSet = village.id
-                oldName = village.name
-                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                    village_id: village.id,
-                    name: nameSet[index]
-                })
-                addLog(villageIdSet, nameSet[index], oldName)
-            }, index * interval)
         })
         prankHelper.stop()
     }
