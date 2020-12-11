@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 11 Dec 2020 08:41:48 GMT
+ * Fri, 11 Dec 2020 08:59:38 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24134,7 +24134,6 @@ define('two/prankHelper', [
         var selectedGroup = prankHelperSettings[SETTINGS.GROUPS]
         const groupList = modelDataService.getGroupList()
         var groupVillages = groupList.getGroupVillageIds(selectedGroup)
-        var villagesToDo = []
         var interval = 4000
         var newName
         var villageIdSet = 0
@@ -24144,14 +24143,6 @@ define('two/prankHelper', [
         var i = 0
         var minNew = alphabet.indexOf(min)
         var maxNew = alphabet.indexOf(max)
-        villages.forEach(function(village) {
-            groupVillages.forEach(function(id) {
-                if (village.data.villageId == id) {
-                    villagesToDo.push(villages[id])
-                }
-            })
-        })
-        console.log(villagesToDo)
         if (type == 'increase') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = minNew; i <= maxNew; i++) {
@@ -24178,8 +24169,8 @@ define('two/prankHelper', [
             }
         } else {
             newName = prefix + validName + sufix
-            villages.forEach(function(village, index) {
-                groupVillages.forEach(function(id) {
+            villages.forEach(function(village) {
+                groupVillages.forEach(function(id, index) {
                     if (village.data.villageId == id) {
                         setTimeout(function() {
                             villageIdSet = village.getId()
@@ -24195,8 +24186,8 @@ define('two/prankHelper', [
             })
         }
         console.log(nameSet)
-        villages.forEach(function(village, index) {
-            groupVillages.forEach(function(id) {
+        villages.forEach(function(village) {
+            groupVillages.forEach(function(id, index) {
                 if (village.data.villageId == id) {
                     setTimeout(function() {
                         villageIdSet = village.getId()
@@ -24215,12 +24206,6 @@ define('two/prankHelper', [
     prankHelper.renameProvince = function renameProvince() {
         var selectedVillage = prankHelperSettings[SETTINGS.VILLAGE_ID]
         var villages = []
-        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
-            'village_id': selectedVillage
-        }, function(data) {
-            villages = data.villages
-        })
-        console.log(villages, selectedVillage)
         var validName = prankHelperSettings[SETTINGS.CENTER2]
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE2]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE2]
@@ -24236,6 +24221,11 @@ define('two/prankHelper', [
         var i = 0
         var minNew = alphabet.indexOf(min)
         var maxNew = alphabet.indexOf(max)
+        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
+            'village_id': selectedVillage
+        }, function(data) {
+            villages.push(data.villages)
+        })
         if (type == 'increase') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = minNew; i <= maxNew; i++) {
@@ -24264,10 +24254,10 @@ define('two/prankHelper', [
             newName = prefix + validName + sufix
             villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    villageIdSet = village.getId()
-                    oldName = village.getName()
+                    villageIdSet = village.id
+                    oldName = village.name
                     socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                        village_id: village.getId(),
+                        village_id: village.id,
                         name: newName
                     })
                     addLog(villageIdSet, newName, oldName)
@@ -24277,10 +24267,10 @@ define('two/prankHelper', [
         console.log(nameSet)
         villages.forEach(function(village, index) {
             setTimeout(function() {
-                villageIdSet = village.getId()
-                oldName = village.getName()
+                villageIdSet = village.id
+                oldName = village.name
                 socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                    village_id: village.getId(),
+                    village_id: village.id,
                     name: nameSet[index]
                 })
                 addLog(villageIdSet, nameSet[index], oldName)
@@ -24370,12 +24360,12 @@ define('two/prankHelper', [
     prankHelper.start = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
-        addLog('Rozpoczęto przemianowanie', '', '')
+        addLog('', 'Rozpoczęto przemianowanie', '')
     }
     prankHelper.stop = function() {
         running = false
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
-        addLog('Zatrzymano przemianowanie', '', '')
+        addLog('', 'Zatrzymano przemianowanie', '')
     }
     prankHelper.getSettings = function() {
         return settings
@@ -24787,8 +24777,8 @@ define('two/prankHelper/settings/map', [
             inputType: 'text'
         },
         [SETTINGS.VILLAGE_ID]: {
-            default: 0,
-            inputType: 'number'
+            default: '0',
+            inputType: 'text'
         }
     }
 })
