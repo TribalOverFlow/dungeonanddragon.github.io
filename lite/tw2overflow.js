@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 11 Dec 2020 08:11:13 GMT
+ * Fri, 11 Dec 2020 08:41:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24074,7 +24074,7 @@ define('two/prankHelper', [
     let selectedGroups = []
     const STORAGE_KEYS = {
         SETTINGS: 'prank_helper_settings',
-        LOGS: 'prank_helper_logs'
+        LOGS: 'prank_helper_log'
     }
     const RENAME_TYPE = {
         [PH_TYPE.INCREASE]: 'increase',
@@ -24122,16 +24122,6 @@ define('two/prankHelper', [
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
-    prankHelper.start = function() {
-        running = true
-        addLog('Rozpoczęto przemianowanie', '', '')
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
-    }
-    prankHelper.stop = function() {
-        running = false
-        addLog('Zatrzymano przemianowanie', '', '')
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
-    }
     prankHelper.renameGroup = function renameGroup() {
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
@@ -24144,6 +24134,7 @@ define('two/prankHelper', [
         var selectedGroup = prankHelperSettings[SETTINGS.GROUPS]
         const groupList = modelDataService.getGroupList()
         var groupVillages = groupList.getGroupVillageIds(selectedGroup)
+        var villagesToDo = []
         var interval = 4000
         var newName
         var villageIdSet = 0
@@ -24153,6 +24144,14 @@ define('two/prankHelper', [
         var i = 0
         var minNew = alphabet.indexOf(min)
         var maxNew = alphabet.indexOf(max)
+        villages.forEach(function(village) {
+            groupVillages.forEach(function(id) {
+                if (village.data.villageId == id) {
+                    villagesToDo.push(villages[id])
+                }
+            })
+        })
+        console.log(villagesToDo)
         if (type == 'increase') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = minNew; i <= maxNew; i++) {
@@ -24359,6 +24358,25 @@ define('two/prankHelper', [
         })
         prankHelper.stop()
     }
+    prankHelper.getLogs = function() {
+        return logs
+    }
+    prankHelper.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_CLEAR_LOGS)
+        return logs
+    }
+    prankHelper.start = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('Rozpoczęto przemianowanie', '', '')
+    }
+    prankHelper.stop = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
+        addLog('Zatrzymano przemianowanie', '', '')
+    }
     prankHelper.getSettings = function() {
         return settings
     }
@@ -24367,15 +24385,6 @@ define('two/prankHelper', [
     }
     prankHelper.isRunning = function() {
         return running
-    }
-    prankHelper.getLogs = function() {
-        return logs
-    }
-    prankHelper.clearLogs = function() {
-        logs = []
-        Lockr.set(STORAGE_KEYS.LOGS, logs)
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_LOGS_UPDATED)
-        return logs
     }
     return prankHelper
 })
@@ -24394,10 +24403,10 @@ define('two/prankHelper/ui', [
     'two/prankHelper/settings/map',
     'two/prankHelper/types/type',
     'two/Settings',
+    'queues/EventQueue',
     'two/EventScope',
     'two/utils',
-    'struct/MapData',
-    'queues/EventQueue'
+    'struct/MapData'
 ], function(
     interfaceOverflow,
     prankHelper,
@@ -24405,10 +24414,10 @@ define('two/prankHelper/ui', [
     SETTINGS_MAP,
     PH_TYPE,
     Settings,
+    eventQueue,
     EventScope,
     utils,
-    mapData,
-    eventQueue
+    mapData
 ) {
     let $scope
     let settings
@@ -24563,18 +24572,16 @@ define('two/prankHelper/ui', [
             $scope.settings[SETTINGS.VILLAGE_ID] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
-        start: function() {
-            $scope.running = true
-            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'prank_helper'))
-        },
-        stop: function() {
-            $scope.running = false
-            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'prank_helper'))
-        },
         clearLogs: function() {
             utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'prank_helper'))
             $scope.visibleLogs = []
             eventHandlers.updateLogs()
+        },
+        start: function() {
+            $scope.running = true
+        },
+        stop: function() {
+            $scope.running = false
         }
     }
     const init = function() {
@@ -24588,13 +24595,13 @@ define('two/prankHelper/ui', [
             running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'recruit_queue'))
+            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'recruit_queue'))
         })
         eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
             running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
+            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'recruit_queue'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
@@ -24609,6 +24616,8 @@ define('two/prankHelper/ui', [
         $scope.selectedTab = TAB_TYPES.RENAME
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
+        $scope.prankVillage = prankVillage
+        $scope.clear = clear
         $scope.autoCompleteVillage = {
             type: ['village'],
             placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'prank_helper'),
@@ -24616,7 +24625,6 @@ define('two/prankHelper/ui', [
             tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'prank_helper'),
             dropDown: true
         }
-        $scope.openVillageInfo = windowDisplayService.openVillageInfo
         $scope.type = Settings.encodeList(PH_TYPE, {
             textObject: 'prank_helper',
             disabled: true
@@ -24624,18 +24632,16 @@ define('two/prankHelper/ui', [
         settings.injectScope($scope)
         eventHandlers.updateGroups()
         $scope.selectTab = selectTab
-        $scope.prankVillage = prankVillage
-        $scope.clear = clear
-        $scope.clearLogs = prankHelper.clearLogs()
+        $scope.addMapSelected = addMapSelected
         $scope.renameAll = renameAll
         $scope.renameProvince = renameProvince
         $scope.renameGroup = renameGroup
         $scope.logsView = logsView
         $scope.logsView.logs = prankHelper.getLogs()
-        $scope.villagesLabel = villagesLabel
         $scope.villagesInfo = villagesInfo
+        $scope.villagesLabel = villagesLabel
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
         $scope.jumpToVillage = mapService.jumpToVillage
-        $scope.addMapSelected = addMapSelected
         $scope.pagination.logs = {
             count: logsView.logs.length,
             offset: 0,
@@ -24650,9 +24656,9 @@ define('two/prankHelper/ui', [
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.PRANK_HELPER_CLEAR_LOGS, eventHandlers.clearLogs)
         eventScope.register(eventTypeProvider.PRANK_HELPER_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.PRANK_HELPER_STOP, eventHandlers.stop)
-        eventScope.register(eventTypeProvider.PRANK_HELPER_LOGS_UPDATED, eventHandlers.updateLogs)
         windowManagerService.getScreenWithInjectedScope('!twoverflow_prank_helper_window', $scope)
     }
     return init
@@ -29650,6 +29656,7 @@ define('two/recruitQueue/ui', [
         },
         clearLogs: function() {
             utils.notif('success', $filter('i18n')('logs.cleared', $rootScope.loc.ale, 'recruit_queue'))
+            $scope.visibleLogs = []
             eventHandlers.updateLogs()
         },
         start: function() {
@@ -29683,7 +29690,7 @@ define('two/recruitQueue/ui', [
     }
     const init = function() {
         settings = recruitQueue.getSettings()
-        $button = interfaceOverflow.addMenuButton('Kapitan', 80)
+        $button = interfaceOverflow.addMenuButton('Kapitan', 80, $filter('i18n')('description', $rootScope.loc.ale, 'recruit_queue'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.RECRUIT_QUEUE_START, function() {
             running = true
