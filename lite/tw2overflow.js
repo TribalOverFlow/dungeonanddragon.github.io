@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Dec 2020 13:29:17 GMT
+ * Sat, 12 Dec 2020 14:25:02 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18333,7 +18333,9 @@ define('two/fakeSender', [
     'two/fakeSender/types/type',
     'two/fakeSender/types/units',
     'two/ready',
-    'queues/EventQueue'
+    'queues/EventQueue',
+    'Lockr',
+    'helper/time'
 ], function (
     Settings,
     SETTINGS,
@@ -18343,12 +18345,16 @@ define('two/fakeSender', [
     FS_TYPE,
     FS_UNIT,
     ready,
-    eventQueue
+    eventQueue,
+    Lockr,
+    timeHelper
 ) {
     let initialized = false
     let running = false
     let settings
+    let logs
     let fakeSenderSettings
+    const LOGS_LIMIT = 500
 
     let selectedGroups = []
     let selectedGroupsP = []
@@ -18357,7 +18363,8 @@ define('two/fakeSender', [
     let selectedGroupsTarget = []
 
     const STORAGE_KEYS = {
-        SETTINGS: 'fake_sender_settings'
+        SETTINGS: 'fake_sender_settings',
+        LOGS: 'fake_sender_log'
     }
     const FAKE_UNIT = {
         [FS_UNIT.SPEAR]: 'spear',
@@ -18419,11 +18426,27 @@ define('two/fakeSender', [
             selectedGroupsTarget.push(allGroups[groupId])
         })
     }
+    const addLog = function(villageId, targetId, unit, type) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            targetId: targetId,
+            unit: unit,
+            type: type
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        return true
+    }
 
     const fakeSender = {}
 
     fakeSender.init = function () {
         initialized = true
+        logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
 
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
@@ -18446,17 +18469,28 @@ define('two/fakeSender', [
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
+    fakeSender.getLogs = function() {
+        return logs
+    }
+    fakeSender.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
+        return logs
+    }
 
     fakeSender.start = function () {
         running = true
 
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+        addLog('', '', 'Ropzpoczęto wysyłanie fejków', '')
     }
 
     fakeSender.stop = function () {
         running = false
 
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
+        addLog('', '', 'Zakończono wysyłanie fejków', '')
     }
 
     fakeSender.getSettings = function () {
@@ -18512,12 +18546,12 @@ define('two/fakeSender/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let logsView = {}
-    let villagesInfo = {}
-    let villagesLabel = {}
     let fakeVillage
     let running = false
     let mapSelectedVillage = false
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
     
     const TAB_TYPES = {
         FAKE: 'fake',
@@ -24226,7 +24260,7 @@ define('two/recruitQueue', [
     let unitInterval = 6000
     const STORAGE_KEYS = {
         SETTINGS: 'recruit_queue_settings',
-        LOGS: 'recruit_queue_log',
+        LOGS: 'recruit_queue_log'
     }
     const RECRUIT_UNIT = {
         [RQ_UNIT.SPEAR]: 'spear',
