@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Dec 2020 07:36:17 GMT
+ * Sat, 12 Dec 2020 12:10:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18389,6 +18389,7 @@ define('two/farmOverflow', [
     let nextCycleDate = null
     let currentStatus = 'paused'
     let lastAttack
+    let selectedVillage
     const PERSISTENT_RUNNING_CHECK_INTERVAL = 30 * 1000
     const VILLAGE_COMMAND_LIMIT = 50
     const MINIMUM_FARMER_CYCLE_INTERVAL = 1 // minutes
@@ -18668,10 +18669,10 @@ define('two/farmOverflow', [
         var localeStatus = $filter('i18n')('status', $rootScope.loc.ale, 'common')
         var localeVillage = $filter('i18n')('selected_village', $rootScope.loc.ale, 'farm_overflow')
         var localeLast = $filter('i18n')('last_attack', $rootScope.loc.ale, 'farm_overflow')
-        console.log(activeFarmer)
-        var villageLabel = utils.genVillageLabel(activeFarmer)
+        console.log(selectedVillage)
+        var villageLabel = utils.genVillageLabel(selectedVillage.data)
         var last = utils.formatDate(lastAttack)
-        var vid = activeFarmer.id
+        var vid = selectedVillage.villageId
         var message = []
         var farmStatus = $filter('i18n')(currentStatus, $rootScope.loc.ale, 'farm_overflow')
         if (currentStatus === 'step_cycle_next') {
@@ -19581,6 +19582,7 @@ define('two/farmOverflow', [
         farmers.forEach(function(farmer) {
             readyFarmers.push(new Promise(function(resolve) {
                 farmer.init().then(resolve)
+                selectedVillage = farmer
             }))
         })
         if (!readyFarmers.length) {
