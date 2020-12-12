@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Dec 2020 13:17:52 GMT
+ * Sat, 12 Dec 2020 13:25:50 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18324,6 +18324,717 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/fakeSender', [
+    'two/Settings',
+    'two/fakeSender/settings',
+    'two/fakeSender/settings/map',
+    'two/fakeSender/settings/updates',
+    'two/fakeSender/types/dates',
+    'two/fakeSender/types/type',
+    'two/fakeSender/types/units',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    DATE_TYPES,
+    FS_TYPE,
+    FS_UNIT,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let fakeSenderSettings
+
+    let selectedGroups = []
+    let selectedGroupsP = []
+    let selectedGroupsT = []
+    let selectedGroupsG = []
+    let selectedGroupsTarget = []
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'fake_sender_settings'
+    }
+    const FAKE_UNIT = {
+        [FS_UNIT.SPEAR]: 'spear',
+        [FS_UNIT.SWORD]: 'sword',
+        [FS_UNIT.AXE]: 'axe',
+        [FS_UNIT.ARCHER]: 'archer',
+        [FS_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
+        [FS_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
+        [FS_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [FS_UNIT.RAM]: 'ram',
+        [FS_UNIT.CATAPULT]: 'catapult',
+        [FS_UNIT.TREBUCHET]: 'trebuchet',
+        [FS_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
+        [FS_UNIT.SNOB]: 'snob',
+        [FS_UNIT.KNIGHT]: 'knight'
+    }
+	
+    const FAKE_TYPE = {
+        [FS_TYPE.ATTACK]: 'attack',
+        [FS_TYPE.SUPPORT]: 'support',
+        [FS_TYPE.QUATTRO]: 'four',
+        [FS_TYPE.FULL]: 'full'
+    }
+	
+    const FAKE_DATE = {
+        [DATE_TYPES.ARRIVE]: 'date_type_arrive',
+        [DATE_TYPES.OUT]: 'date_type_out'
+    }
+
+    console.log(FAKE_UNIT, FAKE_TYPE, FAKE_DATE)
+
+    const updateGroups = function () {
+        selectedGroups = []
+        selectedGroupsP = []
+        selectedGroupsT = []
+        selectedGroupsG = []
+        selectedGroupsTarget = []
+
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsInVillagesFake = fakeSenderSettings[SETTINGS.GROUP]
+        const groupsInPlayerFake = fakeSenderSettings[SETTINGS.GROUPP]
+        const groupsInTribeFake = fakeSenderSettings[SETTINGS.GROUPT]
+        const groupsInGroupFake = fakeSenderSettings[SETTINGS.GROUPG]
+        const targetsGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
+
+        groupsInVillagesFake.forEach(function (groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+        groupsInPlayerFake.forEach(function (groupId) {
+            selectedGroupsP.push(allGroups[groupId])
+        })
+        groupsInTribeFake.forEach(function (groupId) {
+            selectedGroupsT.push(allGroups[groupId])
+        })
+        groupsInGroupFake.forEach(function (groupId) {
+            selectedGroupsG.push(allGroups[groupId])
+        })
+        targetsGroups.forEach(function (groupId) {
+            selectedGroupsTarget.push(allGroups[groupId])
+        })
+    }
+
+    const fakeSender = {}
+
+    fakeSender.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function (changes, updates) {
+            fakeSenderSettings = settings.getAll()
+
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+
+        fakeSenderSettings = settings.getAll()
+
+        console.log('fakeSender settings', fakeSenderSettings)
+
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+
+    fakeSender.start = function () {
+        running = true
+
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+    }
+
+    fakeSender.stop = function () {
+        running = false
+
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
+    }
+
+    fakeSender.getSettings = function () {
+        return settings
+    }
+
+    fakeSender.isInitialized = function () {
+        return initialized
+    }
+
+    fakeSender.isRunning = function () {
+        return running
+    }
+
+    return fakeSender
+})
+
+define('two/fakeSender/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        FAKE_SENDER_START: 'fake_sender_start',
+        FAKE_SENDER_STOP: 'fake_sender_stop'
+    })
+})
+
+define('two/fakeSender/ui', [
+    'two/ui',
+    'two/fakeSender',
+    'two/fakeSender/settings',
+    'two/fakeSender/settings/map',
+    'two/fakeSender/types/dates',
+    'two/fakeSender/types/type',
+    'two/fakeSender/types/units',
+    'two/Settings',
+    'queues/EventQueue',
+    'two/EventScope',
+    'two/utils',
+    'struct/MapData'
+], function (
+    interfaceOverflow,
+    fakeSender,
+    SETTINGS,
+    SETTINGS_MAP,
+    DATE_TYPES,
+    FS_TYPE,
+    FS_UNIT,
+    Settings,
+    eventQueue,
+    EventScope,
+    utils,
+    mapData
+) {
+    let $scope
+    let settings
+    let groupList = modelDataService.getGroupList()
+    let $button
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    let fakeVillage
+    let running = false
+    let mapSelectedVillage = false
+    
+    const TAB_TYPES = {
+        FAKE: 'fake',
+        LOGS: 'logs'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'fake_sender'))
+    }
+
+    const switchState = function () {
+        if (fakeSender.isRunning()) {
+            fakeSender.stop()
+        } else {
+            fakeSender.start()
+        }
+    }
+    const clear = function() {
+        $scope.settings[SETTINGS.COMMAND_INTERVAL] = 2
+        $scope.settings[SETTINGS.COMMAND_INTERVALP] = 2
+        $scope.settings[SETTINGS.COMMAND_INTERVALT] = 2
+        $scope.settings[SETTINGS.COMMAND_INTERVALG] = 2
+        $scope.settings[SETTINGS.DATE_TYPE] = 'date_type_arrive'
+        $scope.settings[SETTINGS.GROUP] = false
+        $scope.settings[SETTINGS.GROUPP] = false
+        $scope.settings[SETTINGS.GROUPT] = false
+        $scope.settings[SETTINGS.GROUPG] = false
+        $scope.settings[SETTINGS.UNIT] = false
+        $scope.settings[SETTINGS.UNITP] = false
+        $scope.settings[SETTINGS.UNITT] = false
+        $scope.settings[SETTINGS.UNITG] = false
+        $scope.settings[SETTINGS.TYPE] = false
+        $scope.settings[SETTINGS.TYPEP] = false
+        $scope.settings[SETTINGS.TYPET] = false
+        $scope.settings[SETTINGS.TYPEG] = false
+        $scope.settings[SETTINGS.LIMIT_OWN] = 12
+        $scope.settings[SETTINGS.LIMIT_OWNP] = 12
+        $scope.settings[SETTINGS.LIMIT_OWNG] = 12
+        $scope.settings[SETTINGS.LIMIT_OWNT] = 12
+        $scope.settings[SETTINGS.LIMIT_TARGET] = 25
+        $scope.settings[SETTINGS.LIMIT_TARGETT] = 25
+        $scope.settings[SETTINGS.LIMIT_TARGETP] = 25
+        $scope.settings[SETTINGS.LIMIT_TARGETG] = 25
+        $scope.settings[SETTINGS.GROUP_TARGET] = false
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'fake_sender'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            fakeVillage.origin = data
+        })
+        $scope.settings[SETTINGS.VILLAGE_ID] = mapSelectedVillage.id
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ŁADOWANIE...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId) {
+                loadVillageInfo(log.villageId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        fakeSender.clearLogs()
+    }
+
+    const eventHandlers = {
+        updateGroups: function () {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        updateLogs: function() {
+            $scope.logs = fakeSender.getLogs()
+            logsView.updateVisibleLogs()
+            if (!$scope.logs.length) {
+                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'recruit_queue'))
+            }
+        },
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'fakesender_village_search') {
+                return false
+            }
+            fakeVillage[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+            $scope.settings[SETTINGS.VILLAGE_ID] = fakeVillage.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        onAutoCompleteVillage: function(data) {
+            fakeVillage.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.VILLAGE_ID] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'fake_sender'))
+            $scope.visibleLogs = []
+            eventHandlers.updateLogs()
+        },
+        start: function () {
+            $scope.running = true
+        },
+        stop: function () {
+            $scope.running = false
+        }
+    }
+
+    const init = function () {
+        settings = fakeSender.getSettings()
+        fakeVillage = {
+            origin: false
+        }
+        interfaceOverflow.addDivisor(21)
+        $button = interfaceOverflow.addMenuButton('Watażka', 20, $filter('i18n')('description', $rootScope.loc.ale, 'fake_sender'))
+        $button.addEventListener('click', buildWindow)
+        eventQueue.register(eventTypeProvider.PRANK_HELPER_START, function() {
+            running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'recruit_queue'))
+        })
+        eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
+            running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'recruit_queue'))
+        })
+
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendVillages\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendTribe\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendGroups\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.type }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-fake-sender div[select]{text-align:right}#two-fake-sender div[select] .select-wrapper{height:34px}#two-fake-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-fake-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm td{text-align:left}#two-fake-sender .addForm span{height:26px;line-height:26px}#two-fake-sender .addForm .item-send{text-align:center}#two-fake-sender .addForm .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-fake-sender .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actions a{width:100px}#two-fake-sender .addForm .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actionsTime .big{width:54px}#two-fake-sender .addForm .actionsTime .small{width:26px}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-fake-sender .logs .status tr{height:25px}#two-fake-sender .logs .status td{padding:0 6px}#two-fake-sender .logs .log-list{margin-bottom:10px}#two-fake-sender .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-fake-sender .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-fake-sender .icon-20x20-village:before{margin-top:-11px}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = running()
+        $scope.selectedTab = TAB_TYPES.FAKE
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.pagination = {}
+        $scope.fakeVillage = fakeVillage
+        $scope.clear = clear
+        $scope.autoCompleteVillage = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'fake_sender'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'fake_sender'),
+            dropDown: true
+        }
+        $scope.datetype = Settings.encodeList(DATE_TYPES, {
+            textObject: 'fake_sender',
+            disabled: true
+        })
+        $scope.type = Settings.encodeList(FS_TYPE, {
+            textObject: 'fake_sender',
+            disabled: true
+        })
+        $scope.units = Settings.encodeList(FS_UNIT, {
+            textObject: 'fake_sender',
+            disabled: true
+        })
+
+        settings.injectScope($scope)
+        eventHandlers.updateGroups()
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+        $scope.addMapSelected = addMapSelected
+        $scope.logsView = logsView
+        $scope.logsView.logs = fakeSender.getLogs()
+        $scope.villagesInfo = villagesInfo
+        $scope.villagesLabel = villagesLabel
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        logsView.updateVisibleLogs()
+
+        let eventScope = new EventScope('twoverflow_fake_sender_window', function onDestroy () {
+            console.log('fakeSender closed')
+        })
+
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.FAKE_SENDER_CLEAR_LOGS, eventHandlers.clearLogs)
+        eventScope.register(eventTypeProvider.FAKE_SENDER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.FAKE_SENDER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_fake_sender_window', $scope)
+    }
+
+    return init
+})
+
+define('two/fakeSender/settings', [], function () {
+    return {
+        COMMAND_INTERVAL: 'interval_villages',
+        COMMAND_INTERVALP: 'interval_player',
+        COMMAND_INTERVALT: 'interval_tribe',
+        COMMAND_INTERVALG: 'interval_groups',
+        DATE_TYPE: 'datetype',
+        GROUP: 'groups_villages',
+        GROUPP: 'groups_player',
+        GROUPT: 'groups_tribe',
+        GROUPG: 'groups_groups',
+        UNIT: 'units_villages',
+        UNITP: 'units_player',
+        UNITT: 'units_tribe',
+        UNITG: 'units_groups',
+        TYPE: 'type_villages',
+        TYPEP: 'type_player',
+        TYPET: 'type_tribe',
+        TYPEG: 'type_groups',
+        LIMIT_OWN: 'limit_own_villages',
+        LIMIT_OWNP: 'limit_own_player',
+        LIMIT_OWNT: 'limit_own_tribe',
+        LIMIT_OWNG: 'limit_own_groups',
+        LIMIT_TARGET: 'limit_target_villages',
+        LIMIT_TARGETP: 'limit_target_player',
+        LIMIT_TARGETT: 'limit_target_tribe',
+        LIMIT_TARGETG: 'limit_target_groups',
+        GROUP_TARGET: 'groups_target'
+    }
+})
+
+define('two/fakeSender/settings/updates', function () {
+    return {
+        GROUPS: 'groups'
+    }
+})
+
+define('two/fakeSender/settings/map', [
+    'two/fakeSender/settings',
+    'two/fakeSender/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.GROUP]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUPP]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUPT]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUPG]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.GROUP_TARGET]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.TYPE]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.DATE_TYPE]: {
+            default: 'date_type_arrive',
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.TYPEP]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.TYPET]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.TYPEG]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT]: {
+            default: false,
+            multiSelect: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNITT]: {
+            default: false,
+            multiSelect: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNITP]: {
+            default: false,
+            multiSelect: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNITG]: {
+            default: false,
+            multiSelect: true,
+            inputType: 'select'
+        },
+        [SETTINGS.COMMAND_INTERVAL]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.COMMAND_INTERVALP]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.COMMAND_INTERVALT]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.COMMAND_INTERVALG]: {
+            default: 2,
+            inputType: 'number',
+            min: 1,
+            max: 3600
+        },
+        [SETTINGS.LIMIT_OWN]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_OWNP]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_OWNT]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_OWNG]: {
+            default: 12,
+            inputType: 'number',
+            min: 1,
+            max: 50
+        },
+        [SETTINGS.LIMIT_TARGET]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
+        },
+        [SETTINGS.LIMIT_TARGETP]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
+        },
+        [SETTINGS.LIMIT_TARGETT]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
+        },
+        [SETTINGS.LIMIT_TARGETG]: {
+            default: 25,
+            inputType: 'number',
+            min: 1,
+            max: 500
+        }
+    }
+})
+
+define('two/fakeSender/types/type', [], function () {
+    return {
+        ATTACK: 'attack',
+        SUPPORT: 'support',
+        QUATTRO: 'four',
+        FULL: 'full'
+    }
+})
+
+define('two/fakeSender/types/dates', [], function () {
+    return {
+        ARRIVE: 'date_type_arrive',
+        OUT: 'date_type_out'
+    }
+})
+
+define('two/fakeSender/types/units', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob',
+        KNIGHT: 'knight'
+    }
+})
+require([
+    'two/ready',
+    'two/fakeSender',
+    'two/fakeSender/ui',
+    'two/fakeSender/events'
+], function (
+    ready,
+    fakeSender,
+    fakeSenderInterface
+) {
+    if (fakeSender.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        fakeSender.init()
+        fakeSenderInterface()
+    })
+})
+
 define('two/farmOverflow', [
     'two/Settings',
     'two/farmOverflow/types/errors',
