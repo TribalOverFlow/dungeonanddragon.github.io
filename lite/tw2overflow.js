@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Dec 2020 13:25:50 GMT
+ * Sat, 12 Dec 2020 13:29:17 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18702,7 +18702,7 @@ define('two/fakeSender/ui', [
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running()
+        $scope.running = running
         $scope.selectedTab = TAB_TYPES.FAKE
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
