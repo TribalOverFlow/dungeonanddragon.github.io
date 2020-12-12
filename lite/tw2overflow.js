@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 11 Dec 2020 09:40:47 GMT
+ * Sat, 12 Dec 2020 00:50:14 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -685,6 +685,7 @@ define('two/language', [
         },
         "battle_calculator": {
             "title": "Kalkulator",
+            "description": "Kalkulator bitewny, rekrutacyjny oraz punktów bojowych.",
             "battle": "Bitwa",
             "battle.simulate": "Symuluj",
             "battle.clear": "Wyczyść pola",
@@ -1039,8 +1040,10 @@ define('two/language', [
             "no_report": "Nie ma raportu",
             "reports": "Raporty",
             "date": "Data",
+            "settings.remote": "Sterowanie Zdalne za pomocą wiadomości PW",
             "description": "Narzędzie do farmienia",
             "status_time_limit": "Cel jest zbyt daleko",
+            "status_command_error": "Problem z wysłaniem rozkazu",
             "status_command_limit": "Limit poleceń",
             "status_full_storage": "Magazyn jest pełny",
             "status_no_units": "Brak dostępnych jednostek",
@@ -1053,8 +1056,8 @@ define('two/language', [
             "status_unknown": "Nieznany status",
             "status_attacking": "Atakuje",
             "status_waiting_cycle": "Oczekuje",
-            "status_user_stop": "",
-            "status_expired_step": "",
+            "status_user_stop": "Zatrzymane przez użytkownika",
+            "status_expired_step": "Cykl przedawniony",
             "not_loaded": "Nie załadowany.",
             "ignored_targets": "Ignorowane cele",
             "no_ignored_targets": "Brak ignorowanych",
@@ -1087,7 +1090,7 @@ define('two/language', [
             "step_cycle_restart": "Restartowanie cyklu poleceń...",
             "step_cycle_end": "Lista wiosek zakończona, oczekiwanie na następny cykl.",
             "step_cycle_end_no_villages": "Brak wiosek do rozpoczęcia cyklu.",
-            "step_cycle_next": "Lista wiosek się skończyła, następny cykl: %d.",
+            "step_cycle_next": "Lista wiosek się skończyła, następny cykl: ",
             "step_cycle_next_no_villages": "Brak wioski do rozpoczęcia cyklu, następny cykl: %d.",
             "full_storage": "Magazyn w wiosce jest pełny",
             "farm_stopped": "Farmer zatrzymany.",
@@ -1130,7 +1133,6 @@ define('two/language', [
             "target_limit_per_village": "Limit celów na wioskę",
             "settings.hotkeySwitch": "Skrót Start/Pauza",
             "settings.hotkeyWindow": "Skrót okna Farmera",
-            "settings.remote": "Sterowanie Zdalne za pomocą wiadomości PW",
             "settingError.minDistance": "Odległość celu musi być większa niż %{min}.",
             "settingError.maxDistance": "Odległość celu nie może przekraczać %{max}.",
             "settingError.maxTravelTime": "Maksymalny czas podróży hh:mm:ss.",
@@ -1511,6 +1513,7 @@ define('two/language', [
         "recruit_queue": {
             "title": "Kapitan",
             "presets": "Szablonowa",
+            "description": "Narzędzie do automatycznej rekrutacji wskazanych jednostek we wskazanych grupach.",
             "recruit_cycle_interval": "Cykl rekrutacji(w minutach)",
             "unit_cycle_interval": "Odstęp rekrutacji jednostek(w sekundach)",
             "group_cycle_interval": "Czas na analize wioski(w sekundach)",
@@ -1898,22 +1901,6 @@ define('two/language', [
             "snob": "Szlachcic",
             "knight": "Rycerz",
             "firefox_shill": ""
-        },
-        "unit_names": {
-            "none": "",
-            "spear": "Pikinier",
-            "sword": "Miecznik",
-            "axe": "Topornik",
-            "archer": "Łucznik",
-            "light_cavalry": "Lekki kawalerzysta",
-            "mounted_archer": "Łucznik konny",
-            "ram": "Taran",
-            "catapult": "Katapulta",
-            "heavy_cavalry": "Ciężki kawalerzysta",
-            "trebuchet": "Trebuszet",
-            "doppelsoldner": "Berserker",
-            "knight": "Rycerz",
-            "snob": "Szlachcic"
         }
     },
     "pl_pl": {
@@ -2090,6 +2077,7 @@ define('two/language', [
         },
         "battle_calculator": {
             "title": "Kalkulator",
+            "description": "Kalkulator bitewny, rekrutacyjny oraz punktów bojowych.",
             "battle": "Bitwa",
             "battle.simulate": "Symuluj",
             "battle.clear": "Wyczyść pola",
@@ -2444,8 +2432,10 @@ define('two/language', [
             "no_report": "Nie ma raportu",
             "reports": "Raporty",
             "date": "Data",
+            "settings.remote": "Sterowanie Zdalne za pomocą wiadomości PW",
             "description": "Narzędzie do farmienia",
             "status_time_limit": "Cel jest zbyt daleko",
+            "status_command_error": "Problem z wysłaniem rozkazu",
             "status_command_limit": "Limit poleceń",
             "status_full_storage": "Magazyn jest pełny",
             "status_no_units": "Brak dostępnych jednostek",
@@ -2458,8 +2448,8 @@ define('two/language', [
             "status_unknown": "Nieznany status",
             "status_attacking": "Atakuje",
             "status_waiting_cycle": "Oczekuje",
-            "status_user_stop": "",
-            "status_expired_step": "",
+            "status_user_stop": "Zatrzymane przez użytkownika",
+            "status_expired_step": "Cykl przedawniony",
             "not_loaded": "Nie załadowany.",
             "ignored_targets": "Ignorowane cele",
             "no_ignored_targets": "Brak ignorowanych",
@@ -2535,7 +2525,6 @@ define('two/language', [
             "target_limit_per_village": "Limit celów na wioskę",
             "settings.hotkeySwitch": "Skrót Start/Pauza",
             "settings.hotkeyWindow": "Skrót okna Farmera",
-            "settings.remote": "Sterowanie Zdalne za pomocą wiadomości PW",
             "settingError.minDistance": "Odległość celu musi być większa niż %{min}.",
             "settingError.maxDistance": "Odległość celu nie może przekraczać %{max}.",
             "settingError.maxTravelTime": "Maksymalny czas podróży hh:mm:ss.",
@@ -2916,6 +2905,7 @@ define('two/language', [
         "recruit_queue": {
             "title": "Kapitan",
             "presets": "Szablonowa",
+            "description": "Narzędzie do automatycznej rekrutacji wskazanych jednostek we wskazanych grupach.",
             "recruit_cycle_interval": "Cykl rekrutacji(w minutach)",
             "unit_cycle_interval": "Odstęp rekrutacji jednostek(w sekundach)",
             "group_cycle_interval": "Czas na analize wioski(w sekundach)",
@@ -3303,22 +3293,6 @@ define('two/language', [
             "snob": "Szlachcic",
             "knight": "Rycerz",
             "firefox_shill": ""
-        },
-        "unit_names": {
-            "none": "",
-            "spear": "Pikinier",
-            "sword": "Miecznik",
-            "axe": "Topornik",
-            "archer": "Łucznik",
-            "light_cavalry": "Lekki kawalerzysta",
-            "mounted_archer": "Łucznik konny",
-            "ram": "Taran",
-            "catapult": "Katapulta",
-            "heavy_cavalry": "Ciężki kawalerzysta",
-            "trebuchet": "Trebuszet",
-            "doppelsoldner": "Berserker",
-            "knight": "Rycerz",
-            "snob": "Szlachcic"
         }
     }
 } // eslint-disable-line
@@ -4311,199 +4285,6 @@ require([
     }, ['map'])
 })
 
-define('two/activityTool', [
-    'two/Settings',
-    'two/activityTool/settings',
-    'two/activityTool/settings/map',
-    'two/ready',
-    'queues/EventQueue'
-], function(
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let activityToolSettings
-    const STORAGE_KEYS = {
-        SETTINGS: 'activity_tool_settings'
-    }
-    const activityTool = {}
-    activityTool.init = function() {
-        initialized = true
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-        settings.onChange(function() {
-            activityToolSettings = settings.getAll()
-        })
-        activityToolSettings = settings.getAll()
-        console.log('Statystyki - ustawienia', activityToolSettings)
-    }
-    activityTool.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_START)
-    }
-    activityTool.stop = function() {
-        running = false
-        eventQueue.trigger(eventTypeProvider.ACTIVITY_TOOL_STOP)
-    }
-    activityTool.getSettings = function() {
-        return settings
-    }
-    activityTool.isInitialized = function() {
-        return initialized
-    }
-    activityTool.isRunning = function() {
-        return running
-    }
-    return activityTool
-})
-define('two/activityTool/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        ACTIVITY_TOOL_START: 'activity_tool_start',
-        ACTIVITY_TOOL_STOP: 'activity_tool_stop'
-    })
-})
-define('two/activityTool/ui', [
-    'two/ui',
-    'two/activityTool',
-    'two/activityTool/settings',
-    'two/activityTool/settings/map',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function(
-    interfaceOverflow,
-    activityTool,
-    SETTINGS,
-    SETTINGS_MAP,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    const TAB_TYPES = {
-        DATA: 'data',
-        LOGS: 'logs'
-    }
-    const selectTab = function(tabType) {
-        $scope.selectedTab = tabType
-    }
-    const saveSettings = function() {
-        settings.setAll(settings.decode($scope.settings))
-        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'activity_tool'))
-    }
-    const resetSettings = function() {
-        utils.notif('success', $filter('i18n')('general.reseted', $rootScope.loc.ale, 'activity_tool'))
-    }
-    const clearLogs = function() {
-        utils.notif('success', $filter('i18n')('general.logs-cleared', $rootScope.loc.ale, 'activity_tool'))
-    }
-    const switchState = function() {
-        if (activityTool.isRunning()) {
-            activityTool.stop()
-        } else {
-            activityTool.start()
-        }
-    }
-    const eventHandlers = {
-        start: function() {
-            $scope.running = true
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'activity_tool'))
-        },
-        stop: function() {
-            $scope.running = false
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'activity_tool'))
-        }
-    }
-    const init = function() {
-        settings = activityTool.getSettings()
-        $button = interfaceOverflow.addMenuButton4('Statystyki', 40, $filter('i18n')('general.description', $rootScope.loc.ale, 'activity_tool'))
-        $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_activity_tool_window', `<div id=\"two-activity-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'activity_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.DATA)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.DATA}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.DATA}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.DATA}\">{{ 'data' | i18n:loc.ale:'activity_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'activity_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.DATA\"><h5 class=\"twx-section\">{{ 'data.dump' | i18n:loc.ale:'activity_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"303px\"><col width=\"60px\"><col><tr><th colspan=\"3\">{{ 'data.players' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PLAYERS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.tribes' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TRIBES]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.achievements' | i18n:loc.ale:'activity_tool' }}<tr><td><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ACHIEVEMENTS]\" vertical=\"false\" size=\"'56x28'\"></div></span><td><tr><th colspan=\"3\">{{ 'data.attention' | i18n:loc.ale:'activity_tool' }}<tr><td colspan=\"3\">{{ 'data.text' | i18n:loc.ale:'activity_tool' }}</table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col><col width=\"20%\"><thead><tr><th>{{ 'logs.type' | i18n:loc.ale:'activity_tool' }}<th>{{ 'logs.date' | i18n:loc.ale:'activity_tool' }}<tbody class=\"activityLog\"><tr class=\"noDumps\"><td colspan=\"2\">{{ 'logs.noDumps' | i18n:loc.ale:'activity_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.DATA\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'data.save' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"resetSettings()\">{{ 'data.reset' | i18n:loc.ale:'activity_tool' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'activity_tool' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'activity_tool' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'activity_tool' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-activity-tool .range-container{width:250px}#two-activity-tool th{text-align:center}#two-activity-tool .activityLog td{text-align:center}#two-activity-tool .activityLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .activityLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-activity-tool .noDumps td{height:26px;text-align:center}#two-activity-tool .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-    const buildWindow = function() {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = activityTool.isRunning()
-        $scope.selectedTab = TAB_TYPES.DATA
-        $scope.settingsMap = SETTINGS_MAP
-        settings.injectScope($scope)
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.resetSettings = resetSettings
-        $scope.clearLogs = clearLogs
-        $scope.switchState = switchState
-        let eventScope = new EventScope('twoverflow_activity_tool_window', function onDestroy() {
-            console.log('Statystyki - zamknięto moduł')
-        })
-        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.ACTIVITY_TOOL_STOP, eventHandlers.stop)
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_activity_tool_window', $scope)
-    }
-    return init
-})
-define('two/activityTool/settings', [], function() {
-    return {
-        PLAYERS: 'players',
-        TRIBES: 'tribes',
-        ACHIEVEMENTS: 'achievements'
-    }
-})
-define('two/activityTool/settings/updates', function() {
-    return {}
-})
-define('two/activityTool/settings/map', [
-    'two/activityTool/settings'
-], function(
-    SETTINGS
-) {
-    return {
-        [SETTINGS.PLAYERS]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.TRIBES]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.ACHIEVEMENTS]: {
-            default: false,
-            inputType: 'checkbox'
-        }
-    }
-})
-require([
-    'two/ready',
-    'two/activityTool',
-    'two/activityTool/ui',
-    'two/activityTool/events'
-], function(
-    ready,
-    activityTool,
-    activityToolInterface
-) {
-    if (activityTool.isInitialized()) {
-        return false
-    }
-    ready(function() {
-        activityTool.init()
-        activityToolInterface()
-    })
-})
 define('two/alertSender', [
     'two/utils',
     'queues/EventQueue',
@@ -5709,7 +5490,7 @@ define('two/armyHelper/ui', [
             return villagesInfo[villageId]
         }
         villagesInfo[villageId] = true
-        villagesLabel[villageId] = 'ładowanie...'
+        villagesLabel[villageId] = 'ŁADOWANIE...'
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: villageId,
@@ -5807,7 +5588,7 @@ define('two/armyHelper/ui', [
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }} jeszcze nie działa</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .logs .status tr{height:25px}#two-army-helper .logs .status td{padding:0 6px}#two-army-helper .logs .log-list{margin-bottom:10px}#two-army-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-army-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-army-helper .icon-20x20-village:before{margin-top:-11px}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
@@ -7244,7 +7025,7 @@ define('two/attackView/ui', [
     const init = function() {
         $button = interfaceOverflow.addMenuButton('Strażnik', 30, $filter('i18n')('description', $rootScope.loc.ale, 'attack_view'))
         $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_attack_view_main', `<div id=\"two-attack-view\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'attack_view' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-orange icon-26x26-double-arrow\" ng-click=\"switchWindowSize()\"></a><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap rich-text\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.VILLAGE)\" tooltip=\"\" tooltip-content=\"{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}<tr><td><div ng-repeat=\"unit in ::UNIT_SPEED_ORDER\" class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}\" ng-click=\"toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)\" tooltip=\"\" tooltip-content=\"{{ unit | i18n:loc.ale:'unit_names' }}\"><span class=\"icon-34x34-unit-{{ unit }} icon-bg-black\"></span></div></table></div><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleCommands.length\">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}<table class=\"tbl-border-light commands-table\" ng-show=\"visibleCommands.length\"><col width=\"7%\"><col width=\"15%\"><col><col><col width=\"5%\"><col width=\"13%\"><col width=\"22%\"><thead class=\"sorting\"><tr><th ng-click=\"toggleSorting(COLUMN_TYPES.COMMAND_TYPE)\" tooltip=\"\" tooltip-content=\"{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'command_type' | i18n:loc.ale:'attack_view' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.COMMAND_TYPE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)\">{{ 'player' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)\">{{ 'origin' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)\">{{ 'target' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TARGET_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th tooltip=\"\" tooltip-content=\"{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}<th ng-click=\"toggleSorting(COLUMN_TYPES.TIME_COMPLETED)\">{{ 'arrive' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TIME_COMPLETED\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th>{{ 'actions' | i18n:loc.ale:'attack_view' }}<tbody><tr ng-repeat=\"command in visibleCommands\" class=\"{{ command.command_type }}\" ng-class=\"{'trebuchet': command.slowestUnit === UNIT_TYPES.TREBUCHET}\"><td><span class=\"icon-20x20-{{ command.command_type }}\"></span><td ng-click=\"openCharacterProfile(command.originCharacter.id)\" class=\"character\"><span class=\"name\">{{ command.originCharacter.name }}</span><td ng-class=\"{'selected': command.originVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.originVillage.id)\">{{ command.originVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.originVillage.x, command.originVillage.y)\">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span><td ng-class=\"{'selected': command.targetVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.targetVillage.id)\">{{ command.targetVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.targetVillage.x, command.targetVillage.y)\">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span><td><span class=\"icon-20x20-unit-{{ command.slowestUnit }}\"></span><td><div class=\"progress-wrapper\" tooltip=\"\" tooltip-content=\"{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}\"><div class=\"progress-bar\" ng-style=\"{width: command.model.percent() + '%'}\"></div><div class=\"progress-text\"><span>{{ command.model.countdown() }}</span></div></div><td><a ng-click=\"copyTimeModal(command.time_completed)\" class=\"btn btn-orange size-20x20 icon-20x20-arrivetime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-click=\"copyTimeModal(command.time_completed + (command.time_completed - command.time_start))\" class=\"btn btn-red size-20x20 icon-20x20-backtime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"removeTroops(command)\" class=\"btn btn-orange size-20x20 icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"withdrawArmy(command)\" class=\"btn btn-orange size-20x20 icon-20x20-withdraw\" tooltip=\"\" tooltip-content=\"{{ 'commands_withdraw_army_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"spyVillage(command)\" class=\"btn btn-orange size-20x20 icon-20x20-spy\" tooltip=\"\" tooltip-content=\"{{ 'commands_spy_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"conquerBack(command)\" class=\"btn btn-green size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_conquer_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage5k(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_5_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage10k(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_10_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage20k(command)\" class=\"btn btn-red size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_20_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNobleman(command)\" class=\"btn btn-orange size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_nobleman_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNoblemanBig(command)\" class=\"btn btn-red size-20x20 icon-20x20-killBig\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_noblemanBig_tooltip' | i18n:loc.ale:'attack_view' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div>`)
+        interfaceOverflow.addTemplate('twoverflow_attack_view_main', `<div id=\"two-attack-view\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'attack_view' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-orange icon-26x26-double-arrow\" ng-click=\"switchWindowSize()\"></a><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap rich-text\"><div class=\"filters\"><table class=\"tbl-border-light\"><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.VILLAGE]}\" ng-click=\"toggleFilter(FILTER_TYPES.VILLAGE)\" tooltip=\"\" tooltip-content=\"{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-village-info icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}<tr><td><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-attack icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-support icon-bg-black\"></span></div><div class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}\" ng-click=\"toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)\" tooltip=\"\" tooltip-content=\"{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}\"><span class=\"icon-34x34-relocate icon-bg-black\"></span></div></table><table class=\"tbl-border-light\"><tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}<tr><td><div ng-repeat=\"unit in ::UNIT_SPEED_ORDER\" class=\"box-border-dark icon\" ng-class=\"{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}\" ng-click=\"toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)\" tooltip=\"\" tooltip-content=\"{{ unit | i18n:loc.ale:'unit_names' }}\"><span class=\"icon-34x34-unit-{{ unit }} icon-bg-black\"></span></div></table></div><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleCommands.length\">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}<table class=\"tbl-border-light commands-table\" ng-show=\"visibleCommands.length\"><col width=\"7%\"><col width=\"15%\"><col><col><col width=\"5%\"><col width=\"13%\"><col width=\"22%\"><thead class=\"sorting\"><tr><th ng-click=\"toggleSorting(COLUMN_TYPES.COMMAND_TYPE)\" tooltip=\"\" tooltip-content=\"{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'command_type' | i18n:loc.ale:'attack_view' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.COMMAND_TYPE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)\">{{ 'player' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)\">{{ 'origin' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th ng-click=\"toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)\">{{ 'target' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TARGET_VILLAGE\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th tooltip=\"\" tooltip-content=\"{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}\">{{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}<th ng-click=\"toggleSorting(COLUMN_TYPES.TIME_COMPLETED)\">{{ 'arrive' | i18n:loc.ale:'common' }} <span class=\"arrow\" ng-show=\"sorting.column == COLUMN_TYPES.TIME_COMPLETED\" ng-class=\"{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}\"></span><th>{{ 'actions' | i18n:loc.ale:'attack_view' }}<tbody><tr ng-repeat=\"command in visibleCommands\" class=\"{{ command.command_type }}\" ng-class=\"{'trebuchet': command.slowestUnit === UNIT_TYPES.TREBUCHET}\"><td><span class=\"icon-20x20-{{ command.command_type }}\"></span><td ng-click=\"openCharacterProfile(command.originCharacter.id)\" class=\"character\"><span class=\"name\">{{ command.originCharacter.name }}</span><td ng-class=\"{'selected': command.originVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.originVillage.id)\">{{ command.originVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.originVillage.x, command.originVillage.y)\">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span><td ng-class=\"{'selected': command.targetVillage.id === selectedVillageId}\" class=\"village\"><span class=\"name\" ng-click=\"openVillageInfo(command.targetVillage.id)\">{{ command.targetVillage.name }}</span> <span class=\"coords\" ng-click=\"jumpToVillage(command.targetVillage.x, command.targetVillage.y)\">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span><td><span class=\"icon-20x20-unit-{{ command.slowestUnit }}\"></span><td><div class=\"progress-wrapper\" tooltip=\"\" tooltip-content=\"{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}\"><div class=\"progress-bar\" ng-style=\"{width: command.model.percent() + '%'}\"></div><div class=\"progress-text\"><span>{{ command.model.countdown() }}</span></div></div><td><a ng-click=\"copyTimeModal(command.time_completed)\" class=\"btn btn-orange size-20x20 icon-20x20-arrivetime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-click=\"copyTimeModal(command.time_completed + (command.time_completed - command.time_start))\" class=\"btn btn-red size-20x20 icon-20x20-backtime\" tooltip=\"\" tooltip-content=\"{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"removeTroops(command)\" class=\"btn btn-orange size-20x20 icon-20x20-units-outgoing\" tooltip=\"\" tooltip-content=\"{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"withdrawArmy(command)\" class=\"btn btn-orange size-20x20 icon-20x20-withdraw\" tooltip=\"\" tooltip-content=\"{{ 'commands_withdraw_army_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"spyVillage(command)\" class=\"btn btn-orange size-20x20 icon-20x20-spy\" tooltip=\"\" tooltip-content=\"{{ 'commands_spy_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"conquerBack(command)\" class=\"btn btn-yellow size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_conquer_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage(command)\" class=\"btn btn-green size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage5k(command)\" class=\"btn btn-green size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_5_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage10k(command)\" class=\"btn btn-green size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_10_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"bunkerVillage20k(command)\" class=\"btn btn-green size-20x20 icon-20x20-bunker\" tooltip=\"\" tooltip-content=\"{{ 'commands_bunker_village_20_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNobleman(command)\" class=\"btn btn-red size-20x20 icon-20x20-kill\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_nobleman_tooltip' | i18n:loc.ale:'attack_view' }}\"></a> <a ng-if=\"commandQueueEnabled\" ng-click=\"killNoblemanBig(command)\" class=\"btn btn-red size-20x20 icon-20x20-killBig\" tooltip=\"\" tooltip-content=\"{{ 'commands_kill_noblemanBig_tooltip' | i18n:loc.ale:'attack_view' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div>`)
         interfaceOverflow.addTemplate('twoverflow_attack_view_show_text_modal', `<div id=\"show-text-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ title }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><form ng-submit=\"closeWindow()\"><input class=\"input-border text-center\" ng-model=\"text\"></form></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-green btn-border\" ng-click=\"closeWindow()\">OK</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-attack-view table.commands-table{table-layout:fixed;font-size:13px;margin-bottom:10px}#two-attack-view table.commands-table th{text-align:center;padding:0px}#two-attack-view table.commands-table td{padding:1px 0;min-height:initial;border:none;text-align:center}#two-attack-view table.commands-table tr.support td{background:#6884ea}#two-attack-view table.commands-table tr.relocate td{background:#afea68}#two-attack-view table.commands-table tr.attack.snob td{background:#ea7d69}#two-attack-view table.commands-table tr.attack.trebuchet td{background:#eab268}#two-attack-view table.commands-table tr.attack.tribemate td{background:#cccccc}#two-attack-view table.commands-table .empty td{height:32px}#two-attack-view table.commands-table .sorting .arrow{margin-top:-4px}#two-attack-view .village .coords{font-size:11px;color:#71471a}#two-attack-view .village .coords:hover{color:#ffde00;text-shadow:0 1px 0 #000}#two-attack-view .village .name:hover{color:#fff;text-shadow:0 1px 0 #000}#two-attack-view .village.selected .name{font-weight:bold}#two-attack-view .character .name:hover{color:#fff;text-shadow:1px 1px 0 #000}#two-attack-view .progress-wrapper{height:20px;margin-bottom:0}#two-attack-view .progress-wrapper .progress-text{position:absolute;width:100%;height:100%;text-align:center;z-index:10;padding:0 5px;line-height:20px;color:#f0ffc9;overflow:hidden}#two-attack-view .filters{height:95px;margin-bottom:10px}#two-attack-view .filters table{width:auto;float:left;margin:5px}#two-attack-view .filters .icon{width:38px;float:left;margin:0 6px}#two-attack-view .filters .icon.active:before{box-shadow:0 0 0 1px #000,-1px -1px 0 2px #ac9c44,0 0 0 3px #ac9c44,0 0 0 4px #000;border-radius:1px;content:"";position:absolute;width:38px;height:38px;left:-1px;top:-1px}#two-attack-view .filters td{padding:6px}#two-attack-view .icon-20x20-backtime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEMklEQVQ4y42US2xUdRTGf3funZn/PHqnnVdpKZZ2RCWBVESgoZogSAKKEEAlGhVNLMGg0QiJKxYudIdoTEyDj8SFGo2seDUGhEQqRHk/UimDpdAptHMr8+jM3Dv35QJbi9KEszzJ+eU753z5JKYuOQGBUpAa2SLiuPgBPBKGrZAPlSlmoQLYk4ekqUCmEHHL0pslRb7fsNwWF8L/DIz5Fanftey0oogBr65rk8HS3WC6jyY8ckfZdNtfWdX++tzGIDMabAJmArte4my/l/c//vaLoFc6jmP3iCqD41B5Mi0BId1Hk+V6ljfEQlvWL2xZoY/lKOTLGCY01tZhVLMkRJEtqzoeyUvSnN70SNZRXC1iUylDVZmszhQiDmbH9Lrgpta4mKPlCjy95D6Wrn8GAKFEEfEmdG2Qowd+4I0XFrUC7+w7eL5sCu8hdL3imaQuYFl6c9l021vjYk7Y72Xjq4/z1IaNCCVKMRckq+moiQDJ2bN48uV3GbnSx9b1ra1l0223LL05AYF/Vw4S80jyonnN6paq5YTe3LyU2rpaYrFpJGfPItlcTzI1H8R8cC38NTFiaojhSzeJJ8KNJ/4YOmP43GsTCmWLiGG5LTUBb2LuzGm3e3Ij3321m5Hey6A0AVAcPjmhQcSbuDyU5sF6e5phuS2yRWQC6Lj4x62h1vjJ3BwjlUoiYn52ffolmUtnuXj4ADu2b7/DFoN9RVQ1gAthx8U/+Sk4LiGAQtFAHzXIajpr16yiu/tX98euzyWAzrc6Abj8+1G0TIZ8uYx/xJpgjANlWfEKqjaZbIlixQQgdDHDyuULWLFisZTVdBJxQTIVA2uQ+qZ6KoU0nhqV09f+QoIxj4ThAWRVJWLZToNXUaarYR8Hdm+iZBic7N5LbmgI0xclERcAFLIVAHRtkFOHjwBwNHNryK9I/bZCXlFVIk6ZuSbukidmR1Z+/cliAHzRBjKjBTq37bz9gEAAgA+2vQjAjb4j9F6pUCga/Hzm5v6A5KRDFkXF1UnWRcRj256d/vam9zrJXT0GwGc7V+ONRwAwtTwAa9bs4ND+PTy8MMW5az7+vJ7lXKZ4IeiVjsuIgaylVxTHxf/S84+u3bh5Mbmrx/D6Y1hjGtaYBjduH9g0RonNSmH4o/T1j9JzeoBixSRbsi9ktNIuRXJ6vFVbA2ypVoiZNuay+qj62r6u1R0ee4i65Iw7rDEOnLegC4CSqwxf18b23C0cFMenF5wKJzLZfLDtuW/4pWt1Ry6XY8/ug8jRB6gN3GI0k6VtXcq9csvqtm2rTyjS+YDkpGXEgLdq/z++EhA2hYjbmMtMx7P8+4/Wbdj64U89/cP5Xlli2HGcUsAnjziulMGxbrheRu4lYH21QjSarvXQoraZbQC/nUoflzwMyx6hVz26MRVkysROQNhQ8XmqQr1XwH/rb2Du69Eebp25AAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-arrivetime{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAEW0lEQVQ4y4WUWWxUZRiGn7PMnNPOVtvODHQBSlulAUFBoQiEaBHBhCsSFaIhIe6JSyAkRkO8NpErY2KoYuINISkkRFAjEUyAUCQsBSu1BVpKZ2DmTNuZzsyZMz3L70Vbgkjqe/Ul//89//K9eSX+KyUKFcVKQopDxBNoALJE2VXJBUzyBpQA9xG9SA+DbF2vdRxrvqQqLWVHNAkITm8saKo0KBz3hqrqt32WlXkUWHoQZvlpQFbWmLZo//zj7W8ua7JRUoKSz+DOXYVrSZMfjnV/W+mTuvHcs/okIw9DFYAoBCw/DY6QX9yycemer9/p6KiQE7ilIj4vwNXBFIO3M1iFLKta4suNvLUwZzpZTxWZiEvJhMkHgYpf1+cKSazfsnHpnve2rVqYTg2xdvMrPL76JWKNNSxesYB1LyyDiQQ9fWkCmhxzkRuLZTcpVC1lOU4eEDNPDUzitJVc6eUDn6zuSAwl2PDGLqrnx9ECPob6kkxaPiLBEK1LniIaFVz/c4SAJsf6U2ZaEfZwxMOYuaVCJTWypKz68LXV7y6sigWf7thMdfMKkMOgryA2r5pYYwWBaA3FzBhFM8uiRXFOnumn/jGt0SjYl8t+MWzbFABkxSFSdkTTE3F3zkDyBnptw/2J5VMXpwq1gfT1AQ4eOIyi1AHw5II5hCp80bIjmhSHyEyP7Ak0AcFwuIKR/vy/PLVv7156T/1M4u8e9n/1HXqNRnNzjMS9AuGQBlMfF5zxKoA6U2hph5xp0nv+ErX1KVqfXctbH+yk65tOAOa1tolNm56TjIyFNVpmIl8GwBMEHnSzKkuUJUHh8vAYcihMIFQi3hAHZ4T65hq27dyKkbGI1uqS7a/mXO8F+gZGuDZ0j4nClFsU1adj2wrgyq5KTlOlwTOJ8STApVO/Y2VGAJgwSgBEa3VsfzXZZJKLvxyjWC7z8+G3CQf9+FS13nG9ueEwEUBRqmywEfrAvWLF4rqq5fmiwCvcIjuqYCTu8v5nnXQd7+bgoZ/48dduXF8F4ZpaNj0/j60bgly+YLTeNMyUYosxPUhONaBUpeq3K7G7T/Ym2pfWh5ZU1MzBX/0XV/64iVYe4+jR3QD4aqeGaWdylPNjABw9upv9X3R+9GVXwsjmrZQCiJDjOI4scjnTyZZc0ZhKJmM9PcNYlsu4CLJjez3jt65ij45jpZPYhVG8SRNFrcQc7eeZ9evIl9xI96Xh4yqAAaXoJCOW3zuRGjfNwbRob6wNbkkYxTizaDx9B0+pY93rnWdTYxPf+xQ9p0yvCRPciEtJqFpKEfZwyXaupArOYLbM+JK2lS3HDhyRbgwanO6eoPvEaWLxOixLY+WOrrP5onUI4Z2TdMeQZgtYySaGrM6VJVFfmnRjsiwHXEG8KR5p2/fpxjWv7jpyyCd7JxR8v03nY0Fidt2H+z1dcz1LFx7xlctb2gHO9wz1+CS1L2tZSabD4f+Asx7g+a0JbYJJg6lgAPgHUh4QWRIJr4EAAAAASUVORK5CYII=")}#two-attack-view .icon-20x20-spy{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAN9SURBVDhPrZVLbBtVFIb/mTt+xC/GdlzHSZw2jhMIIbRENG5JsVFbFiAWSOy6SlnwqlggFgiJBQuW7BArNiwBCSGxYFGhSpRWTlrHSUxCGjt1Yzt+JX5nJuPHPMgMTqWqadpF/s3VPfecT0c6j0u98/FnOE7R3fPYpGX414/fU6IosoSmgxSFFxUF/0qyfJNhmFpo9prS9X0mkbGz53E/ErYzhP7oq8+v/nDlYt8lo8UcWEsUhX1oPBNbaJ06M911f7o04EZkbuL1SfcXV4LEMzrmQQ9N7C7XwFuR1U09oWBMRufq6dgC/yxgDfhgcc7vYQ1Xh57bta4meLhffhesvolLr7rOsw5boFYT3HWumUrH7uxDA51u7KHSgJnlCFFE8TQtSs+XdygwrQQuvCLDP+yBiwh2M+kJ5MrcVJ1vJdOxu/mjoBowu3yXqwriYrWpm9LpFO+gsYxensVWo4FIkiiCuZ/y9du9PG0OFvPb1tTSnWIuFqkOnZmWu5yH0oDqg+qw0xCiHZoJDjuoXomu4Pa6ghfenKUk2oh0Ng+vVWEnRwdCDUk3WqlUCodlqwFVqdDNxflmnWvZ+mxsqLTbwg4ZRJsrY/NBEp9MOzFItWFs8xge8fiILEykilxChaaWIuJBwR4CVeVjC6IMeXUtzwku1hZSKIJ0Jo/LLhH9nl6YbRboJAmdWo1ye8yeTrtzOVsW0pIkbx201yNANUu1PQB5baO4R044We2x3yhDEQSwp9owG90wujpwiSZ4LAar2USfu1/kFVGSVnxT55qPjZ46GYQwRQNDvpv/J/lT14xUqYHo3zVUxLx2X0kVEE4WYHdYB0bGxz9UoLyk2g+dZRXKUFRGlqRvc7lCmJcKmr2x14RUoPHH9QzWOREFyxgcF97HG2+/d3J/bL2qzxOXw8zsNdGgJ2vZMvf1UsEQVaENQcTP8/fAEYKKyQ/aPoSWbQAGcRdQ0KvGHbltQrOf7hFC37q1Uvzy12X5Xq21jXa5AYPVgR6TCTNnJzHu6sHmVjb+2vSET4156vpSoQbC3Mhu1z+4uSGH9U4bTozPIBC8CN+IH9bGMqqplXjfyZG46v9IlZ8ktfr7LZWr8q3bvIgpp77ppZWOkluPUNd//y2q6CxLf94If/NY2xyl/1sqUqpyQtzhZF2FfDZRKpXibv/pX1TYwd485i8A+A/DgaisICBxKQAAAABJRU5ErkJggg==")}#two-attack-view .icon-20x20-withdraw{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQRSURBVDhPlZRtTBxFGMf/s7sc3AsHnBwHR6GHwcJBxLbQ1lYTFCsJidb4Qf2gxEox0WihEL+YmH6oxpjUtJCWJlarrUZj/GBjfaGlqSmvhRZqQQOIpdxxlAKF4+DeWO52x51luUKiqf6SzTzPf2f+OzP7zJBn3qzD/6H1i+M5kiztBkhn2b6aQU2OwWntf6akMPuFhqbjJzOt5jc0aR3/ath6uol0nm4StFTJjxlaTjYUFz/9fFWaPRuyTF/89VRjuvY6xjpDthw2iMVUlveEJfkyM7r0WWMKBblW9059L09p3tGD9Sgqyrdl5TjOqAPXsM4wStGk0wlfMmNw5ENK8djSstwAjv86PiHBac/fjJEbnaBm+0r/gDebfUxNNGKGlz8/9pyyjIpIlBZEZPoVazda4mA2G6uZbrFtIAPdbWrfQ4ePYCEcBR8V8wWeW7eXMcNlSS7VQhiN+l2stVtMaKwvJSz2Tk/Qm72tLETrL2eRpBewIa8Q6cl6pypqqJvO9o1wfF1V+UN4wGanfj6FSAEvpMU7qCjPQEvBKzjwsYv8MdxHDXeDJMX6O+KNZkizLozPBl15qtUKqiHHwWA06ekHBx8nRnOQcCabomYpzyPwTwawc3sKzh7JxatvT5LJII9QKMSGIeydhk7gwmqioS6ZI+QvixD56faYB0NXhuBq74HPNYaQVwdD2oOqaXryIL4/UYqXdtlp36AHd9wuSEYLIpLUoTppcKzelL8pgo/zMcGYoEdCigm8zqp2EBd9SLSbMNLvxXuHOtDe7yF5qQQF6TyyM20QON6idtTgy1+vgWegT5z1ixW51qTiieFbcHsWMDoaQlfXKNJTjfjz6ggq3+3ArXAy/BEO2fwCwkER4UUvxufCA44tO2Kz5Ddt2wnH5u0Yu96z7dJv00Jzf+jMz72B0vPXpgZFUfKkxkcyXn7/6rRflMfjdILVKs/BEF6CFBYxvSRjZnH5XM7WHT2a372yIYReFAgO6+K4jziONEclOm9zPnrquw6/8pbOKflAiTMLoz6ZXrgtNruSctyZm5xQatax4rCCasj2cXf1gfYnqvb/ULp3f0iSpGGmz5sdJ1q6h4+yU8JyVsyBQJjwoJ8EZybOMY3juAzWrqIalu59i6qZhsDhPAdZPacsFpfEmSyLPlKypYialPKSqZw2ObvYbXE8DKargzRiS15L2b7aFuX5VEsRleSbU77w0NwST9JSE4kMrkwptY1x+kStxz3+0XAtPM91ECo/K1PqDt51KxdC4Ioy+zqWj1xvQ4azuHL1hmLc15Dt6VPVtfNZqYlun6gcrOjyrDL7qSerar7p6r7xrcFggMCTrau3zn0NV8nd81pn28ULhVN+qVaToOe5SqYp4Y8JgqCUA/A3Zu24cT81pCsAAAAASUVORK5CYII=")}#two-attack-view .icon-20x20-bunker{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOpSURBVDhPrZVvTBNnHMe/d9dBaUtharBSwOsUZAwEGoECMUE0ZsSRZYvJtqjZJmOJY7ExkRczMe7VlizxxeaWGbNFXZbBZsziotmmAzVzVBQUwYppgRWo/Se29drrX67dc+eJMBzZCz/Jk+e55/l9v/f8ued31Ct79uFZQsv1kvR++7lOLPLjkjAlNfVyczGXj39pmBzq31NcVnY04A98aL9u0TqHBxxsdW1QDlnE3JL/OvGVIi4IJal0ajlD04WJ2XSTTr+q3bCmGGWVRoz+eRYunoHf60xzHP9NhoK6JKRS0zRFP8hkGFvjOx2zoo9CciPwiWRl88stA9aRW/C5vXh9xy40bNoMjVqD82fP4O3XGnHo2HnUNGykEiFfu9vtag/HKUnrvefaQKpBsT1n+JyCXldZ/iJatr8Fll0NU/V6rNBmwzpqRdieiy2NAjoPc2kSSuWtWAa2qEDSjd0Lkll71pHmQkMRlVqFv8fGEQ2HcO1qPzKSHCz9gzh2sBXaLAeWZ8xS4gqUKi0K89QQjRVCWFY/YsEpR/gIYjyH5MRFvGHogfnVBLo/qYC+vFga//HTUpz7rAI9R7egtRyIk9h/M2dIgeJnghzYNWsRy6vFoeNB/NJ1CZnaXDkCUCuzyAtzsb/zNL6/JmAZW4FZRiNp5ZAnhuR0o2IdCvPI0+nQ9GYHPv5dgbujIWlciPmhfF6DzoM/Yzy9EpWlq5Hm70tLfqwVmbdkyjk0OACPwybtoVhK8nOgz76DxP3r6BvkodSosO+DeuSoGEQiETimnLA73JL2kcc8Q4ahHNbhkW67zQ6PxwfH+Bg6tuWi73IQxq1HsN38E34758bGigIIZO+KCgvEE8eM1/erqJVMCHM3ha2qS07csPj0Rey74nMsGsVLqml8dNKG9fVb4X/gRe8Ih4k7VmRlqWFzBSlxdnzoYVvzbvO4ZEJYcPVeMJqm+s6cCmTn5LTosoGLdhpVpiYYTQ0YtlxATXU5kmo9YikaY64QfNOT5s3vmU/JcokFn43Ipra9X9y0XDkQiCvAFpdCqdZKt0WVmSmNuwIJ3J58SPbafoBmmCNS5zyemhzY6rorPV0nA7r8/BalUol4IgmPbQgeLokk5yUf/4S5affew2xVrax4wn9mG4Oxrv+PrhMuYtp6l9wOnvPD5+cwNel8v7nN/LUctogl05fBaLrR2/3dUCrqr4pFYsLMTGAn2ZIf5OGn8r8y9uPkSmbmkTqW4Bn/AoB/AEiQfn1r/m4bAAAAAElFTkSuQmCC")}#two-attack-view .icon-20x20-kill{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARYSURBVDhPrVVtTFNXGH4uvZTSQgstpUKBUQQa0PFlBBzBZTB+bMMl02XBhbk6NhfjotFly2L2Yz/moiGZIZsxWSaRLRrJNtwSTIYwFBlBDCAwyrdQpIV+QmnpB+29ves9IJppsj8+ycn7vuec9+s5N++lqo+exPNExKZ8bniqwp7LF2g/w8RSFHbzdkXdiZtdly9QoRB7sHhnesq9UYOR4zBUUXd8jDj8B09VWL3/jSPdXUeXF7rr2tRKWTW/RwOCI5XKty4eXD83cCbpyrl3M1v4fT4RXwCvP4Ige/ceovz1Y0O8OtJz1mk2rqcwzqrJJj1kKaGF69dvZybGiT7UJkYVGQeg6B7yUCtcyNHyx63G0l059S+qIn74p7e3QN/X05ZeUBIkLXdeath2qvaVxRj3fWrIKDYVsqHkQx8UU8KkGJIstkgJ77IQ+uZLxJ7uleHqqndwX55U8r7OrzWYc3Dg077vtG/qjpOWw62dPvlxBkV0/5r6sIylBL/1gv2+HQ7PLFobruHa+Ub+eAvFS6tF3jF39sXPg5x7pB9gmTh+n7TsmBx6TXXfXJJrY7FfvkGJKCcTXM0uTNf3QzTPQWGj8KDPhwmLmEveE6SS8kSYmPFR8ys+amCUAa2MZe92dDVuPcq+sxWIT0vbtIBgpQbDZ9phsHmI/UgqbS5q+g7FWe0MsvIjkSCj8cX5t5EeIy5iEBJuBRQnZsCEAOx7d5DFB9spC796pmTzxmNYg17K50vF67oaSFOS8efVETh9PnJGAmo0as26ywn9QxvHZAmRqcvHS02VaJ3xYDwvG3s7vsKh4XrU3vkI+rgwJYpEHD5dBad5Gi7jIrQFa4h2uB4H3CG1++cGbqLms2gqThaCe3ENAUsPucCDMXVjebgN355qgn2VARxWdP78E2b6h3Him2KMDNpBq2kwTCiKBGwdXl9SZ72AmLQKSJML4fGJwi1oSTWDm62YpucRJxEQ3R2rgDMQCZ7H0SED8ooS4PaLyZnAph+kc3O3Vx14Nb40UpKKKGkc6AgWFOeCSuXH2qoTgRU7ggEGIpkI0hgG+VksHhp9EIWfIIpisLjgxYJPBsOi60tSIeW1lf9ywwuxPECyBFyTMJv8RNdu38jMQ+ZeJnJqfp3IWStLpNPDhqlwD4bJYCPKdMeYv0et7xmmbHAa5iCgrfCveaHWpEKplEMcGw1FcA2w2Inzk8hIFJC2bSsJCFLi5pd1xzjyYWuKSmx3O291WCYsZRKOTYiXR8A8OwPauoRInxeO5Y1qLWHeJOIIKMLc8ouTpqN/ToARo2NpeMr2TlpBcWhrOMi1hQstv9++MWf0luvHA0lCWgxangThtiREqZLhFSSAE6zjgUOJ8QUJJsw02u8Zlxz+yK8Hpiy15bpPCA/PnNj8sKAoqiI5QVqqUYnK5FECVYgJqa3ewBJ/bnKyvwrANc9bXWMimnbztBHHMP73F8DPPH4e8vqTjs8G8C/hq9/zbfBsvwAAAABJRU5ErkJggg==")}#two-attack-view .icon-20x20-killBig{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARYSURBVDhPrVVtTFNXGH4uvZTSQgstpUKBUQQa0PFlBBzBZTB+bMMl02XBhbk6NhfjotFly2L2Yz/moiGZIZsxWSaRLRrJNtwSTIYwFBlBDCAwyrdQpIV+QmnpB+29ves9IJppsj8+ycn7vuec9+s5N++lqo+exPNExKZ8bniqwp7LF2g/w8RSFHbzdkXdiZtdly9QoRB7sHhnesq9UYOR4zBUUXd8jDj8B09VWL3/jSPdXUeXF7rr2tRKWTW/RwOCI5XKty4eXD83cCbpyrl3M1v4fT4RXwCvP4Ige/ceovz1Y0O8OtJz1mk2rqcwzqrJJj1kKaGF69dvZybGiT7UJkYVGQeg6B7yUCtcyNHyx63G0l059S+qIn74p7e3QN/X05ZeUBIkLXdeath2qvaVxRj3fWrIKDYVsqHkQx8UU8KkGJIstkgJ77IQ+uZLxJ7uleHqqndwX55U8r7OrzWYc3Dg077vtG/qjpOWw62dPvlxBkV0/5r6sIylBL/1gv2+HQ7PLFobruHa+Ub+eAvFS6tF3jF39sXPg5x7pB9gmTh+n7TsmBx6TXXfXJJrY7FfvkGJKCcTXM0uTNf3QzTPQWGj8KDPhwmLmEveE6SS8kSYmPFR8ys+amCUAa2MZe92dDVuPcq+sxWIT0vbtIBgpQbDZ9phsHmI/UgqbS5q+g7FWe0MsvIjkSCj8cX5t5EeIy5iEBJuBRQnZsCEAOx7d5DFB9spC796pmTzxmNYg17K50vF67oaSFOS8efVETh9PnJGAmo0as26ywn9QxvHZAmRqcvHS02VaJ3xYDwvG3s7vsKh4XrU3vkI+rgwJYpEHD5dBad5Gi7jIrQFa4h2uB4H3CG1++cGbqLms2gqThaCe3ENAUsPucCDMXVjebgN355qgn2VARxWdP78E2b6h3Him2KMDNpBq2kwTCiKBGwdXl9SZ72AmLQKSJML4fGJwi1oSTWDm62YpucRJxEQ3R2rgDMQCZ7H0SED8ooS4PaLyZnAph+kc3O3Vx14Nb40UpKKKGkc6AgWFOeCSuXH2qoTgRU7ggEGIpkI0hgG+VksHhp9EIWfIIpisLjgxYJPBsOi60tSIeW1lf9ywwuxPECyBFyTMJv8RNdu38jMQ+ZeJnJqfp3IWStLpNPDhqlwD4bJYCPKdMeYv0et7xmmbHAa5iCgrfCveaHWpEKplEMcGw1FcA2w2Inzk8hIFJC2bSsJCFLi5pd1xzjyYWuKSmx3O291WCYsZRKOTYiXR8A8OwPauoRInxeO5Y1qLWHeJOIIKMLc8ouTpqN/ToARo2NpeMr2TlpBcWhrOMi1hQstv9++MWf0luvHA0lCWgxangThtiREqZLhFSSAE6zjgUOJ8QUJJsw02u8Zlxz+yK8Hpiy15bpPCA/PnNj8sKAoqiI5QVqqUYnK5FECVYgJqa3ewBJ/bnKyvwrANc9bXWMimnbztBHHMP73F8DPPH4e8vqTjs8G8C/hq9/zbfBsvwAAAABJRU5ErkJggg==")}')
     }
@@ -7985,128 +7766,6 @@ require([
                 Lockr.set(STORAGE_KEYS.ACTIVE, true)
             })
             eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, false)
-            })
-        }, ['initial_village'])
-    })
-})
-define('two/autoWithdraw', [
-    'two/utils',
-    'queues/EventQueue'
-], function (
-    utils,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-
-    let autoWithdraw = {}
-    autoWithdraw.init = function() {
-        initialized = true
-    }
-    autoWithdraw.start = function() {
-        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
-        running = true
-    }
-    autoWithdraw.stop = function() {
-        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STOPPED)
-        running = false
-    }
-    autoWithdraw.isRunning = function() {
-        return running
-    }
-    autoWithdraw.isInitialized = function() {
-        return initialized
-    }
-    return autoWithdraw
-})
-define('two/autoWithdraw/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        AUTO_WITHDRAW_STARTED: 'auto_withdraw_started',
-        AUTO_WITHDRAW_STOPPED: 'auto_withdraw_stopped'
-    })
-})
-
-define('two/autoWithdraw/ui', [
-    'two/ui',
-    'two/autoWithdraw',
-    'two/utils',
-    'queues/EventQueue'
-], function (
-    interfaceOverflow,
-    autoWithdraw,
-    utils,
-    eventQueue
-) {
-    let $button
-
-    const init = function () {
-        $button = interfaceOverflow.addMenuButton('Dezerter', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_withdraw'))
-
-        $button.addEventListener('click', function () {
-            if (autoWithdraw.isRunning()) {
-                autoWithdraw.stop()
-                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_withdraw'))
-            } else {
-                autoWithdraw.start()
-                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_withdraw'))
-            }
-        })
-
-        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function () {
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-        })
-
-        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function () {
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-        })
-
-        if (autoWithdraw.isRunning()) {
-            eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
-        }
-
-        return opener
-    }
-
-    return init
-})
-require([
-    'two/ready',
-    'two/autoWithdraw',
-    'two/autoWithdraw/ui',
-    'Lockr',
-    'queues/EventQueue',
-    'two/autoWithdraw/events'
-], function(
-    ready,
-    autoWithdraw,
-    autoWithdrawInterface,
-    Lockr,
-    eventQueue
-) {
-    const STORAGE_KEYS = {
-        ACTIVE: 'auto_withdraw_active'
-    }
-	
-    if (autoWithdraw.isInitialized()) {
-        return false
-    }
-    ready(function() {
-        autoWithdraw.init()
-        autoWithdrawInterface()
-
-        ready(function() {
-            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
-                autoWithdraw.start()
-            }
-
-            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, true)
-            })
-
-            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
@@ -12784,6 +12443,7 @@ define('two/battleCalculator/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
             battleVillage.origin = data
         })
+        $scope.settings[SETTINGS.BATTLE_VILLAGE_ID] = mapSelectedVillage.id
     }
     const insertSurvived = function() {
         if ($scope.spearDsurvived > 0 || $scope.swordDsurvived > 0 || $scope.axeDsurvived > 0 || $scope.archerDsurvived > 0 || $scope.lcDsurvived > 0 || $scope.maDsurvived > 0 || $scope.hcDsurvived > 0 || $scope.ramDsurvived > 0 || $scope.catapultDsurvived > 0 || $scope.snobDsurvived > 0 || $scope.knightDsurvived > 0 || $scope.trebuchetDsurvived > 0 || $scope.berserkerDsurvived > 0) {
@@ -13505,7 +13165,9 @@ define('two/battleCalculator/ui', [
                 y: data.raw.y,
                 name: data.raw.name
             }
+            $scope.settings[SETTINGS.BATTLE_VILLAGE_ID] = battleVillage.id
             $scope.searchQuery[type] = ''
+            settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteVillage: function(data) {
             battleVillage.origin = {
@@ -16324,7 +15986,7 @@ define('two/builderQueue/ui', [
             return villagesInfo[villageId]
         }
         villagesInfo[villageId] = true
-        villagesLabel[villageId] = 'LOADING...'
+        villagesLabel[villageId] = 'ŁADOWANIE...'
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: villageId,
@@ -18662,558 +18324,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/fakeSender', [
-    'two/Settings',
-    'two/fakeSender/settings',
-    'two/fakeSender/settings/map',
-    'two/fakeSender/settings/updates',
-    'two/fakeSender/types/dates',
-    'two/fakeSender/types/type',
-    'two/fakeSender/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    DATE_TYPES,
-    FS_TYPE,
-    FS_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let fakeSenderSettings
-
-    let selectedGroups = []
-    let selectedGroupsP = []
-    let selectedGroupsT = []
-    let selectedGroupsG = []
-    let selectedGroupsTarget = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'fake_sender_settings'
-    }
-    const FAKE_UNIT = {
-        [FS_UNIT.SPEAR]: 'spear',
-        [FS_UNIT.SWORD]: 'sword',
-        [FS_UNIT.AXE]: 'axe',
-        [FS_UNIT.ARCHER]: 'archer',
-        [FS_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [FS_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [FS_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [FS_UNIT.RAM]: 'ram',
-        [FS_UNIT.CATAPULT]: 'catapult',
-        [FS_UNIT.TREBUCHET]: 'trebuchet',
-        [FS_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [FS_UNIT.SNOB]: 'snob',
-        [FS_UNIT.KNIGHT]: 'knight'
-    }
-	
-    const FAKE_TYPE = {
-        [FS_TYPE.ATTACK]: 'attack',
-        [FS_TYPE.SUPPORT]: 'support',
-        [FS_TYPE.QUATTRO]: 'four',
-        [FS_TYPE.FULL]: 'full'
-    }
-	
-    const FAKE_DATE = {
-        [DATE_TYPES.ARRIVE]: 'date_type_arrive',
-        [DATE_TYPES.OUT]: 'date_type_out'
-    }
-
-    console.log(FAKE_UNIT, FAKE_TYPE, FAKE_DATE)
-
-    const updateGroups = function () {
-        selectedGroups = []
-        selectedGroupsP = []
-        selectedGroupsT = []
-        selectedGroupsG = []
-        selectedGroupsTarget = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsInVillagesFake = fakeSenderSettings[SETTINGS.GROUP]
-        const groupsInPlayerFake = fakeSenderSettings[SETTINGS.GROUPP]
-        const groupsInTribeFake = fakeSenderSettings[SETTINGS.GROUPT]
-        const groupsInGroupFake = fakeSenderSettings[SETTINGS.GROUPG]
-        const targetsGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
-
-        groupsInVillagesFake.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-        groupsInPlayerFake.forEach(function (groupId) {
-            selectedGroupsP.push(allGroups[groupId])
-        })
-        groupsInTribeFake.forEach(function (groupId) {
-            selectedGroupsT.push(allGroups[groupId])
-        })
-        groupsInGroupFake.forEach(function (groupId) {
-            selectedGroupsG.push(allGroups[groupId])
-        })
-        targetsGroups.forEach(function (groupId) {
-            selectedGroupsTarget.push(allGroups[groupId])
-        })
-    }
-
-    const fakeSender = {}
-
-    fakeSender.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            fakeSenderSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        fakeSenderSettings = settings.getAll()
-
-        console.log('fakeSender settings', fakeSenderSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    fakeSender.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
-    }
-
-    fakeSender.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
-    }
-
-    fakeSender.getSettings = function () {
-        return settings
-    }
-
-    fakeSender.isInitialized = function () {
-        return initialized
-    }
-
-    fakeSender.isRunning = function () {
-        return running
-    }
-
-    return fakeSender
-})
-
-define('two/fakeSender/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        FAKE_SENDER_START: 'fake_sender_start',
-        FAKE_SENDER_STOP: 'fake_sender_stop'
-    })
-})
-
-define('two/fakeSender/ui', [
-    'two/ui',
-    'two/fakeSender',
-    'two/fakeSender/settings',
-    'two/fakeSender/settings/map',
-    'two/fakeSender/types/dates',
-    'two/fakeSender/types/type',
-    'two/fakeSender/types/units',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    fakeSender,
-    SETTINGS,
-    SETTINGS_MAP,
-    DATE_TYPES,
-    FS_TYPE,
-    FS_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        FAKE: 'fake',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'fake_sender'))
-    }
-
-    const switchState = function () {
-        if (fakeSender.isRunning()) {
-            fakeSender.stop()
-        } else {
-            fakeSender.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'fake_sender'))
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'fake_sender'))
-        }
-    }
-
-    const init = function () {
-        settings = fakeSender.getSettings()
-        interfaceOverflow.addDivisor(21)
-        $button = interfaceOverflow.addMenuButton('Watażka', 20, $filter('i18n')('description', $rootScope.loc.ale, 'fake_sender'))
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><div auto-complete=\"autoCompleteTarget\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendVillages\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendTribe\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"commandData.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"selectedDateType\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendGroups\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody class=\"fakerLog\"><tr class=\"noFakes\"><td colspan=\"5\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-fake-sender div[select]{text-align:right}#two-fake-sender div[select] .select-wrapper{height:34px}#two-fake-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-fake-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm td{text-align:left}#two-fake-sender .addForm span{height:26px;line-height:26px}#two-fake-sender .addForm .item-send{text-align:center}#two-fake-sender .addForm .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-fake-sender .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actions a{width:100px}#two-fake-sender .addForm .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actionsTime .big{width:54px}#two-fake-sender .addForm .actionsTime .small{width:26px}#two-fake-sender .fakerLog td{text-align:center}#two-fake-sender .fakerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-fake-sender .fakerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-fake-sender .noFakes td{height:26px;text-align:center}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = fakeSender.isRunning()
-        $scope.selectedTab = TAB_TYPES.FAKE
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.datetype = Settings.encodeList(DATE_TYPES, {
-            textObject: 'fake_sender',
-            disabled: true
-        })
-        $scope.type = Settings.encodeList(FS_TYPE, {
-            textObject: 'fake_sender',
-            disabled: true
-        })
-        $scope.units = Settings.encodeList(FS_UNIT, {
-            textObject: 'fake_sender',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_fake_sender_window', function onDestroy () {
-            console.log('fakeSender closed')
-        })
-
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.FAKE_SENDER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.FAKE_SENDER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_fake_sender_window', $scope)
-    }
-
-    return init
-})
-
-define('two/fakeSender/settings', [], function () {
-    return {
-        COMMAND_INTERVAL: 'interval_villages',
-        COMMAND_INTERVALP: 'interval_player',
-        COMMAND_INTERVALT: 'interval_tribe',
-        COMMAND_INTERVALG: 'interval_groups',
-        DATE_TYPE: 'datetype',
-        GROUP: 'groups_villages',
-        GROUPP: 'groups_player',
-        GROUPT: 'groups_tribe',
-        GROUPG: 'groups_groups',
-        UNIT: 'units_villages',
-        UNITP: 'units_player',
-        UNITT: 'units_tribe',
-        UNITG: 'units_groups',
-        TYPE: 'type_villages',
-        TYPEP: 'type_player',
-        TYPET: 'type_tribe',
-        TYPEG: 'type_groups',
-        LIMIT_OWN: 'limit_own_villages',
-        LIMIT_OWNP: 'limit_own_player',
-        LIMIT_OWNT: 'limit_own_tribe',
-        LIMIT_OWNG: 'limit_own_groups',
-        LIMIT_TARGET: 'limit_target_villages',
-        LIMIT_TARGETP: 'limit_target_player',
-        LIMIT_TARGETT: 'limit_target_tribe',
-        LIMIT_TARGETG: 'limit_target_groups',
-        GROUP_TARGET: 'groups_target'
-    }
-})
-
-define('two/fakeSender/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/fakeSender/settings/map', [
-    'two/fakeSender/settings',
-    'two/fakeSender/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUP]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPP]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPT]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPG]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP_TARGET]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.DATE_TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPEP]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPET]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPEG]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNITT]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNITP]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNITG]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.COMMAND_INTERVAL]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.COMMAND_INTERVALP]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.COMMAND_INTERVALT]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.COMMAND_INTERVALG]: {
-            default: 2,
-            inputType: 'number',
-            min: 1,
-            max: 3600
-        },
-        [SETTINGS.LIMIT_OWN]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_OWNP]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_OWNT]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_OWNG]: {
-            default: 12,
-            inputType: 'number',
-            min: 1,
-            max: 50
-        },
-        [SETTINGS.LIMIT_TARGET]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        },
-        [SETTINGS.LIMIT_TARGETP]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        },
-        [SETTINGS.LIMIT_TARGETT]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        },
-        [SETTINGS.LIMIT_TARGETG]: {
-            default: 25,
-            inputType: 'number',
-            min: 1,
-            max: 500
-        }
-    }
-})
-
-define('two/fakeSender/types/type', [], function () {
-    return {
-        ATTACK: 'attack',
-        SUPPORT: 'support',
-        QUATTRO: 'four',
-        FULL: 'full'
-    }
-})
-
-define('two/fakeSender/types/dates', [], function () {
-    return {
-        ARRIVE: 'date_type_arrive',
-        OUT: 'date_type_out'
-    }
-})
-
-define('two/fakeSender/types/units', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-require([
-    'two/ready',
-    'two/fakeSender',
-    'two/fakeSender/ui',
-    'two/fakeSender/events'
-], function (
-    ready,
-    fakeSender,
-    fakeSenderInterface
-) {
-    if (fakeSender.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        fakeSender.init()
-        fakeSenderInterface()
-    })
-})
-
 define('two/farmOverflow', [
     'two/Settings',
     'two/farmOverflow/types/errors',
@@ -19233,7 +18343,7 @@ define('two/farmOverflow', [
     'conf/resourceTypes',
     'struct/MapData',
     'Lockr'
-], function (
+], function(
     Settings,
     ERROR_TYPES,
     STATUS,
@@ -19277,6 +18387,9 @@ define('two/farmOverflow', [
     let persistentRunningLastCheck = timeHelper.gameTime()
     let persistentRunningTimer = null
     let nextCycleDate = null
+    let currentStatus = 'paused'
+    let lastAttack
+    let selectedVillage = null
     const PERSISTENT_RUNNING_CHECK_INTERVAL = 30 * 1000
     const VILLAGE_COMMAND_LIMIT = 50
     const MINIMUM_FARMER_CYCLE_INTERVAL = 1 // minutes
@@ -19294,70 +18407,62 @@ define('two/farmOverflow', [
         RESOURCE_TYPES.CLAY,
         RESOURCE_TYPES.IRON,
     ]
-
     const villageFilters = {
-        distance: function (target) {
+        distance: function(target) {
             return !target.distance.between(
                 farmSettings[SETTINGS.MIN_DISTANCE],
                 farmSettings[SETTINGS.MAX_DISTANCE]
             )
         },
-        ownPlayer: function (target) {
+        ownPlayer: function(target) {
             return target.character_id === $player.getId()
         },
-        included: function (target) {
+        included: function(target) {
             return target.character_id && !includedVillages.includes(target.id)
         },
-        ignored: function (target) {
+        ignored: function(target) {
             return ignoredVillages.includes(target.id)
         },
-        points: function (points) {
+        points: function(points) {
             return !points.between(
                 farmSettings[SETTINGS.MIN_POINTS],
                 farmSettings[SETTINGS.MAX_POINTS]
             )
         }
     }
-
     const targetFilters = [
         villageFilters.distance,
         villageFilters.ownPlayer,
         villageFilters.included,
         villageFilters.ignored
     ]
-
-    const calcDistances = function (targets, origin) {
-        return targets.map(function (target) {
+    const calcDistances = function(targets, origin) {
+        return targets.map(function(target) {
             target.distance = math.actualDistance(origin, target)
             return target
         })
     }
-
-    const filterTargets = function (targets) {
-        return targets.filter(function (target) {
-            return targetFilters.every(function (fn) {
+    const filterTargets = function(targets) {
+        return targets.filter(function(target) {
+            return targetFilters.every(function(fn) {
                 return !fn(target)
             })
         })
     }
-
-    const sortTargets = function (targets) {
-        return targets.sort(function (a, b) {
+    const sortTargets = function(targets) {
+        return targets.sort(function(a, b) {
             return a.distance - b.distance
         })
     }
-
-    const arrayUnique = function (array) {
-        return array.sort().filter(function (item, pos, ary) {
+    const arrayUnique = function(array) {
+        return array.sort().filter(function(item, pos, ary) {
             return !pos || item != ary[pos - 1]
         })
     }
-
-    const reloadTimers = function () {
+    const reloadTimers = function() {
         if (!running) {
             return
         }
-
         if (stepDelayTimer) {
             stopTimers()
             activeFarmer.targetStep({
@@ -19365,55 +18470,41 @@ define('two/farmOverflow', [
             })
         } else if (cycleTimer) {
             stopTimers()
-
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_CYCLE_BEGIN)
-
             farmerIndex = 0
             farmerStep()
         }
     }
-
-    const updateIncludedVillage = function () {
+    const updateIncludedVillage = function() {
         const groupsInclude = farmSettings[SETTINGS.GROUP_INCLUDE]
-
         includedVillages = []
-
-        groupsInclude.forEach(function (groupId) {
+        groupsInclude.forEach(function(groupId) {
             let groupVillages = modelDataService.getGroupList().getGroupVillageIds(groupId)
             includedVillages = includedVillages.concat(groupVillages)
         })
-
         includedVillages = arrayUnique(includedVillages)
     }
-
-    const updateIgnoredVillage = function () {
+    const updateIgnoredVillage = function() {
         const groupIgnored = farmSettings[SETTINGS.GROUP_IGNORE]
         ignoredVillages = modelDataService.getGroupList().getGroupVillageIds(groupIgnored)
     }
-
-    const updateOnlyVillage = function () {
+    const updateOnlyVillage = function() {
         const groupsOnly = farmSettings[SETTINGS.GROUP_ONLY]
-
         onlyVillages = []
-
-        groupsOnly.forEach(function (groupId) {
+        groupsOnly.forEach(function(groupId) {
             let groupVillages = modelDataService.getGroupList().getGroupVillageIds(groupId)
-            groupVillages = groupVillages.filter(function (villageId) {
+            groupVillages = groupVillages.filter(function(villageId) {
                 return !!$player.getVillage(villageId)
             })
-
             onlyVillages = onlyVillages.concat(groupVillages)
         })
-
         onlyVillages = arrayUnique(onlyVillages)
     }
-
-    const updateExceptionLogs = function () {
+    const updateExceptionLogs = function() {
         const exceptionVillages = ignoredVillages.concat(includedVillages)
         let modified = false
-
-        exceptionVillages.forEach(function (villageId) {
-            if (!hasOwn.call(exceptionLogs, villageId)) { 
+        exceptionVillages.forEach(function(villageId) {
+            if (!hasOwn.call(exceptionLogs, villageId)) {
                 exceptionLogs[villageId] = {
                     time: timeHelper.gameTime(),
                     report: false
@@ -19421,214 +18512,237 @@ define('two/farmOverflow', [
                 modified = true
             }
         })
-
-        utils.each(exceptionLogs, function (time, villageId) {
+        utils.each(exceptionLogs, function(time, villageId) {
             villageId = parseInt(villageId, 10)
-            
             if (!exceptionVillages.includes(villageId)) {
                 delete exceptionLogs[villageId]
                 modified = true
             }
         })
-
         if (modified) {
             Lockr.set(STORAGE_KEYS.EXCEPTION_LOGS, exceptionLogs)
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_EXCEPTION_LOGS_UPDATED)
         }
     }
-
-    const updateGroupVillages = function () {
+    const updateGroupVillages = function() {
         updateIncludedVillage()
         updateIgnoredVillage()
         updateOnlyVillage()
         updateExceptionLogs()
-
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_EXCEPTION_VILLAGES_UPDATED)
     }
-
-    const villageGroupLink = function (event, data) {
+    const villageGroupLink = function(event, data) {
         const groupsInclude = farmSettings[SETTINGS.GROUP_INCLUDE]
         const groupIgnore = farmSettings[SETTINGS.GROUP_IGNORE]
         const groupsOnly = farmSettings[SETTINGS.GROUP_ONLY]
         const isOwnVillage = $player.getVillage(data.village_id)
         let farmerListUpdated = false
-
         updateGroupVillages()
-
         if (groupIgnore === data.group_id) {
             if (isOwnVillage) {
                 removeFarmer(data.village_id)
                 farmerListUpdated = true
             } else {
                 removeTarget(data.village_id)
-
                 addLog(LOG_TYPES.IGNORED_VILLAGE, {
                     villageId: data.village_id
                 })
                 addExceptionLog(data.village_id)
             }
         }
-
         if (groupsInclude.includes(data.group_id) && !isOwnVillage) {
             reloadTargets()
-
             addLog(LOG_TYPES.INCLUDED_VILLAGE, {
                 villageId: data.village_id
             })
             addExceptionLog(data.village_id)
         }
-
         if (groupsOnly.includes(data.group_id) && isOwnVillage) {
             let farmer = createFarmer(data.village_id)
-            farmer.init().then(function () {
+            farmer.init().then(function() {
                 if (running) {
                     farmer.start()
                 }
             })
-
             farmerListUpdated = true
         }
-
         if (farmerListUpdated) {
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_FARMER_VILLAGES_UPDATED)
         }
     }
-
-    const villageGroupUnlink = function (event, data) {
+    const villageGroupUnlink = function(event, data) {
         const groupsInclude = farmSettings[SETTINGS.GROUP_INCLUDE]
         const groupIgnore = farmSettings[SETTINGS.GROUP_IGNORE]
         const groupsOnly = farmSettings[SETTINGS.GROUP_ONLY]
         const isOwnVillage = $player.getVillage(data.village_id)
         let farmerListUpdated = false
-
         updateGroupVillages()
-
         if (groupIgnore === data.group_id) {
             if (isOwnVillage) {
                 let farmer = createFarmer(data.village_id)
-                farmer.init().then(function () {
+                farmer.init().then(function() {
                     if (running) {
                         farmer.start()
                     }
                 })
-
                 farmerListUpdated = true
             } else {
                 reloadTargets()
-
                 addLog(LOG_TYPES.IGNORED_VILLAGE_REMOVED, {
                     villageId: data.village_id
                 })
             }
         }
-
         if (groupsInclude.includes(data.group_id) && !isOwnVillage) {
             reloadTargets()
-
             addLog(LOG_TYPES.INCLUDED_VILLAGE_REMOVED, {
                 villageId: data.village_id
             })
         }
-
         if (groupsOnly.includes(data.group_id) && isOwnVillage) {
             removeFarmer(data.village_id)
             farmerListUpdated = true
         }
-
         if (farmerListUpdated) {
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_FARMER_VILLAGES_UPDATED)
         }
     }
-
-    const validGroups = function (_flag) {
+    const validGroups = function(_flag) {
         const gameGroups = modelDataService.getGroupList().getGroups()
         const groupIgnore = farmSettings[SETTINGS.GROUP_IGNORE]
-
         const groupsOnly = farmSettings[SETTINGS.GROUP_ONLY]
         const groupsInclude = farmSettings[SETTINGS.GROUP_INCLUDE]
         const validedGroupIgnore = hasOwn.call(gameGroups, groupIgnore) ? groupIgnore : settings.getDefault(SETTINGS.GROUP_IGNORE)
         const validedGroupsOnly = groupsOnly.filter(groupId => hasOwn.call(gameGroups, groupId))
         const validedGroupsInclude = groupsInclude.filter(groupId => hasOwn.call(gameGroups, groupId))
-
         settings.setAll({
             [SETTINGS.GROUP_IGNORE]: validedGroupIgnore,
             [SETTINGS.GROUP_ONLY]: validedGroupsOnly,
             [SETTINGS.GROUP_INCLUDE]: validedGroupsInclude
         }, _flag)
     }
-
-    const removedGroupListener = function () {
+    const removedGroupListener = function() {
         validGroups()
         updateGroupVillages()
-
         flushFarmers()
         reloadTargets()
         createFarmers()
     }
-
-    const processPresets = function () {
+    const processPresets = function() {
         selectedPresets = []
         const playerPresets = modelDataService.getPresetList().getPresets()
         const activePresets = farmSettings[SETTINGS.PRESETS]
-
-        activePresets.forEach(function (presetId) {
+        activePresets.forEach(function(presetId) {
             if (!hasOwn.call(playerPresets, presetId)) {
                 return
             }
-
             let preset = playerPresets[presetId]
             preset.load = getPresetHaul(preset)
             preset.travelTime = armyService.calculateTravelTime(preset, {
                 barbarian: false,
                 officers: false
             })
-
             selectedPresets.push(preset)
         })
-
-        selectedPresets = selectedPresets.sort(function (a, b) {
+        selectedPresets = selectedPresets.sort(function(a, b) {
             return a.travelTime - b.travelTime || b.load - a.load
         })
     }
-
-    const ignoreVillage = function (villageId) {
+    const ignoreVillage = function(villageId) {
         const groupIgnore = farmSettings[SETTINGS.GROUP_IGNORE]
-
         if (!groupIgnore) {
             return false
         }
-
         socketService.emit(routeProvider.GROUPS_LINK_VILLAGE, {
             group_id: groupIgnore,
             village_id: villageId
         })
-
         return true
     }
-
-    const presetListener = function () {
+    const sendMessageReply = function(message_id, message) {
+        socketService.emit(routeProvider.MESSAGE_REPLY, {
+            message_id: message_id,
+            message: message
+        })
+    }
+    var genStatusReply = function() {
+        var localeStatus = $filter('i18n')('status', $rootScope.loc.ale, 'common')
+        var localeVillage = $filter('i18n')('selected_village', $rootScope.loc.ale, 'farm_overflow')
+        var localeLast = $filter('i18n')('last_attack', $rootScope.loc.ale, 'farm_overflow')
+        var statusReplaces = {}
+        if (currentStatus === 'step_cycle_next') {
+            var next = timeHelper.gameTime() + getCycleInterval()
+            statusReplaces.time = utils.formatDate(next)
+        }
+        var farmStatus = $filter('i18n')(currentStatus + statusReplaces, $rootScope.loc.ale, 'farm_overflow')
+        var villageLabel = utils.genVillageLabel(selectedVillage)
+        var last = utils.formatDate(lastAttack)
+        var vid = selectedVillage.id
+        var message = []
+        message.push('[b]', localeStatus, ':[/b] ', farmStatus, '[br]')
+        message.push('[b]', localeVillage, ':[/b] ')
+        message.push('[village=', vid, ']', villageLabel, '[/village][br]')
+        message.push('[b]', localeLast, ':[/b] ', last)
+        return message.join('')
+    }
+    const messageListener = function() {
+        var remoteHandler = function(_, data) {
+            var id = farmSettings[SETTINGS.REMOTE]
+            if (data.participants.length !== 1 || data.title !== id) {
+                return false
+            }
+            var userMessage = data.message.content.trim().toLowerCase()
+            switch (userMessage) {
+                case 'dawaj':
+                case 'lecimy':
+                case 'kurwa':
+                case 'farmie':
+                case 'ciasne leginsy':
+                case 'obiwan':
+                    farmOverflow.start()
+                    sendMessageReply(data.message_id, genStatusReply())
+                    eventQueue.trigger('Farm/remoteCommand', ['on'])
+                    break
+                case 'bierz':
+                case 'spadamy':
+                case 'chuj':
+                case 'karmie':
+                case 'luźne dresy':
+                case 'padawan':
+                    farmOverflow.stop()
+                    sendMessageReply(data.message_id, genStatusReply())
+                    eventQueue.trigger('Farm/remoteCommand', ['off'])
+                    break
+                case 'stan':
+                case 'jak idzie':
+                case 'info':
+                    sendMessageReply(data.message_id, genStatusReply())
+                    eventQueue.trigger('Farm/remoteCommand', ['status'])
+                    break
+            }
+            return false
+        }
+        $rootScope.$on(eventTypeProvider.MESSAGE_SENT, remoteHandler)
+    }
+    const presetListener = function() {
         processPresets()
-
         if (!selectedPresets.length) {
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_STOP, {
                 reason: ERROR_TYPES.NO_PRESETS
             })
-
+            currentStatus = 'no_preset'
             if (running) {
                 farmOverflow.stop()
             }
         }
     }
-
-    const reportListener = function (event, data) {
+    const reportListener = function(event, data) {
         if (!farmSettings[SETTINGS.IGNORE_ON_LOSS] || !farmSettings[SETTINGS.GROUP_IGNORE]) {
             return
         }
-
         if (!running || data.type !== COMMAND_TYPES.TYPES.ATTACK) {
             return
         }
-
         // 1 = nocasualties
         // 2 = casualties
         // 3 = defeat
@@ -19639,96 +18753,73 @@ define('two/farmOverflow', [
                 result: data.result,
                 title: data.title
             }
-
             ignoreVillage(data.target_village_id)
         }
     }
-
-    const commandSentListener = function (event, data) {
+    const commandSentListener = function(event, data) {
         if (!activeFarmer || !currentTarget) {
             return
         }
-
         if (data.origin.id !== activeFarmer.getId()) {
             return
         }
-
         if (data.target.id !== currentTarget.id) {
             return
         }
-
         if (data.direction === 'forward' && data.type === COMMAND_TYPES.TYPES.ATTACK) {
             activeFarmer.commandSent(data)
         }
     }
-
-    const commandErrorListener = function (event, data) {
+    const commandErrorListener = function(event, data) {
         if (!activeFarmer || !sendingCommand || !currentTarget) {
             return
         }
-
         if (data.cause === routeProvider.SEND_PRESET.type) {
             activeFarmer.commandError(data)
         }
     }
-
-    const getPresetHaul = function (preset) {
+    const getPresetHaul = function(preset) {
         let haul = 0
-
-        utils.each(preset.units, function (unitAmount, unitName) {
+        utils.each(preset.units, function(unitAmount, unitName) {
             if (unitAmount) {
                 haul += unitsData[unitName].load * unitAmount
             }
         })
-
         return haul
     }
-
-    const addExceptionLog = function (villageId) {
+    const addExceptionLog = function(villageId) {
         exceptionLogs[villageId] = {
             time: timeHelper.gameTime(),
             report: tempVillageReports[villageId] || false
         }
-
         delete tempVillageReports[villageId]
-
         Lockr.set(STORAGE_KEYS.EXCEPTION_LOGS, exceptionLogs)
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_EXCEPTION_LOGS_UPDATED)
     }
-
-    const addLog = function (type, data = {}) {
+    const addLog = function(type, data = {}) {
         if (typeof type !== 'string') {
             return false
         }
-
         if (!angular.isObject(data)) {
             data = {}
         }
-
         data.time = timeHelper.gameTime()
         data.type = type
-
         logs.unshift(data)
         trimAndSaveLogs()
-
         return true
     }
-
-    const trimAndSaveLogs = function () {
+    const trimAndSaveLogs = function() {
         const limit = farmSettings[SETTINGS.LOGS_LIMIT]
-
         if (logs.length > limit) {
             logs.splice(logs.length - limit, logs.length)
         }
-
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_LOGS_UPDATED)
     }
-
-    const isTargetBusy = function (attacking, otherAttacking, allVillagesLoaded) {
+    const isTargetBusy = function(attacking, otherAttacking, allVillagesLoaded) {
         const multipleFarmers = farmSettings[SETTINGS.TARGET_MULTIPLE_FARMERS]
         const singleAttack = farmSettings[SETTINGS.TARGET_SINGLE_ATTACK]
-
         if (multipleFarmers && allVillagesLoaded) {
             if (singleAttack && attacking) {
                 return true
@@ -19740,20 +18831,16 @@ define('two/farmOverflow', [
         } else if (otherAttacking) {
             return true
         }
-
         return false
     }
-
-    const enableRequiredPresets = function (villageId, callback) {
+    const enableRequiredPresets = function(villageId, callback) {
         const villagePresets = modelDataService.getPresetList().getPresetsByVillageId(villageId)
         let missingPresets = []
-
-        selectedPresets.forEach(function (preset) {
+        selectedPresets.forEach(function(preset) {
             if (!hasOwn.call(villagePresets, preset.id)) {
                 missingPresets.push(preset.id)
             }
         })
-
         if (missingPresets.length) {
             // include already enabled presets because you can't only enable
             // missing ones, you need to emit all you want enabled.
@@ -19762,92 +18849,78 @@ define('two/farmOverflow', [
                     missingPresets.push(id)
                 }
             }
-
             socketService.emit(routeProvider.ASSIGN_PRESETS, {
                 village_id: villageId,
                 preset_ids: missingPresets
             }, callback)
-
             return
         }
-
         callback()
     }
-
-    const persistentRunningStart = function () {
+    const persistentRunningStart = function() {
         let cycleInterval = getCycleInterval()
         let attackInterval = getAttackInterval()
         let timeLimit = cycleInterval + (cycleInterval / 2) + attackInterval
-
-        persistentRunningTimer = setInterval(function () {
+        persistentRunningTimer = setInterval(function() {
             let now = timeHelper.gameTime()
-
             if (now - persistentRunningLastCheck > timeLimit) {
                 farmOverflow.stop()
                 setTimeout(farmOverflow.start, 5000)
             }
         }, PERSISTENT_RUNNING_CHECK_INTERVAL)
     }
-
-    const persistentRunningStop = function () {
+    const persistentRunningStop = function() {
         clearInterval(persistentRunningTimer)
     }
-
-    const persistentRunningUpdate = function () {
+    const persistentRunningUpdate = function() {
         persistentRunningLastCheck = timeHelper.gameTime()
     }
-
-    const stopTimers = function () {
+    const stopTimers = function() {
         clearTimeout(cycleTimer)
         clearTimeout(stepDelayTimer)
         clearTimeout(commandExpireTimer)
-
         cycleTimer = null
         stepDelayTimer = null
         commandExpireTimer = null
     }
-
-    const getCycleInterval = function () {
+    const getCycleInterval = function() {
         return Math.max(MINIMUM_FARMER_CYCLE_INTERVAL, farmSettings[SETTINGS.FARMER_CYCLE_INTERVAL] * 60 * 1000)
     }
-
-    const getAttackInterval = function () {
+    const getAttackInterval = function() {
         return Math.max(MINIMUM_ATTACK_INTERVAL, farmSettings[SETTINGS.ATTACK_INTERVAL] * 1000)
     }
-
-    const Farmer = function (villageId) {
+    const updateLastAttack = function () {
+        lastAttack = timeHelper.gameTime()
+        Lockr.set('farm-lastAttack', lastAttack)
+    }
+    const Farmer = function(villageId) {
         this.villageId = villageId
         this.village = $player.getVillage(villageId)
-
+        selectedVillage = $player.getVillage(villageId)
         if (!this.village) {
             throw new Error(`new Farmer -> Village ${villageId} doesn't exist.`)
         }
-
         this.index = 0
         this.running = false
         this.initialized = false
         this.targets = false
         this.onCycleEndFn = noop
         this.status = STATUS.WAITING_CYCLE
+        currentStatus = 'status_waiting_cycle'
     }
-
-    Farmer.prototype.init = function () {
+    Farmer.prototype.init = function() {
         let loadPromises = []
-
         if (!this.isInitialized()) {
             loadPromises.push(new Promise((resolve) => {
                 if (this.isInitialized()) {
                     return resolve()
                 }
-
                 villageService.ensureVillageDataLoaded(this.villageId, resolve)
             }))
-
             loadPromises.push(new Promise((resolve) => {
                 if (this.isInitialized()) {
                     return resolve()
                 }
-
                 this.loadTargets(() => {
                     eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_INSTANCE_READY, {
                         villageId: this.villageId
@@ -19856,71 +18929,56 @@ define('two/farmOverflow', [
                 })
             }))
         }
-
         return Promise.all(loadPromises).then(() => {
             this.initialized = true
         })
     }
-
-    Farmer.prototype.start = function () {
+    Farmer.prototype.start = function() {
         persistentRunningUpdate()
-
         if (this.running) {
             return false
         }
-
         if (!this.initialized) {
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_INSTANCE_ERROR_NOT_READY, {
                 villageId: this.villageId
             })
             return false
         }
-
         if (!this.targets.length) {
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_INSTANCE_ERROR_NO_TARGETS, {
                 villageId: this.villageId
             })
             return false
         }
-
         activeFarmer = this
         this.running = true
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_INSTANCE_START, {
             villageId: this.villageId
         })
-
         this.targetStep({
             delay: false
         })
-
         return true
     }
-
-    Farmer.prototype.stop = function (reason) {
+    Farmer.prototype.stop = function(reason) {
         this.running = false
-
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_INSTANCE_STOP, {
             villageId: this.villageId,
             reason: reason
         })
-
         if (reason === ERROR_TYPES.USER_STOP) {
             this.setStatus(STATUS.USER_STOP)
+            currentStatus = 'status_user_stop'
         }
-
         stopTimers()
-
         this.onCycleEndFn(reason)
         this.onCycleEndFn = noop
     }
-
-    Farmer.prototype.targetStep = async function (options = {}) {
+    Farmer.prototype.targetStep = async function(options = {}) {
         if (!this.running) {
             return false
         }
-
         persistentRunningUpdate()
-
         const commandList = this.village.getCommandListModel()
         const villageCommands = commandList.getOutgoingCommands(true, true)
         let selectedPreset = false
@@ -19929,17 +18987,15 @@ define('two/farmOverflow', [
         let otherVillageAttacking
         let thisVillageAttacking
         let playerVillages
-
         const delayStep = () => {
             return new Promise((resolve, reject) => {
                 if (options.delay) {
                     stepDelayTimer = setTimeout(() => {
                         stepDelayTimer = null
-
                         if (!this.running) {
+                            currentStatus = 'status_user_stop'
                             return reject(STATUS.USER_STOP)
                         }
-
                         resolve()
                     }, utils.randomSeconds(getAttackInterval()))
                 } else {
@@ -19947,19 +19003,17 @@ define('two/farmOverflow', [
                 }
             })
         }
-
         const checkCommandLimit = () => {
             return new Promise((resolve, reject) => {
                 const limit = VILLAGE_COMMAND_LIMIT - farmSettings[SETTINGS.PRESERVE_COMMAND_SLOTS]
-
                 if (villageCommands.length >= limit) {
                     reject(STATUS.COMMAND_LIMIT)
+                    currentStatus = 'status_command_limit'
                 } else {
                     resolve()
                 }
             })
         }
-
         const checkStorage = () => {
             return new Promise((resolve, reject) => {
                 if (farmSettings[SETTINGS.IGNORE_FULL_STORAGE]) {
@@ -19967,49 +19021,48 @@ define('two/farmOverflow', [
                     const computed = resources.getComputed()
                     const maxStorage = resources.getMaxStorage()
                     const isFull = RESOURCES.every((type) => computed[type].currentStock === maxStorage)
-
                     if (isFull) {
+                        currentStatus = 'status_full_storage'
                         return reject(STATUS.FULL_STORAGE)
                     }
                 }
-
                 resolve()
             })
         }
-
         const selectTarget = () => {
             return new Promise((resolve, reject) => {
                 if (!this.targets.length) {
+                    currentStatus = 'status_no_targets'
                     return reject(STATUS.NO_TARGETS)
                 }
-
                 if (this.index > this.targets.length || !this.targets[this.index]) {
+                    currentStatus = 'status_target_cycle_end'
                     return reject(STATUS.TARGET_CYCLE_END)
                 }
-
                 target = this.targets[this.index]
-
                 resolve()
             })
         }
-
         const checkTarget = () => {
             return new Promise((resolve, reject) => {
                 $mapData.getTownAtAsync(target.x, target.y, (data) => {
                     if (villageFilters.points(data.points)) {
+                        currentStatus = 'status_not_allowed_points'
                         return reject(STATUS.NOT_ALLOWED_POINTS)
                     }
-
                     socketService.emit(routeProvider.GET_ATTACKING_FACTOR, {
                         target_id: target.id
                     }, (data) => {
                         if (!this.running) {
                             reject(STATUS.USER_STOP)
-                        // abandoned village conquered by some noob.
+                            currentStatus = 'status_user_stop'
+                            // abandoned village conquered by some noob.
                         } else if (target.character_id === null && data.owner_id !== null && !includedVillages.includes(target.id)) {
                             reject(STATUS.ABANDONED_CONQUERED)
+                            currentStatus = 'status_abandoned_conquered'
                         } else if (target.attack_protection) {
                             reject(STATUS.PROTECTED_VILLAGE)
+                            currentStatus = 'status_protected_village'
                         } else {
                             resolve()
                         }
@@ -20017,7 +19070,6 @@ define('two/farmOverflow', [
                 })
             })
         }
-
         const checkPresets = () => {
             return new Promise((resolve, reject) => {
                 enableRequiredPresets(this.villageId, () => {
@@ -20025,35 +19077,30 @@ define('two/farmOverflow', [
                         resolve()
                     } else {
                         reject(STATUS.USER_STOP)
+                        currentStatus = 'status_user_stop'
                     }
                 })
             })
         }
-
         const selectPreset = () => {
             return new Promise((resolve, reject) => {
                 const villageUnits = this.village.getUnitInfo().getUnits()
                 const maxTravelTime = farmSettings[SETTINGS.MAX_TRAVEL_TIME] * 60
                 const villagePosition = this.village.getPosition()
                 const targetDistance = math.actualDistance(villagePosition, target)
-
                 utils.each(selectedPresets, (preset) => {
                     let enoughUnits = !Object.entries(preset.units).some((unit) => {
                         const name = unit[0]
                         const amount = unit[1]
-                        
                         return villageUnits[name].in_town < amount
                     })
-
                     if (!enoughUnits) {
                         return
                     }
-
                     const travelTime = armyService.calculateTravelTime(preset, {
                         barbarian: !target.character_id,
                         officers: false
                     })
-
                     if (maxTravelTime > travelTime * targetDistance) {
                         selectedPreset = preset
                         resolve()
@@ -20061,73 +19108,60 @@ define('two/farmOverflow', [
                         // why reject with TIME_LIMIT if there are more presets to check?
                         // because the preset list is sorted by travel time.
                         reject(STATUS.TIME_LIMIT)
+                        currentStatus = 'status_time_limit'
                     }
-
                     return false
                 })
-
                 if (!selectedPreset) {
                     reject(STATUS.NO_UNITS)
+                    currentStatus = 'status_no_units'
                 }
             })
         }
-
         const checkLocalCommands = () => {
             return new Promise((resolve, reject) => {
                 otherVillageAttacking = false
                 playerVillages = $player.getVillageList()
-                
                 const allVillagesLoaded = playerVillages.every((anotherVillage) => anotherVillage.isInitialized(VILLAGE_CONFIG.READY_STATES.OWN_COMMANDS))
-
                 if (allVillagesLoaded) {
                     otherVillageAttacking = playerVillages.some((anotherVillage) => {
                         if (anotherVillage.getId() === this.villageId) {
                             return false
                         }
-
                         const otherVillageCommands = anotherVillage.getCommandListModel().getOutgoingCommands(true, true)
-
                         return otherVillageCommands.some((command) => {
                             return command.targetVillageId === target.id && command.data.direction === 'forward'
                         })
                     })
                 }
-
                 thisVillageAttacking = villageCommands.some((command) => {
                     return command.data.target.id === target.id && command.data.direction === 'forward'
                 })
-
                 if (isTargetBusy(thisVillageAttacking, otherVillageAttacking, allVillagesLoaded)) {
+                    currentStatus = 'status_busy_target'
                     return reject(STATUS.BUSY_TARGET)
                 }
-
                 if (allVillagesLoaded) {
                     checkedLocalCommands = true
                 }
-
                 resolve()
             })
         }
-
         const minimumInterval = () => {
             return new Promise((resolve, reject) => {
                 if (!thisVillageAttacking && !otherVillageAttacking) {
                     return resolve()
                 }
-
                 const multipleAttacksInterval = farmSettings[SETTINGS.MULTIPLE_ATTACKS_INTERVAL] * 60
-
                 if (!multipleAttacksInterval) {
                     return resolve()
                 }
-
                 // if TARGET_SINGLE_ATTACK is enabled, and TARGET_MULTIPLE_FARMERS is disabled
                 // there's no reason the check, since the target is allowed to receive multiple
                 // attacks simultaneously.
                 if (farmSettings[SETTINGS.TARGET_SINGLE_ATTACK] && !farmSettings[SETTINGS.TARGET_MULTIPLE_FARMERS]) {
                     return resolve()
                 }
-
                 const now = Math.round(timeHelper.gameTime() / 1000)
                 const villages = farmSettings[SETTINGS.TARGET_MULTIPLE_FARMERS] ? playerVillages : [this.village]
                 const position = this.village.getPosition()
@@ -20138,65 +19172,57 @@ define('two/farmOverflow', [
                     effects: true
                 })
                 const commandTravelTime = armyService.getTravelTimeForDistance(selectedPreset, singleFieldtravelTime, distance, COMMAND_TYPES.TYPES.ATTACK)
-
                 const busyTarget = villages.some((village) => {
                     const commands = village.getCommandListModel().getOutgoingCommands(true, true)
                     const targetCommands = commands.filter((command) => command.targetVillageId === target.id && command.data.direction === 'forward')
-
                     if (targetCommands.length) {
                         return targetCommands.some((command) => {
                             return Math.abs((now + commandTravelTime) - command.time_completed) < multipleAttacksInterval
                         })
                     }
                 })
-
                 if (busyTarget) {
+                    currentStatus = 'status_busy_target'
                     return reject(STATUS.BUSY_TARGET)
                 }
-
                 resolve()
             })
         }
-
         const checkLoadedCommands = () => {
             return new Promise((resolve, reject) => {
                 if (checkedLocalCommands) {
                     return resolve()
                 }
-
                 socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
                     my_village_id: this.villageId,
                     village_id: target.id,
                     num_reports: 0
                 }, (data) => {
                     if (!this.running) {
+                        currentStatus = 'status_user_stop'
                         return reject(STATUS.USER_STOP)
                     }
-
                     const targetCommands = data.commands.own.filter((command) => command.type === COMMAND_TYPES.TYPES.ATTACK && command.direction === 'forward')
                     const otherAttacking = targetCommands.some((command) => command.start_village_id !== this.villageId)
                     const attacking = targetCommands.some((command) => command.start_village_id === this.villageId)
-
                     if (isTargetBusy(attacking, otherAttacking, true)) {
+                        currentStatus = 'status_busy_target'
                         return reject(STATUS.BUSY_TARGET)
                     }
-
                     resolve()
                 })
             })
         }
-
         const prepareAttack = () => {
             if (!this.running) {
                 return false
             }
-
             this.setStatus(STATUS.ATTACKING)
-
+            currentStatus = 'status_attacking'
+            updateLastAttack()
             sendingCommand = true
             currentTarget = target
             this.index++
-
             socketService.emit(routeProvider.SEND_PRESET, {
                 start_village: this.villageId,
                 target_village: target.id,
@@ -20204,15 +19230,12 @@ define('two/farmOverflow', [
                 type: COMMAND_TYPES.TYPES.ATTACK
             })
         }
-
         const stepStatus = (status) => {
             stopTimers()
-
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_INSTANCE_STEP_STATUS, {
                 villageId: this.villageId,
                 error: status
             })
-
             switch (status) {
                 case STATUS.TIME_LIMIT:
                 case STATUS.BUSY_TARGET:
@@ -20221,10 +19244,12 @@ define('two/farmOverflow', [
                     this.index++
                     this.setStatus(status)
                     this.targetStep(options)
+                    currentStatus = 'status_protected_village'
                     break
                 }
                 case STATUS.USER_STOP: {
                     this.setStatus(status)
+                    currentStatus = 'status_user_stop'
                     break
                 }
                 case STATUS.NOT_ALLOWED_POINTS: {
@@ -20232,6 +19257,7 @@ define('two/farmOverflow', [
                     this.setStatus(status)
                     removeTarget(target.id)
                     this.targetStep(options)
+                    currentStatus = 'status_not_allowed_points'
                     break
                 }
                 case STATUS.NO_UNITS:
@@ -20241,17 +19267,20 @@ define('two/farmOverflow', [
                     this.index++
                     this.setStatus(status)
                     this.stop(status)
+                    currentStatus = 'status_command_limit'
                     break
                 }
                 case STATUS.TARGET_CYCLE_END: {
                     this.index = 0
                     this.setStatus(status)
                     this.stop(status)
+                    currentStatus = 'status_target_cycle_end'
                     break
                 }
                 case STATUS.EXPIRED_STEP: {
                     this.setStatus(status)
                     this.targetStep()
+                    currentStatus = 'status_expired_step'
                     break
                 }
                 default: {
@@ -20260,11 +19289,11 @@ define('two/farmOverflow', [
                     this.index++
                     this.setStatus(STATUS.UNKNOWN)
                     this.stop(STATUS.UNKNOWN)
+                    currentStatus = 'status_unknown'
                     break
                 }
             }
         }
-
         let attackPromise = new Promise((resolve, reject) => {
             delayStep()
                 .then(checkCommandLimit)
@@ -20279,179 +19308,140 @@ define('two/farmOverflow', [
                 .then(resolve)
                 .catch(reject)
         })
-
         let expirePromise = new Promise((resolve, reject) => {
             commandExpireTimer = setTimeout(() => {
                 if (this.running) {
                     reject(STATUS.EXPIRED_STEP)
+                    currentStatus = 'status_expired_step'
                 }
             }, STEP_EXPIRE_TIME)
         })
-
         Promise.race([attackPromise, expirePromise])
             .then(prepareAttack)
             .catch(stepStatus)
     }
-
-    Farmer.prototype.setStatus = function (newStatus) {
+    Farmer.prototype.setStatus = function(newStatus) {
         this.status = newStatus
     }
-
-    Farmer.prototype.getStatus = function () {
+    Farmer.prototype.getStatus = function() {
+        currentStatus = 'status_unknown'
         return this.status || STATUS.UNKNOWN
     }
-
-    Farmer.prototype.commandSent = function (data) {
+    Farmer.prototype.commandSent = function(data) {
         sendingCommand = false
         currentTarget = false
-
         stopTimers()
-
         addLog(LOG_TYPES.ATTACKED_VILLAGE, {
             targetId: data.target.id
         })
-
         this.targetStep({
             delay: true
         })
     }
-
-    Farmer.prototype.commandError = function () {
+    Farmer.prototype.commandError = function() {
         sendingCommand = false
         currentTarget = false
-
         this.stop(STATUS.COMMAND_ERROR)
+        currentStatus = 'status_command_error'
     }
-
-    Farmer.prototype.onCycleEnd = function (handler) {
+    Farmer.prototype.onCycleEnd = function(handler) {
         this.onCycleEndFn = handler
     }
-
-    Farmer.prototype.loadTargets = function (callback) {
+    Farmer.prototype.loadTargets = function(callback) {
         const pos = this.village.getPosition()
-
         twoMapData.load((loadedTargets) => {
             this.targets = calcDistances(loadedTargets, pos)
             this.targets = filterTargets(this.targets, pos)
             this.targets = sortTargets(this.targets)
             this.targets = this.targets.slice(0, farmSettings[SETTINGS.TARGET_LIMIT_PER_VILLAGE])
-
             if (typeof callback === 'function') {
                 callback(this.targets)
             }
         })
     }
-
-    Farmer.prototype.getTargets = function () {
+    Farmer.prototype.getTargets = function() {
         return this.targets
     }
-
-    Farmer.prototype.getIndex = function () {
+    Farmer.prototype.getIndex = function() {
         return this.index
     }
-
-    Farmer.prototype.getVillage = function () {
+    Farmer.prototype.getVillage = function() {
         return this.village
     }
-
-    Farmer.prototype.isRunning = function () {
+    Farmer.prototype.isRunning = function() {
         return this.running
     }
-
-    Farmer.prototype.isInitialized = function () {
+    Farmer.prototype.isInitialized = function() {
         return this.initialized
     }
-
-    Farmer.prototype.removeTarget = function (targetId) {
+    Farmer.prototype.removeTarget = function(targetId) {
         if (typeof targetId !== 'number' || !this.targets) {
             return false
         }
-
-        this.targets = this.targets.filter(function (target) {
+        this.targets = this.targets.filter(function(target) {
             return target.id !== targetId
         })
-
         return true
     }
-
-    Farmer.prototype.getId = function () {
+    Farmer.prototype.getId = function() {
         return this.villageId
     }
-
-    const createFarmer = function (villageId) {
+    const createFarmer = function(villageId) {
         const groupsOnly = farmSettings[SETTINGS.GROUP_ONLY]
-
         villageId = parseInt(villageId, 10)
-
         if (groupsOnly.length && !onlyVillages.includes(villageId)) {
             return false
         }
-
         if (ignoredVillages.includes(villageId)) {
             return false
         }
-
         let farmer = farmOverflow.getFarmer(villageId)
-
         if (!farmer) {
             farmer = new Farmer(villageId)
             farmers.push(farmer)
         }
-
         return farmer
     }
-
-    const createFarmers = function () {
-        utils.each($player.getVillages(), function (village, villageId) {
+    const createFarmers = function() {
+        utils.each($player.getVillages(), function(village, villageId) {
             createFarmer(villageId)
         })
-
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_FARMER_VILLAGES_UPDATED)
     }
-
     /**
      * Clean farmer instances by removing villages based on
      * groups-only, only-villages and ignore-villages group filters.
      */
-    const flushFarmers = function () {
+    const flushFarmers = function() {
         const groupsOnly = farmSettings[SETTINGS.GROUP_ONLY]
         let removeIds = []
-
-        farmers.forEach(function (farmer) {
+        farmers.forEach(function(farmer) {
             let villageId = farmer.getId()
-
             if (groupsOnly.length && !onlyVillages.includes(villageId)) {
                 removeIds.push(villageId)
             } else if (ignoredVillages.includes(villageId)) {
                 removeIds.push(villageId)
             }
         })
-
         if (removeIds.length) {
-            removeIds.forEach(function (removeId) {
+            removeIds.forEach(function(removeId) {
                 removeFarmer(removeId)
             })
-
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_FARMER_VILLAGES_UPDATED)
         }
     }
-
-    const removeFarmer = function (farmerId) {
+    const removeFarmer = function(farmerId) {
         for (let i = 0; i < farmers.length; i++) {
             if (farmers[i].getId() === farmerId) {
                 farmers[i].stop(ERROR_TYPES.KILL_FARMER)
                 farmers.splice(i, i + 1)
-
                 return true
             }
         }
-
         return false
     }
-
-    const farmerStep = function (status) {
+    const farmerStep = function(status) {
         persistentRunningUpdate()
-
         if (!farmers.length) {
             activeFarmer = false
         } else if (farmerIndex >= farmers.length) {
@@ -20459,26 +19449,24 @@ define('two/farmOverflow', [
             activeFarmer = false
             nextCycleDate = timeHelper.gameTime() + getCycleInterval()
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_CYCLE_END)
+            currentStatus = 'step_cycle_next'
         } else {
             activeFarmer = farmers[farmerIndex]
         }
-
         if (activeFarmer) {
-            activeFarmer.onCycleEnd(function (reason) {
+            activeFarmer.onCycleEnd(function(reason) {
                 if (reason !== ERROR_TYPES.USER_STOP) {
                     farmerIndex++
                     farmerStep()
                 }
             })
-
             if (status === CYCLE_BEGIN) {
                 nextCycleDate = null
                 eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_CYCLE_BEGIN)
             }
-
             activeFarmer.start()
         } else {
-            cycleTimer = setTimeout(function () {
+            cycleTimer = setTimeout(function() {
                 cycleTimer = null
                 farmerIndex = 0
                 nextCycleDate = null
@@ -20487,101 +19475,81 @@ define('two/farmOverflow', [
             }, getCycleInterval())
         }
     }
-
-    const isTarget = function (targetId) {
+    const isTarget = function(targetId) {
         for (let i = 0; i < farmers.length; i++) {
             let farmer = farmers[i]
             let targets = farmer.getTargets()
-
             for (let j = 0; j < targets.length; j++) {
                 let target = targets[j]
-
                 if (target.id === targetId) {
                     return true
                 }
             }
         }
-
         return false
     }
-
-    const removeTarget = function (targetId) {
-        farmers.forEach(function (farmer) {
+    const removeTarget = function(targetId) {
+        farmers.forEach(function(farmer) {
             farmer.removeTarget(targetId)
         })
     }
-
-    const reloadTargets = function () {
-        twoMapData.load(function () {
-            farmers.forEach(function (farmer) {
+    const reloadTargets = function() {
+        twoMapData.load(function() {
+            farmers.forEach(function(farmer) {
                 farmer.loadTargets()
             })
         }, true)
     }
-
     let farmOverflow = {}
-
-    farmOverflow.init = function () {
+    farmOverflow.init = function() {
         initialized = true
         logs = Lockr.get(STORAGE_KEYS.LOGS, [])
+        lastAttack = Lockr.get('farm-lastAttack', -1, true)
         exceptionLogs = Lockr.get(STORAGE_KEYS.EXCEPTION_LOGS, {})
         $player = modelDataService.getSelectedCharacter()
         unitsData = modelDataService.getGameData().getUnitsObject()
-
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates, _flag) {
+        settings.onChange(function(changes, updates, _flag) {
             farmSettings = settings.getAll()
-
             if (_flag === IGNORE_UPDATES) {
                 return
             }
-
             if (updates[UPDATES.PRESET]) {
                 processPresets()
             }
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroupVillages()
             }
-
             if (updates[UPDATES.TARGETS]) {
                 reloadTargets()
             }
-
             if (updates[UPDATES.VILLAGES]) {
                 flushFarmers()
                 createFarmers()
             }
-
             if (updates[UPDATES.LOGS]) {
                 trimAndSaveLogs()
             }
-
             if (updates[UPDATES.INTERVAL_TIMERS]) {
                 reloadTimers()
             }
         })
-
         farmSettings = settings.getAll()
-
         validGroups(IGNORE_UPDATES)
         updateGroupVillages()
         createFarmers()
-
-        ready(function () {
+        messageListener()
+        ready(function() {
             processPresets()
         }, 'presets')
-
-        ready(function () {
-            farmers.forEach(function (farmer) {
+        ready(function() {
+            farmers.forEach(function(farmer) {
                 farmer.loadTargets()
             })
         }, 'minimap_data')
-
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, presetListener)
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, presetListener)
         $rootScope.$on(eventTypeProvider.GROUPS_VILLAGE_LINKED, villageGroupLink)
@@ -20591,130 +19559,99 @@ define('two/farmOverflow', [
         $rootScope.$on(eventTypeProvider.MESSAGE_ERROR, commandErrorListener)
         $rootScope.$on(eventTypeProvider.REPORT_NEW, reportListener)
     }
-
-    farmOverflow.start = function () {
+    farmOverflow.start = function() {
         let readyFarmers
-
         if (running) {
             return false
         }
-
         if (!selectedPresets.length) {
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_STOP, {
                 reason: ERROR_TYPES.NO_PRESETS
             })
-
+            currentStatus = 'no_preset'
             return false
         }
-
         running = true
         readyFarmers = []
-
-        farmers.forEach(function (farmer) {
-            readyFarmers.push(new Promise(function (resolve) {
+        farmers.forEach(function(farmer) {
+            readyFarmers.push(new Promise(function(resolve) {
                 farmer.init().then(resolve)
             }))
         })
-
         if (!readyFarmers.length) {
             running = false
             return false
         }
-
-        Promise.all(readyFarmers).then(function () {
+        Promise.all(readyFarmers).then(function() {
             farmerStep(CYCLE_BEGIN)
         })
-
         persistentRunningUpdate()
         persistentRunningStart()
-
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_START)
-
         addLog(LOG_TYPES.FARM_START)
     }
-
-    farmOverflow.stop = function (reason = STATUS.USER_STOP) {
+    farmOverflow.stop = function(reason = STATUS.USER_STOP) {
         if (activeFarmer) {
             activeFarmer.stop(reason)
-            
             if (reason !== STATUS.USER_STOP) {
                 nextCycleDate = timeHelper.gameTime() + getCycleInterval()
+                currentStatus = 'step_cycle_next'
             }
-
             eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_CYCLE_END, reason)
         } else {
             nextCycleDate = null
         }
-
         running = false
-
         stopTimers()
-
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_STOP, {
             reason: reason
         })
-
         persistentRunningStop()
-
         if (reason === STATUS.USER_STOP) {
             addLog(LOG_TYPES.FARM_STOP)
         }
     }
-
-    farmOverflow.getFarmer = function (farmerId) {
-        return farmers.find(function (farmer) {
+    farmOverflow.getFarmer = function(farmerId) {
+        return farmers.find(function(farmer) {
             return farmer.getId() === farmerId
         })
     }
-
-    farmOverflow.getFarmers = function () {
+    farmOverflow.getFarmers = function() {
         return farmers
     }
-
-    farmOverflow.getSettings = function () {
+    farmOverflow.getSettings = function() {
         return settings
     }
-
-    farmOverflow.getExceptionVillages = function () {
+    farmOverflow.getExceptionVillages = function() {
         return {
             included: includedVillages,
             ignored: ignoredVillages
         }
     }
-
-    farmOverflow.getExceptionLogs = function () {
+    farmOverflow.getExceptionLogs = function() {
         return exceptionLogs
     }
-
-    farmOverflow.isInitialized = function () {
+    farmOverflow.isInitialized = function() {
         return initialized
     }
-
-    farmOverflow.isRunning = function () {
+    farmOverflow.isRunning = function() {
         return running
     }
-
-    farmOverflow.getLogs = function () {
+    farmOverflow.getLogs = function() {
         return logs
     }
-
-    farmOverflow.clearLogs = function () {
+    farmOverflow.clearLogs = function() {
         logs = []
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         eventQueue.trigger(eventTypeProvider.FARM_OVERFLOW_LOGS_UPDATED)
-
         return logs
     }
-
-    farmOverflow.getNextCycleDate = function () {
+    farmOverflow.getNextCycleDate = function() {
         return nextCycleDate
     }
-
     farmOverflow.getCycleInterval = getCycleInterval
-
     return farmOverflow
 })
-
 define('two/farmOverflow/events', [], function () {
     angular.extend(eventTypeProvider, {
         FARM_OVERFLOW_START: 'farm_overflow_start',
@@ -20803,7 +19740,7 @@ define('two/farmOverflow/ui', [
         }
 
         villagesInfo[villageId] = true
-        villagesLabel[villageId] = 'ładowanie...'
+        villagesLabel[villageId] = 'ŁADOWANIE...'
 
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
@@ -20984,7 +19921,7 @@ define('two/farmOverflow/ui', [
             $button.classList.add('btn-orange')
         })
 
-        interfaceOverflow.addTemplate('twoverflow_farm_overflow_window', `<div id=\"two-farmoverflow\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'farm_overflow' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.VILLAGES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.VILLAGES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.VILLAGES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.VILLAGES}\">{{ TAB_TYPES.VILLAGES | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><tr><th colspan=\"2\">{{ 'groups_presets' | i18n:loc.ale:'farm_overflow' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'farm_overflow' }}</span><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'group_ignored' | i18n:loc.ale:'farm_overflow' }}</span><td class=\"snowflake\"><div select=\"\" list=\"groupsWithDisabled\" selected=\"settings[SETTINGS.GROUP_IGNORE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'group_include' | i18n:loc.ale:'farm_overflow' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_INCLUDE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'group_only' | i18n:loc.ale:'farm_overflow' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_ONLY]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'misc' | i18n:loc.ale:'farm_overflow' }}<tr><td><span class=\"ff-cell-fix\">{{ 'attack_interval' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ATTACK_INTERVAL].min\" max=\"settingsMap[SETTINGS.ATTACK_INTERVAL].max\" value=\"settings[SETTINGS.ATTACK_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ATTACK_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'preserve_command_slots' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_COMMAND_SLOTS].min\" max=\"settingsMap[SETTINGS.PRESERVE_COMMAND_SLOTS].max\" value=\"settings[SETTINGS.PRESERVE_COMMAND_SLOTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_COMMAND_SLOTS]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'ignore_on_loss' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"settings[SETTINGS.GROUP_IGNORE].value\" border=\"true\" value=\"settings[SETTINGS.IGNORE_ON_LOSS]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'ignore_full_storage' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.IGNORE_FULL_STORAGE]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'target_limit_per_village' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TARGET_LIMIT_PER_VILLAGE].min\" max=\"settingsMap[SETTINGS.TARGET_LIMIT_PER_VILLAGE].max\" value=\"settings[SETTINGS.TARGET_LIMIT_PER_VILLAGE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_LIMIT_PER_VILLAGE]\"></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'step_cycle_header' | i18n:loc.ale:'farm_overflow' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_single_attack' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TARGET_SINGLE_ATTACK]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_multiple_farmers' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TARGET_MULTIPLE_FARMERS]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'farmer_cycle_interval' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.FARMER_CYCLE_INTERVAL].min\" max=\"settingsMap[SETTINGS.FARMER_CYCLE_INTERVAL].max\" value=\"settings[SETTINGS.FARMER_CYCLE_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FARMER_CYCLE_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'multiple_attacks_interval' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MULTIPLE_ATTACKS_INTERVAL].min\" max=\"settingsMap[SETTINGS.MULTIPLE_ATTACKS_INTERVAL].max\" value=\"settings[SETTINGS.MULTIPLE_ATTACKS_INTERVAL]\" enabled=\"!(settings[SETTINGS.TARGET_SINGLE_ATTACK] && !settings[SETTINGS.TARGET_MULTIPLE_FARMERS])\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MULTIPLE_ATTACKS_INTERVAL]\" ng-disabled=\"settings[SETTINGS.TARGET_SINGLE_ATTACK] && !settings[SETTINGS.TARGET_MULTIPLE_FARMERS]\"></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'target_filters' | i18n:loc.ale:'farm_overflow' }}<tr><td><span class=\"ff-cell-fix\">{{ 'min_distance' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MIN_DISTANCE].min\" max=\"settingsMap[SETTINGS.MIN_DISTANCE].max\" value=\"settings[SETTINGS.MIN_DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'max_distance' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MAX_DISTANCE].min\" max=\"settingsMap[SETTINGS.MAX_DISTANCE].max\" value=\"settings[SETTINGS.MAX_DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MAX_DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'min_points' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MIN_POINTS].min\" max=\"settingsMap[SETTINGS.MIN_POINTS].max\" value=\"settings[SETTINGS.MIN_POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_POINTS]\"><tr><td><span class=\"ff-cell-fix\">{{ 'max_points' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MAX_POINTS].min\" max=\"settingsMap[SETTINGS.MAX_POINTS].max\" value=\"settings[SETTINGS.MAX_POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MAX_POINTS]\"><tr><td><span class=\"ff-cell-fix\">{{ 'max_travel_time' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MAX_TRAVEL_TIME].min\" max=\"settingsMap[SETTINGS.MAX_TRAVEL_TIME].max\" value=\"settings[SETTINGS.MAX_TRAVEL_TIME]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MAX_TRAVEL_TIME]\"></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'others' | i18n:loc.ale:'common' }}<tr><td><span class=\"ff-cell-fix\">{{ 'logs_limit' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LOGS_LIMIT].min\" max=\"settingsMap[SETTINGS.LOGS_LIMIT].max\" value=\"settings[SETTINGS.LOGS_LIMIT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LOGS_LIMIT]\"></table></div><div class=\"villages rich-text\" ng-show=\"selectedTab === TAB_TYPES.VILLAGES\"><p ng-show=\"showCycleTimer\" class=\"text-center\">{{ 'next_cycle_in' | i18n:loc.ale:'farm_overflow' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}<h5 class=\"twx-section\">{{ 'farmer_villages' | i18n:loc.ale:'farm_overflow' }}</h5><p ng-show=\"!farmers.length\" class=\"text-center\">{{ 'no_farmer_villages' | i18n:loc.ale:'farm_overflow' }}<table class=\"tbl-border-light tbl-striped\" ng-show=\"farmers.length\"><col><col width=\"40%\"><col width=\"20%\"><tr><th>{{ 'villages' | i18n:loc.ale:'common' }}<th>{{ 'last_status' | i18n:loc.ale:'farm_overflow' }}<th>{{ 'target' | i18n:loc.ale:'common':2 }}<tr ng-repeat=\"farmer in farmers\"><td><span ng-class=\"{true:'icon-20x20-queue-indicator-long', false:'icon-20x20-queue-indicator-short'}[farmer.isRunning()]\"></span> <a class=\"link\" ng-click=\"openVillageInfo(farmer.getVillage().getId())\"><span class=\"icon-20x20-village\"></span> {{ farmer.getVillage().getName() }} ({{ farmer.getVillage().getX() }}|{{ farmer.getVillage().getY() }})</a><td>{{ 'status_' + farmer.getStatus() | i18n:loc.ale:'farm_overflow' }}<td ng-if=\"farmer.getTargets()\"><span ng-if=\"farmer.isRunning()\">{{ farmer.getIndex() }} / </span><span>{{ farmer.getTargets().length }}</span><td ng-if=\"!farmer.getTargets()\">{{ 'not_loaded' | i18n:loc.ale:'farm_overflow' }}</table><h5 class=\"twx-section\">{{ 'ignored_targets' | i18n:loc.ale:'farm_overflow' }}</h5><p ng-if=\"!exceptionVillages.ignored.length\" class=\"text-center\">{{ 'no_ignored_targets' | i18n:loc.ale:'farm_overflow' }}<table class=\"ignored-villages tbl-border-light tbl-striped\" ng-show=\"exceptionVillages.ignored.length\"><col><col width=\"15%\"><col width=\"15%\"><col width=\"30px\"><tr><th>{{ 'villages' | i18n:loc.ale:'common' }}<th>{{ 'date' | i18n:loc.ale:'farm_overflow' }}<th>{{ 'reports' | i18n:loc.ale:'farm_overflow' }}<th><tr ng-repeat=\"villageId in exceptionVillages.ignored track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[villageId] }}</a><td>{{ exceptionLogs[villageId].time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}<td><span ng-if=\"exceptionLogs[villageId].report\"><a class=\"link\" ng-click=\"showReport(exceptionLogs[villageId].report.id)\" tooltip=\"\" tooltip-content=\"{{ exceptionLogs[villageId].report.title }}\"><span class=\"icon-20x20-report\"></span> {{ 'open_report' | i18n:loc.ale:'farm_overflow' }}</a> <span ng-class=\"{2:'icon-20x20-queue-indicator-medium', 3:'icon-20x20-queue-indicator-short'}[exceptionLogs[villageId].report.result]\"></span> <span ng-class=\"{'full': 'icon-26x26-capacity', 'partial':'icon-26x26-capacity-low', 'none':'hidden'}[exceptionLogs[villageId].report.haul]\"></span> </span><span ng-if=\"!exceptionLogs[villageId].report\">{{ 'no_report' | i18n:loc.ale:'farm_overflow' }}</span><td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"removeIgnored(villageId)\" tooltip=\"\" tooltip-content=\"\"></a></table><h5 class=\"twx-section\">{{ 'included_targets' | i18n:loc.ale:'farm_overflow' }}</h5><p ng-if=\"!exceptionVillages.included.length\" class=\"text-center\">{{ 'no_included_targets' | i18n:loc.ale:'farm_overflow' }}<table class=\"tbl-border-light tbl-striped\" ng-show=\"exceptionVillages.included.length\"><col><col width=\"15%\"><col width=\"30px\"><tr><th>{{ 'villages' | i18n:loc.ale:'common' }}<th>{{ 'date' | i18n:loc.ale:'farm_overflow' }}<th><tr ng-repeat=\"villageId in exceptionVillages.included track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[villageId] }}</a><td>{{ exceptionLogs[villageId].time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"removeIncluded(villageId)\" tooltip=\"\" tooltip-content=\"\"></a></table></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleLogs.length\">{{ 'no_logs' | i18n:loc.ale:'farm_overflow' }}<table class=\"log-list tbl-border-light tbl-striped\" ng-show=\"visibleLogs.length\"><col width=\"100px\"><col width=\"30px\"><col><tr ng-repeat=\"log in visibleLogs track by $index\"><td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}<td><span class=\"icon-bg-black\" ng-class=\"{
+        interfaceOverflow.addTemplate('twoverflow_farm_overflow_window', `<div id=\"two-farmoverflow\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'farm_overflow' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.VILLAGES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.VILLAGES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.VILLAGES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.VILLAGES}\">{{ TAB_TYPES.VILLAGES | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><tr><th colspan=\"2\">{{ 'groups_presets' | i18n:loc.ale:'farm_overflow' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets' | i18n:loc.ale:'farm_overflow' }}</span><td><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'group_ignored' | i18n:loc.ale:'farm_overflow' }}</span><td class=\"snowflake\"><div select=\"\" list=\"groupsWithDisabled\" selected=\"settings[SETTINGS.GROUP_IGNORE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'group_include' | i18n:loc.ale:'farm_overflow' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_INCLUDE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'group_only' | i18n:loc.ale:'farm_overflow' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_ONLY]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'misc' | i18n:loc.ale:'farm_overflow' }}<tr><td><span class=\"ff-cell-fix\">{{ 'attack_interval' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ATTACK_INTERVAL].min\" max=\"settingsMap[SETTINGS.ATTACK_INTERVAL].max\" value=\"settings[SETTINGS.ATTACK_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ATTACK_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'preserve_command_slots' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_COMMAND_SLOTS].min\" max=\"settingsMap[SETTINGS.PRESERVE_COMMAND_SLOTS].max\" value=\"settings[SETTINGS.PRESERVE_COMMAND_SLOTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_COMMAND_SLOTS]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'ignore_on_loss' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"settings[SETTINGS.GROUP_IGNORE].value\" border=\"true\" value=\"settings[SETTINGS.IGNORE_ON_LOSS]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'ignore_full_storage' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.IGNORE_FULL_STORAGE]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'target_limit_per_village' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TARGET_LIMIT_PER_VILLAGE].min\" max=\"settingsMap[SETTINGS.TARGET_LIMIT_PER_VILLAGE].max\" value=\"settings[SETTINGS.TARGET_LIMIT_PER_VILLAGE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_LIMIT_PER_VILLAGE]\"></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'step_cycle_header' | i18n:loc.ale:'farm_overflow' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_single_attack' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TARGET_SINGLE_ATTACK]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'target_multiple_farmers' | i18n:loc.ale:'farm_overflow' }}</span><td><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.TARGET_MULTIPLE_FARMERS]\" vertical=\"false\" size=\"'56x28'\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'farmer_cycle_interval' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.FARMER_CYCLE_INTERVAL].min\" max=\"settingsMap[SETTINGS.FARMER_CYCLE_INTERVAL].max\" value=\"settings[SETTINGS.FARMER_CYCLE_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FARMER_CYCLE_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'multiple_attacks_interval' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MULTIPLE_ATTACKS_INTERVAL].min\" max=\"settingsMap[SETTINGS.MULTIPLE_ATTACKS_INTERVAL].max\" value=\"settings[SETTINGS.MULTIPLE_ATTACKS_INTERVAL]\" enabled=\"!(settings[SETTINGS.TARGET_SINGLE_ATTACK] && !settings[SETTINGS.TARGET_MULTIPLE_FARMERS])\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MULTIPLE_ATTACKS_INTERVAL]\" ng-disabled=\"settings[SETTINGS.TARGET_SINGLE_ATTACK] && !settings[SETTINGS.TARGET_MULTIPLE_FARMERS]\"></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'target_filters' | i18n:loc.ale:'farm_overflow' }}<tr><td><span class=\"ff-cell-fix\">{{ 'min_distance' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MIN_DISTANCE].min\" max=\"settingsMap[SETTINGS.MIN_DISTANCE].max\" value=\"settings[SETTINGS.MIN_DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'max_distance' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MAX_DISTANCE].min\" max=\"settingsMap[SETTINGS.MAX_DISTANCE].max\" value=\"settings[SETTINGS.MAX_DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MAX_DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'min_points' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MIN_POINTS].min\" max=\"settingsMap[SETTINGS.MIN_POINTS].max\" value=\"settings[SETTINGS.MIN_POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_POINTS]\"><tr><td><span class=\"ff-cell-fix\">{{ 'max_points' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MAX_POINTS].min\" max=\"settingsMap[SETTINGS.MAX_POINTS].max\" value=\"settings[SETTINGS.MAX_POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MAX_POINTS]\"><tr><td><span class=\"ff-cell-fix\">{{ 'max_travel_time' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.MAX_TRAVEL_TIME].min\" max=\"settingsMap[SETTINGS.MAX_TRAVEL_TIME].max\" value=\"settings[SETTINGS.MAX_TRAVEL_TIME]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MAX_TRAVEL_TIME]\"></table><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'others' | i18n:loc.ale:'common' }}<tr><td><span class=\"ff-cell-fix\">{{ 'logs_limit' | i18n:loc.ale:'farm_overflow' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LOGS_LIMIT].min\" max=\"settingsMap[SETTINGS.LOGS_LIMIT].max\" value=\"settings[SETTINGS.LOGS_LIMIT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LOGS_LIMIT]\"><tr><td><span class=\"icon-26x26-message-misc\"></span> <span class=\"ff-cell-fix\">{{ 'settings.remote' | i18n:loc.ale:'farm_overflow' }}</span><td><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.REMOTE]\" min=\"3\" max=\"45\"></table></div><div class=\"villages rich-text\" ng-show=\"selectedTab === TAB_TYPES.VILLAGES\"><p ng-show=\"showCycleTimer\" class=\"text-center\">{{ 'next_cycle_in' | i18n:loc.ale:'farm_overflow' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}<h5 class=\"twx-section\">{{ 'farmer_villages' | i18n:loc.ale:'farm_overflow' }}</h5><p ng-show=\"!farmers.length\" class=\"text-center\">{{ 'no_farmer_villages' | i18n:loc.ale:'farm_overflow' }}<table class=\"tbl-border-light tbl-striped\" ng-show=\"farmers.length\"><col><col width=\"40%\"><col width=\"20%\"><tr><th>{{ 'villages' | i18n:loc.ale:'common' }}<th>{{ 'last_status' | i18n:loc.ale:'farm_overflow' }}<th>{{ 'target' | i18n:loc.ale:'common':2 }}<tr ng-repeat=\"farmer in farmers\"><td><span ng-class=\"{true:'icon-20x20-queue-indicator-long', false:'icon-20x20-queue-indicator-short'}[farmer.isRunning()]\"></span> <a class=\"link\" ng-click=\"openVillageInfo(farmer.getVillage().getId())\"><span class=\"icon-20x20-village\"></span> {{ farmer.getVillage().getName() }} ({{ farmer.getVillage().getX() }}|{{ farmer.getVillage().getY() }})</a><td>{{ 'status_' + farmer.getStatus() | i18n:loc.ale:'farm_overflow' }}<td ng-if=\"farmer.getTargets()\"><span ng-if=\"farmer.isRunning()\">{{ farmer.getIndex() }} / </span><span>{{ farmer.getTargets().length }}</span><td ng-if=\"!farmer.getTargets()\">{{ 'not_loaded' | i18n:loc.ale:'farm_overflow' }}</table><h5 class=\"twx-section\">{{ 'ignored_targets' | i18n:loc.ale:'farm_overflow' }}</h5><p ng-if=\"!exceptionVillages.ignored.length\" class=\"text-center\">{{ 'no_ignored_targets' | i18n:loc.ale:'farm_overflow' }}<table class=\"ignored-villages tbl-border-light tbl-striped\" ng-show=\"exceptionVillages.ignored.length\"><col><col width=\"15%\"><col width=\"15%\"><col width=\"30px\"><tr><th>{{ 'villages' | i18n:loc.ale:'common' }}<th>{{ 'date' | i18n:loc.ale:'farm_overflow' }}<th>{{ 'reports' | i18n:loc.ale:'farm_overflow' }}<th><tr ng-repeat=\"villageId in exceptionVillages.ignored track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[villageId] }}</a><td>{{ exceptionLogs[villageId].time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}<td><span ng-if=\"exceptionLogs[villageId].report\"><a class=\"link\" ng-click=\"showReport(exceptionLogs[villageId].report.id)\" tooltip=\"\" tooltip-content=\"{{ exceptionLogs[villageId].report.title }}\"><span class=\"icon-20x20-report\"></span> {{ 'open_report' | i18n:loc.ale:'farm_overflow' }}</a> <span ng-class=\"{2:'icon-20x20-queue-indicator-medium', 3:'icon-20x20-queue-indicator-short'}[exceptionLogs[villageId].report.result]\"></span> <span ng-class=\"{'full': 'icon-26x26-capacity', 'partial':'icon-26x26-capacity-low', 'none':'hidden'}[exceptionLogs[villageId].report.haul]\"></span> </span><span ng-if=\"!exceptionLogs[villageId].report\">{{ 'no_report' | i18n:loc.ale:'farm_overflow' }}</span><td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"removeIgnored(villageId)\" tooltip=\"\" tooltip-content=\"\"></a></table><h5 class=\"twx-section\">{{ 'included_targets' | i18n:loc.ale:'farm_overflow' }}</h5><p ng-if=\"!exceptionVillages.included.length\" class=\"text-center\">{{ 'no_included_targets' | i18n:loc.ale:'farm_overflow' }}<table class=\"tbl-border-light tbl-striped\" ng-show=\"exceptionVillages.included.length\"><col><col width=\"15%\"><col width=\"30px\"><tr><th>{{ 'villages' | i18n:loc.ale:'common' }}<th>{{ 'date' | i18n:loc.ale:'farm_overflow' }}<th><tr ng-repeat=\"villageId in exceptionVillages.included track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[villageId] }}</a><td>{{ exceptionLogs[villageId].time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"removeIncluded(villageId)\" tooltip=\"\" tooltip-content=\"\"></a></table></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleLogs.length\">{{ 'no_logs' | i18n:loc.ale:'farm_overflow' }}<table class=\"log-list tbl-border-light tbl-striped\" ng-show=\"visibleLogs.length\"><col width=\"100px\"><col width=\"30px\"><col><tr ng-repeat=\"log in visibleLogs track by $index\"><td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}<td><span class=\"icon-bg-black\" ng-class=\"{
                                 'icon-26x26-dot-green': log.type === LOG_TYPES.FARM_START,
                                 'icon-26x26-dot-red': log.type === LOG_TYPES.FARM_STOP,
                                 'icon-26x26-check-negative': log.type === LOG_TYPES.IGNORED_VILLAGE || log.type === LOG_TYPES.INCLUDED_VILLAGE_REMOVED,
@@ -21073,6 +20010,7 @@ define('two/farmOverflow/ui', [
 
 define('two/farmOverflow/settings', [], function () {
     return {
+        REMOTE: 'remote',
         PRESETS: 'presets',
         GROUP_IGNORE: 'group_ignore',
         GROUP_INCLUDE: 'group_include',
@@ -21269,13 +20207,17 @@ define('two/farmOverflow/settings/map', [
             updates: [UPDATES.TARGETS],
             min: 0,
             max: 500
+        },
+        [SETTINGS.REMOTE]: {
+            default: 'Zadyma',
+            inputType: 'text'
         }
     }
 })
 
 define('two/farmOverflow/types/errors', [], function () {
     return {
-        NO_PRESETS: 'no_presets',
+        NO_PRESETS: 'no_preset',
         USER_STOP: 'user_stop',
         KILL_FARMER: 'kill_farmer'
     }
@@ -21334,909 +20276,6 @@ require([
         farmOverflow.init()
         farmOverflowInterface()
     }, ['map', 'presets'])
-})
-
-define('two/kingTool', [
-    'two/Settings',
-    'two/kingTool/settings',
-    'two/kingTool/settings/map',
-    'two/kingTool/types/sequence',
-    'two/kingTool/types/aplication',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    SEQUENCES,
-    APLICATION_TYPE,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let kingToolSettings
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'king_tool_settings'
-    }
-	
-    const ALL_SEQUENCES = {
-        [SEQUENCES.LOOT]: 'loot',
-        [SEQUENCES.NUMBERS]: 'numbers',
-        [SEQUENCES.WAR]: 'war',
-        [SEQUENCES.BALANCED]: 'balanced'
-    }
-	
-    const APLICATION = {
-        [APLICATION_TYPE.ANYONE]: 'anyone',
-        [APLICATION_TYPE.APLICATION]: 'aplication',
-        [APLICATION_TYPE.CLOSED]: 'closed'
-    }
-	
-    console.log(APLICATION, ALL_SEQUENCES)
-	
-    const kingTool = {}
-
-    kingTool.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function () {
-            kingToolSettings = settings.getAll()
-        })
-
-        kingToolSettings = settings.getAll()
-
-        console.log('kingTool settings', kingToolSettings)
-    }
-
-    kingTool.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_START)
-    }
-
-    kingTool.stop = function () {
-        running = false
-
-        console.log('kingTool stop')
-
-        eventQueue.trigger(eventTypeProvider.EXAMPLE_MODULE_STOP)
-    }
-
-    kingTool.getSettings = function () {
-        return settings
-    }
-
-    kingTool.isInitialized = function () {
-        return initialized
-    }
-
-    kingTool.isRunning = function () {
-        return running
-    }
-
-    return kingTool
-})
-
-define('two/kingTool/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        KING_TOOL_START: 'king_tool_start',
-        KING_TOOL_STOP: 'king_tool_stop'
-    })
-})
-
-define('two/kingTool/ui', [
-    'two/ui',
-    'two/kingTool',
-    'two/kingTool/settings',
-    'two/kingTool/settings/map',
-    'two/kingTool/types/sequence',
-    'two/kingTool/types/aplication',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    kingTool,
-    SETTINGS,
-    SETTINGS_MAP,
-    SEQUENCES,
-    APLICATION_TYPE,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    
-    const TAB_TYPES = {
-        TRIBE: 'tribe',
-        SKILLS: 'skills',
-        FORUM: 'forum'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (kingTool.isRunning()) {
-            kingTool.stop()
-        } else {
-            kingTool.start()
-        }
-    }
-
-    const eventHandlers = {
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = kingTool.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Marszałek', 50)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_king_tool_window', `<div id=\"two-king-tool\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'king_tool' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRIBE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRIBE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRIBE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRIBE}\">{{ 'tribe' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SKILLS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SKILLS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SKILLS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SKILLS}\">{{ 'skills' | i18n:loc.ale:'king_tool' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FORUM)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FORUM}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FORUM}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FORUM}\">{{ 'forum' | i18n:loc.ale:'king_tool' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><h5 class=\"twx-section\">{{ 'tribe.display' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"3\">{{ 'tribe.edit-name' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-name\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-name' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-description' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-description\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-description' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.edit-emblem' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"3\" class=\"item-emblem\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.change-emblem' | i18n:loc.ale:'king_tool' }}</span><tr><th colspan=\"3\">{{ 'tribe.aplication' | i18n:loc.ale:'king_tool' }}<tr><td><span class=\"ff-cell-fix\">{{ 'tribe.aplication-type' | i18n:loc.ale:'king_tool' }}</span><td colspan=\"2\"><div select=\"\" list=\"aplication\" selected=\"settings[SETTINGS.APLICATION_TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'tribe.minimum-points' | i18n:loc.ale:'king_tool' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.POINTS].min\" max=\"settingsMap[SETTINGS.POINTS].max\" value=\"settings[SETTINGS.POINTS]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.POINTS]\"><tr><td colspan=\"3\" class=\"item-aplication\"><span class=\"btn btn-orange addSelected\">{{ 'tribe.set' | i18n:loc.ale:'king_tool' }}</span></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><h5 class=\"twx-section\">{{ 'skills.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"50%\"><tr><th colspan=\"2\">{{ 'skills.sequence' | i18n:loc.ale:'king_tool' }}<tr><td colspan=\"2\"><div select=\"\" list=\"sequence\" selected=\"settings[SETTINGS.SEQUENCE]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"item-manage\"><span class=\"btn btn-orange addSelected\">{{ 'skills.manage' | i18n:loc.ale:'king_tool' }}</span><tr><td colspan=\"2\">{{ 'skills.description' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.position' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsSequence\"><tr class=\"noSequence\"><td colspan=\"2\">{{ 'skills.noSequence' | i18n:loc.ale:'king_tool' }}</table><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col><thead><tr><th>{{ 'skills.date' | i18n:loc.ale:'king_tool' }}<th>{{ 'skills.skill' | i18n:loc.ale:'king_tool' }}<tbody class=\"skillsLog\"><tr class=\"noSkills\"><td colspan=\"2\">{{ 'skills.noSkills' | i18n:loc.ale:'king_tool' }}</table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FORUM\"><h5 class=\"twx-section\">{{ 'forum.head' | i18n:loc.ale:'king_tool' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><tr><th>{{ 'forum.head-text' | i18n:loc.ale:'king_tool' }}<tr><td class=\"item-create\"><span class=\"btn btn-orange addSelected\">{{ 'forum.create' | i18n:loc.ale:'king_tool' }}</span><tr><td>{{ 'forum.description' | i18n:loc.ale:'king_tool' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRIBE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsTribe()\">{{ 'tribe.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearTribe()\">{{ 'tribe.clear' | i18n:loc.ale:'king_tool' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SKILLS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettingsSkills()\">{{ 'skills.save' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearSkills()\">{{ 'skills.clear' | i18n:loc.ale:'king_tool' }}</a> <a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'skills.clear-logs' | i18n:loc.ale:'king_tool' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-king-tool div[select]{text-align:center}#two-king-tool div[select] .select-wrapper{height:34px}#two-king-tool div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-king-tool div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-king-tool .range-container{width:250px}#two-king-tool th{text-align:center}#two-king-tool .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-king-tool .textfield-border.fit{width:100%}#two-king-tool .skillsLog td{text-align:center}#two-king-tool .skillsLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSkills td{height:26px;text-align:center}#two-king-tool .skillsSequence td{text-align:center}#two-king-tool .skillsSequence .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .skillsSequence .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-king-tool .noSequence td{height:26px;text-align:center}#two-king-tool .force-26to20{transform:scale(.8);width:20px;height:20px}#two-king-tool .item-name{text-align:center}#two-king-tool .item-name span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-description{text-align:center}#two-king-tool .item-description span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-emblem{text-align:center}#two-king-tool .item-emblem span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-aplication{text-align:center}#two-king-tool .item-aplication span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-manage{text-align:center}#two-king-tool .item-manage span{height:34px;line-height:34px;text-align:center;width:125px}#two-king-tool .item-create{text-align:center}#two-king-tool .item-create span{height:34px;line-height:34px;text-align:center;width:125px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = kingTool.isRunning()
-        $scope.selectedTab = TAB_TYPES.TRIBE
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.sequence = Settings.encodeList(SEQUENCES, {
-            textObject: 'king_tool',
-            disabled: true
-        })
-        $scope.aplication = Settings.encodeList(APLICATION_TYPE, {
-            textObject: 'king_tool',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_king_tool_window', function onDestroy () {
-            console.log('kingTool closed')
-        })
-
-        eventScope.register(eventTypeProvider.KING_TOOL_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.KING_TOOL_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_king_tool_window', $scope)
-    }
-
-    return init
-})
-
-define('two/kingTool/settings', [], function () {
-    return {
-        SEQUENCE: 'sequence',
-        POINTS: 'points',
-        APLICATION_TYPE: 'aplication_type'
-    }
-})
-
-define('two/kingTool/settings/map', [
-    'two/kingTool/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.SEQUENCE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.APLICATION_TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.POINTS]: {
-            default: 200,
-            inputType: 'number',
-            min: 0,
-            max: 10000
-        }
-    }
-})
-
-define('two/kingTool/types/sequence', [], function () {
-    return {
-        LOOT: 'loot',
-        NUMBERS: 'numbers',
-        WAR: 'war',
-        BALANCED: 'balanced'
-    }
-})
-
-define('two/kingTool/types/aplication', [], function () {
-    return {
-        ANYONE: 'anyone',
-        APLICATION: 'aplication',
-        CLOSED: 'closed'
-    }
-})
-require([
-    'two/ready',
-    'two/kingTool',
-    'two/kingTool/ui',
-    'two/kingTool/events'
-], function (
-    ready,
-    kingTool,
-    kingToolInterface
-) {
-    if (kingTool.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        kingTool.init()
-        kingToolInterface()
-    })
-})
-
-define('two/marketHelper', [
-    'two/Settings',
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/map',
-    'two/marketHelper/settings/updates',
-    'two/marketHelper/types/buildings',
-    'two/marketHelper/types/level',
-    'two/marketHelper/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    MH_BUILDINGS,
-    MH_LEVEL,
-    MH_UNITS,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let marketHelperSettings
-
-    let selectedGroups = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'market_helper_settings'
-    }
-    const PRESERVE_UNITS = {
-        [MH_UNITS.SPEAR]: 'spear',
-        [MH_UNITS.SWORD]: 'sword',
-        [MH_UNITS.AXE]: 'axe',
-        [MH_UNITS.ARCHER]: 'archer',
-        [MH_UNITS.LIGHT_CAVALRY]: 'light_cavalry',
-        [MH_UNITS.MOUNTED_ARCHER]: 'mounted_archer',
-        [MH_UNITS.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [MH_UNITS.RAM]: 'ram',
-        [MH_UNITS.CATAPULT]: 'catapult',
-        [MH_UNITS.TREBUCHET]: 'trebuchet',
-        [MH_UNITS.DOPPELSOLDNER]: 'doppelsoldner',
-        [MH_UNITS.SNOB]: 'snob',
-        [MH_UNITS.KNIGHT]: 'knight'
-    }
-	
-    const PRESERVE_BUILDINGS = {
-        [MH_BUILDINGS.HEADQUARTER]: 'headquarter',
-        [MH_BUILDINGS.WAREHOUSE]: 'warehouse',
-        [MH_BUILDINGS.FARM]: 'farm',
-        [MH_BUILDINGS.RALLY_POINT]: 'rally_point',
-        [MH_BUILDINGS.STATUE]: 'statue',
-        [MH_BUILDINGS.WALL]: 'wall',
-        [MH_BUILDINGS.TAVERN]: 'tavern',
-        [MH_BUILDINGS.BARRACKS]: 'barracks',
-        [MH_BUILDINGS.PRECEPTORY]: 'preceptory',
-        [MH_BUILDINGS.HOSPITAL]: 'hospital',
-        [MH_BUILDINGS.CLAY_PIT]: 'clay_pit',
-        [MH_BUILDINGS.IRON_MINE]: 'iron_mine',
-        [MH_BUILDINGS.TIMBER_CAMP]: 'timber_camp',
-        [MH_BUILDINGS.CHAPEL]: 'chapel',
-        [MH_BUILDINGS.CHURCH]: 'church',
-        [MH_BUILDINGS.MARKET]: 'market',
-        [MH_BUILDINGS.ACADEMY]: 'academy'
-    }
-	
-    const BUILDING_LEVEL = {
-        [MH_LEVEL.LEVEL_1]: 1,
-        [MH_LEVEL.LEVEL_2]: 2,
-        [MH_LEVEL.LEVEL_3]: 3,
-        [MH_LEVEL.LEVEL_4]: 4,
-        [MH_LEVEL.LEVEL_5]: 5,
-        [MH_LEVEL.LEVEL_6]: 6,
-        [MH_LEVEL.LEVEL_7]: 7,
-        [MH_LEVEL.LEVEL_8]: 8,
-        [MH_LEVEL.LEVEL_9]: 9,
-        [MH_LEVEL.LEVEL_10]: 10,
-        [MH_LEVEL.LEVEL_11]: 11,
-        [MH_LEVEL.LEVEL_12]: 12,
-        [MH_LEVEL.LEVEL_13]: 13,
-        [MH_LEVEL.LEVEL_14]: 14,
-        [MH_LEVEL.LEVEL_15]: 15,
-        [MH_LEVEL.LEVEL_16]: 16,
-        [MH_LEVEL.LEVEL_17]: 17,
-        [MH_LEVEL.LEVEL_18]: 18,
-        [MH_LEVEL.LEVEL_19]: 19,
-        [MH_LEVEL.LEVEL_20]: 20,
-        [MH_LEVEL.LEVEL_21]: 21,
-        [MH_LEVEL.LEVEL_22]: 22,
-        [MH_LEVEL.LEVEL_23]: 23,
-        [MH_LEVEL.LEVEL_24]: 24,
-        [MH_LEVEL.LEVEL_25]: 25,
-        [MH_LEVEL.LEVEL_26]: 26,
-        [MH_LEVEL.LEVEL_27]: 27,
-        [MH_LEVEL.LEVEL_28]: 28,
-        [MH_LEVEL.LEVEL_29]: 29,
-        [MH_LEVEL.LEVEL_30]: 30
-    }
-	
-    console.log(BUILDING_LEVEL, PRESERVE_BUILDINGS, PRESERVE_UNITS)
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = marketHelperSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-
-        console.log('selectedGroups', selectedGroups)
-    }
-
-    const marketHelper = {}
-
-    marketHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            marketHelperSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        marketHelperSettings = settings.getAll()
-
-        console.log('marketHelper settings', marketHelperSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    marketHelper.start = function () {
-        running = true
-
-        console.log('selectedGroups', selectedGroups)
-
-        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_START)
-    }
-
-    marketHelper.stop = function () {
-        running = false
-
-        console.log('marketHelper stop')
-
-        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_STOP)
-    }
-
-    marketHelper.getSettings = function () {
-        return settings
-    }
-
-    marketHelper.isInitialized = function () {
-        return initialized
-    }
-
-    marketHelper.isRunning = function () {
-        return running
-    }
-
-    return marketHelper
-})
-
-define('two/marketHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        MARKET_HELPER_START: 'market_helper_start',
-        MARKET_HELPER_STOP: 'market_helper_stop'
-    })
-})
-
-define('two/marketHelper/ui', [
-    'two/ui',
-    'two/marketHelper',
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/map',
-    'two/marketHelper/types/buildings',
-    'two/marketHelper/types/level',
-    'two/marketHelper/types/units',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    marketHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    MH_BUILDINGS,
-    MH_LEVEL,
-    MH_UNITS,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        TRADE: 'trade',
-        INSTANT_TRADE: 'instant_trade',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (marketHelper.isRunning()) {
-            marketHelper.stop()
-        } else {
-            marketHelper.start()
-        }
-    }
-	
-    const switchStateI = function () {
-        if (marketHelper.isRunning()) {
-            marketHelper.stop()
-        } else {
-            marketHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'marketHelper started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'marketHelper stopped')
-        }
-    }
-
-    const init = function () {
-        settings = marketHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton2('Handlarz', 30, $filter('i18n')('description', $rootScope.loc.ale, 'market_helper'))
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody class=\"traderLog\"><tr class=\"noTrades\"><td colspan=\"7\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchStateI()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-market-helper div[select]{text-align:center}#two-market-helper div[select] .select-wrapper{height:34px}#two-market-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-market-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-market-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-market-helper .actions a{width:100px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}#two-market-helper th{text-align:center}#two-market-helper .traderLog td{text-align:center}#two-market-helper .traderLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper .traderLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper table.header-center th{text-align:center}#two-market-helper .noTrades td{height:26px;text-align:center}#two-market-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = marketHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.TRADE
-        $scope.settingsMap = SETTINGS_MAP
-		
-        $scope.level = Settings.encodeList(MH_LEVEL, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-        $scope.units = Settings.encodeList(MH_UNITS, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-        $scope.buildings = Settings.encodeList(MH_BUILDINGS, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-        $scope.switchStateI = switchStateI
-
-        let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy () {
-            console.log('marketHelper closed')
-        })
-
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.MARKET_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.MARKET_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_market_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/marketHelper/settings', [], function () {
-    return {
-        GROUPS: 'groups',
-        WOOD_IN: 'wood_in',
-        WOOD_OUT: 'wood_out',
-        WOOD_MIN: 'wood_min',
-        WOOD_IN_I: 'wood_in_i',
-        WOOD_OUT_I: 'wood_out_i',
-        WOOD_MIN_I: 'wood_min_i',
-        CLAY_IN: 'clay_in',
-        CLAY_OUT: 'clay_out',
-        CLAY_MIN: 'clay_min',
-        CLAY_IN_I: 'clay_in_i',
-        CLAY_OUT_I: 'clay_out_i',
-        CLAY_MIN_I: 'clay_min_i',
-        IRON_IN: 'iron_in',
-        IRON_OUT: 'iron_out',
-        IRON_MIN: 'iron_min',
-        IRON_IN_I: 'iron_in_i',
-        IRON_OUT_I: 'iron_out_i',
-        IRON_MIN_I: 'iron_min_i',
-        DISTANCE: 'distance',
-        INDIVIDUAL: 'individual',
-        PRIORITIZE: 'prioritize',
-        FULL: 'full',
-        BUILDINGS: 'buildings',
-        LEVEL: 'level',
-        UNITS: 'units',
-        AMOUNT: 'amount',
-        COINS: 'coins'
-    }
-})
-
-define('two/marketHelper/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/marketHelper/settings/map', [
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUPS]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.WOOD_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.AMOUNT]: {
-            default: 100,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.UNITS]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.BUILDINGS]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.LEVEL]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.FULL]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.COINS]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.PRIORITIZE]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.INDIVIDUAL]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 235000
-        },
-        [SETTINGS.DISTANCE]: {
-            default: 90,
-            inputType: 'number',
-            min: 1,
-            max: 300
-        }
-    }
-})
-
-define('two/marketHelper/types/units', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-
-define('two/marketHelper/types/buildings', [], function () {
-    return {
-        HEADQUARTER: 'headquarter',
-        WAREHOUSE: 'warehouse',
-        FARM: 'farm',
-        RALLY_POINT: 'rally_point',
-        STATUE: 'statue',
-        WALL: 'wall',
-        TAVERN: 'tavern',
-        BARRACKS: 'barracks',
-        PRECEPTORY: 'preceptory',
-        HOSPITAL: 'hospital',
-        CLAY_PIT: 'clay_pit',
-        IRON_MINE: 'iron_mine',
-        TIMBER_CAMP: 'timber_camp',
-        CHAPEL: 'chapel',
-        CHURCH: 'church',
-        MARKET: 'market',
-        ACADEMY: 'academy'
-    }
-})
-
-define('two/marketHelper/types/level', [], function () {
-    return {
-        LEVEL_1: 'level_1',
-        LEVEL_2: 'level_2',
-        LEVEL_3: 'level_3',
-        LEVEL_4: 'level_4',
-        LEVEL_5: 'level_5',
-        LEVEL_6: 'level_6',
-        LEVEL_7: 'level_7',
-        LEVEL_8: 'level_8',
-        LEVEL_9: 'level_9',
-        LEVEL_10: 'level_10',
-        LEVEL_11: 'level_11',
-        LEVEL_12: 'level_12',
-        LEVEL_13: 'level_13',
-        LEVEL_14: 'level_14',
-        LEVEL_15: 'level_15',
-        LEVEL_16: 'level_16',
-        LEVEL_17: 'level_17',
-        LEVEL_18: 'level_18',
-        LEVEL_19: 'level_19',
-        LEVEL_20: 'level_20',
-        LEVEL_21: 'level_21',
-        LEVEL_22: 'level_22',
-        LEVEL_23: 'level_23',
-        LEVEL_24: 'level_24',
-        LEVEL_25: 'level_25',
-        LEVEL_26: 'level_26',
-        LEVEL_27: 'level_27',
-        LEVEL_28: 'level_28',
-        LEVEL_29: 'level_29',
-        LEVEL_30: 'level_30'
-    }
-})
-require([
-    'two/ready',
-    'two/marketHelper',
-    'two/marketHelper/ui',
-    'two/marketHelper/events'
-], function (
-    ready,
-    marketHelper,
-    marketHelperInterface
-) {
-    if (marketHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        marketHelper.init()
-        marketHelperInterface()
-    })
 })
 
 define('two/minimap', [
@@ -23731,319 +21770,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/powerHelper', [
-    'two/Settings',
-    'two/powerHelper/settings',
-    'two/powerHelper/settings/map',
-    'two/powerHelper/settings/updates',
-    'two/powerHelper/types/ironwalls',
-    'two/powerHelper/types/wall',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    IRON_WALLS,
-    WALLS,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let powerHelperSettings
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'power_helper_settings'
-    }
-	
-    const BATTLE_IRON_WALLS = {
-        [IRON_WALLS.LEVEL_1]: 1,
-        [IRON_WALLS.LEVEL_2]: 2,
-        [IRON_WALLS.LEVEL_3]: 3,
-        [IRON_WALLS.LEVEL_4]: 4,
-        [IRON_WALLS.LEVEL_5]: 5
-    }
-	
-    const BATTLE_WALLS = {
-        [WALLS.NO_WALL]: 0,
-        [WALLS.LEVEL_1]: 5,
-        [WALLS.LEVEL_2]: 10,
-        [WALLS.LEVEL_3]: 15,
-        [WALLS.LEVEL_4]: 20,
-        [WALLS.LEVEL_5]: 25,
-        [WALLS.LEVEL_6]: 30,
-        [WALLS.LEVEL_7]: 35,
-        [WALLS.LEVEL_8]: 40,
-        [WALLS.LEVEL_9]: 45,
-        [WALLS.LEVEL_10]: 50,
-        [WALLS.LEVEL_11]: 55,
-        [WALLS.LEVEL_12]: 60,
-        [WALLS.LEVEL_13]: 65,
-        [WALLS.LEVEL_14]: 70,
-        [WALLS.LEVEL_15]: 75,
-        [WALLS.LEVEL_16]: 80,
-        [WALLS.LEVEL_17]: 85,
-        [WALLS.LEVEL_18]: 90,
-        [WALLS.LEVEL_19]: 95,
-        [WALLS.LEVEL_20]: 100
-    }
-    
-    console.log(BATTLE_IRON_WALLS, BATTLE_WALLS)
-
-    const powerHelper = {}
-
-    powerHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function () {
-            powerHelperSettings = settings.getAll()
-        })
-
-        powerHelperSettings = settings.getAll()
-
-        console.log('powerHelper settings', powerHelperSettings)
-    }
-
-    powerHelper.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.POWER_HELPER_START)
-    }
-
-    powerHelper.stop = function () {
-        running = false
-
-        console.log('powerHelper stop')
-
-        eventQueue.trigger(eventTypeProvider.POWER_HELPER_STOP)
-    }
-
-    powerHelper.getSettings = function () {
-        return settings
-    }
-
-    powerHelper.isInitialized = function () {
-        return initialized
-    }
-
-    powerHelper.isRunning = function () {
-        return running
-    }
-
-    return powerHelper
-})
-
-define('two/powerHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        POWER_HELPER_START: 'power_helper_start',
-        POWER_HELPER_STOP: 'power_helper_stop'
-    })
-})
-
-define('two/powerHelper/ui', [
-    'two/ui',
-    'two/powerHelper',
-    'two/powerHelper/settings',
-    'two/powerHelper/settings/map',
-    'two/powerHelper/types/ironwalls',
-    'two/powerHelper/types/wall',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    powerHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    IRON_WALLS,
-    WALLS,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    
-    const TAB_TYPES = {
-        POWERS: 'powers',
-        BUNKER: 'bunker',
-        BEATBUNKER: 'beatbunker'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (powerHelper.isRunning()) {
-            powerHelper.stop()
-        } else {
-            powerHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = powerHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton4('Bunkry', 20)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_power_helper_window', `<div id=\"two-power-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'power_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.POWERS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.POWERS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.POWERS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.POWERS}\">{{ 'powers' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BUNKER}\">{{ 'bunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BEATBUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BEATBUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BEATBUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BEATBUNKER}\">{{ 'beatbunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.POWERS\"><h5 class=\"twx-section\">{{ 'power-troops' | i18n:loc.ale:'power_helper' }}</h5><p>Do obliczeń przyjęto jedną zagrodę Off równą 21480 prowiantu oraz 14 zagród Deff równych 300720 prowiantu.<form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><col><tr><th><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td class=\"headD\" rowspan=\"12\">J<br>e<br>d<br>n<br>o<br>s<br>t<br>k<br>a<br><br>D<br>e<br>f<br>e<br>n<br>s<br>y<br>w<br>n<br>a<td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td>0,483<td>1,909<td>4,610<td class=\"yellow\">7,546<td class=\"blue\">1,172<td class=\"orange\">9,919<td>0,015<td>2,668<td class=\"blue\">0,790<td class=\"red\">15,272<td>0,314<td>5,399<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"blue\">0,148<td class=\"blue\">0,585<td class=\"blue\">1,413<td class=\"sky\">1,452<td class=\"orange\">31,636<td class=\"sky\">1,909<td>0,003<td>0,513<td class=\"yellow\">21,343<td class=\"blue\">4,680<td>0,060<td class=\"blue\">1,655<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td>18,223<td>7,546<td class=\"orange\">31,636<td>9,919<td>0,015<td>2,668<td class=\"yellow\">21,343<td class=\"red\">60,368<td>0,314<td class=\"yellow\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td class=\"yellow\">18,223<td class=\"blue\">0,513<td class=\"sky\">2,152<td class=\"blue\">0,675<td class=\"sky\">0,001<td class=\"sky\">0,182<td class=\"sky\">1,452<td class=\"red\">60,368<td class=\"blue\">0,021<td class=\"orange\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td>2,940<td>11,617<td class=\"yellow\">28,057<td>11,617<td>11,185<td>15,273<td>0,024<td>4,107<td>7,546<td class=\"red\">92,942<td>0,483<td class=\"orange\">32,858<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td>2,669<td>10,546<td class=\"yellow\">25,467<td>7,545<td class=\"yellow\">24,066<td>9,919<td>0,015<td>2,669<td>16,236<td class=\"red\">84,367<td>0,314<td class=\"orange\">29,827<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td>7,545<td>29,828<td class=\"yellow\">72,034<td>29,828<td>11,185<td>39,211<td>0,060<td>10,546<td>7,545<td class=\"red\">100,000<td>1,240<td class=\"orange\">100,000<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td>1,365<td>5,400<td>13,041<td>5,400<td class=\"orange\">22,636<td>7,098<td>0,011<td>1,910<td class=\"yellow\">15,273<td class=\"red\">43,195<td>0,223<td class=\"yellow\">15,271<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"sky\">0,313<td class=\"sky\">1,239<td class=\"yellow-sky\">2,995<td class=\"sky\">1,452<td>2,568<td class=\"sky\">1,909<td>0,002<td>0,513<td>1,734<td class=\"red-sky\">9,920<td class=\"sky\">0,060<td class=\"orange\">3,507<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td>0,888<td>3,508<td>8,470<td class=\"yellow\">9,920<td>5,197<td class=\"orange\">13,039<td>0,020<td>3,508<td>3,508<td class=\"red\">28,057<td>0,413<td class=\"yellow\">9,919<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td>0,675<td>2,667<td class=\"yellow\">6,444<td>2,667<td>2,830<td>3,508<td class=\"blue\">0,000<td class=\"blue\">0,000<td>1,909<td class=\"red\">21,342<td>0,110<td class=\"orange\">7,545</table></form><h5 class=\"twx-section\">{{ 'power-deff' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headD\" colspan=\"12\">J e d n o s t k a D e f e n s y w n a<tr><td><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,166<td>5,520<td>11,133<td>4,911<td>11,428<td>11,752<td>28,093<td>7,966<td class=\"blue\">1,481<td>5,308<td class=\"sky\">2,578<tr><td class=\"off\">{{ 'offensive-units' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,964<td>6,188<td>13,967<td>7,096<td>15,251<td>15,327<td>38,839<td>9,994<td class=\"blue\">1,916<td>6,692<td class=\"sky\">3,388</table></form><h5 class=\"twx-section\">{{ 'power-off' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td>1,895<td>7,490<td class=\"yellow\">18,089<td>7,772<td>13,297<td>10,216<td>0,015<td>2,662<td>8,971<td class=\"orange\">22,606<td>0,323<td class=\"red\">47,319<tr><td class=\"deff\">{{ 'defensive-units' | i18n:loc.ale:'power_helper' }}<td>0,706<td>2,789<td>6,737<td>2,726<td class=\"orange\">8,072<td>3,584<td>0,004<td>0,775<td>5,446<td class=\"yellow\">7,890<td>0,113<td class=\"red\">22,316</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BUNKER\"><h5 class=\"twx-section\">{{ 'deffense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><tr><td colspan=\"2\" class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span><tr><td class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\"></span><span class=\"unitname\"> {{ 'fullfarm.set' | i18n:loc.ale:'power_helper' }}</span><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-fullfarm\" tooltip=\"{{ 'compariser' | i18n:loc.ale:'fullfarm' }}\"><input id=\"settings-fullfarm\" data-setting=\"fullfarm\" type=\"checkbox\"></label></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.defender' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearD-amount\" class=\"spearD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordD-amount\" class=\"swordD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeD-amount\" class=\"axeD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerD-amount\" class=\"archerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcD-amount\" class=\"lcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maD-amount\" class=\"maD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcD-amount\" class=\"hcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramD-amount\" class=\"ramD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultD-amount\" class=\"catapultD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerD-amount\" class=\"berserkerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetD-amount\" class=\"trebuchetD-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearD\"><input id=\"settings-spearD\" data-setting=\"spearD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordD\"><input id=\"settings-swordD\" data-setting=\"swordD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerD\"><input id=\"settings-archerD\" data-setting=\"archerD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcD\"><input id=\"settings-hcD\" data-setting=\"hcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetD\"><input id=\"settings-trebuchetD\" data-setting=\"trebuchetD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeD\"><input id=\"settings-axeD\" data-setting=\"axeD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcD\"><input id=\"settings-lcD\" data-setting=\"lcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maD\"><input id=\"settings-maD\" data-setting=\"maD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramD\"><input id=\"settings-ramD\" data-setting=\"ramD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultD\"><input id=\"settings-catapultD\" data-setting=\"catapultD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerD\"><input id=\"settings-berserkerD\" data-setting=\"berserkerD\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.WALL]\" drop-down=\"true\"></div><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span><span class=\"unitname\"> {{ 'battle.iron-walls' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.IRON_WALL]\" drop-down=\"true\"></div></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.off' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BEATBUNKER\"><h5 class=\"twx-section\">{{ 'offense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check2\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.attacker' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div height=\"30px\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearA-amount\" class=\"spearA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordA-amount\" class=\"swordA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeA-amount\" class=\"axeA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerA-amount\" class=\"archerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcA-amount\" class=\"lcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maA-amount\" class=\"maA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcA-amount\" class=\"hcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramA-amount\" class=\"ramA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultA-amount\" class=\"catapultA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerA-amount\" class=\"berserkerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetA-amount\" class=\"trebuchetA-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeA\"><input id=\"settings-axeA\" data-setting=\"axeA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcA\"><input id=\"settings-lcA\" data-setting=\"lcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maA\"><input id=\"settings-maA\" data-setting=\"maA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramA\"><input id=\"settings-ramA\" data-setting=\"ramA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultA\"><input id=\"settings-catapultA\" data-setting=\"catapultA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerA\"><input id=\"settings-berserkerA\" data-setting=\"berserkerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearA\"><input id=\"settings-spearA\" data-setting=\"spearA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordA\"><input id=\"settings-swordA\" data-setting=\"swordA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerA\"><input id=\"settings-archerA\" data-setting=\"archerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcA\"><input id=\"settings-hcA\" data-setting=\"hcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetA\"><input id=\"settings-trebuchetA\" data-setting=\"trebuchetA\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"{{ 'simulator' | i18n:loc.ale:'food' }}\"></span><span class=\"unitname\"> {{ 'provisions' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\" class=\"item-input\"><input class=\"textfield-border\" id=\"provisions\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}\"></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.deff' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td colspan=\"1\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"1\" class=\"item-input\"><input class=\"textfield-border\" id=\"wallBB\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'level' | i18n:loc.ale:'power_helper' }}\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-power-helper div[select]{text-align:center}#two-power-helper div[select] .select-wrapper{height:34px}#two-power-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-power-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-power-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-power-helper .textfield-border.fit{width:100%}#two-power-helper .addForm1 td{text-align:left;line-height:34px}#two-power-helper .addForm1 th{text-align:center;padding:0px}#two-power-helper .addForm1 span{height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm1 input{height:34px;line-height:26px;color:#000;font-size:14px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAABGdBTUEAALGPC/xhBQAAALRQTFRFr6+vmJiYoKCgrKysq6urpaWltLS0s7OzsLCwpKSkm5ubqKiojY2NlZWVk5OTqampbGxsWFhYUVFRhISEgYGBmpqaUFBQnp6eYmJidnZ2nZ2dY2NjW1tbZ2dnoaGhe3t7l5eXg4ODVVVVWVlZj4+PXFxcVlZWkpKSZmZmdXV1ZWVlc3NzjIyMXl5eVFRUeHh4hoaGYWFhXV1dbW1tampqb29veXl5fHx8gICAiYmJcnJyTk5Ooj6l1wAAADx0Uk5TGhkZGhoaGxoaGRkaGRkZGhkbHBgYGR0ZGhkZGhsZGRgZGRwbGRscGRoZGhkZGhwZGRobGRkZGRkZGRkeyXExWQAABOJJREFUSMeNVgdy4zgQxIW9TQ7KOVEUo5gz0f//1/WA0sple6+OLokQiUk9PQ2rvlzvT0vA6xDXU3R5hQmqddDVaIELsMl3KLUGoFHugUphjt25PWkE6KMAqPkO/Qh7HRadPmTNxKJpWuhSjLZAoSZmXYoPXh0w2R2z10rjBxpMNRfomhbNFUfUFbfUCh6TWmO4ZqNn6Jxekx6lte3h9IgYv9ZwzIZXfhQ/bejmsYkgOeVInoDGT6KGP9MMbsj7mtEKphKgVFKkJGUM+r/00zybNkPMFWYske+jY9hUblbrK4YosyPtrxl+5kNRWSb2B3+pceKT05SQRPZY8pVSGoWutgen2junRVKPZJ0v5Nu9HAk/CFPr+T1XTkXYFWSJXfTyLPcpcPXtBZIPONq/cFQ0Y0Lr1GF6f5doHdm2RLTbQMpMmCIf/HGm53OLFPiiEOsBKtgHccgKTVwn8l7kbt3iPvqniMX4jgWj4aqlX43xLwXVet5XTG1cYp/29m58q6ULSa7V0M3UQFyjd+AD+1W9WLBpDd9uej7emFbea/+Yw8faySElQQrBDksTpTOVIG/SE2HpPvZsplJWsblRLEGXATEW9YLUY1rPSdivBDmuK3exNiAysfPALfYZFWJrsA4Zt+fftEeRY0UsMDqfyNCKJpdrtI1r2k0vp9LMSwdO0u5SpjBeEYz5ebhWNbwT2g7OJXy1vjW+pEwyd1FTkAtbzzcbmX1yZlkR2pPiXZ/mDbPNWvHRsaKfLH8+FqiZbnodbOK9RGWlNMli8k+wsgbSNwS35QB6qxn53xhu2DFqUilisB9q2Zqw4nNI9tOB2z8GbkvEdNjPaD2j+9pwEC+YlWJvI7xN7xMC09eqhq/qwRvz3JWcFWmkjrWBWSiOysEmc4LmMb0iSsxR8+Z8pk3+oE39cdAmh1xSDXuAryRLZgpp9V62+8IOeBSICjs8LlbtKGN4E7XGoGASIJ+vronVa5mjagPHIFJA2b+BKkZC5I/78wOqmzYp1N8vzTkWIWz6YfsS3eh3w8pBkfKz6TSLxK9Qai5DUGTMZ8NNmrW8ldNudIJq+eJycwjv+xbeOJwPv1jjsSV/rCBaS/IBrafaUQ+5ksHwwl9y9X7kmvvIKWoBDFvbWySGyMU3XflxZRkNeRU63otWb0+P8H8BrRokbJivpWkk6m6LccSlrC2K0i6+4otx4dN3mbAVKt0wbaqBab4/MW8rgrS8JP06HU6UYSTYsQ5pYETpo87ZonORvbPlvYbXwmsMgoQGKr8PUQ5dDEO0EcXp2oOfSk+YpR/Eg4R46O0/Sf7jVnbqbXBrRkCPsZFOQTN8h+aqlcRw9FjJ/j8V7SXZ3hVNXYsOYcxzpfPNgFrvB9S6Dej2PqDqq0su+5ng0WMi527p/pA+OiW0fsYzDa6sPS9C1qxTtxVRMuySrwPD6qGPRKc4uIx4oceJ9FPjxWaqPPebzyXxU7W1jNqqOw+9z6X/k+Na3SBa0v+VjgoaULR30G1nxvZN1vsha2UaSrKy/PyCaHK5zAYnJzm9RSpSPDWbDVu0dkUujMmB/ly4w8EnDdXXoyX/VfhB3yKzMJ2BSaZO+A9GiNQMbll+6z1WGLWpEGMeEg85MESSep0IPFaHYZZ1QOW/xcjfxGhNjP0tRtbhFHOmhhjAv/p77JrCX3+ZAAAAAElFTkSuQmCC) top left #b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:213px}#two-power-helper .addForm .table{border-spacing:1px;border-collapse:separate;box-shadow:0 0 0 2px rgba(124,54,0,0.4);width:100%;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAl7SURBVHjatF3bcRtJDIRYigLhnGNRAnYcSsCORekgDd3HmazdWfQDQx6rVJKopbiDwaPRwIBv39/f8efXj4z5oyIiyfPo7+tr2XXuezmvmd6XfHx8ftUqu9vxiY/PryJvdPwe5I1T/D0OC4tm0ev7HgVx/Apz8QWEu/6vy3rv8kBy+fPrRx7/9vH5VW93De2kvbtzYAGrMNPU3G4TkfYhRUjz+Ysmr3K5/47k9fb75z+thh4uVsJcTUkttgzBMjMtIKAUG5LGxrbCZMq2yuyG/MHhwhRuQAk9m9+z0bjO5FO4iBBuZb0+m98ts3cfb2tQArvhap9rqlMXwqwhhIXE4H5P93kX5ioPprHv7oXgJpgZdotT2p7CxyGNLaCRDpqAroLJArjH/6L8x+dXHYV5uFgtLIBZ1YYbCKDRCGlkI2B232m4h8662mh/l9Uqs1un0oaWFoAgAQRbQ7Mu4O+CQCwltGq+l2FVFxR0/L762JsRkKY33gWgFILoNKPbjBIuxkElnYl3LuKkeR3m7H6+rWq7CLeAOQcwvyI3y8w5wSYkCXBhWAl73y4OUPDeaeTFh65SXl7kLt7JTlgmpCBREu0qAJNK+N4kSUehQI3c411ut+Mf0A4QcwyirUGuL+JCigi/M+0E0V8BeIRXE0X0uwWzaP/O1HcQFdfFFADjRYSosGMO09NdAgUKtZPNGuXffv/8B+arG0C8jEU5P09BfYSXSanUdMRdtGwTcsTDaL5qUhlQC+X2Cqa5llPGfUhczFJPCJsaQB/CjxXxdQ7wT1O7WNBJkkQkyYpSwDVq0uv3VUMfJg986NS8HBOeUHe7VKFL5RULZB+fX1ZMOQr37fv7+5INEIJEEcJpCnsiTCUgRcXtEC5t3HC4jtsdLnUpFjGXAiDcWTxyGbXhtx334frl7PjQo4l3rNP6/Sacbw0dPFtc5+MYS4TglZsETAialgY8Khsy8dVNQj602ZEJF8rM2SUyXgHTJhCtUIRnbP0lKJlVz3oC700wZgyE6N5Dme6Irm9VtI7u/PPrR55qSgZj72YXDsNfgovcRQKqZqWCo8WorS7yLuSLQE2TmmqvW6hTG+BG/0nJhZr/avYq0r8fVRiA2hr6qtxg6FU0TuN/VBPskliBw+AHo+1agSJpN+lnGWRtbmi6WuBOwS2Hmtheq6i7jvZ8N5mmXUIjBoJmOT2j26YcQ5oW0WomEvL9uvehMAOYVGz6Obferjo8WJROI8NqrcyFTUch3xiZGrz02pElaWqmYqQcd4NMPA1rSUGYnEh3ZcVtCaSj9A3qLAPXZmrAwjuMVQnSOYDmuVovg04HldbnIWz6q8bhMtomuJ6Sx4r4rf/hXmxmqSVHBA+YIv9V+b3K013TdEnoMghsVe96vAaVihmMuolaMyNGknCJzLzToN9S0IIVXj2JUYqsqJjIpFU33g2p8UFDp06/q82rlLPTvgJCD4I6UNBjGw/hXEe8d4nQqdEBUfwgcDhtNSqKqoqASgIm0XyanRWL6F07zkqS3FZ40Ki5AtIMDSCf5kAm9L9Ve7qqi4WxuckC0FqfP3bcXFrCQSuOXb8eECJhMFiv4k5dBovynU4J5G14CmRSF7L8lAmPXnFPE/pPUnfosIfDh06Oz0xw4rTJwWG7HCZ+q7rq9NvTTMnwY06Hcg59JYvwChKxQJYCLbRFRIQ1uwB+asUxsoFd4neivU5D1zNuZztDYia+BvJ3wYWqHF5pJcKLDo2mtB5tAGoJckshVsMYIkluaEcMhjqJvyqhParMrNxFCU0uAzapDmaoYAy7n1pxXlSc67RIIYBnCexnSJFS2ZQbkB5BiVD7zpEUtutpanYOUlCXZOkSkxL3c0q3UXrJAtMN9Y8vQp40KuSGKaLNy9B98IjEcTGwZL+6Ux/oOWXyYZi4W0ufNm+5Wdnu/51kUyGwepxST+RsD2Vkh1yYdrq9AtK4TQux8X718flFkU9H66lGh3hywY52s/dwnmPtiIoMiVfh1ruG3pDEFyfswKMaQhQ3rQzDMliwcRswLgcj2OmPzs+egtLK6y1ZkuqljNCFOpXCIkGtXwglKO0sApPooS/SMn+FTaosCqIpgiNuswJqlUmRCLidKUm4AHSiDmp9J1TUunRjjjbw4aogUKUETk2TPc8B096dRlYaiPzwqVFsLQsRIv7MNoELVTbT4UQkeDU9QWl1CDPO8LtWSihLxN8OZlVDWpVRlZFXgbiwhJkiO6fZ+bqKeZ+nU1gcNac5h2gfGiqimNtK6LBFJYLYpB9+B7YFybwubmTVzuOwBkR3XnJ5NasIaAej0ZDLKIH9MvYnQigiOgSLDw8lqH6n01nPhlV5toThzGuaENIT9zLtBJTA3irSPZnLT4hal+zdOa/0bG5Phd/5Tto5Quh9x19N60YJoq0TyYNAtimnoCBUa9JHk+9q886hhWdIEec69/BBvFjzXnas+/i7w9grTdwlInaZJqdS8Arqj7JNKCV9aCiQepCgssPOuHPv3OEALmMV8eToS0K+nx7vBrBnMKNIlhIig1JR350EpkyfrcMWsorup0FYIqVS0xdQcSs3TTFFMCxBzITx+qewbReMHsDe6MxltSXkBhBFloCa6wSdgjpkGusmBRW68zlW4XXA/nEKBI0hM3J2NoqSmXoA03dOkaCJt4i2Y+f0FaM1Mns6+26A4YrQZ6xCybCg4gUSMEVhBskU7ov2giIhP2pKx3ZG0NM0zVp2T3Q88yhSTXDmPdP7GowBPQelJvGfHHINYrbO+CHmU1nWpNwQ00y6RocDXQV/GYQ12Y1NAmL36PW0FYhNkmCVU2mRCNRfGh1MAmAnVXQFqg4vTBprkfuZnrkfPdoxQwNqTVFfrxiNMdWmqc9+irZbla+dfTek73Z39ZVBaceKQvGzJq15DkpdDg+ggnOY1aXgdoSvJt6qEURtZZNlgd0IUPXzTiuOOzboVf1KLs2222TmfgqEJEkuOBT5hanPGTJHyPeG8NnTsUQqKLbv3ckC9dzDMUOHHYjwZx9N6LGJZrMPAdiBWY4bG318BQT2DcBPkqOz1FMxRmh6uPJzkyqBO3ITkTKwDEKP1XSp5/JPXN/kks+Tj5vYLlMYvlIB/tO4S3TEe9XcE2NP8GiIgOQSE8/2hO4Q0k7O77ojGWNOHwxgfFgVm1SbBkk8WXCErop2AUVNI3d6Ri+HFhiVd6opGQNZJ0FhR+scBLELpSYYmX5ijcuJ/jsA5u4AhqNud/gAAAAASUVORK5CYII=) #d1ad86}#two-power-helper .addForm .table th{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAAcCAMAAAAa7mKqAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAJeUExURa2FWbOLX6mBVbKKXq6GWrCIXLGJXa+HW6yEWKuDV6qCVqiAVKyEV7WNYa6GWbSMYJlxRZpzSad/U5lySJhySJZwRpp0SqqCVbCIW6+HWraOYppzR5x0SJlyR5t0SplyRqZ+UquDVplzSZx1S553TJ94TZVvRa2FWLePY5t1S5ZwR5dwRqmBVLKKXaB5Tp53TZ11SZx1SppzSJ94TptzR6d/UqiAU5hxR5x1SZhxSJ53S7GJXJdxSKZ+U5t0SJpyRpdwR512S512TJdwRaV9UpdxR5hwRJp0S593S5RuRaF6T6V9UZZvRqV+UqJ7T5NtQ5hySZZvQ5lySaR8UJ52Spt1SqB4TKB5TZt0SZlzSqN8UKJ7UKB5T5hxRqR8UZdvQ6N8UamBVphxRbSMX7iQZLOLXqN7UJ12SpVuRad/VJdwRJZvRaF6Tpt0S513TJx1TJp0SZVuQ5t1TJ13TZpzSp54TqR9UJhyR5RuRJ11SqZ/U6F5TZlzSKB6T6J6T594TKJ6TpZuQpx2TJlxRqV9UJVuRKR9UqeAVKF6UJx0SZx2S7aOYaR9UbWNYKV+UaqCV553TqF6TZ95TphwRZpyR5tzSJlySpRtRJ93TKB4TZVvRqZ+UZpzS6J7TqN7T5RtQpZuQ6V+U6F5Tp54TbePYpVuRp94T512TZ13Tpl0SaJ7UaZ/UqV/U5NtRJdwSKyFWKuDWJdvRJZvRJVvRJ54TKiBVJx2TaiAVaN8T595T6B6UJx2SpRtQ5RtRaqDV5RuQ5hySqeAU6B5TJZwRZp0TJdxRqF7UJNsRJ95TbiQY/RiQRAAAAcgSURBVEjHHZJjgy27EobT3elO0lq2bXvWeNYa27Zntm1772Pb59q28a9u9v2SVKpST71VCVDsUIAMZ2eiDM9BYVv5L6/sRCFvZ5So8CyqQYLGzmxz0agQ/YrZtm9rkIKiTPSl8YyLKhy/zXBRZjuqgK8A4IFGY+eiENUVmsYDPiowdg0nIIQgZJQXGjsE/0fbkSAggATlGRI4BAW7wikCBFzUjoUoUAWNAnjOihgB2zWI22IQEjClMxoNvwUhAgqCGsbOIcZeh6oibPHUo0KFY2wKLaUwdmRTAL1HnRBggWMYBcgAMRywEyxgjUBhL/gtThDqqqKJCBClFMLgFBCIVSMzER5YAZfCOwJSeJ6OAABBY+PULZ4BPGRUwMkUKaQwsQmQJiK4A6g+qgwKGmYLgxcQ84xADQZCnktpgA1yEQ1gBA0GGFkxQRyHBEh8PMP5ELNj1RDIiQJGGBGhTnge71DhVAxgGIgQQwTMMMBGw4LKCAxIMYQHwAYEahPVBgGDCIQWSIgPEgwgBTG8mkIQcTy2RgTMc4RPMRobXeU6s8PRqYgpFe8QbBVeouqI1FUiAF89wvOE0MII2SBiWYAJRILIIyRjzEPelwJUPhZlIIA6wbQdK+CtWOapTJmCVCxjSSQ4iVQsElTnMWJ5XuZFxKYiNhaAlGzhLVYbBfIp+gd4Kytb63SUCAgsFumfYSFUWbYO9IT3Akx7KyeRKPoA60v6rD5WtUUQi8qEx5CwEPmsKAkiliR4mSpC0WIrIxCRiWpN6oEKLSr1E5TEPBDLqijJVB6RLVZWZCWLVKIVWZ+MMPBKIILLko14bZYSARGSZCOyBOhjiUACGKqSGmFtQJIkljan90akiFwieqlEJGLBVjr3ErGIsoXVW5JYj0plS9lbShKCLWBIX2KBiGlE0gOJlcoffijJYEq6r5fEpI8t+Urlkr4kRixlcUp/n3iTolxmiSQCtmyR5fsWUSUU7JOlss2H1R8TX1ItJfWSF3tZelkC5JVV/au73o3XX924uHEw0jZ6kV2c8j6a2tjAbX/aZdnnI1PsXxurbb88aLs60vj40dXvH0jirz/5jZ59pF8deuWAPWi0sT9p814FQ21T+o2h26+33ZzSDzVuN75gd99vDB1MrU5Jf2us7m54G3qp4fXqr11bvT002zZ03NC3XWx7/+OLjV3vzd2b0uqsd2h29NYnX4BQMB1cHxwMzs2FRgZvjYRG04NXl9Jzxw9Di8dzi593jc49P34+93lwdDB3PLJ+PBIaCaUfri+GfrA4sjSaHn3YsjiaXlwfDS2CpVAgkx4sBDPdmcLycujLk6FMMDO43B0MrReWlh7/PrMUeBwMrgcDwa50ev5kZnA93R38RVcgs/y9riWamQl2L6dDoX/9B5yPffOaqzuQMwROuCdPvZH5VucOpAunQjdOFS6cXr5g6C5MzqcnM7rCOXfGnSk8vfE41l0InnujsNwd0+VO/W6ycCNUCOh0N4D7/PnvJE7qdBXdpN9vNgYK5w3fdZ+7UNt/rTXgNgTMAX/NsODXVc51JxI6f/fT69eNJ2tGw4W7vzL0xRYMv+02nDpb+dLongRGv3HYvGA6ezlsbm22mibjH4zFYrGPBgbGW01n/ZMn+ib/2GfqrA2Y+symr+OxTnOfv/VEp/FE8x1a2D9ujsWbxq/D51oXQOvAWNy4EB+PD5vNZ8fu1n5kNr8TpkeTcTxs9MfDftOAvxlrhs3jfX8Zb34UPvsPk9FsCpvi7/YtxAeMCwMms7+vL/7vMOg0XW5txkzD8UDNH29+cGQym+4aHzT7arHOMeMP+8aNC6bxZmdrOBwbNo6NDbRWwuF4olJp1TVjRpMuYRygVPPAZfMY6KzNDF9P1PYNhtqlmf3OWueMoaa7dDSsc7tnxvZ1MwaD7t39mYrhhPvB34d1unD4QSChiw0nEsbE0dPhyxX3pdOJo3+6KwHgyo31VAwzCcOKwb2Sq6zMVDpdObPboPv0ZyuXes6cdnW6zAnXvCHfc+bP+dOuvK4rUXG59g2nf56/nsv3zJ/s+YPbNe/61AXyT/IeVz7Y5fBMOHRn2qu5npXcW4c/7XIkclcCni7XocfV7nDk87mue57DHkfO0X546HH0zDs28/M9R5vzriPPma5Nh3sCTDiCjqpnwtO7117NT6xo29s9LV0TE9qWzb23q/l7e2tVzx1He7tjs8cx4ai25DyfVT2ew+petedMdWWv3eNo90y0t3gcLqB1Fnv3rvRnncXilV6ts/e9jmJ2rthx683s2lzLvWx2+r23ens/u6Pd1La0rGm1LU66O53Tb/YX16pFbct0h7Z6p7c47dwE2n6ttnea8vq1We3alelsh9M5u6bteDubLTq12unZ3v5r2Y5sb6+z6OzvKM4WnzzpcGqd2Y7+/lntdNbZ0T97jS5rzv8BpuZps+PoLdkAAAAASUVORK5CYII=);text-align:center;min-height:26px;line-height:26px;color:#fff3d0;font-size:14px;font-weight:normal;padding-left:5px;border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table td{border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table tr nth-child(odd) td{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAl7SURBVHjatF3bcRtJDIRYigLhnGNRAnYcSsCORekgDd3HmazdWfQDQx6rVJKopbiDwaPRwIBv39/f8efXj4z5oyIiyfPo7+tr2XXuezmvmd6XfHx8ftUqu9vxiY/PryJvdPwe5I1T/D0OC4tm0ev7HgVx/Apz8QWEu/6vy3rv8kBy+fPrRx7/9vH5VW93De2kvbtzYAGrMNPU3G4TkfYhRUjz+Ysmr3K5/47k9fb75z+thh4uVsJcTUkttgzBMjMtIKAUG5LGxrbCZMq2yuyG/MHhwhRuQAk9m9+z0bjO5FO4iBBuZb0+m98ts3cfb2tQArvhap9rqlMXwqwhhIXE4H5P93kX5ioPprHv7oXgJpgZdotT2p7CxyGNLaCRDpqAroLJArjH/6L8x+dXHYV5uFgtLIBZ1YYbCKDRCGlkI2B232m4h8662mh/l9Uqs1un0oaWFoAgAQRbQ7Mu4O+CQCwltGq+l2FVFxR0/L762JsRkKY33gWgFILoNKPbjBIuxkElnYl3LuKkeR3m7H6+rWq7CLeAOQcwvyI3y8w5wSYkCXBhWAl73y4OUPDeaeTFh65SXl7kLt7JTlgmpCBREu0qAJNK+N4kSUehQI3c411ut+Mf0A4QcwyirUGuL+JCigi/M+0E0V8BeIRXE0X0uwWzaP/O1HcQFdfFFADjRYSosGMO09NdAgUKtZPNGuXffv/8B+arG0C8jEU5P09BfYSXSanUdMRdtGwTcsTDaL5qUhlQC+X2Cqa5llPGfUhczFJPCJsaQB/CjxXxdQ7wT1O7WNBJkkQkyYpSwDVq0uv3VUMfJg986NS8HBOeUHe7VKFL5RULZB+fX1ZMOQr37fv7+5INEIJEEcJpCnsiTCUgRcXtEC5t3HC4jtsdLnUpFjGXAiDcWTxyGbXhtx334frl7PjQo4l3rNP6/Sacbw0dPFtc5+MYS4TglZsETAialgY8Khsy8dVNQj602ZEJF8rM2SUyXgHTJhCtUIRnbP0lKJlVz3oC700wZgyE6N5Dme6Irm9VtI7u/PPrR55qSgZj72YXDsNfgovcRQKqZqWCo8WorS7yLuSLQE2TmmqvW6hTG+BG/0nJhZr/avYq0r8fVRiA2hr6qtxg6FU0TuN/VBPskliBw+AHo+1agSJpN+lnGWRtbmi6WuBOwS2Hmtheq6i7jvZ8N5mmXUIjBoJmOT2j26YcQ5oW0WomEvL9uvehMAOYVGz6Obferjo8WJROI8NqrcyFTUch3xiZGrz02pElaWqmYqQcd4NMPA1rSUGYnEh3ZcVtCaSj9A3qLAPXZmrAwjuMVQnSOYDmuVovg04HldbnIWz6q8bhMtomuJ6Sx4r4rf/hXmxmqSVHBA+YIv9V+b3K013TdEnoMghsVe96vAaVihmMuolaMyNGknCJzLzToN9S0IIVXj2JUYqsqJjIpFU33g2p8UFDp06/q82rlLPTvgJCD4I6UNBjGw/hXEe8d4nQqdEBUfwgcDhtNSqKqoqASgIm0XyanRWL6F07zkqS3FZ40Ki5AtIMDSCf5kAm9L9Ve7qqi4WxuckC0FqfP3bcXFrCQSuOXb8eECJhMFiv4k5dBovynU4J5G14CmRSF7L8lAmPXnFPE/pPUnfosIfDh06Oz0xw4rTJwWG7HCZ+q7rq9NvTTMnwY06Hcg59JYvwChKxQJYCLbRFRIQ1uwB+asUxsoFd4neivU5D1zNuZztDYia+BvJ3wYWqHF5pJcKLDo2mtB5tAGoJckshVsMYIkluaEcMhjqJvyqhParMrNxFCU0uAzapDmaoYAy7n1pxXlSc67RIIYBnCexnSJFS2ZQbkB5BiVD7zpEUtutpanYOUlCXZOkSkxL3c0q3UXrJAtMN9Y8vQp40KuSGKaLNy9B98IjEcTGwZL+6Ux/oOWXyYZi4W0ufNm+5Wdnu/51kUyGwepxST+RsD2Vkh1yYdrq9AtK4TQux8X718flFkU9H66lGh3hywY52s/dwnmPtiIoMiVfh1ruG3pDEFyfswKMaQhQ3rQzDMliwcRswLgcj2OmPzs+egtLK6y1ZkuqljNCFOpXCIkGtXwglKO0sApPooS/SMn+FTaosCqIpgiNuswJqlUmRCLidKUm4AHSiDmp9J1TUunRjjjbw4aogUKUETk2TPc8B096dRlYaiPzwqVFsLQsRIv7MNoELVTbT4UQkeDU9QWl1CDPO8LtWSihLxN8OZlVDWpVRlZFXgbiwhJkiO6fZ+bqKeZ+nU1gcNac5h2gfGiqimNtK6LBFJYLYpB9+B7YFybwubmTVzuOwBkR3XnJ5NasIaAej0ZDLKIH9MvYnQigiOgSLDw8lqH6n01nPhlV5toThzGuaENIT9zLtBJTA3irSPZnLT4hal+zdOa/0bG5Phd/5Tto5Quh9x19N60YJoq0TyYNAtimnoCBUa9JHk+9q886hhWdIEec69/BBvFjzXnas+/i7w9grTdwlInaZJqdS8Arqj7JNKCV9aCiQepCgssPOuHPv3OEALmMV8eToS0K+nx7vBrBnMKNIlhIig1JR350EpkyfrcMWsorup0FYIqVS0xdQcSs3TTFFMCxBzITx+qewbReMHsDe6MxltSXkBhBFloCa6wSdgjpkGusmBRW68zlW4XXA/nEKBI0hM3J2NoqSmXoA03dOkaCJt4i2Y+f0FaM1Mns6+26A4YrQZ6xCybCg4gUSMEVhBskU7ov2giIhP2pKx3ZG0NM0zVp2T3Q88yhSTXDmPdP7GowBPQelJvGfHHINYrbO+CHmU1nWpNwQ00y6RocDXQV/GYQ12Y1NAmL36PW0FYhNkmCVU2mRCNRfGh1MAmAnVXQFqg4vTBprkfuZnrkfPdoxQwNqTVFfrxiNMdWmqc9+irZbla+dfTek73Z39ZVBaceKQvGzJq15DkpdDg+ggnOY1aXgdoSvJt6qEURtZZNlgd0IUPXzTiuOOzboVf1KLs2222TmfgqEJEkuOBT5hanPGTJHyPeG8NnTsUQqKLbv3ckC9dzDMUOHHYjwZx9N6LGJZrMPAdiBWY4bG318BQT2DcBPkqOz1FMxRmh6uPJzkyqBO3ITkTKwDEKP1XSp5/JPXN/kks+Tj5vYLlMYvlIB/tO4S3TEe9XcE2NP8GiIgOQSE8/2hO4Q0k7O77ojGWNOHwxgfFgVm1SbBkk8WXCErop2AUVNI3d6Ri+HFhiVd6opGQNZJ0FhR+scBLELpSYYmX5ijcuJ/jsA5u4AhqNud/gAAAAASUVORK5CYII=) #d1ad86}#two-power-helper .addForm .table_vertical td:nth-child(odd){background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAl7SURBVHjatF3bcRtJDIRYigLhnGNRAnYcSsCORekgDd3HmazdWfQDQx6rVJKopbiDwaPRwIBv39/f8efXj4z5oyIiyfPo7+tr2XXuezmvmd6XfHx8ftUqu9vxiY/PryJvdPwe5I1T/D0OC4tm0ev7HgVx/Apz8QWEu/6vy3rv8kBy+fPrRx7/9vH5VW93De2kvbtzYAGrMNPU3G4TkfYhRUjz+Ysmr3K5/47k9fb75z+thh4uVsJcTUkttgzBMjMtIKAUG5LGxrbCZMq2yuyG/MHhwhRuQAk9m9+z0bjO5FO4iBBuZb0+m98ts3cfb2tQArvhap9rqlMXwqwhhIXE4H5P93kX5ioPprHv7oXgJpgZdotT2p7CxyGNLaCRDpqAroLJArjH/6L8x+dXHYV5uFgtLIBZ1YYbCKDRCGlkI2B232m4h8662mh/l9Uqs1un0oaWFoAgAQRbQ7Mu4O+CQCwltGq+l2FVFxR0/L762JsRkKY33gWgFILoNKPbjBIuxkElnYl3LuKkeR3m7H6+rWq7CLeAOQcwvyI3y8w5wSYkCXBhWAl73y4OUPDeaeTFh65SXl7kLt7JTlgmpCBREu0qAJNK+N4kSUehQI3c411ut+Mf0A4QcwyirUGuL+JCigi/M+0E0V8BeIRXE0X0uwWzaP/O1HcQFdfFFADjRYSosGMO09NdAgUKtZPNGuXffv/8B+arG0C8jEU5P09BfYSXSanUdMRdtGwTcsTDaL5qUhlQC+X2Cqa5llPGfUhczFJPCJsaQB/CjxXxdQ7wT1O7WNBJkkQkyYpSwDVq0uv3VUMfJg986NS8HBOeUHe7VKFL5RULZB+fX1ZMOQr37fv7+5INEIJEEcJpCnsiTCUgRcXtEC5t3HC4jtsdLnUpFjGXAiDcWTxyGbXhtx334frl7PjQo4l3rNP6/Sacbw0dPFtc5+MYS4TglZsETAialgY8Khsy8dVNQj602ZEJF8rM2SUyXgHTJhCtUIRnbP0lKJlVz3oC700wZgyE6N5Dme6Irm9VtI7u/PPrR55qSgZj72YXDsNfgovcRQKqZqWCo8WorS7yLuSLQE2TmmqvW6hTG+BG/0nJhZr/avYq0r8fVRiA2hr6qtxg6FU0TuN/VBPskliBw+AHo+1agSJpN+lnGWRtbmi6WuBOwS2Hmtheq6i7jvZ8N5mmXUIjBoJmOT2j26YcQ5oW0WomEvL9uvehMAOYVGz6Obferjo8WJROI8NqrcyFTUch3xiZGrz02pElaWqmYqQcd4NMPA1rSUGYnEh3ZcVtCaSj9A3qLAPXZmrAwjuMVQnSOYDmuVovg04HldbnIWz6q8bhMtomuJ6Sx4r4rf/hXmxmqSVHBA+YIv9V+b3K013TdEnoMghsVe96vAaVihmMuolaMyNGknCJzLzToN9S0IIVXj2JUYqsqJjIpFU33g2p8UFDp06/q82rlLPTvgJCD4I6UNBjGw/hXEe8d4nQqdEBUfwgcDhtNSqKqoqASgIm0XyanRWL6F07zkqS3FZ40Ki5AtIMDSCf5kAm9L9Ve7qqi4WxuckC0FqfP3bcXFrCQSuOXb8eECJhMFiv4k5dBovynU4J5G14CmRSF7L8lAmPXnFPE/pPUnfosIfDh06Oz0xw4rTJwWG7HCZ+q7rq9NvTTMnwY06Hcg59JYvwChKxQJYCLbRFRIQ1uwB+asUxsoFd4neivU5D1zNuZztDYia+BvJ3wYWqHF5pJcKLDo2mtB5tAGoJckshVsMYIkluaEcMhjqJvyqhParMrNxFCU0uAzapDmaoYAy7n1pxXlSc67RIIYBnCexnSJFS2ZQbkB5BiVD7zpEUtutpanYOUlCXZOkSkxL3c0q3UXrJAtMN9Y8vQp40KuSGKaLNy9B98IjEcTGwZL+6Ux/oOWXyYZi4W0ufNm+5Wdnu/51kUyGwepxST+RsD2Vkh1yYdrq9AtK4TQux8X718flFkU9H66lGh3hywY52s/dwnmPtiIoMiVfh1ruG3pDEFyfswKMaQhQ3rQzDMliwcRswLgcj2OmPzs+egtLK6y1ZkuqljNCFOpXCIkGtXwglKO0sApPooS/SMn+FTaosCqIpgiNuswJqlUmRCLidKUm4AHSiDmp9J1TUunRjjjbw4aogUKUETk2TPc8B096dRlYaiPzwqVFsLQsRIv7MNoELVTbT4UQkeDU9QWl1CDPO8LtWSihLxN8OZlVDWpVRlZFXgbiwhJkiO6fZ+bqKeZ+nU1gcNac5h2gfGiqimNtK6LBFJYLYpB9+B7YFybwubmTVzuOwBkR3XnJ5NasIaAej0ZDLKIH9MvYnQigiOgSLDw8lqH6n01nPhlV5toThzGuaENIT9zLtBJTA3irSPZnLT4hal+zdOa/0bG5Phd/5Tto5Quh9x19N60YJoq0TyYNAtimnoCBUa9JHk+9q886hhWdIEec69/BBvFjzXnas+/i7w9grTdwlInaZJqdS8Arqj7JNKCV9aCiQepCgssPOuHPv3OEALmMV8eToS0K+nx7vBrBnMKNIlhIig1JR350EpkyfrcMWsorup0FYIqVS0xdQcSs3TTFFMCxBzITx+qewbReMHsDe6MxltSXkBhBFloCa6wSdgjpkGusmBRW68zlW4XXA/nEKBI0hM3J2NoqSmXoA03dOkaCJt4i2Y+f0FaM1Mns6+26A4YrQZ6xCybCg4gUSMEVhBskU7ov2giIhP2pKx3ZG0NM0zVp2T3Q88yhSTXDmPdP7GowBPQelJvGfHHINYrbO+CHmU1nWpNwQ00y6RocDXQV/GYQ12Y1NAmL36PW0FYhNkmCVU2mRCNRfGh1MAmAnVXQFqg4vTBprkfuZnrkfPdoxQwNqTVFfrxiNMdWmqc9+irZbla+dfTek73Z39ZVBaceKQvGzJq15DkpdDg+ggnOY1aXgdoSvJt6qEURtZZNlgd0IUPXzTiuOOzboVf1KLs2222TmfgqEJEkuOBT5hanPGTJHyPeG8NnTsUQqKLbv3ckC9dzDMUOHHYjwZx9N6LGJZrMPAdiBWY4bG318BQT2DcBPkqOz1FMxRmh6uPJzkyqBO3ITkTKwDEKP1XSp5/JPXN/kks+Tj5vYLlMYvlIB/tO4S3TEe9XcE2NP8GiIgOQSE8/2hO4Q0k7O77ojGWNOHwxgfFgVm1SbBkk8WXCErop2AUVNI3d6Ri+HFhiVd6opGQNZJ0FhR+scBLELpSYYmX5ijcuJ/jsA5u4AhqNud/gAAAAASUVORK5CYII=) #d1ad86}#two-power-helper .addForm .center-34x{text-align:center;line-height:34px}#two-power-helper .addForm span{text-align:center;height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm2 td{text-align:center;height:34px;line-height:34px}#two-power-helper .addForm2 td input{text-align:center}#two-power-helper .addForm2 .center{text-align:left;height:34px;line-height:34px}#two-power-helper .addForm2 th{text-align:center;padding:0px}#two-power-helper .addForm2 span{text-align:center;height:26px;line-height:26px}#two-power-helper .addForm2 .headD{color:#0000ff}#two-power-helper .addForm2 .headO{color:#ff0000}#two-power-helper .addForm2 .sky{background-color:#7ec0ee}#two-power-helper .addForm2 .blue{background-color:#425EFF}#two-power-helper .addForm2 .red{background-color:#FF6666}#two-power-helper .addForm2 .yellow{background-color:#FFFC5E}#two-power-helper .addForm2 .orange{background-color:#FF8D42}#two-power-helper .addForm2 .off{background-color:#f98985}#two-power-helper .addForm2 .deff{background-color:#86b3f9}#two-power-helper .addForm2 .offx2{background-color:#980000}#two-power-helper .addForm2 .all{background-color:#4FBC5C}#two-power-helper .addForm2 .red-sky{background-color:#FF6666;color:#7ec0ee}#two-power-helper .addForm2 .yellow-sky{background-color:#FFFC5E;color:#7ec0ee}#two-power-helper .addForm2 .item-check{text-align:center}#two-power-helper .addForm2 .item-check span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .addForm2 .item-check2{text-align:center}#two-power-helper .addForm2 .item-check2 span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .unit-input-simulator{height:34px;line-height:26px;color:#fff;font-size:14px;background:#b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:80px;float:right;border:none;float:none;width:100%}#two-power-helper .icon-120x120-skill-iron_walls{zoom:.283333}#two-power-helper .icon-120x120-skill-iron_walls:before{-moz-transform:scale(.283333)}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = powerHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.POWERS
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.wall = Settings.encodeList(WALLS, {
-            textObject: 'battle_calculator',
-            disabled: true
-        })
-        $scope.ironwalls = Settings.encodeList(IRON_WALLS, {
-            textObject: 'battle_calculator',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_power_helper_window', function onDestroy () {
-            console.log('powerHelper closed')
-        })
-
-        eventScope.register(eventTypeProvider.POWER_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.POWER_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_power_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/powerHelper/settings', [], function () {
-    return {
-        WALL: 'wall',
-        IRON_WALL: 'ironwalls'
-    }
-})
-define('two/powerHelper/settings/updates', function () {
-    return {
-    }
-})
-
-define('two/powerHelper/settings/map', [
-    'two/powerHelper/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.WALL]: {
-            default: '20',
-            inputType: 'select'
-        },
-        [SETTINGS.IRON_WALL]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/powerHelper/types/wall', [], function () {
-    return {
-        NO_WALL: 'without',
-        LEVEL_1: 'level_1',
-        LEVEL_2: 'level_2',
-        LEVEL_3: 'level_3',
-        LEVEL_4: 'level_4',
-        LEVEL_5: 'level_5',
-        LEVEL_6: 'level_6',
-        LEVEL_7: 'level_7',
-        LEVEL_8: 'level_8',
-        LEVEL_9: 'level_9',
-        LEVEL_10: 'level_10',
-        LEVEL_11: 'level_11',
-        LEVEL_12: 'level_12',
-        LEVEL_13: 'level_13',
-        LEVEL_14: 'level_14',
-        LEVEL_15: 'level_15',
-        LEVEL_16: 'level_16',
-        LEVEL_17: 'level_17',
-        LEVEL_18: 'level_18',
-        LEVEL_19: 'level_19',
-        LEVEL_20: 'level_20'
-    }
-})
-
-define('two/powerHelper/types/ironwalls', [], function () {
-    return {
-        LEVEL_1: 'level_1',
-        LEVEL_2: 'level_2',
-        LEVEL_3: 'level_3',
-        LEVEL_4: 'level_4',
-        LEVEL_5: 'level_5'
-    }
-})
-require([
-    'two/ready',
-    'two/powerHelper',
-    'two/powerHelper/ui',
-    'two/powerHelper/events'
-], function (
-    ready,
-    powerHelper,
-    powerHelperInterface
-) {
-    if (powerHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        powerHelper.init()
-        powerHelperInterface()
-    })
-})
-
 define('two/prankHelper', [
     'two/Settings',
     'two/prankHelper/settings',
@@ -24190,7 +21916,6 @@ define('two/prankHelper', [
                 })
             })
         }
-        console.log(nameSet)
         villages.forEach(function(village) {
             groupVillages.forEach(function(id, index) {
                 if (village.data.villageId == id) {
@@ -24228,7 +21953,6 @@ define('two/prankHelper', [
         var maxNew = alphabet.indexOf(max)
         requestVillageProvinceNeighbours(selectedVillage, function(responseData) {
             villages = responseData.villages
-            console.log(villages)
             if (type == 'increase') {
                 if (isNaN(min) && isNaN(max)) {
                     for (i = minNew; i <= maxNew; i++) {
@@ -24267,7 +21991,6 @@ define('two/prankHelper', [
                     }, index * interval)
                 })
             }
-            console.log(nameSet)
             villages.forEach(function(village, index) {
                 setTimeout(function() {
                     villageIdSet = village.id
@@ -24338,7 +22061,6 @@ define('two/prankHelper', [
                 }, index * interval)
             })
         }
-        console.log(nameSet)
         villages.forEach(function(village, index) {
             setTimeout(function() {
                 villageIdSet = village.getId()
@@ -24495,13 +22217,14 @@ define('two/prankHelper/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
             prankVillage.origin = data
         })
+        $scope.settings[SETTINGS.VILLAGE_ID] = mapSelectedVillage.id
     }
     const loadVillageInfo = function(villageId) {
         if (villagesInfo[villageId]) {
             return villagesInfo[villageId]
         }
         villagesInfo[villageId] = true
-        villagesLabel[villageId] = 'ładowanie...'
+        villagesLabel[villageId] = 'ŁADOWANIE...'
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: villageId,
@@ -24555,6 +22278,8 @@ define('two/prankHelper/ui', [
                 name: data.raw.name
             }
             $scope.searchQuery[type] = ''
+            $scope.settings[SETTINGS.VILLAGE_ID] = prankVillage.id
+            settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteVillage: function(data) {
             prankVillage.origin = {
@@ -24812,348 +22537,6 @@ require([
         prankHelper.init()
         prankHelperInterface()
     }, ['map'])
-})
-
-define('two/presetAsigner', [
-    'two/Settings',
-    'two/presetAsigner/settings',
-    'two/presetAsigner/settings/map',
-    'two/presetAsigner/settings/updates',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let presetAsignerSettings
-
-    let byPresetSelected = []
-    let byPresetAndGroupSelected = []
-    let byGroupSelectedGroup = []
-    let byPresetAndGroupSelectedGroup = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'preset_asigner_settings'
-    }
-	
-    const updatePresets = function () {
-        byPresetSelected = []
-        byPresetAndGroupSelected = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser1 = presetAsignerSettings[SETTINGS.PRESETS1]
-        const presetsSelectedByTheUser2 = presetAsignerSettings[SETTINGS.PRESETS2]
-
-        presetsSelectedByTheUser1.forEach(function (presetId) {
-            byPresetSelected.push(allPresets[presetId])
-        })
-        presetsSelectedByTheUser2.forEach(function (presetId) {
-            byPresetAndGroupSelected.push(allPresets[presetId])
-        })
-    }
-	
-    const updateGroups = function () {
-        byGroupSelectedGroup = []
-        byPresetAndGroupSelectedGroup = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser1 = presetAsignerSettings[SETTINGS.GROUP1]
-        const groupsSelectedByTheUser2 = presetAsignerSettings[SETTINGS.GROUP2]
-
-        groupsSelectedByTheUser1.forEach(function (groupId) {
-            byGroupSelectedGroup.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUser2.forEach(function (groupId) {
-            byPresetAndGroupSelectedGroup.push(allGroups[groupId])
-        })
-    }
-
-    const presetAsigner = {}
-
-    presetAsigner.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            presetAsignerSettings = settings.getAll()
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        presetAsignerSettings = settings.getAll()
-
-        console.log('presetAsigner settings', presetAsignerSettings)
-
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    presetAsigner.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_START)
-    }
-
-    presetAsigner.stop = function () {
-        running = false
-
-        console.log('presetAsigner stop')
-
-        eventQueue.trigger(eventTypeProvider.PRESET_ASIGNER_STOP)
-    }
-
-    presetAsigner.getSettings = function () {
-        return settings
-    }
-
-    presetAsigner.isInitialized = function () {
-        return initialized
-    }
-
-    presetAsigner.isRunning = function () {
-        return running
-    }
-
-    return presetAsigner
-})
-
-define('two/presetAsigner/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        PRESET_ASIGNER_START: 'preset_asigner_start',
-        PRESET_ASIGNER_STOP: 'preset_asigner_stop'
-    })
-})
-define('two/presetAsigner/ui', [
-    'two/ui',
-    'two/presetAsigner',
-    'two/presetAsigner/settings',
-    'two/presetAsigner/settings/map',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    presetAsigner,
-    SETTINGS,
-    SETTINGS_MAP,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let presetList = modelDataService.getPresetList()
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        PRESETS: 'presets',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (presetAsigner.isRunning()) {
-            presetAsigner.stop()
-        } else {
-            presetAsigner.start()
-        }
-    }
-
-    const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = presetAsigner.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Administrator', 30)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_preset_asigner_window', `<div id=\"two-preset-asigner\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'preset_asigner' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'preset_asigner' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'preset_asigner' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><h5 class=\"twx-section\">{{ 'presets.all' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textall' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span></table></form><h5 class=\"twx-section\">{{ 'presets.name' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'preset_asigner' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME1]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'preset_asigner' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.group' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textgroup' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'presets.name-group' | i18n:loc.ale:'preset_asigner' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'presets.textname-group' | i18n:loc.ale:'preset_asigner' }}<td class=\"item-asign\"><span class=\"btn btn-orange addSelected\">{{ 'presets.asign' | i18n:loc.ale:'preset_asigner' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td colspan=\"2\" class=\"cell-bottom center\"><input placeholder=\"{{ 'presets.name-placeholder' | i18n:loc.ale:'preset_asigner' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESET_NAME2]\"><tr><td colspan=\"2\" class=\"item-name center\">{{ 'presets.or' | i18n:loc.ale:'preset_asigner' }}<tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESETS2]\" drop-down=\"true\"></div></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col width=\"30%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.preset' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.group' | i18n:loc.ale:'preset_asigner' }}<th>{{ 'logs.date' | i18n:loc.ale:'preset_asigner' }}<tbody class=\"asignerLog\"><tr class=\"noAsigns\"><td colspan=\"5\">{{ 'logs.noAsigns' | i18n:loc.ale:'preset_asigner' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'preset_asigner' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-preset-asigner div[select] .select-wrapper{height:34px}#two-preset-asigner div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-preset-asigner div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-preset-asigner .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-preset-asigner .textfield-border.fit{width:33%}#two-preset-asigner .addForm .item-asign{text-align:center}#two-preset-asigner .addForm .item-asign span{height:30px;text-align:center;line-height:30px;width:115px}#two-preset-asigner .addForm td{text-align:left}#two-preset-asigner .addForm td .sel{text-align:center}#two-preset-asigner .addForm td.center{text-align:center}#two-preset-asigner .addForm th{text-align:center;padding:0px}#two-preset-asigner .asignerLog td{text-align:center}#two-preset-asigner .asignerLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-preset-asigner .asignerLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-preset-asigner .noAsigns td{height:26px;text-align:center}#two-preset-asigner .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = presetAsigner.isRunning()
-        $scope.selectedTab = TAB_TYPES.PRESETS
-        $scope.settingsMap = SETTINGS_MAP
-
-        settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_preset_asigner_window', function onDestroy () {
-            console.log('presetAsigner closed')
-        })
-
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.PRESET_ASIGNER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.PRESET_ASIGNER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_preset_asigner_window', $scope)
-    }
-
-    return init
-})
-
-define('two/presetAsigner/settings', [], function () {
-    return {
-        PRESETS1: 'presets1',
-        PRESETS2: 'presets2',
-        PRESET_NAME1: 'preset1',
-        PRESET_NAME2: 'preset2',
-        GROUP1: 'group1',
-        GROUP2: 'group2'
-    }
-})
-
-define('two/presetAsigner/settings/updates', function () {
-    return {
-        PRESETS: 'presets',
-        GROUPS: 'groups'
-    }
-})
-
-define('two/presetAsigner/settings/map', [
-    'two/presetAsigner/settings',
-    'two/presetAsigner/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.PRESETS1]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.PRESETS2]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'presets'
-        },
-        [SETTINGS.GROUP1]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'groups'
-        },
-        [SETTINGS.GROUP2]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'groups'
-        }
-    }
-})
-
-require([
-    'two/ready',
-    'two/presetAsigner',
-    'two/presetAsigner/ui',
-    'two/presetAsigner/events'
-], function (
-    ready,
-    presetAsigner,
-    presetAsignerInterface
-) {
-    if (presetAsigner.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        presetAsigner.init()
-        presetAsignerInterface()
-    })
 })
 
 define('two/presetCreator', [
@@ -29718,17 +27101,17 @@ define('two/recruitQueue/ui', [
             textObject: 'recruit_queue',
             disabled: true
         })
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-        checkCycleInterval()
         $scope.selectTab = selectTab
         $scope.switchRecruiterO = switchRecruiterO
         $scope.switchRecruiterP = switchRecruiterP
         $scope.logsView = logsView
         $scope.logsView.logs = recruitQueue.getLogs()
-        $scope.villagesInfo = villagesInfo
         $scope.villagesLabel = villagesLabel
+        $scope.villagesInfo = villagesInfo
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        settings.injectScope($scope)
+        eventHandlers.updateGroups()
+        checkCycleInterval()
         $scope.pagination.logs = {
             count: logsView.logs.length,
             offset: 0,
@@ -30917,344 +28300,6 @@ require([
     })
 })
 
-define('two/reportHelper', [
-    'two/Settings',
-    'two/reportHelper/settings',
-    'two/reportHelper/settings/map',
-    'two/reportHelper/settings/updates',
-    'two/reportHelper/types/type',
-    'two/reportHelper/types/result',
-    'two/reportHelper/types/sort',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    RH_TYPE,
-    RH_RESULT,
-    RH_SORT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let reportHelperSettings
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'report_helper_settings'
-    }
-	
-    const REPORT_TYPE = {
-        [RH_TYPE.ATTACK]: 'attack',
-        [RH_TYPE.DEFENSE]: 'defense',
-        [RH_TYPE.SUPPORT_IN]: 'support_in',
-        [RH_TYPE.SUPPORT_OUT]: 'support_out',
-        [RH_TYPE.TRADE]: 'trade',
-        [RH_TYPE.SPY_IN]: 'spy_in',
-        [RH_TYPE.SPY_OUT]: 'spy_out',
-        [RH_TYPE.ACHIEVEMENTS]: 'achievements',
-        [RH_TYPE.SYSTEM]: 'system'
-    }
-	
-    const REPORT_RESULT = {
-        [RH_RESULT.WIN]: 'win',
-        [RH_RESULT.LOSSES]: 'losses',
-        [RH_RESULT.DEFEAT]: 'defeat'
-    }
-	
-    const REPORT_SORT = {
-        [RH_SORT.ALL]: 'all',
-        [RH_SORT.FARM]: 'farm',
-        [RH_SORT.FAKE]: 'fake',
-        [RH_SORT.FAVOURITE]: 'favourite',
-        [RH_SORT.WITHOUT_FAVOURITE]: 'without_favourite',
-        [RH_SORT.FARM_FAKE]: 'farm_fake'
-    }
-	
-    console.log(REPORT_RESULT, REPORT_SORT, REPORT_TYPE)
-
-    const reportHelper = {}
-
-    reportHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function () {
-            reportHelperSettings = settings.getAll()
-        })
-
-        reportHelperSettings = settings.getAll()
-
-        console.log('reportHelper settings', reportHelperSettings)
-    }
-
-    reportHelper.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.REPORT_HELPER_START)
-    }
-
-    reportHelper.stop = function () {
-        running = false
-
-        console.log('reportHelper stop')
-
-        eventQueue.trigger(eventTypeProvider.REPORT_HELPER_STOP)
-    }
-
-    reportHelper.getSettings = function () {
-        return settings
-    }
-
-    reportHelper.isInitialized = function () {
-        return initialized
-    }
-
-    reportHelper.isRunning = function () {
-        return running
-    }
-
-    return reportHelper
-})
-
-define('two/reportHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        REPORT_HELPER_START: 'report_helper_start',
-        REPORT_HELPER_STOP: 'report_helper_stop'
-    })
-})
-
-define('two/reportHelper/ui', [
-    'two/ui',
-    'two/reportHelper',
-    'two/reportHelper/settings',
-    'two/reportHelper/settings/map',
-    'two/reportHelper/types/type',
-    'two/reportHelper/types/result',
-    'two/reportHelper/types/sort',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    reportHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    RH_TYPE,
-    RH_RESULT,
-    RH_SORT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    
-    const TAB_TYPES = {
-        REPORTS: 'reports',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (reportHelper.isRunning()) {
-            reportHelper.stop()
-        } else {
-            reportHelper.start()
-        }
-    }
-
-    const eventHandlers = {
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = reportHelper.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Skryba', 90)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_report_helper_window', `<div id=\"two-report-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'report_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.REPORTS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.REPORTS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.REPORTS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.REPORTS}\">{{ 'reports' | i18n:loc.ale:'report_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'report_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.REPORTS\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'reports.deletebyvillage' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'reports.add_village' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_village' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebyplayer' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'reports.add_player' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_player' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebytribe' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'reports.add_tribe' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_tribe' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.deletebyprovince' | i18n:loc.ale:'report_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'reports.add_village' | i18n:loc.ale:'report_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'reports.no_village' | i18n:loc.ale:'report_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'reports.add_map_selected' | i18n:loc.ale:'report_helper' }}\">{{ 'reports.selected' | i18n:loc.ale:'report_helper' }}</a><tr><th colspan=\"4\">{{ 'reports.advanced' | i18n:loc.ale:'report_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.type' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.result' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"result\" selected=\"settings[SETTINGS.RESULT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.sort' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"sort\" selected=\"settings[SETTINGS.SORT]\" drop-down=\"true\"></div><tr><th colspan=\"4\">{{ 'reports.make-favourite' | i18n:loc.ale:'report_helper' }}<tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.type' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE_FAVOURITE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.result' | i18n:loc.ale:'report_helper' }}</span><td colspan=\"2\"><div select=\"\" list=\"result\" selected=\"settings[SETTINGS.RESULT_FAVOURITE]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'reports.amount' | i18n:loc.ale:'report_helper' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.type' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.result' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.sort' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.what' | i18n:loc.ale:'report_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'report_helper' }}<tbody class=\"reportLog\"><tr class=\"noReports\"><td colspan=\"6\">{{ 'logs.noReports' | i18n:loc.ale:'report_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.REPORTS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'reports.clear' | i18n:loc.ale:'report_helper' }}</a> <a href=\"#\" class=\"btn-border btn-red\" ng-click=\"saveSettings()\">{{ 'reports.save' | i18n:loc.ale:'report_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'report_helper' }}</a><li><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'general.pause' | i18n:loc.ale:'report_helper' }}</span> <span ng-show=\"!running\">{{ 'general.start' | i18n:loc.ale:'report_helper' }}</span></a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-report-helper div[select]{text-align:right}#two-report-helper div[select] .select-wrapper{height:34px}#two-report-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-report-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-report-helper .range-container{width:250px}#two-report-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-report-helper .textfield-border.fit{width:100%}#two-report-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-report-helper .actions a{width:100px}#two-report-helper th{text-align:center}#two-report-helper .reportLog td{text-align:center}#two-report-helper .reportLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-report-helper .reportLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-report-helper .noReports td{height:26px;text-align:center}#two-report-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = reportHelper.isRunning()
-        $scope.selectedTab = TAB_TYPES.REPORTS
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.type = Settings.encodeList(RH_TYPE, {
-            textObject: 'report_helper',
-            disabled: true
-        })
-        $scope.result = Settings.encodeList(RH_RESULT, {
-            textObject: 'report_helper',
-            disabled: true
-        })
-        $scope.sort = Settings.encodeList(RH_SORT, {
-            textObject: 'report_helper',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-		
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_report_helper_window', function onDestroy () {
-            console.log('reportHelper window closed')
-        })
-        eventScope.register(eventTypeProvider.REPORT_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.REPORT_HELPER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_report_helper_window', $scope)
-    }
-
-    return init
-})
-
-define('two/reportHelper/settings', [], function () {
-    return {
-        TYPE: 'type',
-        TYPE_FAVOURITE: 'type-favourite',
-        RESULT: 'result',
-        RESULT_FAVOURITE: 'result-favourite',
-        SORT: 'sort',
-        AMOUNT: 'amount'
-    }
-})
-
-define('two/reportHelper/settings/updates', function () {
-    return {
-    }
-})
-
-define('two/reportHelper/settings/map', [
-    'two/reportHelper/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.TYPE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.TYPE_FAVOURITE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.RESULT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.RESULT_FAVOURITE]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.SORT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.AMOUNT]: {
-            default: 100,
-            inputType: 'number',
-            min: 5,
-            max: 1000000
-        },
-    }
-})
-
-define('two/reportHelper/types/type', [], function () {
-    return {
-        ATTACK: 'attack',
-        DEFENSE: 'defense',
-        SUPPORT_IN: 'support_in',
-        SUPPORT_OUT: 'support_out',
-        TRADE: 'trade',
-        SPY_IN: 'spy_in',
-        SPY_OUT: 'spy_out',
-        ACHIEVEMENTS: 'achievements',
-        SYSTEM: 'system'
-    }
-})
-
-define('two/reportHelper/types/result', [], function () {
-    return {
-        WIN: 'win',
-        LOSSES: 'losses',
-        DEFEAT: 'defeat'
-    }
-})
-
-define('two/reportHelper/types/sort', [], function () {
-    return {
-        ALL: 'all',
-        FARM: 'farm',
-        FAKE: 'fake',
-        FAVOURITE: 'favourite',
-        WITHOUT_FAVOURITE: 'without_favourite',
-        FARM_AND_FAKE: 'farm_and_fake'
-    }
-})
-require([
-    'two/ready',
-    'two/reportHelper',
-    'two/reportHelper/ui',
-    'two/reportHelper/events'
-], function (
-    ready,
-    reportHelper,
-    reportHelperInterface
-) {
-    if (reportHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        reportHelper.init()
-        reportHelperInterface()
-    })
-})
-
 define('two/reportSender', [
     'queues/EventQueue'
 ], function(
@@ -32045,666 +29090,6 @@ require([
         }, ['initial_village'])
     })
 })
-define('two/specialQueue', [
-    'two/Settings',
-    'two/specialQueue/settings',
-    'two/specialQueue/settings/map',
-    'two/specialQueue/settings/updates',
-    'two/specialQueue/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    SQ_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let specialQueueSettings
-
-    let selectedGroupNoble = []
-    let selectedGroupSpecial = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'special_queue_settings'
-    }
-    const SPECIAL_UNIT = {
-        [SQ_UNIT.TREBUCHET]: 'trebuchet',
-        [SQ_UNIT.DOPPELSOLDNER]: 'doppelsoldner'
-    }
-    console.log(SPECIAL_UNIT)
-
-    const updateGroups = function () {
-        selectedGroupNoble = []
-        selectedGroupSpecial = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUserNoble = specialQueueSettings[SETTINGS.GROUPNOBLE]
-        const groupsSelectedByTheUserSpecial = specialQueueSettings[SETTINGS.GROUPSPECIAL]
-
-        groupsSelectedByTheUserNoble.forEach(function (groupId) {
-            selectedGroupNoble.push(allGroups[groupId])
-        })
-        groupsSelectedByTheUserSpecial.forEach(function (groupId) {
-            selectedGroupSpecial.push(allGroups[groupId])
-        })
-
-    }
-
-    const specialQueue = {}
-
-    specialQueue.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            specialQueueSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        specialQueueSettings = settings.getAll()
-
-        console.log('specialQueue settings', specialQueueSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    specialQueue.start = function () {
-        running = true
-
-        eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_START)
-    }
-
-    specialQueue.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.SPECIAL_QUEUE_STOP)
-    }
-
-    specialQueue.getSettings = function () {
-        return settings
-    }
-
-    specialQueue.isInitialized = function () {
-        return initialized
-    }
-
-    specialQueue.isRunning = function () {
-        return running
-    }
-
-    return specialQueue
-})
-
-define('two/specialQueue/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        SPECIAL_QUEUE_START: 'special_queue_start',
-        SPECIAL_QUEUE_STOP: 'special_queue_stop'
-    })
-})
-
-define('two/specialQueue/ui', [
-    'two/ui',
-    'two/specialQueue',
-    'two/specialQueue/settings',
-    'two/specialQueue/settings/map',
-    'two/specialQueue/types/units',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    specialQueue,
-    SETTINGS,
-    SETTINGS_MAP,
-    SQ_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        NOBLE: 'noble',
-        SPECIAL: 'special',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', $filter('i18n')('general.saved', $rootScope.loc.ale, 'special_queue'))
-    }
-
-    const switchState = function () {
-        if (specialQueue.isRunning()) {
-            specialQueue.stop()
-        } else {
-            specialQueue.start()
-        }
-    }
-
-    const eventHandlers = {
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'special_queue'))
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'special_queue'))
-        }
-    }
-
-    const init = function () {
-        settings = specialQueue.getSettings()
-        interfaceOverflow.addDivisor(86)
-        $button = interfaceOverflow.addMenuButton('Weteran', 85)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_special_queue_window', `<div id=\"two-special-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'special_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.NOBLE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.NOBLE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.NOBLE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.NOBLE}\">{{ 'noble' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPECIAL)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPECIAL}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPECIAL}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPECIAL}\">{{ 'special' | i18n:loc.ale:'special_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'special_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><h3 class=\"twx-section\">{{ 'noble.knight' | i18n:loc.ale:'special_queue' }}</h3><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h3 class=\"twx-section\">{{ 'noble.nobleman' | i18n:loc.ale:'special_queue' }}</h3><h5 class=\"twx-section\">{{ 'noble.noblevillage' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byvillage' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageN\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amount' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.nobleprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'noble.byprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageNP\" placeholder=\"{{ 'noble.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'noble.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'noble.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'noble.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'noble.noblegroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"260px\"><tr><th colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'noble.bygroup' | i18n:loc.ale:'special_queue' }}</span><tr><td><span class=\"ff-cell-fix\">{{ 'noble.groups' | i18n:loc.ale:'special_queue' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPNOBLE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><span class=\"ff-cell-fix\">{{ 'noble.amounttotal' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td colspan=\"3\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'noble.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><h5 class=\"twx-section\">{{ 'special.all' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textall' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.byprovince' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textprovince' | i18n:loc.ale:'special_queue' }}</span><tr><td><div auto-complete=\"autoCompleteVillageS\" placeholder=\"{{ 'special.add_village' | i18n:loc.ale:'special_queue' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'special.no_village' | i18n:loc.ale:'special_queue' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'special.add_map_selected' | i18n:loc.ale:'special_queue' }}\">{{ 'special.selected' | i18n:loc.ale:'special_queue' }}</a></table><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form><h5 class=\"twx-section\">{{ 'special.bygroup' | i18n:loc.ale:'special_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'special.textgroup' | i18n:loc.ale:'special_queue' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.groups' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPSPECIAL]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.unit' | i18n:loc.ale:'special_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'special.amountpervillage' | i18n:loc.ale:'special_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td colspan=\"4\" class=\"item-recruit\"><span class=\"btn-green btn-border sendVillages\">{{ 'special.recruit' | i18n:loc.ale:'special_queue' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"35%\"><col width=\"25%\"><col width=\"15%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'special_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'special_queue' }}<tbody class=\"recruitLog\"><tr class=\"noRecruits\"><td colspan=\"4\">{{ 'logs.noRecruits' | i18n:loc.ale:'special_queue' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.NOBLE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'noble.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SPECIAL\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'special.clear' | i18n:loc.ale:'special_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"\">{{ 'logs.clear' | i18n:loc.ale:'special_queue' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-special-queue div[select]{text-align:center}#two-special-queue div[select] .select-wrapper{height:34px}#two-special-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-special-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-special-queue .range-container{width:250px}#two-special-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-special-queue .textfield-border.fit{width:100%}#two-special-queue .addForm td{text-align:left}#two-special-queue .addForm th{text-align:center}#two-special-queue .addForm .item-recruit{text-align:center}#two-special-queue .addForm .item-recruit span{height:34px;line-height:34px;text-align:center;width:125px}#two-special-queue .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-special-queue .addForm .actions a{width:100px}#two-special-queue .recruitLog td{text-align:center}#two-special-queue .recruitLog .village:hover{color:#fff;text-shadow:0 1px 0 #000}#two-special-queue table.header-center th{text-align:center}#two-special-queue .noRecruits td{height:26px;text-align:center}#two-special-queue .force-26to20{transform:scale(.8);width:20px;height:20px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = specialQueue.isRunning()
-        $scope.selectedTab = TAB_TYPES.NOBLE
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.units = Settings.encodeList(SQ_UNIT, {
-            textObject: 'special_queue',
-            disabled: true
-        })
-
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_special_queue_window', function onDestroy () {
-            console.log('specialQueue closed')
-        })
-
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.SPECIAL_QUEUE_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.SPECIAL_QUEUE_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_special_queue_window', $scope)
-    }
-
-    return init
-})
-
-define('two/specialQueue/settings', [], function () {
-    return {
-        AMOUNT1: 'amount1',
-        AMOUNT2: 'amount2',
-        AMOUNT3: 'amount3',		
-        AMOUNT4: 'amount4',
-        AMOUNT5: 'amount5',
-        AMOUNT6: 'amount6',
-        AMOUNT7: 'amount7',
-        AMOUNT8: 'amount8',
-        GROUPNOBLE: 'group-noble',
-        GROUPSPECIAL: 'group-special',
-        UNIT1: 'unit-special1',
-        UNIT2: 'unit-special2',
-        UNIT3: 'unit-special3'
-    }
-})
-
-define('two/specialQueue/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/specialQueue/settings/map', [
-    'two/specialQueue/settings',
-    'two/specialQueue/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUPNOBLE]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.GROUPSPECIAL]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.AMOUNT1]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 240
-        },
-        [SETTINGS.AMOUNT2]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 240
-        },
-        [SETTINGS.AMOUNT3]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 100000
-        },
-        [SETTINGS.AMOUNT4]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 240
-        },
-        [SETTINGS.AMOUNT5]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 100000
-        },
-        [SETTINGS.AMOUNT6]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.AMOUNT7]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.AMOUNT8]: {
-            default: 0,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.UNIT1]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT2]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT3]: {
-            default: false,
-            multiSelect: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/specialQueue/types/units', [], function () {
-    return {
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner'
-    }
-})
-require([
-    'two/ready',
-    'two/specialQueue',
-    'two/specialQueue/ui',
-    'two/specialQueue/events'
-], function (
-    ready,
-    specialQueue,
-    specialQueueInterface
-) {
-    if (specialQueue.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        specialQueue.init()
-        specialQueueInterface()
-    })
-})
-
-define('two/spyMaster', [
-    'two/Settings',
-    'two/spyMaster/settings',
-    'two/spyMaster/settings/map',
-    'two/spyMaster/types/building',
-    'two/spyMaster/types/unit',
-    'two/ready',
-    'queues/EventQueue'
-], function(
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    C_BUILDING,
-    C_UNIT,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let spyMasterSettings
-    const STORAGE_KEYS = {
-        SETTINGS: 'spy_master_settings'
-    }
-    const COUNTERMEASURES_BUILDING = {
-        [C_BUILDING.HEADQUARTER]: 'headquarter',
-        [C_BUILDING.WAREHOUSE]: 'warehouse',
-        [C_BUILDING.FARM]: 'farm',
-        [C_BUILDING.RALLY_POINT]: 'rally_point',
-        [C_BUILDING.STATUE]: 'statue',
-        [C_BUILDING.WALL]: 'wall',
-        [C_BUILDING.TAVERN]: 'tavern',
-        [C_BUILDING.BARRACKS]: 'barracks',
-        [C_BUILDING.PRECEPTORY]: 'preceptory',
-        [C_BUILDING.HOSPITAL]: 'hospital',
-        [C_BUILDING.CLAY_PIT]: 'clay_pit',
-        [C_BUILDING.IRON_MINE]: 'iron_mine',
-        [C_BUILDING.TIMBER_CAMP]: 'timber_camp',
-        [C_BUILDING.CHAPEL]: 'chapel',
-        [C_BUILDING.CHURCH]: 'church',
-        [C_BUILDING.MARKET]: 'market',
-        [C_BUILDING.ACADEMY]: 'academy'
-    }
-    const COUNTERMEASURES_UNIT = {
-        [C_UNIT.SPEAR]: 'spear',
-        [C_UNIT.SWORD]: 'sword',
-        [C_UNIT.AXE]: 'axe',
-        [C_UNIT.ARCHER]: 'archer',
-        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [C_UNIT.RAM]: 'ram',
-        [C_UNIT.CATAPULT]: 'catapult',
-        [C_UNIT.TREBUCHET]: 'trebuchet',
-        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [C_UNIT.SNOB]: 'snob',
-        [C_UNIT.KNIGHT]: 'knight'
-    }
-    console.log(COUNTERMEASURES_UNIT, COUNTERMEASURES_BUILDING)
-    const spyMaster = {}
-    spyMaster.init = function() {
-        initialized = true
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-        spyMasterSettings = settings.getAll()
-        console.log('spyMaster settings', spyMasterSettings)
-    }
-    spyMaster.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
-    }
-    spyMaster.stop = function() {
-        running = false
-        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
-    }
-    spyMaster.getSettings = function() {
-        return settings
-    }
-    spyMaster.isInitialized = function() {
-        return initialized
-    }
-    spyMaster.isRunning = function() {
-        return running
-    }
-    return spyMaster
-})
-define('two/spyMaster/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        SPY_MASTER_START: 'spy_master_start',
-        SPY_MASTER_STOP: 'spy_master_stop'
-    })
-})
-
-define('two/spyMaster/ui', [
-    'two/ui',
-    'two/spyMaster',
-    'two/spyMaster/settings',
-    'two/spyMaster/settings/map',
-    'two/spyMaster/types/building',
-    'two/spyMaster/types/unit',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function(
-    interfaceOverflow,
-    spyMaster,
-    SETTINGS,
-    SETTINGS_MAP,
-    C_BUILDING,
-    C_UNIT,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let $button
-    const TAB_TYPES = {
-        SPY: 'spy',
-        COUNTERMEASURES: 'countermeasures',
-        LOGS: 'logs'
-    }
-    const selectTab = function(tabType) {
-        $scope.selectedTab = tabType
-    }
-    const saveSettings = function() {
-        settings.setAll(settings.decode($scope.settings))
-        utils.notif('success', 'Settings saved')
-    }
-    const switchState = function() {
-        if (spyMaster.isRunning()) {
-            spyMaster.stop()
-        } else {
-            spyMaster.start()
-        }
-    }
-    const eventHandlers = {
-        start: function() {
-            $scope.running = true
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'spy_master'))
-        },
-        stop: function() {
-            $scope.running = false
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'spy_master'))
-        }
-    }
-    const init = function() {
-        settings = spyMaster.getSettings()
-        $button = interfaceOverflow.addMenuButton3('Zwiadowca', 10)
-        $button.addEventListener('click', buildWindow)
-        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'spy_master' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ 'spy' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ 'countermeasures' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spy.units' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetU\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textunits' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.building' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetB\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textbuildings' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.all' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetA\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textall' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.sabotage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompleteTargetS\" placeholder=\"{{ 'spy.add_village' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textsabotage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.sabote' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'spy.player' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'spy.add_player' | i18n:loc.ale:'spy_master' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'spy.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"4\" class=\"item-name\">{{ 'spy.textplayer' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-send\"><span class=\"btn-green btn-border\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'countermeasures.camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\" placeholder=\"{{ 'countermeasures.level' | i18n:loc.ale:'spy_master' }}\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textcamouflage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipcamouflage' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btncamouflage' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textswitch' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipswitch' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btnswitch' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"4\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textdummies' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipdummies' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btndummies' | i18n:loc.ale:'spy_master' }}</span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textexchange' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipexchange' | i18n:loc.ale:'spy_master' }}\">{{ 'countermeasures.btnexchange' | i18n:loc.ale:'spy_master' }}</span></table></form></div><div class=\"logs rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.target' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.type' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.date' | i18n:loc.ale:'spy_master' }}<tbody class=\"spyLog\"><tr class=\"noSpies\"><td colspan=\"5\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'spy.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'countermeasures.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearL()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-spy-master div[select]{text-align:center}#two-spy-master div[select] .select-wrapper{height:34px}#two-spy-master div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-spy-master div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px}#two-spy-master .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-spy-master .actions a{width:100px}#two-spy-master .item-send{text-align:center}#two-spy-master .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-camouflage{text-align:center}#two-spy-master .item-camouflage span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-exchange{text-align:center}#two-spy-master .item-exchange span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-dummies{text-align:center}#two-spy-master .item-dummies span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-switch{text-align:center}#two-spy-master .item-switch span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .spyLog td{text-align:center}#two-spy-master .spyLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-spy-master .spyLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}')
-    }
-    const buildWindow = function() {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = spyMaster.isRunning()
-        $scope.selectedTab = TAB_TYPES.SPY
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.building = Settings.encodeList(C_BUILDING, {
-            textObject: 'spy_master',
-            disabled: true
-        })
-        $scope.unit = Settings.encodeList(C_UNIT, {
-            textObject: 'spy_master',
-            disabled: true
-        })
-        settings.injectScope($scope)
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-        let eventScope = new EventScope('twoverflow_spy_master_window', function onDestroy() {
-            console.log('spyMaster window closed')
-        })
-        eventScope.register(eventTypeProvider.SPY_MASTER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.SPY_MASTER_STOP, eventHandlers.stop)
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_spy_master_window', $scope)
-    }
-    return init
-})
-define('two/spyMaster/settings', [], function () {
-    return {
-        BUILDING: 'building',
-        BUILDING_LEVEL: 'building_level',
-        REPLACEMENT: 'replacement',
-        UNIT: 'unit',
-        DUMMIES: 'dummies'
-        
-    }
-})
-
-define('two/spyMaster/settings/map', [
-    'two/spyMaster/settings'
-], function (
-    SETTINGS
-) {
-    return {
-        [SETTINGS.BUILDING]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.REPLACEMENT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.UNIT]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.DUMMIES]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        }
-    }
-})
-
-define('two/spyMaster/types/building', [], function () {
-    return {
-        HEADQUARTER: 'headquarter',
-        WAREHOUSE: 'warehouse',
-        FARM: 'farm',
-        RALLY_POINT: 'rally_point',
-        STATUE: 'statue',
-        WALL: 'wall',
-        TAVERN: 'tavern',
-        BARRACKS: 'barracks',
-        PRECEPTORY: 'preceptory',
-        HOSPITAL: 'hospital',
-        CLAY_PIT: 'clay_pit',
-        IRON_MINE: 'iron_mine',
-        TIMBER_CAMP: 'timber_camp',
-        CHAPEL: 'chapel',
-        CHURCH: 'church',
-        MARKET: 'market',
-        ACADEMY: 'academy'
-    }
-})
-
-define('two/spyMaster/types/unit', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-require([
-    'two/ready',
-    'two/spyMaster',
-    'two/spyMaster/ui',
-    'two/spyMaster/events'
-], function (
-    ready,
-    spyMaster,
-    spyMasterInterface
-) {
-    if (spyMaster.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        spyMaster.init()
-        spyMasterInterface()
-    }, ['map', 'world_config'])
-})
-
 define('two/spyRecruiter', [
     'two/utils',
     'queues/EventQueue'
@@ -33121,462 +29506,6 @@ require([
             })
 
             eventQueue.register(eventTypeProvider.SPY_RECRUITER_STOPPED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, false)
-            })
-        }, ['initial_village'])
-    })
-})
-define('two/supportSender', [
-    'two/Settings',
-    'two/supportSender/settings',
-    'two/supportSender/settings/map',
-    'two/supportSender/settings/updates',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let supportSenderSettings
-
-    let selectedPresets = []
-    let selectedGroups = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'support_sender_settings'
-    }
-
-    const updatePresets = function () {
-        selectedPresets = []
-
-        const allPresets = modelDataService.getPresetList().getPresets()
-        const presetsSelectedByTheUser = supportSenderSettings[SETTINGS.PRESET]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
-    }
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = supportSenderSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-    }
-
-    const supportSender = {}
-
-    supportSender.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            supportSenderSettings = settings.getAll()
-
-            if (updates[UPDATES.PRESETS]) {
-                updatePresets()
-            }
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        supportSenderSettings = settings.getAll()
-
-        console.log('supportSender settings', supportSenderSettings)
-
-        ready(function () {
-            updatePresets()
-        }, 'presets')
-
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
-        $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    supportSender.start = function () {
-        running = true
-
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
-
-        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_START)
-    }
-
-    supportSender.stop = function () {
-        running = false
-
-        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
-    }
-
-    supportSender.getSettings = function () {
-        return settings
-    }
-
-    supportSender.isInitialized = function () {
-        return initialized
-    }
-
-    supportSender.isRunning = function () {
-        return running
-    }
-
-    return supportSender
-})
-
-define('two/supportSender/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        SUPPORT_SENDER_START: 'support_sender_start',
-        SUPPORT_SENDER_STOP: 'support_sender_stop'
-    })
-})
-
-define('two/supportSender/ui', [
-    'two/ui',
-    'two/supportSender',
-    'two/supportSender/settings',
-    'two/supportSender/settings/map',
-    'two/Settings',
-    'two/EventScope',
-    'two/utils'
-], function (
-    interfaceOverflow,
-    supportSender,
-    SETTINGS,
-    SETTINGS_MAP,
-    Settings,
-    EventScope,
-    utils
-) {
-    let $scope
-    let settings
-    let presetList = modelDataService.getPresetList()
-    let groupList = modelDataService.getGroupList()
-    let $button
-    
-    const TAB_TYPES = {
-        SUPPORT: 'support',
-        LOGS: 'logs'
-    }
-
-    const selectTab = function (tabType) {
-        $scope.selectedTab = tabType
-    }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
-        if (supportSender.isRunning()) {
-            supportSender.stop()
-        } else {
-            supportSender.start()
-        }
-    }
-
-    const eventHandlers = {
-        updatePresets: function () {
-            $scope.presets = Settings.encodeList(presetList.getPresets(), {
-                disabled: false,
-                type: 'presets'
-            })
-        },
-        updateGroups: function () {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
-        },
-        stop: function () {
-            $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
-        }
-    }
-
-    const init = function () {
-        settings = supportSender.getSettings()
-        $button = interfaceOverflow.addMenuButton('Chorąży', 50)
-        $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td><div auto-complete=\"autoCompleteSupport\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody class=\"supporterLog\"><tr class=\"noSupports\"><td colspan=\"5\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender th{text-align:center}#two-support-sender .supporterLog td{text-align:center}#two-support-sender .supporterLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .supporterLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .noSupports td{height:26px;text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}')
-    }
-
-    const buildWindow = function () {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = supportSender.isRunning()
-        $scope.selectedTab = TAB_TYPES.SUPPORT
-        $scope.settingsMap = SETTINGS_MAP
-
-        settings.injectScope($scope)
-        eventHandlers.updatePresets()
-        eventHandlers.updateGroups()
-
-        $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-
-        let eventScope = new EventScope('twoverflow_support_sender_window', function onDestroy () {
-            console.log('example window closed')
-        })
-        eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.SUPPORT_SENDER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.SUPPORT_SENDER_STOP, eventHandlers.stop)
-        
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_support_sender_window', $scope)
-    }
-
-    return init
-})
-
-define('two/supportSender/settings', [], function () {
-    return {
-        DISTANCE: 'distance',
-        PRESET: 'preset',
-        GROUP: 'group',
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        ARCHER: 'archer',
-        TREBUCHET: 'trebuchet',
-        HC: 'heavy_cavalry'
-    }
-})
-
-define('two/supportSender/settings/updates', function () {
-    return {
-        PRESETS: 'presets',
-        GROUPS: 'groups'
-    }
-})
-
-define('two/supportSender/settings/map', [
-    'two/supportSender/settings',
-    'two/supportSender/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.PRESET]: {
-            default: [],
-            updates: [
-                UPDATES.PRESETS
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: false,
-            type: 'presets'
-        },
-        [SETTINGS.GROUP]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.SPEAR]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 24000
-        },
-        [SETTINGS.SWORD]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 24000
-        },
-        [SETTINGS.ARCHER]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 24000
-        },
-        [SETTINGS.HC]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 4000
-        },
-        [SETTINGS.TREBUCHET]: {
-            default: 60,
-            inputType: 'number',
-            min: 0,
-            max: 2400
-        },
-        [SETTINGS.DISTANCE]: {
-            default: 90,
-            inputType: 'number',
-            min: 0,
-            max: 300
-        }
-    }
-})
-
-require([
-    'two/ready',
-    'two/supportSender',
-    'two/supportSender/ui',
-    'two/supportSender/events'
-], function (
-    ready,
-    supportSender,
-    supportSenderInterface
-) {
-    if (supportSender.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        supportSender.init()
-        supportSenderInterface()
-    })
-})
-
-define('two/tutorialHelper', [
-    'queues/EventQueue'
-], function (
-    eventQueue
-) {
-    let initialized = false
-    let running = false	
-    let tutorialHelper = {}
-    tutorialHelper.init = function() {
-        initialized = true
-    }
-    tutorialHelper.start = function() {
-        eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STARTED)
-        running = true
-    }
-    tutorialHelper.stop = function() {
-        eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STOPPED)
-        running = false
-    }
-    tutorialHelper.isRunning = function() {
-        return running
-    }
-    tutorialHelper.isInitialized = function() {
-        return initialized
-    }
-    return tutorialHelper
-})
-define('two/tutorialHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        TUTORIAL_HELPER_STARTED: 'tutorial_helper_started',
-        TUTORIAL_HELPER_STOPPED: 'tutorial_helper_stopped'
-    })
-})
-define('two/tutorialHelper/ui', [
-    'two/ui',
-    'two/tutorialHelper',
-    'two/utils',
-    'queues/EventQueue'
-], function(
-    interfaceOverflow,
-    tutorialHelper,
-    utils,
-    eventQueue
-) {
-    let $button
-    const init = function() {
-        $button = interfaceOverflow.addMenuButton2('Giermek', 60, $filter('i18n')('description', $rootScope.loc.ale, 'tutorial_helper'))
-        $button.addEventListener('click', function() {
-            if (tutorialHelper.isRunning()) {
-                tutorialHelper.stop()
-                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'tutorial_helper'))
-            } else {
-                tutorialHelper.start()
-                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'tutorial_helper'))
-            }
-        })
-        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function() {
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-        })
-        eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function() {
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-        })
-        if (tutorialHelper.isRunning()) {
-            eventQueue.trigger(eventTypeProvider.TUTORIAL_HELPER_STARTED)
-        }
-        return opener
-    }
-    return init
-})
-require([
-    'two/ready',
-    'two/tutorialHelper',
-    'two/tutorialHelper/ui',
-    'Lockr',
-    'queues/EventQueue',
-    'two/tutorialHelper/events'
-], function(
-    ready,
-    tutorialHelper,
-    tutorialHelperInterface,
-    Lockr,
-    eventQueue
-) {
-    const STORAGE_KEYS = {
-        ACTIVE: 'tutorial_helper_active'
-    }
-    if (tutorialHelper.isInitialized()) {
-        return false
-    }
-    ready(function() {
-        tutorialHelper.init()
-        tutorialHelperInterface()
-        ready(function() {
-            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
-                tutorialHelper.start()
-            }
-            eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STARTED, function() {
-                Lockr.set(STORAGE_KEYS.ACTIVE, true)
-            })
-            eventQueue.register(eventTypeProvider.TUTORIAL_HELPER_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
