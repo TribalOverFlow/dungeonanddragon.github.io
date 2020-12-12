@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Dec 2020 12:10:06 GMT
+ * Sat, 12 Dec 2020 12:30:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18670,7 +18670,7 @@ define('two/farmOverflow', [
         var localeVillage = $filter('i18n')('selected_village', $rootScope.loc.ale, 'farm_overflow')
         var localeLast = $filter('i18n')('last_attack', $rootScope.loc.ale, 'farm_overflow')
         console.log(selectedVillage)
-        var villageLabel = utils.genVillageLabel(selectedVillage.data)
+        var villageLabel = utils.genVillageLabel(selectedVillage.village.data)
         var last = utils.formatDate(lastAttack)
         var vid = selectedVillage.villageId
         var message = []
