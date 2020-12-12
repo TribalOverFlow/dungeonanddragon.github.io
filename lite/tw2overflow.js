@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 12 Dec 2020 00:50:14 GMT
+ * Sat, 12 Dec 2020 07:26:22 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1129,7 +1129,7 @@ define('two/language', [
             "reseted_logs": "Zarejestrowane logi zostały wyczyszczone.",
             "date_added": "Data dodania",
             "multiple_attacks_interval": "Przerwa między atakami (sekundy)",
-            "next_cycle_in": "Następny cykl za",
+            "next_cycle_in": "Następny cykl za: ",
             "target_limit_per_village": "Limit celów na wioskę",
             "settings.hotkeySwitch": "Skrót Start/Pauza",
             "settings.hotkeyWindow": "Skrót okna Farmera",
@@ -2432,7 +2432,7 @@ define('two/language', [
             "no_report": "Nie ma raportu",
             "reports": "Raporty",
             "date": "Data",
-            "settings.remote": "Sterowanie Zdalne za pomocą wiadomości PW",
+            "settings.remote": "Sterowanie zdalne przez PW",
             "description": "Narzędzie do farmienia",
             "status_time_limit": "Cel jest zbyt daleko",
             "status_command_error": "Problem z wysłaniem rozkazu",
@@ -18389,7 +18389,6 @@ define('two/farmOverflow', [
     let nextCycleDate = null
     let currentStatus = 'paused'
     let lastAttack
-    let selectedVillage = null
     const PERSISTENT_RUNNING_CHECK_INTERVAL = 30 * 1000
     const VILLAGE_COMMAND_LIMIT = 50
     const MINIMUM_FARMER_CYCLE_INTERVAL = 1 // minutes
@@ -18669,20 +18668,26 @@ define('two/farmOverflow', [
         var localeStatus = $filter('i18n')('status', $rootScope.loc.ale, 'common')
         var localeVillage = $filter('i18n')('selected_village', $rootScope.loc.ale, 'farm_overflow')
         var localeLast = $filter('i18n')('last_attack', $rootScope.loc.ale, 'farm_overflow')
-        var statusReplaces = {}
+        var villageLabel = utils.genVillageLabel(activeFarmer)
+        var last = utils.formatDate(lastAttack)
+        var vid = activeFarmer.id
+        var message = []
+        var farmStatus = $filter('i18n')(currentStatus, $rootScope.loc.ale, 'farm_overflow')
         if (currentStatus === 'step_cycle_next') {
             var next = timeHelper.gameTime() + getCycleInterval()
-            statusReplaces.time = utils.formatDate(next)
+            var nextCycleTime = utils.formatDate(next)
+            var cycleText = $filter('i18n')('next_cycle_in', $rootScope.loc.ale, 'farm_overflow')
+            message.push('[b]', localeStatus, ':[/b] ', farmStatus, '[br]')
+            message.push('[b]', cycleText, ':[/b] ', nextCycleTime, '[br]')
+            message.push('[b]', localeVillage, ':[/b] ')
+            message.push('[village=', vid, ']', villageLabel, '[/village][br]')
+            message.push('[b]', localeLast, ':[/b] ', last)
+        } else {
+            message.push('[b]', localeStatus, ':[/b] ', farmStatus, '[br]')
+            message.push('[b]', localeVillage, ':[/b] ')
+            message.push('[village=', vid, ']', villageLabel, '[/village][br]')
+            message.push('[b]', localeLast, ':[/b] ', last)
         }
-        var farmStatus = $filter('i18n')(currentStatus + statusReplaces, $rootScope.loc.ale, 'farm_overflow')
-        var villageLabel = utils.genVillageLabel(selectedVillage)
-        var last = utils.formatDate(lastAttack)
-        var vid = selectedVillage.id
-        var message = []
-        message.push('[b]', localeStatus, ':[/b] ', farmStatus, '[br]')
-        message.push('[b]', localeVillage, ':[/b] ')
-        message.push('[village=', vid, ']', villageLabel, '[/village][br]')
-        message.push('[b]', localeLast, ':[/b] ', last)
         return message.join('')
     }
     const messageListener = function() {
@@ -18896,7 +18901,6 @@ define('two/farmOverflow', [
     const Farmer = function(villageId) {
         this.villageId = villageId
         this.village = $player.getVillage(villageId)
-        selectedVillage = $player.getVillage(villageId)
         if (!this.village) {
             throw new Error(`new Farmer -> Village ${villageId} doesn't exist.`)
         }
