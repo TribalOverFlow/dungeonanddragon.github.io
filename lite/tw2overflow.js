@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 11:04:50 GMT
+ * Mon, 14 Dec 2020 11:19:39 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18520,7 +18520,9 @@ define('two/fakeSender', [
         const targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
-            fakeVillages.push(groupVillages)
+            for (var i of groupVillages) {
+                fakeVillages.push(i)
+            }
         })
         let target1Limit = targetLimit
         let target2Limit = targetLimit
@@ -18556,7 +18558,7 @@ define('two/fakeSender', [
                                 ownLimit -= 4
                                 target1Limit -= 4
                             } else if (fakeType == 'full') {
-                                newdate = utils.getTimeFromString(date)
+                                newdate = utils.fixDate(date)
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(village, target1, newdate, whenSend, {
                                     unit: '1'
