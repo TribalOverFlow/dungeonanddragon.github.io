@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 10:47:30 GMT
+ * Mon, 14 Dec 2020 11:04:50 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18532,13 +18532,13 @@ define('two/fakeSender', [
         let target8Limit = targetLimit
         let target9Limit = targetLimit
         let target10Limit = targetLimit
+        let newdate = 0
         fakeVillages.forEach(function(village, index) {
             let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
             setTimeout(function() {
                 fakeUnits.forEach(function(unit, index1) {
                     setTimeout(function() {
                         if (target1 != 0 && target1Limit != 0 && ownLimit != 0) {
-                            console.log(village, target1, date)
                             if (fakeType == 'four') {
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(village, target1, date, whenSend, {
@@ -18556,7 +18556,7 @@ define('two/fakeSender', [
                                 ownLimit -= 4
                                 target1Limit -= 4
                             } else if (fakeType == 'full') {
-                                let newdate = date
+                                newdate = utils.getTimeFromString(date)
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(village, target1, newdate, whenSend, {
                                     unit: '1'
@@ -18694,6 +18694,7 @@ define('two/fakeSender', [
                                 commandQueue.start()
                             }
                         }
+                        console.log(fakeVillages, village, target1, newdate, date)
                     }, index1 * interval1)
                 })
             }, index * interval)
@@ -19529,15 +19530,15 @@ define('two/fakeSender/ui', [
         }
         $scope.datetype = Settings.encodeList(DATE_TYPES, {
             textObject: 'fake_sender',
-            disabled: true
+            disabled: false
         })
         $scope.type = Settings.encodeList(FS_TYPE, {
             textObject: 'fake_sender',
-            disabled: true
+            disabled: false
         })
         $scope.units = Settings.encodeList(FS_UNIT, {
             textObject: 'fake_sender',
-            disabled: true
+            disabled: false
         })
 
         settings.injectScope($scope)
@@ -19750,7 +19751,7 @@ define('two/fakeSender/settings/map', [
             type: 'groups'
         },
         [SETTINGS.TYPE]: {
-            default: false,
+            default: 'attack',
             disabledOption: true,
             inputType: 'select'
         },
@@ -19780,43 +19781,43 @@ define('two/fakeSender/settings/map', [
             inputType: 'select'
         },
         [SETTINGS.TYPEP]: {
-            default: false,
+            default: 'attack',
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.TYPEPro]: {
-            default: false,
+            default: 'attack',
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.TYPET]: {
-            default: false,
+            default: 'attack',
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.TYPEG]: {
-            default: false,
+            default: 'attack',
             disabledOption: true,
             inputType: 'select'
         },
         [SETTINGS.UNIT_FOUR]: {
-            default: false,
+            default: 'trebuchet',
             inputType: 'select'
         },
         [SETTINGS.UNIT_FOURT]: {
-            default: false,
+            default: 'trebuchet',
             inputType: 'select'
         },
         [SETTINGS.UNIT_FOURP]: {
-            default: false,
+            default: 'trebuchet',
             inputType: 'select'
         },
         [SETTINGS.UNIT_FOURPro]: {
-            default: false,
+            default: 'trebuchet',
             inputType: 'select'
         },
         [SETTINGS.UNIT_FOURG]: {
-            default: false,
+            default: 'trebuchet',
             inputType: 'select'
         },
         [SETTINGS.UNIT]: {
