@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 17:31:31 GMT
+ * Mon, 14 Dec 2020 18:00:58 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18536,44 +18536,25 @@ define('two/fakeSender', [
         let target9Limit = targetLimit
         let target10Limit = targetLimit
         let newdate = 0
-        let origin = null
-        fakeVillages.forEach(function(village, index) {
-            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {
-            }, function(data) {
-                for (var i = 0; i <= data.villages.length; i++) {
-                    if (data.villages[i].id == village) {
-                        origin.push(data.villages[i])
-                    }
+        let dateNew = 0
+        let origin = 0
+        let origins = 0
+        socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+            origins.push(data.villages)
+            console.log(data.villages, origins)
+        })
+        origins.forEach(function(originSet) {
+            fakeVillages.forEach(function(village, index) {
+                if (originSet.id == village) {
+                    origin = originSet
                 }
-            })
-            let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
-            setTimeout(function() {
-                fakeUnits.forEach(function(unit, index1) {
-                    setTimeout(function() {
-                        if (target1 != 0 && target1Limit != 0 && ownLimit != 0) {
-                            if (fakeType == 'four') {
-                                commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(origin, target1, date, whenSend, {
-                                    unit: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(origin, target1, date, whenSend, {
-                                    unit: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(origin, target1, date, whenSend, {
-                                    unit: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(origin, target1, date, whenSend, {
-                                    unit: '1'
-                                }, {}, commandType, false)
-                                ownLimit -= 4
-                                target1Limit -= 4
-                            } else if (fakeType == 'full') {
-                                newdate = utils.getTimeFromString(date)
-                                commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(origin, target1, newdate, whenSend, {
-                                    unit: '1'
-                                }, {}, commandType, false)
-                                if (fourUnit == 'trebuchet') {
+                let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
+                setTimeout(function() {
+                    fakeUnits.forEach(function(unit, index1) {
+                        setTimeout(function() {
+                            if (target1 != 0 && target1Limit != 0 && ownLimit != 0) {
+                                if (fakeType == 'four') {
+                                    commandType = COMMAND_TYPES.ATTACK
                                     commandQueue.addCommand(origin, target1, date, whenSend, {
                                         unit: '1'
                                     }, {}, commandType, false)
@@ -18588,128 +18569,154 @@ define('two/fakeSender', [
                                     }, {}, commandType, false)
                                     ownLimit -= 4
                                     target1Limit -= 4
+                                } else if (fakeType == 'full') {
+                                    newdate = utils.getTimeFromString(date) - 2000
+                                    dateNew = utils.formatDate(newdate)
+                                    commandType = COMMAND_TYPES.ATTACK
+                                    commandQueue.addCommand(origin, target1, dateNew, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                    if (fourUnit == 'trebuchet') {
+                                        commandQueue.addCommand(origin, target1, date, whenSend, {
+                                            unit: '1'
+                                        }, {}, commandType, false)
+                                        commandQueue.addCommand(origin, target1, date, whenSend, {
+                                            unit: '1'
+                                        }, {}, commandType, false)
+                                        commandQueue.addCommand(origin, target1, date, whenSend, {
+                                            unit: '1'
+                                        }, {}, commandType, false)
+                                        commandQueue.addCommand(origin, target1, date, whenSend, {
+                                            unit: '1'
+                                        }, {}, commandType, false)
+                                        ownLimit -= 4
+                                        target1Limit -= 4
+                                    }
+                                    newdate = utils.getTimeFromString(date) + 2000
+                                    dateNew = utils.formatDate(newdate)
+                                    commandQueue.addCommand(origin, target1, dateNew, whenSend, {
+                                        unit: '1'
+                                    }, {}, COMMAND_TYPES.SUPPORT, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                } else if (fakeType == 'attack') {
+                                    commandType = COMMAND_TYPES.ATTACK
+                                    commandQueue.addCommand(origin, target1, date, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                } else if (fakeType == 'support') {
+                                    commandType = COMMAND_TYPES.SUPPORT
+                                    commandQueue.addCommand(origin, target1, date, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                } else {
+                                    utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
                                 }
-                                newdate = utils.getTimeFromString(date)
-                                commandQueue.addCommand(origin, target1, newdate, whenSend, {
-                                    unit: '1'
-                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                ownLimit -= 2
-                                target1Limit -= 2
-                            } else if (fakeType == 'attack') {
-                                commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(origin, target1, date, whenSend, {
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
+                            }
+                            if (target2 != 0 && target2Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target2, date, whenSend, {
                                     unit: '1'
                                 }, {}, commandType, false)
                                 ownLimit -= 1
-                                target1Limit -= 1
-                            } else if (fakeType == 'support') {
-                                commandType = COMMAND_TYPES.SUPPORT
-                                commandQueue.addCommand(origin, target1, date, whenSend, {
+                                target2Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
+                            }
+                            if (target3 != 0 && target3Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target3, date, whenSend, {
                                     unit: '1'
                                 }, {}, commandType, false)
                                 ownLimit -= 1
-                                target1Limit -= 1
-                            } else {
-                                utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
+                                target3Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                            if (target4 != 0 && target4Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target4, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target4Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                        }
-                        if (target2 != 0 && target2Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target2, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target2Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                            if (target5 != 0 && target5Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target5, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target5Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                        }
-                        if (target3 != 0 && target3Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target3, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target3Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                            if (target6 != 0 && target6Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target6, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target6Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                        }
-                        if (target4 != 0 && target4Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target4, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target4Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                            if (target7 != 0 && target7Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target7, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target7Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                        }
-                        if (target5 != 0 && target5Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target5, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target5Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                            if (target8 != 0 && target8Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target8, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target8Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                        }
-                        if (target6 != 0 && target6Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target6, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target6Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                            if (target9 != 0 && target9Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target9, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target9Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                        }
-                        if (target7 != 0 && target7Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target7, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target7Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                            if (target10 != 0 && target10Limit != 0 && ownLimit != 0) {
+                                commandQueue.addCommand(origin, target10, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target10Limit -= 1
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
-                        }
-                        if (target8 != 0 && target8Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target8, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target8Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target9 != 0 && target9Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target9, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target9Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target10 != 0 && target10Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origin, target10, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target10Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        console.log( origin, target1, newdate, date)
-                    }, index1 * interval1)
-                })
-            }, index * interval)
+                            console.log(origin, target1, newdate, date)
+                        }, index1 * interval1)
+                    })
+                }, index * interval)
+            })
         })
     }
     fakeSender.start = function() {
