@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 20:46:51 GMT
+ * Mon, 14 Dec 2020 21:11:51 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18538,9 +18538,6 @@ define('two/fakeSender', [
         let newdate = 0
         let dateNew = 0
         let origins = []
-        var player = modelDataService.getSelectedCharacter()
-        var villages = player.getVillageList()
-        console.log(villages)
         let finalOrigins = []
         socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
             for (var i = 0; i < data.villages.length; i++) {
@@ -18548,15 +18545,9 @@ define('two/fakeSender', [
             }
         })
         console.log(origins)
-        origins.forEach(function(base) {
-            var villageId = base.id
+        origins.forEach(function(base, index) {
+            var villageId = origins[index].id
             console.log(villageId)
-            for (var i = 0; i < fakeVillages.length; i++) {
-                if (villageId == fakeVillages[i]) {
-                    finalOrigins.push(base)
-                    console.log(finalOrigins)
-                }
-            }
         })
         console.log('final' + finalOrigins)
         finalOrigins.forEach(function(origin, index) {
