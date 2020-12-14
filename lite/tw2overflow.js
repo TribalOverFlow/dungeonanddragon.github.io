@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 18:00:58 GMT
+ * Mon, 14 Dec 2020 18:28:01 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18537,16 +18537,17 @@ define('two/fakeSender', [
         let target10Limit = targetLimit
         let newdate = 0
         let dateNew = 0
-        let origin = 0
-        let origins = 0
+        let origin = []
+        let origins = []
         socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
-            origins.push(data.villages)
-            console.log(data.villages, origins)
+            for (var i = 0; i <= 9; i++) {
+                origins.push(data.villages[i])
+            }
         })
-        origins.forEach(function(originSet) {
+        origins.forEach(function(next) {
             fakeVillages.forEach(function(village, index) {
-                if (originSet.id == village) {
-                    origin = originSet
+                if (next.id == village) {
+                    origin.push(next)
                 }
                 let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                 setTimeout(function() {
