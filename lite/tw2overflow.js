@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 20:33:08 GMT
+ * Mon, 14 Dec 2020 20:46:51 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18492,7 +18492,6 @@ define('two/fakeSender', [
         return logs
     }
     fakeSender.fakeVillages = function() {
-        console.log('ruszam')
         const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
         const target2 = fakeSenderSettings[SETTINGS.TARGET_ID2]
         const target3 = fakeSenderSettings[SETTINGS.TARGET_ID3]
@@ -18539,12 +18538,16 @@ define('two/fakeSender', [
         let newdate = 0
         let dateNew = 0
         let origins = []
+        var player = modelDataService.getSelectedCharacter()
+        var villages = player.getVillageList()
+        console.log(villages)
         let finalOrigins = []
         socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
             for (var i = 0; i < data.villages.length; i++) {
                 origins.push(data.villages[i])
             }
         })
+        console.log(origins)
         origins.forEach(function(base) {
             var villageId = base.id
             console.log(villageId)
@@ -18555,7 +18558,7 @@ define('two/fakeSender', [
                 }
             }
         })
-        console.log(finalOrigins)
+        console.log('final' + finalOrigins)
         finalOrigins.forEach(function(origin, index) {
             let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
             setTimeout(function() {
