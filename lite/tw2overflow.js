@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 11:19:39 GMT
+ * Mon, 14 Dec 2020 11:28:30 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6135,6 +6135,7 @@ define('two/attackView', [
             var Trebuchet = 0
             const commandType = COMMAND_TYPES.SUPPORT
             let units = {}
+            console.log(origin)
 
             function unitInfo() {
                 origin.forEach(function(village, index) {
@@ -18579,7 +18580,7 @@ define('two/fakeSender', [
                                     ownLimit -= 4
                                     target1Limit -= 4
                                 }
-                                newdate = date
+                                newdate = utils.fixDate(date)
                                 commandQueue.addCommand(village, target1, newdate, whenSend, {
                                     unit: '1'
                                 }, {}, COMMAND_TYPES.SUPPORT, false)
@@ -18696,7 +18697,7 @@ define('two/fakeSender', [
                                 commandQueue.start()
                             }
                         }
-                        console.log(fakeVillages, village, target1, newdate, date)
+                        console.log( village, target1, newdate, date)
                     }, index1 * interval1)
                 })
             }, index * interval)
