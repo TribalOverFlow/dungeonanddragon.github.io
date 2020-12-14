@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 20:24:18 GMT
+ * Mon, 14 Dec 2020 20:33:08 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18546,11 +18546,14 @@ define('two/fakeSender', [
             }
         })
         origins.forEach(function(base) {
-            fakeVillages.forEach(function(village) {
-                if (base.id == village) {
+            var villageId = base.id
+            console.log(villageId)
+            for (var i = 0; i < fakeVillages.length; i++) {
+                if (villageId == fakeVillages[i]) {
                     finalOrigins.push(base)
+                    console.log(finalOrigins)
                 }
-            })
+            }
         })
         console.log(finalOrigins)
         finalOrigins.forEach(function(origin, index) {
