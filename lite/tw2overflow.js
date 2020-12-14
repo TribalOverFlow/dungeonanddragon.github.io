@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 20:18:58 GMT
+ * Mon, 14 Dec 2020 20:24:18 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18552,6 +18552,7 @@ define('two/fakeSender', [
                 }
             })
         })
+        console.log(finalOrigins)
         finalOrigins.forEach(function(origin, index) {
             let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
             setTimeout(function() {
