@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 10:29:28 GMT
+ * Mon, 14 Dec 2020 10:36:55 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18352,8 +18352,6 @@ define('two/fakeSender', [
     'two/fakeSender/types/type',
     'two/attackView/types/commands',
     'two/fakeSender/types/units',
-    'two/commandQueue',
-    'two/commandQueue/types/dates',
     'two/ready',
     'queues/EventQueue',
     'Lockr',
@@ -18368,8 +18366,6 @@ define('two/fakeSender', [
     FS_TYPE,
     COMMAND_TYPES,
     FS_UNIT,
-    commandQueue,
-    COMMAND_QUEUE_DATE_TYPES,
     ready,
     eventQueue,
     Lockr,
@@ -18379,9 +18375,11 @@ define('two/fakeSender', [
     let running = false
     let settings
     let logs
+    let commandQueue = false
     let interval1 = 1000
     let interval = 15000
     let fakeSenderSettings
+    let COMMAND_QUEUE_DATE_TYPES
     const LOGS_LIMIT = 500
     let selectedGroups = []
     let selectedGroupsP = []
@@ -18463,6 +18461,8 @@ define('two/fakeSender', [
     }
     const fakeSender = {}
     fakeSender.init = function() {
+        commandQueue = require('two/commandQueue')
+        COMMAND_QUEUE_DATE_TYPES = require('two/commandQueue/types/dates')
         initialized = true
         logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
         settings = new Settings({
