@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 13 Dec 2020 11:34:34 GMT
+ * Mon, 14 Dec 2020 10:16:32 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -979,6 +979,7 @@ define('two/language', [
             "description": "Automatycznie wysyła fejki na wskazane cele",
             "fake": "Fejki",
             "fake.send": "Wyślij",
+            "error_no_type": "Nie wybrano typu fejków",
             "fake.enemies": "Wioski pozostałych graczy wroga",
             "fake.send_villages": "Fejki na wskazane cele(maks 10)",
             "fake.send_player": "Fejki na wszystkie wioski gracza",
@@ -999,6 +1000,7 @@ define('two/language', [
             "fake.group": "Grupa/y wiosek własnych",
             "fake.target_group": "Grupa/y wiosek celi",
             "fake.unit": "Jednostka/i",
+            "fake.unit-four": "Jednostka karety",
             "fake.type": "Rodzaj fejków",
             "fake.attack_interval": "Przerwa między atakami(sek)",
             "fake.target_limit": "Maks liczba fejków na cel",
@@ -2376,6 +2378,7 @@ define('two/language', [
             "description": "Automatycznie wysyła fejki na wskazane cele",
             "fake": "Fejki",
             "fake.send": "Wyślij",
+            "error_no_type": "Nie wybrano typu fejków",
             "fake.enemies": "Wioski pozostałych graczy wroga",
             "fake.send_villages": "Fejki na wskazane cele(maks 10)",
             "fake.send_player": "Fejki na wszystkie wioski gracza",
@@ -2396,6 +2399,7 @@ define('two/language', [
             "fake.group": "Grupa/y wiosek własnych",
             "fake.target_group": "Grupa/y wiosek celi",
             "fake.unit": "Jednostka/i",
+            "fake.unit-four": "Jednostka karety",
             "fake.type": "Rodzaj fejków",
             "fake.attack_interval": "Przerwa między atakami(sek)",
             "fake.target_limit": "Maks liczba fejków na cel",
@@ -4716,10 +4720,11 @@ define('two/armyHelper', [
             byUnitAndGroupBalance.push(allGroups[groupId])
         })
     }
-    const addLog = function(villageId, unit, group) {
+    const addLog = function(villageId, targetId, unit, group) {
         let data = {
             time: timeHelper.gameTime(),
             villageId: villageId,
+            targetId: targetId,
             unit: unit,
             group: group
         }
@@ -5055,7 +5060,7 @@ define('two/armyHelper', [
             KnightR = calcKnightR
             KnightT = calcKnightT + calcKnightR
             console.log(calcArcherI, calcAxeI, calcSpearI, calcSwordI, calcLightCavalryI, calcMountedArcherI, calcHeavyCavalryI, calcRamI, calcCatapultI, calcTrebuchetI, calcBerserkerI, calcKnightI, calcSnobI)
-            addLog('Policzono wojsko', '', '')
+            addLog('', '', 'Zliczono armię', '')
         }
         checkArmy()
     }
@@ -5304,10 +5309,10 @@ define('two/armyHelper', [
 define('two/armyHelper/events', [], function () {
     angular.extend(eventTypeProvider, {
         ARMY_HELPER_START: 'army_helper_start',
-        ARMY_HELPER_STOP: 'army_helper_stop'
+        ARMY_HELPER_STOP: 'army_helper_stop',
+        ARMY_HELPER_CLEAR_LOGS: 'army_helper_clear_logs'
     })
 })
-
 define('two/armyHelper/ui', [
     'two/ui',
     'two/armyHelper',
@@ -5562,16 +5567,17 @@ define('two/armyHelper/ui', [
         start: function () {
             $scope.running = true
 
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
         },
         stop: function () {
             $scope.running = false
 
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
         },
         updateLogs: function() {
             $scope.logs = armyHelper.getLogs()
             logsView.updateVisibleLogs()
+            if (!$scope.logs.length) {
+                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'army_helper'))
+            }
         },
         clearLogs: function() {
             utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'army_helper'))
@@ -5590,15 +5596,17 @@ define('two/armyHelper/ui', [
             running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
         })
         eventQueue.register(eventTypeProvider.ARMY_HELPER_STOP, function() {
             running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'army_helper'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }} jeszcze nie działa</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }} jeszcze nie działa</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .logs .status tr{height:25px}#two-army-helper .logs .status td{padding:0 6px}#two-army-helper .logs .log-list{margin-bottom:10px}#two-army-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-army-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-army-helper .icon-20x20-village:before{margin-top:-11px}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
@@ -5643,7 +5651,6 @@ define('two/armyHelper/ui', [
         $scope.balanceGroup = balanceGroup
         $scope.balanceUnit = balanceUnit
         $scope.balanceUnitAndGroup = balanceUnitAndGroup
-        $scope.clearLogs = armyHelper.clearLogs()
         $scope.clear = clear
         $scope.jumpToVillage = mapService.jumpToVillage
         $scope.addMapSelected = addMapSelected
@@ -5656,6 +5663,7 @@ define('two/armyHelper/ui', [
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.ARMY_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.ARMY_HELPER_CLEAR_LOGS, eventHandlers.clearLogs)
         eventScope.register(eventTypeProvider.ARMY_HELPER_STOP, eventHandlers.stop)
         eventScope.register(eventTypeProvider.ARMY_HELPER_LOGS_UPDATED, eventHandlers.updateLogs)
         
@@ -18336,23 +18344,27 @@ require([
 })
 define('two/fakeSender', [
     'two/Settings',
+    'two/utils',
     'two/fakeSender/settings',
     'two/fakeSender/settings/map',
     'two/fakeSender/settings/updates',
     'two/fakeSender/types/dates',
     'two/fakeSender/types/type',
+    'two/attackView/types/commands',
     'two/fakeSender/types/units',
     'two/ready',
     'queues/EventQueue',
     'Lockr',
     'helper/time'
-], function (
+], function(
     Settings,
+    utils,
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
     DATE_TYPES,
     FS_TYPE,
+    COMMAND_TYPES,
     FS_UNIT,
     ready,
     eventQueue,
@@ -18363,15 +18375,17 @@ define('two/fakeSender', [
     let running = false
     let settings
     let logs
+    let interval1 = 1000
+    let interval = 15000
     let fakeSenderSettings
     const LOGS_LIMIT = 500
-
+    let COMMAND_QUEUE_DATE_TYPES
+    let commandQueue = false
     let selectedGroups = []
     let selectedGroupsP = []
     let selectedGroupsT = []
     let selectedGroupsG = []
     let selectedGroupsTarget = []
-
     const STORAGE_KEYS = {
         SETTINGS: 'fake_sender_settings',
         LOGS: 'fake_sender_log'
@@ -18391,48 +18405,42 @@ define('two/fakeSender', [
         [FS_UNIT.SNOB]: 'snob',
         [FS_UNIT.KNIGHT]: 'knight'
     }
-	
     const FAKE_TYPE = {
         [FS_TYPE.ATTACK]: 'attack',
         [FS_TYPE.SUPPORT]: 'support',
         [FS_TYPE.QUATTRO]: 'four',
         [FS_TYPE.FULL]: 'full'
     }
-	
     const FAKE_DATE = {
         [DATE_TYPES.ARRIVE]: 'date_type_arrive',
         [DATE_TYPES.OUT]: 'date_type_out'
     }
-
     console.log(FAKE_UNIT, FAKE_TYPE, FAKE_DATE)
-
-    const updateGroups = function () {
+    const updateGroups = function() {
         selectedGroups = []
         selectedGroupsP = []
         selectedGroupsT = []
         selectedGroupsG = []
         selectedGroupsTarget = []
-
         const allGroups = modelDataService.getGroupList().getGroups()
         const groupsInVillagesFake = fakeSenderSettings[SETTINGS.GROUP]
         const groupsInPlayerFake = fakeSenderSettings[SETTINGS.GROUPP]
         const groupsInTribeFake = fakeSenderSettings[SETTINGS.GROUPT]
         const groupsInGroupFake = fakeSenderSettings[SETTINGS.GROUPG]
         const targetsGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
-
-        groupsInVillagesFake.forEach(function (groupId) {
+        groupsInVillagesFake.forEach(function(groupId) {
             selectedGroups.push(allGroups[groupId])
         })
-        groupsInPlayerFake.forEach(function (groupId) {
+        groupsInPlayerFake.forEach(function(groupId) {
             selectedGroupsP.push(allGroups[groupId])
         })
-        groupsInTribeFake.forEach(function (groupId) {
+        groupsInTribeFake.forEach(function(groupId) {
             selectedGroupsT.push(allGroups[groupId])
         })
-        groupsInGroupFake.forEach(function (groupId) {
+        groupsInGroupFake.forEach(function(groupId) {
             selectedGroupsG.push(allGroups[groupId])
         })
-        targetsGroups.forEach(function (groupId) {
+        targetsGroups.forEach(function(groupId) {
             selectedGroupsTarget.push(allGroups[groupId])
         })
     }
@@ -18451,30 +18459,22 @@ define('two/fakeSender', [
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         return true
     }
-
     const fakeSender = {}
-
-    fakeSender.init = function () {
+    fakeSender.init = function() {
         initialized = true
         logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
-
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function(changes, updates) {
             fakeSenderSettings = settings.getAll()
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
         })
-
         fakeSenderSettings = settings.getAll()
-
         console.log('fakeSender settings', fakeSenderSettings)
-
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
@@ -18488,40 +18488,240 @@ define('two/fakeSender', [
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
         return logs
     }
-
-    fakeSender.start = function () {
+    fakeSender.fakeVillages = function() {
+        const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
+        const target2 = fakeSenderSettings[SETTINGS.TARGET_ID2]
+        const target3 = fakeSenderSettings[SETTINGS.TARGET_ID3]
+        const target4 = fakeSenderSettings[SETTINGS.TARGET_ID4]
+        const target5 = fakeSenderSettings[SETTINGS.TARGET_ID5]
+        const target6 = fakeSenderSettings[SETTINGS.TARGET_ID6]
+        const target7 = fakeSenderSettings[SETTINGS.TARGET_ID7]
+        const target8 = fakeSenderSettings[SETTINGS.TARGET_ID8]
+        const target9 = fakeSenderSettings[SETTINGS.TARGET_ID9]
+        const target10 = fakeSenderSettings[SETTINGS.TARGET_ID10]
+        const fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
+        const fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
+        const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
+        let fakeVillages = []
+        let groupList = modelDataService.getGroupList()
+        const dateType = fakeSenderSettings[SETTINGS.DATE_TYPEV]
+        let whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        if (dateType == 'date_type_arrive') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        } else {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
+        }
+        let groupVillages = null
+        const fakeType = fakeSenderSettings[SETTINGS.TYPE]
+        let commandType = COMMAND_TYPES.ATTACK
+        const date = fakeSenderSettings[SETTINGS.DATEV]
+        const targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
+        ownGroups.forEach(function(group) {
+            groupVillages = groupList.getGroupVillageIds(group)
+            fakeVillages.push(groupVillages)
+        })
+        let target1Limit = targetLimit
+        let target2Limit = targetLimit
+        let target3Limit = targetLimit
+        let target4Limit = targetLimit
+        let target5Limit = targetLimit
+        let target6Limit = targetLimit
+        let target7Limit = targetLimit
+        let target8Limit = targetLimit
+        let target9Limit = targetLimit
+        let target10Limit = targetLimit
+        fakeVillages.forEach(function(village, index) {
+            let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
+            setTimeout(function() {
+                fakeUnits.forEach(function(unit, index1) {
+                    setTimeout(function() {
+                        if (target1 != 0 && target1Limit != 0 && ownLimit != 0) {
+                            if (fakeType == 'four') {
+                                commandType = COMMAND_TYPES.ATTACK
+                                commandQueue.addCommand(village, target1, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                commandQueue.addCommand(village, target1, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                commandQueue.addCommand(village, target1, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                commandQueue.addCommand(village, target1, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 4
+                                target1Limit -= 4
+                            } else if (fakeType == 'full') {
+                                let newdate = date
+                                commandType = COMMAND_TYPES.ATTACK
+                                commandQueue.addCommand(village, target1, newdate, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                if (fourUnit == 'trebuchet') {
+                                    commandQueue.addCommand(village, target1, date, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1, date, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1, date, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1, date, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 4
+                                    target1Limit -= 4
+                                }
+                                newdate = date
+                                commandQueue.addCommand(village, target1, newdate, whenSend, {
+                                    unit: '1'
+                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                ownLimit -= 2
+                                target1Limit -= 2
+                            } else if (fakeType == 'attack') {
+                                commandType = COMMAND_TYPES.ATTACK
+                                commandQueue.addCommand(village, target1, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target1Limit -= 1
+                            } else if (fakeType == 'support') {
+                                commandType = COMMAND_TYPES.SUPPORT
+                                commandQueue.addCommand(village, target1, date, whenSend, {
+                                    unit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 1
+                                target1Limit -= 1
+                            } else {
+                                utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
+                            }
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target2 != 0 && target2Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target2, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target2Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target3 != 0 && target3Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target3, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target3Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target4 != 0 && target4Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target4, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target4Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target5 != 0 && target5Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target5, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target5Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target6 != 0 && target6Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target6, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target6Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target7 != 0 && target7Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target7, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target7Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target8 != 0 && target8Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target8, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target8Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target9 != 0 && target9Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target9, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target9Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                        if (target10 != 0 && target10Limit != 0 && ownLimit != 0) {
+                            commandQueue.addCommand(village, target10, date, whenSend, {
+                                unit: '1'
+                            }, {}, commandType, false)
+                            ownLimit -= 1
+                            target10Limit -= 1
+                            if (!commandQueue.isRunning()) {
+                                commandQueue.start()
+                            }
+                        }
+                    }, index1 * interval1)
+                })
+            }, index * interval)
+        })
+    }
+    fakeSender.start = function() {
         running = true
-
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
         addLog('', '', 'Ropzpoczęto wysyłanie fejków', '')
     }
-
-    fakeSender.stop = function () {
+    fakeSender.stop = function() {
         running = false
-
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
         addLog('', '', 'Zakończono wysyłanie fejków', '')
     }
-
-    fakeSender.getSettings = function () {
+    fakeSender.getSettings = function() {
         return settings
     }
-
-    fakeSender.isInitialized = function () {
+    fakeSender.isInitialized = function() {
         return initialized
     }
-
-    fakeSender.isRunning = function () {
+    fakeSender.isRunning = function() {
         return running
     }
-
     return fakeSender
 })
-
 define('two/fakeSender/events', [], function () {
     angular.extend(eventTypeProvider, {
         FAKE_SENDER_START: 'fake_sender_start',
-        FAKE_SENDER_STOP: 'fake_sender_stop'
+        FAKE_SENDER_STOP: 'fake_sender_stop',
+        FAKE_SENDER_CLEAR_LOGS: 'fake_sender_clear_logs'
     })
 })
 
@@ -18558,7 +18758,6 @@ define('two/fakeSender/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let fakeTarget
     let fakeTarget1
     let fakeTarget2
     let fakeTarget3
@@ -18570,7 +18769,6 @@ define('two/fakeSender/ui', [
     let fakeTarget9
     let fakeTarget10
     let fakeTribe1
-    let fakeGroup1
     let fakePlayer1
     let fakeProvince1
     let running = false
@@ -18722,7 +18920,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage1.x, mapSelectedVillage1.y, 1, 1, function(data) {
             fakeTarget1.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID1] = mapSelectedVillage1.id
+        $scope.settings[SETTINGS.TARGET_ID1] = mapSelectedVillage1.id
     }
     const addMapSelected2 = function() {
         if (!mapSelectedVillage2) {
@@ -18731,7 +18929,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage2.x, mapSelectedVillage2.y, 1, 1, function(data) {
             fakeTarget2.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID2] = mapSelectedVillage2.id
+        $scope.settings[SETTINGS.TARGET_ID2] = mapSelectedVillage2.id
     }
     const addMapSelected3 = function() {
         if (!mapSelectedVillage3) {
@@ -18740,7 +18938,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage3.x, mapSelectedVillage3.y, 1, 1, function(data) {
             fakeTarget3.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID3] = mapSelectedVillage3.id
+        $scope.settings[SETTINGS.TARGET_ID3] = mapSelectedVillage3.id
     }
     const addMapSelected4 = function() {
         if (!mapSelectedVillage4) {
@@ -18749,7 +18947,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage4.x, mapSelectedVillage4.y, 1, 1, function(data) {
             fakeTarget4.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID4] = mapSelectedVillage4.id
+        $scope.settings[SETTINGS.TARGET_ID4] = mapSelectedVillage4.id
     }
     const addMapSelected5 = function() {
         if (!mapSelectedVillage5) {
@@ -18758,7 +18956,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage5.x, mapSelectedVillage5.y, 1, 1, function(data) {
             fakeTarget5.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID5] = mapSelectedVillage5.id
+        $scope.settings[SETTINGS.TARGET_ID5] = mapSelectedVillage5.id
     }
     const addMapSelected6 = function() {
         if (!mapSelectedVillage6) {
@@ -18767,7 +18965,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage6.x, mapSelectedVillage6.y, 1, 1, function(data) {
             fakeTarget6.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID6] = mapSelectedVillage6.id
+        $scope.settings[SETTINGS.TARGET_ID6] = mapSelectedVillage6.id
     }
     const addMapSelected7 = function() {
         if (!mapSelectedVillage7) {
@@ -18776,7 +18974,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage7.x, mapSelectedVillage7.y, 1, 1, function(data) {
             fakeTarget7.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID7] = mapSelectedVillage7.id
+        $scope.settings[SETTINGS.TARGET_ID7] = mapSelectedVillage7.id
     }
     const addMapSelected8 = function() {
         if (!mapSelectedVillage8) {
@@ -18785,7 +18983,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage8.x, mapSelectedVillage8.y, 1, 1, function(data) {
             fakeTarget8.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID8] = mapSelectedVillage8.id
+        $scope.settings[SETTINGS.TARGET_ID8] = mapSelectedVillage8.id
     }
     const addMapSelected9 = function() {
         if (!mapSelectedVillage9) {
@@ -18794,7 +18992,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage9.x, mapSelectedVillage9.y, 1, 1, function(data) {
             fakeTarget9.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID9] = mapSelectedVillage9.id
+        $scope.settings[SETTINGS.TARGET_ID9] = mapSelectedVillage9.id
     }
     const addMapSelected10 = function() {
         if (!mapSelectedVillage10) {
@@ -18803,7 +19001,7 @@ define('two/fakeSender/ui', [
         mapData.loadTownDataAsync(mapSelectedVillage10.x, mapSelectedVillage10.y, 1, 1, function(data) {
             fakeTarget10.origin = data
         })
-        $scope.settings[SETTINGS.VILLAGE_ID10] = mapSelectedVillage10.id
+        $scope.settings[SETTINGS.TARGET_ID10] = mapSelectedVillage10.id
     }
     const addMapSelectedPlayer = function() {
         if (!mapSelectedVillageP) {
@@ -18858,94 +19056,94 @@ define('two/fakeSender/ui', [
         return formatedDate(date)
     }
     const addCurrentDateV = function () {
-        fakeTarget.date = formatedDate()
+        $scope.settings[SETTINGS.DATEV] = formatedDate()
     }
     const incrementDateV = function () {
-        if (!fakeTarget.date) {
+        if (!$scope.settings[SETTINGS.DATEV]) {
             return false
         }
 
-        fakeTarget.date = addDateDiff(fakeTarget.date, 100)
+        $scope.settings[SETTINGS.DATEV] = addDateDiff($scope.settings[SETTINGS.DATEV], 100)
     }
 
     const reduceDateV = function () {
-        if (!fakeTarget.date) {
+        if (!$scope.settings[SETTINGS.DATEV]) {
             return false
         }
 
-        fakeTarget.date = addDateDiff(fakeTarget.date, -100)
+        $scope.settings[SETTINGS.DATEV] = addDateDiff($scope.settings[SETTINGS.DATEV], -100)
     }
     const addCurrentDateT = function () {
-        fakeTribe1.date = formatedDate()
+        $scope.settings[SETTINGS.DATET] = formatedDate()
     }
     const incrementDateT = function () {
-        if (!fakeTribe1.date) {
+        if (!$scope.settings[SETTINGS.DATET]) {
             return false
         }
 
-        fakeTribe1.date = addDateDiff(fakeTribe1.date, 100)
+        $scope.settings[SETTINGS.DATET] = addDateDiff($scope.settings[SETTINGS.DATET], 100)
     }
 
     const reduceDateT = function () {
-        if (!fakeTribe1.date) {
+        if (!$scope.settings[SETTINGS.DATET]) {
             return false
         }
 
-        fakeTribe1.date = addDateDiff(fakeTribe1.date, -100)
+        $scope.settings[SETTINGS.DATET] = addDateDiff($scope.settings[SETTINGS.DATET], -100)
     }
     const addCurrentDateP = function () {
-        fakePlayer1.date = formatedDate()
+        $scope.settings[SETTINGS.DATEP] = formatedDate()
     }
     const incrementDateP = function () {
-        if (!fakePlayer1.date) {
+        if (!$scope.settings[SETTINGS.DATEP]) {
             return false
         }
 
-        fakePlayer1.date = addDateDiff(fakePlayer1.date, 100)
+        $scope.settings[SETTINGS.DATEP] = addDateDiff($scope.settings[SETTINGS.DATEP], 100)
     }
 
     const reduceDateP = function () {
-        if (!fakePlayer1.date) {
+        if (!$scope.settings[SETTINGS.DATEP]) {
             return false
         }
 
-        fakePlayer1.date = addDateDiff(fakePlayer1.date, -100)
+        $scope.settings[SETTINGS.DATEP] = addDateDiff($scope.settings[SETTINGS.DATEP], -100)
     }
     const addCurrentDatePro = function () {
-        fakeProvince1.date = formatedDate()
+        $scope.settings[SETTINGS.DATEPRO] = formatedDate()
     }
     const incrementDatePro = function () {
-        if (!fakeProvince1.date) {
+        if (!$scope.settings[SETTINGS.DATEPRO]) {
             return false
         }
 
-        fakeProvince1.date = addDateDiff(fakeProvince1.date, 100)
+        $scope.settings[SETTINGS.DATEPRO] = addDateDiff($scope.settings[SETTINGS.DATEPRO], 100)
     }
 
     const reduceDatePro = function () {
-        if (!fakeProvince1.date) {
+        if (!$scope.settings[SETTINGS.DATEPRO]) {
             return false
         }
 
-        fakeProvince1.date = addDateDiff(fakeProvince1.date, -100)
+        $scope.settings[SETTINGS.DATEPRO] = addDateDiff($scope.settings[SETTINGS.DATEPRO], -100)
     }
     const addCurrentDateG = function () {
-        fakeGroup1.date = formatedDate()
+        $scope.settings[SETTINGS.DATEG] = formatedDate()
     }
     const incrementDateG = function () {
-        if (!fakeGroup1.date) {
+        if (!$scope.settings[SETTINGS.DATEG]) {
             return false
         }
 
-        fakeGroup1.date = addDateDiff(fakeGroup1.date, 100)
+        $scope.settings[SETTINGS.DATEG] = addDateDiff($scope.settings[SETTINGS.DATEG], 100)
     }
 
     const reduceDateG = function () {
-        if (!fakeGroup1.date) {
+        if (!$scope.settings[SETTINGS.DATEG]) {
             return false
         }
 
-        fakeGroup1.date = addDateDiff(fakeGroup1.date, -100)
+        $scope.settings[SETTINGS.DATEG] = addDateDiff($scope.settings[SETTINGS.DATEG], -100)
     }
     const loadVillageInfo = function(villageId) {
         if (villagesInfo[villageId]) {
@@ -19016,7 +19214,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID1] = data.id
+            $scope.settings[SETTINGS.TARGET_ID1] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget2: function(data) {
@@ -19026,7 +19224,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID2] = data.id
+            $scope.settings[SETTINGS.TARGET_ID2] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget3: function(data) {
@@ -19036,7 +19234,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID3] = data.id
+            $scope.settings[SETTINGS.TARGET_ID3] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget4: function(data) {
@@ -19046,7 +19244,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID4] = data.id
+            $scope.settings[SETTINGS.TARGET_ID4] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget5: function(data) {
@@ -19056,7 +19254,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID5] = data.id
+            $scope.settings[SETTINGS.TARGET_ID5] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget6: function(data) {
@@ -19066,7 +19264,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID6] = data.id
+            $scope.settings[SETTINGS.TARGET_ID6] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget7: function(data) {
@@ -19076,7 +19274,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID7] = data.id
+            $scope.settings[SETTINGS.TARGET_ID7] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget8: function(data) {
@@ -19086,7 +19284,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID8] = data.id
+            $scope.settings[SETTINGS.TARGET_ID8] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget9: function(data) {
@@ -19096,7 +19294,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID9] = data.id
+            $scope.settings[SETTINGS.TARGET_ID9] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteTarget10: function(data) {
@@ -19106,7 +19304,7 @@ define('two/fakeSender/ui', [
                 y: data.y,
                 name: data.name
             }
-            $scope.settings[SETTINGS.VILLAGE_ID10] = data.id
+            $scope.settings[SETTINGS.TARGET_ID10] = data.id
             settings.setAll(settings.decode($scope.settings))
         },
         onAutoCompleteProvince: function(data) {
@@ -19183,22 +19381,13 @@ define('two/fakeSender/ui', [
             origin: false
         }
         fakePlayer1 = {
-            origin: false,
-            date: ''
+            origin: false
         }
         fakeProvince1 = {
-            origin: false,
-            date: ''
+            origin: false
         }
         fakeTribe1 = {
-            origin: false,
-            date: ''
-        }
-        fakeTarget = {
-            date: ''
-        }
-        fakeGroup1 = {
-            date: ''
+            origin: false
         }
         interfaceOverflow.addDivisor(21)
         $button = interfaceOverflow.addMenuButton('Watażka', 20, $filter('i18n')('description', $rootScope.loc.ale, 'fake_sender'))
@@ -19218,7 +19407,7 @@ define('two/fakeSender/ui', [
 
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID1]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget1\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget1.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget1.origin\" class=\"command-village\">{{ fakeTarget1.origin.name }} ({{ fakeTarget1.origin.x }}|{{ fakeTarget1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected1()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID2]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget2\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget2.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget2.origin\" class=\"command-village\">{{ fakeTarget2.origin.name }} ({{ fakeTarget2.origin.x }}|{{ fakeTarget2.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected2()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID3]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget3\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget3.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget3.origin\" class=\"command-village\">{{ fakeTarget3.origin.name }} ({{ fakeTarget3.origin.x }}|{{ fakeTarget3.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected3()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID4]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget4\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget4.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget4.origin\" class=\"command-village\">{{ fakeTarget4.origin.name }} ({{ fakeTarget4.origin.x }}|{{ fakeTarget4.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected4()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID5]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget5\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget5.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget5.origin\" class=\"command-village\">{{ fakeTarget5.origin.name }} ({{ fakeTarget5.origin.x }}|{{ fakeTarget5.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected5()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID6]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget6\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget6.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget6.origin\" class=\"command-village\">{{ fakeTarget6.origin.name }} ({{ fakeTarget6.origin.x }}|{{ fakeTarget6.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected6()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID7]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget7\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget7.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget7.origin\" class=\"command-village\">{{ fakeTarget7.origin.name }} ({{ fakeTarget7.origin.x }}|{{ fakeTarget7.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected7()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID8]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget8\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget8.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget8.origin\" class=\"command-village\">{{ fakeTarget8.origin.name }} ({{ fakeTarget8.origin.x }}|{{ fakeTarget8.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected8()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID9]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget9\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget9.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget9.origin\" class=\"command-village\">{{ fakeTarget9.origin.name }} ({{ fakeTarget9.origin.x }}|{{ fakeTarget9.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected9()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID10]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget10\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget10.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget10.origin\" class=\"command-village\">{{ fakeTarget10.origin.name }} ({{ fakeTarget10.origin.x }}|{{ fakeTarget10.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected10()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"fakeTarget.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEV]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeVillages()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_province' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'fake.add_province' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakeProvince1.origin\" class=\"command-village\">{{ 'fake.no_province' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeProvince1.origin\" class=\"command-village\">{{ fakeProvince1.origin.name }} ({{ fakeProvince1.origin.x }}|{{ fakeProvince1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"fakeProvince1.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEPro]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].max\" value=\"settings[SETTINGS.COMMAND_INTERVALPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNPro].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNPro].max\" value=\"settings[SETTINGS.LIMIT_OWNPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETPro].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETPro].max\" value=\"settings[SETTINGS.LIMIT_TARGETPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETPro]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.enemies' | i18n:loc.ale:'fake_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeProvince()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakePlayer1.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakePlayer1.origin\" class=\"command-village\">{{ fakePlayer1.origin.name }} ({{ fakePlayer1.origin.x }}|{{ fakePlayer1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPlayer()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"fakePlayer1.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakePlayer()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TRIBE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!fakeTribe1.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTribe1.origin\" class=\"command-village\">{{ fakeTribe1.origin.name }} ({{ fakeTribe1.origin.x }}|{{ fakeTribe1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedTribe()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"fakeTribe1.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPET]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendTribe\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeTribe()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"fakeGroup1.date\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendGroups\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeGroups()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.type }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID1]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget1\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget1.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget1.origin\" class=\"command-village\">{{ fakeTarget1.origin.name }} ({{ fakeTarget1.origin.x }}|{{ fakeTarget1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected1()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID2]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget2\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget2.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget2.origin\" class=\"command-village\">{{ fakeTarget2.origin.name }} ({{ fakeTarget2.origin.x }}|{{ fakeTarget2.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected2()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID3]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget3\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget3.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget3.origin\" class=\"command-village\">{{ fakeTarget3.origin.name }} ({{ fakeTarget3.origin.x }}|{{ fakeTarget3.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected3()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID4]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget4\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget4.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget4.origin\" class=\"command-village\">{{ fakeTarget4.origin.name }} ({{ fakeTarget4.origin.x }}|{{ fakeTarget4.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected4()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID5]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget5\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget5.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget5.origin\" class=\"command-village\">{{ fakeTarget5.origin.name }} ({{ fakeTarget5.origin.x }}|{{ fakeTarget5.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected5()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID6]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget6\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget6.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget6.origin\" class=\"command-village\">{{ fakeTarget6.origin.name }} ({{ fakeTarget6.origin.x }}|{{ fakeTarget6.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected6()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID7]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget7\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget7.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget7.origin\" class=\"command-village\">{{ fakeTarget7.origin.name }} ({{ fakeTarget7.origin.x }}|{{ fakeTarget7.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected7()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID8]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget8\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget8.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget8.origin\" class=\"command-village\">{{ fakeTarget8.origin.name }} ({{ fakeTarget8.origin.x }}|{{ fakeTarget8.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected8()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID9]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget9\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget9.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget9.origin\" class=\"command-village\">{{ fakeTarget9.origin.name }} ({{ fakeTarget9.origin.x }}|{{ fakeTarget9.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected9()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID10]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget10\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget10.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget10.origin\" class=\"command-village\">{{ fakeTarget10.origin.name }} ({{ fakeTarget10.origin.x }}|{{ fakeTarget10.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected10()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEV]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEV]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT_FOUR]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeVillages()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_province' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'fake.add_province' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakeProvince1.origin\" class=\"command-village\">{{ 'fake.no_province' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeProvince1.origin\" class=\"command-village\">{{ fakeProvince1.origin.name }} ({{ fakeProvince1.origin.x }}|{{ fakeProvince1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEPRO]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT_FOURPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEPro]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].max\" value=\"settings[SETTINGS.COMMAND_INTERVALPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNPro].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNPro].max\" value=\"settings[SETTINGS.LIMIT_OWNPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETPro].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETPro].max\" value=\"settings[SETTINGS.LIMIT_TARGETPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETPro]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.enemies' | i18n:loc.ale:'fake_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeProvince()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakePlayer1.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakePlayer1.origin\" class=\"command-village\">{{ fakePlayer1.origin.name }} ({{ fakePlayer1.origin.x }}|{{ fakePlayer1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPlayer()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEP]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT_FOURP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendPlayer\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakePlayer()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TRIBE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!fakeTribe1.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTribe1.origin\" class=\"command-village\">{{ fakeTribe1.origin.name }} ({{ fakeTribe1.origin.x }}|{{ fakeTribe1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedTribe()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATET]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPET]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT_FOURT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendTribe\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeTribe()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"settings[SETTINGS.DATEG]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT_FOURG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border sendGroups\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeGroups()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.type }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-fake-sender div[select]{text-align:right}#two-fake-sender div[select] .select-wrapper{height:34px}#two-fake-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-fake-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm td{text-align:left}#two-fake-sender .addForm span{height:26px;line-height:26px}#two-fake-sender .addForm .item-send{text-align:center}#two-fake-sender .addForm .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-fake-sender .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actions a{width:100px}#two-fake-sender .addForm .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actionsTime .big{width:54px}#two-fake-sender .addForm .actionsTime .small{width:26px}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-fake-sender .logs .status tr{height:25px}#two-fake-sender .logs .status td{padding:0 6px}#two-fake-sender .logs .log-list{margin-bottom:10px}#two-fake-sender .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-fake-sender .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-fake-sender .icon-20x20-village:before{margin-top:-11px}')
     }
 
@@ -19230,7 +19419,6 @@ define('two/fakeSender/ui', [
         $scope.selectedTab = TAB_TYPES.FAKE
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
-        $scope.fakeTarget = fakeTarget
         $scope.fakeTarget1 = fakeTarget1
         $scope.fakeTarget2 = fakeTarget2
         $scope.fakeTarget3 = fakeTarget3
@@ -19243,7 +19431,6 @@ define('two/fakeSender/ui', [
         $scope.fakeTarget10 = fakeTarget10
         $scope.fakePlayer1 = fakePlayer1
         $scope.fakeTribe1 = fakeTribe1
-        $scope.fakeGroup1 = fakeGroup1
         $scope.fakeProvince1 = fakeProvince1
         $scope.clear = clear
         $scope.autoCompleteTarget1 = {
@@ -19427,6 +19614,11 @@ define('two/fakeSender/settings', [], function () {
         COMMAND_INTERVALPro: 'interval_province',
         COMMAND_INTERVALT: 'interval_tribe',
         COMMAND_INTERVALG: 'interval_groups',
+        DATEPro: 'datepro',
+        DATEP: 'datep',
+        DATEG: 'dateg',
+        DATET: 'datet',
+        DATEV: 'datev',
         DATE_TYPEPro: 'datetypepro',
         DATE_TYPEP: 'datetypep',
         DATE_TYPEG: 'datetypeg',
@@ -19442,6 +19634,11 @@ define('two/fakeSender/settings', [], function () {
         UNITPro: 'units_province',
         UNITT: 'units_tribe',
         UNITG: 'units_groups',
+        UNIT_FOUR: 'unit_four_villages',
+        UNIT_FOURP: 'unit_four_player',
+        UNIT_FOURPro: 'unit_four_province',
+        UNIT_FOURT: 'unit_four_tribe',
+        UNIT_FOURG: 'unit_four_groups',
         TYPE: 'type_villages',
         TYPEP: 'type_player',
         TYPEPro: 'type_province',
@@ -19597,6 +19794,26 @@ define('two/fakeSender/settings/map', [
         [SETTINGS.TYPEG]: {
             default: false,
             disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_FOUR]: {
+            default: false,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_FOURT]: {
+            default: false,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_FOURP]: {
+            default: false,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_FOURPro]: {
+            default: false,
+            inputType: 'select'
+        },
+        [SETTINGS.UNIT_FOURG]: {
+            default: false,
             inputType: 'select'
         },
         [SETTINGS.UNIT]: {
@@ -19767,6 +19984,26 @@ define('two/fakeSender/settings/map', [
             inputType: 'text'
         },
         [SETTINGS.PROVINCE_ID]: {
+            default: '0',
+            inputType: 'text'
+        },
+        [SETTINGS.DATEV]: {
+            default: '0',
+            inputType: 'text'
+        },
+        [SETTINGS.DATEP]: {
+            default: '0',
+            inputType: 'text'
+        },
+        [SETTINGS.DATET]: {
+            default: '0',
+            inputType: 'text'
+        },
+        [SETTINGS.DATEG]: {
+            default: '0',
+            inputType: 'text'
+        },
+        [SETTINGS.DATEPRO]: {
             default: '0',
             inputType: 'text'
         }
@@ -23617,7 +23854,7 @@ define('two/prankHelper/events', [], function () {
     angular.extend(eventTypeProvider, {
         PRANK_HELPER_START: 'prank_helper_start',
         PRANK_HELPER_STOP: 'prank_helper_stop',
-        PRANK_HELPER_LOGS_UPDATED: 'prank_helper_logs_updated'
+        PRANK_HELPER_CLEAR_LOGS: 'prank_helper_clear_logs'
     })
 })
 
@@ -23773,7 +24010,7 @@ define('two/prankHelper/ui', [
             $scope.logs = prankHelper.getLogs()
             logsView.updateVisibleLogs()
             if (!$scope.logs.length) {
-                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'recruit_queue'))
+                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'prank_helper'))
             }
         },
         autoCompleteSelected: function(event, id, data, type) {
@@ -23802,7 +24039,6 @@ define('two/prankHelper/ui', [
         },
         clearLogs: function() {
             utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'prank_helper'))
-            $scope.visibleLogs = []
             eventHandlers.updateLogs()
         },
         start: function() {
@@ -23833,7 +24069,7 @@ define('two/prankHelper/ui', [
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!prankVillage.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"prankVillage.origin\" class=\"command-village\">{{ prankVillage.origin.name }} ({{ prankVillage.origin.x }}|{{ prankVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.oldname }}<td>{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!prankVillage.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"prankVillage.origin\" class=\"command-village\">{{ prankVillage.origin.name }} ({{ prankVillage.origin.x }}|{{ prankVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.oldname }}<td>{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-prank-helper .logs .status tr{height:25px}#two-prank-helper .logs .status td{padding:0 6px}#two-prank-helper .logs .log-list{margin-bottom:10px}#two-prank-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-prank-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-prank-helper .icon-20x20-village:before{margin-top:-11px}')
     }
     const buildWindow = function() {
