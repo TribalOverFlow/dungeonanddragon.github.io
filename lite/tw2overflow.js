@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 10:36:55 GMT
+ * Mon, 14 Dec 2020 10:47:30 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18538,6 +18538,7 @@ define('two/fakeSender', [
                 fakeUnits.forEach(function(unit, index1) {
                     setTimeout(function() {
                         if (target1 != 0 && target1Limit != 0 && ownLimit != 0) {
+                            console.log(village, target1, date)
                             if (fakeType == 'four') {
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(village, target1, date, whenSend, {
