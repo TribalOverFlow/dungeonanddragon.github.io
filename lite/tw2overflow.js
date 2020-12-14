@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 10:16:32 GMT
+ * Mon, 14 Dec 2020 10:29:28 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18352,6 +18352,8 @@ define('two/fakeSender', [
     'two/fakeSender/types/type',
     'two/attackView/types/commands',
     'two/fakeSender/types/units',
+    'two/commandQueue',
+    'two/commandQueue/types/dates',
     'two/ready',
     'queues/EventQueue',
     'Lockr',
@@ -18366,6 +18368,8 @@ define('two/fakeSender', [
     FS_TYPE,
     COMMAND_TYPES,
     FS_UNIT,
+    commandQueue,
+    COMMAND_QUEUE_DATE_TYPES,
     ready,
     eventQueue,
     Lockr,
@@ -18379,8 +18383,6 @@ define('two/fakeSender', [
     let interval = 15000
     let fakeSenderSettings
     const LOGS_LIMIT = 500
-    let COMMAND_QUEUE_DATE_TYPES
-    let commandQueue = false
     let selectedGroups = []
     let selectedGroupsP = []
     let selectedGroupsT = []
