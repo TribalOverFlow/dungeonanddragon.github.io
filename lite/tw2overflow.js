@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 14 Dec 2020 11:28:30 GMT
+ * Mon, 14 Dec 2020 11:41:54 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6135,7 +6135,7 @@ define('two/attackView', [
             var Trebuchet = 0
             const commandType = COMMAND_TYPES.SUPPORT
             let units = {}
-            console.log(origin)
+            console.log(origin, target)
 
             function unitInfo() {
                 origin.forEach(function(village, index) {
@@ -18559,7 +18559,7 @@ define('two/fakeSender', [
                                 ownLimit -= 4
                                 target1Limit -= 4
                             } else if (fakeType == 'full') {
-                                newdate = utils.fixDate(date)
+                                newdate = utils.getTimeFromString(date)
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(village, target1, newdate, whenSend, {
                                     unit: '1'
@@ -18580,7 +18580,7 @@ define('two/fakeSender', [
                                     ownLimit -= 4
                                     target1Limit -= 4
                                 }
-                                newdate = utils.fixDate(date)
+                                newdate = utils.getTimeFromString(date)
                                 commandQueue.addCommand(village, target1, newdate, whenSend, {
                                     unit: '1'
                                 }, {}, COMMAND_TYPES.SUPPORT, false)
