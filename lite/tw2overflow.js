@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 18:52:58 GMT
+ * Tue, 15 Dec 2020 19:00:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24264,7 +24264,7 @@ define('two/presetCreator', [
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
             var presets = data.presets
             for (var i of presets) {
-                if (presets[i].name != 'Farma (pik)') {
+                if (i.name != 'Farma (pik)') {
                     socketService.emit(routeProvider.SAVE_NEW_PRESET, {
                         village_id: villages[0].data.villageId,
                         name: 'Farma (pik)',
