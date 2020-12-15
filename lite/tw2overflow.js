@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 17:54:28 GMT
+ * Tue, 15 Dec 2020 18:03:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24237,11 +24237,6 @@ define('two/presetCreator', [
     var karetatreb = '030d0e'
 
     function createPresets() {
-        let allPresets = []
-        socketService.emit(routeProvider.GET_PRESETS, {}, function(data) { 
-            allPresets.push(data.presets)
-        })
-        allPresets
         pikinier = typeof pikinier === 'string' ? parseInt(pikinier, 16) : pikinier
         miecznik = typeof miecznik === 'string' ? parseInt(miecznik, 16) : miecznik
         topornik = typeof topornik === 'string' ? parseInt(topornik, 16) : topornik
@@ -24266,6 +24261,11 @@ define('two/presetCreator', [
         karetatar = typeof karetatar === 'string' ? parseInt(karetatar, 16) : karetatar
         karetakat = typeof karetakat === 'string' ? parseInt(karetakat, 16) : karetakat
         karetatreb = typeof karetatreb === 'string' ? parseInt(karetatreb, 16) : karetatreb
+        var allPresets = []
+        socketService.emit(routeProvider.GET_PRESETS, {}, function(data) { 
+            allPresets.push(data.presets)
+        })
+        console.log(allPresets)
         allPresets[0].forEach(function(preset) {
             if (preset.name != 'Farma (pik)') {
                 socketService.emit(routeProvider.SAVE_NEW_PRESET, {
