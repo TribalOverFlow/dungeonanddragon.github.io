@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 17:39:14 GMT
+ * Tue, 15 Dec 2020 17:54:28 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24241,6 +24241,7 @@ define('two/presetCreator', [
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) { 
             allPresets.push(data.presets)
         })
+        allPresets
         pikinier = typeof pikinier === 'string' ? parseInt(pikinier, 16) : pikinier
         miecznik = typeof miecznik === 'string' ? parseInt(miecznik, 16) : miecznik
         topornik = typeof topornik === 'string' ? parseInt(topornik, 16) : topornik
