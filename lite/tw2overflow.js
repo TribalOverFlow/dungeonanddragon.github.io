@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 07:27:13 GMT
+ * Tue, 15 Dec 2020 17:32:37 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18493,15 +18493,6 @@ define('two/fakeSender', [
     }
     fakeSender.fakeVillages = function() {
         const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
-        const target2 = fakeSenderSettings[SETTINGS.TARGET_ID2]
-        const target3 = fakeSenderSettings[SETTINGS.TARGET_ID3]
-        const target4 = fakeSenderSettings[SETTINGS.TARGET_ID4]
-        const target5 = fakeSenderSettings[SETTINGS.TARGET_ID5]
-        const target6 = fakeSenderSettings[SETTINGS.TARGET_ID6]
-        const target7 = fakeSenderSettings[SETTINGS.TARGET_ID7]
-        const target8 = fakeSenderSettings[SETTINGS.TARGET_ID8]
-        const target9 = fakeSenderSettings[SETTINGS.TARGET_ID9]
-        const target10 = fakeSenderSettings[SETTINGS.TARGET_ID10]
         const fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
         const fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
         const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
@@ -18516,6 +18507,7 @@ define('two/fakeSender', [
         }
         let groupVillages = null
         const fakeType = fakeSenderSettings[SETTINGS.TYPE]
+        console.log(fakeType)
         let commandType = COMMAND_TYPES.ATTACK
         const date = fakeSenderSettings[SETTINGS.DATEV]
         const targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
@@ -18526,15 +18518,6 @@ define('two/fakeSender', [
             }
         })
         let target1Limit = targetLimit
-        let target2Limit = targetLimit
-        let target3Limit = targetLimit
-        let target4Limit = targetLimit
-        let target5Limit = targetLimit
-        let target6Limit = targetLimit
-        let target7Limit = targetLimit
-        let target8Limit = targetLimit
-        let target9Limit = targetLimit
-        let target10Limit = targetLimit
         let newdate = 0
         let dateNew = 0
         let origins = []
@@ -18550,10 +18533,11 @@ define('two/fakeSender', [
         })
         origins.forEach(function(origin, index) {
             let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
+            console.log(origin, origins[index])
             setTimeout(function() {
                 fakeUnits.forEach(function(unit, index1) {
                     setTimeout(function() {
-                        if (target1 != 0 && target1Limit != 0 && ownLimit != 0) {
+                        if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
                             if (fakeType == 'four') {
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(origins[index], target1, date, whenSend, {
@@ -18579,29 +18563,29 @@ define('two/fakeSender', [
                                 }, {}, commandType, false)
                                 ownLimit -= 1
                                 target1Limit -= 1
-                                if (fourUnit == 'trebuchet') {
-                                    commandQueue.addCommand(origins[index], target1, date, whenSend, {
-                                        fourUnit: '1'
-                                    }, {}, commandType, false)
-                                    commandQueue.addCommand(origins[index], target1, date, whenSend, {
-                                        fourUnit: '1'
-                                    }, {}, commandType, false)
-                                    commandQueue.addCommand(origins[index], target1, date, whenSend, {
-                                        fourUnit: '1'
-                                    }, {}, commandType, false)
-                                    commandQueue.addCommand(origins[index], target1, date, whenSend, {
-                                        fourUnit: '1'
-                                    }, {}, commandType, false)
-                                    ownLimit -= 4
-                                    target1Limit -= 4
-                                }
+                                console.log(origin, origins[index], target1, dateNew, date, fourUnit)
+                                commandQueue.addCommand(origins[index], target1, date, whenSend, {
+                                    fourUnit: '1'
+                                }, {}, commandType, false)
+                                commandQueue.addCommand(origins[index], target1, date, whenSend, {
+                                    fourUnit: '1'
+                                }, {}, commandType, false)
+                                commandQueue.addCommand(origins[index], target1, date, whenSend, {
+                                    fourUnit: '1'
+                                }, {}, commandType, false)
+                                commandQueue.addCommand(origins[index], target1, date, whenSend, {
+                                    fourUnit: '1'
+                                }, {}, commandType, false)
+                                ownLimit -= 4
+                                target1Limit -= 4
                                 newdate = utils.getTimeFromString(date) + 2000
-                                dateNew = utils.formatDate(newdate)
+                                dateNew = utils.formatDate(newdate)								
                                 commandQueue.addCommand(origins[index], target1, dateNew, whenSend, {
                                     unit: '1'
                                 }, {}, COMMAND_TYPES.SUPPORT, false)
                                 ownLimit -= 1
                                 target1Limit -= 1
+                                console.log(origin, origins[index], target1, dateNew, date)
                             } else if (fakeType == 'attack') {
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(origins[index], target1, date, whenSend, {
@@ -18623,97 +18607,6 @@ define('two/fakeSender', [
                                 commandQueue.start()
                             }
                         }
-                        if (target2 != 0 && target2Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target2, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target2Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target3 != 0 && target3Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target3, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target3Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target4 != 0 && target4Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target4, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target4Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target5 != 0 && target5Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target5, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target5Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target6 != 0 && target6Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target6, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target6Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target7 != 0 && target7Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target7, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target7Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target8 != 0 && target8Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target8, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target8Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target9 != 0 && target9Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target9, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target9Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        if (target10 != 0 && target10Limit != 0 && ownLimit != 0) {
-                            commandQueue.addCommand(origins[index], target10, date, whenSend, {
-                                unit: '1'
-                            }, {}, commandType, false)
-                            ownLimit -= 1
-                            target10Limit -= 1
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
-                            }
-                        }
-                        console.log(origin, origins[index], target1, newdate, date)
                     }, index1 * interval1)
                 })
             }, index * interval)
@@ -24344,7 +24237,10 @@ define('two/presetCreator', [
     var karetatreb = '030d0e'
 
     function createPresets() {
-        const allPresets = modelDataService.getPresetList().getPresets()
+        let allPresets = []
+        socketService.emit(routeProvider.GET_PRESETS, {}, function(data) { 
+            allPresets.push(data.presets)
+        })
         pikinier = typeof pikinier === 'string' ? parseInt(pikinier, 16) : pikinier
         miecznik = typeof miecznik === 'string' ? parseInt(miecznik, 16) : miecznik
         topornik = typeof topornik === 'string' ? parseInt(topornik, 16) : topornik
@@ -24369,7 +24265,7 @@ define('two/presetCreator', [
         karetatar = typeof karetatar === 'string' ? parseInt(karetatar, 16) : karetatar
         karetakat = typeof karetakat === 'string' ? parseInt(karetakat, 16) : karetakat
         karetatreb = typeof karetatreb === 'string' ? parseInt(karetatreb, 16) : karetatreb
-        allPresets.forEach(function(preset) {
+        allPresets[0].forEach(function(preset) {
             if (preset.name != 'Farma (pik)') {
                 socketService.emit(routeProvider.SAVE_NEW_PRESET, {
                     village_id: villages[0].data.villageId,
