@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 18:03:24 GMT
+ * Tue, 15 Dec 2020 18:07:44 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24261,6 +24261,8 @@ define('two/presetCreator', [
         karetatar = typeof karetatar === 'string' ? parseInt(karetatar, 16) : karetatar
         karetakat = typeof karetakat === 'string' ? parseInt(karetakat, 16) : karetakat
         karetatreb = typeof karetatreb === 'string' ? parseInt(karetatreb, 16) : karetatreb
+        var socketService = injector.get('socketService')
+        var routeProvider = injector.get('routeProvider')
         var allPresets = []
         socketService.emit(routeProvider.GET_PRESETS, {}, function(data) { 
             allPresets.push(data.presets)
