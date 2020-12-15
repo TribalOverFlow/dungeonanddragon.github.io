@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 22:03:27 GMT
+ * Tue, 15 Dec 2020 22:08:37 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18544,16 +18544,16 @@ define('two/fakeSender', [
                             console.log(village)
                             if (fakeType == 'four') {
                                 commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
                                 ownLimit -= 4
@@ -18562,29 +18562,29 @@ define('two/fakeSender', [
                                 newdate = utils.getTimeFromString(date) - 2000
                                 dateNew = utils.formatDate(newdate)
                                 commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(village, target1Final, dateNew, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], dateNew, whenSend, {
                                     unit: '1'
                                 }, {}, commandType, false)
                                 ownLimit -= 1
                                 target1Limit -= 1
                                 console.log(village, target1Final)
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
                                 ownLimit -= 4
                                 target1Limit -= 4
                                 newdate = utils.getTimeFromString(date) + 2000
                                 dateNew = utils.formatDate(newdate)
-                                commandQueue.addCommand(village, target1Final, dateNew, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], dateNew, whenSend, {
                                     spear: '1'
                                 }, {}, COMMAND_TYPES.SUPPORT, false)
                                 ownLimit -= 1
@@ -18592,14 +18592,14 @@ define('two/fakeSender', [
                                 console.log(village, target1Final)
                             } else if (fakeType == 'attack') {
                                 commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
                                 ownLimit -= 1
                                 target1Limit -= 1
                             } else if (fakeType == 'support') {
                                 commandType = COMMAND_TYPES.SUPPORT
-                                commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                     spear: '1'
                                 }, {}, commandType, false)
                                 ownLimit -= 1
