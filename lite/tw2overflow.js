@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 19:00:48 GMT
+ * Tue, 15 Dec 2020 19:21:07 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24261,729 +24261,676 @@ define('two/presetCreator', [
         karetatar = typeof karetatar === 'string' ? parseInt(karetatar, 16) : karetatar
         karetakat = typeof karetakat === 'string' ? parseInt(karetakat, 16) : karetakat
         karetatreb = typeof karetatreb === 'string' ? parseInt(karetatreb, 16) : karetatreb
-        socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
-            var presets = data.presets
-            for (var i of presets) {
-                if (i.name != 'Farma (pik)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'Farma (pik)',
-                        icon: pikinier,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 20,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'Farma (miecz)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'Farma (miecz)',
-                        icon: miecznik,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 33,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'Farma (top)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'Farma (top)',
-                        icon: topornik,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 25,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'Farma (łuk)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'Farma (łuk)',
-                        icon: łucznik,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 50,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'Farma (lk)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'Farma (lk)',
-                        icon: lk,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 10,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'Farma (łk)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'Farma (łk)',
-                        icon: łk,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 10,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'Farma (ck)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'Farma (ck)',
-                        icon: ck,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 10,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'PartDeff') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'PartDeff',
-                        icon: partDeff,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 180,
-                            sword: 140,
-                            axe: 0,
-                            archer: 100,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'FullDeff') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'FullDeff',
-                        icon: fullDeff,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 9000,
-                            sword: 7000,
-                            axe: 0,
-                            archer: 5000,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'PartOff') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'PartOff',
-                        icon: partOff,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 200,
-                            archer: 0,
-                            light_cavalry: 75,
-                            mounted_archer: 87,
-                            heavy_cavalry: 0,
-                            ram: 15,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'FullOff') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'FullOff',
-                        icon: fullOff,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 4000,
-                            archer: 0,
-                            light_cavalry: 1500,
-                            mounted_archer: 1750,
-                            heavy_cavalry: 0,
-                            ram: 300,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (pik)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (pik)',
-                        icon: fejkpik,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 1,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (miecz)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (miecz)',
-                        icon: fejkmiecz,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 1,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (top)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (top)',
-                        icon: fejktop,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 1,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (łuk)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (łuk)',
-                        icon: fejkłuk,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 1,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (lk)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (lk)',
-                        icon: fejklk,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 1,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (łk)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (łk)',
-                        icon: fejkłk,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 1,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (ck)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (ck)',
-                        icon: fejkck,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 1,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (tar)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (tar)',
-                        icon: fejktar,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 1,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (kat)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (kat)',
-                        icon: fejkkat,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 1,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'fejk (treb)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'fejk (treb)',
-                        icon: fejktreb,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 1,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'kareta (tar)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'kareta (tar)',
-                        icon: karetatreb,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 1,
-                            catapult: 0,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'kareta (kat)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'kareta (kat)',
-                        icon: karetatreb,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 1,
-                            trebuchet: 0,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
-                if (presets[i].name != 'kareta (treb)') {
-                    socketService.emit(routeProvider.SAVE_NEW_PRESET, {
-                        village_id: villages[0].data.villageId,
-                        name: 'kareta (treb)',
-                        icon: karetatreb,
-                        officers: {
-                            leader: false,
-                            loot_master: false,
-                            medic: false,
-                            scout: false,
-                            supporter: false,
-                            bastard: false
-                        },
-                        units: {
-                            spear: 0,
-                            sword: 0,
-                            axe: 0,
-                            archer: 0,
-                            light_cavalry: 0,
-                            mounted_archer: 0,
-                            heavy_cavalry: 0,
-                            ram: 0,
-                            catapult: 0,
-                            trebuchet: 1,
-                            doppelsoldner: 0,
-                            snob: 0,
-                            knight: 0
-                        }
-                    })
-                }
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (pik)',
+            icon: pikinier,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 20,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (miecz)',
+            icon: miecznik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 33,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (top)',
+            icon: topornik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 25,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (łuk)',
+            icon: łucznik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 50,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (lk)',
+            icon: lk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 10,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (łk)',
+            icon: łk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 10,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'Farma (ck)',
+            icon: ck,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 10,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'PartDeff',
+            icon: partDeff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 180,
+                sword: 140,
+                axe: 0,
+                archer: 100,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'FullDeff',
+            icon: fullDeff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 9000,
+                sword: 7000,
+                axe: 0,
+                archer: 5000,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'PartOff',
+            icon: partOff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 200,
+                archer: 0,
+                light_cavalry: 75,
+                mounted_archer: 87,
+                heavy_cavalry: 0,
+                ram: 15,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'FullOff',
+            icon: fullOff,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 4000,
+                archer: 0,
+                light_cavalry: 1500,
+                mounted_archer: 1750,
+                heavy_cavalry: 0,
+                ram: 300,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (pik)',
+            icon: fejkpik,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 1,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (miecz)',
+            icon: fejkmiecz,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 1,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (top)',
+            icon: fejktop,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 1,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (łuk)',
+            icon: fejkłuk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 1,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (lk)',
+            icon: fejklk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 1,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (łk)',
+            icon: fejkłk,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 1,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (ck)',
+            icon: fejkck,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 1,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (tar)',
+            icon: fejktar,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 1,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (kat)',
+            icon: fejkkat,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 1,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'fejk (treb)',
+            icon: fejktreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 1,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'kareta (tar)',
+            icon: karetatreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 1,
+                catapult: 0,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'kareta (kat)',
+            icon: karetatreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 1,
+                trebuchet: 0,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
+            }
+        })
+        socketService.emit(routeProvider.SAVE_NEW_PRESET, {
+            village_id: villages[0].data.villageId,
+            name: 'kareta (treb)',
+            icon: karetatreb,
+            officers: {
+                leader: false,
+                loot_master: false,
+                medic: false,
+                scout: false,
+                supporter: false,
+                bastard: false
+            },
+            units: {
+                spear: 0,
+                sword: 0,
+                axe: 0,
+                archer: 0,
+                light_cavalry: 0,
+                mounted_archer: 0,
+                heavy_cavalry: 0,
+                ram: 0,
+                catapult: 0,
+                trebuchet: 1,
+                doppelsoldner: 0,
+                snob: 0,
+                knight: 0
             }
         })
         utils.notif('success', $filter('i18n')('done', $rootScope.loc.ale, 'preset_creator'))
