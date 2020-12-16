@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 15 Dec 2020 22:08:37 GMT
+ * Wed, 16 Dec 2020 08:01:03 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18377,6 +18377,7 @@ define('two/fakeSender', [
     let settings
     let logs
     let commandQueue = false
+    var player = modelDataService.getSelectedCharacter()
     let fakeSenderSettings
     let COMMAND_QUEUE_DATE_TYPES
     const LOGS_LIMIT = 500
@@ -18491,7 +18492,7 @@ define('two/fakeSender', [
     }
     fakeSender.fakeVillages = function() {
         const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
-        let target1Final = []
+        var target1Final = []
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: target1,
@@ -18504,11 +18505,10 @@ define('two/fakeSender', [
                 name: data.village_name
             })
         })
-        console.log(target1Final)
         const fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
         const supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
         const fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
-        console.log(fakeUnits, supportUnits, fourUnit)
+        console.log(target1Final[0], fourUnit, supportUnits, fakeUnits)
         const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
         let fakeVillages = []
         let groupList = modelDataService.getGroupList()
@@ -18537,11 +18537,16 @@ define('two/fakeSender', [
             for (var i = 0; i < data.villages.length; i++) {
                 for (var j = 0; j < fakeVillages.length; j++) {
                     var villageId = data.villages[i].id
-                    var village = data.villages[i]
+                    var village = {
+                        id: data.villages[i].id,
+                        x: data.villages[i].x,
+                        y: data.villages[i].y,
+                        name: data.villages[i].name,
+                        character_id: player.getId()
+                    }
                     if (villageId == fakeVillages[j]) {
                         let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                         if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
-                            console.log(village)
                             if (fakeType == 'four') {
                                 commandType = COMMAND_TYPES.ATTACK
                                 commandQueue.addCommand(village, target1Final[0], date, whenSend, {
