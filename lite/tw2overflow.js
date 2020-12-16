@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 16 Dec 2020 08:01:03 GMT
+ * Wed, 16 Dec 2020 10:57:02 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18492,23 +18492,10 @@ define('two/fakeSender', [
     }
     fakeSender.fakeVillages = function() {
         const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
-        var target1Final = []
-        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-            my_village_id: modelDataService.getSelectedVillage().getId(),
-            village_id: target1,
-            num_reports: 1
-        }, function(data) {
-            target1Final.push({
-                id: data.village_id,
-                x: data.village_x,
-                y: data.village_y,
-                name: data.village_name
-            })
-        })
         const fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
         const supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
         const fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
-        console.log(target1Final[0], fourUnit, supportUnits, fakeUnits)
+        console.log(fourUnit, supportUnits, fakeUnits)
         const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
         let fakeVillages = []
         let groupList = modelDataService.getGroupList()
@@ -18544,79 +18531,91 @@ define('two/fakeSender', [
                         name: data.villages[i].name,
                         character_id: player.getId()
                     }
-                    if (villageId == fakeVillages[j]) {
-                        let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
-                        if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
-                            if (fakeType == 'four') {
-                                commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                ownLimit -= 4
-                                target1Limit -= 4
-                            } else if (fakeType == 'full') {
-                                newdate = utils.getTimeFromString(date) - 2000
-                                dateNew = utils.formatDate(newdate)
-                                commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(village, target1Final[0], dateNew, whenSend, {
-                                    unit: '1'
-                                }, {}, commandType, false)
-                                ownLimit -= 1
-                                target1Limit -= 1
-                                console.log(village, target1Final)
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                ownLimit -= 4
-                                target1Limit -= 4
-                                newdate = utils.getTimeFromString(date) + 2000
-                                dateNew = utils.formatDate(newdate)
-                                commandQueue.addCommand(village, target1Final[0], dateNew, whenSend, {
-                                    spear: '1'
-                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                ownLimit -= 1
-                                target1Limit -= 1
-                                console.log(village, target1Final)
-                            } else if (fakeType == 'attack') {
-                                commandType = COMMAND_TYPES.ATTACK
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                ownLimit -= 1
-                                target1Limit -= 1
-                            } else if (fakeType == 'support') {
-                                commandType = COMMAND_TYPES.SUPPORT
-                                commandQueue.addCommand(village, target1Final[0], date, whenSend, {
-                                    spear: '1'
-                                }, {}, commandType, false)
-                                ownLimit -= 1
-                                target1Limit -= 1
-                            } else {
-                                utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
-                            }
-                            if (!commandQueue.isRunning()) {
-                                commandQueue.start()
+                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                        my_village_id: modelDataService.getSelectedVillage().getId(),
+                        village_id: target1,
+                        num_reports: 1
+                    }, function(data) {
+                        var target1Final = {
+                            id: data.village_id,
+                            x: data.village_x,
+                            y: data.village_y,
+                            name: data.village_name
+                        }
+                        if (villageId == fakeVillages[j]) {
+                            let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
+                            if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
+                                if (fakeType == 'four') {
+                                    commandType = COMMAND_TYPES.ATTACK
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 4
+                                    target1Limit -= 4
+                                } else if (fakeType == 'full') {
+                                    newdate = utils.getTimeFromString(date) - 2000
+                                    dateNew = utils.formatDate(newdate)
+                                    commandType = COMMAND_TYPES.ATTACK
+                                    commandQueue.addCommand(village, target1Final, dateNew, whenSend, {
+                                        unit: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                    console.log(village, target1Final)
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 4
+                                    target1Limit -= 4
+                                    newdate = utils.getTimeFromString(date) + 2000
+                                    dateNew = utils.formatDate(newdate)
+                                    commandQueue.addCommand(village, target1Final, dateNew, whenSend, {
+                                        spear: '1'
+                                    }, {}, COMMAND_TYPES.SUPPORT, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                    console.log(village, target1Final)
+                                } else if (fakeType == 'attack') {
+                                    commandType = COMMAND_TYPES.ATTACK
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                } else if (fakeType == 'support') {
+                                    commandType = COMMAND_TYPES.SUPPORT
+                                    commandQueue.addCommand(village, target1Final, date, whenSend, {
+                                        spear: '1'
+                                    }, {}, commandType, false)
+                                    ownLimit -= 1
+                                    target1Limit -= 1
+                                } else {
+                                    utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
+                                }
+                                if (!commandQueue.isRunning()) {
+                                    commandQueue.start()
+                                }
                             }
                         }
-                    }
+                    })
                 }
             }
         })
