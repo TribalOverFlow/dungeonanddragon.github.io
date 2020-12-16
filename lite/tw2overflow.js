@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 16 Dec 2020 10:57:02 GMT
+ * Wed, 16 Dec 2020 18:57:27 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18376,11 +18376,13 @@ define('two/fakeSender', [
     let running = false
     let settings
     let logs
+    let groupList = modelDataService.getGroupList()
     let commandQueue = false
     var player = modelDataService.getSelectedCharacter()
     let fakeSenderSettings
     let COMMAND_QUEUE_DATE_TYPES
     const LOGS_LIMIT = 500
+    let village = {}
     let selectedGroups = []
     let selectedGroupsP = []
     let selectedGroupsT = []
@@ -18492,56 +18494,64 @@ define('two/fakeSender', [
     }
     fakeSender.fakeVillages = function() {
         const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
+        var target1Final = {}
         const fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
         const supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
         const fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
+        const fakeType = fakeSenderSettings[SETTINGS.TYPE]
+        var commandType = COMMAND_TYPES.ATTACK
+        const date = fakeSenderSettings[SETTINGS.DATEV]
+        var newdate = 0
+        var dateNew = 0
+        const targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
+        let target1Limit = targetLimit
         console.log(fourUnit, supportUnits, fakeUnits)
         const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
-        let fakeVillages = []
-        let groupList = modelDataService.getGroupList()
-        const dateType = fakeSenderSettings[SETTINGS.DATE_TYPEV]
-        let whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
-        if (dateType == 'date_type_arrive') {
-            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
-        } else {
-            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
-        }
-        let groupVillages = null
-        const fakeType = fakeSenderSettings[SETTINGS.TYPE]
-        let commandType = COMMAND_TYPES.ATTACK
-        const date = fakeSenderSettings[SETTINGS.DATEV]
-        const targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
+        var fakeVillages = []
+        var groupVillages = null
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
             for (var i of groupVillages) {
                 fakeVillages.push(i)
             }
         })
-        let target1Limit = targetLimit
-        let newdate = 0
-        let dateNew = 0
-        socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
-            for (var i = 0; i < data.villages.length; i++) {
-                for (var j = 0; j < fakeVillages.length; j++) {
-                    var villageId = data.villages[i].id
-                    var village = {
-                        id: data.villages[i].id,
-                        x: data.villages[i].x,
-                        y: data.villages[i].y,
-                        name: data.villages[i].name,
-                        character_id: player.getId()
-                    }
-                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-                        my_village_id: modelDataService.getSelectedVillage().getId(),
-                        village_id: target1,
-                        num_reports: 1
-                    }, function(data) {
-                        var target1Final = {
-                            id: data.village_id,
-                            x: data.village_x,
-                            y: data.village_y,
-                            name: data.village_name
+        var whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        const dateType = fakeSenderSettings[SETTINGS.DATE_TYPEV]
+        if (dateType == 'date_type_arrive') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        } else {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
+        }
+
+        function getTarget() {
+            socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                my_village_id: modelDataService.getSelectedVillage().getId(),
+                village_id: target1,
+                num_reports: 1
+            }, function(data) {
+                target1Final = {
+                    id: data.village_id,
+                    x: data.village_x,
+                    y: data.village_y,
+                    name: data.village_name
+                }
+            })
+            sendFakes()
+        }
+
+        function sendFakes() {
+            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+                for (var i = 0; i < data.villages.length; i++) {
+                    for (var j = 0; j < fakeVillages.length; j++) {
+                        var villageId = data.villages[i].id
+                        village = {
+                            id: data.villages[i].id,
+                            x: data.villages[i].x,
+                            y: data.villages[i].y,
+                            name: data.villages[i].name,
+                            character_id: player.getId()
                         }
+                        console.log(village, target1Final)
                         if (villageId == fakeVillages[j]) {
                             let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                             if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
@@ -18615,15 +18625,16 @@ define('two/fakeSender', [
                                 }
                             }
                         }
-                    })
+                    }
                 }
-            }
-        })
+            })
+        }
+        getTarget()
     }
     fakeSender.start = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
-        addLog('', '', 'Ropzpoczęto wysyłanie fejków', '')
+        addLog('', '', 'Rozpoczęto wysyłanie fejków', '')
     }
     fakeSender.stop = function() {
         running = false
