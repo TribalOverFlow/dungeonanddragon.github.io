@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 17 Dec 2020 07:08:09 GMT
+ * Thu, 17 Dec 2020 07:23:35 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17554,6 +17554,7 @@ define('two/commandQueue/ui', [
             name: village.name,
             character_id: $player.getId()
         }
+        console.log(commandData.origin)
     }
 
     const addMapSelected = function () {
@@ -17563,6 +17564,7 @@ define('two/commandQueue/ui', [
 
         mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function (data) {
             commandData.target = data
+            console.log(commandData.target)
         })
     }
 
@@ -18546,11 +18548,11 @@ define('two/fakeSender', [
                     for (var j = 0; j < fakeVillages.length; j++) {
                         var villageId = data.villages[i].id
                         village = {
-                            id: data.villages[i].id,
-                            x: data.villages[i].x,
-                            y: data.villages[i].y,
-                            name: data.villages[i].name,
-                            character_id: player.getId()
+                            'id': data.villages[i].id,
+                            'x': data.villages[i].x,
+                            'y': data.villages[i].y,
+                            'name': data.villages[i].name,
+                            'character_id': player.getId()
                         }
                         console.log(village, target1Final)
                         if (villageId == fakeVillages[j]) {
@@ -18581,7 +18583,7 @@ define('two/fakeSender', [
                                     }, {}, commandType, false)
                                     ownLimit -= 1
                                     target1Limit -= 1
-                                    console.log(village, target1Final)
+                                    console.log(village, target1Final[0])
                                     commandQueue.addCommand(village, target1Final[0], date, whenSend, {
                                         spear: '1'
                                     }, {}, commandType, false)
@@ -18603,7 +18605,7 @@ define('two/fakeSender', [
                                     }, {}, COMMAND_TYPES.SUPPORT, false)
                                     ownLimit -= 1
                                     target1Limit -= 1
-                                    console.log(village, target1Final)
+                                    console.log(village, target1Final[0])
                                 } else if (fakeType == 'attack') {
                                     commandType = COMMAND_TYPES.ATTACK
                                     commandQueue.addCommand(village, target1Final[0], date, whenSend, {
