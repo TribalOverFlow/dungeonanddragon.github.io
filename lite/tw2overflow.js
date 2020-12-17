@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 17 Dec 2020 07:45:45 GMT
+ * Thu, 17 Dec 2020 07:53:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18523,22 +18523,6 @@ define('two/fakeSender', [
             whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
         }
 
-        function getTarget(target) {
-            socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-                my_village_id: modelDataService.getSelectedVillage().getId(),
-                village_id: target,
-                num_reports: 1
-            }, function(data) {
-                targetFinal = {
-                    id: data.village_id,
-                    x: data.village_x,
-                    y: data.village_y,
-                    name: data.village_name
-                }
-            })
-            console.log(targetFinal)
-        }
-
         function sendFakes() {
             socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
                 for (var i = 0; i < data.villages.length; i++) {
@@ -18552,10 +18536,21 @@ define('two/fakeSender', [
                             'character_id': player.getId()
                         }
                         if (villageId == fakeVillages[j]) {
-                            console.log(village, targetFinal)
                             let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                             if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
-                                getTarget(target1)
+                                socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                    my_village_id: modelDataService.getSelectedVillage().getId(),
+                                    village_id: target1,
+                                    num_reports: 1
+                                }, function(data) {
+                                    targetFinal = {
+                                        id: data.village_id,
+                                        x: data.village_x,
+                                        y: data.village_y,
+                                        name: data.village_name
+                                    }
+                                })
+                                console.log(village, targetFinal)
                                 if (fakeType == 'four') {
                                     commandType = COMMAND_TYPES.ATTACK
                                     commandQueue.addCommand(village, targetFinal, date, whenSend, {
