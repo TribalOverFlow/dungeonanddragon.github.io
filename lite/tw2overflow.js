@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 19 Dec 2020 22:39:49 GMT
+ * Sat, 19 Dec 2020 23:28:27 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1028,6 +1028,8 @@ define('two/language', [
             "date_type_out": "Czas wyjścia z  twojej wioski",
             "four": "kareta",
             "full": "all-in-one",
+            "start": "Rozpoczęto fejkowanie",
+            "stop": "Zakończono fejkowanie",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -2428,6 +2430,8 @@ define('two/language', [
             "date_type_out": "Czas wyjścia z  twojej wioski",
             "four": "kareta",
             "full": "all-in-one",
+            "start": "Rozpoczęto fejkowanie",
+            "stop": "Zakończono fejkowanie",
             "spear": "Pikinier",
             "sword": "Miecznik",
             "axe": "Topornik",
@@ -18552,346 +18556,352 @@ define('two/fakeSender', [
 
         function sendFakes() {
             socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
-                for (var i = 0; i < data.villages.length; i++) {
-                    fakeVillages.forEach(function(fakeVillage) {
-                        var villageId = data.villages[i].id
-                        if (villageId == fakeVillage) {
-                            village = {
-                                'id': data.villages[i].id,
-                                'x': data.villages[i].x,
-                                'y': data.villages[i].y,
-                                'name': data.villages[i].name,
-                                'character_id': player.getId()
-                            }
-                            socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
-                                village_id: villageId
-                            }, function(data) {
-                                Spear = data.available_units.spear.total
-                                Sword = data.available_units.sword.total
-                                Axe = data.available_units.axe.total
-                                Archer = data.available_units.archer.total
-                                LC = data.available_units.light_cavalry.total
-                                MA = data.available_units.mounted_archer.total
-                                Ram = data.available_units.ram.total
-                                Catapult = data.available_units.catapult.total
-                                HC = data.available_units.heavy_cavalry.total
-                                Berserker = data.available_units.doppelsoldner.total
-                                Trebuchet = data.available_units.trebuchet.total
-                                let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
-                                if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
-                                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-                                        my_village_id: modelDataService.getSelectedVillage().getId(),
-                                        village_id: target1,
-                                        num_reports: 1
-                                    }, function(data) {
-                                        targetFinal = {
-                                            id: data.village_id,
-                                            x: data.village_x,
-                                            y: data.village_y,
-                                            name: data.village_name
-                                        }
-                                        if (fakeType == 'attack') {
-                                            fakeUnits.forEach(function(unit) {
-                                                if (unit == 'spear' && Spear > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        spear: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'axe' && Axe > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        axe: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'archer' && Archer > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        archer: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'doppelsoldner' && Berserker > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        doppelsoldner: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'sword' && Sword > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        sword: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'light_cavalry' && LC > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        light_cavalry: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'mounted_archer' && MA > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        mounted_archer: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'ram' && Ram > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        ram: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'catapult' && Catapult > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        catapult: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'heavy_cavalry' && HC > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        heavy_cavalry: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'trebuchet' && Trebuchet > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        trebuchet: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else {
-                                                    utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                }
-                                            })
-                                        } else if (fakeType == 'support') {
-                                            supportUnits.forEach(function(unit) {
-                                                if (unit == 'spear' && Spear > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        spear: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                } else if (unit == 'archer' && Archer > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        archer: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                }
-                                                if (unit == 'sword' && Sword > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        sword: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                }
-                                                if (unit == 'heavy_cavalry' && HC > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        heavy_cavalry: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                } else {
-                                                    utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                }
-                                            })
-                                        } else if (fakeType == 'four') {
-                                            if (fourUnit == 'catapult' && Catapult > 0) {
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                ownLimit -= 4
-                                                target1Limit -= 4
-                                                addLog(village.id, targetFinal.id, fourUnit, 'fejk kareta')
-                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet')) {
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                ownLimit -= 4
-                                                target1Limit -= 4
-                                                addLog(village.id, targetFinal.id, fourUnit, 'fejk kareta')
-                                            } else {
-                                                utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
-                                            }
-                                        } else if (fakeType == 'full') {
-                                            if (fourUnit == 'catapult' && Catapult > 0) {
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                ownLimit -= 4
-                                                target1Limit -= 4
-                                                addLog(village.id, targetFinal.id, fourUnit, 'fejk kareta')
-                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet')) {
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                ownLimit -= 4
-                                                target1Limit -= 4
-                                                addLog(village.id, targetFinal.id, fourUnit, 'fejk kareta')
-                                            } else {
-                                                utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
-                                            }
-                                            newdate = utils.getTimeFromString(date) - 2000
-                                            date = utils.formatDate(newdate)
-                                            fakeUnits.forEach(function(unit) {
-                                                if (unit == 'spear' && Spear > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        spear: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'axe' && Axe > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        axe: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'archer' && Archer > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        archer: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'doppelsoldner' && Berserker > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        doppelsoldner: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'sword' && Sword > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        sword: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'light_cavalry' && LC > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        light_cavalry: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'mounted_archer' && MA > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        mounted_archer: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'ram' && Ram > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        ram: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else if (unit == 'catapult' && Catapult > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        catapult: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'heavy_cavalry' && HC > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        heavy_cavalry: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                }
-                                                if (unit == 'trebuchet' && Trebuchet > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        trebuchet: 1
-                                                    }, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk atak')
-                                                } else {
-                                                    utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                }
-                                            })
-                                            newdate = utils.getTimeFromString(date) + 4000
-                                            date = utils.formatDate(newdate)
-                                            supportUnits.forEach(function(unit) {
-                                                if (unit == 'spear' && Spear > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        spear: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                } else if (unit == 'archer' && Archer > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        archer: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                }
-                                                if (unit == 'sword' && Sword > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        sword: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                }
-                                                if (unit == 'heavy_cavalry' && HC > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                        heavy_cavalry: 1
-                                                    }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                    ownLimit -= 1
-                                                    target1Limit -= 1
-                                                    addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
-                                                } else {
-                                                    utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                }
-                                            })
-                                        } else {
-                                            utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
-                                        }
-                                        if (!commandQueue.isRunning()) {
-                                            commandQueue.start()
-                                        }
-                                    })
+                fakeVillages.forEach(function(fakeVillage, index) {
+                    setTimeout(function() {
+                        for (var i = 0; i < data.villages.length; i++) {
+                            var villageId = data.villages[i].id
+                            if (fakeVillage == villageId) {
+                                village = {
+                                    'id': data.villages[i].id,
+                                    'x': data.villages[i].x,
+                                    'y': data.villages[i].y,
+                                    'name': data.villages[i].name,
+                                    'character_id': player.getId()
                                 }
-                            })
+                                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                    village_id: villageId
+                                }, function(data) {
+                                    Spear = data.available_units.spear.total
+                                    Sword = data.available_units.sword.total
+                                    Axe = data.available_units.axe.total
+                                    Archer = data.available_units.archer.total
+                                    LC = data.available_units.light_cavalry.total
+                                    MA = data.available_units.mounted_archer.total
+                                    Ram = data.available_units.ram.total
+                                    Catapult = data.available_units.catapult.total
+                                    HC = data.available_units.heavy_cavalry.total
+                                    Berserker = data.available_units.doppelsoldner.total
+                                    Trebuchet = data.available_units.trebuchet.total
+                                    let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
+                                    if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
+                                        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                            my_village_id: modelDataService.getSelectedVillage().getId(),
+                                            village_id: target1,
+                                            num_reports: 1
+                                        }, function(data) {
+                                            targetFinal = {
+                                                id: data.village_id,
+                                                x: data.village_x,
+                                                y: data.village_y,
+                                                name: data.village_name
+                                            }
+                                            if (fakeType == 'attack') {
+                                                date = fakeSenderSettings[SETTINGS.DATEV]
+                                                fakeUnits.forEach(function(unit) {
+                                                    if (unit == 'spear' && Spear > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            spear: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'axe' && Axe > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            axe: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'archer' && Archer > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            archer: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'doppelsoldner' && Berserker > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            doppelsoldner: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'sword' && Sword > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            sword: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'light_cavalry' && LC > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            light_cavalry: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'mounted_archer' && MA > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            mounted_archer: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'ram' && Ram > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            ram: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'catapult' && Catapult > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            catapult: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            heavy_cavalry: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'trebuchet' && Trebuchet > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            trebuchet: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else {
+                                                        utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                    }
+                                                })
+                                            } else if (fakeType == 'support') {
+                                                date = fakeSenderSettings[SETTINGS.DATEV]
+                                                supportUnits.forEach(function(unit) {
+                                                    if (unit == 'spear' && Spear > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            spear: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    } else if (unit == 'archer' && Archer > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            archer: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    }
+                                                    if (unit == 'sword' && Sword > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            sword: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    }
+                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            heavy_cavalry: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    } else {
+                                                        utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                    }
+                                                })
+                                            } else if (fakeType == 'four') {
+                                                date = fakeSenderSettings[SETTINGS.DATEV]
+                                                if (fourUnit == 'catapult' && Catapult > 0) {
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    ownLimit -= 4
+                                                    target1Limit -= 4
+                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet')) {
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    ownLimit -= 4
+                                                    target1Limit -= 4
+                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                } else {
+                                                    utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                }
+                                            } else if (fakeType == 'full') {
+                                                date = fakeSenderSettings[SETTINGS.DATEV]
+                                                if (fourUnit == 'catapult' && Catapult > 0) {
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                    ownLimit -= 4
+                                                    target1Limit -= 4
+                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet')) {
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                    ownLimit -= 4
+                                                    target1Limit -= 4
+                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                } else {
+                                                    utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                }
+                                                newdate = utils.getTimeFromString(date) - 2000
+                                                date = utils.formatDate(newdate)
+                                                fakeUnits.forEach(function(unit) {
+                                                    if (unit == 'spear' && Spear > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            spear: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'axe' && Axe > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            axe: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'archer' && Archer > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            archer: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'doppelsoldner' && Berserker > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            doppelsoldner: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'sword' && Sword > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            sword: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'light_cavalry' && LC > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            light_cavalry: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'mounted_archer' && MA > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            mounted_archer: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'ram' && Ram > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            ram: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else if (unit == 'catapult' && Catapult > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            catapult: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            heavy_cavalry: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    }
+                                                    if (unit == 'trebuchet' && Trebuchet > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            trebuchet: 1
+                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    } else {
+                                                        utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                    }
+                                                })
+                                                newdate = utils.getTimeFromString(date) + 4000
+                                                date = utils.formatDate(newdate)
+                                                supportUnits.forEach(function(unit) {
+                                                    if (unit == 'spear' && Spear > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            spear: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    } else if (unit == 'archer' && Archer > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            archer: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    }
+                                                    if (unit == 'sword' && Sword > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            sword: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    }
+                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                            heavy_cavalry: 1
+                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                        ownLimit -= 1
+                                                        target1Limit -= 1
+                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                    } else {
+                                                        utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                    }
+                                                })
+                                            } else {
+                                                utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
+                                            }
+                                            if (!commandQueue.isRunning()) {
+                                                commandQueue.start()
+                                            }
+                                        })
+                                    }
+                                })
+                            }
                         }
-                    })
-                }
+                    }, index * 3000)
+                })
             })
         }
         sendFakes()
@@ -18899,12 +18909,12 @@ define('two/fakeSender', [
     fakeSender.start = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
-        addLog('', '', 'Rozpoczęto wysyłanie fejków', '')
+        addLog('', '', 'start', '')
     }
     fakeSender.stop = function() {
         running = false
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
-        addLog('', '', 'Zakończono wysyłanie fejków', '')
+        addLog('', '', 'stop', '')
     }
     fakeSender.getSettings = function() {
         return settings
