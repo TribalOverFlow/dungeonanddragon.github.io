@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 17 Dec 2020 08:13:25 GMT
+ * Sat, 19 Dec 2020 09:18:16 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1001,6 +1001,7 @@ define('two/language', [
             "fake.target_group": "Grupa/y wiosek celi",
             "fake.unit": "Jednostka/i",
             "fake.unit-four": "Jednostka karety",
+            "fake.unit-support": "Jednostka/i wsparcia",
             "fake.type": "Rodzaj fejków",
             "fake.attack_interval": "Przerwa między atakami(sek)",
             "fake.target_limit": "Maks liczba fejków na cel",
@@ -2400,6 +2401,7 @@ define('two/language', [
             "fake.target_group": "Grupa/y wiosek celi",
             "fake.unit": "Jednostka/i",
             "fake.unit-four": "Jednostka karety",
+            "fake.unit-support": "Jednostka/i wsparcia",
             "fake.type": "Rodzaj fejków",
             "fake.attack_interval": "Przerwa między atakami(sek)",
             "fake.target_limit": "Maks liczba fejków na cel",
@@ -18355,6 +18357,7 @@ define('two/fakeSender', [
     'two/fakeSender/types/units',
     'two/ready',
     'queues/EventQueue',
+    'conf/buildingTypes',
     'Lockr',
     'helper/time'
 ], function(
@@ -18369,6 +18372,7 @@ define('two/fakeSender', [
     FS_UNIT,
     ready,
     eventQueue,
+    BUILDING_TYPES,
     Lockr,
     timeHelper
 ) {
@@ -18495,17 +18499,31 @@ define('two/fakeSender', [
     }
     fakeSender.fakeVillages = function() {
         const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
-        const fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
-        const supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
-        const fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
+        var fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
+        var supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
+        var fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
+        console.log(fakeUnits, supportUnits, fourUnit)
+        var snobUnit = {}
+        if (fourUnit == 'trebuchet') {
+            snobUnit = {
+                trebuchet: 1
+            }
+        } else if (fourUnit == 'ram') {
+            snobUnit = {
+                ram: 1
+            }
+        } else if (fourUnit == 'catapult') {
+            snobUnit = {
+                catapult: 1
+            }
+        }
         const fakeType = fakeSenderSettings[SETTINGS.TYPE]
-        var commandType = COMMAND_TYPES.ATTACK
+        var unit = {}
         const date = fakeSenderSettings[SETTINGS.DATEV]
         var newdate = 0
         var dateNew = 0
         const targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
         let target1Limit = targetLimit
-        console.log(fourUnit, supportUnits, fakeUnits)
         const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
         var fakeVillages = []
         var groupVillages = null
@@ -18525,17 +18543,17 @@ define('two/fakeSender', [
 
         function sendFakes() {
             socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
-                for (var i = 0; i < data.villages.length; i++) {
-                    for (var j = 0; j < fakeVillages.length; j++) {
+                for (var j = 0; j < fakeVillages.length; j++) {
+                    for (var i = 0; i < data.villages.length; i++) {
                         var villageId = data.villages[i].id
-                        village = {
-                            'id': data.villages[i].id,
-                            'x': data.villages[i].x,
-                            'y': data.villages[i].y,
-                            'name': data.villages[i].name,
-                            'character_id': player.getId()
-                        }
                         if (villageId == fakeVillages[j]) {
+                            village = {
+                                'id': data.villages[i].id,
+                                'x': data.villages[i].x,
+                                'y': data.villages[i].y,
+                                'name': data.villages[i].name,
+                                'character_id': player.getId()
+                            }
                             let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                             if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
                                 socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
@@ -18549,69 +18567,66 @@ define('two/fakeSender', [
                                         y: data.village_y,
                                         name: data.village_name
                                     }
-                                    console.log(village, targetFinal)
-                                    if (fakeType == 'four') {
-                                        commandType = COMMAND_TYPES.ATTACK
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        ownLimit -= 4
-                                        target1Limit -= 4
+                                    var fakeUnit = {}
+                                    var supportUnit = {}
+                                    if (fakeType == 'attack') {
+                                        commandQueue.addCommand(village, targetFinal, date, whenSend, fakeUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                        ownLimit -= 1
+                                        target1Limit -= 1
+                                        addLog(village.id, targetFinal.id, unit, 'fejk atak')
+                                    } else if (fakeType == 'support') {
+                                        commandQueue.addCommand(village, targetFinal, date, whenSend, supportUnit, {}, COMMAND_TYPES.SUPPORT, false)
+                                        ownLimit -= 1
+                                        target1Limit -= 1
+                                        addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
+                                    } else if (fakeType == 'four') {
+                                        if (fourUnit == 'catapult') {
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            ownLimit -= 4
+                                            target1Limit -= 4
+                                            addLog(village.id, targetFinal.id, unit, 'fejk kareta')
+                                        } else {
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            ownLimit -= 4
+                                            target1Limit -= 4
+                                            addLog(village.id, targetFinal.id, unit, 'fejk kareta')
+                                        }
                                     } else if (fakeType == 'full') {
                                         newdate = utils.getTimeFromString(date) - 2000
                                         dateNew = utils.formatDate(newdate)
-                                        commandType = COMMAND_TYPES.ATTACK
-                                        commandQueue.addCommand(village, targetFinal, dateNew, whenSend, {
-                                            unit: '1'
-                                        }, {}, commandType, false)
+                                        commandQueue.addCommand(village, targetFinal, dateNew, whenSend, fakeUnit, {}, COMMAND_TYPES.ATTACK, false)
                                         ownLimit -= 1
                                         target1Limit -= 1
-                                        console.log(village, targetFinal)
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        ownLimit -= 4
-                                        target1Limit -= 4
+                                        addLog(village.id, targetFinal.id, unit, 'fejk atak')
                                         newdate = utils.getTimeFromString(date) + 2000
                                         dateNew = utils.formatDate(newdate)
-                                        commandQueue.addCommand(village, targetFinal, dateNew, whenSend, {
-                                            spear: '1'
-                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                        commandQueue.addCommand(village, targetFinal, dateNew, whenSend, supportUnit, {}, COMMAND_TYPES.SUPPORT, false)
                                         ownLimit -= 1
                                         target1Limit -= 1
-                                        console.log(village, targetFinal)
-                                    } else if (fakeType == 'attack') {
-                                        commandType = COMMAND_TYPES.ATTACK
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        ownLimit -= 1
-                                        target1Limit -= 1
-                                    } else if (fakeType == 'support') {
-                                        commandType = COMMAND_TYPES.SUPPORT
-                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                            spear: '1'
-                                        }, {}, commandType, false)
-                                        ownLimit -= 1
-                                        target1Limit -= 1
+                                        addLog(village.id, targetFinal.id, unit, 'fejk wsparcie')
+                                        if (fourUnit == 'catapult') {
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                            ownLimit -= 4
+                                            target1Limit -= 4
+                                            addLog(village.id, targetFinal.id, unit, 'fejk kareta')
+                                        } else {
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                            ownLimit -= 4
+                                            target1Limit -= 4
+                                            addLog(village.id, targetFinal.id, unit, 'fejk kareta')
+                                        }
                                     } else {
                                         utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
                                     }
@@ -19766,22 +19781,27 @@ define('two/fakeSender/settings/map', [
         },
         [SETTINGS.UNIT_SUPPORT]: {
             default: 'spear',
+            multiSelect: true,
             inputType: 'select'
         },
         [SETTINGS.UNIT_SUPPORTT]: {
             default: 'spear',
+            multiSelect: true,
             inputType: 'select'
         },
         [SETTINGS.UNIT_SUPPORTP]: {
             default: 'spear',
+            multiSelect: true,
             inputType: 'select'
         },
         [SETTINGS.UNIT_SUPPORTPro]: {
             default: 'spear',
+            multiSelect: true,
             inputType: 'select'
         },
         [SETTINGS.UNIT_SUPPORTG]: {
             default: 'spear',
+            multiSelect: true,
             inputType: 'select'
         },
         [SETTINGS.UNIT]: {
@@ -20006,9 +20026,7 @@ define('two/fakeSender/types/units', [], function () {
         RAM: 'ram',
         CATAPULT: 'catapult',
         TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
+        DOPPELSOLDNER: 'doppelsoldner'
     }
 })
 
@@ -20025,8 +20043,7 @@ define('two/fakeSender/types/unitsfour', [], function () {
     return {
         RAM: 'ram',
         CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        SNOB: 'snob'
+        TREBUCHET: 'trebuchet'
     }
 })
 require([
