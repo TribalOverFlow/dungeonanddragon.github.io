@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Dec 2020 13:16:43 GMT
+ * Sun, 20 Dec 2020 13:29:56 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19362,7 +19362,7 @@ define('two/fakeSender/ui', [
 
         $scope.settings[SETTINGS.DATEG] = addDateDiff($scope.settings[SETTINGS.DATEG], -100)
     }
-    const loadVillageInfo = function(villageId, targetId) {
+    const loadVillageInfo = function(villageId) {
         if (villagesInfo[villageId]) {
             return villagesInfo[villageId]
         }
@@ -19381,6 +19381,8 @@ define('two/fakeSender/ui', [
             }
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
+    }
+    const loadTargetInfo = function(targetId) {
         if (targetsInfo[targetId]) {
             return targetsInfo[targetId]
         }
@@ -19406,11 +19408,9 @@ define('two/fakeSender/ui', [
         logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
         $scope.pagination.logs.count = logsView.logs.length
         logsView.visibleLogs.forEach(function(log) {
-            if (log.villageId) {
+            if (log.villageId && log.targetId) {
                 loadVillageInfo(log.villageId)
-            }
-            if (log.targetId) {
-                loadVillageInfo(log.targetId)
+                loadTargetInfo(log.targetId)
             }
         })
     }
