@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Dec 2020 19:10:31 GMT
+ * Sun, 20 Dec 2020 22:39:16 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18403,6 +18403,32 @@ define('two/fakeSender', [
     let selectedGroupsT = []
     let selectedGroupsG = []
     let selectedGroupsTarget = []
+    var Spear = 0
+    var Sword = 0
+    var Axe = 0
+    var Archer = 0
+    var LC = 0
+    var MA = 0
+    var Ram = 0
+    var Catapult = 0
+    var HC = 0
+    var Berserker = 0
+    var Trebuchet = 0
+    var targets = []
+    var snobUnit = {}
+    var fakeUnits = ''
+    var supportUnits = ''
+    var fourUnit = ''
+    var newdate = 0
+    var fakeType = ''
+    var date = ''
+    var targetLimit = 0
+    var ownGroups = ''
+    var commandInterval = 0
+    var fakeVillages = []
+    var groupVillages = null
+    var whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+    var dateType = ''
     const STORAGE_KEYS = {
         SETTINGS: 'fake_sender_settings',
         LOGS: 'fake_sender_log'
@@ -18507,34 +18533,12 @@ define('two/fakeSender', [
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
         return logs
     }
-    fakeSender.fakeVillages = function() {
-        var Spear = 0
-        var Sword = 0
-        var Axe = 0
-        var Archer = 0
-        var LC = 0
-        var MA = 0
-        var Ram = 0
-        var Catapult = 0
-        var HC = 0
-        var Berserker = 0
-        var Trebuchet = 0
-        var targets = []
+    fakeSender.fakeGroups = function() {
         targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID2])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID3])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID4])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID5])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID6])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID7])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID8])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID9])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID10])
-        var fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
-        var supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
-        var fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
+        fakeUnits = fakeSenderSettings[SETTINGS.UNITG]
+        supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTG]
+        fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURG]
         console.log(fakeUnits, supportUnits, fourUnit)
-        var snobUnit = {}
         if (fourUnit == 'trebuchet') {
             snobUnit = {
                 trebuchet: 1
@@ -18548,22 +18552,175 @@ define('two/fakeSender', [
                 catapult: 1
             }
         }
-        const fakeType = fakeSenderSettings[SETTINGS.TYPE]
-        var date = fakeSenderSettings[SETTINGS.DATEV]
-        var newdate = 0
-        var targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
-        const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
-        const commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVAL]
-        var fakeVillages = []
-        var groupVillages = null
+        fakeType = fakeSenderSettings[SETTINGS.TYPEG]
+        date = fakeSenderSettings[SETTINGS.DATEG]
+        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETG]
+        ownGroups = fakeSenderSettings[SETTINGS.GROUPG]
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
             for (var i of groupVillages) {
                 fakeVillages.push(i)
             }
         })
-        var whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
-        const dateType = fakeSenderSettings[SETTINGS.DATE_TYPEV]
+        commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALG]
+        dateType = fakeSenderSettings[SETTINGS.DATE_TYPEG]
+        if (dateType == 'date_type_arrive') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        } else {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
+        }
+    }
+    fakeSender.fakeTribe = function() {
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
+        fakeUnits = fakeSenderSettings[SETTINGS.UNITT]
+        supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTT]
+        fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURT]
+        console.log(fakeUnits, supportUnits, fourUnit)
+        if (fourUnit == 'trebuchet') {
+            snobUnit = {
+                trebuchet: 1
+            }
+        } else if (fourUnit == 'ram') {
+            snobUnit = {
+                ram: 1
+            }
+        } else if (fourUnit == 'catapult') {
+            snobUnit = {
+                catapult: 1
+            }
+        }
+        fakeType = fakeSenderSettings[SETTINGS.TYPET]
+        date = fakeSenderSettings[SETTINGS.DATET]
+        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETT]
+        ownGroups = fakeSenderSettings[SETTINGS.GROUPT]
+        ownGroups.forEach(function(group) {
+            groupVillages = groupList.getGroupVillageIds(group)
+            for (var i of groupVillages) {
+                fakeVillages.push(i)
+            }
+        })
+        commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALT]
+        dateType = fakeSenderSettings[SETTINGS.DATE_TYPET]
+        if (dateType == 'date_type_arrive') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        } else {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
+        }
+    }
+    fakeSender.fakeProvince = function() {
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
+        fakeUnits = fakeSenderSettings[SETTINGS.UNITPro]
+        supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTPro]
+        fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURPro]
+        console.log(fakeUnits, supportUnits, fourUnit)
+        if (fourUnit == 'trebuchet') {
+            snobUnit = {
+                trebuchet: 1
+            }
+        } else if (fourUnit == 'ram') {
+            snobUnit = {
+                ram: 1
+            }
+        } else if (fourUnit == 'catapult') {
+            snobUnit = {
+                catapult: 1
+            }
+        }
+        fakeType = fakeSenderSettings[SETTINGS.TYPEPro]
+        date = fakeSenderSettings[SETTINGS.DATEPro]
+        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETPro]
+        ownGroups = fakeSenderSettings[SETTINGS.GROUPPro]
+        ownGroups.forEach(function(group) {
+            groupVillages = groupList.getGroupVillageIds(group)
+            for (var i of groupVillages) {
+                fakeVillages.push(i)
+            }
+        })
+        commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALPro]
+        dateType = fakeSenderSettings[SETTINGS.DATE_TYPEPro]
+        if (dateType == 'date_type_arrive') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        } else {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
+        }
+    }
+    fakeSender.fakePlayer = function() {
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
+        fakeUnits = fakeSenderSettings[SETTINGS.UNITP]
+        supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTP]
+        fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURP]
+        console.log(fakeUnits, supportUnits, fourUnit)
+        if (fourUnit == 'trebuchet') {
+            snobUnit = {
+                trebuchet: 1
+            }
+        } else if (fourUnit == 'ram') {
+            snobUnit = {
+                ram: 1
+            }
+        } else if (fourUnit == 'catapult') {
+            snobUnit = {
+                catapult: 1
+            }
+        }
+        fakeType = fakeSenderSettings[SETTINGS.TYPEP]
+        date = fakeSenderSettings[SETTINGS.DATEP]
+        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETP]
+        ownGroups = fakeSenderSettings[SETTINGS.GROUPP]
+        ownGroups.forEach(function(group) {
+            groupVillages = groupList.getGroupVillageIds(group)
+            for (var i of groupVillages) {
+                fakeVillages.push(i)
+            }
+        })
+        commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALP]
+        dateType = fakeSenderSettings[SETTINGS.DATE_TYPEP]
+        if (dateType == 'date_type_arrive') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        } else {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
+        }
+    }
+    fakeSender.fakeVillages = function() {
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID2])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID3])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID4])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID5])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID6])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID7])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID8])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID9])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID10])
+        fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
+        supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
+        fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
+        console.log(fakeUnits, supportUnits, fourUnit)
+        if (fourUnit == 'trebuchet') {
+            snobUnit = {
+                trebuchet: 1
+            }
+        } else if (fourUnit == 'ram') {
+            snobUnit = {
+                ram: 1
+            }
+        } else if (fourUnit == 'catapult') {
+            snobUnit = {
+                catapult: 1
+            }
+        }
+        fakeType = fakeSenderSettings[SETTINGS.TYPE]
+        date = fakeSenderSettings[SETTINGS.DATEV]
+        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
+        ownGroups = fakeSenderSettings[SETTINGS.GROUP]
+        commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVAL]
+        ownGroups.forEach(function(group) {
+            groupVillages = groupList.getGroupVillageIds(group)
+            for (var i of groupVillages) {
+                fakeVillages.push(i)
+            }
+        })
+        dateType = fakeSenderSettings[SETTINGS.DATE_TYPEV]
         if (dateType == 'date_type_arrive') {
             whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
         } else {
@@ -19293,6 +19450,7 @@ define('two/fakeSender/ui', [
         }
         mapData.loadTownDataAsync(mapSelectedVillageP.x, mapSelectedVillageP.y, 1, 1, function(data) {
             fakePlayer1.origin = data
+            console.log(data)
         })
         $scope.settings[SETTINGS.PLAYER_ID] = mapSelectedVillageP.id
     }
