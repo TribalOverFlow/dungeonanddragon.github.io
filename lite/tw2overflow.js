@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Dec 2020 10:31:59 GMT
+ * Sun, 20 Dec 2020 10:43:22 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18590,10 +18590,10 @@ define('two/fakeSender', [
                                             num_reports: 1
                                         }, function(data) {
                                             targetFinal = {
-                                                id: data.village_id,
-                                                x: data.village_x,
-                                                y: data.village_y,
-                                                name: data.village_name
+                                                'id': data.village_id,
+                                                'x': data.village_x,
+                                                'y': data.village_y,
+                                                'name': data.village_name
                                             }
                                             if (fakeType == 'attack') {
                                                 date = fakeSenderSettings[SETTINGS.DATEV]
