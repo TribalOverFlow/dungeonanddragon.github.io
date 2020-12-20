@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Dec 2020 13:29:56 GMT
+ * Sun, 20 Dec 2020 19:10:31 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -980,6 +980,9 @@ define('two/language', [
             "fake": "Fejki",
             "fake.send": "Wyślij",
             "error_no_type": "Nie wybrano typu fejków",
+            "error_no_supportUnit": "Nie wybrano jednostek do wsparć",
+            "error_no_fakeUnit": "Nie wybrano jednostek do ataków",
+            "error_no_fourUnit": "Nie wybrano jednostki karety",
             "fake.enemies": "Wioski pozostałych graczy wroga",
             "fake.send_villages": "Fejki na wskazane cele(maks 10)",
             "fake.send_player": "Fejki na wszystkie wioski gracza",
@@ -2382,6 +2385,9 @@ define('two/language', [
             "fake": "Fejki",
             "fake.send": "Wyślij",
             "error_no_type": "Nie wybrano typu fejków",
+            "error_no_supportUnit": "Nie wybrano jednostek do wsparć",
+            "error_no_fakeUnit": "Nie wybrano jednostek do ataków",
+            "error_no_fourUnit": "Nie wybrano jednostki karety",
             "fake.enemies": "Wioski pozostałych graczy wroga",
             "fake.send_villages": "Fejki na wskazane cele(maks 10)",
             "fake.send_player": "Fejki na wszystkie wioski gracza",
@@ -18513,7 +18519,17 @@ define('two/fakeSender', [
         var HC = 0
         var Berserker = 0
         var Trebuchet = 0
-        const target1 = fakeSenderSettings[SETTINGS.TARGET_ID1]
+        var targets = []
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID2])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID3])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID4])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID5])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID6])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID7])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID8])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID9])
+        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID10])
         var fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
         var supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
         var fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
@@ -18535,9 +18551,9 @@ define('two/fakeSender', [
         const fakeType = fakeSenderSettings[SETTINGS.TYPE]
         var date = fakeSenderSettings[SETTINGS.DATEV]
         var newdate = 0
-        const targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
-        let target1Limit = targetLimit
+        var targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
         const ownGroups = fakeSenderSettings[SETTINGS.GROUP]
+        const commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVAL]
         var fakeVillages = []
         var groupVillages = null
         ownGroups.forEach(function(group) {
@@ -18555,354 +18571,405 @@ define('two/fakeSender', [
         }
 
         function sendFakes() {
-            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
-                fakeVillages.forEach(function(fakeVillage, index) {
-                    setTimeout(function() {
-                        for (var i = 0; i < data.villages.length; i++) {
-                            var villageId = data.villages[i].id
-                            if (villageId == fakeVillage) {
-                                village = {
-                                    'id': data.villages[i].id,
-                                    'x': data.villages[i].x,
-                                    'y': data.villages[i].y,
-                                    'name': data.villages[i].name,
-                                    'character_id': player.getId()
-                                }
-                                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
-                                    village_id: villageId
-                                }, function(data) {
-                                    Spear = data.available_units.spear.total
-                                    Sword = data.available_units.sword.total
-                                    Axe = data.available_units.axe.total
-                                    Archer = data.available_units.archer.total
-                                    LC = data.available_units.light_cavalry.total
-                                    MA = data.available_units.mounted_archer.total
-                                    Ram = data.available_units.ram.total
-                                    Catapult = data.available_units.catapult.total
-                                    HC = data.available_units.heavy_cavalry.total
-                                    Berserker = data.available_units.doppelsoldner.total
-                                    Trebuchet = data.available_units.trebuchet.total
-                                    let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
-                                    if (target1 != 0 && target1Limit > 0 && ownLimit > 0) {
-                                        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-                                            my_village_id: modelDataService.getSelectedVillage().getId(),
-                                            village_id: target1,
-                                            num_reports: 1
+            fakeVillages.forEach(function(fakeVillage, index) {
+                setTimeout(function() {
+                    let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
+                    socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+                        targets.forEach(function(target, index1) {
+                            setTimeout(function() {
+                                var intervalFinal = Math.floor(Math.random() * 10000) + commandInterval * 1000
+                                var repeatFour = 0
+                                for (var i = 0; i < data.villages.length; i++) {
+                                    var villageId = data.villages[i].id
+                                    if (villageId == fakeVillage) {
+                                        village = {
+                                            'id': data.villages[i].id,
+                                            'x': data.villages[i].x,
+                                            'y': data.villages[i].y,
+                                            'name': data.villages[i].name,
+                                            'character_id': player.getId()
+                                        }
+                                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                            village_id: villageId
                                         }, function(data) {
-                                            targetFinal = {
-                                                'id': data.village_id,
-                                                'x': data.village_x,
-                                                'y': data.village_y,
-                                                'name': data.village_name
-                                            }
-                                            console.log(targetFinal, village, Spear, Sword, Axe)
-                                            if (fakeType == 'attack') {
-                                                date = fakeSenderSettings[SETTINGS.DATEV]
-                                                fakeUnits.forEach(function(unit) {
-                                                    if (unit == 'spear' && Spear > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            spear: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'axe' && Axe > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            axe: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'archer' && Archer > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            archer: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'doppelsoldner' && Berserker > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            doppelsoldner: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                            Spear = data.available_units.spear.total
+                                            Sword = data.available_units.sword.total
+                                            Axe = data.available_units.axe.total
+                                            Archer = data.available_units.archer.total
+                                            LC = data.available_units.light_cavalry.total
+                                            MA = data.available_units.mounted_archer.total
+                                            Ram = data.available_units.ram.total
+                                            Catapult = data.available_units.catapult.total
+                                            HC = data.available_units.heavy_cavalry.total
+                                            Berserker = data.available_units.doppelsoldner.total
+                                            Trebuchet = data.available_units.trebuchet.total
+                                            var infantrySupport = 0
+                                            var infantryAxe = 0
+                                            var infantrySword = 0
+                                            var infantryRam = 0
+                                            var infantryTrebuchet = 0
+                                            var cavalryLc = 0
+                                            var cavalryHc = 0
+                                            if (target != 0 && targetLimit > 0 && ownLimit > 0) {
+                                                socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                                    my_village_id: modelDataService.getSelectedVillage().getId(),
+                                                    village_id: target,
+                                                    num_reports: 1
+                                                }, function(data) {
+                                                    targetFinal = {
+                                                        'id': data.village_id,
+                                                        'x': data.village_x,
+                                                        'y': data.village_y,
+                                                        'name': data.village_name
                                                     }
-                                                    if (unit == 'sword' && Sword > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            sword: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'light_cavalry' && LC > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            light_cavalry: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'mounted_archer' && MA > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            mounted_archer: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'ram' && Ram > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            ram: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'catapult' && Catapult > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            catapult: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'heavy_cavalry' && HC > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            heavy_cavalry: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'trebuchet' && Trebuchet > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            trebuchet: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                    console.log(targetFinal, village, Spear, Sword, Axe)
+                                                    if (fakeType == 'attack') {
+                                                        date = fakeSenderSettings[SETTINGS.DATEV]
+                                                        newdate = utils.getTimeFromString(date) + intervalFinal
+                                                        date = utils.formatDate(newdate)
+                                                        fakeUnits.forEach(function(unit) {
+                                                            if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    spear: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    axe: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    archer: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    doppelsoldner: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    sword: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantrySword += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    light_cavalry: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                cavalryLc += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    mounted_archer: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                cavalryLc += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    ram: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryRam += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    catapult: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryRam += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    heavy_cavalry: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                cavalryHc += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    trebuchet: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryTrebuchet += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else {
+                                                                utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                            }
+                                                        })
+                                                    } else if (fakeType == 'support') {
+                                                        date = fakeSenderSettings[SETTINGS.DATEV]
+                                                        newdate = utils.getTimeFromString(date) + intervalFinal
+                                                        date = utils.formatDate(newdate)
+                                                        supportUnits.forEach(function(unit) {
+                                                            if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    spear: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantrySupport += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    archer: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantrySupport += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            }
+                                                            if (unit == 'sword' && Sword > 0) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    sword: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            }
+                                                            if (unit == 'heavy_cavalry' && HC > 0) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    heavy_cavalry: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            } else {
+                                                                utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                            }
+                                                        })
+                                                    } else if (fakeType == 'four') {
+                                                        date = fakeSenderSettings[SETTINGS.DATEV]
+                                                        newdate = utils.getTimeFromString(date) + intervalFinal
+                                                        date = utils.formatDate(newdate)
+                                                        if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            ownLimit -= 4
+                                                            targetLimit -= 4
+                                                            repeatFour += 1
+                                                            addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                        } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            ownLimit -= 4
+                                                            targetLimit -= 4
+                                                            repeatFour += 1
+                                                            addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                        } else {
+                                                            utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                        }
+                                                    } else if (fakeType == 'full') {
+                                                        date = fakeSenderSettings[SETTINGS.DATEV]
+                                                        newdate = utils.getTimeFromString(date) + intervalFinal
+                                                        date = utils.formatDate(newdate)
+                                                        if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                            ownLimit -= 4
+                                                            targetLimit -= 4
+                                                            repeatFour += 1
+                                                            addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                        } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                            ownLimit -= 4
+                                                            targetLimit -= 4
+                                                            repeatFour += 1
+                                                            addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                        } else {
+                                                            utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                        }
+                                                        newdate = utils.getTimeFromString(date) - 2000
+                                                        date = utils.formatDate(newdate)
+                                                        fakeUnits.forEach(function(unit) {
+                                                            if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    spear: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    axe: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    archer: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    doppelsoldner: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryAxe += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    sword: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantrySword += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    light_cavalry: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                cavalryLc += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    mounted_archer: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                cavalryLc += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    ram: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryRam += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    catapult: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryRam += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    heavy_cavalry: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                cavalryHc += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            }
+                                                            if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    trebuchet: 1
+                                                                }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantryTrebuchet += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'atak')
+                                                            } else {
+                                                                utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                            }
+                                                        })
+                                                        newdate = utils.getTimeFromString(date) + 4000
+                                                        date = utils.formatDate(newdate)
+                                                        supportUnits.forEach(function(unit) {
+                                                            if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    spear: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantrySupport += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    archer: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                infantrySupport += 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            }
+                                                            if (unit == 'sword' && Sword > 0) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    sword: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            }
+                                                            if (unit == 'heavy_cavalry' && HC > 0) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                    heavy_cavalry: 1
+                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                ownLimit -= 1
+                                                                targetLimit -= 1
+                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                            } else {
+                                                                utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                            }
+                                                        })
                                                     } else {
-                                                        utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
+                                                        utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
+                                                    }
+                                                    if (!commandQueue.isRunning()) {
+                                                        commandQueue.start()
                                                     }
                                                 })
-                                            } else if (fakeType == 'support') {
-                                                date = fakeSenderSettings[SETTINGS.DATEV]
-                                                supportUnits.forEach(function(unit) {
-                                                    if (unit == 'spear' && Spear > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            spear: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    } else if (unit == 'archer' && Archer > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            archer: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    }
-                                                    if (unit == 'sword' && Sword > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            sword: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    }
-                                                    if (unit == 'heavy_cavalry' && HC > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            heavy_cavalry: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    } else {
-                                                        utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                    }
-                                                })
-                                            } else if (fakeType == 'four') {
-                                                date = fakeSenderSettings[SETTINGS.DATEV]
-                                                if (fourUnit == 'catapult' && Catapult > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    ownLimit -= 4
-                                                    target1Limit -= 4
-                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet')) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 4
-                                                    target1Limit -= 4
-                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                } else {
-                                                    utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                }
-                                            } else if (fakeType == 'full') {
-                                                date = fakeSenderSettings[SETTINGS.DATEV]
-                                                if (fourUnit == 'catapult' && Catapult > 0) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                    ownLimit -= 4
-                                                    target1Limit -= 4
-                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet')) {
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                    ownLimit -= 4
-                                                    target1Limit -= 4
-                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                } else {
-                                                    utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                }
-                                                newdate = utils.getTimeFromString(date) - 2000
-                                                date = utils.formatDate(newdate)
-                                                fakeUnits.forEach(function(unit) {
-                                                    if (unit == 'spear' && Spear > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            spear: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'axe' && Axe > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            axe: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'archer' && Archer > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            archer: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'doppelsoldner' && Berserker > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            doppelsoldner: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'sword' && Sword > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            sword: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'light_cavalry' && LC > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            light_cavalry: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'mounted_archer' && MA > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            mounted_archer: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'ram' && Ram > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            ram: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else if (unit == 'catapult' && Catapult > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            catapult: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'heavy_cavalry' && HC > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            heavy_cavalry: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    }
-                                                    if (unit == 'trebuchet' && Trebuchet > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            trebuchet: 1
-                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'atak')
-                                                    } else {
-                                                        utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                    }
-                                                })
-                                                newdate = utils.getTimeFromString(date) + 4000
-                                                date = utils.formatDate(newdate)
-                                                supportUnits.forEach(function(unit) {
-                                                    if (unit == 'spear' && Spear > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            spear: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    } else if (unit == 'archer' && Archer > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            archer: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    }
-                                                    if (unit == 'sword' && Sword > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            sword: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    }
-                                                    if (unit == 'heavy_cavalry' && HC > 0) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                            heavy_cavalry: 1
-                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                        ownLimit -= 1
-                                                        target1Limit -= 1
-                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                    } else {
-                                                        utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
-                                                    }
-                                                })
-                                            } else {
-                                                utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
-                                            }
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
                                             }
                                         })
                                     }
-                                })
-                            }
-                        }
-                    }, index * 3000)
-                })
+                                }
+                            }, index1 * 2000)
+                        })
+                    })
+                }, index * fakeVillages.length * 2200)
             })
         }
         sendFakes()
@@ -19645,7 +19712,7 @@ define('two/fakeSender/ui', [
 
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID1]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget1\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget1.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget1.origin\" class=\"command-village\">{{ fakeTarget1.origin.name }} ({{ fakeTarget1.origin.x }}|{{ fakeTarget1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected1()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID2]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget2\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget2.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget2.origin\" class=\"command-village\">{{ fakeTarget2.origin.name }} ({{ fakeTarget2.origin.x }}|{{ fakeTarget2.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected2()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID3]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget3\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget3.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget3.origin\" class=\"command-village\">{{ fakeTarget3.origin.name }} ({{ fakeTarget3.origin.x }}|{{ fakeTarget3.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected3()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID4]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget4\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget4.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget4.origin\" class=\"command-village\">{{ fakeTarget4.origin.name }} ({{ fakeTarget4.origin.x }}|{{ fakeTarget4.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected4()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID5]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget5\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget5.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget5.origin\" class=\"command-village\">{{ fakeTarget5.origin.name }} ({{ fakeTarget5.origin.x }}|{{ fakeTarget5.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected5()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID6]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget6\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget6.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget6.origin\" class=\"command-village\">{{ fakeTarget6.origin.name }} ({{ fakeTarget6.origin.x }}|{{ fakeTarget6.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected6()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID7]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget7\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget7.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget7.origin\" class=\"command-village\">{{ fakeTarget7.origin.name }} ({{ fakeTarget7.origin.x }}|{{ fakeTarget7.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected7()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID8]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget8\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget8.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget8.origin\" class=\"command-village\">{{ fakeTarget8.origin.name }} ({{ fakeTarget8.origin.x }}|{{ fakeTarget8.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected8()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID9]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget9\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget9.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget9.origin\" class=\"command-village\">{{ fakeTarget9.origin.name }} ({{ fakeTarget9.origin.x }}|{{ fakeTarget9.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected9()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID10]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget10\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget10.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget10.origin\" class=\"command-village\">{{ fakeTarget10.origin.name }} ({{ fakeTarget10.origin.x }}|{{ fakeTarget10.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected10()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEV]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEV]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOUR]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeVillages()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_province' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'fake.add_province' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakeProvince1.origin\" class=\"command-village\">{{ 'fake.no_province' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeProvince1.origin\" class=\"command-village\">{{ fakeProvince1.origin.name }} ({{ fakeProvince1.origin.x }}|{{ fakeProvince1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEPRO]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEPro]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].max\" value=\"settings[SETTINGS.COMMAND_INTERVALPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNPro].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNPro].max\" value=\"settings[SETTINGS.LIMIT_OWNPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETPro].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETPro].max\" value=\"settings[SETTINGS.LIMIT_TARGETPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETPro]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.enemies' | i18n:loc.ale:'fake_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeProvince()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakePlayer1.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakePlayer1.origin\" class=\"command-village\">{{ fakePlayer1.origin.name }} ({{ fakePlayer1.origin.x }}|{{ fakePlayer1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPlayer()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEP]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakePlayer()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TRIBE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!fakeTribe1.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTribe1.origin\" class=\"command-village\">{{ fakeTribe1.origin.name }} ({{ fakeTribe1.origin.x }}|{{ fakeTribe1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedTribe()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATET]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPET]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeTribe()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"settings[SETTINGS.DATEG]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeGroups()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetLabel[log.targetId] }}</a><td><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'fake_sender' }}<td>{{ log.type }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID1]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget1\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget1.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget1.origin\" class=\"command-village\">{{ fakeTarget1.origin.name }} ({{ fakeTarget1.origin.x }}|{{ fakeTarget1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected1()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID2]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget2\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget2.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget2.origin\" class=\"command-village\">{{ fakeTarget2.origin.name }} ({{ fakeTarget2.origin.x }}|{{ fakeTarget2.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected2()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID3]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget3\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget3.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget3.origin\" class=\"command-village\">{{ fakeTarget3.origin.name }} ({{ fakeTarget3.origin.x }}|{{ fakeTarget3.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected3()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID4]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget4\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget4.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget4.origin\" class=\"command-village\">{{ fakeTarget4.origin.name }} ({{ fakeTarget4.origin.x }}|{{ fakeTarget4.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected4()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID5]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget5\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget5.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget5.origin\" class=\"command-village\">{{ fakeTarget5.origin.name }} ({{ fakeTarget5.origin.x }}|{{ fakeTarget5.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected5()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID6]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget6\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget6.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget6.origin\" class=\"command-village\">{{ fakeTarget6.origin.name }} ({{ fakeTarget6.origin.x }}|{{ fakeTarget6.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected6()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID7]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget7\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget7.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget7.origin\" class=\"command-village\">{{ fakeTarget7.origin.name }} ({{ fakeTarget7.origin.x }}|{{ fakeTarget7.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected7()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID8]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget8\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget8.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget8.origin\" class=\"command-village\">{{ fakeTarget8.origin.name }} ({{ fakeTarget8.origin.x }}|{{ fakeTarget8.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected8()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID9]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget9\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget9.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget9.origin\" class=\"command-village\">{{ fakeTarget9.origin.name }} ({{ fakeTarget9.origin.x }}|{{ fakeTarget9.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected9()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID10]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget10\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget10.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget10.origin\" class=\"command-village\">{{ fakeTarget10.origin.name }} ({{ fakeTarget10.origin.x }}|{{ fakeTarget10.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected10()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEV]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEV]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOUR]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeVillages()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_province' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'fake.add_province' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakeProvince1.origin\" class=\"command-village\">{{ 'fake.no_province' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeProvince1.origin\" class=\"command-village\">{{ fakeProvince1.origin.name }} ({{ fakeProvince1.origin.x }}|{{ fakeProvince1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEPRO]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEPro]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].max\" value=\"settings[SETTINGS.COMMAND_INTERVALPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNPro].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNPro].max\" value=\"settings[SETTINGS.LIMIT_OWNPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETPro].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETPro].max\" value=\"settings[SETTINGS.LIMIT_TARGETPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETPro]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.enemies' | i18n:loc.ale:'fake_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeProvince()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakePlayer1.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakePlayer1.origin\" class=\"command-village\">{{ fakePlayer1.origin.name }} ({{ fakePlayer1.origin.x }}|{{ fakePlayer1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPlayer()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEP]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakePlayer()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TRIBE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!fakeTribe1.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTribe1.origin\" class=\"command-village\">{{ fakeTribe1.origin.name }} ({{ fakeTribe1.origin.x }}|{{ fakeTribe1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedTribe()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATET]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPET]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeTribe()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"settings[SETTINGS.DATEG]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeGroups()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetLabel[log.targetId] }}</a><td><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'fake_sender' }}<td>{{ log.type }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-fake-sender div[select]{text-align:right}#two-fake-sender div[select] .select-wrapper{height:34px}#two-fake-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-fake-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm td{height:34px;text-align:left}#two-fake-sender .addForm span{height:26px;line-height:26px}#two-fake-sender .addForm .item-send{text-align:center}#two-fake-sender .addForm .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-fake-sender .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actions a{width:100px}#two-fake-sender .addForm .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actionsTime .big{width:54px}#two-fake-sender .addForm .actionsTime .small{width:26px}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-fake-sender .logs .status tr{height:25px}#two-fake-sender .logs .status td{padding:0 6px}#two-fake-sender .logs .log-list{margin-bottom:10px}#two-fake-sender .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-fake-sender .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-fake-sender .icon-20x20-village:before{margin-top:-11px}')
     }
 
