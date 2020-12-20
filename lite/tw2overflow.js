@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Dec 2020 10:43:22 GMT
+ * Sun, 20 Dec 2020 10:56:32 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18560,7 +18560,7 @@ define('two/fakeSender', [
                     setTimeout(function() {
                         for (var i = 0; i < data.villages.length; i++) {
                             var villageId = data.villages[i].id
-                            if (fakeVillage == villageId) {
+                            if (villageId == fakeVillage) {
                                 village = {
                                     'id': data.villages[i].id,
                                     'x': data.villages[i].x,
@@ -18595,6 +18595,7 @@ define('two/fakeSender', [
                                                 'y': data.village_y,
                                                 'name': data.village_name
                                             }
+                                            console.log(targetFinal, village, Spear, Sword, Axe)
                                             if (fakeType == 'attack') {
                                                 date = fakeSenderSettings[SETTINGS.DATEV]
                                                 fakeUnits.forEach(function(unit) {
