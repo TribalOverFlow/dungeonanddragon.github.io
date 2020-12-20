@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 20 Dec 2020 22:39:16 GMT
+ * Sun, 20 Dec 2020 22:47:23 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18427,7 +18427,7 @@ define('two/fakeSender', [
     var commandInterval = 0
     var fakeVillages = []
     var groupVillages = null
-    var whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+    var whenSend = ''
     var dateType = ''
     const STORAGE_KEYS = {
         SETTINGS: 'fake_sender_settings',
