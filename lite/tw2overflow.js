@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 21 Dec 2020 16:43:00 GMT
+ * Tue, 22 Dec 2020 22:47:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24291,6 +24291,7 @@ define('two/prankHelper', [
         var maxNew = alphabet.indexOf(max)
         requestVillageProvinceNeighbours(selectedVillage, function(responseData) {
             villages = responseData.villages
+            console.log(villages)
             if (type == 'increase') {
                 if (isNaN(min) && isNaN(max)) {
                     for (i = minNew; i <= maxNew; i++) {
@@ -24354,7 +24355,6 @@ define('two/prankHelper', [
         var max = prankHelperSettings[SETTINGS.TO1]
         var interval = 4000
         var newName
-        var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         var oldName = null
         var nameSet = []
@@ -24389,25 +24389,23 @@ define('two/prankHelper', [
             newName = prefix + validName + sufix
             villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    villageIdSet = village.getId()
                     oldName = village.getName()
                     socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                         village_id: village.getId(),
                         name: newName
                     })
-                    addLog(villageIdSet, newName, oldName)
+                    addLog(village, newName, oldName)
                 }, index * interval)
             })
         }
         villages.forEach(function(village, index) {
             setTimeout(function() {
-                villageIdSet = village.getId()
                 oldName = village.getName()
                 socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                     village_id: village.getId(),
                     name: nameSet[index]
                 })
-                addLog(villageIdSet, nameSet[index], oldName)
+                addLog(village, nameSet[index], oldName)
             }, index * interval)
         })
         prankHelper.stop()
