@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 26 Dec 2020 18:43:09 GMT
+ * Sat, 26 Dec 2020 18:58:23 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7508,36 +7508,35 @@ define('two/autoFoundator', [
     let running = false
     let interval = 3000
     const donateTribe = function() {
-        if (!running) {
-            return false
+        if (running == true) {
+            let player = modelDataService.getSelectedCharacter()
+            let villages = player.getVillageList()
+            villages.forEach(function(village, index) {
+                var resources = village.getResources()
+                var computed = resources.getComputed()
+                var wood = computed.wood
+                var clay = computed.clay
+                var iron = computed.iron
+                var villageWood = wood.currentStock
+                var villageClay = clay.currentStock
+                var villageIron = iron.currentStock
+                var woodCalculated = Math.round(villageWood * 0.02) + 1
+                var ironCalculated = Math.round(villageIron * 0.02) + 1
+                var clayCalculated = Math.round(villageClay * 0.02) + 1
+                setTimeout(function() {
+                    socketService.emit(routeProvider.TRIBE_SKILL_DONATE, {
+                        village_id: village.getId(),
+                        crowns: 0,
+                        resources: {
+                            wood: woodCalculated,
+                            clay: clayCalculated,
+                            iron: ironCalculated
+                        }
+                    })
+                }, index * Math.random() * interval)
+                console.log('Wykonano darowizne na plemię: ' + village.getName() + ' drewno: ' + woodCalculated + ', glina: ' + clayCalculated + ', żelazo: ' + ironCalculated)
+            })
         }
-        let player = modelDataService.getSelectedCharacter()
-        let villages = player.getVillageList()
-        villages.forEach(function(village, index) {
-            var resources = village.getResources()
-            var computed = resources.getComputed()
-            var wood = computed.wood
-            var clay = computed.clay
-            var iron = computed.iron
-            var villageWood = wood.currentStock
-            var villageClay = clay.currentStock
-            var villageIron = iron.currentStock
-            var woodCalculated = Math.round(villageWood * 0.02) + 1
-            var ironCalculated = Math.round(villageIron * 0.02) + 1
-            var clayCalculated = Math.round(villageClay * 0.02) + 1
-            setTimeout(function() {
-                socketService.emit(routeProvider.TRIBE_SKILL_DONATE, {
-                    village_id: village.getId(),
-                    crowns: 0,
-                    resources: {
-                        wood: woodCalculated,
-                        clay: clayCalculated,
-                        iron: ironCalculated
-                    }
-                })
-            }, index * Math.random() * interval)
-            console.log('Wykonano darowizne na plemię: ' + village.getName() + ' drewno: ' + woodCalculated + ', glina: ' + clayCalculated + ', żelazo: ' + ironCalculated)
-        })
     }
     let autoFoundator = {}
     autoFoundator.init = function() {
@@ -7546,7 +7545,7 @@ define('two/autoFoundator', [
     autoFoundator.start = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
         running = true
-        setInterval (function() {
+        setInterval(function() {
             running = true
             donateTribe()
         }, 6000)
