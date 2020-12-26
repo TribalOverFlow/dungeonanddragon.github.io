@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 26 Dec 2020 18:58:23 GMT
+ * Sat, 26 Dec 2020 19:12:29 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7546,7 +7546,6 @@ define('two/autoFoundator', [
         eventQueue.trigger(eventTypeProvider.AUTO_FOUNDATOR_STARTED)
         running = true
         setInterval(function() {
-            running = true
             donateTribe()
         }, 6000)
         donateTribe()
