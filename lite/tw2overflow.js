@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Dec 2020 10:47:47 GMT
+ * Sun, 27 Dec 2020 11:02:03 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -14097,7 +14097,7 @@ define('two/builderQueue', [
     'queues/EventQueue',
     'Lockr',
     'helper/time'
-], function(
+], function (
     ready,
     utils,
     Settings,
@@ -14134,34 +14134,48 @@ define('two/builderQueue', [
         LOGS: 'builder_queue_log',
         SETTINGS: 'builder_queue_settings'
     }
-    const analyseVillages = function() {
+
+    /**
+     * Loop all player villages, check if ready and init the building analyse
+     * for each village.
+     */
+    const analyseVillages = function () {
         const villageIds = getVillageIds()
+
         if (!sequencesAvail) {
             builderQueue.stop()
             return false
         }
-        villageIds.forEach(function(villageId) {
+
+        villageIds.forEach(function (villageId) {
             const village = $player.getVillage(villageId)
             const readyState = village.checkReadyState()
             const queue = village.buildingQueue
             const jobs = queue.getAmountJobs()
+
             if (jobs === queue.getUnlockedSlots()) {
                 return false
             }
+
             if (!readyState.buildingQueue || !readyState.buildings) {
                 return false
             }
+
             analyseVillageBuildings(village)
         })
     }
-    const analyseVillagesInstantFinish = function() {
+
+    const analyseVillagesInstantFinish = function () {
         const villageIds = getVillageIds()
-        villageIds.forEach(function(villageId) {
+
+        villageIds.forEach(function (villageId) {
             const village = $player.getVillage(villageId)
             const queue = village.buildingQueue
+
             if (queue.getAmountJobs()) {
                 const jobs = queue.getQueue()
-                jobs.forEach(function(job) {
+
+                jobs.forEach(function (job) {
                     if (buildingQueueService.canBeFinishedForFree(job, village)) {
                         premiumActionService.instantBuild(job, LOCATION_TYPES.MASS_SCREEN, true, villageId)
                     }
@@ -14169,76 +14183,110 @@ define('two/builderQueue', [
             }
         })
     }
-    const initializeAllVillages = function() {
+
+    const initializeAllVillages = function () {
         const villageIds = getVillageIds()
-        villageIds.forEach(function(villageId) {
+
+        villageIds.forEach(function (villageId) {
             const village = $player.getVillage(villageId)
+
             if (!village.isInitialized()) {
                 villageService.initializeVillage(village)
             }
         })
     }
-    const getVillageIds = function() {
+
+    /**
+     * Generate an Array with all player's village IDs.
+     *
+     * @return {Array}
+     */
+    const getVillageIds = function () {
         const groupVillages = builderSettings[SETTINGS.GROUP_VILLAGES]
         let villages = []
+
         if (groupVillages) {
             villages = groupList.getGroupVillageIds(groupVillages)
-            villages = villages.filter(function(vid) {
+            villages = villages.filter(function (vid) {
                 return $player.getVillage(vid)
             })
         } else {
-            utils.each($player.getVillages(), function(village) {
+            utils.each($player.getVillages(), function (village) {
                 villages.push(village.getId())
             })
         }
+
         return villages
     }
-    const analyseVillageBuildings = function(village) {
+
+    /**
+     * Loop all village buildings, start build job if available.
+     *
+     * @param {VillageModel} village
+     */
+    const analyseVillageBuildings = function (village) {
         let buildingLevels = angular.copy(village.buildingData.getBuildingLevels())
         const currentQueue = village.buildingQueue.getQueue()
         let sequence = angular.copy(VILLAGE_BUILDINGS)
         const sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
         const activeSequenceId = builderSettings[SETTINGS.ACTIVE_SEQUENCE]
         const activeSequence = sequences[activeSequenceId]
-        currentQueue.forEach(function(job) {
+
+        currentQueue.forEach(function (job) {
             buildingLevels[job.building]++
         })
+
         if (checkVillageBuildingLimit(buildingLevels)) {
             return false
         }
-        activeSequence.some(function(buildingName) {
+
+        activeSequence.some(function (buildingName) {
             if (++sequence[buildingName] > buildingLevels[buildingName]) {
                 buildingService.compute(village)
-                checkAndUpgradeBuilding(village, buildingName, function(jobAdded, data) {
+
+                checkAndUpgradeBuilding(village, buildingName, function (jobAdded, data) {
                     if (jobAdded && data.job) {
                         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_JOB_STARTED, data.job)
                         addLog(village.getId(), data.job)
                     }
                 })
+
                 return true
             }
         })
     }
-    const checkAndUpgradeBuilding = function(village, buildingName, callback) {
+
+    /**
+     * Init a build job
+     *
+     * @param {VillageModel} village
+     * @param {String} buildingName - Building to be build.
+     * @param {Function} callback
+     */
+    const checkAndUpgradeBuilding = function (village, buildingName, callback) {
         const upgradeability = checkBuildingUpgradeability(village, buildingName)
+
         if (upgradeability === UPGRADEABILITY_STATES.POSSIBLE) {
-            upgradeBuilding(village, buildingName, function(data) {
+            upgradeBuilding(village, buildingName, function (data) {
                 callback(true, data)
             })
         } else if (upgradeability === UPGRADEABILITY_STATES.NOT_ENOUGH_FOOD) {
             if (builderSettings[SETTINGS.PRIORIZE_FARM]) {
                 const limitFarm = buildingSequenceLimit[BUILDING_TYPES.FARM]
                 const villageFarm = village.getBuildingData().getDataForBuilding(BUILDING_TYPES.FARM)
+
                 if (villageFarm.level < limitFarm) {
-                    upgradeBuilding(village, BUILDING_TYPES.FARM, function(data) {
+                    upgradeBuilding(village, BUILDING_TYPES.FARM, function (data) {
                         callback(true, data)
                     })
                 }
             }
         }
+
         callback(false)
     }
-    const upgradeBuilding = function(village, buildingName, callback) {
+
+    const upgradeBuilding = function (village, buildingName, callback) {
         socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING, {
             building: buildingName,
             village_id: village.getId(),
@@ -14246,11 +14294,17 @@ define('two/builderQueue', [
             premium: false
         }, callback)
     }
-    const checkBuildingUpgradeability = function(village, buildingName) {
+
+    /**
+     * Can't just use the .upgradeability value because of the preserve resources setting.
+     */
+    const checkBuildingUpgradeability = function (village, buildingName) {
         const buildingData = village.getBuildingData().getDataForBuilding(buildingName)
+
         if (buildingData.upgradeability === UPGRADEABILITY_STATES.POSSIBLE) {
             const nextLevelCosts = buildingData.nextLevelCosts
             const resources = village.getResources().getComputed()
+
             if (
                 resources.clay.currentStock - builderSettings[SETTINGS.PRESERVE_CLAY] < nextLevelCosts.clay ||
                 resources.iron.currentStock - builderSettings[SETTINGS.PRESERVE_IRON] < nextLevelCosts.iron ||
@@ -14259,168 +14313,238 @@ define('two/builderQueue', [
                 return UPGRADEABILITY_STATES.NOT_ENOUGH_RESOURCES
             }
         }
+
         return buildingData.upgradeability
     }
-    const checkVillageBuildingLimit = function(buildingLevels) {
+
+    /**
+     * Check if all buildings from the sequence already reached
+     * the specified level.
+     *
+     * @param {Object} buildingLevels - Current buildings level from the village.
+     * @return {Boolean} True if the levels already reached the limit.
+     */
+    const checkVillageBuildingLimit = function (buildingLevels) {
         for (let buildingName in buildingLevels) {
             if (buildingLevels[buildingName] < buildingSequenceLimit[buildingName]) {
                 return false
             }
         }
+
         return true
     }
-    const validSequence = function(sequence) {
+
+    /**
+     * Check if the building sequence is valid by analysing if the
+     * buildings exceed the maximum level.
+     *
+     * @param {Array} sequence
+     * @return {Boolean}
+     */
+    const validSequence = function (sequence) {
         const buildingData = modelDataService.getGameData().getBuildings()
+
         for (let i = 0; i < sequence.length; i++) {
             let building = sequence[i]
+
             if (++sequence[building] > buildingData[building].max_level) {
                 return false
             }
         }
+
         return true
     }
-    const getSequenceLimit = function(sequenceId) {
+
+    /**
+     * Get the level max for each building.
+     *
+     * @param {String} sequenceId
+     * @return {Object} Maximum level for each building.
+     */
+    const getSequenceLimit = function (sequenceId) {
         const sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
         const sequence = sequences[sequenceId]
         let sequenceLimit = angular.copy(VILLAGE_BUILDINGS)
-        sequence.forEach(function(buildingName) {
+
+        sequence.forEach(function (buildingName) {
             sequenceLimit[buildingName]++
         })
+
         return sequenceLimit
     }
-    const addLog = function(villageId, jobData) {
+
+    const addLog = function (villageId, jobData) {
         let data = {
             time: timeHelper.gameTime(),
             villageId: villageId,
             building: jobData.building,
             level: jobData.level
         }
+
         logs.unshift(data)
+
         if (logs.length > LOGS_LIMIT) {
             logs.splice(logs.length - LOGS_LIMIT, logs.length)
         }
+
         Lockr.set(STORAGE_KEYS.LOGS, logs)
+
         return true
     }
+
     let builderQueue = {}
-    builderQueue.start = function() {
+
+    builderQueue.start = function () {
         if (!sequencesAvail) {
             eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_NO_SEQUENCES)
             return false
         }
+
         running = true
         intervalCheckId = setInterval(analyseVillages, 60000 / ANALYSES_PER_MINUTE)
         intervalInstantCheckId = setInterval(analyseVillagesInstantFinish, 60000 / ANALYSES_PER_MINUTE_INSTANT_FINISH)
-        ready(function() {
+        
+        ready(function () {
             initializeAllVillages()
             analyseVillages()
             analyseVillagesInstantFinish()
         }, ['all_villages_ready'])
+
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_START)
     }
-    builderQueue.stop = function() {
+
+    builderQueue.stop = function () {
         running = false
         clearInterval(intervalCheckId)
         clearInterval(intervalInstantCheckId)
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_STOP)
     }
-    builderQueue.isRunning = function() {
+
+    builderQueue.isRunning = function () {
         return running
     }
-    builderQueue.isInitialized = function() {
+
+    builderQueue.isInitialized = function () {
         return initialized
     }
-    builderQueue.getSettings = function() {
+
+    builderQueue.getSettings = function () {
         return settings
     }
-    builderQueue.getLogs = function() {
+
+    builderQueue.getLogs = function () {
         return logs
     }
-    builderQueue.clearLogs = function() {
+
+    builderQueue.clearLogs = function () {
         logs = []
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS)
-        return logs
     }
-    builderQueue.addBuildingSequence = function(id, sequence) {
+
+    builderQueue.addBuildingSequence = function (id, sequence) {
         let sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
+
         if (id in sequences) {
             return SEQUENCE_STATUS.SEQUENCE_EXISTS
         }
+
         if (!Array.isArray(sequence)) {
             return SEQUENCE_STATUS.SEQUENCE_INVALID
         }
+
         sequences[id] = sequence
         settings.set(SETTINGS.BUILDING_SEQUENCES, sequences, {
             quiet: true
         })
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_ADDED, id)
+
         return SEQUENCE_STATUS.SEQUENCE_SAVED
     }
-    builderQueue.updateBuildingSequence = function(id, sequence) {
+
+    builderQueue.updateBuildingSequence = function (id, sequence) {
         let sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
+
         if (!(id in sequences)) {
             return SEQUENCE_STATUS.SEQUENCE_NO_EXISTS
         }
+
         if (!Array.isArray(sequence) || !validSequence(sequence)) {
             return SEQUENCE_STATUS.SEQUENCE_INVALID
         }
+
         sequences[id] = sequence
         settings.set(SETTINGS.BUILDING_SEQUENCES, sequences, {
             quiet: true
         })
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_UPDATED, id)
+
         return SEQUENCE_STATUS.SEQUENCE_SAVED
     }
-    builderQueue.removeSequence = function(id) {
+
+    builderQueue.removeSequence = function (id) {
         let sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
+
         if (!(id in sequences)) {
             return SEQUENCE_STATUS.SEQUENCE_NO_EXISTS
         }
+
         delete sequences[id]
         settings.set(SETTINGS.BUILDING_SEQUENCES, sequences, {
             quiet: true
         })
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_REMOVED, id)
     }
-    builderQueue.init = function() {
+
+    builderQueue.init = function () {
         initialized = true
         logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
         $player = modelDataService.getSelectedCharacter()
         groupList = modelDataService.getGroupList()
+        
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-        settings.onChange(function(changes, updates, opt) {
+
+        settings.onChange(function (changes, updates, opt) {
             builderSettings = settings.getAll()
+
             if (running) {
                 if (updates[UPDATES.ANALYSE]) {
                     analyseVillages()
                 }
             }
+
             if (!opt.quiet) {
                 eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_SETTINGS_CHANGE)
             }
         })
+
         builderSettings = settings.getAll()
+
         for (let buildingName in BUILDING_TYPES) {
             VILLAGE_BUILDINGS[BUILDING_TYPES[buildingName]] = 0
         }
+
         sequencesAvail = Object.keys(builderSettings[SETTINGS.BUILDING_SEQUENCES]).length
         buildingSequenceLimit = sequencesAvail ? getSequenceLimit(builderSettings[SETTINGS.ACTIVE_SEQUENCE]) : false
-        $rootScope.$on(eventTypeProvider.BUILDING_LEVEL_CHANGED, function(event, data) {
+
+        $rootScope.$on(eventTypeProvider.BUILDING_LEVEL_CHANGED, function (event, data) {
             if (!running) {
                 return false
             }
-            setTimeout(function() {
+
+            setTimeout(function () {
                 let village = $player.getVillage(data.village_id)
                 analyseVillageBuildings(village)
             }, 1000)
         })
     }
+
     return builderQueue
 })
+
 define('two/builderQueue/defaultOrders', [
     'conf/buildingTypes'
 ], function(
@@ -15969,7 +16093,7 @@ define('two/builderQueue/ui', [
     'two/EventScope',
     'queues/EventQueue',
     'helper/time'
-], function(
+], function (
     interfaceOverflow,
     builderQueue,
     utils,
@@ -15997,6 +16121,7 @@ define('two/builderQueue/ui', [
     let settingsView = {
         sequencesAvail: true
     }
+    let logsView = {}
     const TAB_TYPES = {
         SETTINGS: 'settings',
         SEQUENCES: 'sequences',
@@ -16007,59 +16132,78 @@ define('two/builderQueue/ui', [
     let unsavedChanges = false
     let oldCloseWindow
     let ignoreInputChange = false
-    const loadVillageInfo = function(villageId) {
+
+    // TODO: make it shared with other modules
+    const loadVillageInfo = function (villageId) {
         if (villagesInfo[villageId]) {
             return villagesInfo[villageId]
         }
+
         villagesInfo[villageId] = true
-        villagesLabel[villageId] = 'ŁADOWANIE...'
+        villagesLabel[villageId] = 'LOADING...'
+
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: villageId,
             num_reports: 1
-        }, function(data) {
+        }, function (data) {
             villagesInfo[villageId] = {
                 x: data.village_x,
                 y: data.village_y,
                 name: data.village_name,
                 last_report: data.last_reports[0]
             }
+
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
     }
-    const buildingLevelReached = function(building, level) {
+
+    const buildingLevelReached = function (building, level) {
         const buildingData = modelDataService.getSelectedVillage().getBuildingData()
         return buildingData.getBuildingLevel(building) >= level
     }
-    const buildingLevelProgress = function(building, level) {
+
+    const buildingLevelProgress = function (building, level) {
         const queue = modelDataService.getSelectedVillage().getBuildingQueue().getQueue()
         let progress = false
-        queue.some(function(job) {
+
+        queue.some(function (job) {
             if (job.building === building && job.level === level) {
                 return progress = true
             }
         })
+
         return progress
     }
-    const getLevelScale = function(factor, base, level) {
+
+    /**
+     * Calculate the total of points accumulated ultil the specified level.
+     */
+    const getLevelScale = function (factor, base, level) {
         return level ? parseInt(Math.round(factor * Math.pow(base, level - 1)), 10) : 0
     }
-    const moveArrayItem = function(obj, oldIndex, newIndex) {
+
+    const moveArrayItem = function (obj, oldIndex, newIndex) {
         if (newIndex >= obj.length) {
             let i = newIndex - obj.length + 1
+            
             while (i--) {
                 obj.push(undefined)
             }
         }
+
         obj.splice(newIndex, 0, obj.splice(oldIndex, 1)[0])
     }
-    const parseBuildingSequence = function(sequence) {
-        return sequence.map(function(item) {
+
+    const parseBuildingSequence = function (sequence) {
+        return sequence.map(function (item) {
             return item.building
         })
     }
-    const createBuildingSequence = function(sequenceId, sequence) {
+
+    const createBuildingSequence = function (sequenceId, sequence) {
         const status = builderQueue.addBuildingSequence(sequenceId, sequence)
+
         switch (status) {
             case SEQUENCE_STATUS.SEQUENCE_SAVED: {
                 return true
@@ -16074,46 +16218,59 @@ define('two/builderQueue/ui', [
             }
         }
     }
-    const selectSome = function(obj) {
+
+    const selectSome = function (obj) {
         for (let i in obj) {
             if (hasOwn.call(obj, i)) {
                 return i
             }
         }
+
         return false
     }
-    settingsView.generateSequences = function() {
+
+    settingsView.generateSequences = function () {
         const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
         const sequencesAvail = Object.keys(sequences).length
+
         settingsView.sequencesAvail = sequencesAvail
+
         if (!sequencesAvail) {
             return false
         }
+
         settingsView.generateBuildingSequence()
         settingsView.generateBuildingSequenceFinal()
         settingsView.updateVisibleBuildingSequence()
     }
-    settingsView.generateBuildingSequence = function() {
+
+    settingsView.generateBuildingSequence = function () {
         const sequenceId = $scope.settings[SETTINGS.ACTIVE_SEQUENCE].value
         const buildingSequenceRaw = $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId]
         const buildingData = modelDataService.getGameData().getBuildings()
         let buildingLevels = {}
+
         settingsView.sequencesAvail = !!buildingSequenceRaw
+
         if (!settingsView.sequencesAvail) {
             return false
         }
+
         for (let building in BUILDING_TYPES) {
             buildingLevels[BUILDING_TYPES[building]] = 0
         }
-        settingsView.buildingSequence = buildingSequenceRaw.map(function(building) {
+
+        settingsView.buildingSequence = buildingSequenceRaw.map(function (building) {
             let level = ++buildingLevels[building]
             let price = buildingData[building].individual_level_costs[level]
             let state = 'not-reached'
+
             if (buildingLevelReached(building, level)) {
                 state = 'reached'
             } else if (buildingLevelProgress(building, level)) {
                 state = 'progress'
             }
+
             return {
                 level: level,
                 price: buildingData[building].individual_level_costs[level],
@@ -16124,11 +16281,13 @@ define('two/builderQueue/ui', [
             }
         })
     }
-    settingsView.generateBuildingSequenceFinal = function(_sequenceId) {
+
+    settingsView.generateBuildingSequenceFinal = function (_sequenceId) {
         const selectedSequence = $scope.settings[SETTINGS.ACTIVE_SEQUENCE].value
         const sequenceBuildings = $scope.settings[SETTINGS.BUILDING_SEQUENCES][_sequenceId || selectedSequence]
         let sequenceObj = {}
         let sequence = []
+        
         for (let building in gameDataBuildings) {
             sequenceObj[building] = {
                 level: 0,
@@ -16143,9 +16302,11 @@ define('two/builderQueue/ui', [
                 build_time: 0
             }
         }
-        sequenceBuildings.forEach(function(building) {
+
+        sequenceBuildings.forEach(function (building) {
             let level = ++sequenceObj[building].level
             let costs = gameDataBuildings[building].individual_level_costs[level]
+
             sequenceObj[building].resources.wood += parseInt(costs.wood, 10)
             sequenceObj[building].resources.clay += parseInt(costs.clay, 10)
             sequenceObj[building].resources.iron += parseInt(costs.iron, 10)
@@ -16153,6 +16314,7 @@ define('two/builderQueue/ui', [
             sequenceObj[building].build_time += parseInt(costs.build_time, 10)
             sequenceObj[building].points += buildingsLevelPoints[building][level - 1]
         })
+
         for (let building in sequenceObj) {
             if (sequenceObj[building].level !== 0) {
                 sequence.push({
@@ -16165,84 +16327,110 @@ define('two/builderQueue/ui', [
                 })
             }
         }
+
         settingsView.buildingSequenceFinal = sequence
     }
-    settingsView.updateVisibleBuildingSequence = function() {
+
+    settingsView.updateVisibleBuildingSequence = function () {
         const offset = $scope.pagination.buildingSequence.offset
         const limit = $scope.pagination.buildingSequence.limit
+
         settingsView.visibleBuildingSequence = settingsView.buildingSequence.slice(offset, offset + limit)
         $scope.pagination.buildingSequence.count = settingsView.buildingSequence.length
     }
-    settingsView.generateBuildingsLevelPoints = function() {
+
+    settingsView.generateBuildingsLevelPoints = function () {
         const $gameData = modelDataService.getGameData()
         let buildingTotalPoints
-        for (let buildingName in $gameData.data.buildings) {
+
+        for(let buildingName in $gameData.data.buildings) {
             let buildingData = $gameData.getBuildingDataForBuilding(buildingName)
             buildingTotalPoints = 0
             buildingsLevelPoints[buildingName] = []
+
             for (let level = 1; level <= buildingData.max_level; level++) {
-                let currentLevelPoints = getLevelScale(buildingData.points, buildingData.points_factor, level)
+                let currentLevelPoints  = getLevelScale(buildingData.points, buildingData.points_factor, level)
                 let levelPoints = currentLevelPoints - buildingTotalPoints
                 buildingTotalPoints += levelPoints
+
                 buildingsLevelPoints[buildingName].push(levelPoints)
             }
         }
     }
-    editorView.moveUp = function() {
+
+    editorView.moveUp = function () {
         let copy = angular.copy(editorView.buildingSequence)
         let changed = false
+
         for (let i = 0; i < copy.length; i++) {
             let item = copy[i]
+
             if (!item.checked) {
                 continue
             }
+
             if (i === 0) {
                 continue
             }
+
             if (copy[i - 1].checked) {
                 continue
             }
+
             if (copy[i - 1].building === item.building) {
                 copy[i - 1].level++
                 item.level--
                 changed = true
             }
+
             moveArrayItem(copy, i, i - 1)
         }
+
         editorView.buildingSequence = copy
         editorView.updateVisibleBuildingSequence()
+
         if (changed) {
             unsavedChanges = true
         }
     }
-    editorView.moveDown = function() {
+
+    editorView.moveDown = function () {
         let copy = angular.copy(editorView.buildingSequence)
         let changed = false
+
         for (let i = copy.length - 1; i >= 0; i--) {
             let item = copy[i]
+
             if (!item.checked) {
                 continue
             }
+
             if (i === copy.length - 1) {
                 continue
             }
+
             if (copy[i + 1].checked) {
                 continue
             }
+
             if (copy[i + 1].building === item.building) {
                 copy[i + 1].level--
                 item.level++
                 changed = true
             }
+
             moveArrayItem(copy, i, i + 1)
         }
+
         editorView.buildingSequence = copy
         editorView.updateVisibleBuildingSequence()
+        
         if (changed) {
             unsavedChanges = true
         }
     }
-    editorView.addBuilding = function(building, position, amount = 1) {
+
+    editorView.addBuilding = function (building, position, amount = 1) {
         const index = position - 1
         let newSequence = editorView.buildingSequence.slice()
         let buildingData = {
@@ -16250,26 +16438,35 @@ define('two/builderQueue/ui', [
             building: building,
             checked: false
         }
+
         for (let i = 0; i < amount; i++) {
             newSequence.splice(index, 0, buildingData)
         }
+
         editorView.buildingSequence = editorView.updateLevels(newSequence, building)
         editorView.updateVisibleBuildingSequence()
         unsavedChanges = true
+
         return true
     }
-    editorView.removeBuilding = function(index) {
+
+    editorView.removeBuilding = function (index) {
         const building = editorView.buildingSequence[index].building
+
         editorView.buildingSequence.splice(index, 1)
         editorView.buildingSequence = editorView.updateLevels(editorView.buildingSequence, building)
+
         editorView.updateVisibleBuildingSequence()
         unsavedChanges = true
     }
-    editorView.updateLevels = function(sequence, building) {
+
+    editorView.updateLevels = function (sequence, building) {
         let buildingLevel = 0
         let modifiedSequence = []
+
         for (let i = 0; i < sequence.length; i++) {
             let item = sequence[i]
+
             if (item.building === building) {
                 if (buildingLevel < gameDataBuildings[building].max_level) {
                     modifiedSequence.push({
@@ -16282,40 +16479,52 @@ define('two/builderQueue/ui', [
                 modifiedSequence.push(item)
             }
         }
+
         return modifiedSequence
     }
-    editorView.generateBuildingSequence = function() {
+
+    editorView.generateBuildingSequence = function () {
         const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
         const sequencesAvail = Object.keys(sequences).length
+
         editorView.sequencesAvail = sequencesAvail
+
         if (!sequencesAvail) {
             return false
         }
+
         const sequenceId = editorView.selectedSequence.value
         const buildingSequenceRaw = sequences[sequenceId]
         let buildingLevels = {}
+
         for (let building in BUILDING_TYPES) {
             buildingLevels[BUILDING_TYPES[building]] = 0
         }
-        editorView.buildingSequence = buildingSequenceRaw.map(function(building) {
+
+        editorView.buildingSequence = buildingSequenceRaw.map(function (building) {
             return {
                 level: ++buildingLevels[building],
                 building: building,
                 checked: false
             }
         })
+
         editorView.updateVisibleBuildingSequence()
     }
-    editorView.updateVisibleBuildingSequence = function() {
+
+    editorView.updateVisibleBuildingSequence = function () {
         const offset = $scope.pagination.buildingSequenceEditor.offset
         const limit = $scope.pagination.buildingSequenceEditor.limit
+
         editorView.visibleBuildingSequence = editorView.buildingSequence.slice(offset, offset + limit)
         $scope.pagination.buildingSequenceEditor.count = editorView.buildingSequence.length
     }
-    editorView.updateBuildingSequence = function() {
+
+    editorView.updateBuildingSequence = function () {
         const selectedSequence = editorView.selectedSequence.value
         const parsedSequence = parseBuildingSequence(editorView.buildingSequence)
         const status = builderQueue.updateBuildingSequence(selectedSequence, parsedSequence)
+
         switch (status) {
             case SEQUENCE_STATUS.SEQUENCE_SAVED: {
                 unsavedChanges = false
@@ -16331,24 +16540,30 @@ define('two/builderQueue/ui', [
             }
         }
     }
-    editorView.modal.removeSequence = function() {
+
+    editorView.modal.removeSequence = function () {
         let modalScope = $rootScope.$new()
+
         modalScope.title = $filter('i18n')('title', $rootScope.loc.ale, 'builder_queue_remove_sequence_modal')
         modalScope.text = $filter('i18n')('text', $rootScope.loc.ale, 'builder_queue_remove_sequence_modal')
         modalScope.submitText = $filter('i18n')('remove', $rootScope.loc.ale, 'common')
         modalScope.cancelText = $filter('i18n')('cancel', $rootScope.loc.ale, 'common')
         modalScope.switchColors = true
-        modalScope.submit = function() {
+
+        modalScope.submit = function () {
             modalScope.closeWindow()
             builderQueue.removeSequence(editorView.selectedSequence.value)
             unsavedChanges = false
         }
-        modalScope.cancel = function() {
+
+        modalScope.cancel = function () {
             modalScope.closeWindow()
         }
+
         windowManagerService.getModal('modal_attention', modalScope)
     }
-    editorView.modal.addBuilding = function() {
+
+    editorView.modal.addBuilding = function () {
         let modalScope = $rootScope.$new()
         modalScope.buildings = []
         modalScope.position = editorView.lastAddedIndex
@@ -16359,20 +16574,24 @@ define('two/builderQueue/ui', [
             name: $filter('i18n')(editorView.lastAddedBuilding, $rootScope.loc.ale, 'building_names'),
             value: editorView.lastAddedBuilding
         }
+
         for (let building in gameDataBuildings) {
             modalScope.buildings.push({
                 name: $filter('i18n')(building, $rootScope.loc.ale, 'building_names'),
                 value: building
             })
         }
-        modalScope.add = function() {
+
+        modalScope.add = function () {
             const building = modalScope.selectedBuilding.value
             const position = modalScope.position
             const amount = modalScope.amount
             const buildingName = $filter('i18n')(building, $rootScope.loc.ale, 'building_names')
             const buildingLimit = gameDataBuildings[building].max_level
+
             editorView.lastAddedBuilding = building
             editorView.lastAddedIndex = position
+
             if (editorView.addBuilding(building, position, amount)) {
                 modalScope.closeWindow()
                 utils.notif('success', $filter('i18n')('add_building_success', $rootScope.loc.ale, 'builder_queue', buildingName, position))
@@ -16380,219 +16599,256 @@ define('two/builderQueue/ui', [
                 utils.notif('error', $filter('i18n')('add_building_limit_exceeded', $rootScope.loc.ale, 'builder_queue', buildingName, buildingLimit))
             }
         }
+
         windowManagerService.getModal('!twoverflow_builder_queue_add_building_modal', modalScope)
     }
-    editorView.modal.nameSequence = function() {
-        const nameSequence = function() {
+
+    editorView.modal.nameSequence = function () {
+        const nameSequence = function () {
             let modalScope = $rootScope.$new()
             const selectedSequenceName = editorView.selectedSequence.name
             const selectedSequence = $scope.settings[SETTINGS.BUILDING_SEQUENCES][selectedSequenceName]
+            
             modalScope.name = selectedSequenceName
-            modalScope.submit = function() {
+
+            modalScope.submit = function () {
                 if (modalScope.name.length < 3) {
                     utils.notif('error', $filter('i18n')('name_sequence_min_lenght', $rootScope.loc.ale, 'builder_queue'))
                     return false
                 }
+
                 if (createBuildingSequence(modalScope.name, selectedSequence)) {
                     modalScope.closeWindow()
                 }
             }
+
             windowManagerService.getModal('!twoverflow_builder_queue_name_sequence_modal', modalScope)
         }
+
         if (unsavedChanges) {
             let modalScope = $rootScope.$new()
             modalScope.title = $filter('i18n')('clone_warn_changed_sequence_title', $rootScope.loc.ale, 'builder_queue')
             modalScope.text = $filter('i18n')('clone_warn_changed_sequence_text', $rootScope.loc.ale, 'builder_queue')
             modalScope.submitText = $filter('i18n')('clone', $rootScope.loc.ale, 'builder_queue')
             modalScope.cancelText = $filter('i18n')('cancel', $rootScope.loc.ale, 'common')
-            modalScope.submit = function() {
+
+            modalScope.submit = function () {
                 modalScope.closeWindow()
                 nameSequence()
             }
-            modalScope.cancel = function() {
+
+            modalScope.cancel = function () {
                 modalScope.closeWindow()
             }
+
             windowManagerService.getModal('modal_attention', modalScope)
         } else {
             nameSequence()
         }
     }
-    const updateVisibleLogs = function() {
-        const offset = $scope.pagination.offset
-        const limit = $scope.pagination.limit
-        $scope.visibleLogs = $scope.logs.slice(offset, offset + limit)
-        $scope.pagination.count = $scope.logs.length
-        $scope.visibleLogs.forEach(function(log) {
+
+    logsView.updateVisibleLogs = function () {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+
+        logsView.visibleLogs.forEach(function (log) {
             if (log.villageId) {
                 loadVillageInfo(log.villageId)
             }
         })
     }
-    const createSequence = function() {
+
+    logsView.clearLogs = function () {
+        builderQueue.clearLogs()
+    }
+
+    const createSequence = function () {
         let modalScope = $rootScope.$new()
         const initialSequence = [BUILDING_TYPES.HEADQUARTER]
+
         modalScope.name = ''
-        modalScope.submit = function() {
+        
+        modalScope.submit = function () {
             if (modalScope.name.length < 3) {
                 utils.notif('error', $filter('i18n')('name_sequence_min_lenght', $rootScope.loc.ale, 'builder_queue'))
                 return false
             }
+
             if (createBuildingSequence(modalScope.name, initialSequence)) {
-                $scope.settings[SETTINGS.ACTIVE_SEQUENCE] = {
-                    name: modalScope.name,
-                    value: modalScope.name
-                }
+                $scope.settings[SETTINGS.ACTIVE_SEQUENCE] = { name: modalScope.name, value: modalScope.name }
                 $scope.settings[SETTINGS.BUILDING_SEQUENCES][modalScope.name] = initialSequence
+
                 saveSettings()
-                settingsView.selectedSequence = {
-                    name: modalScope.name,
-                    value: modalScope.name
-                }
-                editorView.selectedSequence = {
-                    name: modalScope.name,
-                    value: modalScope.name
-                }
+
+                settingsView.selectedSequence = { name: modalScope.name, value: modalScope.name }
+                editorView.selectedSequence = { name: modalScope.name, value: modalScope.name }
+
                 settingsView.generateSequences()
                 editorView.generateBuildingSequence()
+
                 modalScope.closeWindow()
                 selectTab(TAB_TYPES.SEQUENCES)
             }
         }
+
         windowManagerService.getModal('!twoverflow_builder_queue_name_sequence_modal', modalScope)
     }
-    const selectTab = function(tabType) {
+
+    const selectTab = function (tabType) {
         $scope.selectedTab = tabType
     }
-    const saveSettings = function() {
+
+    const saveSettings = function () {
         settings.setAll(settings.decode($scope.settings))
         unsavedChanges = false
     }
-    const switchBuilder = function() {
+
+    const switchBuilder = function () {
         if (builderQueue.isRunning()) {
             builderQueue.stop()
         } else {
             builderQueue.start()
         }
     }
-    const confirmDiscardModal = function(onDiscard, onCancel) {
+
+    const confirmDiscardModal = function (onDiscard, onCancel) {
         let modalScope = $rootScope.$new()
         modalScope.title = $filter('i18n')('discard_changes_title', $rootScope.loc.ale, 'builder_queue')
         modalScope.text = $filter('i18n')('discard_changes_text', $rootScope.loc.ale, 'builder_queue')
         modalScope.submitText = $filter('i18n')('discard', $rootScope.loc.ale, 'common')
         modalScope.cancelText = $filter('i18n')('cancel', $rootScope.loc.ale, 'common')
         modalScope.switchColors = true
-        modalScope.submit = function() {
+
+        modalScope.submit = function () {
             modalScope.closeWindow()
             onDiscard && onDiscard()
         }
-        modalScope.cancel = function() {
+
+        modalScope.cancel = function () {
             modalScope.closeWindow()
             onCancel && onCancel()
         }
+
         windowManagerService.getModal('modal_attention', modalScope)
     }
-    const confirmCloseWindow = function() {
+
+    const confirmCloseWindow = function () {
         if (unsavedChanges) {
-            confirmDiscardModal(function onDiscard() {
+            confirmDiscardModal(function onDiscard () {
                 oldCloseWindow()
             })
         } else {
             oldCloseWindow()
         }
     }
+
     const eventHandlers = {
-        updateGroups: function() {
+        updateGroups: function () {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 type: 'groups',
                 disabled: true
             })
         },
-        updateSequences: function() {
+        updateSequences: function () {
             const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
+            
             $scope.sequences = Settings.encodeList(sequences, {
                 type: 'keys',
                 disabled: false
             })
         },
-        generateBuildingSequences: function() {
+        generateBuildingSequences: function () {
             settingsView.generateSequences()
         },
-        generateBuildingSequencesEditor: function() {
+        generateBuildingSequencesEditor: function () {
             editorView.generateBuildingSequence()
         },
-        updateLogs: function() {
-            $scope.logs = angular.copy(builderQueue.getLogs())
-            updateVisibleLogs()
-            if (!$scope.logs.length) {
-                utils.notif('success', $filter('i18n')('reseted_logs', $rootScope.loc.ale, 'builder_queue'))
-            }
+        updateLogs: function () {
+            $scope.logs = builderQueue.getLogs()
+            logsView.updateVisibleLogs()
         },
-        buildingSequenceUpdate: function(event, sequenceId) {
+        clearLogs: function () {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'builder_queue'))
+            eventHandlers.updateLogs()
+        },
+        buildingSequenceUpdate: function (event, sequenceId) {
             const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
             $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId] = sequences[sequenceId]
+
             if ($scope.settings[SETTINGS.ACTIVE_SEQUENCE].value === sequenceId) {
                 settingsView.generateSequences()
             }
+
             utils.notif('success', $filter('i18n')('sequence_updated', $rootScope.loc.ale, 'builder_queue', sequenceId))
         },
-        buildingSequenceAdd: function(event, sequenceId) {
+        buildingSequenceAdd: function (event, sequenceId) {
             const sequences = settings.get(SETTINGS.BUILDING_SEQUENCES)
             $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId] = sequences[sequenceId]
             eventHandlers.updateSequences()
             utils.notif('success', $filter('i18n')('sequence_created', $rootScope.loc.ale, 'builder_queue', sequenceId))
         },
-        buildingSequenceRemoved: function(event, sequenceId) {
+        buildingSequenceRemoved: function (event, sequenceId) {
             delete $scope.settings[SETTINGS.BUILDING_SEQUENCES][sequenceId]
+
             const substituteSequence = selectSome($scope.settings[SETTINGS.BUILDING_SEQUENCES])
-            editorView.selectedSequence = {
-                name: substituteSequence,
-                value: substituteSequence
-            }
+            editorView.selectedSequence = { name: substituteSequence, value: substituteSequence }
             eventHandlers.updateSequences()
             editorView.generateBuildingSequence()
+
             if (settings.get(SETTINGS.ACTIVE_SEQUENCE) === sequenceId) {
                 settings.set(SETTINGS.ACTIVE_SEQUENCE, substituteSequence, {
                     quiet: true
                 })
                 settingsView.generateSequences()
             }
+
             utils.notif('success', $filter('i18n')('sequence_removed', $rootScope.loc.ale, 'builder_queue', sequenceId))
         },
-        saveSettings: function() {
+        saveSettings: function () {
             utils.notif('success', $filter('i18n')('settings_saved', $rootScope.loc.ale, 'builder_queue'))
         },
-        started: function() {
+        started: function () {
             $scope.running = true
         },
-        stopped: function() {
+        stopped: function () {
             $scope.running = false
         }
     }
-    const init = function() {
+
+    const init = function () {
         gameDataBuildings = modelDataService.getGameData().getBuildings()
         settingsView.generateBuildingsLevelPoints()
         settings = builderQueue.getSettings()
-        $button = interfaceOverflow.addMenuButton2('Budowniczy', 20, $filter('i18n')('general.description', $rootScope.loc.ale, 'builder_queue'))
+
+        $button = interfaceOverflow.addMenuButton('Builder', 30)
         $button.addEventListener('click', buildWindow)
-        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_START, function() {
+
+        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_START, function () {
             running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
             utils.notif('success', $filter('i18n')('started', $rootScope.loc.ale, 'builder_queue'))
         })
-        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_STOP, function() {
+
+        eventQueue.register(eventTypeProvider.BUILDER_QUEUE_STOP, function () {
             running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('stopped', $rootScope.loc.ale, 'builder_queue'))
         })
-        interfaceOverflow.addTemplate('twoverflow_builder_queue_window', `<div id=\"two-builder-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'builder_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SEQUENCES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}\">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><h5 class=\"twx-section\">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5><table class=\"settings tbl-border-light tbl-striped\"><col width=\"40%\"><col><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_VILLAGES]\" drop-down=\"true\"></div><tr ng-show=\"settingsView.sequencesAvail\"><td><span class=\"ff-cell-fix\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"sequences\" selected=\"settings[SETTINGS.ACTIVE_SEQUENCE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_WOOD].min\" max=\"settingsMap[SETTINGS.PRESERVE_WOOD].max\" value=\"settings[SETTINGS.PRESERVE_WOOD]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_WOOD]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_CLAY].min\" max=\"settingsMap[SETTINGS.PRESERVE_CLAY].max\" value=\"settings[SETTINGS.PRESERVE_CLAY]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_CLAY]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_IRON].min\" max=\"settingsMap[SETTINGS.PRESERVE_IRON].max\" value=\"settings[SETTINGS.PRESERVE_IRON]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_IRON]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span><td class=\"text-center\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORIZE_FARM]\" vertical=\"false\" size=\"'56x28'\"></div></table><h5 class=\"twx-section\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!settingsView.sequencesAvail\" class=\"text-center\"><a href=\"#\" class=\"btn-orange btn-border create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><div ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div><table class=\"tbl-border-light header-center building-sequence\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"13%\"><col width=\"8%\"><col width=\"9%\"><col width=\"9%\"><col width=\"9%\"><col width=\"6%\"><tr><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.visibleBuildingSequence track by $index\" class=\"{{ item.state }}\"><td>{{ pagination.buildingSequence.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.duration }}<td class=\"green\">+{{ item.levelPoints | number }}<td>{{ item.price.wood | number }}<td>{{ item.price.clay | number }}<td>{{ item.price.iron | number }}<td>{{ item.price.food | number }}</table><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div></div><h5 ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"twx-section\">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5><table ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-final\"><col><col width=\"5%\"><col width=\"12%\"><col width=\"8%\"><col width=\"11%\"><col width=\"11%\"><col width=\"11%\"><col width=\"7%\"><tr><th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.buildingSequenceFinal | orderBy:'order'\"><td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.build_time | readableSecondsFilter }}<td class=\"green\">+{{ item.points | number }}<td>{{ item.resources.wood | number }}<td>{{ item.resources.clay | number }}<td>{{ item.resources.iron | number }}<td>{{ item.resources.food | number }}</table><p ng-show=\"settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length\" class=\"text-center\">{{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}</div><div ng-show=\"selectedTab === TAB_TYPES.SEQUENCES\"><h5 class=\"twx-section\">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!editorView.sequencesAvail\" class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><table ng-if=\"editorView.sequencesAvail\" class=\"tbl-border-light tbl-striped editor-select-sequence\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span><td><div class=\"select-sequence-editor\" select=\"\" list=\"sequences\" selected=\"editorView.selectedSequence\" drop-down=\"true\"></div><tr><td class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-orange clone-sequence\" ng-click=\"editorView.modal.nameSequence()\">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-red remove-sequence\" ng-click=\"editorView.modal.removeSequence()\">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></table><div ng-if=\"editorView.sequencesAvail\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><table ng-show=\"editorView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-editor\"><col width=\"5%\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"10%\"><tr><th><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'actions' | i18n:loc.ale:'common' }}<tr ng-repeat=\"item in editorView.visibleBuildingSequence track by $index\" ng-class=\"{'selected': item.checked}\"><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" ng-class=\"{'icon-26x26-checkbox-checked': item.checked}\"><input type=\"checkbox\" ng-model=\"item.checked\"></label><td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)\" tooltip=\"\" tooltip-content=\"{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><p ng-show=\"!editorView.visibleBuildingSequence.length\" class=\"text-center\"><a class=\"btn btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a></div></div><div ng-show=\"selectedTab === TAB_TYPES.LOGS\" class=\"rich-text logs\"><div class=\"page-wrap\" pagination=\"pagination\"></div><p class=\"text-center\" ng-show=\"!visibleLogs.length\">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}<table class=\"log-list tbl-border-light tbl-striped header-center\" ng-show=\"visibleLogs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'started_at' | i18n:loc.ale:'common' }}<tbody><tr ng-repeat=\"log in visibleLogs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"building-icon icon-20x20-building-{{ log.building }}\"></span> {{ log.building | i18n:loc.ale:'building_names' }}<td>{{ log.level }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchBuilder()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveUp()\">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveDown()\">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"editorView.updateBuildingSequence()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
+
+        interfaceOverflow.addTemplate('twoverflow_builder_queue_window', `<div id=\"two-builder-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>BuilderQueue</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SEQUENCES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}\">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><h5 class=\"twx-section\">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5><table class=\"settings tbl-border-light tbl-striped\"><col width=\"40%\"><col><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_VILLAGES]\" drop-down=\"true\"></div><tr ng-show=\"settingsView.sequencesAvail\"><td><span class=\"ff-cell-fix\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"sequences\" selected=\"settings[SETTINGS.ACTIVE_SEQUENCE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_WOOD].min\" max=\"settingsMap[SETTINGS.PRESERVE_WOOD].max\" value=\"settings[SETTINGS.PRESERVE_WOOD]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_WOOD]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_CLAY].min\" max=\"settingsMap[SETTINGS.PRESERVE_CLAY].max\" value=\"settings[SETTINGS.PRESERVE_CLAY]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_CLAY]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_IRON].min\" max=\"settingsMap[SETTINGS.PRESERVE_IRON].max\" value=\"settings[SETTINGS.PRESERVE_IRON]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_IRON]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span><td class=\"text-center\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORIZE_FARM]\" vertical=\"false\" size=\"'56x28'\"></div></table><h5 class=\"twx-section\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!settingsView.sequencesAvail\" class=\"text-center\"><a href=\"#\" class=\"btn-orange btn-border create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><div ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div><table class=\"tbl-border-light header-center building-sequence\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"13%\"><col width=\"8%\"><col width=\"9%\"><col width=\"9%\"><col width=\"9%\"><col width=\"6%\"><tr><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.visibleBuildingSequence track by $index\" class=\"{{ item.state }}\"><td>{{ pagination.buildingSequence.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.duration }}<td class=\"green\">+{{ item.levelPoints | number }}<td>{{ item.price.wood | number }}<td>{{ item.price.clay | number }}<td>{{ item.price.iron | number }}<td>{{ item.price.food | number }}</table><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div></div><h5 ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"twx-section\">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5><table ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-final\"><col><col width=\"5%\"><col width=\"12%\"><col width=\"8%\"><col width=\"11%\"><col width=\"11%\"><col width=\"11%\"><col width=\"7%\"><tr><th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.buildingSequenceFinal | orderBy:'order'\"><td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.build_time | readableSecondsFilter }}<td class=\"green\">+{{ item.points | number }}<td>{{ item.resources.wood | number }}<td>{{ item.resources.clay | number }}<td>{{ item.resources.iron | number }}<td>{{ item.resources.food | number }}</table><p ng-show=\"settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length\" class=\"text-center\">{{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}</div><div ng-show=\"selectedTab === TAB_TYPES.SEQUENCES\"><h5 class=\"twx-section\">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!editorView.sequencesAvail\" class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><table ng-if=\"editorView.sequencesAvail\" class=\"tbl-border-light tbl-striped editor-select-sequence\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span><td><div class=\"select-sequence-editor\" select=\"\" list=\"sequences\" selected=\"editorView.selectedSequence\" drop-down=\"true\"></div><tr><td class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-orange clone-sequence\" ng-click=\"editorView.modal.nameSequence()\">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-red remove-sequence\" ng-click=\"editorView.modal.removeSequence()\">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></table><div ng-if=\"editorView.sequencesAvail\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><table ng-show=\"editorView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-editor\"><col width=\"5%\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"10%\"><tr><th><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'actions' | i18n:loc.ale:'common' }}<tr ng-repeat=\"item in editorView.visibleBuildingSequence track by $index\" ng-class=\"{'selected': item.checked}\"><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" ng-class=\"{'icon-26x26-checkbox-checked': item.checked}\"><input type=\"checkbox\" ng-model=\"item.checked\"></label><td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)\" tooltip=\"\" tooltip-content=\"{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><p ng-show=\"!editorView.visibleBuildingSequence.length\" class=\"text-center\"><a class=\"btn btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a></div></div><div ng-show=\"selectedTab === TAB_TYPES.LOGS\" class=\"rich-text\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'started_at' | i18n:loc.ale:'common' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"building-icon icon-20x20-building-{{ log.building }}\"></span> {{ log.building | i18n:loc.ale:'building_names' }}<td>{{ log.level }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchBuilder()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveUp()\">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveDown()\">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"editorView.updateBuildingSequence()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_add_building_modal', `<div id=\"add-building-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_add_building_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap unit-operate-slider\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"15%\"><col><col width=\"15%\"><tr><td>{{ 'building' | i18n:loc.ale:'common' }}<td colspan=\"2\"><div select=\"\" list=\"buildings\" selected=\"selectedBuilding\" drop-down=\"true\"></div><tr><td>{{ 'position' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"indexLimit\" value=\"position\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"position\"><tr><td>{{ 'amount' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"buildingsData[selectedBuilding.value].max_level\" value=\"amount\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"amount\"></table></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"add()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_name_sequence_modal', `<div id=\"name-sequence-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_name_sequence_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><div class=\"box-border-light input-wrapper name_preset\"><form ng-submit=\"submit()\"><input focus=\"true\" ng-model=\"name\" minlength=\"3\"></form></div></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"submit()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-builder-queue tr.reached td{background-color:#b9af7e}#two-builder-queue tr.progress td{background-color:#af9d57}#two-builder-queue .building-sequence,#two-builder-queue .building-sequence-final,#two-builder-queue .building-sequence-editor,#two-builder-queue .logs{margin-bottom:10px}#two-builder-queue .building-sequence td,#two-builder-queue .building-sequence-final td,#two-builder-queue .building-sequence-editor td,#two-builder-queue .logs td,#two-builder-queue .building-sequence th,#two-builder-queue .building-sequence-final th,#two-builder-queue .building-sequence-editor th,#two-builder-queue .logs th{text-align:center;line-height:20px}#two-builder-queue .building-sequence .log-list,#two-builder-queue .building-sequence-final .log-list,#two-builder-queue .building-sequence-editor .log-list,#two-builder-queue .logs .log-list{margin-bottom:10px}#two-builder-queue .building-sequence .log-list td,#two-builder-queue .building-sequence-final .log-list td,#two-builder-queue .building-sequence-editor .log-list td,#two-builder-queue .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-builder-queue .building-sequence .log-list td .village-link,#two-builder-queue .building-sequence-final .log-list td .village-link,#two-builder-queue .building-sequence-editor .log-list td .village-link,#two-builder-queue .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-builder-queue .building-sequence-editor .selected td{background-color:#b9af7e}#two-builder-queue .editor-select-sequence{margin-bottom:13px}#two-builder-queue a.btn{height:28px;line-height:28px;padding:0 10px}#two-builder-queue .select-sequence-editor{text-align:center;margin-top:1px}#two-builder-queue .create-sequence{padding:8px 20px 8px 20px}#two-builder-queue table.settings td{padding:1px 5px}#two-builder-queue table.settings td.text-right{text-align:right}#two-builder-queue table.settings div[switch-slider]{display:inline-block;margin-top:2px}#two-builder-queue .small-select a.select-handler{height:28px;line-height:28px}#two-builder-queue .small-select a.select-button{height:28px}#two-builder-queue input.preserve-resource{width:70px;height:32px}#two-builder-queue .icon-26x26-resource-wood,#two-builder-queue .icon-26x26-resource-clay,#two-builder-queue .icon-26x26-resource-iron,#two-builder-queue .icon-26x26-resource-food{transform:scale(.8);top:-1px}#add-building-modal td{text-align:center}#add-building-modal .select-wrapper{width:250px}#add-building-modal input[type="text"]{width:60px}')
+        interfaceOverflow.addStyle('#two-builder-queue tr.reached td{background-color:#b9af7e}#two-builder-queue tr.progress td{background-color:#af9d57}#two-builder-queue .building-sequence,#two-builder-queue .building-sequence-final,#two-builder-queue .building-sequence-editor,#two-builder-queue .logs{margin-bottom:10px}#two-builder-queue .building-sequence td,#two-builder-queue .building-sequence-final td,#two-builder-queue .building-sequence-editor td,#two-builder-queue .logs td,#two-builder-queue .building-sequence th,#two-builder-queue .building-sequence-final th,#two-builder-queue .building-sequence-editor th,#two-builder-queue .logs th{text-align:center;line-height:20px}#two-builder-queue .building-sequence-editor .selected td{background-color:#b9af7e}#two-builder-queue .editor-select-sequence{margin-bottom:13px}#two-builder-queue a.btn{height:28px;line-height:28px;padding:0 10px}#two-builder-queue .select-sequence-editor{text-align:center;margin-top:1px}#two-builder-queue .create-sequence{padding:8px 20px 8px 20px}#two-builder-queue table.settings td{padding:1px 5px}#two-builder-queue table.settings td.text-right{text-align:right}#two-builder-queue table.settings div[switch-slider]{display:inline-block;margin-top:2px}#two-builder-queue .small-select a.select-handler{height:28px;line-height:28px}#two-builder-queue .small-select a.select-button{height:28px}#two-builder-queue input.preserve-resource{width:70px;height:32px}#two-builder-queue .icon-26x26-resource-wood,#two-builder-queue .icon-26x26-resource-clay,#two-builder-queue .icon-26x26-resource-iron,#two-builder-queue .icon-26x26-resource-food{transform:scale(.8);top:-1px}#add-building-modal td{text-align:center}#add-building-modal .select-wrapper{width:250px}#add-building-modal input[type="text"]{width:60px}')
     }
-    const buildWindow = function() {
+
+    const buildWindow = function () {
         const activeSequence = settings.get(SETTINGS.ACTIVE_SEQUENCE)
+
         $scope = $rootScope.$new()
         $scope.selectedTab = TAB_TYPES.SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
@@ -16600,53 +16856,62 @@ define('two/builderQueue/ui', [
         $scope.running = running
         $scope.pagination = {}
         $scope.settingsMap = settings.settingsMap
+
         $scope.villagesLabel = villagesLabel
         $scope.villagesInfo = villagesInfo
+
         $scope.editorView = editorView
         $scope.editorView.buildingSequence = {}
         $scope.editorView.visibleBuildingSequence = []
-        $scope.editorView.selectedSequence = {
-            name: activeSequence,
-            value: activeSequence
-        }
+        $scope.editorView.selectedSequence = { name: activeSequence, value: activeSequence }
+
         $scope.editorView.lastAddedBuilding = BUILDING_TYPES.HEADQUARTER
         $scope.editorView.lastAddedIndex = 1
+
         $scope.settingsView = settingsView
         $scope.settingsView.buildingSequence = {}
         $scope.settingsView.buildingSequenceFinal = {}
-        $scope.logs = builderQueue.getLogs()
-        $scope.visibleLogs = []
+
+        $scope.logsView = logsView
+        $scope.logsView.logs = builderQueue.getLogs()
+
         // methods
         $scope.selectTab = selectTab
         $scope.switchBuilder = switchBuilder
         $scope.saveSettings = saveSettings
         $scope.createSequence = createSequence
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
+
         settings.injectScope($scope)
         eventHandlers.updateGroups()
         eventHandlers.updateSequences()
+
         $scope.pagination.buildingSequence = {
             count: settingsView.buildingSequence.length,
             offset: 0,
             loader: settingsView.updateVisibleBuildingSequence,
             limit: storageService.getPaginationLimit()
         }
+
         $scope.pagination.buildingSequenceEditor = {
             count: editorView.buildingSequence.length,
             offset: 0,
             loader: editorView.updateVisibleBuildingSequence,
             limit: storageService.getPaginationLimit()
         }
+
         $scope.pagination.logs = {
-            count: $scope.logs.length,
+            count: logsView.logs.length,
             offset: 0,
-            loader: updateVisibleLogs,
+            loader: logsView.updateVisibleLogs,
             limit: storageService.getPaginationLimit()
         }
-        updateVisibleLogs()
+
+        logsView.updateVisibleLogs()
+
         settingsView.generateSequences()
         editorView.generateBuildingSequence()
-        $scope.clearLogs = builderQueue.clearLogs
+
         let eventScope = new EventScope('twoverflow_builder_queue_window')
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
@@ -16657,36 +16922,38 @@ define('two/builderQueue/ui', [
         eventScope.register(eventTypeProvider.BUILDING_TEARING_DOWN, eventHandlers.generateBuildingSequences, true)
         eventScope.register(eventTypeProvider.VILLAGE_BUILDING_QUEUE_CHANGED, eventHandlers.generateBuildingSequences, true)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_JOB_STARTED, eventHandlers.updateLogs)
-        eventScope.register(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS, eventHandlers.updateLogs)
+        eventScope.register(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS, eventHandlers.clearLogs)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_UPDATED, eventHandlers.buildingSequenceUpdate)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_ADDED, eventHandlers.buildingSequenceAdd)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_REMOVED, eventHandlers.buildingSequenceRemoved)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_SETTINGS_CHANGE, eventHandlers.saveSettings)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_START, eventHandlers.started)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_STOP, eventHandlers.stopped)
+
         windowManagerService.getScreenWithInjectedScope('!twoverflow_builder_queue_window', $scope)
+
         oldCloseWindow = $scope.closeWindow
         $scope.closeWindow = confirmCloseWindow
-        $scope.$watch('settings[SETTINGS.ACTIVE_SEQUENCE].value', function(newValue, oldValue) {
+
+        $scope.$watch('settings[SETTINGS.ACTIVE_SEQUENCE].value', function (newValue, oldValue) {
             if (newValue !== oldValue) {
                 eventHandlers.generateBuildingSequences()
             }
         })
-        $scope.$watch('editorView.selectedSequence.value', function(newValue, oldValue) {
+
+        $scope.$watch('editorView.selectedSequence.value', function (newValue, oldValue) {
             if (ignoreInputChange) {
                 ignoreInputChange = false
                 return
             }
+
             if (newValue !== oldValue) {
                 if (unsavedChanges) {
-                    confirmDiscardModal(function onDiscard() {
+                    confirmDiscardModal(function onDiscard () {
                         eventHandlers.generateBuildingSequencesEditor()
                         unsavedChanges = false
-                    }, function onCancel() {
-                        $scope.editorView.selectedSequence = {
-                            name: oldValue,
-                            value: oldValue
-                        }
+                    }, function onCancel () {
+                        $scope.editorView.selectedSequence = { name: oldValue, value: oldValue }
                         ignoreInputChange = true
                     })
                 } else {
@@ -16695,8 +16962,10 @@ define('two/builderQueue/ui', [
             }
         })
     }
+
     return init
 })
+
 define('two/builderQueue/settings', [], function() {
     return {
         GROUP_VILLAGES: 'group_villages',
