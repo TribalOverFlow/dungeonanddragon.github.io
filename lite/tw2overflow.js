@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Dec 2020 09:44:32 GMT
+ * Sun, 27 Dec 2020 10:11:33 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -14340,6 +14340,7 @@ define('two/builderQueue', [
         logs = []
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS)
+        return logs
     }
     builderQueue.addBuildingSequence = function(id, sequence) {
         let sequences = builderSettings[SETTINGS.BUILDING_SEQUENCES]
@@ -16620,7 +16621,7 @@ define('two/builderQueue/ui', [
         $scope.settingsView.buildingSequenceFinal = {}
         $scope.logsView = logsView
         $scope.logsView.logs = builderQueue.getLogs()
-        $scope.clearLogs = logsView.clearLogs
+        $scope.clearLogs = builderQueue.clearLogs
         // methods
         $scope.selectTab = selectTab
         $scope.switchBuilder = switchBuilder
@@ -16661,7 +16662,7 @@ define('two/builderQueue/ui', [
         eventScope.register(eventTypeProvider.BUILDING_TEARING_DOWN, eventHandlers.generateBuildingSequences, true)
         eventScope.register(eventTypeProvider.VILLAGE_BUILDING_QUEUE_CHANGED, eventHandlers.generateBuildingSequences, true)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_JOB_STARTED, eventHandlers.updateLogs)
-        eventScope.register(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS, eventHandlers.clearLogs)
+        eventScope.register(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS, eventHandlers.updateLogs)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_UPDATED, eventHandlers.buildingSequenceUpdate)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_ADDED, eventHandlers.buildingSequenceAdd)
         eventScope.register(eventTypeProvider.BUILDER_QUEUE_BUILDING_SEQUENCES_REMOVED, eventHandlers.buildingSequenceRemoved)
