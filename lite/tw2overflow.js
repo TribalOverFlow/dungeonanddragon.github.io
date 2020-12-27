@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Dec 2020 11:02:03 GMT
+ * Sun, 27 Dec 2020 11:05:59 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -14440,6 +14440,7 @@ define('two/builderQueue', [
         logs = []
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_CLEAR_LOGS)
+        return logs
     }
 
     builderQueue.addBuildingSequence = function (id, sequence) {
