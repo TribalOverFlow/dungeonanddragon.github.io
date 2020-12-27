@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 27 Dec 2020 11:05:59 GMT
+ * Sun, 27 Dec 2020 11:16:39 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -16664,6 +16664,7 @@ define('two/builderQueue/ui', [
 
     logsView.clearLogs = function () {
         builderQueue.clearLogs()
+        $scope.logsView.logs = []
     }
 
     const createSequence = function () {
@@ -16824,7 +16825,7 @@ define('two/builderQueue/ui', [
         settingsView.generateBuildingsLevelPoints()
         settings = builderQueue.getSettings()
 
-        $button = interfaceOverflow.addMenuButton('Builder', 30)
+        $button = interfaceOverflow.addMenuButton2('Budowniczy', 20, $filter('i18n')('description', $rootScope.loc.ale, 'builder_queue'))
         $button.addEventListener('click', buildWindow)
 
         eventQueue.register(eventTypeProvider.BUILDER_QUEUE_START, function () {
