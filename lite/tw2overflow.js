@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 14:59:46 GMT
+ * Tue, 29 Dec 2020 15:19:33 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -31706,11 +31706,10 @@ define('two/spyMaster', [
     var targets = []
     var villages = []
     var villageData = {}
-    var villageSpy = {}
-    var targetFinal = {}
     var ownLimit = 0
     var provinceId = ''
     var countSpy = 0
+    var targetsCount = 0
     var groupTargets = null
     var groupVillages = null
     var targetGroups = ''
@@ -31802,9 +31801,11 @@ define('two/spyMaster', [
         })
     }
     const sendSpies = function() {
-        targets.forEach(function(target, index) {
+        targetsCount = targets.length
+        villages.forEach(function(village, index) {
             setTimeout(function() {
-                villages.forEach(function(village, index1) {
+                targets.forEach(function(target, index1) {
+                    targetsCount -= 1
                     var scoutingInfo = village.scoutingInfo
                     var spies = scoutingInfo.spies
                     spies.forEach(function(spy) {
@@ -31812,208 +31813,191 @@ define('two/spyMaster', [
                             countSpy += 1
                         }
                     })
-                    villageSpy = {
-                        'id': village.data.villageId,
-                        'x': village.data.x,
-                        'y': village.data.y,
-                        'name': village.data.name,
-                        'character_id': player.getId()
-                    }
                     setTimeout(function() {
                         if (target != 0) {
-                            socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-                                my_village_id: modelDataService.getSelectedVillage().getId(),
-                                village_id: target,
-                                num_reports: 1
-                            }, function(data) {
-                                targetFinal = {
-                                    'id': data.village_id,
-                                    'x': data.village_x,
-                                    'y': data.village_y,
-                                    'name': data.village_name
-                                }
-                                if (type == 'units' || type == 'buildings') {
-                                    if (ownLimit > 0 && countSpy > 0) {
-                                        for (var x = 0; x < countSpy; x++) {
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: type
-                                                })
-                                                addLog(villageSpy, targetFinal, type, 1)
-                                                ownLimit -= 1
-                                            }, (x * 2000) + 1000)
-                                        }
-                                    }
-                                } else if (type == 'all') {
-                                    if (ownLimit > 0) {
-                                        if (countSpy == 5) {
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'buildings'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Budynki', 1)
-                                                ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'buildings'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Budynki', 1)
-                                                ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (3 * 2000) + 5000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (4 * 2000) + 7000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (5 * 2000) + 9000)
-                                        } else if (countSpy == 4) {
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'buildings'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Budynki', 1)
-                                                ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'buildings'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Budynki', 1)
-                                                ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (3 * 2000) + 5000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (4 * 2000) + 7000)
-                                        } else if (countSpy == 3) {
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'buildings'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Budynki', 1)
-                                                ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (3 * 2000) + 5000)
-                                        } else if (countSpy == 2) {
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'buildings'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Budynki', 1)
-                                                ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'units'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Jednostki', 1)
-                                                ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
-                                        } else if (countSpy == 1) {
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                    startVillage: village.getId(),
-                                                    targetVillage: target,
-                                                    spys: 1,
-                                                    type: 'buildings'
-                                                })
-                                                addLog(villageSpy, targetFinal, 'Budynki', 1)
-                                                ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
-                                        }
+                            if (type == 'units' || type == 'buildings') {
+                                if (ownLimit > 0 && countSpy > 0) {
+                                    for (var x = 0; x < countSpy; x++) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: type
+                                            })
+                                            addLog(village.getId(), target, type, 1)
+                                            ownLimit -= 1
+                                        }, (x * 2000) + 1000)
                                     }
                                 }
-                            })
+                            } else if (type == 'all') {
+                                if (ownLimit > 0) {
+                                    if (countSpy == 5) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, (1 * 2000) + 1000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, (2 * 2000) + 3000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (3 * 2000) + 5000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (4 * 2000) + 7000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (5 * 2000) + 9000)
+                                    } else if (countSpy == 4) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, (1 * 2000) + 1000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, (2 * 2000) + 3000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (3 * 2000) + 5000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (4 * 2000) + 7000)
+                                    } else if (countSpy == 3) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, (1 * 2000) + 1000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (2 * 2000) + 3000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (3 * 2000) + 5000)
+                                    } else if (countSpy == 2) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, (1 * 2000) + 1000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, (2 * 2000) + 3000)
+                                    } else if (countSpy == 1) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, (1 * 2000) + 1000)
+                                    }
+                                }
+                            }
                         }
                     }, index1 * 12000)
                 })
             }, index * villages.length * 12000)
-            spyMaster.stop()
         })
+        if (targetsCount == 0) {
+            spyMaster.stop()
+        }
     }
     const spyMaster = {}
     spyMaster.init = function() {
