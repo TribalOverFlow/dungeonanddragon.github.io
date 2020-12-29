@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 15:24:28 GMT
+ * Tue, 29 Dec 2020 16:32:16 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -31706,8 +31706,8 @@ define('two/spyMaster', [
     var targets = []
     var villages = []
     var ownLimit = 0
+    var ownLimitS = 0
     var provinceId = ''
-    var countSpy = 0
     var targetsCount = 0
     var groupTargets = null
     var groupVillages = null
@@ -31799,12 +31799,52 @@ define('two/spyMaster', [
             selectedGroupsSabotageOwn.push(allGroups[groupId])
         })
     }
+    const sendSabotages = function() {
+        targetsCount = targets.length
+        targets.forEach(function(target, index) {
+            ownLimitS = spyMasterSettings[SETTINGS.LIMIT_S]
+            targetsCount -= 1
+            villages.forEach(function(village, index1) {
+                var available = 0
+                var scoutingInfo = village.scoutingInfo
+                var spies = scoutingInfo.spies
+                var order = village.data.preceptory_order
+                if (order == 'thieves') {
+                    spies.forEach(function(spy) {
+                        if (spy.type == 1) {
+                            available += 1
+                        }
+                    })
+                    setTimeout(function() {
+                        if (available >= 3 && ownLimitS > 0) {
+                            setTimeout(function() {
+                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                    startVillage: village.getId(),
+                                    targetVillage: target,
+                                    spys: 3,
+                                    type: 'sabotage'
+                                })
+                                addLog(village.getId(), target, 'Sabotaż', 3)
+                                ownLimitS -= 1
+                                available -= 3
+                            }, index1 * 2000 * Math.random())
+                        }
+                    }, index * 2500 * Math.random())
+                }
+            })
+        })
+        if (targetsCount == 0) {
+            spyMaster.stop()
+        }
+    }
     const sendSpies = function() {
         targetsCount = targets.length
-        villages.forEach(function(village, index) {
+        targets.forEach(function(target, index) {
+            ownLimit = spyMasterSettings[SETTINGS.LIMIT]
+            targetsCount -= 1
             setTimeout(function() {
-                targets.forEach(function(target, index1) {
-                    targetsCount -= 1
+                villages.forEach(function(village, index1) {
+                    var countSpy = 0
                     var scoutingInfo = village.scoutingInfo
                     var spies = scoutingInfo.spies
                     spies.forEach(function(spy) {
@@ -32280,12 +32320,88 @@ define('two/spyMaster', [
         sendSpies()
     }
     spyMaster.sabotage = function() {
+        var provinceData = []
+        var characterData = 0
         villageTarget = spyMasterSettings[SETTINGS.VILLAGE_S]
+        if (villageTarget > 0) {
+            targets.push(spyMasterSettings[SETTINGS.VILLAGE])
+        }
         playerId = spyMasterSettings[SETTINGS.PLAYER_S]
+        if (playerId > 0) {
+            socketService.emit(routeProvider.CHAR_GET_PROFILE, {
+                character_id: playerId
+            }, function(data) {
+                var villages = data.villages
+                villages.forEach(function(village) {
+                    targets.push(village.village_id)
+                })
+            })
+        }
         provinceId = spyMasterSettings[SETTINGS.PROVINCE_S]
+        if (provinceId > 0) {
+            tribeId = 0
+            enemies = spyMasterSettings[SETTINGS.ENEMIES]
+            socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                my_village_id: modelDataService.getSelectedVillage().getId(),
+                village_id: provinceId,
+                num_reports: 1
+            }, function(data) {
+                provinceData.push(data.province.x)
+                provinceData.push(data.province.y)
+                characterData = data.character_id
+                socketService.emit(routeProvider.MAP_GETPROVINCE, {
+                    x: provinceData[0],
+                    y: provinceData[1]
+                }, function(data) {
+                    var provinceVillages = data.villages
+                    provinceVillages.forEach(function(village) {
+                        if (village.village_id == provinceId) {
+                            tribeId = village.tribe_id
+                        }
+                    })
+                    provinceVillages.forEach(function(fake) {
+                        if (enemies && fake.tribe_id == tribeId) {
+                            targets.push(fake.village_id)
+                        } else if (fake.character_id == characterData) {
+                            targets.push(fake.village_id)
+                        }
+                    })
+                })
+            })
+        }
         targetGroups = spyMasterSettings[SETTINGS.GROUPS_S]
+        if (targetGroups) {
+            targetGroups.forEach(function(group) {
+                groupTargets = groupList.getGroupVillageIds(group)
+                for (var i of groupTargets) {
+                    targets.push(i)
+                }
+            })
+        }
+        var villagesGetId = player.getVillageList()
         ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN_S]
-        enemies = spyMasterSettings[SETTINGS.ENEMIES_S]
+        let villagesFromGroup = []
+        if (ownGroups) {
+            ownGroups.forEach(function(group) {
+                groupVillages = groupList.getGroupVillageIds(group)
+                for (var i of groupVillages) {
+                    villagesFromGroup.push(i)
+                }
+            })
+            villagesGetId.forEach(function(village) {
+                var id = village.data.villageId
+                villagesFromGroup.forEach(function(groupVillage) {
+                    if (id == groupVillage) {
+                        villages.push(village)
+                    }
+                })
+            })
+        } else {
+            villagesGetId.forEach(function(village) {
+                villages.push(village)
+            })
+        }
+        sendSabotages()
     }
     spyMaster.getLogs = function() {
         return logs
@@ -32359,7 +32475,7 @@ define('two/spyMaster/ui', [
     let villagesInfo = {}
     let targetsInfo = {}
     let villagesLabel = {}
-    let targetLabel = {}
+    let targetsLabel = {}
     let spyPlayer
     let spyProvince
     let spyVillage
@@ -32561,7 +32677,7 @@ define('two/spyMaster/ui', [
             return targetsInfo[targetId]
         }
         targetsInfo[targetId] = true
-        targetLabel[targetId] = 'ŁADOWANIE...'
+        targetsLabel[targetId] = 'ŁADOWANIE...'
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: targetId,
@@ -32573,7 +32689,7 @@ define('two/spyMaster/ui', [
                 name: data.village_name,
                 last_report: data.last_reports[0]
             }
-            targetLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+            targetsLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
     }
     logsView.updateVisibleLogs = function() {
@@ -32808,6 +32924,7 @@ define('two/spyMaster/ui', [
         $scope.villagesInfo = villagesInfo
         $scope.villagesLabel = villagesLabel
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.openTargetInfo = windowDisplayService.openVillageInfo
         $scope.jumpToVillage = mapService.jumpToVillage
         $scope.addMapSelectedVS = addMapSelectedVS
         $scope.addMapSelectedV = addMapSelectedV
