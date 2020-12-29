@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 20:23:45 GMT
+ * Tue, 29 Dec 2020 21:05:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18725,6 +18725,7 @@ define('two/fakeSender', [
     var newsupportdate = 0
     var fakeType = ''
     var date = ''
+    var dateGet = ''
     var dateattack = ''
     var dateSupport = ''
     var targetLimit = 0
@@ -18812,9 +18813,10 @@ define('two/fakeSender', [
     const sendFakes = function() {
         targets.forEach(function(target, index) {
             intervalFinal = Math.floor(Math.random() * 10000) + commandInterval * 1000
-            date = fakeSenderSettings[SETTINGS.DATEV]
-            newdate = utils.getTimeFromString(date) + intervalFinal
+            dateGet = fakeSenderSettings[SETTINGS.DATEV]
+            newdate = utils.getTimeFromString(dateGet) + intervalFinal
             date = utils.formatDate(newdate)
+            console.log(date)
             setTimeout(function() {
                 socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
                     fakeVillages.forEach(function(fakeVillage, index1) {
