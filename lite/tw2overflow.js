@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 20:04:31 GMT
+ * Tue, 29 Dec 2020 20:23:45 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18699,6 +18699,7 @@ define('two/fakeSender', [
     let selectedGroupsT = []
     let selectedGroupsG = []
     let selectedGroupsTarget = []
+    var intervalFinal = 0
     var Spear = 0
     var Sword = 0
     var Axe = 0
@@ -18810,7 +18811,7 @@ define('two/fakeSender', [
     }
     const sendFakes = function() {
         targets.forEach(function(target, index) {
-            var intervalFinal = Math.floor(Math.random() * 10000) + commandInterval * 1000
+            intervalFinal = Math.floor(Math.random() * 10000) + commandInterval * 1000
             date = fakeSenderSettings[SETTINGS.DATEV]
             newdate = utils.getTimeFromString(date) + intervalFinal
             date = utils.formatDate(newdate)
@@ -18961,7 +18962,7 @@ define('two/fakeSender', [
                                                                 infantryTrebuchet += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             }
-                                                        }, index2 * 2000)
+                                                        }, index2 * 1000)
                                                     })
                                                 } else if (fakeType == 'support') {
                                                     supportUnits.forEach(function(unit, index3) {
@@ -18999,7 +19000,7 @@ define('two/fakeSender', [
                                                                 targetLimit -= 1
                                                                 addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                             }
-                                                        }, index3 * 2000)
+                                                        }, index3 * 1000)
                                                     })
                                                 } else if (fakeType == 'four') {
                                                     if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
@@ -19139,7 +19140,7 @@ define('two/fakeSender', [
                                                                 infantryTrebuchet += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             }
-                                                        }, index4 * 2000)
+                                                        }, index4 * 1000)
                                                     })
                                                     newsupportdate = utils.getTimeFromString(date) + 4000
                                                     dateSupport = utils.formatDate(newsupportdate)
@@ -19178,7 +19179,7 @@ define('two/fakeSender', [
                                                                 targetLimit -= 1
                                                                 addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                             }
-                                                        }, index5 * 2000)
+                                                        }, index5 * 1000)
                                                     })
                                                 } else {
                                                     utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
@@ -19191,10 +19192,10 @@ define('two/fakeSender', [
                                     })
                                 }
                             }
-                        }, index1 * 31000)
+                        }, index1 * 16000)
                     })
                 })
-            }, index * ((fakeVillages.length * 31000) - 30000))
+            }, index * ((fakeVillages.length * 16000) - 15000))
         })
     }
     const fakeSender = {}
