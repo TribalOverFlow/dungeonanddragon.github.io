@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 10:05:55 GMT
+ * Tue, 29 Dec 2020 13:05:31 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1700,8 +1700,13 @@ define('two/language', [
             "buildings": "Budynki",
             "all": "Jednostki i budynki",
             "spy.stop": "Zatrzymaj",
+            "spy.information": "Wszystkie cele do szpiegowania można łączyć",
+            "sabotage.information": "Wszystkie cele do sabotowania można łączyć",
             "spy.player": "Szpieguj Gracza",
             "spy.village": "Szpieguj Wioskę",
+            "sabotage.province": "Sabotuj Prowincję",
+            "sabotage.player": "Sabotuj Gracza",
+            "sabotage.village": "Sabotuj Wioskę",
             "spy.province": "Szpieguj Prowincję",
             "spy.limit": "Limit na cel",
             "spy.groups": "Szpieguj grupę/y wiosek",
@@ -2437,7 +2442,7 @@ define('two/language', [
             "logs.target": "Wioska cel",
             "logs.unit": "Jednostka",
             "logs.type": "Rodzaj",
-            "logs.date": "Czas wysłania",
+            "logs.date": "Czas dodania",
             "logs.noFakes": "Nie wysłano żadnych fejków",
             "logs.clear": "Wyczyść logi",
             "general.started": "Watażka uruchomiony",
@@ -2471,7 +2476,7 @@ define('two/language', [
             "no_report": "Nie ma raportu",
             "reports": "Raporty",
             "date": "Data",
-            "settings.remote": "Sterowanie zdalne przez PW",
+            "settings.remote": "Sterowanie Zdalne za pomocą wiadomości PW",
             "description": "Narzędzie do farmienia",
             "status_time_limit": "Cel jest zbyt daleko",
             "status_command_error": "Problem z wysłaniem rozkazu",
@@ -2521,7 +2526,7 @@ define('two/language', [
             "step_cycle_restart": "Restartowanie cyklu poleceń...",
             "step_cycle_end": "Lista wiosek zakończona, oczekiwanie na następny cykl.",
             "step_cycle_end_no_villages": "Brak wiosek do rozpoczęcia cyklu.",
-            "step_cycle_next": "Lista wiosek się skończyła, następny cykl: %d.",
+            "step_cycle_next": "Lista wiosek się skończyła, następny cykl: ",
             "step_cycle_next_no_villages": "Brak wioski do rozpoczęcia cyklu, następny cykl: %d.",
             "full_storage": "Magazyn w wiosce jest pełny",
             "farm_stopped": "Farmer zatrzymany.",
@@ -2560,7 +2565,7 @@ define('two/language', [
             "reseted_logs": "Zarejestrowane logi zostały wyczyszczone.",
             "date_added": "Data dodania",
             "multiple_attacks_interval": "Przerwa między atakami (sekundy)",
-            "next_cycle_in": "Następny cykl za",
+            "next_cycle_in": "Następny cykl za: ",
             "target_limit_per_village": "Limit celów na wioskę",
             "settings.hotkeySwitch": "Skrót Start/Pauza",
             "settings.hotkeyWindow": "Skrót okna Farmera",
@@ -3118,8 +3123,13 @@ define('two/language', [
             "buildings": "Budynki",
             "all": "Jednostki i budynki",
             "spy.stop": "Zatrzymaj",
-            "spy.player": "Szpieguj całego gracza",
+            "spy.information": "Wszystkie cele do szpiegowania można łączyć",
+            "sabotage.information": "Wszystkie cele do sabotowania można łączyć",
+            "spy.player": "Szpieguj Gracza",
             "spy.village": "Szpieguj Wioskę",
+            "sabotage.province": "Sabotuj Prowincję",
+            "sabotage.player": "Sabotuj Gracza",
+            "sabotage.village": "Sabotuj Wioskę",
             "spy.province": "Szpieguj Prowincję",
             "spy.limit": "Limit na cel",
             "spy.groups": "Szpieguj grupę/y wiosek",
@@ -3143,7 +3153,7 @@ define('two/language', [
             "spy.add_player": "Wybierz gracza...",
             "spy.selected": "Wybierz",
             "sabotage.selected": "Wybierz",
-            "spy.send": "Wyślij",
+            "spy.send": "Szpieguj",
             "spy.sabote": "Sabotuj",
             "spy.clear": "Wyczyść",
             "countermeasures": "Kontrwywiad",
@@ -3171,7 +3181,7 @@ define('two/language', [
             "logs.type": "Typ",
             "logs.amount": "Ilość",
             "logs.date": "Czas wysłania",
-            "logs.noMissions": "Brak wysłanych szpiegów.",
+            "logs.noMissions": "Brak akcji szpiegowskich.",
             "logs.clear": "Wyczyść logi",
             "general.stopped": "Zwiadowca zatrzymany",
             "general.started": "Zwiadowca uruchomiony",
@@ -31788,44 +31798,44 @@ define('two/spyMaster', [
         })
     }
     const sendSpies = function() {
+        var ownLimit = spyMasterSettings[SETTINGS.LIMIT]
+        var LiczbaJ = 0
+        var LiczbaB = 0
+        if (ownLimit == 1) {
+            LiczbaJ = 1
+            LiczbaB = 0
+        } else if (ownLimit == 2) {
+            LiczbaJ = 1
+            LiczbaB = 1
+        } else if (ownLimit == 3) {
+            LiczbaJ = 2
+            LiczbaB = 1
+        } else if (ownLimit == 4) {
+            LiczbaJ = 2
+            LiczbaB = 2
+        } else if (ownLimit == 5) {
+            LiczbaJ = 3
+            LiczbaB = 2
+        } else if (ownLimit == 6) {
+            LiczbaJ = 4
+            LiczbaB = 2
+        } else if (ownLimit == 7) {
+            LiczbaJ = 4
+            LiczbaB = 3
+        } else if (ownLimit == 8) {
+            LiczbaJ = 5
+            LiczbaB = 3
+        } else if (ownLimit == 9) {
+            LiczbaJ = 6
+            LiczbaB = 3
+        } else if (ownLimit == 10) {
+            LiczbaJ = 6
+            LiczbaB = 4
+        } else if (ownLimit > 10) {
+            LiczbaJ = Math.Floor(ownLimit * 0.6)
+            LiczbaB = ownLimit - LiczbaJ
+        }
         targets.forEach(function(target, index) {
-            var ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-            var LiczbaJ = 0
-            var LiczbaB = 0
-            if (ownLimit == 1) {
-                LiczbaJ = 1
-                LiczbaB = 0
-            } else if (ownLimit == 2) {
-                LiczbaJ = 1
-                LiczbaB = 1
-            } else if (ownLimit == 3) {
-                LiczbaJ = 2
-                LiczbaB = 1
-            } else if (ownLimit == 4) {
-                LiczbaJ = 2
-                LiczbaB = 2
-            } else if (ownLimit == 5) {
-                LiczbaJ = 3
-                LiczbaB = 2
-            } else if (ownLimit == 6) {
-                LiczbaJ = 4
-                LiczbaB = 2
-            } else if (ownLimit == 7) {
-                LiczbaJ = 4
-                LiczbaB = 3
-            } else if (ownLimit == 8) {
-                LiczbaJ = 5
-                LiczbaB = 3
-            } else if (ownLimit == 9) {
-                LiczbaJ = 6
-                LiczbaB = 3
-            } else if (ownLimit == 10) {
-                LiczbaJ = 6
-                LiczbaB = 4
-            } else if (ownLimit > 10) {
-                LiczbaJ = Math.Floor(ownLimit * 0.6)
-                LiczbaB = ownLimit - LiczbaJ
-            }
             setTimeout(function() {
                 villages.forEach(function(village, index1) {
                     villageSpy = {
@@ -31925,6 +31935,7 @@ define('two/spyMaster', [
                 })
             }, index * villages.length * 12000)
         })
+        spyMaster.stop()
     }
     const spyMaster = {}
     spyMaster.init = function() {
@@ -31993,6 +32004,7 @@ define('two/spyMaster', [
         })
         if (amountTaverns == okTaverns) {
             addLog('', '', 'Kamuflaż zakończony', '')
+            spyMaster.stop()
         }
     }
     spyMaster.switchWeapon = function() {
@@ -32003,6 +32015,8 @@ define('two/spyMaster', [
         var replacement = spyMasterSettings[SETTINGS.REPLACEMENT]
         var amountTaverns = 0
         var okTaverns = 0
+        var unitLog = $filter('i18n')(unit, $rootScope.loc.ale, 'common')
+        var replacementLog = $filter('i18n')(replacement, $rootScope.loc.ale, 'common')
         villages.forEach(function(village) {
             var data = village.data
             var buildings = data.buildings
@@ -32036,12 +32050,13 @@ define('two/spyMaster', [
                         unit: unit,
                         replacement: replacement
                     })
-                    addLog(villageData, 'Zamiana broni', unit, replacement)
+                    addLog(villageData, 'Zamiana broni', unitLog, replacementLog)
                 }, index * interval * Math.random())
             }
         })
         if (amountTaverns == okTaverns) {
             addLog('', '', 'Zamiana broni zakończona', '')
+            spyMaster.stop()
         }
     }
     spyMaster.setDummies = function() {
@@ -32051,6 +32066,7 @@ define('two/spyMaster', [
         var unitD = spyMasterSettings[SETTINGS.DUMMIES]
         var amountTaverns = 0
         var okTaverns = 0
+        var dummies = $filter('i18n')(unitD, $rootScope.loc.ale, 'spy_master')
         villages.forEach(function(village) {
             var data = village.data
             var buildings = data.buildings
@@ -32084,12 +32100,13 @@ define('two/spyMaster', [
                         unit: unitD,
                         replacement: ''
                     })
-                    addLog(villageData, 'Atrapy', unitD, '')
+                    addLog(villageData, 'Atrapy', dummies, '')
                 }, index * interval * Math.random())
             }
         })
         if (amountTaverns == okTaverns) {
             addLog('', '', 'Atrapy postawione', '')
+            spyMaster.stop()
         }
     }
     spyMaster.exchangeUnits = function() {
@@ -32137,6 +32154,7 @@ define('two/spyMaster', [
         })
         if (amountTaverns == okTaverns) {
             addLog('', '', 'Wymiana zakończona', '')
+            spyMaster.stop()
         }
     }
     spyMaster.sendSpy = function() {
@@ -32669,7 +32687,7 @@ define('two/spyMaster/ui', [
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'spy_master' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ 'spy' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ 'countermeasures' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spy.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><span class=\"ff-cell-fix\">{{ 'spy.village' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyVillage.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyVillage.origin\" class=\"command-village\">{{ spyVillage.origin.name }} ({{ spyVillage.origin.x }}|{{ spyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedV()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><span class=\"ff-cell-fix\">{{ 'spy.province' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteProvince\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyProvince.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyProvince.origin\" class=\"command-village\">{{ spyProvince.origin.name }} ({{ spyProvince.origin.x }}|{{ spyProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPro()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER]\"><td><td><span class=\"ff-cell-fix\">{{ 'spy.player' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompletePlayer\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!spyPlayer.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyPlayer.origin\" class=\"command-village\">{{ spyPlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedP()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'spy.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'spy.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'spy.type' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'spy.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form><h5 class=\"twx-section\">{{ 'sabotage.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_S]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillageS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageVillage.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageVillage.origin\" class=\"command-village\">{{ sabotageVillage.origin.name }} ({{ sabotageVillage.origin.x }}|{{ sabotageVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_S]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvinceS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageProvince.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageProvince.origin\" class=\"command-village\">{{ sabotageProvince.origin.name }} ({{ sabotageProvince.origin.x }}|{{ sabotageProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_S]\"><td><td><td><tr><td><div auto-complete=\"autoCompletePlayerS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!sabotagePlayer.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotagePlayer.origin\" class=\"command-village\">{{ sabotagePlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'sabotage.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_S]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'sabotage.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'sabotage.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN_S]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_S]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sabotage.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES_S]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'countermeasures.camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\" placeholder=\"{{ 'countermeasures.level' | i18n:loc.ale:'spy_master' }}\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textcamouflage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipcamouflage' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"doCamouflage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btncamouflage' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textswitch' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipswitch' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"switchWeapon()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnswitch' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"4\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textdummies' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipdummies' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"setDummies()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btndummies' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textexchange' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipexchange' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"exchangeUnits()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnexchange' | i18n:loc.ale:'spy_master' }}</span></span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.target' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.type' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.date' | i18n:loc.ale:'spy_master' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openTargetInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetsLabel[log.targetId] }}</a><td>{{ log.type }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'spy.clear' | i18n:loc.ale:'spy_master' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSpy()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span> </a><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sabotage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.sabote' | i18n:loc.ale:'spy_master' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'countermeasures.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'spy_master' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ 'spy' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ 'countermeasures' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spy.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th><span class=\"ff-cell-fix\">{{ 'spy.information' | i18n:loc.ale:'spy_master' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.village' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyVillage.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyVillage.origin\" class=\"command-village\">{{ spyVillage.origin.name }} ({{ spyVillage.origin.x }}|{{ spyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedV()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.province' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteProvince\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyProvince.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyProvince.origin\" class=\"command-village\">{{ spyProvince.origin.name }} ({{ spyProvince.origin.x }}|{{ spyProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPro()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.player' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompletePlayer\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!spyPlayer.origin\" class=\"command-village\">{{ 'spy.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyPlayer.origin\" class=\"command-village\">{{ spyPlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedP()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'spy.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'spy.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'spy.type' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'spy.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form><h5 class=\"twx-section\">{{ 'sabotage.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th><span class=\"ff-cell-fix\">{{ 'sabotage.information' | i18n:loc.ale:'spy_master' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.village' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteVillageS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageVillage.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageVillage.origin\" class=\"command-village\">{{ sabotageVillage.origin.name }} ({{ sabotageVillage.origin.x }}|{{ sabotageVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.province' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteProvinceS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageProvince.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageProvince.origin\" class=\"command-village\">{{ sabotageProvince.origin.name }} ({{ sabotageProvince.origin.x }}|{{ sabotageProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.player' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompletePlayerS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!sabotagePlayer.origin\" class=\"command-village\">{{ 'sabotage.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotagePlayer.origin\" class=\"command-village\">{{ sabotagePlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'sabotage.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_S]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'sabotage.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'sabotage.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN_S]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_S]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sabotage.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES_S]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'countermeasures.camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\" placeholder=\"{{ 'countermeasures.level' | i18n:loc.ale:'spy_master' }}\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textcamouflage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipcamouflage' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"doCamouflage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btncamouflage' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textswitch' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipswitch' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"switchWeapon()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnswitch' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"4\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textdummies' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipdummies' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"setDummies()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btndummies' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textexchange' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipexchange' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"exchangeUnits()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnexchange' | i18n:loc.ale:'spy_master' }}</span></span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.target' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.type' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.date' | i18n:loc.ale:'spy_master' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openTargetInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetsLabel[log.targetId] }}</a><td>{{ log.type }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'spy.clear' | i18n:loc.ale:'spy_master' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSpy()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span> </a><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sabotage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.sabote' | i18n:loc.ale:'spy_master' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'countermeasures.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-spy-master div[select]{text-align:center}#two-spy-master div[select] .select-wrapper{height:34px}#two-spy-master div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-spy-master div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px}#two-spy-master .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-spy-master .actions a{width:100px}#two-spy-master .item-send{text-align:center}#two-spy-master .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-camouflage{text-align:center}#two-spy-master .item-camouflage span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-exchange{text-align:center}#two-spy-master .item-exchange span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-dummies{text-align:center}#two-spy-master .item-dummies span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-switch{text-align:center}#two-spy-master .item-switch span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .logs .status tr{height:25px}#two-spy-master .logs .status td{padding:0 6px}#two-spy-master .logs .log-list{margin-bottom:10px}#two-spy-master .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-spy-master .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}')
     }
     const buildWindow = function() {
