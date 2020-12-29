@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 20:23:45 GMT
+ * Tue, 29 Dec 2020 21:40:31 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18724,7 +18724,9 @@ define('two/fakeSender', [
     var newattackdate = 0
     var newsupportdate = 0
     var fakeType = ''
-    var date = ''
+    var date = []
+    var dateGet = ''
+    var dateFormated = ''
     var dateattack = ''
     var dateSupport = ''
     var targetLimit = 0
@@ -18812,9 +18814,9 @@ define('two/fakeSender', [
     const sendFakes = function() {
         targets.forEach(function(target, index) {
             intervalFinal = Math.floor(Math.random() * 10000) + commandInterval * 1000
-            date = fakeSenderSettings[SETTINGS.DATEV]
-            newdate = utils.getTimeFromString(date) + intervalFinal
-            date = utils.formatDate(newdate)
+            newdate = utils.getTimeFromString(dateGet) + intervalFinal
+            dateFormated = utils.formatDate(newdate)
+            date.push(dateFormated)
             setTimeout(function() {
                 socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
                     fakeVillages.forEach(function(fakeVillage, index1) {
@@ -18869,7 +18871,7 @@ define('two/fakeSender', [
                                                     fakeUnits.forEach(function(unit, index2) {
                                                         setTimeout(function() {
                                                             if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     spear: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18877,7 +18879,7 @@ define('two/fakeSender', [
                                                                 infantryAxe += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     axe: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18885,7 +18887,7 @@ define('two/fakeSender', [
                                                                 infantryAxe += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     archer: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18893,7 +18895,7 @@ define('two/fakeSender', [
                                                                 infantryAxe += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     doppelsoldner: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18902,7 +18904,7 @@ define('two/fakeSender', [
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             }
                                                             if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     sword: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18911,7 +18913,7 @@ define('two/fakeSender', [
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             }
                                                             if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     light_cavalry: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18919,7 +18921,7 @@ define('two/fakeSender', [
                                                                 cavalryLc += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     mounted_archer: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18928,7 +18930,7 @@ define('two/fakeSender', [
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             }
                                                             if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     ram: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18936,7 +18938,7 @@ define('two/fakeSender', [
                                                                 infantryRam += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     catapult: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                 ownLimit -= 1
@@ -18945,7 +18947,7 @@ define('two/fakeSender', [
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             }
                                                             if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     heavy_cavalry: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18954,7 +18956,7 @@ define('two/fakeSender', [
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
                                                             }
                                                             if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     trebuchet: 1
                                                                 }, {}, COMMAND_TYPES.ATTACK, false)
                                                                 ownLimit -= 1
@@ -18968,7 +18970,7 @@ define('two/fakeSender', [
                                                     supportUnits.forEach(function(unit, index3) {
                                                         setTimeout(function() {
                                                             if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     spear: 1
                                                                 }, {}, COMMAND_TYPES.SUPPORT, false)
                                                                 ownLimit -= 1
@@ -18976,7 +18978,7 @@ define('two/fakeSender', [
                                                                 infantrySupport += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                             } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     archer: 1
                                                                 }, {}, COMMAND_TYPES.SUPPORT, false)
                                                                 ownLimit -= 1
@@ -18985,7 +18987,7 @@ define('two/fakeSender', [
                                                                 addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                             }
                                                             if (unit == 'sword' && Sword > 0) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     sword: 1
                                                                 }, {}, COMMAND_TYPES.SUPPORT, false)
                                                                 ownLimit -= 1
@@ -18993,7 +18995,7 @@ define('two/fakeSender', [
                                                                 addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                             }
                                                             if (unit == 'heavy_cavalry' && HC > 0) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                commandQueue.addCommand(village, targetFinal, date(index), whenSend, {
                                                                     heavy_cavalry: 1
                                                                 }, {}, COMMAND_TYPES.SUPPORT, false)
                                                                 ownLimit -= 1
@@ -19004,19 +19006,19 @@ define('two/fakeSender', [
                                                     })
                                                 } else if (fakeType == 'four') {
                                                     if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                         ownLimit -= 4
                                                         targetLimit -= 4
                                                         repeatFour += 1
                                                         addLog(village.id, targetFinal.id, fourUnit, 'kareta')
                                                     } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                         ownLimit -= 4
                                                         targetLimit -= 4
                                                         repeatFour += 1
@@ -19024,25 +19026,25 @@ define('two/fakeSender', [
                                                     }
                                                 } else if (fakeType == 'full') {
                                                     if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                         ownLimit -= 4
                                                         targetLimit -= 4
                                                         repeatFour += 1
                                                         addLog(village.id, targetFinal.id, fourUnit, 'kareta')
                                                     } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                        commandQueue.addCommand(village, targetFinal, date(index), whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                         ownLimit -= 4
                                                         targetLimit -= 4
                                                         repeatFour += 1
                                                         addLog(village.id, targetFinal.id, fourUnit, 'kareta')
                                                     }
-                                                    newattackdate = utils.getTimeFromString(date) - 2000
+                                                    newattackdate = utils.getTimeFromString(date(index)) - 2000
                                                     dateattack = utils.formatDate(newattackdate)
                                                     fakeUnits.forEach(function(unit, index4) {
                                                         setTimeout(function() {
@@ -19142,7 +19144,7 @@ define('two/fakeSender', [
                                                             }
                                                         }, index4 * 1000)
                                                     })
-                                                    newsupportdate = utils.getTimeFromString(date) + 4000
+                                                    newsupportdate = utils.getTimeFromString(date(index)) + 4000
                                                     dateSupport = utils.formatDate(newsupportdate)
                                                     supportUnits.forEach(function(unit, index5) {
                                                         setTimeout(function() {
@@ -19255,7 +19257,7 @@ define('two/fakeSender', [
             }
         }
         fakeType = fakeSenderSettings[SETTINGS.TYPEG]
-        date = fakeSenderSettings[SETTINGS.DATEG]
+        dateGet = fakeSenderSettings[SETTINGS.DATEG]
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETG]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPG]
         ownGroups.forEach(function(group) {
@@ -19313,7 +19315,7 @@ define('two/fakeSender', [
             }
         }
         fakeType = fakeSenderSettings[SETTINGS.TYPET]
-        date = fakeSenderSettings[SETTINGS.DATET]
+        dateGet = fakeSenderSettings[SETTINGS.DATET]
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETT]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPT]
         ownGroups.forEach(function(group) {
@@ -19382,7 +19384,7 @@ define('two/fakeSender', [
             }
         }
         fakeType = fakeSenderSettings[SETTINGS.TYPEPro]
-        date = fakeSenderSettings[SETTINGS.DATEPro]
+        dateGet = fakeSenderSettings[SETTINGS.DATEPro]
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETPro]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPPro]
         ownGroups.forEach(function(group) {
@@ -19428,7 +19430,7 @@ define('two/fakeSender', [
             }
         }
         fakeType = fakeSenderSettings[SETTINGS.TYPEP]
-        date = fakeSenderSettings[SETTINGS.DATEP]
+        dateGet = fakeSenderSettings[SETTINGS.DATEP]
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETP]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPP]
         ownGroups.forEach(function(group) {
@@ -19447,16 +19449,36 @@ define('two/fakeSender', [
         sendFakes()
     }
     fakeSender.fakeVillages = function() {
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID2])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID3])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID4])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID5])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID6])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID7])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID8])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID9])
-        targets.push(fakeSenderSettings[SETTINGS.TARGET_ID10])
+        if (fakeSenderSettings[SETTINGS.TARGET_ID1] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID2] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID2])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID3] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID3])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID4] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID4])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID5] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID5])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID6] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID6])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID7] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID7])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID8] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID8])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID9] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID9])
+        }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID10] > 0) {
+            targets.push(fakeSenderSettings[SETTINGS.TARGET_ID10])
+        }
         fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
         supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
         fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
@@ -19475,7 +19497,7 @@ define('two/fakeSender', [
             }
         }
         fakeType = fakeSenderSettings[SETTINGS.TYPE]
-        date = fakeSenderSettings[SETTINGS.DATEV]
+        dateGet = fakeSenderSettings[SETTINGS.DATEV]
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
         ownGroups = fakeSenderSettings[SETTINGS.GROUP]
         commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVAL]
