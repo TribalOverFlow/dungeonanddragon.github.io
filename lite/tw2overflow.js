@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 09:24:43 GMT
+ * Tue, 29 Dec 2020 10:05:55 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -31863,12 +31863,13 @@ define('two/spyMaster', [
                                                     })
                                                     addLog(villageSpy, targetFinal, type, 1)
                                                     ownLimit -= 1
-                                                }, index2 * 2000)
+                                                }, (index2 * 2000) + 1000)
                                             }
                                         }
                                     } else if (type == 'all') {
                                         if (available.type == 1) {
                                             if (LiczbaB > 0 && LiczbaJ > 0) {
+                                                console.log(LiczbaB, LiczbaJ)
                                                 if (LiczbaB < (LiczbaJ - 1)) {
                                                     setTimeout(function() {
                                                         socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
@@ -31879,7 +31880,7 @@ define('two/spyMaster', [
                                                         })
                                                         addLog(villageSpy, targetFinal, 'Jednostki', 1)
                                                         LiczbaJ -= 1
-                                                    }, index2 * 2000)
+                                                    }, (index2 * 2000) + 1000)
                                                 } else if (LiczbaB < LiczbaJ) {
                                                     setTimeout(function() {
                                                         socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
@@ -31890,7 +31891,7 @@ define('two/spyMaster', [
                                                         })
                                                         addLog(villageSpy, targetFinal, 'Budynki', 1)
                                                         LiczbaB -= 1
-                                                    }, index2 * 2000)
+                                                    }, (index2 * 2000) + 1000)
                                                 } else if (LiczbaB == LiczbaJ) {
                                                     setTimeout(function() {
                                                         socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
@@ -31901,7 +31902,7 @@ define('two/spyMaster', [
                                                         })
                                                         addLog(villageSpy, targetFinal, 'Budynki', 1)
                                                         LiczbaB -= 1
-                                                    }, index2 * 2000)
+                                                    }, (index2 * 2000) + 1000)
                                                 }
                                             } else if (LiczbaB == 0 && LiczbaJ > 0) {
                                                 setTimeout(function() {
@@ -31913,16 +31914,16 @@ define('two/spyMaster', [
                                                     })
                                                     addLog(villageSpy, targetFinal, 'Jednostki', 1)
                                                     LiczbaJ -= 1
-                                                }, index2 * 2000)
+                                                }, (index2 * 2000) + 1000)
                                             }
                                         }
                                     }
                                 })
                             })
                         }
-                    }, index1 * 11000)
+                    }, index1 * 12000)
                 })
-            }, index * 15000)
+            }, index * villages.length * 12000)
         })
     }
     const spyMaster = {}
