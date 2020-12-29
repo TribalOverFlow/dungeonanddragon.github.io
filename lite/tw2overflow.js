@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 15:19:33 GMT
+ * Tue, 29 Dec 2020 15:24:28 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -31705,7 +31705,6 @@ define('two/spyMaster', [
     var enemies = false
     var targets = []
     var villages = []
-    var villageData = {}
     var ownLimit = 0
     var provinceId = ''
     var countSpy = 0
@@ -32043,13 +32042,6 @@ define('two/spyMaster', [
             var level = tavern.level
             if (level >= 3) {
                 setTimeout(function() {
-                    villageData = {
-                        'id': village.data.villageId,
-                        'x': village.data.x,
-                        'y': village.data.y,
-                        'name': village.data.name,
-                        'character_id': player.getId()
-                    }
                     amountTaverns = amountTaverns + 1
                     socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
                         village_id: village.getId(),
@@ -32060,7 +32052,7 @@ define('two/spyMaster', [
                         unit: '',
                         replacement: ''
                     })
-                    addLog(villageData, 'Kamuflaż', buildingT, buildingLv)
+                    addLog(village.getId(), 'Kamuflaż', buildingT, buildingLv)
                 }, index * interval * Math.random())
             }
         })
@@ -32095,13 +32087,6 @@ define('two/spyMaster', [
             var level = tavern.level
             if (level >= 6) {
                 setTimeout(function() {
-                    villageData = {
-                        'id': village.data.villageId,
-                        'x': village.data.x,
-                        'y': village.data.y,
-                        'name': village.data.name,
-                        'character_id': player.getId()
-                    }
                     amountTaverns = amountTaverns + 1
                     socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
                         village_id: village.getId(),
@@ -32112,7 +32097,7 @@ define('two/spyMaster', [
                         unit: unit,
                         replacement: replacement
                     })
-                    addLog(villageData, 'Zamiana broni', unitLog, replacementLog)
+                    addLog(village.getId(), 'Zamiana broni', unitLog, replacementLog)
                 }, index * interval * Math.random())
             }
         })
@@ -32145,13 +32130,6 @@ define('two/spyMaster', [
             var level = tavern.level
             if (level >= 9) {
                 setTimeout(function() {
-                    villageData = {
-                        'id': village.data.villageId,
-                        'x': village.data.x,
-                        'y': village.data.y,
-                        'name': village.data.name,
-                        'character_id': player.getId()
-                    }
                     amountTaverns = amountTaverns + 1
                     socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
                         village_id: village.getId(),
@@ -32162,7 +32140,7 @@ define('two/spyMaster', [
                         unit: unitD,
                         replacement: ''
                     })
-                    addLog(villageData, 'Atrapy', dummies, '')
+                    addLog(village.getId(), 'Atrapy', dummies, '')
                 }, index * interval * Math.random())
             }
         })
@@ -32193,13 +32171,6 @@ define('two/spyMaster', [
             var level = tavern.level
             if (level >= 12) {
                 setTimeout(function() {
-                    villageData = {
-                        'id': village.data.villageId,
-                        'x': village.data.x,
-                        'y': village.data.y,
-                        'name': village.data.name,
-                        'character_id': player.getId()
-                    }
                     amountTaverns = amountTaverns + 1
                     socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
                         village_id: village.getId(),
@@ -32210,7 +32181,7 @@ define('two/spyMaster', [
                         unit: '',
                         replacement: ''
                     })
-                    addLog(villageData, 'Wymiana', '', '')
+                    addLog(village.getId(), 'Wymiana', '', '')
                 }, index * interval * Math.random())
             }
         })
