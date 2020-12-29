@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 17:54:02 GMT
+ * Tue, 29 Dec 2020 19:02:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -18956,8 +18956,6 @@ define('two/fakeSender', [
                                                                 targetLimit -= 1
                                                                 infantryTrebuchet += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else {
-                                                                utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
                                                             }
                                                         }, index2 * 2000)
                                                     })
@@ -18999,8 +18997,6 @@ define('two/fakeSender', [
                                                                 ownLimit -= 1
                                                                 targetLimit -= 1
                                                                 addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            } else {
-                                                                utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
                                                             }
                                                         }, index3 * 2000)
                                                     })
@@ -19026,8 +19022,6 @@ define('two/fakeSender', [
                                                         targetLimit -= 4
                                                         repeatFour += 1
                                                         addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                    } else {
-                                                        utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
                                                     }
                                                 } else if (fakeType == 'full') {
                                                     date = fakeSenderSettings[SETTINGS.DATEV]
@@ -19051,8 +19045,6 @@ define('two/fakeSender', [
                                                         targetLimit -= 4
                                                         repeatFour += 1
                                                         addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                    } else {
-                                                        utils.notif('error', $filter('i18n')('error_no_fourUnit', $rootScope.loc.ale, 'fake_sender'))
                                                     }
                                                     newdate = utils.getTimeFromString(date) - 2000
                                                     date = utils.formatDate(newdate)
@@ -19151,8 +19143,6 @@ define('two/fakeSender', [
                                                                 targetLimit -= 1
                                                                 infantryTrebuchet += 1
                                                                 addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else {
-                                                                utils.notif('error', $filter('i18n')('error_no_fakeUnit', $rootScope.loc.ale, 'fake_sender'))
                                                             }
                                                         }, index4 * 2000)
                                                     })
@@ -19192,8 +19182,6 @@ define('two/fakeSender', [
                                                                 ownLimit -= 1
                                                                 targetLimit -= 1
                                                                 addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            } else {
-                                                                utils.notif('error', $filter('i18n')('error_no_supportUnit', $rootScope.loc.ale, 'fake_sender'))
                                                             }
                                                         }, index5 * 2000)
                                                     })
@@ -19208,7 +19196,7 @@ define('two/fakeSender', [
                                     })
                                 }
                             }
-                        }, index1 * 30000)
+                        }, index1 * 10000)
                     })
                 })
             }, index * 2200 * fakeVillages.length)
