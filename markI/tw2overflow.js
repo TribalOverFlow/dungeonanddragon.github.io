@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 30 Dec 2020 21:58:44 GMT
+ * Wed, 30 Dec 2020 22:19:27 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4476,13 +4476,13 @@ define('two/alertSender', [
                         var message = alertText.join()
                         if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
                             socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                message_id: 7749,
+                                message_id: 1742,
                                 message: message
                             })
                             alertText = []
                         } else {
                             socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                message_id: 7750,
+                                message_id: 1743,
                                 message: message
                             })
                             alertText = []
