@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 29 Dec 2020 21:48:55 GMT
+ * Wed, 30 Dec 2020 21:58:44 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -888,7 +888,7 @@ define('two/language', [
             "duration": "Czas",
             "info.header": "Tytuł",
             "info.content": "Zawartość",
-            "general.description": "Wznosi budynki w wioskach wg określonego szablonu"
+            "description": "Wznosi budynki w wioskach wg określonego szablonu"
         },
         "builder_queue_add_building_modal": {
             "title": "Dodaj nowy budynek"
@@ -1698,6 +1698,7 @@ define('two/language', [
             "spy": "Akcje Szpiegowskie",
             "units": "Jednostki",
             "buildings": "Budynki",
+            "description": "Narzędzie do akcji szpiegowskich i kontrwywiadu",
             "all": "Jednostki i budynki",
             "spy.stop": "Zatrzymaj",
             "spy.information": "Wszystkie cele do szpiegowania można łączyć",
@@ -2312,7 +2313,7 @@ define('two/language', [
             "duration": "Czas",
             "info.header": "Tytuł",
             "info.content": "Zawartość",
-            "general.description": "Wznosi budynki w wioskach wg określonego szablonu"
+            "description": "Wznosi budynki w wioskach wg określonego szablonu"
         },
         "builder_queue_add_building_modal": {
             "title": "Dodaj nowy budynek"
@@ -3122,6 +3123,7 @@ define('two/language', [
             "spy": "Akcje Szpiegowskie",
             "units": "Jednostki",
             "buildings": "Budynki",
+            "description": "Narzędzie do akcji szpiegowskich i kontrwywiadu",
             "all": "Jednostki i budynki",
             "spy.stop": "Zatrzymaj",
             "spy.information": "Wszystkie cele do szpiegowania można łączyć",
@@ -6084,6 +6086,39 @@ define('two/attackView', [
             }
         })
     }
+    const closestOwnVillageSpy = function(origin, callback) {
+        var size = 40
+        if (mapData.hasTownDataInChunk(origin.x, origin.y)) {
+            var sectors = mapData.loadTownData(origin.x, origin.y, size, size, size)
+            var origins = []
+            var closestOrigins
+            var own = []
+            var playerId = modelDataService.getSelectedCharacter().getId()
+            sectors.forEach(function(sector) {
+                for (let x in sector.data) {
+                    for (let y in sector.data[x]) {
+                        origins.push(sector.data[x][y])
+                    }
+                }
+            })
+            own = origins.filter(function(village) {
+                return village.character_id === playerId && origin.id !== village.id
+            })
+            if (own.length) {
+                closestOrigins = sortByDistanceTarget(own, origin)
+            } else {
+                return callback(false)
+            }
+            return callback(closestOrigins)
+        }
+        var loads = convert.scaledGridCoordinates(origin.x, origin.y, size, size, size)
+        var index = 0
+        mapData.loadTownDataAsync(origin.x, origin.y, size, size, function() {
+            if (++index === loads.length) {
+                closestOwnVillageBunker(origin, callback)
+            }
+        })
+    }
     /**
      * @param {Object} data The data-object from the backend
      */
@@ -6887,6 +6922,239 @@ define('two/attackView', [
             unitInfo()
         })
     }
+    attackView.spyVillage = function(command) {
+        closestOwnVillageSpy(command.originVillage, function(closestVillage) {
+            var origin = closestVillage
+            var villageId = command.originVillage.id
+            var villageName = command.originVillage.name
+            var interval = 2000
+            var interval1 = 11000
+            var Liczba = 0
+
+            function spyOrigin() {
+                origin.forEach(function(village, index) {
+                    console.log(village)
+                    var scoutingInfo = village.scoutingInfo
+                    var spies = scoutingInfo.spies
+                    setTimeout(function() {
+                        spies.forEach(function(available, index) {
+                            if (available.type == 1) {
+                                Liczba += 1
+                                if (Liczba <= 6) {
+                                    setTimeout(function() {
+                                        socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                            startVillage: village.id,
+                                            targetVillage: villageId,
+                                            spys: 1,
+                                            type: 'units'
+                                        })
+                                    }, index * interval * Math.random())
+                                    utils.emitNotif('success', 'Szpieg nr ' + Liczba + ' wysłany na ' + villageName)
+                                }
+                            }
+                        })
+                    }, index * interval1 * Math.random())
+                })
+            }
+            spyOrigin()
+        })
+    }
+    attackView.withdrawArmy = function(command, date) {
+        var Time = date
+        console.log(Time)
+        var origin = command.targetVillage.id
+        var supporters = []
+        var archer = 0
+        var axe = 0
+        var catapult = 0
+        var doppelsoldner = 0
+        var heavy_cavalry = 0
+        var knight = 0
+        var light_cavalry = 0
+        var mounted_archer = 0
+        var ram = 0
+        var snob = 0
+        var spear = 0
+        var sword = 0
+        var trebuchet = 0
+        var id = 0
+        socketService.emit(routeProvider.VILLAGE_GET_UNITSCREEN_INFO, {
+            village_id: origin
+        }, function(data) {
+            for (var i = 0; i < data.defArmies.length; i++) {
+                supporters.push(data.defArmies[i])
+            }
+            supporters.forEach(function(support, index) {
+                setTimeout(function() {
+                    archer = support.archer
+                    axe = support.axe
+                    catapult = support.catapult
+                    doppelsoldner = support.doppelsoldner
+                    heavy_cavalry = support.heavy_cavalry
+                    knight = support.knight
+                    light_cavalry = support.light_cavalry
+                    mounted_archer = support.mounted_archer
+                    ram = support.ram
+                    snob = support.snob
+                    spear = support.spear
+                    sword = support.sword
+                    trebuchet = support.trebuchet
+                    id = support.village.village_id
+                    console.log(spear, id)
+                    if (id != origin) {
+                        if (spear > 0 || axe > 0 || archer > 0 || doppelsoldner > 0) {
+                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                id: support.id,
+                                units: {
+                                    archer: archer,
+                                    axe: axe,
+                                    catapult: 0,
+                                    doppelsoldner: doppelsoldner,
+                                    heavy_cavalry: 0,
+                                    knight: 0,
+                                    light_cavalry: 0,
+                                    mounted_archer: 0,
+                                    ram: 0,
+                                    snob: 0,
+                                    spear: spear,
+                                    sword: 0,
+                                    trebuchet: 0
+                                }
+                            }, function(data) {
+                                console.log(data)
+                            })
+                        } else if (light_cavalry > 0 || mounted_archer > 0 || knight > 0) {
+                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                id: support.id,
+                                units: {
+                                    archer: 0,
+                                    axe: 0,
+                                    catapult: 0,
+                                    doppelsoldner: 0,
+                                    heavy_cavalry: 0,
+                                    knight: knight,
+                                    light_cavalry: light_cavalry,
+                                    mounted_archer: mounted_archer,
+                                    ram: 0,
+                                    snob: 0,
+                                    spear: 0,
+                                    sword: 0,
+                                    trebuchet: 0
+                                }
+                            }, function(data) {
+                                console.log(data)
+                            })
+                        } else if (heavy_cavalry > 0) {
+                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                id: support.id,
+                                units: {
+                                    archer: 0,
+                                    axe: 0,
+                                    catapult: 0,
+                                    doppelsoldner: 0,
+                                    heavy_cavalry: heavy_cavalry,
+                                    knight: 0,
+                                    light_cavalry: 0,
+                                    mounted_archer: 0,
+                                    ram: 0,
+                                    snob: 0,
+                                    spear: 0,
+                                    sword: 0,
+                                    trebuchet: 0
+                                }
+                            }, function(data) {
+                                console.log(data)
+                            })
+                        } else if (sword > 0) {
+                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                id: support.id,
+                                units: {
+                                    archer: 0,
+                                    axe: 0,
+                                    catapult: 0,
+                                    doppelsoldner: 0,
+                                    heavy_cavalry: 0,
+                                    knight: 0,
+                                    light_cavalry: 0,
+                                    mounted_archer: 0,
+                                    ram: 0,
+                                    snob: 0,
+                                    spear: 0,
+                                    sword: sword,
+                                    trebuchet: 0
+                                }
+                            }, function(data) {
+                                console.log(data)
+                            })
+                        } else if (snob > 0) {
+                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                id: support.id,
+                                units: {
+                                    archer: 0,
+                                    axe: 0,
+                                    catapult: 0,
+                                    doppelsoldner: 0,
+                                    heavy_cavalry: 0,
+                                    knight: 0,
+                                    light_cavalry: 0,
+                                    mounted_archer: 0,
+                                    ram: 0,
+                                    snob: snob,
+                                    spear: 0,
+                                    sword: 0,
+                                    trebuchet: 0
+                                }
+                            }, function(data) {
+                                console.log(data)
+                            })
+                        } else if (trebuchet > 0) {
+                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                id: support.id,
+                                units: {
+                                    archer: 0,
+                                    axe: 0,
+                                    catapult: 0,
+                                    doppelsoldner: 0,
+                                    heavy_cavalry: 0,
+                                    knight: 0,
+                                    light_cavalry: 0,
+                                    mounted_archer: 0,
+                                    ram: 0,
+                                    snob: 0,
+                                    spear: 0,
+                                    sword: 0,
+                                    trebuchet: trebuchet
+                                }
+                            }, function(data) {
+                                console.log(data)
+                            })
+                        } else if (ram > 0 || catapult > 0) {
+                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                id: support.id,
+                                units: {
+                                    archer: 0,
+                                    axe: 0,
+                                    catapult: catapult,
+                                    doppelsoldner: 0,
+                                    heavy_cavalry: 0,
+                                    knight: 0,
+                                    light_cavalry: 0,
+                                    mounted_archer: 0,
+                                    ram: ram,
+                                    snob: 0,
+                                    spear: 0,
+                                    sword: 0,
+                                    trebuchet: 0
+                                }
+                            }, function(data) {
+                                console.log(data)
+                            })
+                        }
+                    }
+                }, index * 500)
+            })
+        })
+    }
     attackView.commandQueueEnabled = function() {
         return !!commandQueue
     }
@@ -7014,38 +7282,10 @@ define('two/attackView/ui', [
         attackView.setQueueConquerBack(command, formatedDate)
     }
     const spyVillage = function(command) {
-        var villageId = command.originVillage.id
-        var villageName = command.originVillage.name
-        var player = modelDataService.getSelectedCharacter()
-        var villages = player.getVillageList()
-        var interval = 5000
-        var interval1 = 7000
-        var Liczba = 0
-        villages.forEach(function(village, index) {
-            var scoutingInfo = village.scoutingInfo
-            var spies = scoutingInfo.spies
-            setTimeout(function() {
-                spies.forEach(function(available, index) {
-                    if (available.type == 1) {
-                        Liczba = Liczba + 1
-                        if (Liczba <= 7) {
-                            setTimeout(function() {
-                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                    startVillage: village.getId(),
-                                    targetVillage: villageId,
-                                    spys: 1,
-                                    type: 'units'
-                                })
-                            }, index * interval * Math.random())
-                            utils.emitNotif('success', 'Szpieg nr ' + Liczba + ' wysłany na ' + villageName)
-                        }
-                    }
-                })
-            }, index * interval1 * Math.random())
-        })
+        attackView.spyVillage(command)
     }
     const withdrawArmy = function(command) {
-        const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+        const formatedDate = $filter('readableDateFilter')((command.time_completed - 5) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
         console.log(formatedDate)
         attackView.withdrawArmy(command, formatedDate)
     }
@@ -33483,7 +33723,6 @@ define('two/spyRecruiter', [
                     })
                 }
             })
-            utils.notif('success', $filter('i18n')('revived', $rootScope.loc.ale, 'spy_recruiter'))
         }
     }
     let spyRecruiter = {}
@@ -33496,7 +33735,7 @@ define('two/spyRecruiter', [
         recruitSpy()
         setInterval(function() {
             recruitSpy()
-        }, 120000)
+        }, 30000)
     }
     spyRecruiter.stop = function() {
         eventQueue.trigger(eventTypeProvider.SPY_RECRUITER_STOPPED)
