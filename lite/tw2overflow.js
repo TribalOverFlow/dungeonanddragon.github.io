@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 02 Jan 2021 17:01:05 GMT
+ * Sat, 02 Jan 2021 18:31:49 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4354,170 +4354,117 @@ require([
 define('two/alertSender', [
     'two/utils',
     'queues/EventQueue',
-    'models/CommandModel',
-    'conf/unitTypes'
+    'Lockr'
 ], function(
     utils,
     eventQueue,
-    CommandModel,
-    UNIT_TYPES
+    Lockr
 ) {
-    let convert
-    var overviewService = injector.get('overviewService')
     var initialized = false
     var running = false
-    var globalInfoModel = modelDataService.getSelectedCharacter().getGlobalInfo()
-    var COLUMN_TYPES = {
-        'ORIGIN_VILLAGE': 'origin_village_name',
-        'COMMAND_TYPE': 'command_type',
-        'TARGET_VILLAGE': 'target_village_name',
-        'TIME_COMPLETED': 'time_completed',
-        'COMMAND_PROGRESS': 'command_progress',
-        'ORIGIN_CHARACTER': 'origin_character_name'
-    }
-    var sorting = {
-        reverse: false,
-        column: COLUMN_TYPES.COMMAND_PROGRESS
-    }
     var player = modelDataService.getSelectedCharacter()
+    var playerId = player.data.character_id
     var tribe = player.tribeById
     var tribeId = tribe[0]
+    var playerName = player.data.character_name
+    let sendedAlert = []
+    var tribemates = []
+    let attackView = false
+    let commands = []
     var villages = player.getVillageList()
     var villagesIds = []
-    var playerId = player.data.character_id
-    var playerName = player.data.character_name
-    var attacks = []
-    var tribemates = []
-    var UNIT_SPEED_ORDER = [
-        UNIT_TYPES.LIGHT_CAVALRY,
-        UNIT_TYPES.HEAVY_CAVALRY,
-        UNIT_TYPES.AXE,
-        UNIT_TYPES.SWORD,
-        UNIT_TYPES.RAM,
-        UNIT_TYPES.SNOB,
-        UNIT_TYPES.TREBUCHET
-    ]
-
-    function secondsToDaysHHMMSS(totalSeconds) {
-        var returnString = ''
-        var date = new Date(totalSeconds * 1000)
-        convert = date.toLocaleString()
-        returnString = convert
-        return returnString
+    var incomingUnit = ''
+    var incomingName = ''
+    var slowestUnit = ''
+    const STORAGE_KEYS = {
+        ALERTS: 'auto_withdraw_alerts'
+    }
+    const storeAlerts = function() {
+        Lockr.set(STORAGE_KEYS.ALERTS, sendedAlert)
+    }
+    const pushAlert = function(sentAlert) {
+        sendedAlert.push(sentAlert)
     }
     var checkincomingsAttacks = function() {
-        if (!running) {
-            return false
-        }
-        socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
-            tribe: tribeId
-        }, function(data) {
-            var members = data.members
-            for (var i = 0; i < members.length; i++) {
-                tribemates.push(members[i].id)
-            }
-        })
-        villages.forEach(function(village) {
-            villagesIds.push(village.getId())
-        })
-        var incomingCommands = globalInfoModel.getCommandListModel().getIncomingCommands().length
-        var count = incomingCommands > 25 ? incomingCommands : 25
-        socketService.emit(routeProvider.OVERVIEW_GET_INCOMING, {
-            'count': count,
-            'offset': 0,
-            'sorting': sorting.column,
-            'reverse': sorting.reverse ? 1 : 0,
-            'groups': [],
-            'command_types': ['attack'],
-            'villages': villagesIds
-        }, sendAlerts)
-    }
-    var sendAlerts = function sendAlerts(data) {
-        var alertText = []
-        var commands = data.commands
-        for (var i = 0; i < commands.length; i++) {
-            overviewService.formatCommand(commands[i])
-            if (tribemates.includes(commands[i].origin_character_id)) {
-                console.log('Nadchodzące ruchy wojsk pochodzą od współplemieńca ' + commands[i].origin_character_id + ' Rodzaj ' + commands[i].command_type)
-            } else {
-                if (commands[i].command_type == 'attack') {
-                    if (attacks.includes(commands[i].command_id)) {
-                        console.log('Już wysłano powiadomienie')
-                    } else {
-                        attacks.push(commands[i].command_id)
-                        commands[i].slowestUnit = getSlowestUnit(commands[i])
-                        var timecompleted = commands[i].time_completed
-                        var finalTime = secondsToDaysHHMMSS(timecompleted)
-                        var incomingUnit = ''
-                        var incomingName = ''
-                        if (commands[i].slowestUnit == 'sword') {
-                            incomingName = ' [color=03709d]MIECZNIK[/color]'
-                            incomingUnit = 'sword'
-                        } else if (commands[i].slowestUnit == 'axe') {
-                            incomingName = ' [color=e21f1f]TOPORNIK[/color]'
-                            incomingUnit = 'axe'
-                        } else if (commands[i].slowestUnit == 'ram') {
-                            incomingName = ' [color=730202]TARAN[/color]'
-                            incomingUnit = 'ram'
-                        } else if (commands[i].slowestUnit == 'snob') {
-                            incomingName = ' [color=ffee00]SZLACHCIC[/color]'
-                            incomingUnit = 'snob'
-                        } else if (commands[i].slowestUnit == 'trebuchet') {
-                            incomingName = ' [color=494500]TREBUSZ[/color]'
-                            incomingUnit = 'trebuchet'
-                        } else if (commands[i].slowestUnit == 'light_cavalry') {
-                            incomingName = ' [color=d96a19]LEKKA KAWALERIA[/color]'
-                            incomingUnit = 'light_cavalry'
-                        } else if (commands[i].slowestUnit == 'heavy_cavalry') {
-                            incomingName = ' [color=0111af]CIĘŻKA KAWALERIA[/color]'
-                            incomingUnit = 'heavy_cavalry'
-                        }
-                        alertText.push('[size=large][b]Nadchodzący atak [/b]--- [/size][unit]' + incomingUnit + '[/unit] [size=large][b]' + incomingName + '[/b][/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + commands[i].target_village_id + ']' + commands[i].target_village_name + '[/village][b] Gracz cel: [/b][player=' + playerId + ']' + playerName + '[/player][b] [br]Wioska pochodzenia: [/b][village=' + commands[i].origin_village_id + ']' + commands[i].origin_village_name + '[/village][b] Gracz atakujący: [/b][player=' + commands[i].origin_character_id + ']' + commands[i].origin_character_name + '[/player][/size]')
-                        var message = alertText.join()
-                        if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
-                            socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                message_id: 1742,
-                                message: message
-                            })
-                            alertText = []
-                        } else {
-                            socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                message_id: 1743,
-                                message: message
-                            })
-                            alertText = []
-                        }
-                    }
+        if (running == true) {
+            socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
+                tribe: tribeId
+            }, function(data) {
+                var members = data.members
+                for (var i = 0; i < members.length; i++) {
+                    tribemates.push(members[i].id)
                 }
-            }
+            })
+            villages.forEach(function(village) {
+                villagesIds.push(village.getId())
+            })
+            commands = attackView.getCommands()
+            commands.forEach(function(command, index) {
+                if (sendedAlert.includes(command.command_id)) {
+                    console.log('Już dodano wysłano alert.')
+                } else {
+                    setTimeout(function() {
+                        if (command.command_type == 'attack') {
+                            if (tribemates.includes(command.origin_character_id)) {
+                                console.log('Nadchodzące ruchy wojsk pochodzą od współplemieńca ' + command.origin_character_id + ' Rodzaj ' + command.command_type)
+                            } else {
+                                var alertText = []
+                                slowestUnit = command.slowestUnit
+                                var timecompleted = command.time_completed
+                                var finalTime = utils.formatDate(timecompleted)
+                                if (slowestUnit == 'sword') {
+                                    incomingName = ' [color=03709d]MIECZNIK[/color]'
+                                    incomingUnit = 'sword'
+                                } else if (slowestUnit == 'axe') {
+                                    incomingName = ' [color=e21f1f]TOPORNIK[/color]'
+                                    incomingUnit = 'axe'
+                                } else if (slowestUnit == 'ram') {
+                                    incomingName = ' [color=730202]TARAN[/color]'
+                                    incomingUnit = 'ram'
+                                } else if (slowestUnit == 'snob') {
+                                    incomingName = ' [color=ffee00]SZLACHCIC[/color]'
+                                    incomingUnit = 'snob'
+                                } else if (slowestUnit == 'trebuchet') {
+                                    incomingName = ' [color=494500]TREBUSZ[/color]'
+                                    incomingUnit = 'trebuchet'
+                                } else if (slowestUnit == 'light_cavalry') {
+                                    incomingName = ' [color=d96a19]LEKKA KAWALERIA[/color]'
+                                    incomingUnit = 'light_cavalry'
+                                } else if (slowestUnit == 'heavy_cavalry') {
+                                    incomingName = ' [color=0111af]CIĘŻKA KAWALERIA[/color]'
+                                    incomingUnit = 'heavy_cavalry'
+                                }
+                                alertText.push('[size=large][b]Nadchodzący atak [/b]--- [/size][unit]' + incomingUnit + '[/unit] [size=large][b]' + incomingName + '[/b][/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + command.target_village_id + ']' + command.target_village_name + '[/village][b] Gracz cel: [/b][player=' + playerId + ']' + playerName + '[/player][b] [br]Wioska pochodzenia: [/b][village=' + command.origin_village_id + ']' + command.origin_village_name + '[/village][b] Gracz atakujący: [/b][player=' + command.origin_character_id + ']' + command.origin_character_name + '[/player][/size]')
+                                var message = alertText.join()
+                                if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
+                                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                        message_id: 1742,
+                                        message: message
+                                    })
+                                    alertText = []
+                                    pushAlert(command.command_id)
+                                    storeAlerts()
+                                } else {
+                                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                        message_id: 1743,
+                                        message: message
+                                    })
+                                    alertText = []
+                                    pushAlert(command.command_id)
+                                    storeAlerts()
+                                }
+                            }
+                        }
+                    }, index * 4000)
+                }
+            })
         }
-    }
-    var getSlowestUnit = function(command) {
-        const origin = {
-            x: command.origin_x,
-            y: command.origin_y
-        }
-        const target = {
-            x: command.target_x,
-            y: command.target_y
-        }
-        const unitDurationDiff = UNIT_SPEED_ORDER.map(function(unit) {
-            const travelTime = utils.getTravelTime(origin, target, {
-                [unit]: 1
-            }, command.command_type, {}, false)
-            const durationDiff = Math.abs(travelTime - command.model.duration)
-            return {
-                unit: unit,
-                diff: durationDiff
-            }
-        }).sort(function(a, b) {
-            return a.diff - b.diff
-        })
-        return unitDurationDiff[0].unit
     }
     var alertSender = {}
     alertSender.init = function() {
         initialized = true
+        attackView = require('two/attackView')
+        sendedAlert = Lockr.get(STORAGE_KEYS.ALERTS, [], true)
     }
     alertSender.start = function() {
         eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STARTED)
@@ -8166,7 +8113,6 @@ define('two/autoWithdraw', [
             console.log('Dezerter uruchomiony')
             commands = attackView.getCommands()
             commands.forEach(function(command, index) {
-                console.log(command)
                 if (withdrawCommands.includes(command.command_id)) {
                     console.log('Już dodano komendę cofania wojsk lub klinowania.')
                 } else {
