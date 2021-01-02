@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 30 Dec 2020 22:19:27 GMT
+ * Sat, 02 Jan 2021 19:17:54 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -657,7 +657,7 @@ define('two/language', [
             "commands_bunker_village_20_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 20k). Uwaga! robisz to na własną odpowiedzialność.",
             "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
             "commands_conquer_village_tooltip": "Odbij wioske po straceniu(sekunde do minuty po straceniu w zależności od tego czy zdąży szlachcic).",
-            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
+            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia przed wejsciem tego ataku.(zalecane wcześniejsze wykonanie tej akcji)"
         },
         "auto_collector": {
             "title": "Kolekcjoner",
@@ -679,7 +679,7 @@ define('two/language', [
         },
         "auto_withdraw": {
             "title": "Dezerter",
-            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami jeśli to nie szlachcic lub trebuchet.",
+            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami, jeśli to szlachcic lub trebuchet wstawia małe kliny(po 100 jednostek).",
             "activated": "Dezerter aktywowany",
             "deactivated": "Dezerter skończył działanie"
         },
@@ -2082,7 +2082,7 @@ define('two/language', [
             "commands_bunker_village_20_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 20k). Uwaga! robisz to na własną odpowiedzialność.",
             "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
             "commands_conquer_village_tooltip": "Odbij wioske po straceniu(sekunde do minuty po straceniu w zależności od tego czy zdąży szlachcic).",
-            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
+            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia przed wejsciem tego ataku.(zalecane wcześniejsze wykonanie tej akcji)"
         },
         "auto_collector": {
             "title": "Kolekcjoner",
@@ -2104,7 +2104,7 @@ define('two/language', [
         },
         "auto_withdraw": {
             "title": "Dezerter",
-            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami jeśli to nie szlachcic lub trebuchet.",
+            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami, jeśli to szlachcic lub trebuchet wstawia małe kliny(po 100 jednostek).",
             "activated": "Dezerter aktywowany",
             "deactivated": "Dezerter skończył działanie"
         },
@@ -4354,170 +4354,117 @@ require([
 define('two/alertSender', [
     'two/utils',
     'queues/EventQueue',
-    'models/CommandModel',
-    'conf/unitTypes'
+    'Lockr'
 ], function(
     utils,
     eventQueue,
-    CommandModel,
-    UNIT_TYPES
+    Lockr
 ) {
-    let convert
-    var overviewService = injector.get('overviewService')
     var initialized = false
     var running = false
-    var globalInfoModel = modelDataService.getSelectedCharacter().getGlobalInfo()
-    var COLUMN_TYPES = {
-        'ORIGIN_VILLAGE': 'origin_village_name',
-        'COMMAND_TYPE': 'command_type',
-        'TARGET_VILLAGE': 'target_village_name',
-        'TIME_COMPLETED': 'time_completed',
-        'COMMAND_PROGRESS': 'command_progress',
-        'ORIGIN_CHARACTER': 'origin_character_name'
-    }
-    var sorting = {
-        reverse: false,
-        column: COLUMN_TYPES.COMMAND_PROGRESS
-    }
     var player = modelDataService.getSelectedCharacter()
+    var playerId = player.data.character_id
     var tribe = player.tribeById
     var tribeId = tribe[0]
-    var villages = player.getVillageList()
-    var villagesIds = []
-    var playerId = player.data.character_id
     var playerName = player.data.character_name
-    var attacks = []
+    let sendedAlert = []
     var tribemates = []
-    var UNIT_SPEED_ORDER = [
-        UNIT_TYPES.LIGHT_CAVALRY,
-        UNIT_TYPES.HEAVY_CAVALRY,
-        UNIT_TYPES.AXE,
-        UNIT_TYPES.SWORD,
-        UNIT_TYPES.RAM,
-        UNIT_TYPES.SNOB,
-        UNIT_TYPES.TREBUCHET
-    ]
-
-    function secondsToDaysHHMMSS(totalSeconds) {
-        var returnString = ''
-        var date = new Date(totalSeconds * 1000)
-        convert = date.toLocaleString()
-        returnString = convert
-        return returnString
+    let attackView = false
+    let commands = []
+    var incomingUnit = ''
+    var incomingName = ''
+    var slowestUnit = ''
+    var timecompleted = 0
+    var finalTime = ''
+    const STORAGE_KEYS = {
+        ALERTS: 'auto_withdraw_alerts'
+    }
+    const storeAlerts = function() {
+        Lockr.set(STORAGE_KEYS.ALERTS, sendedAlert)
+    }
+    const pushAlert = function(sentAlert) {
+        sendedAlert.push(sentAlert)
     }
     var checkincomingsAttacks = function() {
-        if (!running) {
-            return false
-        }
-        socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
-            tribe: tribeId
-        }, function(data) {
-            var members = data.members
-            for (var i = 0; i < members.length; i++) {
-                tribemates.push(members[i].id)
-            }
-        })
-        villages.forEach(function(village) {
-            villagesIds.push(village.getId())
-        })
-        var incomingCommands = globalInfoModel.getCommandListModel().getIncomingCommands().length
-        var count = incomingCommands > 25 ? incomingCommands : 25
-        socketService.emit(routeProvider.OVERVIEW_GET_INCOMING, {
-            'count': count,
-            'offset': 0,
-            'sorting': sorting.column,
-            'reverse': sorting.reverse ? 1 : 0,
-            'groups': [],
-            'command_types': ['attack'],
-            'villages': villagesIds
-        }, sendAlerts)
-    }
-    var sendAlerts = function sendAlerts(data) {
-        var alertText = []
-        var commands = data.commands
-        for (var i = 0; i < commands.length; i++) {
-            overviewService.formatCommand(commands[i])
-            if (tribemates.includes(commands[i].origin_character_id)) {
-                console.log('Nadchodzące ruchy wojsk pochodzą od współplemieńca ' + commands[i].origin_character_id + ' Rodzaj ' + commands[i].command_type)
-            } else {
-                if (commands[i].command_type == 'attack') {
-                    if (attacks.includes(commands[i].command_id)) {
-                        console.log('Już wysłano powiadomienie')
-                    } else {
-                        attacks.push(commands[i].command_id)
-                        commands[i].slowestUnit = getSlowestUnit(commands[i])
-                        var timecompleted = commands[i].time_completed
-                        var finalTime = secondsToDaysHHMMSS(timecompleted)
-                        var incomingUnit = ''
-                        var incomingName = ''
-                        if (commands[i].slowestUnit == 'sword') {
-                            incomingName = ' [color=03709d]MIECZNIK[/color]'
-                            incomingUnit = 'sword'
-                        } else if (commands[i].slowestUnit == 'axe') {
-                            incomingName = ' [color=e21f1f]TOPORNIK[/color]'
-                            incomingUnit = 'axe'
-                        } else if (commands[i].slowestUnit == 'ram') {
-                            incomingName = ' [color=730202]TARAN[/color]'
-                            incomingUnit = 'ram'
-                        } else if (commands[i].slowestUnit == 'snob') {
-                            incomingName = ' [color=ffee00]SZLACHCIC[/color]'
-                            incomingUnit = 'snob'
-                        } else if (commands[i].slowestUnit == 'trebuchet') {
-                            incomingName = ' [color=494500]TREBUSZ[/color]'
-                            incomingUnit = 'trebuchet'
-                        } else if (commands[i].slowestUnit == 'light_cavalry') {
-                            incomingName = ' [color=d96a19]LEKKA KAWALERIA[/color]'
-                            incomingUnit = 'light_cavalry'
-                        } else if (commands[i].slowestUnit == 'heavy_cavalry') {
-                            incomingName = ' [color=0111af]CIĘŻKA KAWALERIA[/color]'
-                            incomingUnit = 'heavy_cavalry'
-                        }
-                        alertText.push('[size=large][b]Nadchodzący atak [/b]--- [/size][unit]' + incomingUnit + '[/unit] [size=large][b]' + incomingName + '[/b][/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + commands[i].target_village_id + ']' + commands[i].target_village_name + '[/village][b] Gracz cel: [/b][player=' + playerId + ']' + playerName + '[/player][b] [br]Wioska pochodzenia: [/b][village=' + commands[i].origin_village_id + ']' + commands[i].origin_village_name + '[/village][b] Gracz atakujący: [/b][player=' + commands[i].origin_character_id + ']' + commands[i].origin_character_name + '[/player][/size]')
-                        var message = alertText.join()
-                        if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
-                            socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                message_id: 1742,
-                                message: message
-                            })
-                            alertText = []
-                        } else {
-                            socketService.emit(routeProvider.MESSAGE_REPLY, {
-                                message_id: 1743,
-                                message: message
-                            })
-                            alertText = []
-                        }
-                    }
+        if (running == true) {
+            commands = attackView.getCommands()
+            socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
+                tribe: tribeId
+            }, function(data) {
+                var members = data.members
+                for (var i = 0; i < members.length; i++) {
+                    tribemates.push(members[i].id)
                 }
-            }
+            })
+            commands.forEach(function(command, index) {
+                if (sendedAlert.includes(command.command_id)) {
+                    console.log('Już wysłano alert.')
+                } else {
+                    setTimeout(function() {
+                        if (command.command_type == 'attack') {
+                            if (tribemates.includes(command.origin_character_id)) {
+                                console.log('Nadchodzące ruchy wojsk pochodzą od współplemieńca ' + command.origin_character_id + ' Rodzaj ' + command.command_type)
+                                pushAlert(command.command_id)
+                                storeAlerts()
+                            } else {
+                                var alertText = []
+                                slowestUnit = command.slowestUnit
+                                timecompleted = command.time_completed * 1000
+                                finalTime = utils.formatDate(timecompleted)
+                                console.log(timecompleted, finalTime)
+                                if (slowestUnit == 'sword') {
+                                    incomingName = ' [color=03709d]MIECZNIK[/color]'
+                                    incomingUnit = 'sword'
+                                } else if (slowestUnit == 'axe') {
+                                    incomingName = ' [color=e21f1f]TOPORNIK[/color]'
+                                    incomingUnit = 'axe'
+                                } else if (slowestUnit == 'ram') {
+                                    incomingName = ' [color=730202]TARAN[/color]'
+                                    incomingUnit = 'ram'
+                                } else if (slowestUnit == 'snob') {
+                                    incomingName = ' [color=ffee00]SZLACHCIC[/color]'
+                                    incomingUnit = 'snob'
+                                } else if (slowestUnit == 'trebuchet') {
+                                    incomingName = ' [color=494500]TREBUSZ[/color]'
+                                    incomingUnit = 'trebuchet'
+                                } else if (slowestUnit == 'light_cavalry') {
+                                    incomingName = ' [color=d96a19]LEKKA KAWALERIA[/color]'
+                                    incomingUnit = 'light_cavalry'
+                                } else if (slowestUnit == 'heavy_cavalry') {
+                                    incomingName = ' [color=0111af]CIĘŻKA KAWALERIA[/color]'
+                                    incomingUnit = 'heavy_cavalry'
+                                }
+                                alertText.push('[size=large][b]Nadchodzący atak [/b]--- [/size][unit]' + incomingUnit + '[/unit] [size=large][b]' + incomingName + '[/b][/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + command.target_village_id + ']' + command.target_village_name + '[/village][b] Gracz cel: [/b][player=' + playerId + ']' + playerName + '[/player][b] [br]Wioska pochodzenia: [/b][village=' + command.origin_village_id + ']' + command.origin_village_name + '[/village][b] Gracz atakujący: [/b][player=' + command.origin_character_id + ']' + command.origin_character_name + '[/player][/size]')
+                                var message = alertText.join()
+                                if (incomingUnit == 'snob' || incomingUnit == 'trebuchet') {
+                                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                        message_id: 1742,
+                                        message: message
+                                    })
+                                    alertText = []
+                                    pushAlert(command.command_id)
+                                    storeAlerts()
+                                } else {
+                                    socketService.emit(routeProvider.MESSAGE_REPLY, {
+                                        message_id: 1743,
+                                        message: message
+                                    })
+                                    alertText = []
+                                    pushAlert(command.command_id)
+                                    storeAlerts()
+                                }
+                            }
+                        }
+                    }, index * 4000)
+                }
+            })
         }
-    }
-    var getSlowestUnit = function(command) {
-        const origin = {
-            x: command.origin_x,
-            y: command.origin_y
-        }
-        const target = {
-            x: command.target_x,
-            y: command.target_y
-        }
-        const unitDurationDiff = UNIT_SPEED_ORDER.map(function(unit) {
-            const travelTime = utils.getTravelTime(origin, target, {
-                [unit]: 1
-            }, command.command_type, {}, false)
-            const durationDiff = Math.abs(travelTime - command.model.duration)
-            return {
-                unit: unit,
-                diff: durationDiff
-            }
-        }).sort(function(a, b) {
-            return a.diff - b.diff
-        })
-        return unitDurationDiff[0].unit
     }
     var alertSender = {}
     alertSender.init = function() {
         initialized = true
+        attackView = require('two/attackView')
+        sendedAlert = Lockr.get(STORAGE_KEYS.ALERTS, [], true)
     }
     alertSender.start = function() {
         eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STARTED)
@@ -6927,34 +6874,86 @@ define('two/attackView', [
             var origin = closestVillage
             var villageId = command.originVillage.id
             var villageName = command.originVillage.name
-            var interval = 2000
-            var interval1 = 11000
             var Liczba = 0
 
             function spyOrigin() {
                 origin.forEach(function(village, index) {
-                    console.log(village)
-                    var scoutingInfo = village.scoutingInfo
-                    var spies = scoutingInfo.spies
                     setTimeout(function() {
-                        spies.forEach(function(available, index) {
-                            if (available.type == 1) {
-                                Liczba += 1
+                        socketService.emit(routeProvider.SCOUTING_GET_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            var spy1 = data.spy_1
+                            var spy2 = data.spy_2
+                            var spy3 = data.spy_3
+                            var spy4 = data.spy_4
+                            var spy5 = data.spy_5
+                            if (spy1 == 1) {
                                 if (Liczba <= 6) {
-                                    setTimeout(function() {
+                                    socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                        startVillage: village.id,
+                                        targetVillage: villageId,
+                                        spys: 1,
+                                        type: 'units'
+                                    })
+                                }
+                                Liczba += 1
+                            }
+                            if (spy2 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
                                         socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                             startVillage: village.id,
                                             targetVillage: villageId,
                                             spys: 1,
                                             type: 'units'
                                         })
-                                    }, index * interval * Math.random())
-                                    utils.emitNotif('success', 'Szpieg nr ' + Liczba + ' wysłany na ' + villageName)
-                                }
+                                    }
+                                    Liczba += 1
+                                }, 1000)
+                            }
+                            if (spy3 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
+                                        socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                            startVillage: village.id,
+                                            targetVillage: villageId,
+                                            spys: 1,
+                                            type: 'units'
+                                        })
+                                    }
+                                    Liczba += 1
+                                }, 2000)
+                            }
+                            if (spy4 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
+                                        socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                            startVillage: village.id,
+                                            targetVillage: villageId,
+                                            spys: 1,
+                                            type: 'units'
+                                        })
+                                    }
+                                    Liczba += 1
+                                }, 3000)
+                            }
+                            if (spy5 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
+                                        socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                            startVillage: village.id,
+                                            targetVillage: villageId,
+                                            spys: 1,
+                                            type: 'units'
+                                        })
+                                    }
+                                    Liczba += 1
+                                }, 4000)
                             }
                         })
-                    }, index * interval1 * Math.random())
+                    }, 5000 * index)
                 })
+                utils.emitNotif('success', 'Szpiedzy wysłani do ' + villageName)
             }
             spyOrigin()
         })
@@ -7000,158 +6999,173 @@ define('two/attackView', [
                     sword = support.sword
                     trebuchet = support.trebuchet
                     id = support.village.village_id
-                    console.log(spear, id)
                     if (id != origin) {
-                        if (spear > 0 || axe > 0 || archer > 0 || doppelsoldner > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: archer,
-                                    axe: axe,
-                                    catapult: 0,
-                                    doppelsoldner: doppelsoldner,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: spear,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (light_cavalry > 0 || mounted_archer > 0 || knight > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: knight,
-                                    light_cavalry: light_cavalry,
-                                    mounted_archer: mounted_archer,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (heavy_cavalry > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: heavy_cavalry,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (sword > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: sword,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (snob > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: snob,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (trebuchet > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: trebuchet
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (ram > 0 || catapult > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: catapult,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: ram,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        }
+                        setTimeout(function() {
+                            if (spear > 0 || axe > 0 || archer > 0 || doppelsoldner > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: archer,
+                                        axe: axe,
+                                        catapult: 0,
+                                        doppelsoldner: doppelsoldner,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: spear,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, {})
+                            }
+                        }, index * 1000)
+                        setTimeout(function() {
+                            if (light_cavalry > 0 || mounted_archer > 0 || knight > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: knight,
+                                        light_cavalry: light_cavalry,
+                                        mounted_archer: mounted_archer,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, {})
+                            }
+                        }, index * 2000)
+                        setTimeout(function() {
+                            if (heavy_cavalry > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: heavy_cavalry,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 3000)
+                        setTimeout(function() {
+                            if (sword > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: sword,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 4000)
+                        setTimeout(function() {
+                            if (snob > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: snob,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 5000)
+                        setTimeout(function() {
+                            if (trebuchet > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: trebuchet
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 6000)
+                        setTimeout(function() {
+                            if (ram > 0 || catapult > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: catapult,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: ram,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 7000)
                     }
-                }, index * 500)
+                }, index * 8000)
             })
         })
     }
@@ -8066,6 +8080,164 @@ require([
                 Lockr.set(STORAGE_KEYS.ACTIVE, true)
             })
             eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
+define('two/autoWithdraw', [
+    'two/utils',
+    'queues/EventQueue',
+    'Lockr'
+], function(
+    utils,
+    eventQueue,
+    Lockr
+) {
+    let initialized = false
+    let running = false
+    let attackView = false
+    let commands = []
+    let withdrawCommands = []
+    const STORAGE_KEYS = {
+        COMMANDS: 'auto_withdraw_commands'
+    }
+    const storeCommands = function () {
+        Lockr.set(STORAGE_KEYS.COMMANDS, withdrawCommands)
+    }
+    const pushCommand = function (command) {
+        withdrawCommands.push(command)
+    }
+    const checkIncoming = function() {
+        if (running == true) {
+            console.log('Dezerter uruchomiony')
+            commands = attackView.getCommands()
+            commands.forEach(function(command, index) {
+                if (withdrawCommands.includes(command.command_id)) {
+                    console.log('Już dodano komendę cofania wojsk lub klinowania.')
+                } else {
+                    setTimeout(function() {
+                        if (command.command_type == 'attack') {
+                            if (command.slowestUnit == 'snob' || command.slowestUnit == 'trebuchet') {
+                                const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+                                console.log(formatedDate)
+                                attackView.setQueueSupportCommand(command, formatedDate)
+                            } else {
+                                const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+                                console.log(formatedDate)
+                                attackView.setCommander(command, formatedDate)
+                            }
+                        }
+                        pushCommand(command.command_id)
+                        storeCommands()
+                    }, index * 2000)
+                }
+            })
+        }
+    }
+    let autoWithdraw = {}
+    autoWithdraw.init = function() {
+        initialized = true
+        attackView = require('two/attackView')
+        withdrawCommands = Lockr.get(STORAGE_KEYS.COMMANDS, [], true)
+    }
+    autoWithdraw.start = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
+        running = true
+        running = true
+        checkIncoming()
+        setInterval(function() {
+            checkIncoming()
+        }, 480000)
+    }
+    autoWithdraw.stop = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STOPPED)
+        running = false
+    }
+    autoWithdraw.isRunning = function() {
+        return running
+    }
+    autoWithdraw.isInitialized = function() {
+        return initialized
+    }
+    return autoWithdraw
+})
+define('two/autoWithdraw/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        AUTO_WITHDRAW_STARTED: 'auto_withdraw_started',
+        AUTO_WITHDRAW_STOPPED: 'auto_withdraw_stopped'
+    })
+})
+
+define('two/autoWithdraw/ui', [
+    'two/ui',
+    'two/autoWithdraw',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    autoWithdraw,
+    utils,
+    eventQueue
+) {
+    let $button
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Dezerter', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_withdraw'))
+        $button.addEventListener('click', function () {
+            if (autoWithdraw.isRunning()) {
+                autoWithdraw.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_withdraw'))
+            } else {
+                autoWithdraw.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_withdraw'))
+            }
+        })
+        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+        if (autoWithdraw.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
+        }
+        return opener
+    }
+    return init
+})
+require([
+    'two/ready',
+    'two/autoWithdraw',
+    'two/autoWithdraw/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/autoWithdraw/events'
+], function(
+    ready,
+    autoWithdraw,
+    autoWithdrawInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'auto_withdraw_active'
+    }
+    if (autoWithdraw.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        autoWithdraw.init()
+        autoWithdrawInterface()
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                autoWithdraw.start()
+            }
+            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
@@ -24655,6 +24827,319 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/powerHelper', [
+    'two/Settings',
+    'two/powerHelper/settings',
+    'two/powerHelper/settings/map',
+    'two/powerHelper/settings/updates',
+    'two/powerHelper/types/ironwalls',
+    'two/powerHelper/types/wall',
+    'two/ready',
+    'queues/EventQueue'
+], function (
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    IRON_WALLS,
+    WALLS,
+    ready,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let settings
+    let powerHelperSettings
+
+    const STORAGE_KEYS = {
+        SETTINGS: 'power_helper_settings'
+    }
+	
+    const BATTLE_IRON_WALLS = {
+        [IRON_WALLS.LEVEL_1]: 1,
+        [IRON_WALLS.LEVEL_2]: 2,
+        [IRON_WALLS.LEVEL_3]: 3,
+        [IRON_WALLS.LEVEL_4]: 4,
+        [IRON_WALLS.LEVEL_5]: 5
+    }
+	
+    const BATTLE_WALLS = {
+        [WALLS.NO_WALL]: 0,
+        [WALLS.LEVEL_1]: 5,
+        [WALLS.LEVEL_2]: 10,
+        [WALLS.LEVEL_3]: 15,
+        [WALLS.LEVEL_4]: 20,
+        [WALLS.LEVEL_5]: 25,
+        [WALLS.LEVEL_6]: 30,
+        [WALLS.LEVEL_7]: 35,
+        [WALLS.LEVEL_8]: 40,
+        [WALLS.LEVEL_9]: 45,
+        [WALLS.LEVEL_10]: 50,
+        [WALLS.LEVEL_11]: 55,
+        [WALLS.LEVEL_12]: 60,
+        [WALLS.LEVEL_13]: 65,
+        [WALLS.LEVEL_14]: 70,
+        [WALLS.LEVEL_15]: 75,
+        [WALLS.LEVEL_16]: 80,
+        [WALLS.LEVEL_17]: 85,
+        [WALLS.LEVEL_18]: 90,
+        [WALLS.LEVEL_19]: 95,
+        [WALLS.LEVEL_20]: 100
+    }
+    
+    console.log(BATTLE_IRON_WALLS, BATTLE_WALLS)
+
+    const powerHelper = {}
+
+    powerHelper.init = function () {
+        initialized = true
+
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+
+        settings.onChange(function () {
+            powerHelperSettings = settings.getAll()
+        })
+
+        powerHelperSettings = settings.getAll()
+
+        console.log('powerHelper settings', powerHelperSettings)
+    }
+
+    powerHelper.start = function () {
+        running = true
+
+        eventQueue.trigger(eventTypeProvider.POWER_HELPER_START)
+    }
+
+    powerHelper.stop = function () {
+        running = false
+
+        console.log('powerHelper stop')
+
+        eventQueue.trigger(eventTypeProvider.POWER_HELPER_STOP)
+    }
+
+    powerHelper.getSettings = function () {
+        return settings
+    }
+
+    powerHelper.isInitialized = function () {
+        return initialized
+    }
+
+    powerHelper.isRunning = function () {
+        return running
+    }
+
+    return powerHelper
+})
+
+define('two/powerHelper/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        POWER_HELPER_START: 'power_helper_start',
+        POWER_HELPER_STOP: 'power_helper_stop'
+    })
+})
+
+define('two/powerHelper/ui', [
+    'two/ui',
+    'two/powerHelper',
+    'two/powerHelper/settings',
+    'two/powerHelper/settings/map',
+    'two/powerHelper/types/ironwalls',
+    'two/powerHelper/types/wall',
+    'two/Settings',
+    'two/EventScope',
+    'two/utils'
+], function (
+    interfaceOverflow,
+    powerHelper,
+    SETTINGS,
+    SETTINGS_MAP,
+    IRON_WALLS,
+    WALLS,
+    Settings,
+    EventScope,
+    utils
+) {
+    let $scope
+    let settings
+    let $button
+    
+    const TAB_TYPES = {
+        POWERS: 'powers',
+        BUNKER: 'bunker',
+        BEATBUNKER: 'beatbunker'
+    }
+
+    const selectTab = function (tabType) {
+        $scope.selectedTab = tabType
+    }
+
+    const saveSettings = function () {
+        settings.setAll(settings.decode($scope.settings))
+
+        utils.notif('success', 'Settings saved')
+    }
+
+    const switchState = function () {
+        if (powerHelper.isRunning()) {
+            powerHelper.stop()
+        } else {
+            powerHelper.start()
+        }
+    }
+
+    const eventHandlers = {
+        start: function () {
+            $scope.running = true
+
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+
+            utils.notif('success', 'Example module started')
+        },
+        stop: function () {
+            $scope.running = false
+
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+
+            utils.notif('success', 'Example module stopped')
+        }
+    }
+
+    const init = function () {
+        settings = powerHelper.getSettings()
+        $button = interfaceOverflow.addMenuButton4('Bunkry', 20)
+        $button.addEventListener('click', buildWindow)
+
+        interfaceOverflow.addTemplate('twoverflow_power_helper_window', `<div id=\"two-power-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'power_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.POWERS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.POWERS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.POWERS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.POWERS}\">{{ 'powers' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BUNKER}\">{{ 'bunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BEATBUNKER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BEATBUNKER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BEATBUNKER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BEATBUNKER}\">{{ 'beatbunker' | i18n:loc.ale:'power_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.POWERS\"><h5 class=\"twx-section\">{{ 'power-troops' | i18n:loc.ale:'power_helper' }}</h5><p>Do obliczeń przyjęto jedną zagrodę Off równą 21480 prowiantu oraz 14 zagród Deff równych 300720 prowiantu.<form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><col><tr><th><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td class=\"headD\" rowspan=\"12\">J<br>e<br>d<br>n<br>o<br>s<br>t<br>k<br>a<br><br>D<br>e<br>f<br>e<br>n<br>s<br>y<br>w<br>n<br>a<td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td>0,483<td>1,909<td>4,610<td class=\"yellow\">7,546<td class=\"blue\">1,172<td class=\"orange\">9,919<td>0,015<td>2,668<td class=\"blue\">0,790<td class=\"red\">15,272<td>0,314<td>5,399<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"blue\">0,148<td class=\"blue\">0,585<td class=\"blue\">1,413<td class=\"sky\">1,452<td class=\"orange\">31,636<td class=\"sky\">1,909<td>0,003<td>0,513<td class=\"yellow\">21,343<td class=\"blue\">4,680<td>0,060<td class=\"blue\">1,655<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td>18,223<td>7,546<td class=\"orange\">31,636<td>9,919<td>0,015<td>2,668<td class=\"yellow\">21,343<td class=\"red\">60,368<td>0,314<td class=\"yellow\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td>1,909<td>7,546<td class=\"yellow\">18,223<td class=\"blue\">0,513<td class=\"sky\">2,152<td class=\"blue\">0,675<td class=\"sky\">0,001<td class=\"sky\">0,182<td class=\"sky\">1,452<td class=\"red\">60,368<td class=\"blue\">0,021<td class=\"orange\">21,342<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td>2,940<td>11,617<td class=\"yellow\">28,057<td>11,617<td>11,185<td>15,273<td>0,024<td>4,107<td>7,546<td class=\"red\">92,942<td>0,483<td class=\"orange\">32,858<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td>2,669<td>10,546<td class=\"yellow\">25,467<td>7,545<td class=\"yellow\">24,066<td>9,919<td>0,015<td>2,669<td>16,236<td class=\"red\">84,367<td>0,314<td class=\"orange\">29,827<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td>7,545<td>29,828<td class=\"yellow\">72,034<td>29,828<td>11,185<td>39,211<td>0,060<td>10,546<td>7,545<td class=\"red\">100,000<td>1,240<td class=\"orange\">100,000<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td>1,365<td>5,400<td>13,041<td>5,400<td class=\"orange\">22,636<td>7,098<td>0,011<td>1,910<td class=\"yellow\">15,273<td class=\"red\">43,195<td>0,223<td class=\"yellow\">15,271<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"sky\">0,313<td class=\"sky\">1,239<td class=\"yellow-sky\">2,995<td class=\"sky\">1,452<td>2,568<td class=\"sky\">1,909<td>0,002<td>0,513<td>1,734<td class=\"red-sky\">9,920<td class=\"sky\">0,060<td class=\"orange\">3,507<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td>0,888<td>3,508<td>8,470<td class=\"yellow\">9,920<td>5,197<td class=\"orange\">13,039<td>0,020<td>3,508<td>3,508<td class=\"red\">28,057<td>0,413<td class=\"yellow\">9,919<tr><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td>0,675<td>2,667<td class=\"yellow\">6,444<td>2,667<td>2,830<td>3,508<td class=\"blue\">0,000<td class=\"blue\">0,000<td>1,909<td class=\"red\">21,342<td>0,110<td class=\"orange\">7,545</table></form><h5 class=\"twx-section\">{{ 'power-deff' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headD\" colspan=\"12\">J e d n o s t k a D e f e n s y w n a<tr><td><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"deff\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,166<td>5,520<td>11,133<td>4,911<td>11,428<td>11,752<td>28,093<td>7,966<td class=\"blue\">1,481<td>5,308<td class=\"sky\">2,578<tr><td class=\"off\">{{ 'offensive-units' | i18n:loc.ale:'power_helper' }}<td class=\"sky\">3,964<td>6,188<td>13,967<td>7,096<td>15,251<td>15,327<td>38,839<td>9,994<td class=\"blue\">1,916<td>6,692<td class=\"sky\">3,388</table></form><h5 class=\"twx-section\">{{ 'power-off' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><col><col><col><col><col><col><col><col><col><col><tr><th class=\"headO\" colspan=\"13\">J e d n o s t k a O f e n s y w n a<tr><td><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"off\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"offx2\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td class=\"all\">{{ 'all' | i18n:loc.ale:'power_helper' }}<td>1,895<td>7,490<td class=\"yellow\">18,089<td>7,772<td>13,297<td>10,216<td>0,015<td>2,662<td>8,971<td class=\"orange\">22,606<td>0,323<td class=\"red\">47,319<tr><td class=\"deff\">{{ 'defensive-units' | i18n:loc.ale:'power_helper' }}<td>0,706<td>2,789<td>6,737<td>2,726<td class=\"orange\">8,072<td>3,584<td>0,004<td>0,775<td>5,446<td class=\"yellow\">7,890<td>0,113<td class=\"red\">22,316</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BUNKER\"><h5 class=\"twx-section\">{{ 'deffense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><col><tr><td colspan=\"2\" class=\"item-check\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span><tr><td class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\"></span><span class=\"unitname\"> {{ 'fullfarm.set' | i18n:loc.ale:'power_helper' }}</span><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-fullfarm\" tooltip=\"{{ 'compariser' | i18n:loc.ale:'fullfarm' }}\"><input id=\"settings-fullfarm\" data-setting=\"fullfarm\" type=\"checkbox\"></label></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.defender' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearD-amount\" class=\"spearD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordD-amount\" class=\"swordD-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeD-amount\" class=\"axeD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerD-amount\" class=\"archerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcD-amount\" class=\"lcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maD-amount\" class=\"maD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcD-amount\" class=\"hcD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramD-amount\" class=\"ramD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultD-amount\" class=\"catapultD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerD-amount\" class=\"berserkerD-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetD-amount\" class=\"trebuchetD-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td class=\"tg-61xu\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearD\"><input id=\"settings-spearD\" data-setting=\"spearD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordD\"><input id=\"settings-swordD\" data-setting=\"swordD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerD\"><input id=\"settings-archerD\" data-setting=\"archerD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcD\"><input id=\"settings-hcD\" data-setting=\"hcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetD\"><input id=\"settings-trebuchetD\" data-setting=\"trebuchetD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeD\"><input id=\"settings-axeD\" data-setting=\"axeD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcD\"><input id=\"settings-lcD\" data-setting=\"lcD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maD\"><input id=\"settings-maD\" data-setting=\"maD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramD\"><input id=\"settings-ramD\" data-setting=\"ramD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultD\"><input id=\"settings-catapultD\" data-setting=\"catapultD\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerD\"><input id=\"settings-berserkerD\" data-setting=\"berserkerD\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"wall\" selected=\"settings[SETTINGS.WALL]\" drop-down=\"true\"></div><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-120x120-skill-iron_walls\"></span><span class=\"unitname\"> {{ 'battle.iron-walls' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\"><div select=\"\" list=\"ironwalls\" selected=\"settings[SETTINGS.IRON_WALL]\" drop-down=\"true\"></div></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.off' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightAtt\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BEATBUNKER\"><h5 class=\"twx-section\">{{ 'offense' | i18n:loc.ale:'power_helper' }}</h5><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check2\"><span class=\"btn btn-orange addSelected\">{{ 'check.btn' | i18n:loc.ale:'power_helper' }}</span></table></form><form class=\"addForm\"><table class=\"table table_vertical\" id=\"simulation_result\"><col><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><col width=\"34px\"><tr><th colspan=\"12\">{{ 'battle.attacker' | i18n:loc.ale:'power_helper' }}<tr><td><div style=\"height:34px;line-height:34px;\"><span class=\"unitname\">{{ 'battle.unit' | i18n:loc.ale:'power_helper' }}</span></div><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><tr><td><div height=\"30px\"><span class=\"unitname\">{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}</span></div><td><div style=\"text-align:center;\"><span id=\"spearA-amount\" class=\"spearA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"swordA-amount\" class=\"swordA-amount\">0</span></div><td><div style=\"text-align:center;\"><span id=\"axeA-amount\" class=\"axeA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"archerA-amount\" class=\"archerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"lcA-amount\" class=\"lcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"maA-amount\" class=\"maA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"hcA-amount\" class=\"hcA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"ramA-amount\" class=\"ramA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"catapultA-amount\" class=\"catapultA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"berserkerA-amount\" class=\"berserkerA-amount\" style=\"text-align:center;\">0</span></div><td><div style=\"text-align:center;\"><span id=\"trebuchetA-amount\" class=\"trebuchetA-amount\" style=\"text-align:center;\">0</span></div></table></form><form class=\"addForm2\"><table class=\"tbl-border-light tbl-striped\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col width=\"59.6px\"><col width=\"59.7px\"><col><thead><tr><th colspan=\"11\">{{ 'unit-types' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\" tooltip=\"{{ 'axe' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\" tooltip=\"{{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\" tooltip=\"{{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-ram\" tooltip=\"{{ 'ram' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-catapult\" tooltip=\"{{ 'catapult' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\" tooltip=\"{{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-spear\" tooltip=\"{{ 'spear' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-sword\" tooltip=\"{{ 'sword' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-archer\" tooltip=\"{{ 'archer' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\" tooltip=\"{{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}\"></span><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\" tooltip=\"{{ 'trebuchet' | i18n:loc.ale:'power_helper' }}\"></span><tr><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-axeA\"><input id=\"settings-axeA\" data-setting=\"axeA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-lcA\"><input id=\"settings-lcA\" data-setting=\"lcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-maA\"><input id=\"settings-maA\" data-setting=\"maA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-ramA\"><input id=\"settings-ramA\" data-setting=\"ramA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-catapultA\"><input id=\"settings-catapultA\" data-setting=\"catapultA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-berserkerA\"><input id=\"settings-berserkerA\" data-setting=\"berserkerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-spearA\"><input id=\"settings-spearA\" data-setting=\"spearA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-swordA\"><input id=\"settings-swordA\" data-setting=\"swordA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-archerA\"><input id=\"settings-archerA\" data-setting=\"archerA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-hcA\"><input id=\"settings-hcA\" data-setting=\"hcA\" type=\"checkbox\"></label><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" for=\"settings-trebuchetA\"><input id=\"settings-trebuchetA\" data-setting=\"trebuchetA\" type=\"checkbox\"></label><tr><td colspan=\"7\" class=\"center\"><span class=\"icon-bg-black icon-34x34-resource-food\" tooltip=\"{{ 'simulator' | i18n:loc.ale:'food' }}\"></span><span class=\"unitname\"> {{ 'provisions' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"4\" class=\"item-input\"><input class=\"textfield-border\" id=\"provisions\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}\"></table></form><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\" id=\"units\"><col><col width=\"33%\"><thead><tr><th>{{ 'battle.deff' | i18n:loc.ale:'power_helper' }}<th>{{ 'battle.amount' | i18n:loc.ale:'power_helper' }}<tbody><tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span><span class=\"unitname\"> {{ 'spear' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"spearDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span><span class=\"unitname\"> {{ 'sword' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"swordDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span><span class=\"unitname\"> {{ 'axe' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"axeDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span><span class=\"unitname\"> {{ 'archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"archerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span><span class=\"unitname\"> {{ 'light_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"lcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span><span class=\"unitname\"> {{ 'mounted_archer' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"maDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span><span class=\"unitname\"> {{ 'heavy_cavalry' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"hcDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span><span class=\"unitname\"> {{ 'ram' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"ramDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span><span class=\"unitname\"> {{ 'catapult' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"catapultDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span><span class=\"unitname\"> {{ 'doppelsoldner' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"berserkerDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span><span class=\"unitname\"> {{ 'trebuchet' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"trebuchetDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-snob\"></span><span class=\"unitname\"> {{ 'snob' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"snobDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-knight\"></span><span class=\"unitname\"> {{ 'knight' | i18n:loc.ale:'power_helper' }}</span><td><input id=\"knightDeff\" class=\"unit-input-simulator\" type=\"number\" value=\"0\"><tr><td colspan=\"1\"><span class=\"icon-bg-black icon-34x34-building-wall\"></span><span class=\"unitname\"> {{ 'wall' | i18n:loc.ale:'power_helper' }}</span><td colspan=\"1\" class=\"item-input\"><input class=\"textfield-border\" id=\"wallBB\" value=\"\" autocomplete=\"off\" placeholder=\"{{ 'level' | i18n:loc.ale:'power_helper' }}\"></table></form></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-power-helper div[select]{text-align:center}#two-power-helper div[select] .select-wrapper{height:34px}#two-power-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-power-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-power-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-power-helper .textfield-border.fit{width:100%}#two-power-helper .addForm1 td{text-align:left;line-height:34px}#two-power-helper .addForm1 th{text-align:center;padding:0px}#two-power-helper .addForm1 span{height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm1 input{height:34px;line-height:26px;color:#000;font-size:14px;background:url(data:image/png;base64,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) top left #b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:213px}#two-power-helper .addForm .table{border-spacing:1px;border-collapse:separate;box-shadow:0 0 0 2px rgba(124,54,0,0.4);width:100%;background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .table th{background:url(data:image/png;base64,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);text-align:center;min-height:26px;line-height:26px;color:#fff3d0;font-size:14px;font-weight:normal;padding-left:5px;border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table td{border:1px solid rgba(124,54,0,0.3);padding:1px}#two-power-helper .addForm .table tr nth-child(odd) td{background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .table_vertical td:nth-child(odd){background:url(data:image/png;base64,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) #d1ad86}#two-power-helper .addForm .center-34x{text-align:center;line-height:34px}#two-power-helper .addForm span{text-align:center;height:26px;line-height:26px;padding:0 10px}#two-power-helper .addForm2 td{text-align:center;height:34px;line-height:34px}#two-power-helper .addForm2 td input{text-align:center}#two-power-helper .addForm2 .center{text-align:left;height:34px;line-height:34px}#two-power-helper .addForm2 th{text-align:center;padding:0px}#two-power-helper .addForm2 span{text-align:center;height:26px;line-height:26px}#two-power-helper .addForm2 .headD{color:#0000ff}#two-power-helper .addForm2 .headO{color:#ff0000}#two-power-helper .addForm2 .sky{background-color:#7ec0ee}#two-power-helper .addForm2 .blue{background-color:#425EFF}#two-power-helper .addForm2 .red{background-color:#FF6666}#two-power-helper .addForm2 .yellow{background-color:#FFFC5E}#two-power-helper .addForm2 .orange{background-color:#FF8D42}#two-power-helper .addForm2 .off{background-color:#f98985}#two-power-helper .addForm2 .deff{background-color:#86b3f9}#two-power-helper .addForm2 .offx2{background-color:#980000}#two-power-helper .addForm2 .all{background-color:#4FBC5C}#two-power-helper .addForm2 .red-sky{background-color:#FF6666;color:#7ec0ee}#two-power-helper .addForm2 .yellow-sky{background-color:#FFFC5E;color:#7ec0ee}#two-power-helper .addForm2 .item-check{text-align:center}#two-power-helper .addForm2 .item-check span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .addForm2 .item-check2{text-align:center}#two-power-helper .addForm2 .item-check2 span{height:34px;line-height:34px;text-align:center;width:125px}#two-power-helper .unit-input-simulator{height:34px;line-height:26px;color:#fff;font-size:14px;background:#b89064;box-shadow:inset 0 0 0 1px #000,inset 0 0 0 2px #a2682c,inset 0 0 0 3px #000,inset -3px -3px 2px 0 #fff,inset 0 0 9px 5px rgba(99,54,0,0.5);text-align:center;width:80px;float:right;border:none;float:none;width:100%}#two-power-helper .icon-120x120-skill-iron_walls{zoom:.283333}#two-power-helper .icon-120x120-skill-iron_walls:before{-moz-transform:scale(.283333)}')
+    }
+
+    const buildWindow = function () {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = powerHelper.isRunning()
+        $scope.selectedTab = TAB_TYPES.POWERS
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.wall = Settings.encodeList(WALLS, {
+            textObject: 'battle_calculator',
+            disabled: true
+        })
+        $scope.ironwalls = Settings.encodeList(IRON_WALLS, {
+            textObject: 'battle_calculator',
+            disabled: true
+        })
+
+        settings.injectScope($scope)
+
+        $scope.selectTab = selectTab
+        $scope.saveSettings = saveSettings
+        $scope.switchState = switchState
+
+        let eventScope = new EventScope('twoverflow_power_helper_window', function onDestroy () {
+            console.log('powerHelper closed')
+        })
+
+        eventScope.register(eventTypeProvider.POWER_HELPER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.POWER_HELPER_STOP, eventHandlers.stop)
+        
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_power_helper_window', $scope)
+    }
+
+    return init
+})
+
+define('two/powerHelper/settings', [], function () {
+    return {
+        WALL: 'wall',
+        IRON_WALL: 'ironwalls'
+    }
+})
+define('two/powerHelper/settings/updates', function () {
+    return {
+    }
+})
+
+define('two/powerHelper/settings/map', [
+    'two/powerHelper/settings'
+], function (
+    SETTINGS
+) {
+    return {
+        [SETTINGS.WALL]: {
+            default: '20',
+            inputType: 'select'
+        },
+        [SETTINGS.IRON_WALL]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        }
+    }
+})
+
+define('two/powerHelper/types/wall', [], function () {
+    return {
+        NO_WALL: 'without',
+        LEVEL_1: 'level_1',
+        LEVEL_2: 'level_2',
+        LEVEL_3: 'level_3',
+        LEVEL_4: 'level_4',
+        LEVEL_5: 'level_5',
+        LEVEL_6: 'level_6',
+        LEVEL_7: 'level_7',
+        LEVEL_8: 'level_8',
+        LEVEL_9: 'level_9',
+        LEVEL_10: 'level_10',
+        LEVEL_11: 'level_11',
+        LEVEL_12: 'level_12',
+        LEVEL_13: 'level_13',
+        LEVEL_14: 'level_14',
+        LEVEL_15: 'level_15',
+        LEVEL_16: 'level_16',
+        LEVEL_17: 'level_17',
+        LEVEL_18: 'level_18',
+        LEVEL_19: 'level_19',
+        LEVEL_20: 'level_20'
+    }
+})
+
+define('two/powerHelper/types/ironwalls', [], function () {
+    return {
+        LEVEL_1: 'level_1',
+        LEVEL_2: 'level_2',
+        LEVEL_3: 'level_3',
+        LEVEL_4: 'level_4',
+        LEVEL_5: 'level_5'
+    }
+})
+require([
+    'two/ready',
+    'two/powerHelper',
+    'two/powerHelper/ui',
+    'two/powerHelper/events'
+], function (
+    ready,
+    powerHelper,
+    powerHelperInterface
+) {
+    if (powerHelper.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        powerHelper.init()
+        powerHelperInterface()
+    })
+})
+
 define('two/prankHelper', [
     'two/Settings',
     'two/prankHelper/settings',

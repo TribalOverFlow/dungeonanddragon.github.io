@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 02 Jan 2021 18:47:06 GMT
+ * Sat, 02 Jan 2021 19:17:54 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -679,7 +679,7 @@ define('two/language', [
         },
         "auto_withdraw": {
             "title": "Dezerter",
-            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami jeśli to nie szlachcic lub trebuchet.",
+            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami, jeśli to szlachcic lub trebuchet wstawia małe kliny(po 100 jednostek).",
             "activated": "Dezerter aktywowany",
             "deactivated": "Dezerter skończył działanie"
         },
@@ -2082,7 +2082,7 @@ define('two/language', [
             "commands_bunker_village_20_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 20k). Uwaga! robisz to na własną odpowiedzialność.",
             "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
             "commands_conquer_village_tooltip": "Odbij wioske po straceniu(sekunde do minuty po straceniu w zależności od tego czy zdąży szlachcic).",
-            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
+            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia przed wejsciem tego ataku.(zalecane wcześniejsze wykonanie tej akcji)"
         },
         "auto_collector": {
             "title": "Kolekcjoner",
@@ -2104,7 +2104,7 @@ define('two/language', [
         },
         "auto_withdraw": {
             "title": "Dezerter",
-            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami jeśli to nie szlachcic lub trebuchet.",
+            "description": "Automatycznie wycofuje wojska przed nadchodzącymi atakami, jeśli to szlachcic lub trebuchet wstawia małe kliny(po 100 jednostek).",
             "activated": "Dezerter aktywowany",
             "deactivated": "Dezerter skończył działanie"
         },
@@ -4409,7 +4409,7 @@ define('two/alertSender', [
                             } else {
                                 var alertText = []
                                 slowestUnit = command.slowestUnit
-                                timecompleted = command.time_completed
+                                timecompleted = command.time_completed * 1000
                                 finalTime = utils.formatDate(timecompleted)
                                 console.log(timecompleted, finalTime)
                                 if (slowestUnit == 'sword') {
