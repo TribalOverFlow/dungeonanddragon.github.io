@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 02 Jan 2021 14:32:34 GMT
+ * Sat, 02 Jan 2021 16:12:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -6930,7 +6930,7 @@ define('two/attackView', [
             var Liczba = 0
 
             function spyOrigin() {
-                origin.forEach(function(village) {
+                origin.forEach(function(village, index) {
                     setTimeout(function() {
                         socketService.emit(routeProvider.SCOUTING_GET_INFO, {
                             village_id: village.id
@@ -7004,7 +7004,7 @@ define('two/attackView', [
                                 }, 4000)
                             }
                         })
-                    }, 5000)
+                    }, 5000 * index)
                 })
                 utils.emitNotif('success', 'Szpiedzy wysłani do ' + villageName)
             }
@@ -8149,24 +8149,30 @@ define('two/autoWithdraw', [
     let running = false
     let attackView = false
     let commands = []
+    let commandsIds = []
     const checkIncoming = function() {
         if (running == true) {
             console.log('Dezerter uruchomiony')
             commands = attackView.getCommands()
-            commands.forEach(function(command) {
-                setTimeout(function() {
-                    if (command.command_type == 'attack') {
-                        if (command.slowestUnit == 'snob' || command.slowestUnit == 'trebuchet') {
-                            const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
-                            console.log(formatedDate)
-                            attackView.setQueueSupportCommand(command, formatedDate)
-                        } else {
-                            const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
-                            console.log(formatedDate)
-                            attackView.setCommander(command, formatedDate)
+            commands.forEach(function(command, index) {
+                console.log(command)
+                if (commandsIds.includes(command.id)) {
+                    console.log('Już dodano komendę cofania wojsk lub klinowania.')
+                } else {
+                    setTimeout(function() {
+                        if (command.command_type == 'attack') {
+                            if (command.slowestUnit == 'snob' || command.slowestUnit == 'trebuchet') {
+                                const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+                                console.log(formatedDate)
+                                attackView.setQueueSupportCommand(command, formatedDate)
+                            } else {
+                                const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+                                console.log(formatedDate)
+                                attackView.setCommander(command, formatedDate)
+                            }
                         }
-                    }
-                }, 2000)
+                    }, index * 2000)
+                }
             })
         }
     }
