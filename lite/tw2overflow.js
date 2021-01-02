@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 02 Jan 2021 14:13:42 GMT
+ * Sat, 02 Jan 2021 14:32:34 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -8141,7 +8141,7 @@ require([
 define('two/autoWithdraw', [
     'two/utils',
     'queues/EventQueue'
-], function (
+], function(
     utils,
     eventQueue
 ) {
@@ -8153,10 +8153,23 @@ define('two/autoWithdraw', [
         if (running == true) {
             console.log('Dezerter uruchomiony')
             commands = attackView.getCommands()
-            console.log(commands)
+            commands.forEach(function(command) {
+                setTimeout(function() {
+                    if (command.command_type == 'attack') {
+                        if (command.slowestUnit == 'snob' || command.slowestUnit == 'trebuchet') {
+                            const formatedDate = $filter('readableDateFilter')((command.time_completed - 1) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+                            console.log(formatedDate)
+                            attackView.setQueueSupportCommand(command, formatedDate)
+                        } else {
+                            const formatedDate = $filter('readableDateFilter')((command.time_completed - 10) * 1000, $rootScope.loc.ale, $rootScope.GAME_TIMEZONE, $rootScope.GAME_TIME_OFFSET, 'HH:mm:ss:sss dd/MM/yyyy')
+                            console.log(formatedDate)
+                            attackView.setCommander(command, formatedDate)
+                        }
+                    }
+                }, 2000)
+            })
         }
     }
-
     let autoWithdraw = {}
     autoWithdraw.init = function() {
         initialized = true
@@ -8169,7 +8182,7 @@ define('two/autoWithdraw', [
         checkIncoming()
         setInterval(function() {
             checkIncoming()
-        }, 3600000)
+        }, 480000)
     }
     autoWithdraw.stop = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STOPPED)
