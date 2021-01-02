@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 01 Jan 2021 15:45:26 GMT
+ * Sat, 02 Jan 2021 14:13:42 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -657,7 +657,7 @@ define('two/language', [
             "commands_bunker_village_20_tooltip": "Zabunkruj wioske z wojsk znajdujących się na najbliższych twoich wioskach które zdążą przed atakiem(maks 20k). Uwaga! robisz to na własną odpowiedzialność.",
             "commands_spy_village_tooltip": "Szpieguj wioske źródłową.",
             "commands_conquer_village_tooltip": "Odbij wioske po straceniu(sekunde do minuty po straceniu w zależności od tego czy zdąży szlachcic).",
-            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia sekundę przed wejsciem tego ataku."
+            "commands_withdraw_army_tooltip": "Wycofaj wszystkie wsparcia przed wejsciem tego ataku.(zalecane wcześniejsze wykonanie tej akcji)"
         },
         "auto_collector": {
             "title": "Kolekcjoner",
@@ -6927,34 +6927,86 @@ define('two/attackView', [
             var origin = closestVillage
             var villageId = command.originVillage.id
             var villageName = command.originVillage.name
-            var interval = 2000
-            var interval1 = 11000
             var Liczba = 0
 
             function spyOrigin() {
-                origin.forEach(function(village, index) {
-                    console.log(village)
-                    var scoutingInfo = village.scoutingInfo
-                    var spies = scoutingInfo.spies
+                origin.forEach(function(village) {
                     setTimeout(function() {
-                        spies.forEach(function(available, index) {
-                            if (available.type == 1) {
-                                Liczba += 1
+                        socketService.emit(routeProvider.SCOUTING_GET_INFO, {
+                            village_id: village.id
+                        }, function(data) {
+                            var spy1 = data.spy_1
+                            var spy2 = data.spy_2
+                            var spy3 = data.spy_3
+                            var spy4 = data.spy_4
+                            var spy5 = data.spy_5
+                            if (spy1 == 1) {
                                 if (Liczba <= 6) {
-                                    setTimeout(function() {
+                                    socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                        startVillage: village.id,
+                                        targetVillage: villageId,
+                                        spys: 1,
+                                        type: 'units'
+                                    })
+                                }
+                                Liczba += 1
+                            }
+                            if (spy2 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
                                         socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                             startVillage: village.id,
                                             targetVillage: villageId,
                                             spys: 1,
                                             type: 'units'
                                         })
-                                    }, index * interval * Math.random())
-                                    utils.emitNotif('success', 'Szpieg nr ' + Liczba + ' wysłany na ' + villageName)
-                                }
+                                    }
+                                    Liczba += 1
+                                }, 1000)
+                            }
+                            if (spy3 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
+                                        socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                            startVillage: village.id,
+                                            targetVillage: villageId,
+                                            spys: 1,
+                                            type: 'units'
+                                        })
+                                    }
+                                    Liczba += 1
+                                }, 2000)
+                            }
+                            if (spy4 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
+                                        socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                            startVillage: village.id,
+                                            targetVillage: villageId,
+                                            spys: 1,
+                                            type: 'units'
+                                        })
+                                    }
+                                    Liczba += 1
+                                }, 3000)
+                            }
+                            if (spy5 == 1) {
+                                setTimeout(function() {
+                                    if (Liczba <= 6) {
+                                        socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                            startVillage: village.id,
+                                            targetVillage: villageId,
+                                            spys: 1,
+                                            type: 'units'
+                                        })
+                                    }
+                                    Liczba += 1
+                                }, 4000)
                             }
                         })
-                    }, index * interval1 * Math.random())
+                    }, 5000)
                 })
+                utils.emitNotif('success', 'Szpiedzy wysłani do ' + villageName)
             }
             spyOrigin()
         })
@@ -7000,158 +7052,173 @@ define('two/attackView', [
                     sword = support.sword
                     trebuchet = support.trebuchet
                     id = support.village.village_id
-                    console.log(spear, id)
                     if (id != origin) {
-                        if (spear > 0 || axe > 0 || archer > 0 || doppelsoldner > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: archer,
-                                    axe: axe,
-                                    catapult: 0,
-                                    doppelsoldner: doppelsoldner,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: spear,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (light_cavalry > 0 || mounted_archer > 0 || knight > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: knight,
-                                    light_cavalry: light_cavalry,
-                                    mounted_archer: mounted_archer,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (heavy_cavalry > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: heavy_cavalry,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (sword > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: sword,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (snob > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: snob,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (trebuchet > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: 0,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: 0,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: trebuchet
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        } else if (ram > 0 || catapult > 0) {
-                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                id: support.id,
-                                units: {
-                                    archer: 0,
-                                    axe: 0,
-                                    catapult: catapult,
-                                    doppelsoldner: 0,
-                                    heavy_cavalry: 0,
-                                    knight: 0,
-                                    light_cavalry: 0,
-                                    mounted_archer: 0,
-                                    ram: ram,
-                                    snob: 0,
-                                    spear: 0,
-                                    sword: 0,
-                                    trebuchet: 0
-                                }
-                            }, function(data) {
-                                console.log(data)
-                            })
-                        }
+                        setTimeout(function() {
+                            if (spear > 0 || axe > 0 || archer > 0 || doppelsoldner > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: archer,
+                                        axe: axe,
+                                        catapult: 0,
+                                        doppelsoldner: doppelsoldner,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: spear,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, {})
+                            }
+                        }, index * 1000)
+                        setTimeout(function() {
+                            if (light_cavalry > 0 || mounted_archer > 0 || knight > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: knight,
+                                        light_cavalry: light_cavalry,
+                                        mounted_archer: mounted_archer,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, {})
+                            }
+                        }, index * 2000)
+                        setTimeout(function() {
+                            if (heavy_cavalry > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: heavy_cavalry,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 3000)
+                        setTimeout(function() {
+                            if (sword > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: sword,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 4000)
+                        setTimeout(function() {
+                            if (snob > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: snob,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 5000)
+                        setTimeout(function() {
+                            if (trebuchet > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: 0,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: 0,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: trebuchet
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 6000)
+                        setTimeout(function() {
+                            if (ram > 0 || catapult > 0) {
+                                socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                    id: support.id,
+                                    units: {
+                                        archer: 0,
+                                        axe: 0,
+                                        catapult: catapult,
+                                        doppelsoldner: 0,
+                                        heavy_cavalry: 0,
+                                        knight: 0,
+                                        light_cavalry: 0,
+                                        mounted_archer: 0,
+                                        ram: ram,
+                                        snob: 0,
+                                        spear: 0,
+                                        sword: 0,
+                                        trebuchet: 0
+                                    }
+                                }, function(data) {
+                                    console.log(data)
+                                })
+                            }
+                        }, index * 7000)
                     }
-                }, index * 500)
+                }, index * 8000)
             })
         })
     }
@@ -8066,6 +8133,132 @@ require([
                 Lockr.set(STORAGE_KEYS.ACTIVE, true)
             })
             eventQueue.register(eventTypeProvider.AUTO_HEALER_STOPPED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, false)
+            })
+        }, ['initial_village'])
+    })
+})
+define('two/autoWithdraw', [
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    utils,
+    eventQueue
+) {
+    let initialized = false
+    let running = false
+    let attackView = false
+    let commands = []
+    const checkIncoming = function() {
+        if (running == true) {
+            console.log('Dezerter uruchomiony')
+            commands = attackView.getCommands()
+            console.log(commands)
+        }
+    }
+
+    let autoWithdraw = {}
+    autoWithdraw.init = function() {
+        initialized = true
+        attackView = require('two/attackView')
+    }
+    autoWithdraw.start = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
+        running = true
+        running = true
+        checkIncoming()
+        setInterval(function() {
+            checkIncoming()
+        }, 3600000)
+    }
+    autoWithdraw.stop = function() {
+        eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STOPPED)
+        running = false
+    }
+    autoWithdraw.isRunning = function() {
+        return running
+    }
+    autoWithdraw.isInitialized = function() {
+        return initialized
+    }
+    return autoWithdraw
+})
+define('two/autoWithdraw/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        AUTO_WITHDRAW_STARTED: 'auto_withdraw_started',
+        AUTO_WITHDRAW_STOPPED: 'auto_withdraw_stopped'
+    })
+})
+
+define('two/autoWithdraw/ui', [
+    'two/ui',
+    'two/autoWithdraw',
+    'two/utils',
+    'queues/EventQueue'
+], function (
+    interfaceOverflow,
+    autoWithdraw,
+    utils,
+    eventQueue
+) {
+    let $button
+    const init = function () {
+        $button = interfaceOverflow.addMenuButton('Dezerter', 40, $filter('i18n')('description', $rootScope.loc.ale, 'auto_withdraw'))
+        $button.addEventListener('click', function () {
+            if (autoWithdraw.isRunning()) {
+                autoWithdraw.stop()
+                utils.notif('success', $filter('i18n')('deactivated', $rootScope.loc.ale, 'auto_withdraw'))
+            } else {
+                autoWithdraw.start()
+                utils.notif('success', $filter('i18n')('activated', $rootScope.loc.ale, 'auto_withdraw'))
+            }
+        })
+        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function () {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+        eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function () {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+        if (autoWithdraw.isRunning()) {
+            eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
+        }
+        return opener
+    }
+    return init
+})
+require([
+    'two/ready',
+    'two/autoWithdraw',
+    'two/autoWithdraw/ui',
+    'Lockr',
+    'queues/EventQueue',
+    'two/autoWithdraw/events'
+], function(
+    ready,
+    autoWithdraw,
+    autoWithdrawInterface,
+    Lockr,
+    eventQueue
+) {
+    const STORAGE_KEYS = {
+        ACTIVE: 'auto_withdraw_active'
+    }
+    if (autoWithdraw.isInitialized()) {
+        return false
+    }
+    ready(function() {
+        autoWithdraw.init()
+        autoWithdrawInterface()
+        ready(function() {
+            if (Lockr.get(STORAGE_KEYS.ACTIVE, false, true)) {
+                autoWithdraw.start()
+            }
+            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STARTED, function() {
+                Lockr.set(STORAGE_KEYS.ACTIVE, true)
+            })
+            eventQueue.register(eventTypeProvider.AUTO_WITHDRAW_STOPPED, function() {
                 Lockr.set(STORAGE_KEYS.ACTIVE, false)
             })
         }, ['initial_village'])
