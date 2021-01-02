@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 02 Jan 2021 16:12:24 GMT
+ * Sat, 02 Jan 2021 17:01:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -8140,23 +8140,34 @@ require([
 })
 define('two/autoWithdraw', [
     'two/utils',
-    'queues/EventQueue'
+    'queues/EventQueue',
+    'Lockr'
 ], function(
     utils,
-    eventQueue
+    eventQueue,
+    Lockr
 ) {
     let initialized = false
     let running = false
     let attackView = false
     let commands = []
-    let commandsIds = []
+    let withdrawCommands = []
+    const STORAGE_KEYS = {
+        COMMANDS: 'auto_withdraw_commands'
+    }
+    const storeCommands = function () {
+        Lockr.set(STORAGE_KEYS.COMMANDS, withdrawCommands)
+    }
+    const pushCommand = function (command) {
+        withdrawCommands.push(command)
+    }
     const checkIncoming = function() {
         if (running == true) {
             console.log('Dezerter uruchomiony')
             commands = attackView.getCommands()
             commands.forEach(function(command, index) {
                 console.log(command)
-                if (commandsIds.includes(command.id)) {
+                if (withdrawCommands.includes(command.command_id)) {
                     console.log('Już dodano komendę cofania wojsk lub klinowania.')
                 } else {
                     setTimeout(function() {
@@ -8171,6 +8182,8 @@ define('two/autoWithdraw', [
                                 attackView.setCommander(command, formatedDate)
                             }
                         }
+                        pushCommand(command.command_id)
+                        storeCommands()
                     }, index * 2000)
                 }
             })
@@ -8180,6 +8193,7 @@ define('two/autoWithdraw', [
     autoWithdraw.init = function() {
         initialized = true
         attackView = require('two/attackView')
+        withdrawCommands = Lockr.get(STORAGE_KEYS.COMMANDS, [], true)
     }
     autoWithdraw.start = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_WITHDRAW_STARTED)
