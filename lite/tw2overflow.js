@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 02 Jan 2021 18:31:49 GMT
+ * Sat, 02 Jan 2021 18:47:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4371,11 +4371,11 @@ define('two/alertSender', [
     var tribemates = []
     let attackView = false
     let commands = []
-    var villages = player.getVillageList()
-    var villagesIds = []
     var incomingUnit = ''
     var incomingName = ''
     var slowestUnit = ''
+    var timecompleted = 0
+    var finalTime = ''
     const STORAGE_KEYS = {
         ALERTS: 'auto_withdraw_alerts'
     }
@@ -4387,6 +4387,7 @@ define('two/alertSender', [
     }
     var checkincomingsAttacks = function() {
         if (running == true) {
+            commands = attackView.getCommands()
             socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
                 tribe: tribeId
             }, function(data) {
@@ -4395,23 +4396,22 @@ define('two/alertSender', [
                     tribemates.push(members[i].id)
                 }
             })
-            villages.forEach(function(village) {
-                villagesIds.push(village.getId())
-            })
-            commands = attackView.getCommands()
             commands.forEach(function(command, index) {
                 if (sendedAlert.includes(command.command_id)) {
-                    console.log('Już dodano wysłano alert.')
+                    console.log('Już wysłano alert.')
                 } else {
                     setTimeout(function() {
                         if (command.command_type == 'attack') {
                             if (tribemates.includes(command.origin_character_id)) {
                                 console.log('Nadchodzące ruchy wojsk pochodzą od współplemieńca ' + command.origin_character_id + ' Rodzaj ' + command.command_type)
+                                pushAlert(command.command_id)
+                                storeAlerts()
                             } else {
                                 var alertText = []
                                 slowestUnit = command.slowestUnit
-                                var timecompleted = command.time_completed
-                                var finalTime = utils.formatDate(timecompleted)
+                                timecompleted = command.time_completed
+                                finalTime = utils.formatDate(timecompleted)
+                                console.log(timecompleted, finalTime)
                                 if (slowestUnit == 'sword') {
                                     incomingName = ' [color=03709d]MIECZNIK[/color]'
                                     incomingUnit = 'sword'
