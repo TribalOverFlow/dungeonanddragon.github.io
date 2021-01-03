@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 03 Jan 2021 22:59:28 GMT
+ * Sun, 03 Jan 2021 23:09:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -33870,7 +33870,6 @@ define('two/resourceSender', [
                                         clayTo = clayTo - claySend
                                         ironTo = ironTo - ironSend
                                         totalTo = woodTo + clayTo + ironTo
-                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
                                         addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
                                         neededWood = woodTo
                                         neededClay = clayTo
@@ -33889,7 +33888,6 @@ define('two/resourceSender', [
                                         clayTo = clayTo - claySend
                                         ironTo = ironTo - ironSend
                                         totalTo = woodTo + clayTo + ironTo
-                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
                                         addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
                                         neededWood = woodTo
                                         neededClay = clayTo
@@ -33913,7 +33911,6 @@ define('two/resourceSender', [
                                         ironTo = ironTo - ironSend
                                         totalTo = woodTo + clayTo + ironTo
                                         addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
                                         neededWood = woodTo
                                         neededClay = clayTo
                                         neededIron = ironTo
@@ -33932,7 +33929,6 @@ define('two/resourceSender', [
                                         ironTo = ironTo - ironSend
                                         totalTo = woodTo + clayTo + ironTo
                                         addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
                                         neededWood = woodTo
                                         neededClay = clayTo
                                         neededIron = ironTo
@@ -33954,8 +33950,7 @@ define('two/resourceSender', [
                                         clayTo = clayTo - claySend
                                         ironTo = ironTo - ironSend
                                         totalTo = woodTo + clayTo + ironTo
-                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
                                         neededWood = woodTo
                                         neededClay = clayTo
                                         neededIron = ironTo
@@ -33973,8 +33968,7 @@ define('two/resourceSender', [
                                         clayTo = clayTo - claySend
                                         ironTo = ironTo - ironSend
                                         totalTo = woodTo + clayTo + ironTo
-                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
                                         neededWood = woodTo
                                         neededClay = clayTo
                                         neededIron = ironTo
@@ -34404,7 +34398,7 @@ define('two/resourceSender', [
                             }
                         })
                     }
-                }, index2 * 3000)
+                }, index2 * 20000)
             })
         })
     }
