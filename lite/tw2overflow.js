@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 03 Jan 2021 21:54:36 GMT
+ * Sun, 03 Jan 2021 22:53:43 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1646,12 +1646,14 @@ define('two/language', [
         "resource_sender": {
             "title": "Tragarz",
             "trade": "Przesył surowców",
+            "start": "Przesyłaj",
             "trade.fullstorage": "Zapełnij magazyn",
             "description": "Narzędzie do transportu surowców między własnymi wioskami",
             "trade.villages": "Automatyzacja transportów",
             "trade.origin": "Transportuj do wskazanej wioski",
             "trade.province": "Transportuj do wiosek we wskazanej prowincji",
-            "trade.add_village": "Wybierz wioskę...",
+            "trade.add_village_search": "Wybierz wioskę...",
+            "trade.add_origin": "Cel",
             "trade.no_village": "Nie wybrano wioski",
             "trade.add_map_selected": "Wybrana wioska z mapy",
             "trade.selected": "Wybierz",
@@ -1665,7 +1667,7 @@ define('two/language', [
             "trade.distance": "Maksymalna odległość transportu",
             "trade.individual": "Maksymalna wartość jednorazowego transportu",
             "trade.full": "Pomijaj surowiec którego masz pełny magazyn",
-            "trade.advanced": "Zbieraj surowce na określony cel",
+            "trade.advanced": "Zbieraj surowce na określony cel(tylko jeden cel)",
             "trade.building": "Budynek",
             "trade.level": "Poziom",
             "trade.unit": "Jednostka",
@@ -3169,12 +3171,14 @@ define('two/language', [
         "resource_sender": {
             "title": "Tragarz",
             "trade": "Przesył surowców",
+            "start": "Przesyłaj",
             "trade.fullstorage": "Zapełnij magazyn",
             "description": "Narzędzie do transportu surowców między własnymi wioskami",
             "trade.villages": "Automatyzacja transportów",
             "trade.origin": "Transportuj do wskazanej wioski",
             "trade.province": "Transportuj do wiosek we wskazanej prowincji",
-            "trade.add_village": "Wybierz wioskę...",
+            "trade.add_village_search": "Wybierz wioskę...",
+            "trade.add_origin": "Cel",
             "trade.no_village": "Nie wybrano wioski",
             "trade.add_map_selected": "Wybrana wioska z mapy",
             "trade.selected": "Wybierz",
@@ -33600,9 +33604,9 @@ define('two/resourceSender', [
     resourceSender.marketTrade = function() {
         individual = resourceSenderSettings[SETTINGS.INDIVIDUAL]
         distance = resourceSenderSettings[SETTINGS.DISTANCE]
-        wood = resourceSenderSettings[SETTINGS.WOOD]
-        clay = resourceSenderSettings[SETTINGS.CLAY]
-        iron = resourceSenderSettings[SETTINGS.IRON]
+        wood = resourceSenderSettings[SETTINGS.WOOD_IN]
+        clay = resourceSenderSettings[SETTINGS.CLAY_IN]
+        iron = resourceSenderSettings[SETTINGS.IRON_IN]
         var selectedBuilding = resourceSenderSettings[SETTINGS.BUILDINGS]
         var player = modelDataService.getSelectedCharacter()
         var origins = player.getVillageList()
@@ -33850,7 +33854,133 @@ define('two/resourceSender', [
                         }, function(data) {
                             var freeMerchants = data.free
                             if (freeMerchants > 0) {
-                                if (woodTo <= 0) {
+                                if (woodTo <= 0 && clayTo <= 0) {
+                                    woodSend = 0
+                                    claySend = 0
+                                    ironSend = freeMerchants * 1000
+                                    if (villageIronO >= ironSend) {
+                                        socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                            start_village: village.getId(),
+                                            target_village: villageToSend,
+                                            wood: woodSend,
+                                            clay: claySend,
+                                            iron: ironSend
+                                        })
+                                        woodTo = woodTo - woodSend
+                                        clayTo = clayTo - claySend
+                                        ironTo = ironTo - ironSend
+                                        totalTo = woodTo + clayTo + ironTo
+                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        neededWood = woodTo
+                                        neededClay = clayTo
+                                        neededIron = ironTo
+                                        neededTotal = totalTo
+                                    } else {
+                                        ironSend = villageIronO
+                                        socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                            start_village: village.getId(),
+                                            target_village: villageToSend,
+                                            wood: woodSend,
+                                            clay: claySend,
+                                            iron: ironSend
+                                        })
+                                        woodTo = woodTo - woodSend
+                                        clayTo = clayTo - claySend
+                                        ironTo = ironTo - ironSend
+                                        totalTo = woodTo + clayTo + ironTo
+                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        neededWood = woodTo
+                                        neededClay = clayTo
+                                        neededIron = ironTo
+                                        neededTotal = totalTo
+                                    }
+                                } else if (woodTo <= 0 && ironTo <= 0) {
+                                    woodSend = 0
+                                    claySend = freeMerchants * 1000
+                                    ironSend = 0
+                                    if (villageClayO >= claySend) {
+                                        socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                            start_village: village.getId(),
+                                            target_village: villageToSend,
+                                            wood: woodSend,
+                                            clay: claySend,
+                                            iron: ironSend
+                                        })
+                                        woodTo = woodTo - woodSend
+                                        clayTo = clayTo - claySend
+                                        ironTo = ironTo - ironSend
+                                        totalTo = woodTo + clayTo + ironTo
+                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        neededWood = woodTo
+                                        neededClay = clayTo
+                                        neededIron = ironTo
+                                        neededTotal = totalTo
+                                    } else {
+                                        claySend = villageClayO
+                                        socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                            start_village: village.getId(),
+                                            target_village: villageToSend,
+                                            wood: woodSend,
+                                            clay: claySend,
+                                            iron: ironSend
+                                        })
+                                        woodTo = woodTo - woodSend
+                                        clayTo = clayTo - claySend
+                                        ironTo = ironTo - ironSend
+                                        totalTo = woodTo + clayTo + ironTo
+                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        neededWood = woodTo
+                                        neededClay = clayTo
+                                        neededIron = ironTo
+                                        neededTotal = totalTo
+                                    }
+                                } else if (clayTo <= 0 && ironTo <= 0) {
+                                    woodSend = freeMerchants * 1000
+                                    claySend = 0
+                                    ironSend = 0
+                                    if (villageWoodO >= woodSend) {
+                                        socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                            start_village: village.getId(),
+                                            target_village: villageToSend,
+                                            wood: woodSend,
+                                            clay: claySend,
+                                            iron: ironSend
+                                        })
+                                        woodTo = woodTo - woodSend
+                                        clayTo = clayTo - claySend
+                                        ironTo = ironTo - ironSend
+                                        totalTo = woodTo + clayTo + ironTo
+                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        neededWood = woodTo
+                                        neededClay = clayTo
+                                        neededIron = ironTo
+                                        neededTotal = totalTo
+                                    } else {
+                                        woodSend = villageWoodO
+                                        socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                            start_village: village.getId(),
+                                            target_village: villageToSend,
+                                            wood: woodSend,
+                                            clay: claySend,
+                                            iron: ironSend
+                                        })
+                                        woodTo = woodTo - woodSend
+                                        clayTo = clayTo - claySend
+                                        ironTo = ironTo - ironSend
+                                        totalTo = woodTo + clayTo + ironTo
+                                        addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                        addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                        neededWood = woodTo
+                                        neededClay = clayTo
+                                        neededIron = ironTo
+                                        neededTotal = totalTo
+                                    }
+                                } else if (woodTo <= 0) {
                                     woodSend = 0
                                     claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
                                     ironSend = Math.floor((ironTo / totalTo) * freeMerchants * 1000)
@@ -34096,7 +34226,7 @@ define('two/resourceSender', [
                                 } else {
                                     woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
                                     claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
-                                    ironSend = Math.floor((ironTo / totalTo) * freeMerchants * 1000)
+                                    ironSend = totalTo - woodSend - claySend
                                     if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
                                         socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
                                             start_village: village.getId(),
