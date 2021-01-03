@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 02 Jan 2021 21:36:52 GMT
+ * Sun, 03 Jan 2021 20:57:07 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -23527,9 +23527,11 @@ define('two/marketHelper/ui', [
     'two/marketHelper/types/level',
     'two/marketHelper/types/units',
     'two/Settings',
+    'queues/EventQueue',
     'two/EventScope',
-    'two/utils'
-], function (
+    'two/utils',
+    'struct/MapData'
+], function(
     interfaceOverflow,
     marketHelper,
     SETTINGS,
@@ -23538,88 +23540,250 @@ define('two/marketHelper/ui', [
     MH_LEVEL,
     MH_UNITS,
     Settings,
+    eventQueue,
     EventScope,
-    utils
+    utils,
+    mapData
 ) {
     let $scope
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    
+    let running = false
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    let targetInfo = {}
+    let targetsLabel = {}
+    let villageSelected
+    let provinceSelected
+    let mapSelectedVillage = false
+    let mapSelectedProvince = false
     const TAB_TYPES = {
         TRADE: 'trade',
         INSTANT_TRADE: 'instant_trade',
         LOGS: 'logs'
     }
-
-    const selectTab = function (tabType) {
+    const selectTab = function(tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
+    const marketTrade = function() {
         if (marketHelper.isRunning()) {
             marketHelper.stop()
+            running = false
         } else {
             marketHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            marketHelper.marketTrade()
         }
     }
-	
-    const switchStateI = function () {
+    const instantTrade = function() {
         if (marketHelper.isRunning()) {
             marketHelper.stop()
+            running = false
         } else {
             marketHelper.start()
+            settings.setAll(settings.decode($scope.settings))
+            marketHelper.instantTrade()
         }
     }
-
+    const clearTrade = function() {
+        $scope.settings[SETTINGS.GROUPS] = false
+    }
+    const clearInstant = function() {
+        $scope.settings[SETTINGS.GROUPS] = false
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+        mapSelectedProvince = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+        mapSelectedProvince = false
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'market_helper'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            villageSelected.origin = data
+        })
+        $scope.settings[SETTINGS.VILLAGE] = mapSelectedVillage.id
+    }
+    const addMapSelectedP = function() {
+        if (!mapSelectedProvince) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_province', $rootScope.loc.ale, 'market_helper'))
+        }
+        mapData.loadTownDataAsync(mapSelectedProvince.x, mapSelectedProvince.y, 1, 1, function(data) {
+            provinceSelected.origin = data
+        })
+        $scope.settings[SETTINGS.PROVINCE] = mapSelectedProvince.id
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ŁADOWANIE...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    const loadTargetInfo = function(targetId) {
+        if (targetInfo[targetId]) {
+            return targetInfo[targetId]
+        }
+        targetInfo[targetId] = true
+        targetsLabel[targetId] = 'ŁADOWANIE...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: targetId,
+            num_reports: 1
+        }, function(data) {
+            targetInfo[targetId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            targetsLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId && log.targetId) {
+                loadVillageInfo(log.villageId)
+                loadTargetInfo(log.targetId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        marketHelper.clearLogs()
+        $scope.logsView.logs = []
+    }
     const eventHandlers = {
-        updateGroups: function () {
+        updateGroups: function() {
             $scope.groups = Settings.encodeList(groupList.getGroups(), {
                 disabled: false,
                 type: 'groups'
             })
         },
-        start: function () {
-            $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'marketHelper started')
+        updateLogs: function() {
+            $scope.logs = marketHelper.getLogs()
+            logsView.updateVisibleLogs()
         },
-        stop: function () {
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'markethelper_village_search') {
+                return false
+            }
+            villageSelected[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+            $scope.settings[SETTINGS.VILLAGE] = villageSelected.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        onAutoCompleteVillage: function(data) {
+            villageSelected.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.VILLAGE] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        onAutoCompleteProvince: function(data) {
+            provinceSelected.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.PROVINCE] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'market_helper'))
+            eventHandlers.updateLogs()
+        },
+        start: function() {
+            $scope.running = true
+        },
+        stop: function() {
             $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'marketHelper stopped')
         }
     }
-
-    const init = function () {
+    const init = function() {
         settings = marketHelper.getSettings()
+        villageSelected = {
+            origin: false
+        }
+        provinceSelected = {
+            origin: false
+        }
         $button = interfaceOverflow.addMenuButton2('Handlarz', 30, $filter('i18n')('description', $rootScope.loc.ale, 'market_helper'))
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody class=\"traderLog\"><tr class=\"noTrades\"><td colspan=\"7\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchStateI()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-market-helper div[select]{text-align:center}#two-market-helper div[select] .select-wrapper{height:34px}#two-market-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-market-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-market-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-market-helper .actions a{width:100px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}#two-market-helper th{text-align:center}#two-market-helper .traderLog td{text-align:center}#two-market-helper .traderLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper .traderLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-market-helper table.header-center th{text-align:center}#two-market-helper .noTrades td{height:26px;text-align:center}#two-market-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
+        eventQueue.register(eventTypeProvider.MARKET_HELPER_START, function() {
+            running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('trade_started', $rootScope.loc.ale, 'market_helper'))
+        })
+        eventQueue.register(eventTypeProvider.MARKET_HELPER_STOP, function() {
+            running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('trade_stopped', $rootScope.loc.ale, 'market_helper'))
+        })
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openTargetInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetsLabel[log.targetId] }}</a><td>{{ log.bought }}<td>{{ log.amountB }}<td>{{ log.sold }}<td>{{ log.amountS }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearTrade()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"marketTrade()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'market_helper' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearInstant()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"instantTrade()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'market_helper' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-market-helper div[select]{text-align:center}#two-market-helper div[select] .select-wrapper{height:34px}#two-market-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-market-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-market-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-market-helper .actions a{width:100px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}#two-market-helper th{text-align:center}#two-market-helper table.header-center th{text-align:center}#two-market-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-market-helper .logs .status tr{height:25px}#two-market-helper .logs .status td{padding:0 6px}#two-market-helper .logs .log-list{margin-bottom:10px}#two-market-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-market-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-market-helper .icon-20x20-village:before{margin-top:-11px}')
     }
-
-    const buildWindow = function () {
+    const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = marketHelper.isRunning()
+        $scope.running = running
         $scope.selectedTab = TAB_TYPES.TRADE
         $scope.settingsMap = SETTINGS_MAP
-		
+        $scope.pagination = {}
+        $scope.villageSelected = villageSelected
+        $scope.provinceSelected = provinceSelected
+        $scope.clearTrade = clearTrade
+        $scope.clearInstant = clearInstant
+        $scope.autoCompleteVillage = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'market_helper'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'market_helper'),
+            dropDown: true
+        }
+        $scope.autoCompleteProvince = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'market_helper'),
+            onEnter: eventHandlers.onAutoCompleteProvince,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'market_helper'),
+            dropDown: true
+        }
         $scope.level = Settings.encodeList(MH_LEVEL, {
             textObject: 'market_helper',
             disabled: true
@@ -23632,31 +23796,43 @@ define('two/marketHelper/ui', [
             textObject: 'market_helper',
             disabled: true
         })
-
         settings.injectScope($scope)
         eventHandlers.updateGroups()
-
         $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
-        $scope.switchStateI = switchStateI
-
-        let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy () {
+        $scope.addMapSelected = addMapSelected
+        $scope.addMapSelectedP = addMapSelectedP
+        $scope.marketTrade = marketTrade
+        $scope.instantTrade = instantTrade
+        $scope.logsView = logsView
+        $scope.logsView.logs = marketHelper.getLogs()
+        $scope.villagesInfo = villagesInfo
+        $scope.villagesLabel = villagesLabel
+        $scope.targetInfo = targetInfo
+        $scope.targetsLabel = targetsLabel
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.openTargetInfo = windowDisplayService.openVillageInfo
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        logsView.updateVisibleLogs()
+        let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy() {
             console.log('marketHelper closed')
         })
-
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.MARKET_HELPER_CLEAR_LOGS, eventHandlers.clearLogs)
         eventScope.register(eventTypeProvider.MARKET_HELPER_START, eventHandlers.start)
         eventScope.register(eventTypeProvider.MARKET_HELPER_STOP, eventHandlers.stop)
-        
         windowManagerService.getScreenWithInjectedScope('!twoverflow_market_helper_window', $scope)
     }
-
     return init
 })
-
 define('two/marketHelper/settings', [], function () {
     return {
         GROUPS: 'groups',
@@ -25381,7 +25557,7 @@ define('two/mintHelper/ui', [
     let $button
 
     const init = function () {
-        $button = interfaceOverflow.addMenuButton2('Mincerz', 50, $filter('i18n')('description', $rootScope.loc.ale, 'mint_helper'))
+        $button = interfaceOverflow.addMenuButton2('Mincerz', 60, $filter('i18n')('description', $rootScope.loc.ale, 'mint_helper'))
         
         $button.addEventListener('click', function () {
             if (mintHelper.isRunning()) {
@@ -26307,13 +26483,13 @@ define('two/prankHelper/ui', [
             running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'recruit_queue'))
+            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'prank_helper'))
         })
         eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
             running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'recruit_queue'))
+            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'prank_helper'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
@@ -33029,6 +33205,1478 @@ require([
         }, ['initial_village'])
     })
 })
+define('two/resourceSender', [
+    'two/Settings',
+    'two/resourceSender/settings',
+    'two/resourceSender/settings/map',
+    'two/resourceSender/settings/updates',
+    'two/resourceSender/types/buildings',
+    'two/resourceSender/types/level',
+    'two/resourceSender/types/units',
+    'two/ready',
+    'queues/EventQueue',
+    'Lockr',
+    'helper/time'
+], function(
+    Settings,
+    SETTINGS,
+    SETTINGS_MAP,
+    UPDATES,
+    MH_BUILDINGS,
+    MH_LEVEL,
+    MH_UNITS,
+    ready,
+    eventQueue,
+    Lockr,
+    timeHelper
+) {
+    let initialized = false
+    let running = false
+    const LOGS_LIMIT = 500
+    let settings
+    let logs
+    let resourceSenderSettings
+    var maxStorage = 0
+    var villageWood = 0
+    var villageClay = 0
+    var villageIron = 0
+    var villageWoodO = 0
+    var villageClayO = 0
+    var villageIronO = 0
+    var neededWood = 0
+    var woodSend = 0
+    var claySend = 0
+    var ironSend = 0
+    var maxWood = 0
+    var maxClay = 0
+    var maxIron = 0
+    var maxLc = 0
+    var maxArcher = 0
+    var maxAxe = 0
+    var maxMa = 0
+    var maxHc = 0
+    var maxRam = 0
+    var maxSpear = 0
+    var maxSword = 0
+    var maxCat = 0
+    var maxTreb = 0
+    var maxBerk = 0
+    var province = 0
+    var village = 0
+    var units = ''
+    var coins = false
+    var fillStorage = false
+    var neededClay = 0
+    var neededIron = 0
+    var neededTotal = 0
+    var buildingCostWood = 0
+    var buildingCostClay = 0
+    var buildingCostIron = 0
+    var buildingLevel = 0
+    var nextLevelCosts = 0
+    var wood = 0
+    var clay = 0
+    var iron = 0
+    var wood_min = 0
+    var clay_min = 0
+    var iron_min = 0
+    var individual = 0
+    var distance = 0
+    var amount = 0
+    var full = false
+    var level = 0
+    let selectedGroups = []
+    const STORAGE_KEYS = {
+        SETTINGS: 'resource_sender_settings',
+        LOGS: 'resource_sender_log'
+    }
+    const PRESERVE_UNITS = {
+        [MH_UNITS.SPEAR]: 'spear',
+        [MH_UNITS.SWORD]: 'sword',
+        [MH_UNITS.AXE]: 'axe',
+        [MH_UNITS.ARCHER]: 'archer',
+        [MH_UNITS.LIGHT_CAVALRY]: 'light_cavalry',
+        [MH_UNITS.MOUNTED_ARCHER]: 'mounted_archer',
+        [MH_UNITS.HEAVT_CAVALRY]: 'heavy_cavalry',
+        [MH_UNITS.RAM]: 'ram',
+        [MH_UNITS.CATAPULT]: 'catapult',
+        [MH_UNITS.TREBUCHET]: 'trebuchet',
+        [MH_UNITS.DOPPELSOLDNER]: 'doppelsoldner',
+        [MH_UNITS.SNOB]: 'snob',
+        [MH_UNITS.KNIGHT]: 'knight'
+    }
+    const PRESERVE_BUILDINGS = {
+        [MH_BUILDINGS.HEADQUARTER]: 'headquarter',
+        [MH_BUILDINGS.WAREHOUSE]: 'warehouse',
+        [MH_BUILDINGS.FARM]: 'farm',
+        [MH_BUILDINGS.RALLY_POINT]: 'rally_point',
+        [MH_BUILDINGS.STATUE]: 'statue',
+        [MH_BUILDINGS.WALL]: 'wall',
+        [MH_BUILDINGS.TAVERN]: 'tavern',
+        [MH_BUILDINGS.BARRACKS]: 'barracks',
+        [MH_BUILDINGS.PRECEPTORY]: 'preceptory',
+        [MH_BUILDINGS.HOSPITAL]: 'hospital',
+        [MH_BUILDINGS.CLAY_PIT]: 'clay_pit',
+        [MH_BUILDINGS.IRON_MINE]: 'iron_mine',
+        [MH_BUILDINGS.TIMBER_CAMP]: 'timber_camp',
+        [MH_BUILDINGS.CHAPEL]: 'chapel',
+        [MH_BUILDINGS.CHURCH]: 'church',
+        [MH_BUILDINGS.MARKET]: 'market',
+        [MH_BUILDINGS.ACADEMY]: 'academy'
+    }
+    const BUILDING_LEVEL = {
+        [MH_LEVEL.LEVEL_1]: 1,
+        [MH_LEVEL.LEVEL_2]: 2,
+        [MH_LEVEL.LEVEL_3]: 3,
+        [MH_LEVEL.LEVEL_4]: 4,
+        [MH_LEVEL.LEVEL_5]: 5,
+        [MH_LEVEL.LEVEL_6]: 6,
+        [MH_LEVEL.LEVEL_7]: 7,
+        [MH_LEVEL.LEVEL_8]: 8,
+        [MH_LEVEL.LEVEL_9]: 9,
+        [MH_LEVEL.LEVEL_10]: 10,
+        [MH_LEVEL.LEVEL_11]: 11,
+        [MH_LEVEL.LEVEL_12]: 12,
+        [MH_LEVEL.LEVEL_13]: 13,
+        [MH_LEVEL.LEVEL_14]: 14,
+        [MH_LEVEL.LEVEL_15]: 15,
+        [MH_LEVEL.LEVEL_16]: 16,
+        [MH_LEVEL.LEVEL_17]: 17,
+        [MH_LEVEL.LEVEL_18]: 18,
+        [MH_LEVEL.LEVEL_19]: 19,
+        [MH_LEVEL.LEVEL_20]: 20,
+        [MH_LEVEL.LEVEL_21]: 21,
+        [MH_LEVEL.LEVEL_22]: 22,
+        [MH_LEVEL.LEVEL_23]: 23,
+        [MH_LEVEL.LEVEL_24]: 24,
+        [MH_LEVEL.LEVEL_25]: 25,
+        [MH_LEVEL.LEVEL_26]: 26,
+        [MH_LEVEL.LEVEL_27]: 27,
+        [MH_LEVEL.LEVEL_28]: 28,
+        [MH_LEVEL.LEVEL_29]: 29,
+        [MH_LEVEL.LEVEL_30]: 30
+    }
+    console.log(BUILDING_LEVEL, PRESERVE_BUILDINGS, PRESERVE_UNITS)
+    const updateGroups = function() {
+        selectedGroups = []
+        const allGroups = modelDataService.getGroupList().getGroups()
+        const groupsSelectedByTheUser = resourceSenderSettings[SETTINGS.GROUPS]
+        groupsSelectedByTheUser.forEach(function(groupId) {
+            selectedGroups.push(allGroups[groupId])
+        })
+        console.log('selectedGroups', selectedGroups)
+    }
+    const requestVillageProvinceNeighbours = function(villageId, callback) {
+        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
+            'village_id': villageId
+        }, callback)
+    }
+    const addLog = function(villageId, targetId, resource, amount) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            targetId: targetId,
+            resource: resource,
+            amount: amount
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        return true
+    }
+    const resourceSender = {}
+    resourceSender.init = function() {
+        initialized = true
+        logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
+        settings = new Settings({
+            settingsMap: SETTINGS_MAP,
+            storageKey: STORAGE_KEYS.SETTINGS
+        })
+        settings.onChange(function(changes, updates) {
+            resourceSenderSettings = settings.getAll()
+            if (updates[UPDATES.GROUPS]) {
+                updateGroups()
+            }
+        })
+        resourceSenderSettings = settings.getAll()
+        console.log('resourceSender settings', resourceSenderSettings)
+        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
+        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
+    }
+    resourceSender.marketTrade = function() {
+        var player = modelDataService.getSelectedCharacter()
+        wood = resourceSenderSettings[SETTINGS.WOOD]
+        clay = resourceSenderSettings[SETTINGS.CLAY]
+        iron = resourceSenderSettings[SETTINGS.IRON]
+        wood_min = resourceSenderSettings[SETTINGS.WOOD_MIN]
+        clay_min = resourceSenderSettings[SETTINGS.CLAY_MIN]
+        iron_min = resourceSenderSettings[SETTINGS.IRON_MIN]
+        individual = resourceSenderSettings[SETTINGS.INDIVIDUAL]
+        distance = resourceSenderSettings[SETTINGS.DISTANCE]
+        full = resourceSenderSettings[SETTINGS.FULL]
+        var selectedBuilding = resourceSenderSettings[SETTINGS.BUILDINGS]
+        var origins = player.getVillageList()
+        level = resourceSenderSettings[SETTINGS.LEVEL]
+        units = resourceSenderSettings[SETTINGS.UNITS]
+        amount = resourceSenderSettings[SETTINGS.AMOUNT]
+        coins = resourceSenderSettings[SETTINGS.COINS]
+        fillStorage = resourceSenderSettings[SETTINGS.STORAGE]
+        var targets = []
+        var selectedGroup = resourceSenderSettings[SETTINGS.GROUPS]
+        const groupList = modelDataService.getGroupList()
+        selectedGroup.forEach(function(group) {
+            var groupTargets = groupList.getGroupVillageIds(group)
+            for (var i of groupTargets) {
+                targets.push(i)
+            }
+        })
+        var villages = []
+        province = resourceSenderSettings[SETTINGS.PROVINCE]
+        if (province > 0) {
+            requestVillageProvinceNeighbours(province, function(responseData) {
+                villages = responseData.villages
+                villages.forEach(function(village) {
+                    targets.push(village.id)
+                })
+            })
+        }
+        village = resourceSenderSettings[SETTINGS.VILLAGE]
+        if (village > 0) {
+            targets.push(village)
+        }
+        console.log(wood, clay, iron, wood_min, clay_min, iron_min, individual, distance, full, level, buildingLevel, amount)
+        origins.forEach(function(village, index) {
+            targets.forEach(function(villageToSend) {
+                setTimeout(function() {
+                    if (village.data.villageId == villageToSend) {
+                        var resources = village.getResources()
+                        var computed = resources.getComputed()
+                        maxStorage = resources.getMaxStorage()
+                        var wood = computed.wood
+                        var clay = computed.clay
+                        var iron = computed.iron
+                        villageWood = wood.currentStock
+                        villageClay = clay.currentStock
+                        villageIron = iron.currentStock
+                        if (selectedBuilding == 'headquarter') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('headquarter').nextLevelCosts
+                        } else if (selectedBuilding == 'farm') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('farm').nextLevelCosts
+                        } else if (selectedBuilding == 'warehouse') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('warehouse').nextLevelCosts
+                        } else if (selectedBuilding == 'barracks') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('barracks').nextLevelCosts
+                        } else if (selectedBuilding == 'statue') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('statue').nextLevelCosts
+                        } else if (selectedBuilding == 'academy') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('academy').nextLevelCosts
+                        } else if (selectedBuilding == 'preceptory') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('preceptory').nextLevelCosts
+                        } else if (selectedBuilding == 'church') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('church').nextLevelCosts
+                        } else if (selectedBuilding == 'rally_point') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('rally_point').nextLevelCosts
+                        } else if (selectedBuilding == 'wall') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('wall').nextLevelCosts
+                        } else if (selectedBuilding == 'tavern') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('tavern').nextLevelCosts
+                        } else if (selectedBuilding == 'hospital') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('hospital').nextLevelCosts
+                        } else if (selectedBuilding == 'clay_pit') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('clay_pit').nextLevelCosts
+                        } else if (selectedBuilding == 'iron_mine') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('iron_mine').nextLevelCosts
+                        } else if (selectedBuilding == 'timber_camp') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('timber_camp').nextLevelCosts
+                        } else if (selectedBuilding == 'chapel') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('chapel').nextLevelCosts
+                        } else if (selectedBuilding == 'market') {
+                            nextLevelCosts = village.getBuildingData().getDataForBuilding('market').nextLevelCosts
+                        }
+                        if (coins) {
+                            nextLevelCosts = {
+                                wood: '28000',
+                                clay: '30000',
+                                iron: '25000'
+                            }
+                        }
+                        if (fillStorage) {
+                            nextLevelCosts = {
+                                wood: maxStorage,
+                                clay: maxStorage,
+                                iron: maxStorage
+                            }
+                        }
+                        if (units == 'nobleman') {
+                            nextLevelCosts = {
+                                wood: '40000',
+                                clay: '50000',
+                                iron: '50000'
+                            }
+                        } else if (units == 'mounted_archer') {
+                            maxMa = Math.floor(maxStorage / 250)
+                            maxWood = maxMa * 250
+                            maxClay = maxMa * 200
+                            maxIron = maxMa * 100
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'light_cavalry') {
+                            maxLc = Math.floor(maxStorage / 250)
+                            maxWood = maxLc * 125
+                            maxClay = maxLc * 100
+                            maxIron = maxLc * 250
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'heavy_cavalry') {
+                            maxHc = Math.floor(maxStorage / 600)
+                            maxWood = maxHc * 200
+                            maxClay = maxHc * 150
+                            maxIron = maxHc * 600
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'ram') {
+                            maxRam = Math.floor(maxStorage / 300)
+                            maxWood = maxRam * 300
+                            maxClay = maxRam * 200
+                            maxIron = maxRam * 200
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'catapult') {
+                            maxCat = Math.floor(maxStorage / 400)
+                            maxWood = maxCat * 320
+                            maxClay = maxCat * 400
+                            maxIron = maxCat * 100
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'trebuchet') {
+                            maxTreb = Math.floor(maxStorage / 4000)
+                            maxWood = maxTreb * 4000
+                            maxClay = maxTreb * 2000
+                            maxIron = maxTreb * 2000
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'doppelsoldner') {
+                            maxBerk = Math.floor(maxStorage / 2400)
+                            maxWood = maxBerk * 1200
+                            maxClay = maxBerk * 1200
+                            maxIron = maxBerk * 2400
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'spear') {
+                            maxSpear = Math.floor(maxStorage / 50)
+                            maxWood = maxSpear * 50
+                            maxClay = maxSpear * 30
+                            maxIron = maxSpear * 20
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'sword') {
+                            maxSword = Math.floor(maxStorage / 70)
+                            maxWood = maxSword * 30
+                            maxClay = maxSword * 30
+                            maxIron = maxSword * 70
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'axe') {
+                            maxAxe = Math.floor(maxStorage / 60)
+                            maxWood = maxAxe * 60
+                            maxClay = maxAxe * 30
+                            maxIron = maxAxe * 40
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        } else if (units == 'archer') {
+                            maxArcher = Math.floor(maxStorage / 80)
+                            maxWood = maxArcher * 80
+                            maxClay = maxArcher * 30
+                            maxIron = maxArcher * 60
+                            nextLevelCosts = {
+                                wood: maxWood,
+                                clay: maxClay,
+                                iron: maxIron
+                            }
+                        }
+                        buildingCostWood = nextLevelCosts.wood
+                        buildingCostClay = nextLevelCosts.clay
+                        buildingCostIron = nextLevelCosts.iron
+                        console.log(buildingCostClay, buildingCostIron, buildingCostWood)
+                        neededWood = buildingCostWood - villageWood
+                        neededClay = buildingCostClay - villageClay
+                        neededIron = buildingCostIron - villageIron
+                        neededTotal = neededWood + neededClay + neededIron
+                    }
+                }, index * 3600000)
+            })
+        })
+        var woodTo = neededWood
+        var clayTo = neededClay
+        var ironTo = neededIron
+        var totalTo = neededTotal
+        targets.forEach(function(villageToSend, index) {
+            setTimeout(function() {
+                origins.forEach(function(village, index2) {
+                    setTimeout(function() {
+                        console.log(woodTo, clayTo, ironTo, totalTo)
+                        var resourcest = village.getResources()
+                        var computedt = resourcest.getComputed()
+                        var woodt = computedt.wood
+                        var clayt = computedt.clay
+                        var iront = computedt.iron
+                        villageWoodO = woodt.currentStock
+                        villageClayO = clayt.currentStock
+                        villageIronO = iront.currentStock
+                        if (village.data.villageId != villageToSend) {
+                            socketService.emit(routeProvider.TRADING_GET_MERCHANT_STATUS, {
+                                village_id: village.getId()
+                            }, function(data) {
+                                var freeMerchants = data.free
+                                if (freeMerchants > 0) {
+                                    if (woodTo <= 0) {
+                                        woodSend = 0
+                                        claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
+                                        ironSend = Math.floor((ironTo / totalTo) * freeMerchants * 1000)
+                                        if (villageClayO >= claySend && villageIronO >= ironSend) {
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageClayO < claySend && villageIronO >= ironSend) {
+                                            claySend = villageClayO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageClayO >= claySend && villageIronO < ironSend) {
+                                            ironSend = villageIronO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageClayO < claySend && villageIronO < ironSend) {
+                                            claySend = villageClayO
+                                            ironSend = villageIronO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        }
+                                    } else if (ironTo <= 0) {
+                                        woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
+                                        claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
+                                        ironSend = 0
+                                        if (villageClayO >= claySend && villageWoodO >= woodSend) {
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageClayO < claySend && villageWoodO >= woodSend) {
+                                            claySend = villageClayO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageClayO >= claySend && villageWoodO < woodSend) {
+                                            woodSend = villageWoodO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageClayO < claySend && villageWoodO < woodSend) {
+                                            woodSend = villageWoodO
+                                            claySend = villageClayO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        }
+                                    } else if (clayTo <= 0) {
+                                        woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
+                                        claySend = 0
+                                        ironSend = Math.floor((ironTo / totalTo) * freeMerchants * 1000)
+                                        if (villageWoodO >= woodSend && villageIronO >= ironSend) {
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO < woodSend && villageIronO >= ironSend) {
+                                            woodSend = villageWoodO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO >= woodSend && villageIronO < ironSend) {
+                                            ironSend = villageIronO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO < woodSend && villageIronO < ironSend) {
+                                            woodSend = villageWoodO
+                                            ironSend = villageIronO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        }
+                                    } else {
+                                        woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
+                                        claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
+                                        ironSend = Math.floor((ironTo / totalTo) * freeMerchants * 1000)
+                                        if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO < woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
+                                            woodSend = villageWoodO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO >= woodSend && villageIronO < ironSend && villageClayO >= claySend) {
+                                            ironSend = villageIronO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO < claySend) {
+                                            claySend = villageClayO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO < woodSend && villageIronO < ironSend && villageClayO >= claySend) {
+                                            ironSend = villageIronO
+                                            woodSend = villageWoodO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO >= woodSend && villageIronO < ironSend && villageClayO < claySend) {
+                                            ironSend = villageIronO
+                                            claySend = villageClayO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO < woodSend && villageIronO >= ironSend && villageClayO < claySend) {
+                                            claySend = villageClayO
+                                            woodSend = villageWoodO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        } else if (villageWoodO < woodSend && villageIronO < ironSend && villageClayO < claySend) {
+                                            ironSend = villageIronO
+                                            woodSend = villageWoodO
+                                            claySend = villageClayO
+                                            socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                start_village: village.getId(),
+                                                target_village: villageToSend,
+                                                wood: woodSend,
+                                                clay: claySend,
+                                                iron: ironSend
+                                            })
+                                            woodTo = woodTo - woodSend
+                                            clayTo = clayTo - claySend
+                                            ironTo = ironTo - ironSend
+                                            totalTo = woodTo + clayTo + ironTo
+                                            console.log(woodTo, clayTo, ironTo, totalTo)
+                                            addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                            addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                            addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                            neededWood = woodTo
+                                            neededClay = clayTo
+                                            neededIron = ironTo
+                                            neededTotal = totalTo
+                                        }
+                                    }
+                                }
+                            })
+                        }
+                    }, index2 * 3000)
+                })
+            }, (index * 3600000) + 10000)
+        })
+    }
+    resourceSender.start = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_START)
+        addLog('', 'Rozpoczęto przesył', '', '')
+    }
+    resourceSender.getLogs = function() {
+        return logs
+    }
+    resourceSender.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_CLEAR_LOGS)
+        return logs
+    }
+    resourceSender.stop = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_STOP)
+        addLog('', 'Zatrzymano przesył', '', '')
+    }
+    resourceSender.getSettings = function() {
+        return settings
+    }
+    resourceSender.isInitialized = function() {
+        return initialized
+    }
+    resourceSender.isRunning = function() {
+        return running
+    }
+    return resourceSender
+})
+define('two/resourceSender/events', [], function () {
+    angular.extend(eventTypeProvider, {
+        RESOURCE_SENDER_START: 'resource_sender_start',
+        RESOURCE_SENDER_STOP: 'resource_sender_stop'
+    })
+})
+
+define('two/resourceSender/ui', [
+    'two/ui',
+    'two/resourceSender',
+    'two/resourceSender/settings',
+    'two/resourceSender/settings/map',
+    'two/resourceSender/types/buildings',
+    'two/resourceSender/types/level',
+    'two/resourceSender/types/units',
+    'two/Settings',
+    'queues/EventQueue',
+    'two/EventScope',
+    'two/utils',
+    'struct/MapData'
+], function(
+    interfaceOverflow,
+    resourceSender,
+    SETTINGS,
+    SETTINGS_MAP,
+    MH_BUILDINGS,
+    MH_LEVEL,
+    MH_UNITS,
+    Settings,
+    eventQueue,
+    EventScope,
+    utils,
+    mapData
+) {
+    let $scope
+    let settings
+    let groupList = modelDataService.getGroupList()
+    let $button
+    let running = false
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    let targetInfo = {}
+    let targetsLabel = {}
+    let villageSelected
+    let provinceSelected
+    let mapSelectedVillage = false
+    let mapSelectedProvince = false
+    const TAB_TYPES = {
+        TRADE: 'trade',
+        LOGS: 'logs'
+    }
+    const selectTab = function(tabType) {
+        $scope.selectedTab = tabType
+    }
+    const marketTrade = function() {
+        if (resourceSender.isRunning()) {
+            resourceSender.stop()
+            running = false
+        } else {
+            resourceSender.start()
+            settings.setAll(settings.decode($scope.settings))
+            resourceSender.marketTrade()
+        }
+    }
+    const clearTrade = function() {
+        $scope.settings[SETTINGS.GROUPS] = false
+        $scope.settings[SETTINGS.WOOD_IN] = 1000
+        $scope.settings[SETTINGS.WOOD_MIN] = 1000
+        $scope.settings[SETTINGS.CLAY_IN] = 1000
+        $scope.settings[SETTINGS.CLAY_MIN] = 1000
+        $scope.settings[SETTINGS.IRON_IN] = 1000
+        $scope.settings[SETTINGS.IRON_MIN] = 1000
+        $scope.settings[SETTINGS.DISTANCE] = 90
+        $scope.settings[SETTINGS.VILLAGE] = 0
+        $scope.settings[SETTINGS.PROVINCE] = 0
+        $scope.settings[SETTINGS.INDIVIDUAL] = 1000
+        $scope.settings[SETTINGS.FULL] = false
+        $scope.settings[SETTINGS.BUILDINGS] = false
+        $scope.settings[SETTINGS.LEVEL] = false
+        $scope.settings[SETTINGS.UNITS] = false
+        $scope.settings[SETTINGS.AMOUNT] = 100
+        $scope.settings[SETTINGS.COINS] = false
+        $scope.settings[SETTINGS.STORAGE] = false
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+        mapSelectedProvince = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+        mapSelectedProvince = false
+    }
+    const addMapSelected = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'resource_sender'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            villageSelected.origin = data
+        })
+        $scope.settings[SETTINGS.VILLAGE] = mapSelectedVillage.id
+    }
+    const addMapSelectedP = function() {
+        if (!mapSelectedProvince) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_province', $rootScope.loc.ale, 'resource_sender'))
+        }
+        mapData.loadTownDataAsync(mapSelectedProvince.x, mapSelectedProvince.y, 1, 1, function(data) {
+            provinceSelected.origin = data
+        })
+        $scope.settings[SETTINGS.PROVINCE] = mapSelectedProvince.id
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ŁADOWANIE...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    const loadTargetInfo = function(targetId) {
+        if (targetInfo[targetId]) {
+            return targetInfo[targetId]
+        }
+        targetInfo[targetId] = true
+        targetsLabel[targetId] = 'ŁADOWANIE...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: targetId,
+            num_reports: 1
+        }, function(data) {
+            targetInfo[targetId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            targetsLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId && log.targetId) {
+                loadVillageInfo(log.villageId)
+                loadTargetInfo(log.targetId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        resourceSender.clearLogs()
+        $scope.logsView.logs = []
+    }
+    const eventHandlers = {
+        updateGroups: function() {
+            $scope.groups = Settings.encodeList(groupList.getGroups(), {
+                disabled: false,
+                type: 'groups'
+            })
+        },
+        updateLogs: function() {
+            $scope.logs = resourceSender.getLogs()
+            logsView.updateVisibleLogs()
+        },
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'resourcesender_village_search') {
+                return false
+            }
+            villageSelected[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+            $scope.settings[SETTINGS.VILLAGE] = villageSelected.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        onAutoCompleteVillage: function(data) {
+            villageSelected.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.VILLAGE] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        onAutoCompleteProvince: function(data) {
+            provinceSelected.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.PROVINCE] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'resource_sender'))
+            eventHandlers.updateLogs()
+        },
+        start: function() {
+            $scope.running = true
+        },
+        stop: function() {
+            $scope.running = false
+        }
+    }
+    const init = function() {
+        settings = resourceSender.getSettings()
+        villageSelected = {
+            origin: false
+        }
+        provinceSelected = {
+            origin: false
+        }
+        $button = interfaceOverflow.addMenuButton2('Tragarz', 40, $filter('i18n')('description', $rootScope.loc.ale, 'resource_sender'))
+        $button.addEventListener('click', buildWindow)
+        eventQueue.register(eventTypeProvider.RESOURCE_SENDER_START, function() {
+            running = true
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+            utils.notif('success', $filter('i18n')('trade_started', $rootScope.loc.ale, 'resource_sender'))
+        })
+        eventQueue.register(eventTypeProvider.RESOURCE_SENDER_STOP, function() {
+            running = false
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+            utils.notif('success', $filter('i18n')('trade_stopped', $rootScope.loc.ale, 'resource_sender'))
+        })
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_resource_sender_window', `<div id=\"two-resource-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'resource_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'resource_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'resource_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'resource_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'resource_sender' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'resource_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!villageSelected.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'resource_sender' }}<td ng-if=\"villageSelected.origin\" class=\"command-village\">{{ villageSelected.origin.name }} ({{ villageSelected.origin.x }}|{{ villageSelected.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'resource_sender' }}\">{{ 'trade.selected' | i18n:loc.ale:'resource_sender' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'resource_sender' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'resource_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!provinceSelected.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'resource_sender' }}<td ng-if=\"provinceSelected.origin\" class=\"command-village\">{{ provinceSelected.origin.name }} ({{ provinceSelected.origin.x }}|{{ provinceSelected.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedP()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'resource_sender' }}\">{{ 'trade.selected' | i18n:loc.ale:'resource_sender' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'resource_sender' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'resource_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'resource_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'resource_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'resource_sender' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'resource_sender' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'resource_sender' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.fullstorage' | i18n:loc.ale:'resource_sender' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.STORAGE]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noTrades' | i18n:loc.ale:'resource_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'resource_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openTargetInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetsLabel[log.targetId] }}</a><td>{{ log.bought }}<td>{{ log.amountB }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearTrade()\">{{ 'trade.clear' | i18n:loc.ale:'resource_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"marketTrade()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'resource_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'resource_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-resource-sender div[select]{text-align:center}#two-resource-sender div[select] .select-wrapper{height:34px}#two-resource-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-resource-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-resource-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-resource-sender .actions a{width:100px}#two-resource-sender .range-container{width:250px}#two-resource-sender .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-resource-sender .textfield-border.fit{width:100%}#two-resource-sender th{text-align:center}#two-resource-sender table.header-center th{text-align:center}#two-resource-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-resource-sender .logs .status tr{height:25px}#two-resource-sender .logs .status td{padding:0 6px}#two-resource-sender .logs .log-list{margin-bottom:10px}#two-resource-sender .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-resource-sender .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-resource-sender .icon-20x20-village:before{margin-top:-11px}')
+    }
+    const buildWindow = function() {
+        $scope = $rootScope.$new()
+        $scope.SETTINGS = SETTINGS
+        $scope.TAB_TYPES = TAB_TYPES
+        $scope.running = running
+        $scope.selectedTab = TAB_TYPES.TRADE
+        $scope.settingsMap = SETTINGS_MAP
+        $scope.pagination = {}
+        $scope.villageSelected = villageSelected
+        $scope.provinceSelected = provinceSelected
+        $scope.clearTrade = clearTrade
+        $scope.autoCompleteVillage = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'resource_sender'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'resource_sender'),
+            dropDown: true
+        }
+        $scope.autoCompleteProvince = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'resource_sender'),
+            onEnter: eventHandlers.onAutoCompleteProvince,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'resource_sender'),
+            dropDown: true
+        }
+        $scope.level = Settings.encodeList(MH_LEVEL, {
+            textObject: 'resource_sender',
+            disabled: true
+        })
+        $scope.units = Settings.encodeList(MH_UNITS, {
+            textObject: 'resource_sender',
+            disabled: true
+        })
+        $scope.buildings = Settings.encodeList(MH_BUILDINGS, {
+            textObject: 'resource_sender',
+            disabled: true
+        })
+        settings.injectScope($scope)
+        eventHandlers.updateGroups()
+        $scope.selectTab = selectTab
+        $scope.addMapSelected = addMapSelected
+        $scope.addMapSelectedP = addMapSelectedP
+        $scope.marketTrade = marketTrade
+        $scope.logsView = logsView
+        $scope.logsView.logs = resourceSender.getLogs()
+        $scope.villagesInfo = villagesInfo
+        $scope.villagesLabel = villagesLabel
+        $scope.targetInfo = targetInfo
+        $scope.targetsLabel = targetsLabel
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.openTargetInfo = windowDisplayService.openVillageInfo
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        logsView.updateVisibleLogs()
+        let eventScope = new EventScope('twoverflow_resource_sender_window', function onDestroy() {
+            console.log('resourceSender closed')
+        })
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
+        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.RESOURCE_SENDER_CLEAR_LOGS, eventHandlers.clearLogs)
+        eventScope.register(eventTypeProvider.RESOURCE_SENDER_START, eventHandlers.start)
+        eventScope.register(eventTypeProvider.RESOURCE_SENDER_STOP, eventHandlers.stop)
+        windowManagerService.getScreenWithInjectedScope('!twoverflow_resource_sender_window', $scope)
+    }
+    return init
+})
+define('two/resourceSender/settings', [], function () {
+    return {
+        GROUPS: 'groups',
+        WOOD_IN: 'wood_in',
+        WOOD_MIN: 'wood_min',
+        CLAY_IN: 'clay_in',
+        CLAY_MIN: 'clay_min',
+        IRON_IN: 'iron_in',
+        IRON_MIN: 'iron_min',
+        DISTANCE: 'distance',
+        INDIVIDUAL: 'individual',
+        FULL: 'full',
+        BUILDINGS: 'buildings',
+        LEVEL: 'level',
+        VILLAGE: 'village',
+        PROVINCE: 'province',
+        UNITS: 'units',
+        AMOUNT: 'amount',
+        COINS: 'coins',
+        STORAGE: 'storage'
+    }
+})
+
+define('two/resourceSender/settings/updates', function () {
+    return {
+        GROUPS: 'groups'
+    }
+})
+
+define('two/resourceSender/settings/map', [
+    'two/resourceSender/settings',
+    'two/resourceSender/settings/updates'
+], function (
+    SETTINGS,
+    UPDATES
+) {
+    return {
+        [SETTINGS.GROUPS]: {
+            default: [],
+            updates: [
+                UPDATES.GROUPS,
+            ],
+            disabledOption: true,
+            inputType: 'select',
+            multiSelect: true,
+            type: 'groups'
+        },
+        [SETTINGS.WOOD_IN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.WOOD_MIN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_IN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.CLAY_MIN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_IN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.IRON_MIN]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 400000
+        },
+        [SETTINGS.AMOUNT]: {
+            default: 100,
+            inputType: 'number',
+            min: 1,
+            max: 24000
+        },
+        [SETTINGS.UNITS]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.BUILDINGS]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.LEVEL]: {
+            default: false,
+            disabledOption: true,
+            inputType: 'select'
+        },
+        [SETTINGS.VILLAGE]: {
+            default: 0,
+            inputType: 'number',
+        },
+        [SETTINGS.PROVINCE]: {
+            default: 0,
+            inputType: 'number',
+        },
+        [SETTINGS.FULL]: {
+            default: false,
+            inputType: 'checkbox'
+        },
+        [SETTINGS.COINS]: {
+            default: false,
+            inputType: 'checkbox'
+        },
+        [SETTINGS.STORAGE]: {
+            default: false,
+            inputType: 'checkbox'
+        },
+        [SETTINGS.INDIVIDUAL]: {
+            default: 1000,
+            inputType: 'number',
+            min: 1,
+            max: 235000
+        },
+        [SETTINGS.DISTANCE]: {
+            default: 90,
+            inputType: 'number',
+            min: 1,
+            max: 300
+        }
+    }
+})
+
+define('two/resourceSender/types/units', [], function () {
+    return {
+        SPEAR: 'spear',
+        SWORD: 'sword',
+        AXE: 'axe',
+        ARCHER: 'archer',
+        LIGHT_CAVALRY: 'light_cavalry',
+        MOUNTED_ARCHER: 'mounted_archer',
+        HEAVY_CAVALRY: 'heavy_cavalry',
+        RAM: 'ram',
+        CATAPULT: 'catapult',
+        TREBUCHET: 'trebuchet',
+        DOPPELSOLDNER: 'doppelsoldner',
+        SNOB: 'snob'
+    }
+})
+
+define('two/resourceSender/types/buildings', [], function () {
+    return {
+        HEADQUARTER: 'headquarter',
+        WAREHOUSE: 'warehouse',
+        FARM: 'farm',
+        RALLY_POINT: 'rally_point',
+        STATUE: 'statue',
+        WALL: 'wall',
+        TAVERN: 'tavern',
+        BARRACKS: 'barracks',
+        PRECEPTORY: 'preceptory',
+        HOSPITAL: 'hospital',
+        CLAY_PIT: 'clay_pit',
+        IRON_MINE: 'iron_mine',
+        TIMBER_CAMP: 'timber_camp',
+        CHAPEL: 'chapel',
+        CHURCH: 'church',
+        MARKET: 'market',
+        ACADEMY: 'academy'
+    }
+})
+
+define('two/resourceSender/types/level', [], function () {
+    return {
+        LEVEL_1: 'level_1',
+        LEVEL_2: 'level_2',
+        LEVEL_3: 'level_3',
+        LEVEL_4: 'level_4',
+        LEVEL_5: 'level_5',
+        LEVEL_6: 'level_6',
+        LEVEL_7: 'level_7',
+        LEVEL_8: 'level_8',
+        LEVEL_9: 'level_9',
+        LEVEL_10: 'level_10',
+        LEVEL_11: 'level_11',
+        LEVEL_12: 'level_12',
+        LEVEL_13: 'level_13',
+        LEVEL_14: 'level_14',
+        LEVEL_15: 'level_15',
+        LEVEL_16: 'level_16',
+        LEVEL_17: 'level_17',
+        LEVEL_18: 'level_18',
+        LEVEL_19: 'level_19',
+        LEVEL_20: 'level_20',
+        LEVEL_21: 'level_21',
+        LEVEL_22: 'level_22',
+        LEVEL_23: 'level_23',
+        LEVEL_24: 'level_24',
+        LEVEL_25: 'level_25',
+        LEVEL_26: 'level_26',
+        LEVEL_27: 'level_27',
+        LEVEL_28: 'level_28',
+        LEVEL_29: 'level_29',
+        LEVEL_30: 'level_30'
+    }
+})
+require([
+    'two/ready',
+    'two/resourceSender',
+    'two/resourceSender/ui',
+    'two/resourceSender/events'
+], function (
+    ready,
+    resourceSender,
+    resourceSenderInterface
+) {
+    if (resourceSender.isInitialized()) {
+        return false
+    }
+
+    ready(function () {
+        resourceSender.init()
+        resourceSenderInterface()
+    })
+})
+
 define('two/spyMaster', [
     'two/Settings',
     'two/spyMaster/settings',
