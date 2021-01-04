@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 04 Jan 2021 09:19:12 GMT
+ * Mon, 04 Jan 2021 09:42:36 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -33837,11 +33837,11 @@ define('two/resourceSender', [
                             neededWood = buildingCostWood - villageWood
                             neededClay = buildingCostClay - villageClay
                             neededIron = buildingCostIron - villageIron
-                            if (woodTo <= 0) {
+                            if (neededWood <= 0) {
                                 neededTotal = neededClay + neededIron
-                            } else if (clayTo <= 0) {
+                            } else if (neededClay <= 0) {
                                 neededTotal = neededWood + neededIron
-                            } else if (ironTo <= 0) {
+                            } else if (neededIron <= 0) {
                                 neededTotal = neededWood + neededClay
                             } else {
                                 neededTotal = neededWood + neededClay + neededIron
