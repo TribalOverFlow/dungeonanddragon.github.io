@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 04 Jan 2021 08:31:46 GMT
+ * Mon, 04 Jan 2021 08:44:44 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -33437,6 +33437,7 @@ define('two/resourceSender', [
     let logs
     let resourceSenderSettings
     var maxStorage = 0
+    var maxCoins = 0
     var villageWood = 0
     var villageClay = 0
     var villageIron = 0
@@ -33691,7 +33692,8 @@ define('two/resourceSender', [
                             } else if (selectedBuilding == 'market') {
                                 nextLevelCosts = village.getBuildingData().getDataForBuilding('market').nextLevelCosts
                             } else if (coins) {
-                                var maxCoins = Math.floor(maxStorage / 30000)
+                                console.log(maxStorage)
+                                maxCoins = Math.floor(maxStorage / 30000)
                                 maxClay = maxCoins * 30000
                                 maxIron = maxCoins * 25000
                                 maxWood = maxCoins * 28000
@@ -34407,6 +34409,8 @@ define('two/resourceSender', [
                                         } else {
                                             console.log('Wykonano zlecenie')
                                         }
+                                    } else {
+                                        console.log('Brak kupców w: ' + village.getName())
                                     }
                                 })
                             }
