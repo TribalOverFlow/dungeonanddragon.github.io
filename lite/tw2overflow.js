@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 04 Jan 2021 09:42:36 GMT
+ * Mon, 04 Jan 2021 10:19:30 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -25722,7 +25722,7 @@ define('two/mintHelper', [
         mintCoins()
         setInterval(function() {
             mintCoins()
-        }, 1800000)
+        }, 480000)
     }
     mintHelper.stop = function() {
         eventQueue.trigger(eventTypeProvider.MINT_HELPER_STOPPED)
@@ -34244,6 +34244,7 @@ define('two/resourceSender', [
                                                 neededTotal = totalTo
                                             }
                                         } else if (clayTo > 0 && woodTo > 0 && ironTo > 0) {
+                                            console.log(woodTo, clayTo, totalTo)
                                             woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
                                             claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
                                             ironSend = totalTo - woodSend - claySend
@@ -34447,7 +34448,9 @@ define('two/resourceSender', [
         running = true
         addLog('', '', 'Rozpoczęto przesył', '')
         eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_START)
+        addLog('', '', 'Rozpoczęto przesył', '')
         setInterval(function() {
+            running = true
             resourceSender.marketTrade()
         }, 480000)
     }
