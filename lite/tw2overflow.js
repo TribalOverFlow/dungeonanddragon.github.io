@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 04 Jan 2021 10:19:30 GMT
+ * Mon, 04 Jan 2021 10:41:28 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -34248,6 +34248,7 @@ define('two/resourceSender', [
                                             woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
                                             claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
                                             ironSend = totalTo - woodSend - claySend
+                                            console.log(woodSend, claySend, ironSend)
                                             if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
                                                 socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
                                                     start_village: village.getId(),
