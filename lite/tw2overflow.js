@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 04 Jan 2021 08:06:18 GMT
+ * Mon, 04 Jan 2021 08:31:46 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -33691,10 +33691,14 @@ define('two/resourceSender', [
                             } else if (selectedBuilding == 'market') {
                                 nextLevelCosts = village.getBuildingData().getDataForBuilding('market').nextLevelCosts
                             } else if (coins) {
+                                var maxCoins = Math.floor(maxStorage / 30000)
+                                maxClay = maxCoins * 30000
+                                maxIron = maxCoins * 25000
+                                maxWood = maxCoins * 28000
                                 nextLevelCosts = {
-                                    wood: '28000',
-                                    clay: '30000',
-                                    iron: '25000'
+                                    wood: maxWood,
+                                    clay: maxClay,
+                                    iron: maxIron
                                 }
                             } else if (fillStorage) {
                                 nextLevelCosts = {
@@ -34223,7 +34227,7 @@ define('two/resourceSender', [
                                                 neededIron = ironTo
                                                 neededTotal = totalTo
                                             }
-                                        } else {
+                                        } else if (clayTo > 0 && woodTo > 0 && ironTo > 0) {
                                             woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
                                             claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
                                             ironSend = totalTo - woodSend - claySend
@@ -34400,6 +34404,8 @@ define('two/resourceSender', [
                                                 neededIron = ironTo
                                                 neededTotal = totalTo
                                             }
+                                        } else {
+                                            console.log('Wykonano zlecenie')
                                         }
                                     }
                                 })
