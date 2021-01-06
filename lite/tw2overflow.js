@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 18:04:29 GMT
+ * Wed, 06 Jan 2021 18:32:20 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35406,6 +35406,7 @@ define('two/spyMaster', [
         var villages = player.getVillageList()
         var interval = 3200
         var buildingT = spyMasterSettings[SETTINGS.BUILDING]
+        console.log(buildingT)
         var buildingLv = spyMasterSettings[SETTINGS.BUILDING_LEVEL]
         var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
         if (!buildingT) {
@@ -35434,9 +35435,11 @@ define('two/spyMaster', [
                             })
                             addLog(village.getId(), 'countermeasures.camouflage', buildingLog, buildingLv)
                         }
-                        if (index == villages.length) {
-                            spyMaster.stop()
-                            addLog('', 'camouflage.stop', '', '')
+                        if (index == (villages.length -1)) {
+                            setTimeout(function() {
+                                spyMaster.stop()
+                                addLog('', 'camouflage.stop', '', '')
+                            }, 6000)
                         }
                     }, index * interval * Math.random())
                 } else if (running == false) {
@@ -35751,6 +35754,7 @@ define('two/spyMaster', [
     }
     spyMaster.stop = function() {
         running = false
+        console.log(running)
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
     }
     spyMaster.getSettings = function() {
