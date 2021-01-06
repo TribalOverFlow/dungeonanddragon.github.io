@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 20:58:19 GMT
+ * Wed, 06 Jan 2021 21:28:08 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3981,7 +3981,7 @@ define('two/Settings', [
                         decoded[id] = multiValues
                     }
                 } else {
-                    decoded[id] = encoded[id].name
+                    decoded[id] = encoded[id].value
                 }
             } else {
                 decoded[id] = encoded[id]
@@ -35050,25 +35050,6 @@ define('two/spyMaster', [
         SETTINGS: 'spy_master_settings',
         LOGS: 'spy_master_log'
     }
-    const COUNTERMEASURES_BUILDING = {
-        [C_BUILDING.HEADQUARTER]: 'headquarter',
-        [C_BUILDING.WAREHOUSE]: 'warehouse',
-        [C_BUILDING.FARM]: 'farm',
-        [C_BUILDING.RALLY_POINT]: 'rally_point',
-        [C_BUILDING.STATUE]: 'statue',
-        [C_BUILDING.WALL]: 'wall',
-        [C_BUILDING.TAVERN]: 'tavern',
-        [C_BUILDING.BARRACKS]: 'barracks',
-        [C_BUILDING.PRECEPTORY]: 'preceptory',
-        [C_BUILDING.HOSPITAL]: 'hospital',
-        [C_BUILDING.CLAY_PIT]: 'clay_pit',
-        [C_BUILDING.IRON_MINE]: 'iron_mine',
-        [C_BUILDING.TIMBER_CAMP]: 'timber_camp',
-        [C_BUILDING.CHAPEL]: 'chapel',
-        [C_BUILDING.CHURCH]: 'church',
-        [C_BUILDING.MARKET]: 'market',
-        [C_BUILDING.ACADEMY]: 'academy'
-    }
     const COUNTERMEASURES_UNIT = {
         [C_UNIT.SPEAR]: 'spear',
         [C_UNIT.SWORD]: 'sword',
@@ -35089,7 +35070,7 @@ define('two/spyMaster', [
         [C_TYPE.BUILDINGS]: 'buildings',
         [C_TYPE.ALL]: 'all'
     }
-    console.log(COUNTERMEASURES_UNIT, COUNTERMEASURES_BUILDING, SPY_TYPE)
+    console.log(COUNTERMEASURES_UNIT, SPY_TYPE)
     const addLog = function(villageId, targetId, type, amount) {
         let data = {
             time: timeHelper.gameTime(),
