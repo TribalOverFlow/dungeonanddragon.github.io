@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 20:05:17 GMT
+ * Wed, 06 Jan 2021 20:58:19 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3981,7 +3981,7 @@ define('two/Settings', [
                         decoded[id] = multiValues
                     }
                 } else {
-                    decoded[id] = encoded[id].value
+                    decoded[id] = encoded[id].name
                 }
             } else {
                 decoded[id] = encoded[id]
@@ -35065,7 +35065,7 @@ define('two/spyMaster', [
         [C_BUILDING.IRON_MINE]: 'iron_mine',
         [C_BUILDING.TIMBER_CAMP]: 'timber_camp',
         [C_BUILDING.CHAPEL]: 'chapel',
-        [C_BUILDING.CHURCH]: 'kicha',
+        [C_BUILDING.CHURCH]: 'church',
         [C_BUILDING.MARKET]: 'market',
         [C_BUILDING.ACADEMY]: 'academy'
     }
@@ -35413,7 +35413,7 @@ define('two/spyMaster', [
         var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
         if (buildingT == false) {
             utils.notif('error', $filter('i18n')('error.no_building_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stop()
+            spyMaster.stopCamouflage()
             return
         } else {
             villages.forEach(function(village, index) {
@@ -35848,6 +35848,7 @@ define('two/spyMaster/ui', [
             spyMaster.stopCamouflage()
         } else {
             settings.setAll(settings.decode($scope.settings))
+            console.log($scope.settings)
             spyMaster.doCamouflage()
         }
     }
