@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 15:30:18 GMT
+ * Wed, 06 Jan 2021 16:19:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -565,6 +565,7 @@ define('two/language', [
         "army_helper": {
             "title": "Hetman",
             "army": "Wojsko",
+            "calculated": "Zliczono wojsko w wioskach",
             "start": "Rozpoczęto balansowanie wojsk",
             "stop": "Zatrzymano balansowanie wojsk",
             "description": "Narzędzie do organizacji i liczenia wojsk",
@@ -1809,7 +1810,7 @@ define('two/language', [
             "switch.start": "Rozpoczęto zamianę broni",
             "exchange.start": "Rozpoczęto aktywowanie wymiany",
             "dummies.start": "Rozpoczęto ustawianie atrap",
-            "camouflage.start": "Rozpoczęto kamuflowanie budydnków",
+            "camouflage.start": "Rozpoczęto kamuflowanie budynków",
             "sabotage.start": "Rozpoczęto wysyłanie sabotaży",
             "buildings": "Budynki",
             "description": "Narzędzie do akcji szpiegowskich i kontrwywiadu",
@@ -2104,6 +2105,7 @@ define('two/language', [
         "army_helper": {
             "title": "Hetman",
             "army": "Wojsko",
+            "calculated": "Zliczono wojsko w wioskach",
             "start": "Rozpoczęto balansowanie wojsk",
             "stop": "Zatrzymano balansowanie wojsk",
             "description": "Narzędzie do organizacji i liczenia wojsk",
@@ -3348,7 +3350,7 @@ define('two/language', [
             "switch.start": "Rozpoczęto zamianę broni",
             "exchange.start": "Rozpoczęto aktywowanie wymiany",
             "dummies.start": "Rozpoczęto ustawianie atrap",
-            "camouflage.start": "Rozpoczęto kamuflowanie budydnków",
+            "camouflage.start": "Rozpoczęto kamuflowanie budynków",
             "sabotage.start": "Rozpoczęto wysyłanie sabotaży",
             "buildings": "Budynki",
             "description": "Narzędzie do akcji szpiegowskich i kontrwywiadu",
@@ -35377,24 +35379,12 @@ define('two/spyMaster', [
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
     spyMaster.doCamouflage = function() {
-        addLog('', 'camouflage.start', '', '')
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var interval = 3200
         var buildingT = spyMasterSettings[SETTINGS.BUILDING]
         var buildingLv = spyMasterSettings[SETTINGS.BUILDING_LEVEL]
         var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
-        var amountTaverns = 0
-        var okTaverns = 0
-        villages.forEach(function(village) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 3) {
-                okTaverns = okTaverns + 1
-            }
-        })
         villages.forEach(function(village, index) {
             var data = village.data
             var buildings = data.buildings
@@ -35402,7 +35392,6 @@ define('two/spyMaster', [
             var level = tavern.level
             if (level >= 3) {
                 setTimeout(function() {
-                    amountTaverns = amountTaverns + 1
                     socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
                         village_id: village.getId(),
                         type: 'camouflage',
@@ -35413,13 +35402,16 @@ define('two/spyMaster', [
                         replacement: ''
                     })
                     addLog(village.getId(), 'countermeasures.camouflage', buildingLog, buildingLv)
+                    if (index == 0) {
+                        addLog('', 'camouflage.start', '', '')
+                    }
+                    if (index == (villages.length - 1)) {
+                        spyMaster.stop()
+                        addLog('', 'camouflage.stop', '', '')
+                    }
                 }, index * interval * Math.random())
             }
         })
-        if (amountTaverns == okTaverns) {
-            addLog('', 'camouflage.stop', '', '')
-            spyMaster.stop()
-        }
     }
     spyMaster.switchWeapon = function() {
         addLog('', 'switch.start', '', '')
