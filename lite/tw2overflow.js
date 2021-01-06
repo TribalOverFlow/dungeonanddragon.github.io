@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 18:32:20 GMT
+ * Wed, 06 Jan 2021 18:49:39 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35402,6 +35402,8 @@ define('two/spyMaster', [
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
     spyMaster.doCamouflage = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var interval = 3200
@@ -35409,7 +35411,7 @@ define('two/spyMaster', [
         console.log(buildingT)
         var buildingLv = spyMasterSettings[SETTINGS.BUILDING_LEVEL]
         var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
-        if (!buildingT) {
+        if (buildingT == false) {
             utils.notif('error', $filter('i18n')('error.no_building_selected', $rootScope.loc.ale, 'spy_master'))
             return
         } else {
@@ -35748,13 +35750,9 @@ define('two/spyMaster', [
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_CLEAR_LOGS)
         return logs
     }
-    spyMaster.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
-    }
     spyMaster.stop = function() {
         running = false
-        console.log(running)
+        console.log('running' + running)
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
     }
     spyMaster.getSettings = function() {
@@ -35807,7 +35805,6 @@ define('two/spyMaster/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let running = false
     let logsView = {}
     let villagesInfo = {}
     let villagesLabel = {}
@@ -35834,9 +35831,7 @@ define('two/spyMaster/ui', [
     const sendSpy = function() {
         if (spyMaster.isRunning()) {
             spyMaster.stop()
-            running = false
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.sendSpy()
         }
@@ -35844,9 +35839,7 @@ define('two/spyMaster/ui', [
     const sabotage = function() {
         if (spyMaster.isRunning()) {
             spyMaster.stop()
-            running = false
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.sabotage()
         }
@@ -35854,9 +35847,7 @@ define('two/spyMaster/ui', [
     const doCamouflage = function() {
         if (spyMaster.isRunning()) {
             spyMaster.stop()
-            running = false
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.doCamouflage()
         }
@@ -35864,9 +35855,7 @@ define('two/spyMaster/ui', [
     const setDummies = function() {
         if (spyMaster.isRunning()) {
             spyMaster.stop()
-            running = false
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.setDummies()
         }
@@ -35874,9 +35863,7 @@ define('two/spyMaster/ui', [
     const exchangeUnits = function() {
         if (spyMaster.isRunning()) {
             spyMaster.stop()
-            running = false
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.exchangeUnits()
         }
@@ -35884,9 +35871,7 @@ define('two/spyMaster/ui', [
     const switchWeapon = function() {
         if (spyMaster.isRunning()) {
             spyMaster.stop()
-            running = false
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.switchWeapon()
         }
@@ -36141,16 +36126,12 @@ define('two/spyMaster/ui', [
         $button = interfaceOverflow.addMenuButton3('Zwiadowca', 10, $filter('i18n')('description', $rootScope.loc.ale, 'spy_master'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.SPY_MASTER_START, function() {
-            running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'spy_master'))
         })
         eventQueue.register(eventTypeProvider.SPY_MASTER_STOP, function() {
-            running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'spy_master'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
@@ -36161,7 +36142,7 @@ define('two/spyMaster/ui', [
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
+        $scope.running = spyMaster.isRunning()
         $scope.selectedTab = TAB_TYPES.SPY
         $scope.clearS = clearS
         $scope.clearC = clearC
