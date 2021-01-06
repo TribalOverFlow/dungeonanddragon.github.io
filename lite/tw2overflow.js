@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 18:49:39 GMT
+ * Wed, 06 Jan 2021 19:08:15 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35413,11 +35413,12 @@ define('two/spyMaster', [
         var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
         if (buildingT == false) {
             utils.notif('error', $filter('i18n')('error.no_building_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stop()
             return
         } else {
             villages.forEach(function(village, index) {
-                if (running == true) {
-                    setTimeout(function() {
+                setTimeout(function() {
+                    if (running == true) {
                         var data = village.data
                         var buildings = data.buildings
                         var tavern = buildings.tavern
@@ -35437,17 +35438,18 @@ define('two/spyMaster', [
                             })
                             addLog(village.getId(), 'countermeasures.camouflage', buildingLog, buildingLv)
                         }
-                        if (index == (villages.length -1)) {
+                        if (index == (villages.length - 1)) {
                             setTimeout(function() {
                                 spyMaster.stop()
                                 addLog('', 'camouflage.stop', '', '')
                             }, 6000)
                         }
-                    }, index * interval * Math.random())
-                } else if (running == false) {
-                    addLog('', 'camouflage.stop', '', '')
-                    return
-                }
+                    } else if (running == false) {
+                        spyMaster.stop()
+                        addLog('', 'camouflage.stop', '', '')
+                        return
+                    }
+                }, index * interval * Math.random())
             })
         }
     }
@@ -35752,7 +35754,7 @@ define('two/spyMaster', [
     }
     spyMaster.stop = function() {
         running = false
-        console.log('running' + running)
+        console.log('running ' + running)
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
     }
     spyMaster.getSettings = function() {
