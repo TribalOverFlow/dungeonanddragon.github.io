@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 19:23:45 GMT
+ * Wed, 06 Jan 2021 20:05:17 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35065,7 +35065,7 @@ define('two/spyMaster', [
         [C_BUILDING.IRON_MINE]: 'iron_mine',
         [C_BUILDING.TIMBER_CAMP]: 'timber_camp',
         [C_BUILDING.CHAPEL]: 'chapel',
-        [C_BUILDING.CHURCH]: 'church',
+        [C_BUILDING.CHURCH]: 'kicha',
         [C_BUILDING.MARKET]: 'market',
         [C_BUILDING.ACADEMY]: 'academy'
     }
@@ -35438,7 +35438,7 @@ define('two/spyMaster', [
                             })
                             addLog(village.getId(), 'countermeasures.camouflage', buildingLog, buildingLv)
                         }
-                        if (index == (villages.length - 1)) {
+                        if (index == (villages.length - 1) && running == true) {
                             setTimeout(function() {
                                 spyMaster.stopCamouflage()
                             }, 6000)
