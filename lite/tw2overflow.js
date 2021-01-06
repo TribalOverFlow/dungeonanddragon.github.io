@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 19:08:15 GMT
+ * Wed, 06 Jan 2021 19:23:45 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35440,13 +35440,10 @@ define('two/spyMaster', [
                         }
                         if (index == (villages.length - 1)) {
                             setTimeout(function() {
-                                spyMaster.stop()
-                                addLog('', 'camouflage.stop', '', '')
+                                spyMaster.stopCamouflage()
                             }, 6000)
                         }
                     } else if (running == false) {
-                        spyMaster.stop()
-                        addLog('', 'camouflage.stop', '', '')
                         return
                     }
                 }, index * interval * Math.random())
@@ -35752,10 +35749,10 @@ define('two/spyMaster', [
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_CLEAR_LOGS)
         return logs
     }
-    spyMaster.stop = function() {
+    spyMaster.stopCamouflage = function() {
         running = false
-        console.log('running ' + running)
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+        addLog('', 'camouflage.stop', '', '')
     }
     spyMaster.getSettings = function() {
         return settings
@@ -35848,7 +35845,7 @@ define('two/spyMaster/ui', [
     }
     const doCamouflage = function() {
         if (spyMaster.isRunning()) {
-            spyMaster.stop()
+            spyMaster.stopCamouflage()
         } else {
             settings.setAll(settings.decode($scope.settings))
             spyMaster.doCamouflage()
