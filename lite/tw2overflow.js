@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 06 Jan 2021 17:20:08 GMT
+ * Wed, 06 Jan 2021 17:54:16 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1806,6 +1806,7 @@ define('two/language', [
             "title": "Zwiadowca",
             "spy": "Akcje Szpiegowskie",
             "units": "Jednostki",
+            "error.no_building_selected": "Nie wybrano budynku do kamuflowania.",
             "spy.start": "Rozpoczęto wysyłanie szpiegów",
             "switch.start": "Rozpoczęto zamianę broni",
             "exchange.start": "Rozpoczęto aktywowanie wymiany",
@@ -3351,6 +3352,7 @@ define('two/language', [
             "title": "Zwiadowca",
             "spy": "Akcje Szpiegowskie",
             "units": "Jednostki",
+            "error.no_building_selected": "Nie wybrano budynku do kamuflowania.",
             "spy.start": "Rozpoczęto wysyłanie szpiegów",
             "switch.start": "Rozpoczęto zamianę broni",
             "exchange.start": "Rozpoczęto aktywowanie wymiany",
@@ -35001,6 +35003,7 @@ define('two/spyMaster', [
     'two/spyMaster/types/type',
     'two/ready',
     'helper/time',
+    'two/utils',
     'queues/EventQueue',
     'Lockr'
 ], function(
@@ -35013,6 +35016,7 @@ define('two/spyMaster', [
     C_TYPE,
     ready,
     timeHelper,
+    utils,
     eventQueue,
     Lockr
 ) {
@@ -35404,38 +35408,43 @@ define('two/spyMaster', [
         var buildingT = spyMasterSettings[SETTINGS.BUILDING]
         var buildingLv = spyMasterSettings[SETTINGS.BUILDING_LEVEL]
         var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
-        villages.forEach(function(village, index) {
-            if (running == true) {
-                var data = village.data
-                var buildings = data.buildings
-                var tavern = buildings.tavern
-                var level = tavern.level
-                if (level >= 3) {
+        if (buildingT == false) {
+            utils.notif('error', $filter('i18n')('error.no_building_selected', $rootScope.loc.ale, 'spy_master'))
+            return
+        } else {
+            villages.forEach(function(village, index) {
+                if (running == true) {
                     setTimeout(function() {
+                        var data = village.data
+                        var buildings = data.buildings
+                        var tavern = buildings.tavern
+                        var level = tavern.level
                         if (index == 0) {
                             addLog('', 'camouflage.start', '', '')
                         }
-                        socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
-                            village_id: village.getId(),
-                            type: 'camouflage',
-                            status: 1,
-                            building: buildingT,
-                            level: buildingLv,
-                            unit: '',
-                            replacement: ''
-                        })
-                        addLog(village.getId(), 'countermeasures.camouflage', buildingLog, buildingLv)
+                        if (level >= 3) {
+                            socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
+                                village_id: village.getId(),
+                                type: 'camouflage',
+                                status: 1,
+                                building: buildingT,
+                                level: buildingLv,
+                                unit: '',
+                                replacement: ''
+                            })
+                            addLog(village.getId(), 'countermeasures.camouflage', buildingLog, buildingLv)
+                        }
                         if (index == (villages.length - 1)) {
                             spyMaster.stop()
                             addLog('', 'camouflage.stop', '', '')
                         }
                     }, index * interval * Math.random())
+                } else if (running == false) {
+                    addLog('', 'camouflage.stop', '', '')
+                    return
                 }
-            } else {
-                addLog('', 'camouflage.stop', '', '')
-                return
-            }
-        })
+            })
+        }
     }
     spyMaster.switchWeapon = function() {
         var player = modelDataService.getSelectedCharacter()
