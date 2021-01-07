@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 07 Jan 2021 09:37:32 GMT
+ * Thu, 07 Jan 2021 17:10:08 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35103,7 +35103,6 @@ define('two/spyMaster', [
         })
     }
     const sendSabotages = function() {
-        var interval = 60000
         targets.forEach(function(target, index) {
             setTimeout(function() {
                 if (index == 0) {
@@ -35134,18 +35133,18 @@ define('two/spyMaster', [
                                     ownLimitS -= 1
                                     available -= 3
                                 }
-                                if (index == (targets.length - 1) && running == true) {
-                                    setTimeout(function() {
-                                        spyMaster.stopSabotage()
-                                    }, 6000)
-                                }
                             }
                         } else if (running == false) {
                             return
                         }
-                    }, index1 * 2000 * Math.random())
+                    }, index1 * 5000)
                 })
-            }, index * interval * Math.random())
+                if (index == (targets.length - 1) && running == true) {
+                    setTimeout(function() {
+                        spyMaster.stopSabotage()
+                    }, 11000)
+                }
+            }, (index * 5000 * villages.length) + 1000)
         })
     }
     const sendSpies = function() {
@@ -35155,7 +35154,7 @@ define('two/spyMaster', [
                     addLog('', 'spy.start', '', '')
                 }
                 ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-                villages.forEach(function(village) {
+                villages.forEach(function(village, index1) {
                     setTimeout(function() {
                         if (running == true) {
                             var countSpy = 0
@@ -35179,7 +35178,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, type, 1)
                                                 ownLimit -= 1
-                                            }, (x * 2000) + 1000)
+                                            }, x * 2000)
                                         }
                                     }
                                 } else if (type == 'all') {
@@ -35194,7 +35193,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Budynki', 1)
                                                 ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
+                                            }, 0 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35204,7 +35203,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Budynki', 1)
                                                 ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
+                                            }, 1 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35214,7 +35213,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (3 * 2000) + 5000)
+                                            }, 2 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35224,7 +35223,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (4 * 2000) + 7000)
+                                            }, 3 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35234,7 +35233,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (5 * 2000) + 9000)
+                                            }, 4 * 2000)
                                         } else if (countSpy == 4) {
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
@@ -35245,7 +35244,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Budynki', 1)
                                                 ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
+                                            }, 0 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35255,7 +35254,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Budynki', 1)
                                                 ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
+                                            }, 1 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35265,7 +35264,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (3 * 2000) + 5000)
+                                            }, 2 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35275,7 +35274,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (4 * 2000) + 7000)
+                                            }, 3 * 2000)
                                         } else if (countSpy == 3) {
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
@@ -35286,7 +35285,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Budynki', 1)
                                                 ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
+                                            }, 0 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35296,7 +35295,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
+                                            }, 1 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35306,7 +35305,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (3 * 2000) + 5000)
+                                            }, 2 * 2000)
                                         } else if (countSpy == 2) {
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
@@ -35317,7 +35316,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Budynki', 1)
                                                 ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
+                                            }, 0 * 2000)
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                     startVillage: village.getId(),
@@ -35327,7 +35326,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Jednostki', 1)
                                                 ownLimit -= 1
-                                            }, (2 * 2000) + 3000)
+                                            }, 1 * 2000)
                                         } else if (countSpy == 1) {
                                             setTimeout(function() {
                                                 socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
@@ -35338,7 +35337,7 @@ define('two/spyMaster', [
                                                 })
                                                 addLog(village.getId(), target, 'Budynki', 1)
                                                 ownLimit -= 1
-                                            }, (1 * 2000) + 1000)
+                                            }, 0 * 2000)
                                         }
                                     }
                                 }
@@ -35346,14 +35345,14 @@ define('two/spyMaster', [
                         } else if (running == false) {
                             return
                         }
-                    }, index * villages.length * 12000)
+                    }, index1 * 12000)
                 })
                 if (index == (targets.length - 1) && running == true) {
                     setTimeout(function() {
                         spyMaster.stopSpy()
-                    }, 10000)
+                    }, 22000)
                 }
-            }, index * 90000)
+            }, (index * 12000 * villages.length) + 1000)
         })
     }
     const spyMaster = {}
