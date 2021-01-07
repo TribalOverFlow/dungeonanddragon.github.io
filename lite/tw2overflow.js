@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 07 Jan 2021 17:10:08 GMT
+ * Thu, 07 Jan 2021 17:28:03 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35386,7 +35386,7 @@ define('two/spyMaster', [
         var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
         if (buildingT == false) {
             utils.notif('error', $filter('i18n')('error.no_building_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopCamouflage()
+            spyMaster.stopError()
             return
         } else {
             villages.forEach(function(village, index) {
@@ -35435,11 +35435,11 @@ define('two/spyMaster', [
         var replacementLog = $filter('i18n')(replacement, $rootScope.loc.ale, 'common')
         if (unit == false) {
             utils.notif('error', $filter('i18n')('error.no_unit_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopSwitch()
+            spyMaster.stopError()
             return
         } else if (replacement == false) {
             utils.notif('error', $filter('i18n')('error.no_replacement_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopSwitch()
+            spyMaster.stopError()
             return
         } else {
             villages.forEach(function(village, index) {
@@ -35486,7 +35486,7 @@ define('two/spyMaster', [
         var dummies = $filter('i18n')(unitD, $rootScope.loc.ale, 'spy_master')
         if (unitD == false) {
             utils.notif('error', $filter('i18n')('error.no_dummies_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopDummies()
+            spyMaster.stopError()
             return
         } else {
             villages.forEach(function(village, index) {
@@ -35627,7 +35627,7 @@ define('two/spyMaster', [
         }
         if (targetGroups == false && provinceId == 0 && playerId == 0 && villageTarget == 0) {
             utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopSpy()
+            spyMaster.stopError()
             return
         }
         var villagesGetId = player.getVillageList()
@@ -35656,13 +35656,13 @@ define('two/spyMaster', [
         type = spyMasterSettings[SETTINGS.TYPE]
         if (type == false) {
             utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopSpy()
+            spyMaster.stopError()
             return
         }
         ownLimit = spyMasterSettings[SETTINGS.LIMIT]
         if (ownLimit == 0) {
             utils.notif('error', $filter('i18n')('error.no_limit_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopSpy()
+            spyMaster.stopError()
             return
         }
         console.log(type, targets)
@@ -35731,7 +35731,7 @@ define('two/spyMaster', [
         }
         if (targetGroups == false && provinceId == 0 && playerId == 0 && villageTarget == 0) {
             utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopSabotage()
+            spyMaster.stopError()
             return
         }
         var villagesGetId = player.getVillageList()
@@ -35772,6 +35772,10 @@ define('two/spyMaster', [
         running = false
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
         addLog('', 'camouflage.stop', '', '')
+    }
+    spyMaster.stopError = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
     }
     spyMaster.stopSwitch = function() {
         running = false
