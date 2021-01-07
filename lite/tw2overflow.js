@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 07 Jan 2021 18:17:05 GMT
+ * Thu, 07 Jan 2021 23:14:26 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1464,6 +1464,10 @@ define('two/language', [
             "title": "Błazen",
             "stop": "Zatrzymano zmianę nazw wiosek",
             "start": "Rozpoczęto zmianę nazw wiosek",
+            "error.no_name_selected": "Nie wybrano nazwy właściwej wiosek",
+            "error.no_type_selected": "Nie wybrano typu zmiany nazw wiosek",
+            "error.no_group_selected": "Nie wybrano grupy wiosek",
+            "error.no_province_selected": "Nie wybrano prowincji",
             "rename": "Nazwy wiosek",
             "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
@@ -3017,6 +3021,10 @@ define('two/language', [
             "title": "Błazen",
             "stop": "Zatrzymano zmianę nazw wiosek",
             "start": "Rozpoczęto zmianę nazw wiosek",
+            "error.no_name_selected": "Nie wybrano nazwy właściwej wiosek",
+            "error.no_type_selected": "Nie wybrano typu zmiany nazw wiosek",
+            "error.no_group_selected": "Nie wybrano grupy wiosek",
+            "error.no_province_selected": "Nie wybrano prowincji",
             "rename": "Nazwy wiosek",
             "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
@@ -26187,6 +26195,7 @@ define('two/prankHelper', [
     'two/ready',
     'helper/time',
     'queues/EventQueue',
+    'two/utils',
     'Lockr'
 ], function(
     Settings,
@@ -26197,6 +26206,7 @@ define('two/prankHelper', [
     ready,
     timeHelper,
     eventQueue,
+    utils,
     Lockr
 ) {
     let initialized = false
@@ -26262,18 +26272,35 @@ define('two/prankHelper', [
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
     prankHelper.renameGroup = function renameGroup() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('', 'start', '')
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var validName = prankHelperSettings[SETTINGS.CENTER3]
+        if (validName == '' || !validName || validName == null) {
+            utils.notif('error', $filter('i18n')('error.no_name_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE3]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE3]
         var type = prankHelperSettings[SETTINGS.TYPE3]
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var min = prankHelperSettings[SETTINGS.FROM3]
         var max = prankHelperSettings[SETTINGS.TO3]
         var selectedGroup = prankHelperSettings[SETTINGS.GROUPS]
+        if (selectedGroup == false) {
+            utils.notif('error', $filter('i18n')('error.no_group_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         const groupList = modelDataService.getGroupList()
         var groupVillages = groupList.getGroupVillageIds(selectedGroup)
-        var interval = 4000
         var newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -26312,14 +26339,23 @@ define('two/prankHelper', [
                 groupVillages.forEach(function(id, index) {
                     if (village.data.villageId == id) {
                         setTimeout(function() {
-                            villageIdSet = village.getId()
-                            oldName = village.getName()
-                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                                village_id: village.getId(),
-                                name: newName
-                            })
-                            addLog(villageIdSet, newName, oldName)
-                        }, index * interval)
+                            if (running == true) {
+                                villageIdSet = village.getId()
+                                oldName = village.getName()
+                                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                    village_id: village.getId(),
+                                    name: newName
+                                })
+                                addLog(villageIdSet, newName, oldName)
+                                if (index == (villages.length - 1) && running == true) {
+                                    setTimeout(function() {
+                                        prankHelper.stop()
+                                    }, 6000)
+                                }
+                            } else if (running == false) {
+                                return
+                            }
+                        }, index * 4000)
                     }
                 })
             })
@@ -26328,29 +26364,54 @@ define('two/prankHelper', [
             groupVillages.forEach(function(id, index) {
                 if (village.data.villageId == id) {
                     setTimeout(function() {
-                        villageIdSet = village.getId()
-                        oldName = village.getName()
-                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                            village_id: village.getId(),
-                            name: nameSet[index]
-                        })
-                        addLog(villageIdSet, nameSet[index], oldName)
-                    }, index * interval)
+                        if (running == true) {
+                            villageIdSet = village.getId()
+                            oldName = village.getName()
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.getId(),
+                                name: nameSet[index]
+                            })
+                            addLog(villageIdSet, nameSet[index], oldName)
+                            if (index == (villages.length - 1) && running == true) {
+                                setTimeout(function() {
+                                    prankHelper.stop()
+                                }, 6000)
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index * 4000)
                 }
             })
         })
-        prankHelper.stop()
     }
     prankHelper.renameProvince = function renameProvince() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('', 'start', '')
         var selectedVillage = prankHelperSettings[SETTINGS.VILLAGE_ID]
+        if (selectedVillage == 0) {
+            utils.notif('error', $filter('i18n')('error.no_province_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var villages = []
         var validName = prankHelperSettings[SETTINGS.CENTER2]
+        if (validName == '' || !validName || validName == null) {
+            utils.notif('error', $filter('i18n')('error.no_name_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE2]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE2]
         var type = prankHelperSettings[SETTINGS.TYPE2]
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var min = prankHelperSettings[SETTINGS.FROM2]
         var max = prankHelperSettings[SETTINGS.TO2]
-        var interval = 4000
         var newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -26389,40 +26450,69 @@ define('two/prankHelper', [
                 newName = prefix + validName + sufix
                 villages.forEach(function(village, index) {
                     setTimeout(function() {
-                        villageIdSet = village.id
-                        oldName = village.name
-                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                            village_id: village.id,
-                            name: newName
-                        })
-                        addLog(villageIdSet, newName, oldName)
-                    }, index * interval)
+                        if (running == true) {
+                            villageIdSet = village.id
+                            oldName = village.name
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.id,
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                            if (index == (villages.length - 1) && running == true) {
+                                setTimeout(function() {
+                                    prankHelper.stop()
+                                }, 6000)
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index * 4000)
                 })
             }
             villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    villageIdSet = village.id
-                    oldName = village.name
-                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                        village_id: village.id,
-                        name: nameSet[index]
-                    })
-                    addLog(villageIdSet, nameSet[index], oldName)
-                }, index * interval)
+                    if (running == true) {
+                        villageIdSet = village.id
+                        oldName = village.name
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.id,
+                            name: nameSet[index]
+                        })
+                        addLog(villageIdSet, nameSet[index], oldName)
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                prankHelper.stop()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
+                }, index * 4000)
             })
         })
-        prankHelper.stop()
     }
     prankHelper.renameAll = function renameAll() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('', 'start', '')
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var validName = prankHelperSettings[SETTINGS.CENTER1]
+        if (validName == '' || !validName || validName == null) {
+            utils.notif('error', $filter('i18n')('error.no_name_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE1]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE1]
         var type = prankHelperSettings[SETTINGS.TYPE1]
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var min = prankHelperSettings[SETTINGS.FROM1]
         var max = prankHelperSettings[SETTINGS.TO1]
-        var interval = 4000
         var newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -26459,28 +26549,45 @@ define('two/prankHelper', [
             newName = prefix + validName + sufix
             villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    villageIdSet = village.getId()
-                    oldName = village.getName()
-                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                        village_id: village.getId(),
-                        name: newName
-                    })
-                    addLog(villageIdSet, newName, oldName)
-                }, index * interval)
+                    if (running == true) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.getId(),
+                            name: newName
+                        })
+                        addLog(villageIdSet, newName, oldName)
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                prankHelper.stop()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
+                }, index * 4000)
             })
         }
         villages.forEach(function(village, index) {
             setTimeout(function() {
-                villageIdSet = village.getId()
-                oldName = village.getName()
-                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                    village_id: village.getId(),
-                    name: nameSet[index]
-                })
-                addLog(villageIdSet, nameSet[index], oldName)
-            }, index * interval)
+                if (running == true) {
+                    villageIdSet = village.getId()
+                    oldName = village.getName()
+                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                        village_id: village.getId(),
+                        name: nameSet[index]
+                    })
+                    addLog(villageIdSet, nameSet[index], oldName)
+                    if (index == (villages.length - 1) && running == true) {
+                        setTimeout(function() {
+                            prankHelper.stop()
+                        }, 6000)
+                    }
+                } else if (running == false) {
+                    return
+                }
+            }, index * 4000)
         })
-        prankHelper.stop()
     }
     prankHelper.getLogs = function() {
         return logs
@@ -26491,15 +26598,14 @@ define('two/prankHelper', [
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_CLEAR_LOGS)
         return logs
     }
-    prankHelper.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
-        addLog('', 'start', '')
-    }
     prankHelper.stop = function() {
         running = false
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
         addLog('', 'stop', '')
+    }
+    prankHelper.stopError = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
     }
     prankHelper.getSettings = function() {
         return settings
@@ -26547,7 +26653,6 @@ define('two/prankHelper/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let running = false
     let logsView = {}
     let villagesInfo = {}
     let villagesLabel = {}
@@ -26563,9 +26668,7 @@ define('two/prankHelper/ui', [
     const renameAll = function() {
         if (prankHelper.isRunning()) {
             prankHelper.stop()
-            running = false
         } else {
-            prankHelper.start()
             settings.setAll(settings.decode($scope.settings))
             prankHelper.renameAll()
         }
@@ -26573,9 +26676,7 @@ define('two/prankHelper/ui', [
     const renameProvince = function() {
         if (prankHelper.isRunning()) {
             prankHelper.stop()
-            running = false
         } else {
-            prankHelper.start()
             settings.setAll(settings.decode($scope.settings))
             prankHelper.renameProvince()
         }
@@ -26583,9 +26684,7 @@ define('two/prankHelper/ui', [
     const renameGroup = function() {
         if (prankHelper.isRunning()) {
             prankHelper.stop()
-            running = false
         } else {
-            prankHelper.start()
             settings.setAll(settings.decode($scope.settings))
             prankHelper.renameGroup()
         }
@@ -26716,16 +26815,12 @@ define('two/prankHelper/ui', [
         $button = interfaceOverflow.addMenuButton3('Błazen', 80, $filter('i18n')('description', $rootScope.loc.ale, 'prank_helper'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.PRANK_HELPER_START, function() {
-            running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'prank_helper'))
         })
         eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
-            running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'prank_helper'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
@@ -26736,7 +26831,7 @@ define('two/prankHelper/ui', [
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
+        $scope.running = prankHelper.isRunning()
         $scope.selectedTab = TAB_TYPES.RENAME
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
