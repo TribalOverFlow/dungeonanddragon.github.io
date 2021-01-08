@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 08 Jan 2021 18:13:36 GMT
+ * Fri, 08 Jan 2021 19:20:15 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35249,7 +35249,6 @@ define('two/spyMaster', [
                 addLog('', 'spy.start', '', '')
             }
             ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-            console.log(target)
             setTimeout(function() {
                 villages.forEach(function(village, index1) {
                     setTimeout(function() {
@@ -35262,7 +35261,6 @@ define('two/spyMaster', [
                                     countSpy += 1
                                 }
                             })
-                            console.log(countSpy, ownLimit)
                             if (target != 0) {
                                 if (type == 'units' || type == 'buildings') {
                                     if (countSpy > 0) {
@@ -35665,7 +35663,12 @@ define('two/spyMaster', [
                         }
                     }, index1 * 10000)
                 })
-            }, index * villages.length * 10500)
+            }, (index * 10000 * villages.length) + 10000)
+            if (index == (targets.length - 1) && running == true) {
+                setTimeout(function() {
+                    spyMaster.stopSpy()
+                }, (index * 10000 * villages.length) + 10000)
+            }
         })
     }
     const spyMaster = {}
@@ -35878,13 +35881,50 @@ define('two/spyMaster', [
     spyMaster.sendSpy = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
+        type = spyMasterSettings[SETTINGS.TYPE]
+        console.log(type)
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        }
+        ownLimit = spyMasterSettings[SETTINGS.LIMIT]
+        if (ownLimit == 0) {
+            utils.notif('error', $filter('i18n')('error.no_limit_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        }
         villages = []
+        var villagesGetId = player.getVillageList()
+        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN]
+        let villagesFromGroup = []
+        if (ownGroups) {
+            ownGroups.forEach(function(group) {
+                groupVillages = groupList.getGroupVillageIds(group)
+                for (var i of groupVillages) {
+                    villagesFromGroup.push(i)
+                }
+            })
+            villagesGetId.forEach(function(village) {
+                var id = village.data.villageId
+                villagesFromGroup.forEach(function(groupVillage) {
+                    if (id == groupVillage) {
+                        villages.push(village)
+                    }
+                })
+            })
+        } else {
+            villagesGetId.forEach(function(village) {
+                villages.push(village)
+            })
+        }
         targets = []
         var provinceData = []
         var characterData = 0
         villageTarget = spyMasterSettings[SETTINGS.VILLAGE]
         if (villageTarget > 0) {
             targets.push(spyMasterSettings[SETTINGS.VILLAGE])
+            sendSpies()
         }
         playerId = spyMasterSettings[SETTINGS.PLAYER]
         if (playerId > 0) {
@@ -35895,6 +35935,7 @@ define('two/spyMaster', [
                 villages.forEach(function(village) {
                     targets.push(village.village_id)
                 })
+                sendSpies()
             })
         }
         provinceId = spyMasterSettings[SETTINGS.PROVINCE]
@@ -35926,6 +35967,7 @@ define('two/spyMaster', [
                             targets.push(fake.village_id)
                         }
                     })
+                    sendSpies()
                 })
             })
         }
@@ -35936,6 +35978,7 @@ define('two/spyMaster', [
                 for (var i of groupTargets) {
                     targets.push(i)
                 }
+                sendSpies()
             })
         }
         if (targetGroups == false && provinceId == 0 && playerId == 0 && villageTarget == 0) {
@@ -35943,44 +35986,6 @@ define('two/spyMaster', [
             spyMaster.stopError()
             return
         }
-        var villagesGetId = player.getVillageList()
-        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN]
-        let villagesFromGroup = []
-        if (ownGroups) {
-            ownGroups.forEach(function(group) {
-                groupVillages = groupList.getGroupVillageIds(group)
-                for (var i of groupVillages) {
-                    villagesFromGroup.push(i)
-                }
-            })
-            villagesGetId.forEach(function(village) {
-                var id = village.data.villageId
-                villagesFromGroup.forEach(function(groupVillage) {
-                    if (id == groupVillage) {
-                        villages.push(village)
-                    }
-                })
-            })
-        } else {
-            villagesGetId.forEach(function(village) {
-                villages.push(village)
-            })
-        }
-        type = spyMasterSettings[SETTINGS.TYPE]
-        if (type == false) {
-            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopError()
-            return
-        }
-        ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-        if (ownLimit == 0) {
-            utils.notif('error', $filter('i18n')('error.no_limit_selected', $rootScope.loc.ale, 'spy_master'))
-            spyMaster.stopError()
-            return
-        }
-        ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-        console.log(type)
-        sendSpies()
     }
     spyMaster.sabotage = function() {
         running = true
