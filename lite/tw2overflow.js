@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 08 Jan 2021 20:17:59 GMT
+ * Fri, 08 Jan 2021 20:51:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35203,9 +35203,7 @@ define('two/spyMaster', [
                 if (index == 0) {
                     addLog('', 'sabotage.start', '', '')
                 }
-                if (ownLimit == 0) {
-                    ownLimitS = spyMasterSettings[SETTINGS.LIMIT_S]
-                }
+                ownLimitS = spyMasterSettings[SETTINGS.LIMIT_S]
                 villages.forEach(function(village, index1) {
                     setTimeout(function() {
                         if (running == true) {
@@ -35977,8 +35975,8 @@ define('two/spyMaster', [
                 for (var i of groupTargets) {
                     targets.push(i)
                 }
-                sendSpies()
             })
+            sendSpies()
         }
         if (targetGroups == false && provinceId == 0 && playerId == 0 && villageTarget == 0) {
             utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'spy_master'))
@@ -35989,11 +35987,35 @@ define('two/spyMaster', [
     spyMaster.sabotage = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
+        var villagesGetId = player.getVillageList()
+        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN_S]
+        let villagesFromGroup = []
+        if (ownGroups) {
+            ownGroups.forEach(function(group) {
+                groupVillages = groupList.getGroupVillageIds(group)
+                for (var i of groupVillages) {
+                    villagesFromGroup.push(i)
+                }
+            })
+            villagesGetId.forEach(function(village) {
+                var id = village.data.villageId
+                villagesFromGroup.forEach(function(groupVillage) {
+                    if (id == groupVillage) {
+                        villages.push(village)
+                    }
+                })
+            })
+        } else {
+            villagesGetId.forEach(function(village) {
+                villages.push(village)
+            })
+        }
         var provinceData = []
         var characterData = 0
         villageTarget = spyMasterSettings[SETTINGS.VILLAGE_S]
         if (villageTarget > 0) {
             targets.push(spyMasterSettings[SETTINGS.VILLAGE])
+            sendSabotages()
         }
         playerId = spyMasterSettings[SETTINGS.PLAYER_S]
         if (playerId > 0) {
@@ -36004,6 +36026,7 @@ define('two/spyMaster', [
                 villages.forEach(function(village) {
                     targets.push(village.village_id)
                 })
+                sendSabotages()
             })
         }
         provinceId = spyMasterSettings[SETTINGS.PROVINCE_S]
@@ -36035,6 +36058,7 @@ define('two/spyMaster', [
                             targets.push(fake.village_id)
                         }
                     })
+                    sendSabotages()
                 })
             })
         }
@@ -36046,36 +36070,13 @@ define('two/spyMaster', [
                     targets.push(i)
                 }
             })
+            sendSabotages()
         }
         if (targetGroups == false && provinceId == 0 && playerId == 0 && villageTarget == 0) {
             utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'spy_master'))
             spyMaster.stopError()
             return
         }
-        var villagesGetId = player.getVillageList()
-        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN_S]
-        let villagesFromGroup = []
-        if (ownGroups) {
-            ownGroups.forEach(function(group) {
-                groupVillages = groupList.getGroupVillageIds(group)
-                for (var i of groupVillages) {
-                    villagesFromGroup.push(i)
-                }
-            })
-            villagesGetId.forEach(function(village) {
-                var id = village.data.villageId
-                villagesFromGroup.forEach(function(groupVillage) {
-                    if (id == groupVillage) {
-                        villages.push(village)
-                    }
-                })
-            })
-        } else {
-            villagesGetId.forEach(function(village) {
-                villages.push(village)
-            })
-        }
-        sendSabotages()
     }
     spyMaster.getLogs = function() {
         return logs
