@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 08 Jan 2021 17:52:47 GMT
+ * Fri, 08 Jan 2021 17:58:18 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35244,6 +35244,7 @@ define('two/spyMaster', [
         })
     }
     const sendSpies = function() {
+        console.log(targets)
         targets.forEach(function(target, index) {
             if (index == 0) {
                 addLog('', 'spy.start', '', '')
@@ -35668,11 +35669,6 @@ define('two/spyMaster', [
                     }
                 }, index1 * 10000)
             })
-            if (index == (targets.length - 1) && running == true) {
-                setTimeout(function() {
-                    spyMaster.stopSpy()
-                }, (index * 10000 * villages.length) + 10000)
-            }
         })
     }
     const spyMaster = {}
