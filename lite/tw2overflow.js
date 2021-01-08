@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 08 Jan 2021 20:51:24 GMT
+ * Fri, 08 Jan 2021 21:12:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -26321,6 +26321,30 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village) {
+                groupVillages.forEach(function(id, index) {
+                    if (village.data.villageId == id) {
+                        setTimeout(function() {
+                            if (running == true) {
+                                villageIdSet = village.getId()
+                                oldName = village.getName()
+                                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                    village_id: village.getId(),
+                                    name: nameSet[index]
+                                })
+                                addLog(villageIdSet, nameSet[index], oldName)
+                                if (index == (villages.length - 1) && running == true) {
+                                    setTimeout(function() {
+                                        prankHelper.stop()
+                                    }, 6000)
+                                }
+                            } else if (running == false) {
+                                return
+                            }
+                        }, index * 4000)
+                    }
+                })
+            })
         } else if (type == 'decrease') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = maxNew; i >= minNew; i--) {
@@ -26333,6 +26357,30 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village) {
+                groupVillages.forEach(function(id, index) {
+                    if (village.data.villageId == id) {
+                        setTimeout(function() {
+                            if (running == true) {
+                                villageIdSet = village.getId()
+                                oldName = village.getName()
+                                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                    village_id: village.getId(),
+                                    name: nameSet[index]
+                                })
+                                addLog(villageIdSet, nameSet[index], oldName)
+                                if (index == (villages.length - 1) && running == true) {
+                                    setTimeout(function() {
+                                        prankHelper.stop()
+                                    }, 6000)
+                                }
+                            } else if (running == false) {
+                                return
+                            }
+                        }, index * 4000)
+                    }
+                })
+            })
         } else {
             newName = prefix + validName + sufix
             villages.forEach(function(village) {
@@ -26360,30 +26408,6 @@ define('two/prankHelper', [
                 })
             })
         }
-        villages.forEach(function(village) {
-            groupVillages.forEach(function(id, index) {
-                if (village.data.villageId == id) {
-                    setTimeout(function() {
-                        if (running == true) {
-                            villageIdSet = village.getId()
-                            oldName = village.getName()
-                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                                village_id: village.getId(),
-                                name: nameSet[index]
-                            })
-                            addLog(villageIdSet, nameSet[index], oldName)
-                            if (index == (villages.length - 1) && running == true) {
-                                setTimeout(function() {
-                                    prankHelper.stop()
-                                }, 6000)
-                            }
-                        } else if (running == false) {
-                            return
-                        }
-                    }, index * 4000)
-                }
-            })
-        })
     }
     prankHelper.renameProvince = function renameProvince() {
         running = true
@@ -26434,6 +26458,26 @@ define('two/prankHelper', [
                         nameSet.push(newName)
                     }
                 }
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        if (running == true) {
+                            villageIdSet = village.id
+                            oldName = village.name
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.id,
+                                name: nameSet[index]
+                            })
+                            addLog(villageIdSet, nameSet[index], oldName)
+                            if (index == (villages.length - 1) && running == true) {
+                                setTimeout(function() {
+                                    prankHelper.stop()
+                                }, 6000)
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index * 4000)
+                })
             } else if (type == 'decrease') {
                 if (isNaN(min) && isNaN(max)) {
                     for (i = maxNew; i >= minNew; i--) {
@@ -26446,6 +26490,26 @@ define('two/prankHelper', [
                         nameSet.push(newName)
                     }
                 }
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        if (running == true) {
+                            villageIdSet = village.id
+                            oldName = village.name
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.id,
+                                name: nameSet[index]
+                            })
+                            addLog(villageIdSet, nameSet[index], oldName)
+                            if (index == (villages.length - 1) && running == true) {
+                                setTimeout(function() {
+                                    prankHelper.stop()
+                                }, 6000)
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index * 4000)
+                })
             } else {
                 newName = prefix + validName + sufix
                 villages.forEach(function(village, index) {
@@ -26469,26 +26533,6 @@ define('two/prankHelper', [
                     }, index * 4000)
                 })
             }
-            villages.forEach(function(village, index) {
-                setTimeout(function() {
-                    if (running == true) {
-                        villageIdSet = village.id
-                        oldName = village.name
-                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                            village_id: village.id,
-                            name: nameSet[index]
-                        })
-                        addLog(villageIdSet, nameSet[index], oldName)
-                        if (index == (villages.length - 1) && running == true) {
-                            setTimeout(function() {
-                                prankHelper.stop()
-                            }, 6000)
-                        }
-                    } else if (running == false) {
-                        return
-                    }
-                }, index * 4000)
-            })
         })
     }
     prankHelper.renameAll = function renameAll() {
@@ -26533,6 +26577,26 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village, index) {
+                setTimeout(function() {
+                    if (running == true) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.getId(),
+                            name: nameSet[index]
+                        })
+                        addLog(villageIdSet, nameSet[index], oldName)
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                prankHelper.stop()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
+                }, index * 4000)
+            })
         } else if (type == 'decrease') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = maxNew; i >= minNew; i--) {
@@ -26545,6 +26609,26 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village, index) {
+                setTimeout(function() {
+                    if (running == true) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.getId(),
+                            name: nameSet[index]
+                        })
+                        addLog(villageIdSet, nameSet[index], oldName)
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                prankHelper.stop()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
+                }, index * 4000)
+            })
         } else {
             newName = prefix + validName + sufix
             villages.forEach(function(village, index) {
@@ -26568,26 +26652,6 @@ define('two/prankHelper', [
                 }, index * 4000)
             })
         }
-        villages.forEach(function(village, index) {
-            setTimeout(function() {
-                if (running == true) {
-                    villageIdSet = village.getId()
-                    oldName = village.getName()
-                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                        village_id: village.getId(),
-                        name: nameSet[index]
-                    })
-                    addLog(villageIdSet, nameSet[index], oldName)
-                    if (index == (villages.length - 1) && running == true) {
-                        setTimeout(function() {
-                            prankHelper.stop()
-                        }, 6000)
-                    }
-                } else if (running == false) {
-                    return
-                }
-            }, index * 4000)
-        })
     }
     prankHelper.getLogs = function() {
         return logs
