@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Mon, 04 Jan 2021 11:27:36 GMT
+ * Fri, 08 Jan 2021 23:20:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -565,6 +565,9 @@ define('two/language', [
         "army_helper": {
             "title": "Hetman",
             "army": "Wojsko",
+            "calculated": "Zliczono wojsko w wioskach",
+            "start": "Rozpoczęto balansowanie wojsk",
+            "stop": "Zatrzymano balansowanie wojsk",
             "description": "Narzędzie do organizacji i liczenia wojsk",
             "army.header": "Sprawdź ilość jednostek w wioskach",
             "army.check": "Zlicz",
@@ -842,6 +845,8 @@ define('two/language', [
         },
         "builder_queue": {
             "title": "Budowniczy",
+            "stop": "Budowa zatrzymana",
+            "start": "Budowa rozpoczęta",
             "started": "Budowniczy Uruchomiony",
             "stopped": "Budowniczy Zatrzymany",
             "settings": "Ustawienia",
@@ -978,6 +983,16 @@ define('two/language', [
             "title": "Watażka",
             "description": "Automatycznie wysyła fejki na wskazane cele",
             "fake": "Fejki",
+            "error.no_target_selected": "Nie wybrano celu/ów - wioski/ek",
+            "error.no_type_selected": "Nie wybrano typu fejków",
+            "error.no_units_selected": "Nie wybrano jednostek do fejków",
+            "error.no_support_selected": "Nie wybrano jednostek do fejk wsparć",
+            "error.no_four_selected": "Nie wybrano jednostek do fejk karet",
+            "error.no_date_selected": "Nie wybrano daty",
+            "error.no_player_selected": "Nie wybrano celu - gracz",
+            "error.no_province_selected": "Nie wybrano celu - prowincja",
+            "error.no_tribe_selected": "Nie wybrano celu - plemie",
+            "error.no_group_selected": "Nie wybrano celu - grupa",
             "fake.send": "Wyślij",
             "error_no_type": "Nie wybrano typu fejków",
             "error_no_supportUnit": "Nie wybrano jednostek do wsparć",
@@ -1457,6 +1472,12 @@ define('two/language', [
         },
         "prank_helper": {
             "title": "Błazen",
+            "stop": "Zatrzymano zmianę nazw wiosek",
+            "start": "Rozpoczęto zmianę nazw wiosek",
+            "error.no_name_selected": "Nie wybrano nazwy właściwej wiosek",
+            "error.no_type_selected": "Nie wybrano typu zmiany nazw wiosek",
+            "error.no_group_selected": "Nie wybrano grupy wiosek",
+            "error.no_province_selected": "Nie wybrano prowincji",
             "rename": "Nazwy wiosek",
             "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
@@ -1646,7 +1667,10 @@ define('two/language', [
         "resource_sender": {
             "title": "Tragarz",
             "trade": "Przesył surowców",
-            "start": "Przesyłaj",
+            "error.no_target_selected": "Nie wybrano celu",
+            "stop": "Zatrzymano transport surowców",
+            "start": "Rozpoczęto transport surowców",
+            "trade.start": "Przesyłaj",
             "trade.fullstorage": "Zapełnij magazyn",
             "description": "Narzędzie do transportu surowców między własnymi wioskami",
             "trade.villages": "Automatyzacja transportów",
@@ -1667,7 +1691,7 @@ define('two/language', [
             "trade.distance": "Maksymalna odległość transportu",
             "trade.individual": "Maksymalna wartość jednorazowego transportu",
             "trade.full": "Pomijaj surowiec którego masz pełny magazyn",
-            "trade.advanced": "Zbieraj surowce na określony cel(tylko jeden cel)",
+            "trade.advanced": "Lub zbieraj surowce na określony cel(tylko jeden cel)",
             "trade.building": "Budynek",
             "trade.level": "Poziom",
             "trade.unit": "Jednostka",
@@ -1797,11 +1821,30 @@ define('two/language', [
             "title": "Zwiadowca",
             "spy": "Akcje Szpiegowskie",
             "units": "Jednostki",
+            "error.no_building_selected": "Nie wybrano budynku do kamuflowania.",
+            "error.no_unit_selected": "Nie wybrano jednostki do zamiany broni.",
+            "error.no_replacement_selected": "Nie wybrano zamiennika do zamiany broni.",
+            "error.no_dummies_selected": "Nie wybrano jednostki do ustawienia atrap.",
+            "error.no_target_selected": "Nie wybrano celu/ów.",
+            "error.no_type_selected": "Nie wybrano rodzaju szpiegowania.",
+            "error.no_limit_selected": "Nie wybrano limitu szpiegów z własnych wiosek.",
+            "spy.start": "Rozpoczęto wysyłanie szpiegów",
+            "switch.start": "Rozpoczęto zamianę broni",
+            "exchange.start": "Rozpoczęto aktywowanie wymiany",
+            "dummies.start": "Rozpoczęto ustawianie atrap",
+            "camouflage.start": "Rozpoczęto kamuflowanie budynków",
+            "sabotage.start": "Rozpoczęto wysyłanie sabotaży",
+            "spying.stop": "Zakończono wysyłanie szpiegów",
+            "switch.stop": "Zakończono zamianę broni",
+            "exchange.stop": "Zakończono aktywowanie wymiany",
+            "dummies.stop": "Zakończono ustawianie atrap",
+            "camouflage.stop": "Zakończono kamuflowanie budynków",
+            "sabotage.stop": "Zakończono wysyłanie sabotaży",
             "buildings": "Budynki",
             "description": "Narzędzie do akcji szpiegowskich i kontrwywiadu",
             "all": "Jednostki i budynki",
             "spy.stop": "Zatrzymaj",
-            "spy.information": "Wszystkie cele do szpiegowania można łączyć",
+            "spy.information": "Wszystkie cele do szpiegowania - Nie można łączyć",
             "sabotage.information": "Wszystkie cele do sabotowania można łączyć",
             "spy.player": "Szpieguj Gracza",
             "spy.village": "Szpieguj Wioskę",
@@ -2090,6 +2133,9 @@ define('two/language', [
         "army_helper": {
             "title": "Hetman",
             "army": "Wojsko",
+            "calculated": "Zliczono wojsko w wioskach",
+            "start": "Rozpoczęto balansowanie wojsk",
+            "stop": "Zatrzymano balansowanie wojsk",
             "description": "Narzędzie do organizacji i liczenia wojsk",
             "army.header": "Sprawdź ilość jednostek w wioskach",
             "army.check": "Zlicz",
@@ -2367,6 +2413,8 @@ define('two/language', [
         },
         "builder_queue": {
             "title": "Budowniczy",
+            "stop": "Budowa zatrzymana",
+            "start": "Budowa rozpoczęta",
             "started": "Budowniczy Uruchomiony",
             "stopped": "Budowniczy Zatrzymany",
             "settings": "Ustawienia",
@@ -2503,6 +2551,16 @@ define('two/language', [
             "title": "Watażka",
             "description": "Automatycznie wysyła fejki na wskazane cele",
             "fake": "Fejki",
+            "error.no_target_selected": "Nie wybrano celu/ów - wioski/ek",
+            "error.no_type_selected": "Nie wybrano typu fejków",
+            "error.no_units_selected": "Nie wybrano jednostek do fejków",
+            "error.no_support_selected": "Nie wybrano jednostek do fejk wsparć",
+            "error.no_four_selected": "Nie wybrano jednostek do fejk karet",
+            "error.no_date_selected": "Nie wybrano daty",
+            "error.no_player_selected": "Nie wybrano celu - gracz",
+            "error.no_province_selected": "Nie wybrano celu - prowincja",
+            "error.no_tribe_selected": "Nie wybrano celu - plemie",
+            "error.no_group_selected": "Nie wybrano celu - grupa",
             "fake.send": "Wyślij",
             "error_no_type": "Nie wybrano typu fejków",
             "error_no_supportUnit": "Nie wybrano jednostek do wsparć",
@@ -2982,6 +3040,12 @@ define('two/language', [
         },
         "prank_helper": {
             "title": "Błazen",
+            "stop": "Zatrzymano zmianę nazw wiosek",
+            "start": "Rozpoczęto zmianę nazw wiosek",
+            "error.no_name_selected": "Nie wybrano nazwy właściwej wiosek",
+            "error.no_type_selected": "Nie wybrano typu zmiany nazw wiosek",
+            "error.no_group_selected": "Nie wybrano grupy wiosek",
+            "error.no_province_selected": "Nie wybrano prowincji",
             "rename": "Nazwy wiosek",
             "description": "Zmienia nazwy wiosek wg wybranych ustwaień",
             "rename.all": "Zmień nazwy wszystkich wiosek",
@@ -3171,7 +3235,10 @@ define('two/language', [
         "resource_sender": {
             "title": "Tragarz",
             "trade": "Przesył surowców",
-            "start": "Przesyłaj",
+            "error.no_target_selected": "Nie wybrano celu",
+            "stop": "Zatrzymano transport surowców",
+            "start": "Rozpoczęto transport surowców",
+            "trade.start": "Przesyłaj",
             "trade.fullstorage": "Zapełnij magazyn",
             "description": "Narzędzie do transportu surowców między własnymi wioskami",
             "trade.villages": "Automatyzacja transportów",
@@ -3192,7 +3259,7 @@ define('two/language', [
             "trade.distance": "Maksymalna odległość transportu",
             "trade.individual": "Maksymalna wartość jednorazowego transportu",
             "trade.full": "Pomijaj surowiec którego masz pełny magazyn",
-            "trade.advanced": "Zbieraj surowce na określony cel",
+            "trade.advanced": "Lub zbieraj surowce na określony cel(tylko jeden cel)",
             "trade.building": "Budynek",
             "trade.level": "Poziom",
             "trade.unit": "Jednostka",
@@ -3322,11 +3389,30 @@ define('two/language', [
             "title": "Zwiadowca",
             "spy": "Akcje Szpiegowskie",
             "units": "Jednostki",
+            "error.no_building_selected": "Nie wybrano budynku do kamuflowania.",
+            "error.no_unit_selected": "Nie wybrano jednostki do zamiany broni.",
+            "error.no_replacement_selected": "Nie wybrano zamiennika do zamiany broni.",
+            "error.no_dummies_selected": "Nie wybrano jednostki do ustawienia atrap.",
+            "error.no_target_selected": "Nie wybrano celu/ów.",
+            "error.no_type_selected": "Nie wybrano rodzaju szpiegowania.",
+            "error.no_limit_selected": "Nie wybrano limitu szpiegów z własnych wiosek.",
+            "spy.start": "Rozpoczęto wysyłanie szpiegów",
+            "switch.start": "Rozpoczęto zamianę broni",
+            "exchange.start": "Rozpoczęto aktywowanie wymiany",
+            "dummies.start": "Rozpoczęto ustawianie atrap",
+            "camouflage.start": "Rozpoczęto kamuflowanie budynków",
+            "sabotage.start": "Rozpoczęto wysyłanie sabotaży",
+            "spying.stop": "Zakończono wysyłanie szpiegów",
+            "switch.stop": "Zakończono zamianę broni",
+            "exchange.stop": "Zakończono aktywowanie wymiany",
+            "dummies.stop": "Zakończono ustawianie atrap",
+            "camouflage.stop": "Zakończono kamuflowanie budynków",
+            "sabotage.stop": "Zakończono wysyłanie sabotaży",
             "buildings": "Budynki",
             "description": "Narzędzie do akcji szpiegowskich i kontrwywiadu",
             "all": "Jednostki i budynki",
             "spy.stop": "Zatrzymaj",
-            "spy.information": "Wszystkie cele do szpiegowania można łączyć",
+            "spy.information": "Wszystkie cele do szpiegowania - Nie można łączyć",
             "sabotage.information": "Wszystkie cele do sabotowania można łączyć",
             "spy.player": "Szpieguj Gracza",
             "spy.village": "Szpieguj Wioskę",
@@ -4956,12 +5042,12 @@ define('two/armyHelper', [
     }
     armyHelper.start = function() {
         running = true
-        addLog('Rozpoczęto balansowanie wojsk', '', '', '')
+        addLog('', '', 'start', '')
         eventQueue.trigger(eventTypeProvider.ARMY_HELPER_START)
     }
     armyHelper.stop = function() {
         running = false
-        addLog('Zatrzymano balansowanie wojsk', '', '', '')
+        addLog('', '', 'stop', '')
         eventQueue.trigger(eventTypeProvider.ARMY_HELPER_STOP)
     }
     armyHelper.getSettings = function() {
@@ -5259,7 +5345,7 @@ define('two/armyHelper', [
             KnightR = calcKnightR
             KnightT = calcKnightT + calcKnightR
             console.log(calcArcherI, calcAxeI, calcSpearI, calcSwordI, calcLightCavalryI, calcMountedArcherI, calcHeavyCavalryI, calcRamI, calcCatapultI, calcTrebuchetI, calcBerserkerI, calcKnightI, calcSnobI)
-            addLog('', '', 'Zliczono armię', '')
+            addLog('', '', 'calculated', '')
         }
         checkArmy()
     }
@@ -5803,8 +5889,8 @@ define('two/armyHelper/ui', [
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }} jeszcze nie działa</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td>{{ log.unit }}<td>{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .logs .status tr{height:25px}#two-army-helper .logs .status td{padding:0 6px}#two-army-helper .logs .log-list{margin-bottom:10px}#two-army-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-army-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-army-helper .icon-20x20-village:before{margin-top:-11px}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
+        interfaceOverflow.addTemplate('twoverflow_army_helper_window', `<div id=\"two-army-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'army_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.ARMY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.ARMY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.ARMY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ARMY}\">{{ 'army' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.BALANCER)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.BALANCER}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.BALANCER}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.BALANCER}\">{{ 'balancer' | i18n:loc.ale:'army_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.ARMY\"><h5 class=\"twx-section\">{{ 'army.header' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><tr><td class=\"item-check\"><span class=\"btn btn-orange addSelected\" ng-click=\"check()\">{{ 'army.check' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'army.troops' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm1\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><col width=\"12%\"><tr><th class=\"item-head\">{{ 'army.unit' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.recruiting-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.recruiting' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.support-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.support' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.available-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.available' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.own-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.own' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.in-town-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.in-town' | i18n:loc.ale:'army_helper' }}<th class=\"item-head\" tooltip=\"\" tooltip-content=\"{{ 'army.total-tip' | i18n:loc.ale:'army_helper' }}\">{{ 'army.total' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.deffensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-spear\"></span> {{ 'spear' | i18n:loc.ale:'common' }}<td>{{ spearRecruting }}<td>{{ spearSupport }}<td>{{ spearAvailable }}<td>{{ spearOwn }}<td>{{ spearInTown }}<td>{{ spearTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-sword\"></span> {{ 'sword' | i18n:loc.ale:'common' }}<td>{{ swordRecruting }}<td>{{ swordSupport }}<td>{{ swordAvailable }}<td>{{ swordOwn }}<td>{{ swordInTown }}<td>{{ swordTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-archer\"></span> {{ 'archer' | i18n:loc.ale:'common' }}<td>{{ archerRecruting }}<td>{{ archerSupport }}<td>{{ archerAvailable }}<td>{{ archerOwn }}<td>{{ archerInTown }}<td>{{ archerTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span> {{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td>{{ hcRecruting }}<td>{{ hcSupport }}<td>{{ hcAvailable }}<td>{{ hcOwn }}<td>{{ hcInTown }}<td>{{ hcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-trebuchet\"></span> {{ 'trebuchet' | i18n:loc.ale:'common' }}<td>{{ trebuchetRecruting }}<td>{{ trebuchetSupport }}<td>{{ trebuchetAvailable }}<td>{{ trebuchetOwn }}<td>{{ trebuchetInTown }}<td>{{ trebuchetTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.offensive' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-axe\"></span> {{ 'axe' | i18n:loc.ale:'common' }}<td>{{ axeRecruting }}<td>{{ axeSupport }}<td>{{ axeAvailable }}<td>{{ axeOwn }}<td>{{ axeInTown }}<td>{{ axeTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span> {{ 'light_cavalry' | i18n:loc.ale:'common' }}<td>{{ lcRecruting }}<td>{{ lcSupport }}<td>{{ lcAvailable }}<td>{{ lcOwn }}<td>{{ lcInTown }}<td>{{ lcTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span> {{ 'mounted_archer' | i18n:loc.ale:'common' }}<td>{{ maRecruting }}<td>{{ maSupport }}<td>{{ maAvailable }}<td>{{ maOwn }}<td>{{ maInTown }}<td>{{ maTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-ram\"></span> {{ 'ram' | i18n:loc.ale:'common' }}<td>{{ ramRecruting }}<td>{{ ramSupport }}<td>{{ ramAvailable }}<td>{{ ramOwn }}<td>{{ ramInTown }}<td>{{ ramTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span> {{ 'catapult' | i18n:loc.ale:'common' }}<td>{{ catapultRecruting }}<td>{{ catapultSupport }}<td>{{ catapultAvailable }}<td>{{ catapultOwn }}<td>{{ catapultInTown }}<td>{{ catapultTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-doppelsoldner\"></span> {{ 'doppelsoldner' | i18n:loc.ale:'common' }}<td>{{ berserkerRecruting }}<td>{{ berserkerSupport }}<td>{{ berserkerAvailable }}<td>{{ berserkerOwn }}<td>{{ berserkerInTown }}<td>{{ berserkerTotal }}<tr><td class=\"item-nameX\" colspan=\"7\">{{ 'army.special-troops' | i18n:loc.ale:'army_helper' }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-snob\"></span> {{ 'snob' | i18n:loc.ale:'common' }}<td>{{ snobRecruting }}<td>{{ snobSupport }}<td>{{ snobAvailable }}<td>{{ snobOwn }}<td>{{ snobInTown }}<td>{{ snobTotal }}<tr><td class=\"item-name\"><span class=\"icon-bg-black icon-34x34-unit-knight\"></span> {{ 'knight' | i18n:loc.ale:'common' }}<td>{{ knightRecruting }}<td>{{ knightSupport }}<td>{{ knightAvailable }}<td>{{ knightOwn }}<td>{{ knightInTown }}<td>{{ knightTotal }}</table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><h5 class=\"twx-section\">{{ 'balancer.all' | i18n:loc.ale:'army_helper' }} jeszcze nie działa</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textall' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceAll()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span></table></form><h5 class=\"twx-section\">{{ 'balancer.unit' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnit()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE1]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textgroup' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.unit-group' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td class=\"item-name\">{{ 'balancer.textunit-group' | i18n:loc.ale:'army_helper' }}<td class=\"item-balance\"><span class=\"btn btn-orange addSelected\" ng-click=\"balanceUnitAndGroup()\">{{ 'balancer.balance' | i18n:loc.ale:'army_helper' }}</span><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT_TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><div class=\"sel\" select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'balancer.additional' | i18n:loc.ale:'army_helper' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"4\">{{ 'balancer.one-province' | i18n:loc.ale:'army_helper' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'balancer.add_village' | i18n:loc.ale:'army_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!armyVillage.origin\" class=\"command-village\">{{ 'balancer.no_village' | i18n:loc.ale:'army_helper' }}<td ng-if=\"armyVillage.origin\" class=\"command-village\">{{ armyVillage.origin.name }} ({{ armyVillage.origin.x }}|{{ armyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'balancer.add_map_selected' | i18n:loc.ale:'army_helper' }}\">{{ 'balancer.selected' | i18n:loc.ale:'army_helper' }}</a></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noBalances' | i18n:loc.ale:'army_helper' }}<table class=\"logs tbl-border-light tbl-striped header-center\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.unit' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.group' | i18n:loc.ale:'army_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'army_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'army_helper' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'army_helper' }}</b></a><td ng-if=\"log.unit === 'calculated'\" colspan=\"4\"><a>{{ log.unit | i18n:loc.ale:'army_helper' }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'calculated'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'calculated'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'calculated'\">{{ log.unit }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'calculated'\">{{ log.group }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.BALANCER\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'balance.clear' | i18n:loc.ale:'army_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'army_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-army-helper div[select] .select-wrapper{height:34px}#two-army-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-army-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-army-helper .textfield-border{text-align:center;width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-army-helper .textfield-border.fit{width:33%}#two-army-helper .addForm1 td{text-align:center;height:34px;line-height:34px}#two-army-helper .addForm1 th{text-align:center;padding:0px}#two-army-helper .addForm1 span{height:34px;line-height:34px}#two-army-helper .addForm1 .item-name{text-align:left}#two-army-helper .addForm .item-check{text-align:center}#two-army-helper .addForm .item-check span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm .item-balance{text-align:center}#two-army-helper .addForm .item-balance span{height:30px;text-align:center;line-height:30px;width:115px}#two-army-helper .addForm td{text-align:left}#two-army-helper .addForm td .sel{text-align:center}#two-army-helper .addForm td.center{text-align:center}#two-army-helper .addForm th{text-align:center;padding:0px}#two-army-helper .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-army-helper .addForm .actions a{width:100px}#two-army-helper .logs{margin-bottom:10px}#two-army-helper .logs td,#two-army-helper .logs th{text-align:center;line-height:30px}#two-army-helper .icon-20x20-village:before{margin-top:-11px}#two-army-helper .force-26to20{transform:scale(.8);width:20px;height:20px}')
     }
 
     const buildWindow = function () {
@@ -15057,6 +15143,7 @@ define('two/builderQueue', [
         }, ['all_villages_ready'])
 
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_START)
+        addLog('start', '')
     }
 
     builderQueue.stop = function () {
@@ -15064,6 +15151,7 @@ define('two/builderQueue', [
         clearInterval(intervalCheckId)
         clearInterval(intervalInstantCheckId)
         eventQueue.trigger(eventTypeProvider.BUILDER_QUEUE_STOP)
+        addLog('stop', '')
     }
 
     builderQueue.isRunning = function () {
@@ -17488,7 +17576,7 @@ define('two/builderQueue/ui', [
             utils.notif('success', $filter('i18n')('stopped', $rootScope.loc.ale, 'builder_queue'))
         })
 
-        interfaceOverflow.addTemplate('twoverflow_builder_queue_window', `<div id=\"two-builder-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'builder_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SEQUENCES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}\">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><h5 class=\"twx-section\">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5><table class=\"settings tbl-border-light tbl-striped\"><col width=\"40%\"><col><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_VILLAGES]\" drop-down=\"true\"></div><tr ng-show=\"settingsView.sequencesAvail\"><td><span class=\"ff-cell-fix\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"sequences\" selected=\"settings[SETTINGS.ACTIVE_SEQUENCE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_WOOD].min\" max=\"settingsMap[SETTINGS.PRESERVE_WOOD].max\" value=\"settings[SETTINGS.PRESERVE_WOOD]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_WOOD]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_CLAY].min\" max=\"settingsMap[SETTINGS.PRESERVE_CLAY].max\" value=\"settings[SETTINGS.PRESERVE_CLAY]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_CLAY]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_IRON].min\" max=\"settingsMap[SETTINGS.PRESERVE_IRON].max\" value=\"settings[SETTINGS.PRESERVE_IRON]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_IRON]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span><td class=\"text-center\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORIZE_FARM]\" vertical=\"false\" size=\"'56x28'\"></div></table><h5 class=\"twx-section\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!settingsView.sequencesAvail\" class=\"text-center\"><a href=\"#\" class=\"btn-orange btn-border create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><div ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div><table class=\"tbl-border-light header-center building-sequence\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"13%\"><col width=\"8%\"><col width=\"9%\"><col width=\"9%\"><col width=\"9%\"><col width=\"6%\"><tr><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.visibleBuildingSequence track by $index\" class=\"{{ item.state }}\"><td>{{ pagination.buildingSequence.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.duration }}<td class=\"green\">+{{ item.levelPoints | number }}<td>{{ item.price.wood | number }}<td>{{ item.price.clay | number }}<td>{{ item.price.iron | number }}<td>{{ item.price.food | number }}</table><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div></div><h5 ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"twx-section\">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5><table ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-final\"><col><col width=\"5%\"><col width=\"12%\"><col width=\"8%\"><col width=\"11%\"><col width=\"11%\"><col width=\"11%\"><col width=\"7%\"><tr><th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.buildingSequenceFinal | orderBy:'order'\"><td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.build_time | readableSecondsFilter }}<td class=\"green\">+{{ item.points | number }}<td>{{ item.resources.wood | number }}<td>{{ item.resources.clay | number }}<td>{{ item.resources.iron | number }}<td>{{ item.resources.food | number }}</table><p ng-show=\"settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length\" class=\"text-center\">{{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}</div><div ng-show=\"selectedTab === TAB_TYPES.SEQUENCES\"><h5 class=\"twx-section\">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!editorView.sequencesAvail\" class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><table ng-if=\"editorView.sequencesAvail\" class=\"tbl-border-light tbl-striped editor-select-sequence\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span><td><div class=\"select-sequence-editor\" select=\"\" list=\"sequences\" selected=\"editorView.selectedSequence\" drop-down=\"true\"></div><tr><td class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-orange clone-sequence\" ng-click=\"editorView.modal.nameSequence()\">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-red remove-sequence\" ng-click=\"editorView.modal.removeSequence()\">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></table><div ng-if=\"editorView.sequencesAvail\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><table ng-show=\"editorView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-editor\"><col width=\"5%\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"10%\"><tr><th><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'actions' | i18n:loc.ale:'common' }}<tr ng-repeat=\"item in editorView.visibleBuildingSequence track by $index\" ng-class=\"{'selected': item.checked}\"><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" ng-class=\"{'icon-26x26-checkbox-checked': item.checked}\"><input type=\"checkbox\" ng-model=\"item.checked\"></label><td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)\" tooltip=\"\" tooltip-content=\"{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><p ng-show=\"!editorView.visibleBuildingSequence.length\" class=\"text-center\"><a class=\"btn btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a></div></div><div ng-show=\"selectedTab === TAB_TYPES.LOGS\" class=\"rich-text\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'started_at' | i18n:loc.ale:'common' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"building-icon icon-20x20-building-{{ log.building }}\"></span> {{ log.building | i18n:loc.ale:'building_names' }}<td>{{ log.level }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchBuilder()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveUp()\">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveDown()\">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"editorView.updateBuildingSequence()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_builder_queue_window', `<div id=\"two-builder-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'builder_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main small-select\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SETTINGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SETTINGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}\">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SEQUENCES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}\">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div ng-show=\"selectedTab === TAB_TYPES.SETTINGS\"><h5 class=\"twx-section\">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5><table class=\"settings tbl-border-light tbl-striped\"><col width=\"40%\"><col><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_VILLAGES]\" drop-down=\"true\"></div><tr ng-show=\"settingsView.sequencesAvail\"><td><span class=\"ff-cell-fix\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span><td colspan=\"2\" class=\"text-right\"><div select=\"\" list=\"sequences\" selected=\"settings[SETTINGS.ACTIVE_SEQUENCE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_WOOD].min\" max=\"settingsMap[SETTINGS.PRESERVE_WOOD].max\" value=\"settings[SETTINGS.PRESERVE_WOOD]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_WOOD]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_CLAY].min\" max=\"settingsMap[SETTINGS.PRESERVE_CLAY].max\" value=\"settings[SETTINGS.PRESERVE_CLAY]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_CLAY]\"><tr><td><span class=\"ff-cell-fix\">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.PRESERVE_IRON].min\" max=\"settingsMap[SETTINGS.PRESERVE_IRON].max\" value=\"settings[SETTINGS.PRESERVE_IRON]\" enabled=\"true\"></div><td><input type=\"number\" class=\"preserve-resource textfield-border text-center\" ng-model=\"settings[SETTINGS.PRESERVE_IRON]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span><td class=\"text-center\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORIZE_FARM]\" vertical=\"false\" size=\"'56x28'\"></div></table><h5 class=\"twx-section\">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!settingsView.sequencesAvail\" class=\"text-center\"><a href=\"#\" class=\"btn-orange btn-border create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><div ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div><table class=\"tbl-border-light header-center building-sequence\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"13%\"><col width=\"8%\"><col width=\"9%\"><col width=\"9%\"><col width=\"9%\"><col width=\"6%\"><tr><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.visibleBuildingSequence track by $index\" class=\"{{ item.state }}\"><td>{{ pagination.buildingSequence.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.duration }}<td class=\"green\">+{{ item.levelPoints | number }}<td>{{ item.price.wood | number }}<td>{{ item.price.clay | number }}<td>{{ item.price.iron | number }}<td>{{ item.price.food | number }}</table><div class=\"page-wrap\" pagination=\"pagination.buildingSequence\"></div></div><h5 ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"twx-section\">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5><table ng-if=\"settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-final\"><col><col width=\"5%\"><col width=\"12%\"><col width=\"8%\"><col width=\"11%\"><col width=\"11%\"><col width=\"11%\"><col width=\"7%\"><tr><th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'duration' | i18n:loc.ale:'common' }}<th>{{ 'points' | i18n:loc.ale:'common' }}<th><span class=\"icon-26x26-resource-wood\"></span><th><span class=\"icon-26x26-resource-clay\"></span><th><span class=\"icon-26x26-resource-iron\"></span><th><span class=\"icon-26x26-resource-food\"></span><tr ng-repeat=\"item in settingsView.buildingSequenceFinal | orderBy:'order'\"><td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td>{{ item.build_time | readableSecondsFilter }}<td class=\"green\">+{{ item.points | number }}<td>{{ item.resources.wood | number }}<td>{{ item.resources.clay | number }}<td>{{ item.resources.iron | number }}<td>{{ item.resources.food | number }}</table><p ng-show=\"settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length\" class=\"text-center\">{{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}</div><div ng-show=\"selectedTab === TAB_TYPES.SEQUENCES\"><h5 class=\"twx-section\">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5><p ng-show=\"!editorView.sequencesAvail\" class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><table ng-if=\"editorView.sequencesAvail\" class=\"tbl-border-light tbl-striped editor-select-sequence\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span><td><div class=\"select-sequence-editor\" select=\"\" list=\"sequences\" selected=\"editorView.selectedSequence\" drop-down=\"true\"></div><tr><td class=\"text-center\"><a class=\"btn btn-orange create-sequence\" ng-click=\"createSequence()\">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-orange clone-sequence\" ng-click=\"editorView.modal.nameSequence()\">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a><td class=\"text-center\"><a class=\"btn btn-red remove-sequence\" ng-click=\"editorView.modal.removeSequence()\">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></table><div ng-if=\"editorView.sequencesAvail\"><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><table ng-show=\"editorView.visibleBuildingSequence.length\" class=\"tbl-border-light tbl-striped header-center building-sequence-editor\"><col width=\"5%\"><col width=\"5%\"><col><col width=\"7%\"><col width=\"10%\"><tr><th><th tooltip=\"\" tooltip-content=\"{{ 'position' | i18n:loc.ale:'builder_queue' }}\">#<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'actions' | i18n:loc.ale:'common' }}<tr ng-repeat=\"item in editorView.visibleBuildingSequence track by $index\" ng-class=\"{'selected': item.checked}\"><td><label class=\"size-26x26 btn-orange icon-26x26-checkbox\" ng-class=\"{'icon-26x26-checkbox-checked': item.checked}\"><input type=\"checkbox\" ng-model=\"item.checked\"></label><td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}<td><span class=\"building-icon icon-20x20-building-{{ item.building }}\"></span> {{ item.building | i18n:loc.ale:'building_names' }}<td>{{ item.level }}<td><a href=\"#\" class=\"size-20x20 btn-red icon-20x20-close\" ng-click=\"editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)\" tooltip=\"\" tooltip-content=\"{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}\"></a></table><div class=\"page-wrap\" pagination=\"pagination.buildingSequenceEditor\"></div><p ng-show=\"!editorView.visibleBuildingSequence.length\" class=\"text-center\"><a class=\"btn btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a></div></div><div ng-show=\"selectedTab === TAB_TYPES.LOGS\" class=\"rich-text\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'village' | i18n:loc.ale:'common' }}<th>{{ 'building' | i18n:loc.ale:'common' }}<th>{{ 'level' | i18n:loc.ale:'common' }}<th>{{ 'started_at' | i18n:loc.ale:'common' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.villageId === 'start'\" colspan=\"3\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.villageId | i18n:loc.ale:'builder_queue' }}</b></a><td ng-if=\"log.villageId === 'stop'\" colspan=\"3\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.villageId | i18n:loc.ale:'builder_queue' }}</b></a><td ng-if=\"log.villageId !== 'stop' && log.villageId !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.villageId !== 'stop' && log.villageId !== 'start'\"><span class=\"building-icon icon-20x20-building-{{ log.building }}\"></span> {{ log.building | i18n:loc.ale:'building_names' }}<td ng-if=\"log.villageId !== 'stop' && log.villageId !== 'start'\">{{ log.level }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"saveSettings()\">{{ 'save' | i18n:loc.ale:'common' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail\"><a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchBuilder()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveUp()\">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.moveDown()\">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"editorView.modal.addBuilding()\">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a><li ng-show=\"selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"editorView.updateBuildingSequence()\">{{ 'save' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_add_building_modal', `<div id=\"add-building-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_add_building_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap unit-operate-slider\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"15%\"><col><col width=\"15%\"><tr><td>{{ 'building' | i18n:loc.ale:'common' }}<td colspan=\"2\"><div select=\"\" list=\"buildings\" selected=\"selectedBuilding\" drop-down=\"true\"></div><tr><td>{{ 'position' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"indexLimit\" value=\"position\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"position\"><tr><td>{{ 'amount' | i18n:loc.ale:'builder_queue' }}<td><div range-slider=\"\" min=\"1\" max=\"buildingsData[selectedBuilding.value].max_level\" value=\"amount\" enabled=\"true\"></div><td><input type=\"number\" class=\"input-border text-center\" ng-model=\"amount\"></table></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"add()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addTemplate('twoverflow_builder_queue_name_sequence_modal', `<div id=\"name-sequence-modal\" class=\"win-content\"><header class=\"win-head\"><h3>{{ 'title' | i18n:loc.ale:'builder_queue_name_sequence_modal' }}</h3><ul class=\"list-btn sprite\"><li><a href=\"#\" class=\"btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"box-paper\"><div class=\"scroll-wrap\"><div class=\"box-border-light input-wrapper name_preset\"><form ng-submit=\"submit()\"><input focus=\"true\" ng-model=\"name\" minlength=\"3\"></form></div></div></div></div><footer class=\"win-foot sprite-fill\"><ul class=\"list-btn list-center\"><li><a href=\"#\" class=\"btn-red btn-border btn-premium\" ng-click=\"closeWindow()\">{{ 'cancel' | i18n:loc.ale:'common' }}</a><li><a href=\"#\" class=\"btn-orange btn-border\" ng-click=\"submit()\">{{ 'add' | i18n:loc.ale:'common' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-builder-queue tr.reached td{background-color:#b9af7e}#two-builder-queue tr.progress td{background-color:#af9d57}#two-builder-queue .building-sequence,#two-builder-queue .building-sequence-final,#two-builder-queue .building-sequence-editor,#two-builder-queue .logs{margin-bottom:10px}#two-builder-queue .building-sequence td,#two-builder-queue .building-sequence-final td,#two-builder-queue .building-sequence-editor td,#two-builder-queue .logs td,#two-builder-queue .building-sequence th,#two-builder-queue .building-sequence-final th,#two-builder-queue .building-sequence-editor th,#two-builder-queue .logs th{text-align:center;line-height:20px}#two-builder-queue .building-sequence-editor .selected td{background-color:#b9af7e}#two-builder-queue .editor-select-sequence{margin-bottom:13px}#two-builder-queue a.btn{height:28px;line-height:28px;padding:0 10px}#two-builder-queue .select-sequence-editor{text-align:center;margin-top:1px}#two-builder-queue .create-sequence{padding:8px 20px 8px 20px}#two-builder-queue table.settings td{padding:1px 5px}#two-builder-queue table.settings td.text-right{text-align:right}#two-builder-queue table.settings div[switch-slider]{display:inline-block;margin-top:2px}#two-builder-queue .small-select a.select-handler{height:28px;line-height:28px}#two-builder-queue .small-select a.select-button{height:28px}#two-builder-queue input.preserve-resource{width:70px;height:32px}#two-builder-queue .icon-26x26-resource-wood,#two-builder-queue .icon-26x26-resource-clay,#two-builder-queue .icon-26x26-resource-iron,#two-builder-queue .icon-26x26-resource-food{transform:scale(.8);top:-1px}#add-building-modal td{text-align:center}#add-building-modal .select-wrapper{width:250px}#add-building-modal input[type="text"]{width:60px}')
@@ -19431,384 +19519,409 @@ define('two/fakeSender', [
                 console.log(date)
                 socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
                     fakeVillages.forEach(function(fakeVillage, index1) {
-                        let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
-                        setTimeout(function() {
-                            var repeatFour = 0
-                            for (var i = 0; i < data.villages.length; i++) {
-                                var villageId = data.villages[i].id
-                                if (villageId == fakeVillage) {
-                                    village = {
-                                        'id': data.villages[i].id,
-                                        'x': data.villages[i].x,
-                                        'y': data.villages[i].y,
-                                        'name': data.villages[i].name,
-                                        'character_id': player.getId()
-                                    }
-                                    socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
-                                        village_id: villageId
-                                    }, function(data) {
-                                        Spear = data.available_units.spear.total
-                                        Sword = data.available_units.sword.total
-                                        Axe = data.available_units.axe.total
-                                        Archer = data.available_units.archer.total
-                                        LC = data.available_units.light_cavalry.total
-                                        MA = data.available_units.mounted_archer.total
-                                        Ram = data.available_units.ram.total
-                                        Catapult = data.available_units.catapult.total
-                                        HC = data.available_units.heavy_cavalry.total
-                                        Berserker = data.available_units.doppelsoldner.total
-                                        Trebuchet = data.available_units.trebuchet.total
-                                        var infantrySupport = 0
-                                        var infantryAxe = 0
-                                        var infantrySword = 0
-                                        var infantryRam = 0
-                                        var infantryTrebuchet = 0
-                                        var cavalryLc = 0
-                                        var cavalryHc = 0
-                                        if (target != 0 && targetLimit > 0 && ownLimit > 0) {
-                                            socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-                                                my_village_id: modelDataService.getSelectedVillage().getId(),
-                                                village_id: target,
-                                                num_reports: 1
-                                            }, function(data) {
-                                                targetFinal = {
-                                                    'id': data.village_id,
-                                                    'x': data.village_x,
-                                                    'y': data.village_y,
-                                                    'name': data.village_name
-                                                }
-                                                console.log(targetFinal, village, Spear, Sword, Axe)
-                                                if (fakeType == 'attack') {
-                                                    fakeUnits.forEach(function(unit, index2) {
-                                                        setTimeout(function() {
-                                                            if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    spear: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    axe: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    archer: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    doppelsoldner: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    sword: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantrySword += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    light_cavalry: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                cavalryLc += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    mounted_archer: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                cavalryLc += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    ram: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryRam += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    catapult: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryRam += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    heavy_cavalry: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                cavalryHc += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    trebuchet: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryTrebuchet += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                        }, index2 * 1000)
-                                                    })
-                                                } else if (fakeType == 'support') {
-                                                    supportUnits.forEach(function(unit, index3) {
-                                                        setTimeout(function() {
-                                                            if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    spear: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantrySupport += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    archer: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantrySupport += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            }
-                                                            if (unit == 'sword' && Sword > 0) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    sword: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            }
-                                                            if (unit == 'heavy_cavalry' && HC > 0) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, {
-                                                                    heavy_cavalry: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            }
-                                                        }, index3 * 1000)
-                                                    })
-                                                } else if (fakeType == 'four') {
-                                                    if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        ownLimit -= 4
-                                                        targetLimit -= 4
-                                                        repeatFour += 1
-                                                        addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                    } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 4
-                                                        targetLimit -= 4
-                                                        repeatFour += 1
-                                                        addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                    }
-                                                } else if (fakeType == 'full') {
-                                                    if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                        ownLimit -= 4
-                                                        targetLimit -= 4
-                                                        repeatFour += 1
-                                                        addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                    } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                        ownLimit -= 4
-                                                        targetLimit -= 4
-                                                        repeatFour += 1
-                                                        addLog(village.id, targetFinal.id, fourUnit, 'kareta')
-                                                    }
-                                                    newattackdate = utils.getTimeFromString(date) - 2000
-                                                    dateattack = utils.formatDate(newattackdate)
-                                                    fakeUnits.forEach(function(unit, index4) {
-                                                        setTimeout(function() {
-                                                            if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    spear: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    axe: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    archer: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    doppelsoldner: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryAxe += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    sword: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantrySword += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    light_cavalry: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                cavalryLc += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    mounted_archer: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                cavalryLc += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    ram: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryRam += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    catapult: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryRam += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    heavy_cavalry: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                cavalryHc += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                            if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
-                                                                    trebuchet: 1
-                                                                }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantryTrebuchet += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'atak')
-                                                            }
-                                                        }, index4 * 1000)
-                                                    })
-                                                    newsupportdate = utils.getTimeFromString(date) + 4000
-                                                    dateSupport = utils.formatDate(newsupportdate)
-                                                    supportUnits.forEach(function(unit, index5) {
-                                                        setTimeout(function() {
-                                                            if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
-                                                                    spear: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantrySupport += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
-                                                                    archer: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                infantrySupport += 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            }
-                                                            if (unit == 'sword' && Sword > 0) {
-                                                                commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
-                                                                    sword: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            }
-                                                            if (unit == 'heavy_cavalry' && HC > 0) {
-                                                                commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
-                                                                    heavy_cavalry: 1
-                                                                }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                ownLimit -= 1
-                                                                targetLimit -= 1
-                                                                addLog(village.id, targetFinal.id, unit, 'wsparcie')
-                                                            }
-                                                        }, index5 * 1000)
-                                                    })
-                                                } else {
-                                                    utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
-                                                }
-                                                if (!commandQueue.isRunning()) {
-                                                    commandQueue.start()
-                                                }
-                                            })
+                        if (running == true) {
+                            let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
+                            setTimeout(function() {
+                                var repeatFour = 0
+                                for (var i = 0; i < data.villages.length; i++) {
+                                    var villageId = data.villages[i].id
+                                    if (villageId == fakeVillage) {
+                                        village = {
+                                            'id': data.villages[i].id,
+                                            'x': data.villages[i].x,
+                                            'y': data.villages[i].y,
+                                            'name': data.villages[i].name,
+                                            'character_id': player.getId()
                                         }
-                                    })
+                                        socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                            village_id: villageId
+                                        }, function(data) {
+                                            Spear = data.available_units.spear.total
+                                            Sword = data.available_units.sword.total
+                                            Axe = data.available_units.axe.total
+                                            Archer = data.available_units.archer.total
+                                            LC = data.available_units.light_cavalry.total
+                                            MA = data.available_units.mounted_archer.total
+                                            Ram = data.available_units.ram.total
+                                            Catapult = data.available_units.catapult.total
+                                            HC = data.available_units.heavy_cavalry.total
+                                            Berserker = data.available_units.doppelsoldner.total
+                                            Trebuchet = data.available_units.trebuchet.total
+                                            var infantrySupport = 0
+                                            var infantryAxe = 0
+                                            var infantrySword = 0
+                                            var infantryRam = 0
+                                            var infantryTrebuchet = 0
+                                            var cavalryLc = 0
+                                            var cavalryHc = 0
+                                            if (target != 0 && targetLimit > 0 && ownLimit > 0) {
+                                                socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                                    my_village_id: modelDataService.getSelectedVillage().getId(),
+                                                    village_id: target,
+                                                    num_reports: 1
+                                                }, function(data) {
+                                                    targetFinal = {
+                                                        'id': data.village_id,
+                                                        'x': data.village_x,
+                                                        'y': data.village_y,
+                                                        'name': data.village_name
+                                                    }
+                                                    console.log(targetFinal, village, Spear, Sword, Axe)
+                                                    if (fakeType == 'attack') {
+                                                        fakeUnits.forEach(function(unit, index2) {
+                                                            if (running == true) {
+                                                                setTimeout(function() {
+                                                                    if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            spear: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            axe: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            archer: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            doppelsoldner: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            sword: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantrySword += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            light_cavalry: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        cavalryLc += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            mounted_archer: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        cavalryLc += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            ram: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryRam += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            catapult: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryRam += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            heavy_cavalry: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        cavalryHc += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            trebuchet: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryTrebuchet += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                }, index2 * 1000)
+                                                            } else if (running == false) {
+                                                                return
+                                                            }
+                                                        })
+                                                    } else if (fakeType == 'support') {
+                                                        supportUnits.forEach(function(unit, index3) {
+                                                            if (running == true) {
+                                                                setTimeout(function() {
+                                                                    if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            spear: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantrySupport += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            archer: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantrySupport += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    }
+                                                                    if (unit == 'sword' && Sword > 0) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            sword: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    }
+                                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                            heavy_cavalry: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    }
+                                                                }, index3 * 1000)
+                                                            } else if (running == false) {
+                                                                return
+                                                            }
+                                                        })
+                                                    } else if (fakeType == 'four') {
+                                                        if (running == true) {
+                                                            if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                ownLimit -= 4
+                                                                targetLimit -= 4
+                                                                repeatFour += 1
+                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 4
+                                                                targetLimit -= 4
+                                                                repeatFour += 1
+                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                            }
+                                                        } else if (running == false) {
+                                                            return
+                                                        }
+                                                    } else if (fakeType == 'full') {
+                                                        if (running == true) {
+                                                            if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                ownLimit -= 4
+                                                                targetLimit -= 4
+                                                                repeatFour += 1
+                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                ownLimit -= 4
+                                                                targetLimit -= 4
+                                                                repeatFour += 1
+                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                            }
+                                                            newattackdate = utils.getTimeFromString(date) - 2000
+                                                            dateattack = utils.formatDate(newattackdate)
+                                                            fakeUnits.forEach(function(unit, index4) {
+                                                                setTimeout(function() {
+                                                                    if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            spear: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            axe: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            archer: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            doppelsoldner: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryAxe += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            sword: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantrySword += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            light_cavalry: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        cavalryLc += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            mounted_archer: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        cavalryLc += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            ram: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryRam += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            catapult: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryRam += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            heavy_cavalry: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        cavalryHc += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                    if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                            trebuchet: 1
+                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantryTrebuchet += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                    }
+                                                                }, index4 * 1000)
+                                                            })
+                                                            newsupportdate = utils.getTimeFromString(date) + 4000
+                                                            dateSupport = utils.formatDate(newsupportdate)
+                                                            supportUnits.forEach(function(unit, index5) {
+                                                                setTimeout(function() {
+                                                                    if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                            spear: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantrySupport += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                            archer: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        infantrySupport += 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    }
+                                                                    if (unit == 'sword' && Sword > 0) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                            sword: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    }
+                                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                            heavy_cavalry: 1
+                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                        ownLimit -= 1
+                                                                        targetLimit -= 1
+                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                    }
+                                                                }, index5 * 1000)
+                                                            })
+                                                        } else if (running == false) {
+                                                            return
+                                                        }
+                                                    } else {
+                                                        utils.notif('error', $filter('i18n')('error_no_type', $rootScope.loc.ale, 'fake_sender'))
+                                                    }
+                                                    if (!commandQueue.isRunning()) {
+                                                        commandQueue.start()
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
                                 }
-                            }
-                        }, index1 * 16000)
+                            }, index1 * 15000)
+                        } else if (running == false) {
+                            return
+                        }
                     })
                 })
-            }, index * ((fakeVillages.length * 16000) - 15000))
+                if (index == (targets.length - 1) && running == true) {
+                    setTimeout(function() {
+                        fakeSender.stop()
+                    }, (index * fakeVillages.length * 15000) + 16000)
+                }
+            }, (index * fakeVillages.length * 15000) + 1000)
         })
     }
     const fakeSender = {}
@@ -19843,16 +19956,60 @@ define('two/fakeSender', [
         return logs
     }
     fakeSender.fakeGroups = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+        addLog('', '', 'start', '')
         targetGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
+        if (targetGroups == false) {
+            utils.notif('error', $filter('i18n')('error.no_group_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         targetGroups.forEach(function(group) {
             groupTargets = groupList.getGroupVillageIds(group)
             for (var i of groupTargets) {
                 targets.push(i)
             }
         })
+        fakeType = fakeSenderSettings[SETTINGS.TYPEG]
+        if (fakeType == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fakeUnits = fakeSenderSettings[SETTINGS.UNITG]
+        if (fakeUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTG]
+        if (fakeType == 'support' && supportUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURG]
+        if (fakeType == 'four' && fourUnit == false) {
+            utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        if (fakeType == 'full') {
+            if (fakeUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (supportUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (fourUnit == false) {
+                utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            }
+        }
         console.log(fakeUnits, supportUnits, fourUnit)
         if (fourUnit == 'trebuchet') {
             snobUnit = {
@@ -19867,8 +20024,12 @@ define('two/fakeSender', [
                 catapult: 1
             }
         }
-        fakeType = fakeSenderSettings[SETTINGS.TYPEG]
         dateGet = fakeSenderSettings[SETTINGS.DATEG]
+        if (dateGet == '') {
+            utils.notif('error', $filter('i18n')('error.no_date_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETG]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPG]
         ownGroups.forEach(function(group) {
@@ -19887,7 +20048,15 @@ define('two/fakeSender', [
         sendFakes()
     }
     fakeSender.fakeTribe = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+        addLog('', '', 'start', '')
         tribeId = fakeSenderSettings[SETTINGS.TRIBE_ID]
+        if (tribeId == 0) {
+            utils.notif('error', $filter('i18n')('error.no_tribe_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         var players = []
         socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
             tribe: tribeId
@@ -19908,9 +20077,45 @@ define('two/fakeSender', [
                 })
             })
         })
+        fakeType = fakeSenderSettings[SETTINGS.TYPET]
+        if (fakeType == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fakeUnits = fakeSenderSettings[SETTINGS.UNITT]
+        if (fakeUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTT]
+        if (fakeType == 'support' && supportUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURT]
+        if (fakeType == 'four' && fourUnit == false) {
+            utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        if (fakeType == 'full') {
+            if (fakeUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (supportUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (fourUnit == false) {
+                utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            }
+        }
         console.log(fakeUnits, supportUnits, fourUnit)
         if (fourUnit == 'trebuchet') {
             snobUnit = {
@@ -19925,8 +20130,12 @@ define('two/fakeSender', [
                 catapult: 1
             }
         }
-        fakeType = fakeSenderSettings[SETTINGS.TYPET]
         dateGet = fakeSenderSettings[SETTINGS.DATET]
+        if (dateGet == '') {
+            utils.notif('error', $filter('i18n')('error.no_date_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETT]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPT]
         ownGroups.forEach(function(group) {
@@ -19945,11 +20154,19 @@ define('two/fakeSender', [
         sendFakes()
     }
     fakeSender.fakeProvince = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+        addLog('', '', 'start', '')
         enemies = fakeSenderSettings[SETTINGS.ENEMIES]
         var provinceData = []
         var characterData = 0
         tribeId = 0
         provinceId = fakeSenderSettings[SETTINGS.PROVINCE_ID]
+        if (provinceId == 0) {
+            utils.notif('error', $filter('i18n')('error.no_province_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
             my_village_id: modelDataService.getSelectedVillage().getId(),
             village_id: provinceId,
@@ -19977,9 +20194,45 @@ define('two/fakeSender', [
                 })
             })
         })
+        fakeType = fakeSenderSettings[SETTINGS.TYPEPro]
+        if (fakeType == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fakeUnits = fakeSenderSettings[SETTINGS.UNITPro]
+        if (fakeUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTPro]
+        if (fakeType == 'support' && supportUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURPro]
+        if (fakeType == 'four' && fourUnit == false) {
+            utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        if (fakeType == 'full') {
+            if (fakeUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (supportUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (fourUnit == false) {
+                utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            }
+        }
         console.log(fakeUnits, supportUnits, fourUnit)
         if (fourUnit == 'trebuchet') {
             snobUnit = {
@@ -19994,8 +20247,12 @@ define('two/fakeSender', [
                 catapult: 1
             }
         }
-        fakeType = fakeSenderSettings[SETTINGS.TYPEPro]
         dateGet = fakeSenderSettings[SETTINGS.DATEPro]
+        if (dateGet == '') {
+            utils.notif('error', $filter('i18n')('error.no_date_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETPro]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPPro]
         ownGroups.forEach(function(group) {
@@ -20014,7 +20271,15 @@ define('two/fakeSender', [
         sendFakes()
     }
     fakeSender.fakePlayer = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+        addLog('', '', 'start', '')
         playerId = fakeSenderSettings[SETTINGS.PLAYER_ID]
+        if (provinceId == 0) {
+            utils.notif('error', $filter('i18n')('error.no_player_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         socketService.emit(routeProvider.CHAR_GET_PROFILE, {
             character_id: playerId
         }, function(data) {
@@ -20023,9 +20288,45 @@ define('two/fakeSender', [
                 targets.push(village.village_id)
             })
         })
+        fakeType = fakeSenderSettings[SETTINGS.TYPEP]
+        if (fakeType == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fakeUnits = fakeSenderSettings[SETTINGS.UNITP]
+        if (fakeUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORTP]
+        if (fakeType == 'support' && supportUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOURP]
+        if (fakeType == 'four' && fourUnit == false) {
+            utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        if (fakeType == 'full') {
+            if (fakeUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (supportUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (fourUnit == false) {
+                utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            }
+        }
         console.log(fakeUnits, supportUnits, fourUnit)
         if (fourUnit == 'trebuchet') {
             snobUnit = {
@@ -20040,8 +20341,12 @@ define('two/fakeSender', [
                 catapult: 1
             }
         }
-        fakeType = fakeSenderSettings[SETTINGS.TYPEP]
         dateGet = fakeSenderSettings[SETTINGS.DATEP]
+        if (dateGet == '') {
+            utils.notif('error', $filter('i18n')('error.no_date_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETP]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPP]
         ownGroups.forEach(function(group) {
@@ -20060,6 +20365,9 @@ define('two/fakeSender', [
         sendFakes()
     }
     fakeSender.fakeVillages = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
+        addLog('', '', 'start', '')
         if (fakeSenderSettings[SETTINGS.TARGET_ID1] > 0) {
             targets.push(fakeSenderSettings[SETTINGS.TARGET_ID1])
         }
@@ -20090,9 +20398,50 @@ define('two/fakeSender', [
         if (fakeSenderSettings[SETTINGS.TARGET_ID10] > 0) {
             targets.push(fakeSenderSettings[SETTINGS.TARGET_ID10])
         }
+        if (fakeSenderSettings[SETTINGS.TARGET_ID1] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID2] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID3] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID4] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID5] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID6] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID7] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID8] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID9] == 0 && fakeSenderSettings[SETTINGS.TARGET_ID10] == 0) {
+            utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        fakeType = fakeSenderSettings[SETTINGS.TYPE]
+        if (fakeType == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fakeUnits = fakeSenderSettings[SETTINGS.UNIT]
+        if (fakeUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         supportUnits = fakeSenderSettings[SETTINGS.UNIT_SUPPORT]
+        if (fakeType == 'support' && supportUnits == false) {
+            utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         fourUnit = fakeSenderSettings[SETTINGS.UNIT_FOUR]
+        if (fakeType == 'four' && fourUnit == false) {
+            utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        if (fakeType == 'full') {
+            if (fakeUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_units_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (supportUnits == false) {
+                utils.notif('error', $filter('i18n')('error.no_support_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            } else if (fourUnit == false) {
+                utils.notif('error', $filter('i18n')('error.no_four_selected', $rootScope.loc.ale, 'fake_sender'))
+                fakeSender.stopError()
+                return
+            }
+        }
         console.log(fakeUnits, supportUnits, fourUnit)
         if (fourUnit == 'trebuchet') {
             snobUnit = {
@@ -20107,8 +20456,12 @@ define('two/fakeSender', [
                 catapult: 1
             }
         }
-        fakeType = fakeSenderSettings[SETTINGS.TYPE]
         dateGet = fakeSenderSettings[SETTINGS.DATEV]
+        if (dateGet == '') {
+            utils.notif('error', $filter('i18n')('error.no_date_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
         targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
         ownGroups = fakeSenderSettings[SETTINGS.GROUP]
         commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVAL]
@@ -20126,15 +20479,14 @@ define('two/fakeSender', [
         }
         sendFakes()
     }
-    fakeSender.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
-        addLog('', '', 'start', '')
-    }
     fakeSender.stop = function() {
         running = false
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
         addLog('', '', 'stop', '')
+    }
+    fakeSender.stopError = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.FAKE_SENDER_STOP)
     }
     fakeSender.getSettings = function() {
         return settings
@@ -20205,7 +20557,6 @@ define('two/fakeSender/ui', [
     let fakeTribe1
     let fakePlayer1
     let fakeProvince1
-    let running = false
     let mapSelectedVillage1 = false
     let mapSelectedVillage2 = false
     let mapSelectedVillage3 = false
@@ -20221,9 +20572,7 @@ define('two/fakeSender/ui', [
     let mapSelectedVillageT = false
     let logsView = {}
     let villagesInfo = {}
-    let targetsInfo = {}
     let villagesLabel = {}
-    let targetLabel = {}
     
     const TAB_TYPES = {
         FAKE: 'fake',
@@ -20243,9 +20592,7 @@ define('two/fakeSender/ui', [
     const fakePlayer = function () {
         if (fakeSender.isRunning()) {
             fakeSender.stop()
-            running = false
         } else {
-            fakeSender.start()
             settings.setAll(settings.decode($scope.settings))
             fakeSender.fakePlayer()
         }
@@ -20253,9 +20600,7 @@ define('two/fakeSender/ui', [
     const fakeGroups = function () {
         if (fakeSender.isRunning()) {
             fakeSender.stop()
-            running = false
         } else {
-            fakeSender.start()
             settings.setAll(settings.decode($scope.settings))
             fakeSender.fakeGroups()
         }
@@ -20263,9 +20608,7 @@ define('two/fakeSender/ui', [
     const fakeProvince = function () {
         if (fakeSender.isRunning()) {
             fakeSender.stop()
-            running = false
         } else {
-            fakeSender.start()
             settings.setAll(settings.decode($scope.settings))
             fakeSender.fakeProvince()
         }
@@ -20273,9 +20616,7 @@ define('two/fakeSender/ui', [
     const fakeTribe = function () {
         if (fakeSender.isRunning()) {
             fakeSender.stop()
-            running = false
         } else {
-            fakeSender.start()
             settings.setAll(settings.decode($scope.settings))
             fakeSender.fakeTribe()
         }
@@ -20283,9 +20624,7 @@ define('two/fakeSender/ui', [
     const fakeVillages = function () {
         if (fakeSender.isRunning()) {
             fakeSender.stop()
-            running = false
         } else {
-            fakeSender.start()
             settings.setAll(settings.decode($scope.settings))
             fakeSender.fakeVillages()
         }
@@ -20602,35 +20941,17 @@ define('two/fakeSender/ui', [
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
     }
-    const loadTargetInfo = function(targetId) {
-        if (targetsInfo[targetId]) {
-            return targetsInfo[targetId]
-        }
-        targetsInfo[targetId] = true
-        targetLabel[targetId] = 'ŁADOWANIE...'
-        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-            my_village_id: modelDataService.getSelectedVillage().getId(),
-            village_id: targetId,
-            num_reports: 1
-        }, function(data) {
-            targetsInfo[targetId] = {
-                x: data.village_x,
-                y: data.village_y,
-                name: data.village_name,
-                last_report: data.last_reports[0]
-            }
-            targetLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
-        })
-    }
     logsView.updateVisibleLogs = function() {
         const offset = $scope.pagination.logs.offset
         const limit = $scope.pagination.logs.limit
         logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
         $scope.pagination.logs.count = logsView.logs.length
         logsView.visibleLogs.forEach(function(log) {
-            if (log.villageId && log.targetId) {
+            if (log.villageId) {
                 loadVillageInfo(log.villageId)
-                loadTargetInfo(log.targetId)
+            }
+            if (log.targetId) {
+                loadVillageInfo(log.targetId)
             }
         })
     }
@@ -20852,13 +21173,11 @@ define('two/fakeSender/ui', [
         $button = interfaceOverflow.addMenuButton('Watażka', 20, $filter('i18n')('description', $rootScope.loc.ale, 'fake_sender'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.PRANK_HELPER_START, function() {
-            running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
             utils.notif('success', $filter('i18n')('fake_started', $rootScope.loc.ale, 'fake_sender'))
         })
         eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
-            running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('fake_stopped', $rootScope.loc.ale, 'fake_sender'))
@@ -20866,15 +21185,15 @@ define('two/fakeSender/ui', [
 
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID1]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget1\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget1.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget1.origin\" class=\"command-village\">{{ fakeTarget1.origin.name }} ({{ fakeTarget1.origin.x }}|{{ fakeTarget1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected1()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID2]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget2\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget2.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget2.origin\" class=\"command-village\">{{ fakeTarget2.origin.name }} ({{ fakeTarget2.origin.x }}|{{ fakeTarget2.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected2()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID3]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget3\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget3.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget3.origin\" class=\"command-village\">{{ fakeTarget3.origin.name }} ({{ fakeTarget3.origin.x }}|{{ fakeTarget3.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected3()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID4]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget4\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget4.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget4.origin\" class=\"command-village\">{{ fakeTarget4.origin.name }} ({{ fakeTarget4.origin.x }}|{{ fakeTarget4.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected4()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID5]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget5\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget5.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget5.origin\" class=\"command-village\">{{ fakeTarget5.origin.name }} ({{ fakeTarget5.origin.x }}|{{ fakeTarget5.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected5()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID6]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget6\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget6.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget6.origin\" class=\"command-village\">{{ fakeTarget6.origin.name }} ({{ fakeTarget6.origin.x }}|{{ fakeTarget6.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected6()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID7]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget7\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget7.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget7.origin\" class=\"command-village\">{{ fakeTarget7.origin.name }} ({{ fakeTarget7.origin.x }}|{{ fakeTarget7.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected7()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID8]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget8\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget8.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget8.origin\" class=\"command-village\">{{ fakeTarget8.origin.name }} ({{ fakeTarget8.origin.x }}|{{ fakeTarget8.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected8()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID9]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget9\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget9.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget9.origin\" class=\"command-village\">{{ fakeTarget9.origin.name }} ({{ fakeTarget9.origin.x }}|{{ fakeTarget9.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected9()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID10]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget10\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget10.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget10.origin\" class=\"command-village\">{{ fakeTarget10.origin.name }} ({{ fakeTarget10.origin.x }}|{{ fakeTarget10.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected10()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEV]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEV]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOUR]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeVillages()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_province' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'fake.add_province' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeProvince1.origin\" class=\"command-village\">{{ 'fake.no_province' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeProvince1.origin\" class=\"command-village\">{{ fakeProvince1.origin.name }} ({{ fakeProvince1.origin.x }}|{{ fakeProvince1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEPRO]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEPro]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].max\" value=\"settings[SETTINGS.COMMAND_INTERVALPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNPro].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNPro].max\" value=\"settings[SETTINGS.LIMIT_OWNPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETPro].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETPro].max\" value=\"settings[SETTINGS.LIMIT_TARGETPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETPro]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.enemies' | i18n:loc.ale:'fake_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeProvince()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakePlayer1.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakePlayer1.origin\" class=\"command-village\">{{ fakePlayer1.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPlayer()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEP]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakePlayer()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TRIBE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!fakeTribe1.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTribe1.origin\" class=\"command-village\">{{ fakeTribe1.origin.tribe_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedTribe()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATET]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPET]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeTribe()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"settings[SETTINGS.DATEG]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeGroups()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetLabel[log.targetId] }}</a><td><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'fake_sender' }}<td>{{ log.type }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-fake-sender div[select]{text-align:right}#two-fake-sender div[select] .select-wrapper{height:34px}#two-fake-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-fake-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm td{height:34px;text-align:left}#two-fake-sender .addForm span{height:26px;line-height:26px}#two-fake-sender .addForm .item-send{text-align:center}#two-fake-sender .addForm .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-fake-sender .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actions a{width:100px}#two-fake-sender .addForm .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actionsTime .big{width:54px}#two-fake-sender .addForm .actionsTime .small{width:26px}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-fake-sender .logs .status tr{height:25px}#two-fake-sender .logs .status td{padding:0 6px}#two-fake-sender .logs .log-list{margin-bottom:10px}#two-fake-sender .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-fake-sender .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-fake-sender .icon-20x20-village:before{margin-top:-11px}')
+        interfaceOverflow.addTemplate('twoverflow_fake_sender_window', `<div id=\"two-fake-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'fake_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.FAKE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.FAKE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.FAKE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.FAKE}\">{{ 'fake' | i18n:loc.ale:'fake_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'fake_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.FAKE\"><h5 class=\"twx-section\">{{ 'fake.send_villages' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID1]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget1\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget1.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget1.origin\" class=\"command-village\">{{ fakeTarget1.origin.name }} ({{ fakeTarget1.origin.x }}|{{ fakeTarget1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected1()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID2]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget2\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget2.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget2.origin\" class=\"command-village\">{{ fakeTarget2.origin.name }} ({{ fakeTarget2.origin.x }}|{{ fakeTarget2.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected2()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID3]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget3\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget3.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget3.origin\" class=\"command-village\">{{ fakeTarget3.origin.name }} ({{ fakeTarget3.origin.x }}|{{ fakeTarget3.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected3()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID4]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget4\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget4.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget4.origin\" class=\"command-village\">{{ fakeTarget4.origin.name }} ({{ fakeTarget4.origin.x }}|{{ fakeTarget4.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected4()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID5]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget5\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget5.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget5.origin\" class=\"command-village\">{{ fakeTarget5.origin.name }} ({{ fakeTarget5.origin.x }}|{{ fakeTarget5.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected5()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID6]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget6\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget6.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget6.origin\" class=\"command-village\">{{ fakeTarget6.origin.name }} ({{ fakeTarget6.origin.x }}|{{ fakeTarget6.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected6()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID7]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget7\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget7.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget7.origin\" class=\"command-village\">{{ fakeTarget7.origin.name }} ({{ fakeTarget7.origin.x }}|{{ fakeTarget7.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected7()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID8]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget8\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget8.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget8.origin\" class=\"command-village\">{{ fakeTarget8.origin.name }} ({{ fakeTarget8.origin.x }}|{{ fakeTarget8.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected8()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID9]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget9\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget9.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget9.origin\" class=\"command-village\">{{ fakeTarget9.origin.name }} ({{ fakeTarget9.origin.x }}|{{ fakeTarget9.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected9()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TARGET_ID10]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTarget10\" placeholder=\"{{ 'fake.add_village' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeTarget10.origin\" class=\"command-village\">{{ 'fake.no_village' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTarget10.origin\" class=\"command-village\">{{ fakeTarget10.origin.name }} ({{ fakeTarget10.origin.x }}|{{ fakeTarget10.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected10()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEV]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateV()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEV]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOUR]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVAL].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVAL].max\" value=\"settings[SETTINGS.COMMAND_INTERVAL]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVAL]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWN].min\" max=\"settingsMap[SETTINGS.LIMIT_OWN].max\" value=\"settings[SETTINGS.LIMIT_OWN]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGET].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGET].max\" value=\"settings[SETTINGS.LIMIT_TARGET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGET]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeVillages()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_province' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'fake.add_province' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!fakeProvince1.origin\" class=\"command-village\">{{ 'fake.no_province' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeProvince1.origin\" class=\"command-village\">{{ fakeProvince1.origin.name }} ({{ fakeProvince1.origin.x }}|{{ fakeProvince1.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEPRO]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDatePro()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURPro]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEPro]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALPro].max\" value=\"settings[SETTINGS.COMMAND_INTERVALPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNPro].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNPro].max\" value=\"settings[SETTINGS.LIMIT_OWNPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNPro]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETPro].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETPro].max\" value=\"settings[SETTINGS.LIMIT_TARGETPro]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETPro]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.enemies' | i18n:loc.ale:'fake_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeProvince()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_player' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompletePlayer\" placeholder=\"{{ 'fake.add_player' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!fakePlayer1.origin\" class=\"command-village\">{{ 'fake.no_player' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakePlayer1.origin\" class=\"command-village\">{{ fakePlayer1.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPlayer()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATEP]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateP()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURP]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALP].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALP].max\" value=\"settings[SETTINGS.COMMAND_INTERVALP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNP].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNP].max\" value=\"settings[SETTINGS.LIMIT_OWNP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNP]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETP].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETP].max\" value=\"settings[SETTINGS.LIMIT_TARGETP]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETP]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakePlayer()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_tribe' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TRIBE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteTribe\" placeholder=\"{{ 'fake.add_tribe' | i18n:loc.ale:'fake_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-tribe\"></span><td ng-if=\"!fakeTribe1.origin\" class=\"command-village\">{{ 'fake.no_tribe' | i18n:loc.ale:'fake_sender' }}<td ng-if=\"fakeTribe1.origin\" class=\"command-village\">{{ fakeTribe1.origin.tribe_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedTribe()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_map_selected' | i18n:loc.ale:'fake_sender' }}\">{{ 'fake.selected' | i18n:loc.ale:'fake_sender' }}</a><tr><td><input ng-model=\"settings[SETTINGS.DATET]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateT()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPET]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURT]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPET]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALT].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALT].max\" value=\"settings[SETTINGS.COMMAND_INTERVALT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNT].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNT].max\" value=\"settings[SETTINGS.LIMIT_OWNT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETT].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETT].max\" value=\"settings[SETTINGS.LIMIT_TARGETT]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETT]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeTribe()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form><h5 class=\"twx-section\">{{ 'fake.send_groups' | i18n:loc.ale:'fake_sender' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.target_group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP_TARGET]\" drop-down=\"true\"></div><tr><td><input ng-model=\"settings[SETTINGS.DATEG]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDateG()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPEG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.group' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-support' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitssupport\" selected=\"settings[SETTINGS.UNIT_SUPPORTG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.unit-four' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"unitsfour\" selected=\"settings[SETTINGS.UNIT_FOURG]\" drop-down=\"true\"></div><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'fake.type' | i18n:loc.ale:'fake_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPEG]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col><col width=\"200px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.attack_interval' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.COMMAND_INTERVALG].min\" max=\"settingsMap[SETTINGS.COMMAND_INTERVALG].max\" value=\"settings[SETTINGS.COMMAND_INTERVALG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.COMMAND_INTERVALG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.own_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_OWNG].min\" max=\"settingsMap[SETTINGS.LIMIT_OWNG].max\" value=\"settings[SETTINGS.LIMIT_OWNG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_OWNG]\"><tr><td><span class=\"ff-cell-fix\">{{ 'fake.target_limit' | i18n:loc.ale:'fake_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.LIMIT_TARGETG].min\" max=\"settingsMap[SETTINGS.LIMIT_TARGETG].max\" value=\"settings[SETTINGS.LIMIT_TARGETG]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_TARGETG]\"><tr><td colspan=\"3\" class=\"item-send\"><span class=\"btn-green btn-border\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"fakeGroups()\">{{ 'fake.send' | i18n:loc.ale:'fake_sender' }}</span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noFakes' | i18n:loc.ale:'fake_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.type' | i18n:loc.ale:'fake_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'fake_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'fake_sender' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'fake_sender' }}</b></a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'fake_sender' }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.type }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.FAKE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clear()\">{{ 'fake.clear' | i18n:loc.ale:'fake_sender' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'fake_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-fake-sender div[select]{text-align:right}#two-fake-sender div[select] .select-wrapper{height:34px}#two-fake-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-fake-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-fake-sender .range-container{width:250px}#two-fake-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-fake-sender .textfield-border.fit{width:100%}#two-fake-sender .addForm td{height:34px;text-align:left}#two-fake-sender .addForm span{height:26px;line-height:26px}#two-fake-sender .addForm .item-send{text-align:center}#two-fake-sender .addForm .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-fake-sender .addForm .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actions a{width:100px}#two-fake-sender .addForm .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-fake-sender .addForm .actionsTime .big{width:54px}#two-fake-sender .addForm .actionsTime .small{width:26px}#two-fake-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-fake-sender .logs{margin-bottom:10px}#two-fake-sender .logs td,#two-fake-sender .logs th{text-align:center;line-height:30px}#two-fake-sender .icon-20x20-village:before{margin-top:-11px}')
     }
 
     const buildWindow = function () {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
+        $scope.running = fakeSender.isRunning()
         $scope.selectedTab = TAB_TYPES.FAKE
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
@@ -21045,9 +21364,7 @@ define('two/fakeSender/ui', [
         $scope.logsView = logsView
         $scope.logsView.logs = fakeSender.getLogs()
         $scope.villagesInfo = villagesInfo
-        $scope.targetsInfo = targetsInfo
         $scope.villagesLabel = villagesLabel
-        $scope.targetLabel = targetLabel
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
         $scope.jumpToVillage = mapService.jumpToVillage
         $scope.pagination.logs = {
@@ -26151,6 +26468,7 @@ define('two/prankHelper', [
     'two/ready',
     'helper/time',
     'queues/EventQueue',
+    'two/utils',
     'Lockr'
 ], function(
     Settings,
@@ -26161,6 +26479,7 @@ define('two/prankHelper', [
     ready,
     timeHelper,
     eventQueue,
+    utils,
     Lockr
 ) {
     let initialized = false
@@ -26226,18 +26545,35 @@ define('two/prankHelper', [
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
     prankHelper.renameGroup = function renameGroup() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('', 'start', '')
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var validName = prankHelperSettings[SETTINGS.CENTER3]
+        if (validName == '' || !validName || validName == null) {
+            utils.notif('error', $filter('i18n')('error.no_name_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE3]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE3]
         var type = prankHelperSettings[SETTINGS.TYPE3]
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var min = prankHelperSettings[SETTINGS.FROM3]
         var max = prankHelperSettings[SETTINGS.TO3]
         var selectedGroup = prankHelperSettings[SETTINGS.GROUPS]
+        if (selectedGroup == false) {
+            utils.notif('error', $filter('i18n')('error.no_group_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         const groupList = modelDataService.getGroupList()
         var groupVillages = groupList.getGroupVillageIds(selectedGroup)
-        var interval = 4000
         var newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -26258,6 +26594,30 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village) {
+                groupVillages.forEach(function(id, index) {
+                    if (village.data.villageId == id) {
+                        setTimeout(function() {
+                            if (running == true) {
+                                villageIdSet = village.getId()
+                                oldName = village.getName()
+                                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                    village_id: village.getId(),
+                                    name: nameSet[index]
+                                })
+                                addLog(villageIdSet, nameSet[index], oldName)
+                                if (index == (villages.length - 1) && running == true) {
+                                    setTimeout(function() {
+                                        prankHelper.stop()
+                                    }, 6000)
+                                }
+                            } else if (running == false) {
+                                return
+                            }
+                        }, index * 4000)
+                    }
+                })
+            })
         } else if (type == 'decrease') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = maxNew; i >= minNew; i--) {
@@ -26270,51 +26630,85 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village) {
+                groupVillages.forEach(function(id, index) {
+                    if (village.data.villageId == id) {
+                        setTimeout(function() {
+                            if (running == true) {
+                                villageIdSet = village.getId()
+                                oldName = village.getName()
+                                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                    village_id: village.getId(),
+                                    name: nameSet[index]
+                                })
+                                addLog(villageIdSet, nameSet[index], oldName)
+                                if (index == (villages.length - 1) && running == true) {
+                                    setTimeout(function() {
+                                        prankHelper.stop()
+                                    }, 6000)
+                                }
+                            } else if (running == false) {
+                                return
+                            }
+                        }, index * 4000)
+                    }
+                })
+            })
         } else {
             newName = prefix + validName + sufix
             villages.forEach(function(village) {
                 groupVillages.forEach(function(id, index) {
                     if (village.data.villageId == id) {
                         setTimeout(function() {
-                            villageIdSet = village.getId()
-                            oldName = village.getName()
-                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                                village_id: village.getId(),
-                                name: newName
-                            })
-                            addLog(villageIdSet, newName, oldName)
-                        }, index * interval)
+                            if (running == true) {
+                                villageIdSet = village.getId()
+                                oldName = village.getName()
+                                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                    village_id: village.getId(),
+                                    name: newName
+                                })
+                                addLog(villageIdSet, newName, oldName)
+                                if (index == (villages.length - 1) && running == true) {
+                                    setTimeout(function() {
+                                        prankHelper.stop()
+                                    }, 6000)
+                                }
+                            } else if (running == false) {
+                                return
+                            }
+                        }, index * 4000)
                     }
                 })
             })
         }
-        villages.forEach(function(village) {
-            groupVillages.forEach(function(id, index) {
-                if (village.data.villageId == id) {
-                    setTimeout(function() {
-                        villageIdSet = village.getId()
-                        oldName = village.getName()
-                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                            village_id: village.getId(),
-                            name: nameSet[index]
-                        })
-                        addLog(villageIdSet, nameSet[index], oldName)
-                    }, index * interval)
-                }
-            })
-        })
-        prankHelper.stop()
     }
     prankHelper.renameProvince = function renameProvince() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('', 'start', '')
         var selectedVillage = prankHelperSettings[SETTINGS.VILLAGE_ID]
+        if (selectedVillage == 0) {
+            utils.notif('error', $filter('i18n')('error.no_province_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var villages = []
         var validName = prankHelperSettings[SETTINGS.CENTER2]
+        if (validName == '' || !validName || validName == null) {
+            utils.notif('error', $filter('i18n')('error.no_name_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE2]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE2]
         var type = prankHelperSettings[SETTINGS.TYPE2]
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var min = prankHelperSettings[SETTINGS.FROM2]
         var max = prankHelperSettings[SETTINGS.TO2]
-        var interval = 4000
         var newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -26337,6 +26731,26 @@ define('two/prankHelper', [
                         nameSet.push(newName)
                     }
                 }
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        if (running == true) {
+                            villageIdSet = village.id
+                            oldName = village.name
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.id,
+                                name: nameSet[index]
+                            })
+                            addLog(villageIdSet, nameSet[index], oldName)
+                            if (index == (villages.length - 1) && running == true) {
+                                setTimeout(function() {
+                                    prankHelper.stop()
+                                }, 6000)
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index * 4000)
+                })
             } else if (type == 'decrease') {
                 if (isNaN(min) && isNaN(max)) {
                     for (i = maxNew; i >= minNew; i--) {
@@ -26349,44 +26763,73 @@ define('two/prankHelper', [
                         nameSet.push(newName)
                     }
                 }
+                villages.forEach(function(village, index) {
+                    setTimeout(function() {
+                        if (running == true) {
+                            villageIdSet = village.id
+                            oldName = village.name
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.id,
+                                name: nameSet[index]
+                            })
+                            addLog(villageIdSet, nameSet[index], oldName)
+                            if (index == (villages.length - 1) && running == true) {
+                                setTimeout(function() {
+                                    prankHelper.stop()
+                                }, 6000)
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index * 4000)
+                })
             } else {
                 newName = prefix + validName + sufix
                 villages.forEach(function(village, index) {
                     setTimeout(function() {
-                        villageIdSet = village.id
-                        oldName = village.name
-                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                            village_id: village.id,
-                            name: newName
-                        })
-                        addLog(villageIdSet, newName, oldName)
-                    }, index * interval)
+                        if (running == true) {
+                            villageIdSet = village.id
+                            oldName = village.name
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: village.id,
+                                name: newName
+                            })
+                            addLog(villageIdSet, newName, oldName)
+                            if (index == (villages.length - 1) && running == true) {
+                                setTimeout(function() {
+                                    prankHelper.stop()
+                                }, 6000)
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index * 4000)
                 })
             }
-            villages.forEach(function(village, index) {
-                setTimeout(function() {
-                    villageIdSet = village.id
-                    oldName = village.name
-                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                        village_id: village.id,
-                        name: nameSet[index]
-                    })
-                    addLog(villageIdSet, nameSet[index], oldName)
-                }, index * interval)
-            })
         })
-        prankHelper.stop()
     }
     prankHelper.renameAll = function renameAll() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
+        addLog('', 'start', '')
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var validName = prankHelperSettings[SETTINGS.CENTER1]
+        if (validName == '' || !validName || validName == null) {
+            utils.notif('error', $filter('i18n')('error.no_name_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var prefix = prankHelperSettings[SETTINGS.PROLOGUE1]
         var sufix = prankHelperSettings[SETTINGS.EPILOGUE1]
         var type = prankHelperSettings[SETTINGS.TYPE1]
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'prank_helper'))
+            prankHelper.stopError()
+            return
+        }
         var min = prankHelperSettings[SETTINGS.FROM1]
         var max = prankHelperSettings[SETTINGS.TO1]
-        var interval = 4000
         var newName
         var villageIdSet = 0
         var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -26407,6 +26850,26 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village, index) {
+                setTimeout(function() {
+                    if (running == true) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.getId(),
+                            name: nameSet[index]
+                        })
+                        addLog(villageIdSet, nameSet[index], oldName)
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                prankHelper.stop()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
+                }, index * 4000)
+            })
         } else if (type == 'decrease') {
             if (isNaN(min) && isNaN(max)) {
                 for (i = maxNew; i >= minNew; i--) {
@@ -26419,32 +26882,49 @@ define('two/prankHelper', [
                     nameSet.push(newName)
                 }
             }
+            villages.forEach(function(village, index) {
+                setTimeout(function() {
+                    if (running == true) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.getId(),
+                            name: nameSet[index]
+                        })
+                        addLog(villageIdSet, nameSet[index], oldName)
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                prankHelper.stop()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
+                }, index * 4000)
+            })
         } else {
             newName = prefix + validName + sufix
             villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    villageIdSet = village.getId()
-                    oldName = village.getName()
-                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                        village_id: village.getId(),
-                        name: newName
-                    })
-                    addLog(villageIdSet, newName, oldName)
-                }, index * interval)
+                    if (running == true) {
+                        villageIdSet = village.getId()
+                        oldName = village.getName()
+                        socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                            village_id: village.getId(),
+                            name: newName
+                        })
+                        addLog(villageIdSet, newName, oldName)
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                prankHelper.stop()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
+                }, index * 4000)
             })
         }
-        villages.forEach(function(village, index) {
-            setTimeout(function() {
-                villageIdSet = village.getId()
-                oldName = village.getName()
-                socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                    village_id: village.getId(),
-                    name: nameSet[index]
-                })
-                addLog(villageIdSet, nameSet[index], oldName)
-            }, index * interval)
-        })
-        prankHelper.stop()
     }
     prankHelper.getLogs = function() {
         return logs
@@ -26455,15 +26935,14 @@ define('two/prankHelper', [
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_CLEAR_LOGS)
         return logs
     }
-    prankHelper.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_START)
-        addLog('', 'Rozpoczęto przemianowanie', '')
-    }
     prankHelper.stop = function() {
         running = false
         eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
-        addLog('', 'Zatrzymano przemianowanie', '')
+        addLog('', 'stop', '')
+    }
+    prankHelper.stopError = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.PRANK_HELPER_STOP)
     }
     prankHelper.getSettings = function() {
         return settings
@@ -26511,7 +26990,6 @@ define('two/prankHelper/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let running = false
     let logsView = {}
     let villagesInfo = {}
     let villagesLabel = {}
@@ -26527,9 +27005,7 @@ define('two/prankHelper/ui', [
     const renameAll = function() {
         if (prankHelper.isRunning()) {
             prankHelper.stop()
-            running = false
         } else {
-            prankHelper.start()
             settings.setAll(settings.decode($scope.settings))
             prankHelper.renameAll()
         }
@@ -26537,9 +27013,7 @@ define('two/prankHelper/ui', [
     const renameProvince = function() {
         if (prankHelper.isRunning()) {
             prankHelper.stop()
-            running = false
         } else {
-            prankHelper.start()
             settings.setAll(settings.decode($scope.settings))
             prankHelper.renameProvince()
         }
@@ -26547,9 +27021,7 @@ define('two/prankHelper/ui', [
     const renameGroup = function() {
         if (prankHelper.isRunning()) {
             prankHelper.stop()
-            running = false
         } else {
-            prankHelper.start()
             settings.setAll(settings.decode($scope.settings))
             prankHelper.renameGroup()
         }
@@ -26680,27 +27152,23 @@ define('two/prankHelper/ui', [
         $button = interfaceOverflow.addMenuButton3('Błazen', 80, $filter('i18n')('description', $rootScope.loc.ale, 'prank_helper'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.PRANK_HELPER_START, function() {
-            running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('rename_started', $rootScope.loc.ale, 'prank_helper'))
         })
         eventQueue.register(eventTypeProvider.PRANK_HELPER_STOP, function() {
-            running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('rename_stopped', $rootScope.loc.ale, 'prank_helper'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!prankVillage.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"prankVillage.origin\" class=\"command-village\">{{ prankVillage.origin.name }} ({{ prankVillage.origin.x }}|{{ prankVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td>{{ log.oldname }}<td>{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-prank-helper .logs .status tr{height:25px}#two-prank-helper .logs .status td{padding:0 6px}#two-prank-helper .logs .log-list{margin-bottom:10px}#two-prank-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-prank-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-prank-helper .icon-20x20-village:before{margin-top:-11px}')
+        interfaceOverflow.addTemplate('twoverflow_prank_helper_window', `<div id=\"two-prank-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'prank_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.RENAME)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.RENAME}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.RENAME}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.RENAME}\">{{ 'rename' | i18n:loc.ale:'prank_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'prank_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.RENAME\"><h5 class=\"twx-section\">{{ 'rename.all' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE1]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM1]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO1]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameAll()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.province' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_ID]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!prankVillage.origin\" class=\"command-village\">{{ 'rename.no_village' | i18n:loc.ale:'prank_helper' }}<td ng-if=\"prankVillage.origin\" class=\"command-village\">{{ prankVillage.origin.name }} ({{ prankVillage.origin.x }}|{{ prankVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'rename.add_map_selected' | i18n:loc.ale:'prank_helper' }}\">{{ 'rename.selected' | i18n:loc.ale:'prank_helper' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE2]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM2]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO2]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameProvince()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table><h5 class=\"twx-section\">{{ 'rename.group' | i18n:loc.ale:'prank_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.groups' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.type' | i18n:loc.ale:'prank_helper' }}</span><td><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE3]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.center' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CENTER3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.prologue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROLOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.epilogue' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input placeholder=\"{{ 'rename.name' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.EPILOGUE3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.from' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FROM3]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'rename.to' | i18n:loc.ale:'prank_helper' }}</span><td class=\"cell-bottom center\"><input tooltip=\"\" tooltip-content=\"{{ 'rename.tip' | i18n:loc.ale:'prank_helper' }}\" placeholder=\"{{ 'rename.char' | i18n:loc.ale:'prank_helper' }}\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TO3]\"><tr><td colspan=\"4\" class=\"item-rename\"><span class=\"btn-green btn-border sendVillages\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"renameGroup()\"><span ng-show=\"running\">{{ 'rename.stop' | i18n:loc.ale:'prank_helper' }}</span> <span ng-show=\"!running\">{{ 'rename.start' | i18n:loc.ale:'prank_helper' }}</span></span></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRenames' | i18n:loc.ale:'prank_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col><col><col width=\"25%\"><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.old' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.new' | i18n:loc.ale:'prank_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'prank_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.newname === 'start'\" colspan=\"3\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.newname | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.newname === 'stop'\" colspan=\"3\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.newname | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.newname !== 'stop' && log.newname !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.newname !== 'stop' && log.newname !== 'start'\">{{ log.oldname }}<td ng-if=\"log.newname !== 'stop' && log.newname !== 'start'\">{{ log.newname }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.RENAME\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'rename.clear' | i18n:loc.ale:'prank_helper' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'prank_helper' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-prank-helper div[select]{text-align:center}#two-prank-helper div[select] .select-wrapper{height:34px}#two-prank-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-prank-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-prank-helper .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-prank-helper .textfield-border.fit{width:100%}#two-prank-helper td{text-align:left}#two-prank-helper .item-rename{text-align:center}#two-prank-helper .item-rename span{height:34px;line-height:34px;text-align:center;width:125px}#two-prank-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-prank-helper .actions a{width:100px}#two-prank-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-prank-helper .logs{margin-bottom:10px}#two-prank-helper .logs td,#two-prank-helper .logs th{text-align:center;line-height:30px}#two-prank-helper .icon-20x20-village:before{margin-top:-11px}')
     }
     const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
+        $scope.running = prankHelper.isRunning()
         $scope.selectedTab = TAB_TYPES.RENAME
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
@@ -30831,38 +31299,42 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages1.forEach(function(id1) {
                             if (village.data.villageId == id1) {
-                                console.log('wioska:' + village.getName())
-                                villageIdSet = village.getId()
-                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                Barracks1 = village.buildingData.data.barracks.level
-                                queue1 = village.buildingQueue.data.queue
-                                recruitingQueues = village.getRecruitingQueues()
-                                barracksQueue1 = recruitingQueues.barracks.jobs
-                                var resources = village.getResources()
-                                var computed = resources.getComputed()
-                                var woodComputed = computed.wood
-                                var clayComputed = computed.clay
-                                var ironComputed = computed.iron
-                                var foodComputed = computed.food
-                                villageFood1 = foodComputed.currentStock
-                                villageWood1 = woodComputed.currentStock
-                                villageClay1 = clayComputed.currentStock
-                                villageIron1 = ironComputed.currentStock
-                                barracksQueue1.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime1.push(recruitingTimeToFinish)
-                                })
-                                modifier1Get()
+                                if (running == true) {
+                                    console.log('wioska:' + village.getName())
+                                    villageIdSet = village.getId()
+                                    spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                    swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                    axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                    archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                    light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                    mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                    ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                    catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                    heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                    Barracks1 = village.buildingData.data.barracks.level
+                                    queue1 = village.buildingQueue.data.queue
+                                    recruitingQueues = village.getRecruitingQueues()
+                                    barracksQueue1 = recruitingQueues.barracks.jobs
+                                    var resources = village.getResources()
+                                    var computed = resources.getComputed()
+                                    var woodComputed = computed.wood
+                                    var clayComputed = computed.clay
+                                    var ironComputed = computed.iron
+                                    var foodComputed = computed.food
+                                    villageFood1 = foodComputed.currentStock
+                                    villageWood1 = woodComputed.currentStock
+                                    villageClay1 = clayComputed.currentStock
+                                    villageIron1 = ironComputed.currentStock
+                                    barracksQueue1.forEach(function(job) {
+                                        recruitingTime = job.clientRecruitingTime
+                                        totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                        recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                        barracksRecrutingTime1.push(recruitingTimeToFinish)
+                                    })
+                                    modifier1Get()
+                                } else if (running == false) {
+                                    return
+                                }
                             }
                         })
                     }, index * interval)
@@ -30875,38 +31347,42 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages2.forEach(function(id2) {
                             if (village.data.villageId == id2) {
-                                console.log('wioska:' + village.getName())
-                                villageIdSet = village.getId()
-                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                Barracks2 = village.buildingData.data.barracks.level
-                                queue2 = village.buildingQueue.data.queue
-                                recruitingQueues = village.getRecruitingQueues()
-                                barracksQueue2 = recruitingQueues.barracks.jobs
-                                var resources = village.getResources()
-                                var computed = resources.getComputed()
-                                var woodComputed = computed.wood
-                                var clayComputed = computed.clay
-                                var ironComputed = computed.iron
-                                var foodComputed = computed.food
-                                villageFood2 = foodComputed.currentStock
-                                villageWood2 = woodComputed.currentStock
-                                villageClay2 = clayComputed.currentStock
-                                villageIron2 = ironComputed.currentStock
-                                barracksQueue2.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime2.push(recruitingTimeToFinish)
-                                })
-                                modifier2Get()
+                                if (running == true) {
+                                    console.log('wioska:' + village.getName())
+                                    villageIdSet = village.getId()
+                                    spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                    swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                    axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                    archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                    light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                    mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                    ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                    catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                    heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                    Barracks2 = village.buildingData.data.barracks.level
+                                    queue2 = village.buildingQueue.data.queue
+                                    recruitingQueues = village.getRecruitingQueues()
+                                    barracksQueue2 = recruitingQueues.barracks.jobs
+                                    var resources = village.getResources()
+                                    var computed = resources.getComputed()
+                                    var woodComputed = computed.wood
+                                    var clayComputed = computed.clay
+                                    var ironComputed = computed.iron
+                                    var foodComputed = computed.food
+                                    villageFood2 = foodComputed.currentStock
+                                    villageWood2 = woodComputed.currentStock
+                                    villageClay2 = clayComputed.currentStock
+                                    villageIron2 = ironComputed.currentStock
+                                    barracksQueue2.forEach(function(job) {
+                                        recruitingTime = job.clientRecruitingTime
+                                        totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                        recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                        barracksRecrutingTime2.push(recruitingTimeToFinish)
+                                    })
+                                    modifier2Get()
+                                } else if (running == false) {
+                                    return
+                                }
                             }
                         })
                     }, (index * interval) + interval2)
@@ -30919,38 +31395,42 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages3.forEach(function(id3) {
                             if (village.data.villageId == id3) {
-                                console.log('wioska:' + village.getName())
-                                villageIdSet = village.getId()
-                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                Barracks3 = village.buildingData.data.barracks.level
-                                queue3 = village.buildingQueue.data.queue
-                                recruitingQueues = village.getRecruitingQueues()
-                                barracksQueue3 = recruitingQueues.barracks.jobs
-                                var resources = village.getResources()
-                                var computed = resources.getComputed()
-                                var woodComputed = computed.wood
-                                var clayComputed = computed.clay
-                                var ironComputed = computed.iron
-                                var foodComputed = computed.food
-                                villageFood3 = foodComputed.currentStock
-                                villageWood3 = woodComputed.currentStock
-                                villageClay3 = clayComputed.currentStock
-                                villageIron3 = ironComputed.currentStock
-                                barracksQueue3.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime3.push(recruitingTimeToFinish)
-                                })
-                                modifier3Get()
+                                if (running == true) {
+                                    console.log('wioska:' + village.getName())
+                                    villageIdSet = village.getId()
+                                    spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                    swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                    axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                    archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                    light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                    mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                    ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                    catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                    heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                    Barracks3 = village.buildingData.data.barracks.level
+                                    queue3 = village.buildingQueue.data.queue
+                                    recruitingQueues = village.getRecruitingQueues()
+                                    barracksQueue3 = recruitingQueues.barracks.jobs
+                                    var resources = village.getResources()
+                                    var computed = resources.getComputed()
+                                    var woodComputed = computed.wood
+                                    var clayComputed = computed.clay
+                                    var ironComputed = computed.iron
+                                    var foodComputed = computed.food
+                                    villageFood3 = foodComputed.currentStock
+                                    villageWood3 = woodComputed.currentStock
+                                    villageClay3 = clayComputed.currentStock
+                                    villageIron3 = ironComputed.currentStock
+                                    barracksQueue3.forEach(function(job) {
+                                        recruitingTime = job.clientRecruitingTime
+                                        totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                        recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                        barracksRecrutingTime3.push(recruitingTimeToFinish)
+                                    })
+                                    modifier3Get()
+                                } else if (running == false) {
+                                    return
+                                }
                             }
                         })
                     }, (index * interval) + interval3)
@@ -30963,38 +31443,42 @@ define('two/recruitQueue', [
                     setTimeout(function() {
                         groupVillages4.forEach(function(id4) {
                             if (village.data.villageId == id4) {
-                                console.log('wioska:' + village.getName())
-                                villageIdSet = village.getId()
-                                spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
-                                swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
-                                axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
-                                archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
-                                light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
-                                mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
-                                ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
-                                catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
-                                heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
-                                Barracks4 = village.buildingData.data.barracks.level
-                                queue4 = village.buildingQueue.data.queue
-                                recruitingQueues = village.getRecruitingQueues()
-                                barracksQueue4 = recruitingQueues.barracks.jobs
-                                var resources = village.getResources()
-                                var computed = resources.getComputed()
-                                var woodComputed = computed.wood
-                                var clayComputed = computed.clay
-                                var ironComputed = computed.iron
-                                var foodComputed = computed.food
-                                villageFood4 = foodComputed.currentStock
-                                villageWood4 = woodComputed.currentStock
-                                villageClay4 = clayComputed.currentStock
-                                villageIron4 = ironComputed.currentStock
-                                barracksQueue4.forEach(function(job) {
-                                    recruitingTime = job.clientRecruitingTime
-                                    totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
-                                    recruitingTimeToFinish = totalRecruitingTime - recruitingTime
-                                    barracksRecrutingTime4.push(recruitingTimeToFinish)
-                                })
-                                modifier4Get()
+                                if (running == true) {
+                                    console.log('wioska:' + village.getName())
+                                    villageIdSet = village.getId()
+                                    spearAmount = village.unitInfo.units.spear.own + village.unitInfo.units.spear.recruiting
+                                    swordAmount = village.unitInfo.units.sword.own + village.unitInfo.units.sword.recruiting
+                                    axeAmount = village.unitInfo.units.axe.own + village.unitInfo.units.axe.recruiting
+                                    archerAmount = village.unitInfo.units.archer.own + village.unitInfo.units.archer.recruiting
+                                    light_cavalryAmount = village.unitInfo.units.light_cavalry.own + village.unitInfo.units.light_cavalry.recruiting
+                                    mounted_archerAmount = village.unitInfo.units.mounted_archer.own + village.unitInfo.units.mounted_archer.recruiting
+                                    ramAmount = village.unitInfo.units.ram.own + village.unitInfo.units.ram.recruiting
+                                    catapultAmount = village.unitInfo.units.catapult.own + village.unitInfo.units.catapult.recruiting
+                                    heavy_cavalryAmount = village.unitInfo.units.heavy_cavalry.own + village.unitInfo.units.heavy_cavalry.recruiting
+                                    Barracks4 = village.buildingData.data.barracks.level
+                                    queue4 = village.buildingQueue.data.queue
+                                    recruitingQueues = village.getRecruitingQueues()
+                                    barracksQueue4 = recruitingQueues.barracks.jobs
+                                    var resources = village.getResources()
+                                    var computed = resources.getComputed()
+                                    var woodComputed = computed.wood
+                                    var clayComputed = computed.clay
+                                    var ironComputed = computed.iron
+                                    var foodComputed = computed.food
+                                    villageFood4 = foodComputed.currentStock
+                                    villageWood4 = woodComputed.currentStock
+                                    villageClay4 = clayComputed.currentStock
+                                    villageIron4 = ironComputed.currentStock
+                                    barracksQueue4.forEach(function(job) {
+                                        recruitingTime = job.clientRecruitingTime
+                                        totalRecruitingTime = (job.data.time_completed - job.data.start_time) * 1000
+                                        recruitingTimeToFinish = totalRecruitingTime - recruitingTime
+                                        barracksRecrutingTime4.push(recruitingTimeToFinish)
+                                    })
+                                    modifier4Get()
+                                } else if (running == false) {
+                                    return
+                                }
                             }
                         })
                     }, (index * interval) + interval4)
@@ -31003,11 +31487,6 @@ define('two/recruitQueue', [
                 console.log('Nie wybrano grupy nr4')
             }
         }
-        setInterval(function() {
-            if (running == false) {
-                return
-            }
-        }, 60000)
         getVillageData()
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END)
     }
@@ -31020,16 +31499,17 @@ define('two/recruitQueue', [
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CLEAR_LOGS)
         return logs
     }
-    recruitQueue.start = function() {
+    recruitQueue.startP = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_START)
         addLog(LOG_TYPES.RECRUIT_START, 'start', '')
         interval5 = Math.max(MINIMUM_RECRUIT_CYCLE_INTERVAL, recruitQueueSettings[SETTINGS.RECRUIT_QUEUE_INTERVAL] * 60 * 1000)
+        recruitQueue.presetRecrutation()
         runningRecrutation = setInterval(function() {
-            running = true
             recruitQueue.presetRecrutation()
         }, interval5)
     }
+    recruitQueue.startO = function() {}
     recruitQueue.stop = function(reason = STATUS.USER_STOP) {
         if (interval5) {
             if (reason !== STATUS.USER_STOP) {
@@ -31047,7 +31527,6 @@ define('two/recruitQueue', [
         eventQueue.trigger(eventTypeProvider.RECRUIT_QUEUE_CYCLE_END, reason)
         if (reason === STATUS.USER_STOP) {
             addLog(LOG_TYPES.RECRUIT_STOP, 'stop', '')
-            addLog(LOG_TYPES.RECRUIT_STOP, 'cycle.end', '')
         }
     }
     recruitQueue.getSettings = function() {
@@ -31107,7 +31586,6 @@ define('two/recruitQueue/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let running = false
     let cycleCountdownTimer = null
     let logsView = {}
     let villagesInfo = {}
@@ -31123,21 +31601,17 @@ define('two/recruitQueue/ui', [
     const switchRecruiterP = function() {
         if (recruitQueue.isRunning()) {
             recruitQueue.stop()
-            running = false
         } else {
-            recruitQueue.start()
             settings.setAll(settings.decode($scope.settings))
-            recruitQueue.presetRecrutation()
+            recruitQueue.startP()
         }
     }
     const switchRecruiterO = function() {
         if (recruitQueue.isRunning()) {
             recruitQueue.stop()
-            running = false
         } else {
-            recruitQueue.start()
             settings.setAll(settings.decode($scope.settings))
-            recruitQueue.ownRecrutation()
+            recruitQueue.startO()
         }
     }
     const clearP = function() {
@@ -31318,7 +31792,7 @@ define('two/recruitQueue/ui', [
         $scope.logsView.logs = []
     }
     const checkCycleInterval = function() {
-        if (running == true) {
+        if (recruitQueue.isRunning()) {
             let nextCycleDate = recruitQueue.getNextCycleDate()
             let terminateDate = nextCycleDate - timeHelper.gameTime()
             if (nextCycleDate) {
@@ -31385,28 +31859,23 @@ define('two/recruitQueue/ui', [
         $button = interfaceOverflow.addMenuButton('Kapitan', 80, $filter('i18n')('description', $rootScope.loc.ale, 'recruit_queue'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.RECRUIT_QUEUE_START, function() {
-            running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
             utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'recruit_queue'))
         })
         eventQueue.register(eventTypeProvider.RECRUIT_QUEUE_STOP, function() {
-            running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'recruit_queue'))
         })
-        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><p ng-show=\"showCycleTimer\" class=\"text-center timer\">{{ 'recrutation_in' | i18n:loc.ale:'recruit_queue' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}<h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tbody><tr><th colspan=\"3\">{{ 'preset.settings' | i18n:loc.ale:'recruit_queue' }}<tr><td tooltip=\"\" tooltip-content=\"{{ 'recruit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'recruit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.RECRUIT_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'group_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'group_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.GROUP_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'unit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'unit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.UNIT_QUEUE_INTERVAL]\"><tr><th colspan=\"3\">{{ 'preset.recruit1' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK1]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><th colspan=\"3\">{{ 'preset.recruit2' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK2]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><th colspan=\"3\">{{ 'preset.recruit3' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK3]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><th colspan=\"3\">{{ 'preset.recruit4' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK4]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }} Nie działa jeszcze</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text logs\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"link\" ng-class=\"{
-                                'icon-bg-black icon-26x26-dot-green': log.unit === 'start',
-                                'icon-bg-black icon-26x26-dot-red': log.unit === 'stop',
-								'icon-20x20-village': log.unit === 'spear' || log.unit === 'sword' || log.unit === 'axe' || log.unit === 'archer' || log.unit === 'light_cavalry' || log.unit === 'mounted_archer' || log.unit === 'heavy_cavalry' || log.unit === 'ram' || log.unit === 'catapult'}\"></span> {{ villagesLabel[log.villageId] }}</a><td><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'recruit_queue' }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_recruit_queue_window', `<div id=\"two-recruit-queue\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'recruit_queue' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.PRESETS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.PRESETS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.PRESETS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.PRESETS}\">{{ 'presets' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.OWN)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.OWN}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.OWN}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.OWN}\">{{ 'own' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'recruit_queue' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><p ng-show=\"showCycleTimer\" class=\"text-center timer\">{{ 'recrutation_in' | i18n:loc.ale:'recruit_queue' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}<h5 class=\"twx-section\">{{ 'presets.recruit' | i18n:loc.ale:'recruit_queue' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"33%\"><col><col><thead><tbody><tr><th colspan=\"3\">{{ 'preset.settings' | i18n:loc.ale:'recruit_queue' }}<tr><td tooltip=\"\" tooltip-content=\"{{ 'recruit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'recruit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.RECRUIT_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'group_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'group_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.GROUP_QUEUE_INTERVAL]\"><tr><td tooltip=\"\" tooltip-content=\"{{ 'unit_cycle_tooltip' | i18n:loc.ale:'recruit_queue' }}\" colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'unit_cycle_interval' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.UNIT_QUEUE_INTERVAL]\"><tr><th colspan=\"3\">{{ 'preset.recruit1' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP1]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK1]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT1]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT1]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT2]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT2]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT3]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT3]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT4]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT4]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT5]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT5]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT6]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT6]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT7]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT7]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT8]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT8]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT9]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT9]\"><tr><th colspan=\"3\">{{ 'preset.recruit2' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP2]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK2]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT11]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT11]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT12]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT12]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT13]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT13]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT14]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT14]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT15]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT15]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT16]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT16]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT17]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT17]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT18]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT18]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT19]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT19]\"><tr><th colspan=\"3\">{{ 'preset.recruit3' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP3]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK3]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT21]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT21]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT22]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT22]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT23]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT23]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT24]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT24]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT25]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT25]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT26]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT26]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT27]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT27]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT28]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT28]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT29]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT29]\"><tr><th colspan=\"3\">{{ 'preset.recruit4' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"ff-cell-fix\">{{ 'presets.group' | i18n:loc.ale:'recruit_queue' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP4]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'presets.packs' | i18n:loc.ale:'recruit_queue' }}</span><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.MIN_PACK4]\"><td><tr><th><span class=\"ff-cell-fix\">{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}</span><th tooltip=\"\" tooltip-content=\"{{ 'presets.preset-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.preset' | i18n:loc.ale:'recruit_queue' }}<th tooltip=\"\" tooltip-content=\"{{ 'presets.presetfinal-tip' | i18n:loc.ale:'recruit_queue' }}\">{{ 'presets.presetfinal' | i18n:loc.ale:'recruit_queue' }}<tr><td><span class=\"icon-bg-black icon-34x34-unit-spear\"></span>{{ 'spear' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT31]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT31]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-sword\"></span>{{ 'sword' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT32]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT32]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-axe\"></span>{{ 'axe' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT33]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT33]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-archer\"></span>{{ 'archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT34]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT34]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-light_cavalry\"></span>{{ 'light_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT35]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT35]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-mounted_archer\"></span>{{ 'mounted_archer' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT36]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT36]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-heavy_cavalry\"></span>{{ 'heavy_cavalry' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT37]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT37]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-ram\"></span>{{ 'ram' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT38]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT38]\"><tr><td><span class=\"icon-bg-black icon-34x34-unit-catapult\"></span>{{ 'catapult' | i18n:loc.ale:'common' }}<td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.START_AMOUNT39]\"><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.FINAL_AMOUNT39]\"></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.OWN\"><h5 class=\"twx-section\">{{ 'own.recruit' | i18n:loc.ale:'recruit_queue' }} Nie działa jeszcze</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col><col width=\"200px\"><col width=\"60px\"><thead><tr><th>{{ 'own.group' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'own.unit' | i18n:loc.ale:'recruit_queue' }}<th colspan=\"2\">{{ 'own.amount' | i18n:loc.ale:'recruit_queue' }}<tbody><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP5]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT1]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT1].min\" max=\"settingsMap[SETTINGS.AMOUNT1].max\" value=\"settings[SETTINGS.AMOUNT1]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT1]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP6]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT2]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT2].min\" max=\"settingsMap[SETTINGS.AMOUNT2].max\" value=\"settings[SETTINGS.AMOUNT2]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT2]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP7]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT3]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT3].min\" max=\"settingsMap[SETTINGS.AMOUNT3].max\" value=\"settings[SETTINGS.AMOUNT3]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT3]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP8]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT4]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT4].min\" max=\"settingsMap[SETTINGS.AMOUNT4].max\" value=\"settings[SETTINGS.AMOUNT4]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT4]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP9]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT5]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT5].min\" max=\"settingsMap[SETTINGS.AMOUNT5].max\" value=\"settings[SETTINGS.AMOUNT5]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT5]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP10]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT6]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT6].min\" max=\"settingsMap[SETTINGS.AMOUNT6].max\" value=\"settings[SETTINGS.AMOUNT6]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT6]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP11]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT7]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT7].min\" max=\"settingsMap[SETTINGS.AMOUNT7].max\" value=\"settings[SETTINGS.AMOUNT7]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT7]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP12]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT8]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT8].min\" max=\"settingsMap[SETTINGS.AMOUNT8].max\" value=\"settings[SETTINGS.AMOUNT8]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT8]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP13]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT9]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT9].min\" max=\"settingsMap[SETTINGS.AMOUNT9].max\" value=\"settings[SETTINGS.AMOUNT9]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT9]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP14]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT10]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT10].min\" max=\"settingsMap[SETTINGS.AMOUNT10].max\" value=\"settings[SETTINGS.AMOUNT10]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT10]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP15]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT11]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT11].min\" max=\"settingsMap[SETTINGS.AMOUNT11].max\" value=\"settings[SETTINGS.AMOUNT11]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT11]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP16]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT12]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT12].min\" max=\"settingsMap[SETTINGS.AMOUNT12].max\" value=\"settings[SETTINGS.AMOUNT12]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT12]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP17]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT13]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT13].min\" max=\"settingsMap[SETTINGS.AMOUNT13].max\" value=\"settings[SETTINGS.AMOUNT13]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT13]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP18]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT14]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT14].min\" max=\"settingsMap[SETTINGS.AMOUNT14].max\" value=\"settings[SETTINGS.AMOUNT14]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT14]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP19]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT15]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT15].min\" max=\"settingsMap[SETTINGS.AMOUNT15].max\" value=\"settings[SETTINGS.AMOUNT15]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT15]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP20]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT16]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT16].min\" max=\"settingsMap[SETTINGS.AMOUNT16].max\" value=\"settings[SETTINGS.AMOUNT16]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT16]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP21]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT17]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT17].min\" max=\"settingsMap[SETTINGS.AMOUNT17].max\" value=\"settings[SETTINGS.AMOUNT17]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT17]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP22]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT18]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT18].min\" max=\"settingsMap[SETTINGS.AMOUNT18].max\" value=\"settings[SETTINGS.AMOUNT18]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT18]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP23]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT19]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT19].min\" max=\"settingsMap[SETTINGS.AMOUNT19].max\" value=\"settings[SETTINGS.AMOUNT19]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT19]\"><tr><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP24]\" drop-down=\"true\"></div><td><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNIT20]\" drop-down=\"true\"></div><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT20].min\" max=\"settingsMap[SETTINGS.AMOUNT20].max\" value=\"settings[SETTINGS.AMOUNT20]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT20]\"></table></form></div><div class=\"rich-text logs\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noRecruits' | i18n:loc.ale:'recruit_queue' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"40%\"><col width=\"30%\"><col width=\"5%\"><col width=\"25%\"><col><thead><tr><th>{{ 'logs.village' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.unit' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.amount' | i18n:loc.ale:'recruit_queue' }}<th>{{ 'logs.date' | i18n:loc.ale:'recruit_queue' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"3\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'recruit_queue' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"3\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'recruit_queue' }}</b></a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'recruit_queue' }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.PRESETS\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearP()\">{{ 'presets.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterP()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.OWN\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearO()\">{{ 'own.clear' | i18n:loc.ale:'recruit_queue' }}</a> <a href=\"#\" ng-class=\"{false:'btn-orange', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchRecruiterO()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'common' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'recruit_queue' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-recruit-queue div[select]{text-align:center}#two-recruit-queue div[select] .select-wrapper{height:34px;width:164px;min-width:164px}#two-recruit-queue div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-recruit-queue div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:160px}#two-recruit-queue .range-container{width:250px}#two-recruit-queue .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-recruit-queue .textfield-border.fit{width:100%}#two-recruit-queue .addForm th{text-align:center}#two-recruit-queue table.header-center th{text-align:center}#two-recruit-queue .force-26to20{transform:scale(.8);width:20px;height:20px}#two-recruit-queue .timer{line-height:34px}#two-recruit-queue .logs{margin-bottom:10px}#two-recruit-queue .logs td,#two-recruit-queue .logs th{text-align:center;line-height:30px}#two-recruit-queue .icon-20x20-village:before{margin-top:-11px}')
     }
     const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
+        $scope.running = recruitQueue.isRunning()
         $scope.selectedTab = TAB_TYPES.PRESETS
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
@@ -33416,6 +33885,7 @@ define('two/resourceSender', [
     'two/ready',
     'queues/EventQueue',
     'Lockr',
+    'two/utils',
     'helper/time'
 ], function(
     Settings,
@@ -33428,6 +33898,7 @@ define('two/resourceSender', [
     ready,
     eventQueue,
     Lockr,
+    utils,
     timeHelper
 ) {
     let initialized = false
@@ -33643,7 +34114,12 @@ define('two/resourceSender', [
             if (villageSelected > 0) {
                 targets.push(villageSelected)
             }
-            console.log(wood, clay, iron, individual, distance, buildingLevel, amount)
+            if (villageSelected == 0 && province == 0 && selectedGroup == false) {
+                utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'resource_sender'))
+                resourceSender.stopError()
+                return
+            }
+            console.log(wood, clay, iron, individual, distance, buildingLevel, amount, targets)
             targets.forEach(function(villageToSend, index) {
                 setTimeout(function() {
                     origins.forEach(function(village) {
@@ -33859,601 +34335,615 @@ define('two/resourceSender', [
                 setTimeout(function() {
                     origins.forEach(function(village, index2) {
                         setTimeout(function() {
-                            console.log(woodTo, clayTo, ironTo, totalTo)
-                            var resourcest = village.getResources()
-                            var computedt = resourcest.getComputed()
-                            var woodt = computedt.wood
-                            var clayt = computedt.clay
-                            var iront = computedt.iron
-                            villageWoodO = woodt.currentStock
-                            villageClayO = clayt.currentStock
-                            villageIronO = iront.currentStock
-                            if (village.data.villageId != villageToSend) {
-                                socketService.emit(routeProvider.TRADING_GET_MERCHANT_STATUS, {
-                                    village_id: village.getId()
-                                }, function(data) {
-                                    var freeMerchants = data.free
-                                    if (freeMerchants > 0) {
-                                        if (woodTo <= 0 && clayTo <= 0) {
-                                            woodSend = 0
-                                            claySend = 0
-                                            ironSend = freeMerchants * 1000
-                                            if (villageIronO >= ironSend) {
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else {
-                                                ironSend = villageIronO
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            }
-                                        } else if (woodTo <= 0 && ironTo <= 0) {
-                                            woodSend = 0
-                                            claySend = freeMerchants * 1000
-                                            ironSend = 0
-                                            if (villageClayO >= claySend) {
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else {
-                                                claySend = villageClayO
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            }
-                                        } else if (clayTo <= 0 && ironTo <= 0) {
-                                            woodSend = freeMerchants * 1000
-                                            claySend = 0
-                                            ironSend = 0
-                                            if (villageWoodO >= woodSend) {
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else {
-                                                woodSend = villageWoodO
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            }
-                                        } else if (woodTo <= 0) {
-                                            woodSend = 0
-                                            claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
-                                            ironSend = freeMerchants * 1000 - claySend
-                                            if (villageClayO >= claySend && villageIronO >= ironSend) {
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageClayO < claySend && villageIronO >= ironSend) {
-                                                claySend = villageClayO
+                            if (running == true) {
+                                console.log(woodTo, clayTo, ironTo, totalTo)
+                                var resourcest = village.getResources()
+                                var computedt = resourcest.getComputed()
+                                var woodt = computedt.wood
+                                var clayt = computedt.clay
+                                var iront = computedt.iron
+                                villageWoodO = woodt.currentStock
+                                villageClayO = clayt.currentStock
+                                villageIronO = iront.currentStock
+                                if (village.data.villageId != villageToSend) {
+                                    socketService.emit(routeProvider.TRADING_GET_MERCHANT_STATUS, {
+                                        village_id: village.getId()
+                                    }, function(data) {
+                                        var freeMerchants = data.free
+                                        if (freeMerchants > 0) {
+                                            if (woodTo <= 0 && clayTo <= 0) {
+                                                woodSend = 0
+                                                claySend = 0
+                                                ironSend = freeMerchants * 1000
+                                                if (villageIronO >= ironSend) {
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else {
+                                                    ironSend = villageIronO
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                }
+                                            } else if (woodTo <= 0 && ironTo <= 0) {
+                                                woodSend = 0
+                                                claySend = freeMerchants * 1000
+                                                ironSend = 0
+                                                if (villageClayO >= claySend) {
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else {
+                                                    claySend = villageClayO
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                }
+                                            } else if (clayTo <= 0 && ironTo <= 0) {
+                                                woodSend = freeMerchants * 1000
+                                                claySend = 0
+                                                ironSend = 0
+                                                if (villageWoodO >= woodSend) {
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else {
+                                                    woodSend = villageWoodO
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                }
+                                            } else if (woodTo <= 0) {
+                                                woodSend = 0
+                                                claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
                                                 ironSend = freeMerchants * 1000 - claySend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageClayO >= claySend && villageIronO < ironSend) {
-                                                ironSend = villageIronO
-                                                claySend = freeMerchants * 1000 - ironSend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageClayO < claySend && villageIronO < ironSend) {
-                                                claySend = villageClayO
-                                                ironSend = villageIronO
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            }
-                                        } else if (ironTo <= 0) {
-                                            woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
-                                            claySend = freeMerchants * 1000 - woodSend
-                                            ironSend = 0
-                                            if (villageClayO >= claySend && villageWoodO >= woodSend) {
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageClayO < claySend && villageWoodO >= woodSend) {
-                                                claySend = villageClayO
-                                                woodSend = freeMerchants * 1000 - claySend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageClayO >= claySend && villageWoodO < woodSend) {
-                                                woodSend = villageWoodO
-                                                claySend = freeMerchants * 1000 - woodSend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageClayO < claySend && villageWoodO < woodSend) {
-                                                woodSend = villageWoodO
-                                                claySend = villageClayO
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            }
-                                        } else if (clayTo <= 0) {
-                                            woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
-                                            claySend = 0
-                                            ironSend = freeMerchants * 1000 - woodSend
-                                            if (villageWoodO >= woodSend && villageIronO >= ironSend) {
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO < woodSend && villageIronO >= ironSend) {
-                                                woodSend = villageWoodO
-                                                ironSend = freeMerchants * 1000 - woodSend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO >= woodSend && villageIronO < ironSend) {
-                                                ironSend = villageIronO
-                                                woodSend = freeMerchants * 1000 - ironSend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO < woodSend && villageIronO < ironSend) {
-                                                woodSend = villageWoodO
-                                                ironSend = villageIronO
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            }
-                                        } else if (clayTo > 0 && woodTo > 0 && ironTo > 0) {
-                                            console.log(woodTo, clayTo, totalTo)
-                                            woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
-                                            claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
-                                            ironSend = freeMerchants * 1000 - woodSend - claySend
-                                            console.log(woodSend, claySend, ironSend)
-                                            if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO < woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
-                                                woodSend = villageWoodO
-                                                claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
-                                                ironSend = freeMerchants * 1000 - woodSend - claySend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO >= woodSend && villageIronO < ironSend && villageClayO >= claySend) {
-                                                ironSend = villageIronO
-                                                claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
-                                                woodSend = freeMerchants * 1000 - ironSend - claySend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO < claySend) {
-                                                claySend = villageClayO
+                                                if (villageClayO >= claySend && villageIronO >= ironSend) {
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageClayO < claySend && villageIronO >= ironSend) {
+                                                    claySend = villageClayO
+                                                    ironSend = freeMerchants * 1000 - claySend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageClayO >= claySend && villageIronO < ironSend) {
+                                                    ironSend = villageIronO
+                                                    claySend = freeMerchants * 1000 - ironSend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageClayO < claySend && villageIronO < ironSend) {
+                                                    claySend = villageClayO
+                                                    ironSend = villageIronO
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                }
+                                            } else if (ironTo <= 0) {
                                                 woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
+                                                claySend = freeMerchants * 1000 - woodSend
+                                                ironSend = 0
+                                                if (villageClayO >= claySend && villageWoodO >= woodSend) {
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageClayO < claySend && villageWoodO >= woodSend) {
+                                                    claySend = villageClayO
+                                                    woodSend = freeMerchants * 1000 - claySend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageClayO >= claySend && villageWoodO < woodSend) {
+                                                    woodSend = villageWoodO
+                                                    claySend = freeMerchants * 1000 - woodSend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageClayO < claySend && villageWoodO < woodSend) {
+                                                    woodSend = villageWoodO
+                                                    claySend = villageClayO
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                }
+                                            } else if (clayTo <= 0) {
+                                                woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
+                                                claySend = 0
+                                                ironSend = freeMerchants * 1000 - woodSend
+                                                if (villageWoodO >= woodSend && villageIronO >= ironSend) {
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO < woodSend && villageIronO >= ironSend) {
+                                                    woodSend = villageWoodO
+                                                    ironSend = freeMerchants * 1000 - woodSend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO >= woodSend && villageIronO < ironSend) {
+                                                    ironSend = villageIronO
+                                                    woodSend = freeMerchants * 1000 - ironSend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO < woodSend && villageIronO < ironSend) {
+                                                    woodSend = villageWoodO
+                                                    ironSend = villageIronO
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                }
+                                            } else if (clayTo > 0 && woodTo > 0 && ironTo > 0) {
+                                                console.log(woodTo, clayTo, totalTo)
+                                                woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
+                                                claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
                                                 ironSend = freeMerchants * 1000 - woodSend - claySend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO < woodSend && villageIronO < ironSend && villageClayO >= claySend) {
-                                                ironSend = villageIronO
-                                                woodSend = villageWoodO
-                                                claySend = freeMerchants * 1000 - woodSend - ironSend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO >= woodSend && villageIronO < ironSend && villageClayO < claySend) {
-                                                ironSend = villageIronO
-                                                claySend = villageClayO
-                                                woodSend = freeMerchants * 1000 - ironSend - claySend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO < woodSend && villageIronO >= ironSend && villageClayO < claySend) {
-                                                claySend = villageClayO
-                                                woodSend = villageWoodO
-                                                ironSend = freeMerchants * 1000 - woodSend - claySend
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
-                                            } else if (villageWoodO < woodSend && villageIronO < ironSend && villageClayO < claySend) {
-                                                ironSend = villageIronO
-                                                woodSend = villageWoodO
-                                                claySend = villageClayO
-                                                socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
-                                                    start_village: village.getId(),
-                                                    target_village: villageToSend,
-                                                    wood: woodSend,
-                                                    clay: claySend,
-                                                    iron: ironSend
-                                                })
-                                                woodTo = woodTo - woodSend
-                                                clayTo = clayTo - claySend
-                                                ironTo = ironTo - ironSend
-                                                totalTo = woodTo + clayTo + ironTo
-                                                console.log(woodTo, clayTo, ironTo, totalTo)
-                                                addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
-                                                addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
-                                                addLog(village.data.villageId, villageToSend, 'Glina', claySend)
-                                                neededWood = woodTo
-                                                neededClay = clayTo
-                                                neededIron = ironTo
-                                                neededTotal = totalTo
+                                                console.log(woodSend, claySend, ironSend)
+                                                if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO < woodSend && villageIronO >= ironSend && villageClayO >= claySend) {
+                                                    woodSend = villageWoodO
+                                                    claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
+                                                    ironSend = freeMerchants * 1000 - woodSend - claySend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO >= woodSend && villageIronO < ironSend && villageClayO >= claySend) {
+                                                    ironSend = villageIronO
+                                                    claySend = Math.floor((clayTo / totalTo) * freeMerchants * 1000)
+                                                    woodSend = freeMerchants * 1000 - ironSend - claySend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO >= woodSend && villageIronO >= ironSend && villageClayO < claySend) {
+                                                    claySend = villageClayO
+                                                    woodSend = Math.floor((woodTo / totalTo) * freeMerchants * 1000)
+                                                    ironSend = freeMerchants * 1000 - woodSend - claySend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO < woodSend && villageIronO < ironSend && villageClayO >= claySend) {
+                                                    ironSend = villageIronO
+                                                    woodSend = villageWoodO
+                                                    claySend = freeMerchants * 1000 - woodSend - ironSend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO >= woodSend && villageIronO < ironSend && villageClayO < claySend) {
+                                                    ironSend = villageIronO
+                                                    claySend = villageClayO
+                                                    woodSend = freeMerchants * 1000 - ironSend - claySend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO < woodSend && villageIronO >= ironSend && villageClayO < claySend) {
+                                                    claySend = villageClayO
+                                                    woodSend = villageWoodO
+                                                    ironSend = freeMerchants * 1000 - woodSend - claySend
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                } else if (villageWoodO < woodSend && villageIronO < ironSend && villageClayO < claySend) {
+                                                    ironSend = villageIronO
+                                                    woodSend = villageWoodO
+                                                    claySend = villageClayO
+                                                    socketService.emit(routeProvider.TRADING_SEND_RESOURCES, {
+                                                        start_village: village.getId(),
+                                                        target_village: villageToSend,
+                                                        wood: woodSend,
+                                                        clay: claySend,
+                                                        iron: ironSend
+                                                    })
+                                                    woodTo = woodTo - woodSend
+                                                    clayTo = clayTo - claySend
+                                                    ironTo = ironTo - ironSend
+                                                    totalTo = woodTo + clayTo + ironTo
+                                                    console.log(woodTo, clayTo, ironTo, totalTo)
+                                                    addLog(village.data.villageId, villageToSend, 'Żelazo', ironSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Drewno', woodSend)
+                                                    addLog(village.data.villageId, villageToSend, 'Glina', claySend)
+                                                    neededWood = woodTo
+                                                    neededClay = clayTo
+                                                    neededIron = ironTo
+                                                    neededTotal = totalTo
+                                                }
+                                            } else {
+                                                console.log('Wykonano zlecenie')
                                             }
                                         } else {
-                                            console.log('Wykonano zlecenie')
+                                            console.log('Brak kupców w: ' + village.getName())
                                         }
-                                    } else {
-                                        console.log('Brak kupców w: ' + village.getName())
-                                    }
-                                })
+                                    })
+                                }
+                            } else if (running == false) {
+                                return
                             }
-                        }, index2 * 20000)
+                        }, (index2 * (Math.random() * 10 * 3000)) + 1000)
                     })
                 }, (index * 3600000) + 1000)
             })
+        } else {
+            return
         }
     }
     resourceSender.start = function() {
         running = true
-        addLog('', '', 'Rozpoczęto przesył', '')
         eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_START)
-        addLog('', '', 'Rozpoczęto przesył', '')
+        addLog('', '', 'start', '')
+        resourceSender.marketTrade()
         setInterval(function() {
-            running = true
             resourceSender.marketTrade()
-        }, 480000)
+        }, 360000)
+    }
+    resourceSender.stop = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_STOP)
+        addLog('', '', 'stop', '')
+    }
+    resourceSender.stopError = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_STOP)
     }
     resourceSender.getLogs = function() {
         return logs
@@ -34463,11 +34953,6 @@ define('two/resourceSender', [
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_CLEAR_LOGS)
         return logs
-    }
-    resourceSender.stop = function() {
-        running = false
-        eventQueue.trigger(eventTypeProvider.RESOURCE_SENDER_STOP)
-        addLog('', '', 'Zatrzymano przesył', '')
     }
     resourceSender.getSettings = function() {
         return settings
@@ -34518,12 +35003,9 @@ define('two/resourceSender/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let running = false
     let logsView = {}
     let villagesInfo = {}
     let villagesLabel = {}
-    let targetInfo = {}
-    let targetsLabel = {}
     let villageSelected
     let provinceSelected
     let mapSelectedVillage = false
@@ -34538,11 +35020,9 @@ define('two/resourceSender/ui', [
     const marketTrade = function() {
         if (resourceSender.isRunning()) {
             resourceSender.stop()
-            running = false
         } else {
-            resourceSender.start()
             settings.setAll(settings.decode($scope.settings))
-            resourceSender.marketTrade()
+            resourceSender.start()
         }
     }
     const clearTrade = function() {
@@ -34607,35 +35087,17 @@ define('two/resourceSender/ui', [
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
     }
-    const loadTargetInfo = function(targetId) {
-        if (targetInfo[targetId]) {
-            return targetInfo[targetId]
-        }
-        targetInfo[targetId] = true
-        targetsLabel[targetId] = 'ŁADOWANIE...'
-        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-            my_village_id: modelDataService.getSelectedVillage().getId(),
-            village_id: targetId,
-            num_reports: 1
-        }, function(data) {
-            targetInfo[targetId] = {
-                x: data.village_x,
-                y: data.village_y,
-                name: data.village_name,
-                last_report: data.last_reports[0]
-            }
-            targetsLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
-        })
-    }
     logsView.updateVisibleLogs = function() {
         const offset = $scope.pagination.logs.offset
         const limit = $scope.pagination.logs.limit
         logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
         $scope.pagination.logs.count = logsView.logs.length
         logsView.visibleLogs.forEach(function(log) {
-            if (log.villageId && log.targetId) {
+            if (log.villageId) {
                 loadVillageInfo(log.villageId)
-                loadTargetInfo(log.targetId)
+            }
+            if (log.targetId) {
+                loadVillageInfo(log.targetId)
             }
         })
     }
@@ -34710,27 +35172,25 @@ define('two/resourceSender/ui', [
         $button = interfaceOverflow.addMenuButton2('Tragarz', 40, $filter('i18n')('description', $rootScope.loc.ale, 'resource_sender'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.RESOURCE_SENDER_START, function() {
-            running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
             utils.notif('success', $filter('i18n')('trade_started', $rootScope.loc.ale, 'resource_sender'))
         })
         eventQueue.register(eventTypeProvider.RESOURCE_SENDER_STOP, function() {
-            running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
             utils.notif('success', $filter('i18n')('trade_stopped', $rootScope.loc.ale, 'resource_sender'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_resource_sender_window', `<div id=\"two-resource-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'resource_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'resource_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'resource_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'resource_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'resource_sender' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td colspan=\"3\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'resource_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!villageSelected.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'resource_sender' }}<td ng-if=\"villageSelected.origin\" class=\"command-village\">{{ villageSelected.origin.name }} ({{ villageSelected.origin.x }}|{{ villageSelected.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'resource_sender' }}\">{{ 'trade.selected' | i18n:loc.ale:'resource_sender' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'resource_sender' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td colspan=\"3\"><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'resource_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!provinceSelected.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'resource_sender' }}<td ng-if=\"provinceSelected.origin\" class=\"command-village\">{{ provinceSelected.origin.name }} ({{ provinceSelected.origin.x }}|{{ provinceSelected.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedP()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'resource_sender' }}\">{{ 'trade.selected' | i18n:loc.ale:'resource_sender' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'resource_sender' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'resource_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'resource_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'resource_sender' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'resource_sender' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.fullstorage' | i18n:loc.ale:'resource_sender' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.STORAGE]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noTrades' | i18n:loc.ale:'resource_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'resource_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openTargetInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetsLabel[log.targetId] }}</a><td>{{ log.resource }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearTrade()\">{{ 'trade.clear' | i18n:loc.ale:'resource_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"marketTrade()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'resource_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'resource_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-resource-sender div[select]{text-align:center}#two-resource-sender div[select] .select-wrapper{height:34px}#two-resource-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-resource-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-resource-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-resource-sender .actions a{width:100px}#two-resource-sender .range-container{width:250px}#two-resource-sender .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-resource-sender .textfield-border.fit{width:100%}#two-resource-sender th{text-align:center}#two-resource-sender table.header-center th{text-align:center}#two-resource-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-resource-sender .logs .status tr{height:25px}#two-resource-sender .logs .status td{padding:0 6px}#two-resource-sender .logs .log-list{margin-bottom:10px}#two-resource-sender .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-resource-sender .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-resource-sender .icon-20x20-village:before{margin-top:-11px}')
+        interfaceOverflow.addTemplate('twoverflow_resource_sender_window', `<div id=\"two-resource-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'resource_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'resource_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'resource_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'resource_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'resource_sender' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td colspan=\"3\"><tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'resource_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!villageSelected.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'resource_sender' }}<td ng-if=\"villageSelected.origin\" class=\"command-village\">{{ villageSelected.origin.name }} ({{ villageSelected.origin.x }}|{{ villageSelected.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'resource_sender' }}\">{{ 'trade.selected' | i18n:loc.ale:'resource_sender' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'resource_sender' }}<tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td colspan=\"3\"><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'resource_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!provinceSelected.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'resource_sender' }}<td ng-if=\"provinceSelected.origin\" class=\"command-village\">{{ provinceSelected.origin.name }} ({{ provinceSelected.origin.x }}|{{ provinceSelected.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedP()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'resource_sender' }}\">{{ 'trade.selected' | i18n:loc.ale:'resource_sender' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'resource_sender' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'resource_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'resource_sender' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'resource_sender' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.fullstorage' | i18n:loc.ale:'resource_sender' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.STORAGE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'resource_sender' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'resource_sender' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noTrades' | i18n:loc.ale:'resource_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'resource_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'resource_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.resource === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.resource | i18n:loc.ale:'resource_sender' }}</b></a><td ng-if=\"log.resource === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.resource | i18n:loc.ale:'resource_sender' }}</b></a><td ng-if=\"log.resource !== 'stop' && log.resource !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.resource !== 'stop' && log.resource !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.resource !== 'stop' && log.resource !== 'start'\">{{ log.resource }}<td ng-if=\"log.resource !== 'stop' && log.resource !== 'start'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearTrade()\">{{ 'trade.clear' | i18n:loc.ale:'resource_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"marketTrade()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'trade.start' | i18n:loc.ale:'resource_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'resource_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-resource-sender div[select]{text-align:center}#two-resource-sender div[select] .select-wrapper{height:34px}#two-resource-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-resource-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-resource-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-resource-sender .actions a{width:100px}#two-resource-sender .range-container{width:250px}#two-resource-sender .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-resource-sender .textfield-border.fit{width:100%}#two-resource-sender th{text-align:center}#two-resource-sender table.header-center th{text-align:center}#two-resource-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-resource-sender .logs{margin-bottom:10px}#two-resource-sender .logs td,#two-resource-sender .logs th{text-align:center;line-height:30px}#two-resource-sender .icon-20x20-village:before{margin-top:-11px}')
     }
     const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
+        $scope.running = resourceSender.isRunning()
         $scope.selectedTab = TAB_TYPES.TRADE
         $scope.settingsMap = SETTINGS_MAP
         $scope.pagination = {}
@@ -34773,10 +35233,7 @@ define('two/resourceSender/ui', [
         $scope.logsView.logs = resourceSender.getLogs()
         $scope.villagesInfo = villagesInfo
         $scope.villagesLabel = villagesLabel
-        $scope.targetInfo = targetInfo
-        $scope.targetsLabel = targetsLabel
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
-        $scope.openTargetInfo = windowDisplayService.openVillageInfo
         $scope.jumpToVillage = mapService.jumpToVillage
         $scope.pagination.logs = {
             count: logsView.logs.length,
@@ -35009,6 +35466,7 @@ define('two/spyMaster', [
     'two/spyMaster/types/type',
     'two/ready',
     'helper/time',
+    'two/utils',
     'queues/EventQueue',
     'Lockr'
 ], function(
@@ -35021,6 +35479,7 @@ define('two/spyMaster', [
     C_TYPE,
     ready,
     timeHelper,
+    utils,
     eventQueue,
     Lockr
 ) {
@@ -35043,7 +35502,6 @@ define('two/spyMaster', [
     var ownLimit = 0
     var ownLimitS = 0
     var provinceId = ''
-    var targetsCount = 0
     var groupTargets = null
     var groupVillages = null
     var targetGroups = ''
@@ -35055,46 +35513,6 @@ define('two/spyMaster', [
         SETTINGS: 'spy_master_settings',
         LOGS: 'spy_master_log'
     }
-    const COUNTERMEASURES_BUILDING = {
-        [C_BUILDING.HEADQUARTER]: 'headquarter',
-        [C_BUILDING.WAREHOUSE]: 'warehouse',
-        [C_BUILDING.FARM]: 'farm',
-        [C_BUILDING.RALLY_POINT]: 'rally_point',
-        [C_BUILDING.STATUE]: 'statue',
-        [C_BUILDING.WALL]: 'wall',
-        [C_BUILDING.TAVERN]: 'tavern',
-        [C_BUILDING.BARRACKS]: 'barracks',
-        [C_BUILDING.PRECEPTORY]: 'preceptory',
-        [C_BUILDING.HOSPITAL]: 'hospital',
-        [C_BUILDING.CLAY_PIT]: 'clay_pit',
-        [C_BUILDING.IRON_MINE]: 'iron_mine',
-        [C_BUILDING.TIMBER_CAMP]: 'timber_camp',
-        [C_BUILDING.CHAPEL]: 'chapel',
-        [C_BUILDING.CHURCH]: 'church',
-        [C_BUILDING.MARKET]: 'market',
-        [C_BUILDING.ACADEMY]: 'academy'
-    }
-    const COUNTERMEASURES_UNIT = {
-        [C_UNIT.SPEAR]: 'spear',
-        [C_UNIT.SWORD]: 'sword',
-        [C_UNIT.AXE]: 'axe',
-        [C_UNIT.ARCHER]: 'archer',
-        [C_UNIT.LIGHT_CAVALRY]: 'light_cavalry',
-        [C_UNIT.MOUNTED_ARCHER]: 'mounted_archer',
-        [C_UNIT.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [C_UNIT.RAM]: 'ram',
-        [C_UNIT.CATAPULT]: 'catapult',
-        [C_UNIT.TREBUCHET]: 'trebuchet',
-        [C_UNIT.DOPPELSOLDNER]: 'doppelsoldner',
-        [C_UNIT.SNOB]: 'snob',
-        [C_UNIT.KNIGHT]: 'knight'
-    }
-    const SPY_TYPE = {
-        [C_TYPE.UNITS]: 'units',
-        [C_TYPE.BUILDINGS]: 'buildings',
-        [C_TYPE.ALL]: 'all'
-    }
-    console.log(COUNTERMEASURES_UNIT, COUNTERMEASURES_BUILDING, SPY_TYPE)
     const addLog = function(villageId, targetId, type, amount) {
         let data = {
             time: timeHelper.gameTime(),
@@ -35110,7 +35528,6 @@ define('two/spyMaster', [
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         return true
     }
-    console.log(addLog)
     const updateGroups = function() {
         selectedGroupsSpy = []
         selectedGroupsSabotage = []
@@ -35135,78 +35552,88 @@ define('two/spyMaster', [
         })
     }
     const sendSabotages = function() {
-        targetsCount = targets.length
         targets.forEach(function(target, index) {
-            ownLimitS = spyMasterSettings[SETTINGS.LIMIT_S]
-            targetsCount -= 1
-            villages.forEach(function(village, index1) {
-                var available = 0
-                var scoutingInfo = village.scoutingInfo
-                var spies = scoutingInfo.spies
-                var order = village.data.preceptory_order
-                if (order == 'thieves') {
-                    spies.forEach(function(spy) {
-                        if (spy.type == 1) {
-                            available += 1
-                        }
-                    })
-                    setTimeout(function() {
-                        if (available >= 3 && ownLimitS > 0) {
-                            setTimeout(function() {
-                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                    startVillage: village.getId(),
-                                    targetVillage: target,
-                                    spys: 3,
-                                    type: 'sabotage'
-                                })
-                                addLog(village.getId(), target, 'Sabotaż', 3)
-                                ownLimitS -= 1
-                                available -= 3
-                            }, index1 * 2000 * Math.random())
-                        }
-                    }, index * 2500 * Math.random())
+            setTimeout(function() {
+                if (index == 0) {
+                    addLog('', 'sabotage.start', '', '')
                 }
-            })
+                ownLimitS = spyMasterSettings[SETTINGS.LIMIT_S]
+                villages.forEach(function(village, index1) {
+                    setTimeout(function() {
+                        if (running == true) {
+                            var available = 0
+                            var scoutingInfo = village.scoutingInfo
+                            var spies = scoutingInfo.spies
+                            var order = village.data.preceptory_order
+                            if (order == 'thieves') {
+                                spies.forEach(function(spy) {
+                                    if (spy.type == 1) {
+                                        available += 1
+                                    }
+                                })
+                                if (available >= 3 && ownLimitS > 0) {
+                                    socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                        startVillage: village.getId(),
+                                        targetVillage: target,
+                                        spys: 3,
+                                        type: 'sabotage'
+                                    })
+                                    addLog(village.getId(), target, 'Sabotaż', 3)
+                                    ownLimitS -= 1
+                                }
+                            }
+                        } else if (running == false) {
+                            return
+                        }
+                    }, index1 * 5000)
+                })
+                if (index == (targets.length - 1) && running == true) {
+                    setTimeout(function() {
+                        spyMaster.stopSabotage()
+                    }, (index * 5000 * villages.length) + 10000)
+                }
+            }, (index * 5000 * villages.length) + 1000)
         })
-        if (targetsCount == 0) {
-            spyMaster.stop()
-        }
     }
     const sendSpies = function() {
-        targetsCount = targets.length
         targets.forEach(function(target, index) {
-            ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-            targetsCount -= 1
             setTimeout(function() {
+                if (index == 0) {
+                    addLog('', 'spy.start', '', '')
+                }
+                ownLimit = spyMasterSettings[SETTINGS.LIMIT]
+                console.log(target)
                 villages.forEach(function(village, index1) {
-                    var countSpy = 0
-                    var scoutingInfo = village.scoutingInfo
-                    var spies = scoutingInfo.spies
-                    spies.forEach(function(spy) {
-                        if (spy.type == 1) {
-                            countSpy += 1
-                        }
-                    })
                     setTimeout(function() {
-                        if (target != 0) {
+                        if (running == true) {
+                            var countSpy = 0
+                            var scoutingInfo = village.scoutingInfo
+                            var spies = scoutingInfo.spies
+                            spies.forEach(function(spy) {
+                                if (spy.type == 1) {
+                                    countSpy += 1
+                                }
+                            })
                             if (type == 'units' || type == 'buildings') {
-                                if (ownLimit > 0 && countSpy > 0) {
+                                if (countSpy > 0) {
                                     for (var x = 0; x < countSpy; x++) {
                                         setTimeout(function() {
-                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
-                                                startVillage: village.getId(),
-                                                targetVillage: target,
-                                                spys: 1,
-                                                type: type
-                                            })
-                                            addLog(village.getId(), target, type, 1)
-                                            ownLimit -= 1
-                                        }, (x * 2000) + 1000)
+                                            if (ownLimit > 0) {
+                                                socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                    startVillage: village.getId(),
+                                                    targetVillage: target,
+                                                    spys: 1,
+                                                    type: type
+                                                })
+                                                addLog(village.getId(), target, type, 1)
+                                                ownLimit -= 1
+                                            }
+                                        }, x * 2000)
                                     }
                                 }
                             } else if (type == 'all') {
-                                if (ownLimit > 0) {
-                                    if (countSpy == 5) {
+                                if (countSpy == 5) {
+                                    if (ownLimit >= 5) {
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35216,7 +35643,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Budynki', 1)
                                             ownLimit -= 1
-                                        }, (1 * 2000) + 1000)
+                                        }, 0 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35226,7 +35653,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Budynki', 1)
                                             ownLimit -= 1
-                                        }, (2 * 2000) + 3000)
+                                        }, 1 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35236,7 +35663,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (3 * 2000) + 5000)
+                                        }, 2 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35246,7 +35673,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (4 * 2000) + 7000)
+                                        }, 3 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35256,8 +35683,8 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (5 * 2000) + 9000)
-                                    } else if (countSpy == 4) {
+                                        }, 4 * 2000)
+                                    } else if (ownLimit == 4) {
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35267,7 +35694,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Budynki', 1)
                                             ownLimit -= 1
-                                        }, (1 * 2000) + 1000)
+                                        }, 0 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35277,7 +35704,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Budynki', 1)
                                             ownLimit -= 1
-                                        }, (2 * 2000) + 3000)
+                                        }, 1 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35287,7 +35714,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (3 * 2000) + 5000)
+                                        }, 2 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35297,8 +35724,8 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (4 * 2000) + 7000)
-                                    } else if (countSpy == 3) {
+                                        }, 3 * 2000)
+                                    } else if (ownLimit == 3) {
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35308,7 +35735,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Budynki', 1)
                                             ownLimit -= 1
-                                        }, (1 * 2000) + 1000)
+                                        }, 0 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35318,7 +35745,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (2 * 2000) + 3000)
+                                        }, 1 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35328,8 +35755,8 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (3 * 2000) + 5000)
-                                    } else if (countSpy == 2) {
+                                        }, 2 * 2000)
+                                    } else if (ownLimit == 2) {
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35339,7 +35766,7 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Budynki', 1)
                                             ownLimit -= 1
-                                        }, (1 * 2000) + 1000)
+                                        }, 0 * 2000)
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35349,8 +35776,21 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Jednostki', 1)
                                             ownLimit -= 1
-                                        }, (2 * 2000) + 3000)
-                                    } else if (countSpy == 1) {
+                                        }, 1 * 2000)
+                                    } else if (ownLimit == 1) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                    }
+                                } else if (countSpy == 4) {
+                                    if (ownLimit >= 4) {
                                         setTimeout(function() {
                                             socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
                                                 startVillage: village.getId(),
@@ -35360,18 +35800,227 @@ define('two/spyMaster', [
                                             })
                                             addLog(village.getId(), target, 'Budynki', 1)
                                             ownLimit -= 1
-                                        }, (1 * 2000) + 1000)
+                                        }, 0 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, 1 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 2 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 3 * 2000)
+                                    } else if (ownLimit == 3) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 1 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 2 * 2000)
+                                    } else if (ownLimit == 2) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 1 * 2000)
+                                    } else if (ownLimit == 1) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                    }
+                                } else if (countSpy == 3) {
+                                    if (ownLimit >= 3) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 1 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 2 * 2000)
+                                    } else if (ownLimit == 2) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 1 * 2000)
+                                    } else if (ownLimit == 1) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                    }
+                                } else if (countSpy == 2) {
+                                    if (ownLimit >= 2) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 1 * 2000)
+                                    } else if (ownLimit == 1) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'units'
+                                            })
+                                            addLog(village.getId(), target, 'Jednostki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
+                                    }
+                                } else if (countSpy == 1) {
+                                    if (ownLimit >= 1) {
+                                        setTimeout(function() {
+                                            socketService.emit(routeProvider.SCOUTING_SEND_COMMAND, {
+                                                startVillage: village.getId(),
+                                                targetVillage: target,
+                                                spys: 1,
+                                                type: 'buildings'
+                                            })
+                                            addLog(village.getId(), target, 'Budynki', 1)
+                                            ownLimit -= 1
+                                        }, 0 * 2000)
                                     }
                                 }
                             }
+                        } else if (running == false) {
+                            return
                         }
-                    }, index1 * 12000)
+                    }, index1 * 10000)
                 })
-            }, index * villages.length * 12000)
+                if (index == (targets.length - 1) && running == true) {
+                    setTimeout(function() {
+                        spyMaster.stopSpy()
+                    }, (index * 10000 * villages.length) + 11000)
+                }
+            }, (index * 10000 * villages.length) + 1000)
         })
-        if (targetsCount == 0) {
-            spyMaster.stop()
-        }
     }
     const spyMaster = {}
     spyMaster.init = function() {
@@ -35394,185 +36043,239 @@ define('two/spyMaster', [
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
     spyMaster.doCamouflage = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var interval = 3200
         var buildingT = spyMasterSettings[SETTINGS.BUILDING]
         var buildingLv = spyMasterSettings[SETTINGS.BUILDING_LEVEL]
-        var amountTaverns = 0
-        var okTaverns = 0
-        villages.forEach(function(village) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 3) {
-                okTaverns = okTaverns + 1
-            }
-        })
-        villages.forEach(function(village, index) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 3) {
+        var buildingLog = $filter('i18n')(buildingT, $rootScope.loc.ale, 'common')
+        if (buildingT == false) {
+            utils.notif('error', $filter('i18n')('error.no_building_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        } else {
+            villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    amountTaverns = amountTaverns + 1
-                    socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
-                        village_id: village.getId(),
-                        type: 'camouflage',
-                        status: 1,
-                        building: buildingT,
-                        level: buildingLv,
-                        unit: '',
-                        replacement: ''
-                    })
-                    addLog(village.getId(), 'Kamuflaż', buildingT, buildingLv)
+                    if (running == true) {
+                        var data = village.data
+                        var buildings = data.buildings
+                        var tavern = buildings.tavern
+                        var level = tavern.level
+                        if (index == 0) {
+                            addLog('', 'camouflage.start', '', '')
+                        }
+                        if (level >= 3) {
+                            socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
+                                village_id: village.getId(),
+                                type: 'camouflage',
+                                status: 1,
+                                building: buildingT,
+                                level: buildingLv,
+                                unit: '',
+                                replacement: ''
+                            })
+                            addLog(village.getId(), 'countermeasures.camouflage', buildingLog, buildingLv)
+                        }
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                spyMaster.stopCamouflage()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
                 }, index * interval * Math.random())
-            }
-        })
-        if (amountTaverns == okTaverns) {
-            addLog('', '', 'Kamuflaż zakończony', '')
-            spyMaster.stop()
+            })
         }
     }
     spyMaster.switchWeapon = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var interval = 5000
         var unit = spyMasterSettings[SETTINGS.UNIT]
         var replacement = spyMasterSettings[SETTINGS.REPLACEMENT]
-        var amountTaverns = 0
-        var okTaverns = 0
         var unitLog = $filter('i18n')(unit, $rootScope.loc.ale, 'common')
         var replacementLog = $filter('i18n')(replacement, $rootScope.loc.ale, 'common')
-        villages.forEach(function(village) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 6) {
-                okTaverns = okTaverns + 1
-            }
-        })
-        villages.forEach(function(village, index) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 6) {
+        if (unit == false) {
+            utils.notif('error', $filter('i18n')('error.no_unit_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        } else if (replacement == false) {
+            utils.notif('error', $filter('i18n')('error.no_replacement_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        } else {
+            villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    amountTaverns = amountTaverns + 1
-                    socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
-                        village_id: village.getId(),
-                        type: 'switch_weapons',
-                        status: 1,
-                        building: '',
-                        level: '',
-                        unit: unit,
-                        replacement: replacement
-                    })
-                    addLog(village.getId(), 'Zamiana broni', unitLog, replacementLog)
+                    if (running == true) {
+                        var data = village.data
+                        var buildings = data.buildings
+                        var tavern = buildings.tavern
+                        var level = tavern.level
+                        if (index == 0) {
+                            addLog('', 'switch.start', '', '')
+                        }
+                        if (level >= 6) {
+                            socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
+                                village_id: village.getId(),
+                                type: 'switch_weapons',
+                                status: 1,
+                                building: '',
+                                level: '',
+                                unit: unit,
+                                replacement: replacement
+                            })
+                            addLog(village.getId(), 'countermeasures.switch', unitLog, replacementLog)
+                        }
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                spyMaster.stopSwitch()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
                 }, index * interval * Math.random())
-            }
-        })
-        if (amountTaverns == okTaverns) {
-            addLog('', '', 'Zamiana broni zakończona', '')
-            spyMaster.stop()
+            })
         }
     }
     spyMaster.setDummies = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var interval = 5000
         var unitD = spyMasterSettings[SETTINGS.DUMMIES]
-        var amountTaverns = 0
-        var okTaverns = 0
         var dummies = $filter('i18n')(unitD, $rootScope.loc.ale, 'spy_master')
-        villages.forEach(function(village) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 9) {
-                okTaverns = okTaverns + 1
-            }
-        })
-        villages.forEach(function(village, index) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 9) {
+        if (unitD == false) {
+            utils.notif('error', $filter('i18n')('error.no_dummies_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        } else {
+            villages.forEach(function(village, index) {
                 setTimeout(function() {
-                    amountTaverns = amountTaverns + 1
-                    socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
-                        village_id: village.getId(),
-                        type: 'dummies',
-                        status: 1,
-                        building: '',
-                        level: '',
-                        unit: unitD,
-                        replacement: ''
-                    })
-                    addLog(village.getId(), 'Atrapy', dummies, '')
+                    if (running == true) {
+                        var data = village.data
+                        var buildings = data.buildings
+                        var tavern = buildings.tavern
+                        var level = tavern.level
+                        if (index == 0) {
+                            addLog('', 'dummies.start', '', '')
+                        }
+                        if (level >= 9) {
+                            socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
+                                village_id: village.getId(),
+                                type: 'dummies',
+                                status: 1,
+                                building: '',
+                                level: '',
+                                unit: unitD,
+                                replacement: ''
+                            })
+                            addLog(village.getId(), 'countermeasures.dummies', dummies, '')
+                        }
+                        if (index == (villages.length - 1) && running == true) {
+                            setTimeout(function() {
+                                spyMaster.stopDummies()
+                            }, 6000)
+                        }
+                    } else if (running == false) {
+                        return
+                    }
                 }, index * interval * Math.random())
-            }
-        })
-        if (amountTaverns == okTaverns) {
-            addLog('', '', 'Atrapy postawione', '')
-            spyMaster.stop()
+            })
         }
     }
     spyMaster.exchangeUnits = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
         var player = modelDataService.getSelectedCharacter()
         var villages = player.getVillageList()
         var interval = 5000
-        var amountTaverns = 0
-        var okTaverns = 0
-        villages.forEach(function(village) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 12) {
-                okTaverns = okTaverns + 1
-            }
-        })
         villages.forEach(function(village, index) {
-            var data = village.data
-            var buildings = data.buildings
-            var tavern = buildings.tavern
-            var level = tavern.level
-            if (level >= 12) {
-                setTimeout(function() {
-                    amountTaverns = amountTaverns + 1
-                    socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
-                        village_id: village.getId(),
-                        type: 'exchange',
-                        status: 1,
-                        building: '',
-                        level: '',
-                        unit: '',
-                        replacement: ''
-                    })
-                    addLog(village.getId(), 'Wymiana', '', '')
-                }, index * interval * Math.random())
-            }
+            setTimeout(function() {
+                if (running == true) {
+                    var data = village.data
+                    var buildings = data.buildings
+                    var tavern = buildings.tavern
+                    var level = tavern.level
+                    if (index == 0) {
+                        addLog('', 'exchange.start', '', '')
+                    }
+                    if (level >= 12) {
+                        socketService.emit(routeProvider.SCOUTING_SET_COUNTER_MEASURE, {
+                            village_id: village.getId(),
+                            type: 'exchange',
+                            status: 1,
+                            building: '',
+                            level: '',
+                            unit: '',
+                            replacement: ''
+                        })
+                        addLog(village.getId(), 'countermeasures.exchange', '', '')
+                    }
+                    if (index == (villages.length - 1) && running == true) {
+                        setTimeout(function() {
+                            spyMaster.stopExchange()
+                        }, 6000)
+                    }
+                } else if (running == false) {
+                    return
+                }
+            }, index * interval * Math.random())
         })
-        if (amountTaverns == okTaverns) {
-            addLog('', '', 'Wymiana zakończona', '')
-            spyMaster.stop()
-        }
     }
     spyMaster.sendSpy = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
+        type = spyMasterSettings[SETTINGS.TYPE]
+        console.log(type)
+        if (type == false) {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        }
+        ownLimit = spyMasterSettings[SETTINGS.LIMIT]
+        if (ownLimit == 0) {
+            utils.notif('error', $filter('i18n')('error.no_limit_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        }
         villages = []
+        var villagesGetId = player.getVillageList()
+        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN]
+        let villagesFromGroup = []
+        if (ownGroups) {
+            ownGroups.forEach(function(group) {
+                groupVillages = groupList.getGroupVillageIds(group)
+                for (var i of groupVillages) {
+                    villagesFromGroup.push(i)
+                }
+            })
+            villagesGetId.forEach(function(village) {
+                var id = village.data.villageId
+                villagesFromGroup.forEach(function(groupVillage) {
+                    if (id == groupVillage) {
+                        villages.push(village)
+                    }
+                })
+            })
+        } else {
+            villagesGetId.forEach(function(village) {
+                villages.push(village)
+            })
+        }
         targets = []
         var provinceData = []
         var characterData = 0
         villageTarget = spyMasterSettings[SETTINGS.VILLAGE]
         if (villageTarget > 0) {
             targets.push(spyMasterSettings[SETTINGS.VILLAGE])
+            sendSpies()
         }
         playerId = spyMasterSettings[SETTINGS.PLAYER]
         if (playerId > 0) {
@@ -35583,6 +36286,7 @@ define('two/spyMaster', [
                 villages.forEach(function(village) {
                     targets.push(village.village_id)
                 })
+                sendSpies()
             })
         }
         provinceId = spyMasterSettings[SETTINGS.PROVINCE]
@@ -35614,6 +36318,7 @@ define('two/spyMaster', [
                             targets.push(fake.village_id)
                         }
                     })
+                    sendSpies()
                 })
             })
         }
@@ -35625,9 +36330,19 @@ define('two/spyMaster', [
                     targets.push(i)
                 }
             })
+            sendSpies()
         }
+        if (targetGroups == false && provinceId == 0 && playerId == 0 && villageTarget == 0) {
+            utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
+        }
+    }
+    spyMaster.sabotage = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
         var villagesGetId = player.getVillageList()
-        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN]
+        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN_S]
         let villagesFromGroup = []
         if (ownGroups) {
             ownGroups.forEach(function(group) {
@@ -35649,17 +36364,12 @@ define('two/spyMaster', [
                 villages.push(village)
             })
         }
-        type = spyMasterSettings[SETTINGS.TYPE]
-        ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-        console.log(type)
-        sendSpies()
-    }
-    spyMaster.sabotage = function() {
         var provinceData = []
         var characterData = 0
         villageTarget = spyMasterSettings[SETTINGS.VILLAGE_S]
         if (villageTarget > 0) {
             targets.push(spyMasterSettings[SETTINGS.VILLAGE])
+            sendSabotages()
         }
         playerId = spyMasterSettings[SETTINGS.PLAYER_S]
         if (playerId > 0) {
@@ -35670,6 +36380,7 @@ define('two/spyMaster', [
                 villages.forEach(function(village) {
                     targets.push(village.village_id)
                 })
+                sendSabotages()
             })
         }
         provinceId = spyMasterSettings[SETTINGS.PROVINCE_S]
@@ -35701,6 +36412,7 @@ define('two/spyMaster', [
                             targets.push(fake.village_id)
                         }
                     })
+                    sendSabotages()
                 })
             })
         }
@@ -35712,31 +36424,13 @@ define('two/spyMaster', [
                     targets.push(i)
                 }
             })
+            sendSabotages()
         }
-        var villagesGetId = player.getVillageList()
-        ownGroups = spyMasterSettings[SETTINGS.GROUPS_OWN_S]
-        let villagesFromGroup = []
-        if (ownGroups) {
-            ownGroups.forEach(function(group) {
-                groupVillages = groupList.getGroupVillageIds(group)
-                for (var i of groupVillages) {
-                    villagesFromGroup.push(i)
-                }
-            })
-            villagesGetId.forEach(function(village) {
-                var id = village.data.villageId
-                villagesFromGroup.forEach(function(groupVillage) {
-                    if (id == groupVillage) {
-                        villages.push(village)
-                    }
-                })
-            })
-        } else {
-            villagesGetId.forEach(function(village) {
-                villages.push(village)
-            })
+        if (targetGroups == false && provinceId == 0 && playerId == 0 && villageTarget == 0) {
+            utils.notif('error', $filter('i18n')('error.no_target_selected', $rootScope.loc.ale, 'spy_master'))
+            spyMaster.stopError()
+            return
         }
-        sendSabotages()
     }
     spyMaster.getLogs = function() {
         return logs
@@ -35747,13 +36441,39 @@ define('two/spyMaster', [
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_CLEAR_LOGS)
         return logs
     }
-    spyMaster.start = function() {
-        running = true
-        eventQueue.trigger(eventTypeProvider.SPY_MASTER_START)
-    }
-    spyMaster.stop = function() {
+    spyMaster.stopCamouflage = function() {
         running = false
         eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+        addLog('', 'camouflage.stop', '', '')
+    }
+    spyMaster.stopError = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+    }
+    spyMaster.stopSwitch = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+        addLog('', 'switch.stop', '', '')
+    }
+    spyMaster.stopExchange = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+        addLog('', 'exchange.stop', '', '')
+    }
+    spyMaster.stopDummies = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+        addLog('', 'dummies.stop', '', '')
+    }
+    spyMaster.stopSpy = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+        addLog('', 'spying.stop', '', '')
+    }
+    spyMaster.stopSabotage = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SPY_MASTER_STOP)
+        addLog('', 'sabotage.stop', '', '')
     }
     spyMaster.getSettings = function() {
         return settings
@@ -35805,12 +36525,9 @@ define('two/spyMaster/ui', [
     let settings
     let groupList = modelDataService.getGroupList()
     let $button
-    let running = false
     let logsView = {}
     let villagesInfo = {}
-    let targetsInfo = {}
     let villagesLabel = {}
-    let targetsLabel = {}
     let spyPlayer
     let spyProvince
     let spyVillage
@@ -35833,60 +36550,48 @@ define('two/spyMaster/ui', [
     }
     const sendSpy = function() {
         if (spyMaster.isRunning()) {
-            spyMaster.stop()
-            running = false
+            spyMaster.stopSpy()
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.sendSpy()
         }
     }
     const sabotage = function() {
         if (spyMaster.isRunning()) {
-            spyMaster.stop()
-            running = false
+            spyMaster.stopSabotage()
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.sabotage()
         }
     }
     const doCamouflage = function() {
         if (spyMaster.isRunning()) {
-            spyMaster.stop()
-            running = false
+            spyMaster.stopCamouflage()
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.doCamouflage()
         }
     }
     const setDummies = function() {
         if (spyMaster.isRunning()) {
-            spyMaster.stop()
-            running = false
+            spyMaster.stopDummies()
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.setDummies()
         }
     }
     const exchangeUnits = function() {
         if (spyMaster.isRunning()) {
-            spyMaster.stop()
-            running = false
+            spyMaster.stopExchange()
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.exchangeUnits()
         }
     }
     const switchWeapon = function() {
         if (spyMaster.isRunning()) {
-            spyMaster.stop()
-            running = false
+            spyMaster.stopSwitch()
         } else {
-            spyMaster.start()
             settings.setAll(settings.decode($scope.settings))
             spyMaster.switchWeapon()
         }
@@ -36007,35 +36712,17 @@ define('two/spyMaster/ui', [
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
     }
-    const loadTargetInfo = function(targetId) {
-        if (targetsInfo[targetId]) {
-            return targetsInfo[targetId]
-        }
-        targetsInfo[targetId] = true
-        targetsLabel[targetId] = 'ŁADOWANIE...'
-        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-            my_village_id: modelDataService.getSelectedVillage().getId(),
-            village_id: targetId,
-            num_reports: 1
-        }, function(data) {
-            targetsInfo[targetId] = {
-                x: data.village_x,
-                y: data.village_y,
-                name: data.village_name,
-                last_report: data.last_reports[0]
-            }
-            targetsLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
-        })
-    }
     logsView.updateVisibleLogs = function() {
         const offset = $scope.pagination.logs.offset
         const limit = $scope.pagination.logs.limit
         logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
         $scope.pagination.logs.count = logsView.logs.length
         logsView.visibleLogs.forEach(function(log) {
-            if (log.villageId && log.targetId) {
+            if (log.villageId) {
                 loadVillageInfo(log.villageId)
-                loadTargetInfo(log.targetId)
+            }
+            if (log.targetId) {
+                loadVillageInfo(log.targetId)
             }
         })
     }
@@ -36159,27 +36846,23 @@ define('two/spyMaster/ui', [
         $button = interfaceOverflow.addMenuButton3('Zwiadowca', 10, $filter('i18n')('description', $rootScope.loc.ale, 'spy_master'))
         $button.addEventListener('click', buildWindow)
         eventQueue.register(eventTypeProvider.SPY_MASTER_START, function() {
-            running = true
             $button.classList.remove('btn-orange')
             $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('general.started', $rootScope.loc.ale, 'spy_master'))
         })
         eventQueue.register(eventTypeProvider.SPY_MASTER_STOP, function() {
-            running = false
             $button.classList.remove('btn-red')
             $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('general.stopped', $rootScope.loc.ale, 'spy_master'))
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'spy_master' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ 'spy' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ 'countermeasures' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spy.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'spy.information' | i18n:loc.ale:'spy_master' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.village' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyVillage.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyVillage.origin\" class=\"command-village\">{{ spyVillage.origin.name }} ({{ spyVillage.origin.x }}|{{ spyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedV()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.province' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteProvince\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyProvince.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyProvince.origin\" class=\"command-village\">{{ spyProvince.origin.name }} ({{ spyProvince.origin.x }}|{{ spyProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPro()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.player' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompletePlayer\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!spyPlayer.origin\" class=\"command-village\">{{ 'spy.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyPlayer.origin\" class=\"command-village\">{{ spyPlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedP()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'spy.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'spy.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'spy.type' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'spy.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form><h5 class=\"twx-section\">{{ 'sabotage.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'sabotage.information' | i18n:loc.ale:'spy_master' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.village' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteVillageS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageVillage.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageVillage.origin\" class=\"command-village\">{{ sabotageVillage.origin.name }} ({{ sabotageVillage.origin.x }}|{{ sabotageVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.province' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteProvinceS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageProvince.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageProvince.origin\" class=\"command-village\">{{ sabotageProvince.origin.name }} ({{ sabotageProvince.origin.x }}|{{ sabotageProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.player' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompletePlayerS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!sabotagePlayer.origin\" class=\"command-village\">{{ 'sabotage.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotagePlayer.origin\" class=\"command-village\">{{ sabotagePlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'sabotage.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_S]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'sabotage.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'sabotage.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN_S]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_S]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sabotage.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES_S]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'countermeasures.camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\" placeholder=\"{{ 'countermeasures.level' | i18n:loc.ale:'spy_master' }}\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textcamouflage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipcamouflage' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"doCamouflage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btncamouflage' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textswitch' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipswitch' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"switchWeapon()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnswitch' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"4\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textdummies' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipdummies' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"setDummies()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btndummies' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textexchange' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipexchange' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"exchangeUnits()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnexchange' | i18n:loc.ale:'spy_master' }}</span></span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.target' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.type' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.date' | i18n:loc.ale:'spy_master' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openTargetInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetsLabel[log.targetId] }}</a><td>{{ log.type }}<td>{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'spy.clear' | i18n:loc.ale:'spy_master' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSpy()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span> </a><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sabotage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.sabote' | i18n:loc.ale:'spy_master' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'countermeasures.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-spy-master div[select]{text-align:center}#two-spy-master div[select] .select-wrapper{height:34px}#two-spy-master div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-spy-master div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-spy-master .addForm th{text-align:center}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px}#two-spy-master .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-spy-master .actions a{width:100px}#two-spy-master .item-send{text-align:center}#two-spy-master .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-camouflage{text-align:center}#two-spy-master .item-camouflage span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-exchange{text-align:center}#two-spy-master .item-exchange span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-dummies{text-align:center}#two-spy-master .item-dummies span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-switch{text-align:center}#two-spy-master .item-switch span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .logs .status tr{height:25px}#two-spy-master .logs .status td{padding:0 6px}#two-spy-master .logs .log-list{margin-bottom:10px}#two-spy-master .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-spy-master .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}')
+        interfaceOverflow.addTemplate('twoverflow_spy_master_window', `<div id=\"two-spy-master\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'spy_master' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SPY)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SPY}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SPY}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SPY}\">{{ 'spy' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.COUNTERMEASURES)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.COUNTERMEASURES}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.COUNTERMEASURES}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.COUNTERMEASURES}\">{{ 'countermeasures' | i18n:loc.ale:'spy_master' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'spy_master' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SPY\"><h5 class=\"twx-section\">{{ 'spy.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'spy.information' | i18n:loc.ale:'spy_master' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.village' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyVillage.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyVillage.origin\" class=\"command-village\">{{ spyVillage.origin.name }} ({{ spyVillage.origin.x }}|{{ spyVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedV()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.province' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteProvince\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!spyProvince.origin\" class=\"command-village\">{{ 'spy.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyProvince.origin\" class=\"command-village\">{{ spyProvince.origin.name }} ({{ spyProvince.origin.x }}|{{ spyProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPro()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER]\"><td><th><span class=\"ff-cell-fix\">{{ 'spy.player' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompletePlayer\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!spyPlayer.origin\" class=\"command-village\">{{ 'spy.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"spyPlayer.origin\" class=\"command-village\">{{ spyPlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedP()\" tooltip=\"\" tooltip-content=\"{{ 'spy.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'spy.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'spy.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'spy.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'spy.type' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"type\" selected=\"settings[SETTINGS.TYPE]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'spy.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form><h5 class=\"twx-section\">{{ 'sabotage.targets' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'sabotage.information' | i18n:loc.ale:'spy_master' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.village' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteVillageS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageVillage.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageVillage.origin\" class=\"command-village\">{{ sabotageVillage.origin.name }} ({{ sabotageVillage.origin.x }}|{{ sabotageVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.province' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompleteProvinceS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!sabotageProvince.origin\" class=\"command-village\">{{ 'sabotage.no_village' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotageProvince.origin\" class=\"command-village\">{{ sabotageProvince.origin.name }} ({{ sabotageProvince.origin.x }}|{{ sabotageProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PLAYER_S]\"><td><th><span class=\"ff-cell-fix\">{{ 'sabotage.player' | i18n:loc.ale:'spy_master' }}</span><td><tr><td><div auto-complete=\"autoCompletePlayerS\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-character\"></span><td ng-if=\"!sabotagePlayer.origin\" class=\"command-village\">{{ 'sabotage.no_player' | i18n:loc.ale:'spy_master' }}<td ng-if=\"sabotagePlayer.origin\" class=\"command-village\">{{ sabotagePlayer.origin.character_name }}<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedPS()\" tooltip=\"\" tooltip-content=\"{{ 'sabotage.add_map_selected' | i18n:loc.ale:'spy_master' }}\">{{ 'sabotage.selected' | i18n:loc.ale:'spy_master' }}</a><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'sabotage.groups' | i18n:loc.ale:'spy_master' }}</span><td><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_S]\" drop-down=\"true\"></div></table></form><h5 class=\"twx-section\">{{ 'sabotage.settings' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"140px\"><col width=\"60px\"><tr><td><span class=\"ff-cell-fix\">{{ 'sabotage.groups_own' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS_OWN_S]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'spy.limit' | i18n:loc.ale:'spy_master' }}</span><td colspan=\"2\" class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.LIMIT_S]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'sabotage.enemies' | i18n:loc.ale:'spy_master' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ENEMIES_S]\" vertical=\"false\" size=\"'56x28'\"></div></span></table></form></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><h5 class=\"twx-section\">{{ 'countermeasures.camouflage' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"building\" selected=\"settings[SETTINGS.BUILDING]\" drop-down=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.BUILDING_LEVEL]\" placeholder=\"{{ 'countermeasures.level' | i18n:loc.ale:'spy_master' }}\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textcamouflage' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-camouflage\"><span class=\"btn-green btn-border camouflage\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipcamouflage' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"doCamouflage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btncamouflage' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.switch' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.UNIT]\" drop-down=\"true\"></div><td colspan=\"2\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.REPLACEMENT]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textswitch' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-switch\"><span class=\"btn-green btn-border switchWeapon\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipswitch' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"switchWeapon()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnswitch' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.dummies' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"32%\"><col width=\"32%\"><col width=\"18%\"><tr><td colspan=\"4\"><div select=\"\" list=\"unit\" selected=\"settings[SETTINGS.DUMMIES]\" drop-down=\"true\"></div><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textdummies' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-dummies\"><span class=\"btn-green btn-border dummies\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipdummies' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"setDummies()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btndummies' | i18n:loc.ale:'spy_master' }}</span></span></table></form><h5 class=\"twx-section\">{{ 'countermeasures.exchange' | i18n:loc.ale:'spy_master' }}</h5><form class=\"addForm\"><table class=\"tbl-border-light tbl-striped\"><col><col width=\"18%\"><tr><td colspan=\"4\" class=\"item-name\">{{ 'countermeasures.textexchange' | i18n:loc.ale:'spy_master' }}<tr><td colspan=\"4\" class=\"item-exchange\"><span class=\"btn-green btn-border exchange\" tooltip=\"\" tooltip-content=\"{{ 'countermeasures.tipexchange' | i18n:loc.ale:'spy_master' }}\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" ng-click=\"exchangeUnits()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'countermeasures.btnexchange' | i18n:loc.ale:'spy_master' }}</span></span></table></form></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noMissions' | i18n:loc.ale:'spy_master' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col width=\"15%\"><col><col width=\"25%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.target' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.type' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.amount' | i18n:loc.ale:'spy_master' }}<th>{{ 'logs.date' | i18n:loc.ale:'spy_master' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.targetId === 'camouflage.start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'exchange.start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'dummies.start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'switch.start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'sabotage.start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'spy.start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'camouflage.stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'exchange.stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'dummies.stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'switch.stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'sabotage.stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId === 'spying.stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.targetId | i18n:loc.ale:'spy_master' }}</b></a><td ng-if=\"log.targetId !== 'camouflage.start' && log.targetId !== 'exchange.start' && log.targetId !== 'dummies.start' && log.targetId !== 'switch.start' && log.targetId !== 'sabotage.start' && log.targetId !== 'spy.start' && log.targetId !== 'camouflage.stop' && log.targetId !== 'exchange.stop' && log.targetId !== 'dummies.stop' && log.targetId !== 'switch.stop' && log.targetId !== 'sabotage.stop' && log.targetId !== 'spying.stop'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.targetId === 'countermeasures.exchange' || log.targetId === 'countermeasures.dummies' || log.targetId === 'countermeasures.switch' || log.targetId === 'countermeasures.camouflage'\"><a>{{ log.targetId | i18n:loc.ale:'spy_master' }}</a><td ng-if=\"log.targetId !== 'camouflage.start' && log.targetId !== 'exchange.start' && log.targetId !== 'dummies.start' && log.targetId !== 'switch.start' && log.targetId !== 'sabotage.start' && log.targetId !== 'spy.start' && log.targetId !== 'camouflage.stop' && log.targetId !== 'exchange.stop' && log.targetId !== 'dummies.stop' && log.targetId !== 'switch.stop' && log.targetId !== 'sabotage.stop' && log.targetId !== 'spying.stop' && log.targetId !== 'countermeasures.exchange' && log.targetId !== 'countermeasures.dummies' && log.targetId !== 'countermeasures.switch' && log.targetId !== 'countermeasures.camouflage'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.targetId !== 'camouflage.start' && log.targetId !== 'exchange.start' && log.targetId !== 'dummies.start' && log.targetId !== 'switch.start' && log.targetId !== 'sabotage.start' && log.targetId !== 'spy.start' && log.targetId !== 'camouflage.stop' && log.targetId !== 'exchange.stop' && log.targetId !== 'dummies.stop' && log.targetId !== 'switch.stop' && log.targetId !== 'sabotage.stop' && log.targetId !== 'spying.stop'\">{{ log.type }}<td ng-if=\"log.targetId !== 'camouflage.start' && log.targetId !== 'exchange.start' && log.targetId !== 'dummies.start' && log.targetId !== 'switch.start' && log.targetId !== 'sabotage.start' && log.targetId !== 'spy.start' && log.targetId !== 'camouflage.stop' && log.targetId !== 'exchange.stop' && log.targetId !== 'dummies.stop' && log.targetId !== 'switch.stop' && log.targetId !== 'sabotage.stop' && log.targetId !== 'spying.stop'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SPY\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearS()\">{{ 'spy.clear' | i18n:loc.ale:'spy_master' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSpy()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.send' | i18n:loc.ale:'spy_master' }}</span> </a><a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sabotage()\"><span ng-show=\"running\">{{ 'spy.stop' | i18n:loc.ale:'spy_master' }}</span> <span ng-show=\"!running\">{{ 'spy.sabote' | i18n:loc.ale:'spy_master' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.COUNTERMEASURES\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearC()\">{{ 'countermeasures.clear' | i18n:loc.ale:'spy_master' }}</a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'spy_master' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-spy-master div[select]{text-align:center}#two-spy-master div[select] .select-wrapper{height:34px}#two-spy-master div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-spy-master div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:213px}#two-spy-master .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px;text-align:center}#two-spy-master .addForm th{text-align:center}#two-spy-master .addForm td{text-align:center}#two-spy-master .addForm span{height:26px;line-height:26px}#two-spy-master .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-spy-master .actions a{width:100px}#two-spy-master .item-send{text-align:center}#two-spy-master .item-send span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-camouflage{text-align:center}#two-spy-master .item-camouflage span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-exchange{text-align:center}#two-spy-master .item-exchange span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-dummies{text-align:center}#two-spy-master .item-dummies span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .item-switch{text-align:center}#two-spy-master .item-switch span{height:34px;line-height:34px;text-align:center;width:125px}#two-spy-master .logs{margin-bottom:10px}#two-spy-master .logs td,#two-spy-master .logs th{text-align:center;line-height:30px}')
     }
     const buildWindow = function() {
         $scope = $rootScope.$new()
         $scope.SETTINGS = SETTINGS
         $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
+        $scope.running = spyMaster.isRunning()
         $scope.selectedTab = TAB_TYPES.SPY
         $scope.clearS = clearS
         $scope.clearC = clearC
@@ -36259,7 +36942,6 @@ define('two/spyMaster/ui', [
         $scope.villagesInfo = villagesInfo
         $scope.villagesLabel = villagesLabel
         $scope.openVillageInfo = windowDisplayService.openVillageInfo
-        $scope.openTargetInfo = windowDisplayService.openVillageInfo
         $scope.jumpToVillage = mapService.jumpToVillage
         $scope.addMapSelectedVS = addMapSelectedVS
         $scope.addMapSelectedV = addMapSelectedV
