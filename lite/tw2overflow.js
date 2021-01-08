@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 07 Jan 2021 23:48:25 GMT
+ * Fri, 08 Jan 2021 00:02:12 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -35249,10 +35249,6 @@ define('two/spyMaster', [
                 if (index == 0) {
                     addLog('', 'spy.start', '', '')
                 }
-                if (ownLimit == 0) {
-                    ownLimit = spyMasterSettings[SETTINGS.LIMIT]
-                }
-                console.log(ownLimit)
                 villages.forEach(function(village, index1) {
                     setTimeout(function() {
                         if (running == true) {
@@ -35661,6 +35657,9 @@ define('two/spyMaster', [
                                     }
                                 }
                             }
+                            if (ownLimit == 0) {
+                                ownLimit = spyMasterSettings[SETTINGS.LIMIT]
+                            }
                         } else if (running == false) {
                             return
                         }
@@ -35671,7 +35670,7 @@ define('two/spyMaster', [
                         spyMaster.stopSpy()
                     }, 22000)
                 }
-            }, 12000)
+            }, (index * 12000 * villages.length) + 1000)
         })
     }
     const spyMaster = {}
@@ -35984,6 +35983,7 @@ define('two/spyMaster', [
             spyMaster.stopError()
             return
         }
+        ownLimit = spyMasterSettings[SETTINGS.LIMIT]
         console.log(type, targets)
         sendSpies()
     }
