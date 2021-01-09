@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 09 Jan 2021 22:33:09 GMT
+ * Sat, 09 Jan 2021 23:52:46 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -24161,808 +24161,6 @@ require([
     }, ['map', 'presets'])
 })
 
-define('two/marketHelper', [
-    'two/Settings',
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/map',
-    'two/marketHelper/settings/updates',
-    'two/marketHelper/types/buildings',
-    'two/marketHelper/types/level',
-    'two/marketHelper/types/units',
-    'two/ready',
-    'queues/EventQueue'
-], function (
-    Settings,
-    SETTINGS,
-    SETTINGS_MAP,
-    UPDATES,
-    MH_BUILDINGS,
-    MH_LEVEL,
-    MH_UNITS,
-    ready,
-    eventQueue
-) {
-    let initialized = false
-    let running = false
-    let settings
-    let marketHelperSettings
-
-    let selectedGroups = []
-
-    const STORAGE_KEYS = {
-        SETTINGS: 'market_helper_settings'
-    }
-    const PRESERVE_UNITS = {
-        [MH_UNITS.SPEAR]: 'spear',
-        [MH_UNITS.SWORD]: 'sword',
-        [MH_UNITS.AXE]: 'axe',
-        [MH_UNITS.ARCHER]: 'archer',
-        [MH_UNITS.LIGHT_CAVALRY]: 'light_cavalry',
-        [MH_UNITS.MOUNTED_ARCHER]: 'mounted_archer',
-        [MH_UNITS.HEAVT_CAVALRY]: 'heavy_cavalry',
-        [MH_UNITS.RAM]: 'ram',
-        [MH_UNITS.CATAPULT]: 'catapult',
-        [MH_UNITS.TREBUCHET]: 'trebuchet',
-        [MH_UNITS.DOPPELSOLDNER]: 'doppelsoldner',
-        [MH_UNITS.SNOB]: 'snob',
-        [MH_UNITS.KNIGHT]: 'knight'
-    }
-	
-    const PRESERVE_BUILDINGS = {
-        [MH_BUILDINGS.HEADQUARTER]: 'headquarter',
-        [MH_BUILDINGS.WAREHOUSE]: 'warehouse',
-        [MH_BUILDINGS.FARM]: 'farm',
-        [MH_BUILDINGS.RALLY_POINT]: 'rally_point',
-        [MH_BUILDINGS.STATUE]: 'statue',
-        [MH_BUILDINGS.WALL]: 'wall',
-        [MH_BUILDINGS.TAVERN]: 'tavern',
-        [MH_BUILDINGS.BARRACKS]: 'barracks',
-        [MH_BUILDINGS.PRECEPTORY]: 'preceptory',
-        [MH_BUILDINGS.HOSPITAL]: 'hospital',
-        [MH_BUILDINGS.CLAY_PIT]: 'clay_pit',
-        [MH_BUILDINGS.IRON_MINE]: 'iron_mine',
-        [MH_BUILDINGS.TIMBER_CAMP]: 'timber_camp',
-        [MH_BUILDINGS.CHAPEL]: 'chapel',
-        [MH_BUILDINGS.CHURCH]: 'church',
-        [MH_BUILDINGS.MARKET]: 'market',
-        [MH_BUILDINGS.ACADEMY]: 'academy'
-    }
-	
-    const BUILDING_LEVEL = {
-        [MH_LEVEL.LEVEL_1]: 1,
-        [MH_LEVEL.LEVEL_2]: 2,
-        [MH_LEVEL.LEVEL_3]: 3,
-        [MH_LEVEL.LEVEL_4]: 4,
-        [MH_LEVEL.LEVEL_5]: 5,
-        [MH_LEVEL.LEVEL_6]: 6,
-        [MH_LEVEL.LEVEL_7]: 7,
-        [MH_LEVEL.LEVEL_8]: 8,
-        [MH_LEVEL.LEVEL_9]: 9,
-        [MH_LEVEL.LEVEL_10]: 10,
-        [MH_LEVEL.LEVEL_11]: 11,
-        [MH_LEVEL.LEVEL_12]: 12,
-        [MH_LEVEL.LEVEL_13]: 13,
-        [MH_LEVEL.LEVEL_14]: 14,
-        [MH_LEVEL.LEVEL_15]: 15,
-        [MH_LEVEL.LEVEL_16]: 16,
-        [MH_LEVEL.LEVEL_17]: 17,
-        [MH_LEVEL.LEVEL_18]: 18,
-        [MH_LEVEL.LEVEL_19]: 19,
-        [MH_LEVEL.LEVEL_20]: 20,
-        [MH_LEVEL.LEVEL_21]: 21,
-        [MH_LEVEL.LEVEL_22]: 22,
-        [MH_LEVEL.LEVEL_23]: 23,
-        [MH_LEVEL.LEVEL_24]: 24,
-        [MH_LEVEL.LEVEL_25]: 25,
-        [MH_LEVEL.LEVEL_26]: 26,
-        [MH_LEVEL.LEVEL_27]: 27,
-        [MH_LEVEL.LEVEL_28]: 28,
-        [MH_LEVEL.LEVEL_29]: 29,
-        [MH_LEVEL.LEVEL_30]: 30
-    }
-	
-    console.log(BUILDING_LEVEL, PRESERVE_BUILDINGS, PRESERVE_UNITS)
-
-    const updateGroups = function () {
-        selectedGroups = []
-
-        const allGroups = modelDataService.getGroupList().getGroups()
-        const groupsSelectedByTheUser = marketHelperSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
-            selectedGroups.push(allGroups[groupId])
-        })
-
-        console.log('selectedGroups', selectedGroups)
-    }
-
-    const marketHelper = {}
-
-    marketHelper.init = function () {
-        initialized = true
-
-        settings = new Settings({
-            settingsMap: SETTINGS_MAP,
-            storageKey: STORAGE_KEYS.SETTINGS
-        })
-
-        settings.onChange(function (changes, updates) {
-            marketHelperSettings = settings.getAll()
-
-            if (updates[UPDATES.GROUPS]) {
-                updateGroups()
-            }
-        })
-
-        marketHelperSettings = settings.getAll()
-
-        console.log('marketHelper settings', marketHelperSettings)
-
-        $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
-        $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
-    }
-
-    marketHelper.start = function () {
-        running = true
-
-        console.log('selectedGroups', selectedGroups)
-
-        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_START)
-    }
-
-    marketHelper.stop = function () {
-        running = false
-
-        console.log('marketHelper stop')
-
-        eventQueue.trigger(eventTypeProvider.MARKET_HELPER_STOP)
-    }
-
-    marketHelper.getSettings = function () {
-        return settings
-    }
-
-    marketHelper.isInitialized = function () {
-        return initialized
-    }
-
-    marketHelper.isRunning = function () {
-        return running
-    }
-
-    return marketHelper
-})
-
-define('two/marketHelper/events', [], function () {
-    angular.extend(eventTypeProvider, {
-        MARKET_HELPER_START: 'market_helper_start',
-        MARKET_HELPER_STOP: 'market_helper_stop'
-    })
-})
-
-define('two/marketHelper/ui', [
-    'two/ui',
-    'two/marketHelper',
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/map',
-    'two/marketHelper/types/buildings',
-    'two/marketHelper/types/level',
-    'two/marketHelper/types/units',
-    'two/Settings',
-    'queues/EventQueue',
-    'two/EventScope',
-    'two/utils',
-    'struct/MapData'
-], function(
-    interfaceOverflow,
-    marketHelper,
-    SETTINGS,
-    SETTINGS_MAP,
-    MH_BUILDINGS,
-    MH_LEVEL,
-    MH_UNITS,
-    Settings,
-    eventQueue,
-    EventScope,
-    utils,
-    mapData
-) {
-    let $scope
-    let settings
-    let groupList = modelDataService.getGroupList()
-    let $button
-    let running = false
-    let logsView = {}
-    let villagesInfo = {}
-    let villagesLabel = {}
-    let targetInfo = {}
-    let targetsLabel = {}
-    let villageSelected
-    let provinceSelected
-    let mapSelectedVillage = false
-    let mapSelectedProvince = false
-    const TAB_TYPES = {
-        TRADE: 'trade',
-        INSTANT_TRADE: 'instant_trade',
-        LOGS: 'logs'
-    }
-    const selectTab = function(tabType) {
-        $scope.selectedTab = tabType
-    }
-    const marketTrade = function() {
-        if (marketHelper.isRunning()) {
-            marketHelper.stop()
-            running = false
-        } else {
-            marketHelper.start()
-            settings.setAll(settings.decode($scope.settings))
-            marketHelper.marketTrade()
-        }
-    }
-    const instantTrade = function() {
-        if (marketHelper.isRunning()) {
-            marketHelper.stop()
-            running = false
-        } else {
-            marketHelper.start()
-            settings.setAll(settings.decode($scope.settings))
-            marketHelper.instantTrade()
-        }
-    }
-    const clearTrade = function() {
-        $scope.settings[SETTINGS.GROUPS] = false
-    }
-    const clearInstant = function() {
-        $scope.settings[SETTINGS.GROUPS] = false
-    }
-    const setMapSelectedVillage = function(event, menu) {
-        mapSelectedVillage = menu.data
-        mapSelectedProvince = menu.data
-    }
-    const unsetMapSelectedVillage = function() {
-        mapSelectedVillage = false
-        mapSelectedProvince = false
-    }
-    const addMapSelected = function() {
-        if (!mapSelectedVillage) {
-            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'market_helper'))
-        }
-        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
-            villageSelected.origin = data
-        })
-        $scope.settings[SETTINGS.VILLAGE] = mapSelectedVillage.id
-    }
-    const addMapSelectedP = function() {
-        if (!mapSelectedProvince) {
-            return utils.notif('error', $filter('i18n')('error_no_map_selected_province', $rootScope.loc.ale, 'market_helper'))
-        }
-        mapData.loadTownDataAsync(mapSelectedProvince.x, mapSelectedProvince.y, 1, 1, function(data) {
-            provinceSelected.origin = data
-        })
-        $scope.settings[SETTINGS.PROVINCE] = mapSelectedProvince.id
-    }
-    const loadVillageInfo = function(villageId) {
-        if (villagesInfo[villageId]) {
-            return villagesInfo[villageId]
-        }
-        villagesInfo[villageId] = true
-        villagesLabel[villageId] = 'ŁADOWANIE...'
-        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-            my_village_id: modelDataService.getSelectedVillage().getId(),
-            village_id: villageId,
-            num_reports: 1
-        }, function(data) {
-            villagesInfo[villageId] = {
-                x: data.village_x,
-                y: data.village_y,
-                name: data.village_name,
-                last_report: data.last_reports[0]
-            }
-            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
-        })
-    }
-    const loadTargetInfo = function(targetId) {
-        if (targetInfo[targetId]) {
-            return targetInfo[targetId]
-        }
-        targetInfo[targetId] = true
-        targetsLabel[targetId] = 'ŁADOWANIE...'
-        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-            my_village_id: modelDataService.getSelectedVillage().getId(),
-            village_id: targetId,
-            num_reports: 1
-        }, function(data) {
-            targetInfo[targetId] = {
-                x: data.village_x,
-                y: data.village_y,
-                name: data.village_name,
-                last_report: data.last_reports[0]
-            }
-            targetsLabel[targetId] = `${data.village_name} (${data.village_x}|${data.village_y})`
-        })
-    }
-    logsView.updateVisibleLogs = function() {
-        const offset = $scope.pagination.logs.offset
-        const limit = $scope.pagination.logs.limit
-        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
-        $scope.pagination.logs.count = logsView.logs.length
-        logsView.visibleLogs.forEach(function(log) {
-            if (log.villageId && log.targetId) {
-                loadVillageInfo(log.villageId)
-                loadTargetInfo(log.targetId)
-            }
-        })
-    }
-    logsView.clearLogs = function() {
-        marketHelper.clearLogs()
-        $scope.logsView.logs = []
-    }
-    const eventHandlers = {
-        updateGroups: function() {
-            $scope.groups = Settings.encodeList(groupList.getGroups(), {
-                disabled: false,
-                type: 'groups'
-            })
-        },
-        updateLogs: function() {
-            $scope.logs = marketHelper.getLogs()
-            logsView.updateVisibleLogs()
-        },
-        autoCompleteSelected: function(event, id, data, type) {
-            if (id !== 'markethelper_village_search') {
-                return false
-            }
-            villageSelected[type] = {
-                id: data.raw.id,
-                x: data.raw.x,
-                y: data.raw.y,
-                name: data.raw.name
-            }
-            $scope.searchQuery[type] = ''
-            $scope.settings[SETTINGS.VILLAGE] = villageSelected.id
-            settings.setAll(settings.decode($scope.settings))
-        },
-        onAutoCompleteVillage: function(data) {
-            villageSelected.origin = {
-                id: data.id,
-                x: data.x,
-                y: data.y,
-                name: data.name
-            }
-            $scope.settings[SETTINGS.VILLAGE] = data.id
-            settings.setAll(settings.decode($scope.settings))
-        },
-        onAutoCompleteProvince: function(data) {
-            provinceSelected.origin = {
-                id: data.id,
-                x: data.x,
-                y: data.y,
-                name: data.name
-            }
-            $scope.settings[SETTINGS.PROVINCE] = data.id
-            settings.setAll(settings.decode($scope.settings))
-        },
-        clearLogs: function() {
-            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'market_helper'))
-            eventHandlers.updateLogs()
-        },
-        start: function() {
-            $scope.running = true
-        },
-        stop: function() {
-            $scope.running = false
-        }
-    }
-    const init = function() {
-        settings = marketHelper.getSettings()
-        villageSelected = {
-            origin: false
-        }
-        provinceSelected = {
-            origin: false
-        }
-        $button = interfaceOverflow.addMenuButton2('Handlarz', 30, $filter('i18n')('description', $rootScope.loc.ale, 'market_helper'))
-        $button.addEventListener('click', buildWindow)
-        eventQueue.register(eventTypeProvider.MARKET_HELPER_START, function() {
-            running = true
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-            utils.notif('success', $filter('i18n')('trade_started', $rootScope.loc.ale, 'market_helper'))
-        })
-        eventQueue.register(eventTypeProvider.MARKET_HELPER_STOP, function() {
-            running = false
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-            utils.notif('success', $filter('i18n')('trade_stopped', $rootScope.loc.ale, 'market_helper'))
-        })
-        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
-        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_market_helper_window', `<div id=\"two-market-helper\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'market_helper' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.TRADE}\">{{ 'trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.INSTANT_TRADE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.INSTANT_TRADE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.INSTANT_TRADE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.INSTANT_TRADE}\">{{ 'instant_trade' | i18n:loc.ale:'market_helper' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'market_helper' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.TRADE\"><h5 class=\"twx-section\">{{ 'trade.villages' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"70px\"><col width=\"60px\"><col width=\"70px\"><tr><th colspan=\"6\">{{ 'trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillage\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.province' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td colspan=\"3\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"6\">{{ 'trade.group' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.groups' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUPS]\" drop-down=\"true\"></div><tr><th colspan=\"6\">{{ 'trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN].min\" max=\"settingsMap[SETTINGS.WOOD_IN].max\" value=\"settings[SETTINGS.WOOD_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN].min\" max=\"settingsMap[SETTINGS.CLAY_IN].max\" value=\"settings[SETTINGS.CLAY_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN].min\" max=\"settingsMap[SETTINGS.IRON_IN].max\" value=\"settings[SETTINGS.IRON_IN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN]\"><tr><th colspan=\"6\">{{ 'trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT].min\" max=\"settingsMap[SETTINGS.WOOD_OUT].max\" value=\"settings[SETTINGS.WOOD_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT].min\" max=\"settingsMap[SETTINGS.CLAY_OUT].max\" value=\"settings[SETTINGS.CLAY_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT].min\" max=\"settingsMap[SETTINGS.IRON_OUT].max\" value=\"settings[SETTINGS.IRON_OUT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT]\"><tr><th colspan=\"6\">{{ 'trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN].min\" max=\"settingsMap[SETTINGS.WOOD_MIN].max\" value=\"settings[SETTINGS.WOOD_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN].min\" max=\"settingsMap[SETTINGS.CLAY_MIN].max\" value=\"settings[SETTINGS.CLAY_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN].min\" max=\"settingsMap[SETTINGS.IRON_MIN].max\" value=\"settings[SETTINGS.IRON_MIN]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN]\"><tr><th colspan=\"6\">{{ 'trade.miscelanous' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'trade.distance' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><td><span class=\"ff-cell-fix\">{{ 'trade.individual' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.INDIVIDUAL].min\" max=\"settingsMap[SETTINGS.INDIVIDUAL].max\" value=\"settings[SETTINGS.INDIVIDUAL]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.INDIVIDUAL]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.proritize' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.PRIORITIZE]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.full' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.FULL]\" vertical=\"false\" size=\"'56x28'\"></div><td><tr><th colspan=\"6\">{{ 'trade.advanced' | i18n:loc.ale:'market_helper' }}<tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.building' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"buildings\" selected=\"settings[SETTINGS.BUILDINGS]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.level' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"level\" selected=\"settings[SETTINGS.LEVEL]\" drop-down=\"true\"></div><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.unit' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"3\"><div select=\"\" list=\"units\" selected=\"settings[SETTINGS.UNITS]\" drop-down=\"true\"></div><tr><td><span class=\"ff-cell-fix\">{{ 'trade.amount' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.AMOUNT].min\" max=\"settingsMap[SETTINGS.AMOUNT].max\" value=\"settings[SETTINGS.AMOUNT]\" enabled=\"true\"></div><td colspan=\"3\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.AMOUNT]\"><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'trade.coins' | i18n:loc.ale:'market_helper' }}</span><td><td><div class=\"switch\" switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.COINS]\" vertical=\"false\" size=\"'56x28'\"></div><td></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><h5 class=\"twx-section\">{{ 'instant_trade.automation' | i18n:loc.ale:'market_helper' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><col><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\">{{ 'instant_trade.origin' | i18n:loc.ale:'market_helper' }}<tr><td><div auto-complete=\"autoCompleteVillageI\" placeholder=\"{{ 'instant_trade.add_village' | i18n:loc.ale:'market_helper' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'instant_trade.no_village' | i18n:loc.ale:'market_helper' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'instant_trade.add_map_selected' | i18n:loc.ale:'market_helper' }}\">{{ 'instant_trade.selected' | i18n:loc.ale:'market_helper' }}</a><tr><th colspan=\"4\">{{ 'instant_trade.in' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_IN_I].min\" max=\"settingsMap[SETTINGS.WOOD_IN_I].max\" value=\"settings[SETTINGS.WOOD_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_IN_I].min\" max=\"settingsMap[SETTINGS.CLAY_IN_I].max\" value=\"settings[SETTINGS.CLAY_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_IN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_IN_I].min\" max=\"settingsMap[SETTINGS.IRON_IN_I].max\" value=\"settings[SETTINGS.IRON_IN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_IN_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.out' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_OUT_I].min\" max=\"settingsMap[SETTINGS.WOOD_OUT_I].max\" value=\"settings[SETTINGS.WOOD_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_OUT_I].min\" max=\"settingsMap[SETTINGS.CLAY_OUT_I].max\" value=\"settings[SETTINGS.CLAY_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_OUT_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_OUT_I].min\" max=\"settingsMap[SETTINGS.IRON_OUT_I].max\" value=\"settings[SETTINGS.IRON_OUT_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_OUT_I]\"><tr><th colspan=\"4\">{{ 'instant_trade.min' | i18n:loc.ale:'market_helper' }}<tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.wood' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.WOOD_MIN_I].min\" max=\"settingsMap[SETTINGS.WOOD_MIN_I].max\" value=\"settings[SETTINGS.WOOD_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.WOOD_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.clay' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.CLAY_MIN_I].min\" max=\"settingsMap[SETTINGS.CLAY_MIN_I].max\" value=\"settings[SETTINGS.CLAY_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.CLAY_MIN_I]\"><tr><td><span class=\"ff-cell-fix\">{{ 'instant_trade.iron' | i18n:loc.ale:'market_helper' }}</span><td colspan=\"2\"><div range-slider=\"\" min=\"settingsMap[SETTINGS.IRON_MIN_I].min\" max=\"settingsMap[SETTINGS.IRON_MIN_I].max\" value=\"settings[SETTINGS.IRON_MIN_I]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.IRON_MIN_I]\"></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noTrades' | i18n:loc.ale:'market_helper' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.target' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_in' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.resource_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.amount_out' | i18n:loc.ale:'market_helper' }}<th>{{ 'logs.date' | i18n:loc.ale:'market_helper' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td><a class=\"link\" ng-click=\"openTargetInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ targetsLabel[log.targetId] }}</a><td>{{ log.bought }}<td>{{ log.amountB }}<td>{{ log.sold }}<td>{{ log.amountS }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearTrade()\">{{ 'trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"marketTrade()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'market_helper' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.INSTANT_TRADE\"><a href=\"#\" class=\"btn-border btn-red\" ng-click=\"clearInstant()\">{{ 'instant_trade.clear' | i18n:loc.ale:'market_helper' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"instantTrade()\"><span ng-show=\"running\">{{ 'pause' | i18n:loc.ale:'common' }}</span> <span ng-show=\"!running\">{{ 'start' | i18n:loc.ale:'market_helper' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'market_helper' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-market-helper div[select]{text-align:center}#two-market-helper div[select] .select-wrapper{height:34px}#two-market-helper div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-market-helper div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-market-helper .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-market-helper .actions a{width:100px}#two-market-helper .range-container{width:250px}#two-market-helper .textfield-border{width:187px;height:34px;margin-bottom:2px;padding-top:2px}#two-market-helper .textfield-border.fit{width:100%}#two-market-helper th{text-align:center}#two-market-helper table.header-center th{text-align:center}#two-market-helper .force-26to20{transform:scale(.8);width:20px;height:20px}#two-market-helper .logs .status tr{height:25px}#two-market-helper .logs .status td{padding:0 6px}#two-market-helper .logs .log-list{margin-bottom:10px}#two-market-helper .logs .log-list td{white-space:nowrap;text-align:center;padding:0 5px}#two-market-helper .logs .log-list td .village-link{max-width:200px;white-space:nowrap;text-overflow:ellipsis}#two-market-helper .icon-20x20-village:before{margin-top:-11px}')
-    }
-    const buildWindow = function() {
-        $scope = $rootScope.$new()
-        $scope.SETTINGS = SETTINGS
-        $scope.TAB_TYPES = TAB_TYPES
-        $scope.running = running
-        $scope.selectedTab = TAB_TYPES.TRADE
-        $scope.settingsMap = SETTINGS_MAP
-        $scope.pagination = {}
-        $scope.villageSelected = villageSelected
-        $scope.provinceSelected = provinceSelected
-        $scope.clearTrade = clearTrade
-        $scope.clearInstant = clearInstant
-        $scope.autoCompleteVillage = {
-            type: ['village'],
-            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'market_helper'),
-            onEnter: eventHandlers.onAutoCompleteVillage,
-            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'market_helper'),
-            dropDown: true
-        }
-        $scope.autoCompleteProvince = {
-            type: ['village'],
-            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'market_helper'),
-            onEnter: eventHandlers.onAutoCompleteProvince,
-            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'market_helper'),
-            dropDown: true
-        }
-        $scope.level = Settings.encodeList(MH_LEVEL, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-        $scope.units = Settings.encodeList(MH_UNITS, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-        $scope.buildings = Settings.encodeList(MH_BUILDINGS, {
-            textObject: 'market_helper',
-            disabled: true
-        })
-        settings.injectScope($scope)
-        eventHandlers.updateGroups()
-        $scope.selectTab = selectTab
-        $scope.addMapSelected = addMapSelected
-        $scope.addMapSelectedP = addMapSelectedP
-        $scope.marketTrade = marketTrade
-        $scope.instantTrade = instantTrade
-        $scope.logsView = logsView
-        $scope.logsView.logs = marketHelper.getLogs()
-        $scope.villagesInfo = villagesInfo
-        $scope.villagesLabel = villagesLabel
-        $scope.targetInfo = targetInfo
-        $scope.targetsLabel = targetsLabel
-        $scope.openVillageInfo = windowDisplayService.openVillageInfo
-        $scope.openTargetInfo = windowDisplayService.openVillageInfo
-        $scope.jumpToVillage = mapService.jumpToVillage
-        $scope.pagination.logs = {
-            count: logsView.logs.length,
-            offset: 0,
-            loader: logsView.updateVisibleLogs,
-            limit: storageService.getPaginationLimit()
-        }
-        logsView.updateVisibleLogs()
-        let eventScope = new EventScope('twoverflow_market_helper_window', function onDestroy() {
-            console.log('marketHelper closed')
-        })
-        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
-        eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
-        eventScope.register(eventTypeProvider.MARKET_HELPER_CLEAR_LOGS, eventHandlers.clearLogs)
-        eventScope.register(eventTypeProvider.MARKET_HELPER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.MARKET_HELPER_STOP, eventHandlers.stop)
-        windowManagerService.getScreenWithInjectedScope('!twoverflow_market_helper_window', $scope)
-    }
-    return init
-})
-define('two/marketHelper/settings', [], function () {
-    return {
-        GROUPS: 'groups',
-        WOOD_IN: 'wood_in',
-        WOOD_OUT: 'wood_out',
-        WOOD_MIN: 'wood_min',
-        WOOD_IN_I: 'wood_in_i',
-        WOOD_OUT_I: 'wood_out_i',
-        WOOD_MIN_I: 'wood_min_i',
-        CLAY_IN: 'clay_in',
-        CLAY_OUT: 'clay_out',
-        CLAY_MIN: 'clay_min',
-        CLAY_IN_I: 'clay_in_i',
-        CLAY_OUT_I: 'clay_out_i',
-        CLAY_MIN_I: 'clay_min_i',
-        IRON_IN: 'iron_in',
-        IRON_OUT: 'iron_out',
-        IRON_MIN: 'iron_min',
-        IRON_IN_I: 'iron_in_i',
-        IRON_OUT_I: 'iron_out_i',
-        IRON_MIN_I: 'iron_min_i',
-        DISTANCE: 'distance',
-        INDIVIDUAL: 'individual',
-        PRIORITIZE: 'prioritize',
-        FULL: 'full',
-        BUILDINGS: 'buildings',
-        LEVEL: 'level',
-        UNITS: 'units',
-        AMOUNT: 'amount',
-        COINS: 'coins'
-    }
-})
-
-define('two/marketHelper/settings/updates', function () {
-    return {
-        GROUPS: 'groups'
-    }
-})
-
-define('two/marketHelper/settings/map', [
-    'two/marketHelper/settings',
-    'two/marketHelper/settings/updates'
-], function (
-    SETTINGS,
-    UPDATES
-) {
-    return {
-        [SETTINGS.GROUPS]: {
-            default: [],
-            updates: [
-                UPDATES.GROUPS,
-            ],
-            disabledOption: true,
-            inputType: 'select',
-            multiSelect: true,
-            type: 'groups'
-        },
-        [SETTINGS.WOOD_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.WOOD_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.CLAY_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_IN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_OUT]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_MIN]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_IN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_OUT_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.IRON_MIN_I]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 400000
-        },
-        [SETTINGS.AMOUNT]: {
-            default: 100,
-            inputType: 'number',
-            min: 1,
-            max: 24000
-        },
-        [SETTINGS.UNITS]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.BUILDINGS]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.LEVEL]: {
-            default: false,
-            disabledOption: true,
-            inputType: 'select'
-        },
-        [SETTINGS.FULL]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.COINS]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.PRIORITIZE]: {
-            default: false,
-            inputType: 'checkbox'
-        },
-        [SETTINGS.INDIVIDUAL]: {
-            default: 1000,
-            inputType: 'number',
-            min: 1,
-            max: 235000
-        },
-        [SETTINGS.DISTANCE]: {
-            default: 90,
-            inputType: 'number',
-            min: 1,
-            max: 300
-        }
-    }
-})
-
-define('two/marketHelper/types/units', [], function () {
-    return {
-        SPEAR: 'spear',
-        SWORD: 'sword',
-        AXE: 'axe',
-        ARCHER: 'archer',
-        LIGHT_CAVALRY: 'light_cavalry',
-        MOUNTED_ARCHER: 'mounted_archer',
-        HEAVY_CAVALRY: 'heavy_cavalry',
-        RAM: 'ram',
-        CATAPULT: 'catapult',
-        TREBUCHET: 'trebuchet',
-        DOPPELSOLDNER: 'doppelsoldner',
-        SNOB: 'snob',
-        KNIGHT: 'knight'
-    }
-})
-
-define('two/marketHelper/types/buildings', [], function () {
-    return {
-        HEADQUARTER: 'headquarter',
-        WAREHOUSE: 'warehouse',
-        FARM: 'farm',
-        RALLY_POINT: 'rally_point',
-        STATUE: 'statue',
-        WALL: 'wall',
-        TAVERN: 'tavern',
-        BARRACKS: 'barracks',
-        PRECEPTORY: 'preceptory',
-        HOSPITAL: 'hospital',
-        CLAY_PIT: 'clay_pit',
-        IRON_MINE: 'iron_mine',
-        TIMBER_CAMP: 'timber_camp',
-        CHAPEL: 'chapel',
-        CHURCH: 'church',
-        MARKET: 'market',
-        ACADEMY: 'academy'
-    }
-})
-
-define('two/marketHelper/types/level', [], function () {
-    return {
-        LEVEL_1: 'level_1',
-        LEVEL_2: 'level_2',
-        LEVEL_3: 'level_3',
-        LEVEL_4: 'level_4',
-        LEVEL_5: 'level_5',
-        LEVEL_6: 'level_6',
-        LEVEL_7: 'level_7',
-        LEVEL_8: 'level_8',
-        LEVEL_9: 'level_9',
-        LEVEL_10: 'level_10',
-        LEVEL_11: 'level_11',
-        LEVEL_12: 'level_12',
-        LEVEL_13: 'level_13',
-        LEVEL_14: 'level_14',
-        LEVEL_15: 'level_15',
-        LEVEL_16: 'level_16',
-        LEVEL_17: 'level_17',
-        LEVEL_18: 'level_18',
-        LEVEL_19: 'level_19',
-        LEVEL_20: 'level_20',
-        LEVEL_21: 'level_21',
-        LEVEL_22: 'level_22',
-        LEVEL_23: 'level_23',
-        LEVEL_24: 'level_24',
-        LEVEL_25: 'level_25',
-        LEVEL_26: 'level_26',
-        LEVEL_27: 'level_27',
-        LEVEL_28: 'level_28',
-        LEVEL_29: 'level_29',
-        LEVEL_30: 'level_30'
-    }
-})
-require([
-    'two/ready',
-    'two/marketHelper',
-    'two/marketHelper/ui',
-    'two/marketHelper/events'
-], function (
-    ready,
-    marketHelper,
-    marketHelperInterface
-) {
-    if (marketHelper.isInitialized()) {
-        return false
-    }
-
-    ready(function () {
-        marketHelper.init()
-        marketHelperInterface()
-    })
-})
-
 define('two/minimap', [
     'two/minimap/types/actions',
     'two/minimap/types/mapSizes',
@@ -33398,35 +32596,19 @@ define('two/reportSender', [
     Lockr
 ) {
     var player = modelDataService.getSelectedCharacter()
-    let sendedScoutReport = []
-    let sendedAttackReport = []
-    let sendedDefendReport = []
+    let sendedReport = []
     var playerId = player.data.character_id
     var initialized = false
     var running = false
     var convert
     const STORAGE_KEYS = {
-        SCOUT_REPORTS: 'report_sender_scout',
-        ATTACK_REPORTS: 'report_sender_attack',
-        DEFEND_REPORTS: 'report_sender_defend',
+        REPORTS: 'report_sender_reports',
     }
-    const storeScoutReport = function() {
-        Lockr.set(STORAGE_KEYS.SCOUT_REPORTS, sendedScoutReport)
+    const storeReport = function() {
+        Lockr.set(STORAGE_KEYS.REPORTS, sendedReport)
     }
-    const storeAttackReport = function() {
-        Lockr.set(STORAGE_KEYS.ATTACK_REPORTS, sendedAttackReport)
-    }
-    const storeDefendReport = function() {
-        Lockr.set(STORAGE_KEYS.DEFEND_REPORTS, sendedDefendReport)
-    }
-    const pushScoutReport = function(sentReport) {
-        sendedScoutReport.push(sentReport)
-    }
-    const pushAttackReport = function(sentReport) {
-        sendedAttackReport.push(sentReport)
-    }
-    const pushDefendReport = function(sentReport) {
-        sendedDefendReport.push(sentReport)
+    const pushReport = function(sentReport) {
+        sendedReport.push(sentReport)
     }
 
     function secondsToDaysHHMMSS(totalSeconds) {
@@ -33446,11 +32628,9 @@ define('two/reportSender', [
             }, function(data) {
                 var reports = data.reports
                 for (var i = 0; i < reports.length; i++) {
-                    if (sendedScoutReport.includes(reports[i].id)) {
+                    if (sendedReport.includes(reports[i].id)) {
                         console.log('Raport zwiadowczy już wysłany')
                     } else {
-                        pushScoutReport(reports[i].id)
-                        storeScoutReport()
                         socketService.emit(routeProvider.REPORT_GET, {
                             id: reports[i].id
                         }, sendInfoScout)
@@ -33465,11 +32645,9 @@ define('two/reportSender', [
             }, function(data) {
                 var reports = data.reports
                 for (var i = 0; i < reports.length; i++) {
-                    if (sendedDefendReport.includes(reports[i].id)) {
+                    if (sendedReport.includes(reports[i].id)) {
                         console.log('Raport wsparcia już wysłany')
                     } else {
-                        pushDefendReport(reports[i].id)
-                        storeDefendReport()
                         socketService.emit(routeProvider.REPORT_GET, {
                             id: reports[i].id
                         }, sendInfoDefense)
@@ -33484,11 +32662,9 @@ define('two/reportSender', [
             }, function(data) {
                 var reports = data.reports
                 for (var i = 0; i < reports.length; i++) {
-                    if (sendedAttackReport.includes(reports[i].id)) {
+                    if (sendedReport.includes(reports[i].id)) {
                         console.log('Raport ataku już wysłany')
                     } else {
-                        pushAttackReport(reports[i].id)
-                        storeAttackReport()
                         socketService.emit(routeProvider.REPORT_GET, {
                             id: reports[i].id
                         }, sendInfoAttack)
@@ -33584,6 +32760,8 @@ define('two/reportSender', [
                     message: message
                 })
                 alertText = []
+                pushReport(data.id)
+                storeReport()
             }
         } else {
             if (time < 10800) {
@@ -33592,6 +32770,8 @@ define('two/reportSender', [
                     message: message
                 })
                 alertText = []
+                pushReport(data.id)
+                storeReport()
             }
         }
     }
@@ -33819,6 +32999,8 @@ define('two/reportSender', [
                     message: message
                 })
                 alertText = []
+                pushReport(data.id)
+                storeReport()
             }
         }
     }
@@ -34087,6 +33269,8 @@ define('two/reportSender', [
                         message: message
                     })
                     alertText = []
+                    pushReport(data.id)
+                    storeReport()
                 }
             }
         }
@@ -34094,9 +33278,7 @@ define('two/reportSender', [
     var reportSender = {}
     reportSender.init = function() {
         initialized = true
-        sendedDefendReport = Lockr.get(STORAGE_KEYS.DEFEND_REPORTS, [], true)
-        sendedAttackReport = Lockr.get(STORAGE_KEYS.ATTACK_REPORTS, [], true)
-        sendedScoutReport = Lockr.get(STORAGE_KEYS.SCOUT_REPORTS, [], true)
+        sendedReport = Lockr.get(STORAGE_KEYS.REPORTS, [], true)
     }
     reportSender.start = function() {
         eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STARTED)
