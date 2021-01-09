@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 09 Jan 2021 21:53:48 GMT
+ * Sat, 09 Jan 2021 22:08:00 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19722,6 +19722,7 @@ define('two/fakeSender', [
                                                                         }, COMMAND_TYPES.ATTACK, {}, true)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        console.log(sendTime, inputTime)
                                                                         if (timeToSend(sendTime)) {
                                                                             console.log('Fejk nie zdąży')
                                                                         } else {
