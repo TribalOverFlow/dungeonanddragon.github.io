@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 09 Jan 2021 09:14:01 GMT
+ * Sat, 09 Jan 2021 21:53:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19386,6 +19386,7 @@ define('two/fakeSender', [
     let running = false
     let settings
     let logs
+    let timeOffset
     let groupList = modelDataService.getGroupList()
     let commandQueue = false
     var player = modelDataService.getSelectedCharacter()
@@ -19402,6 +19403,9 @@ define('two/fakeSender', [
     var intervalFinal = 0
     var Spear = 0
     var Sword = 0
+    var travelTime = 0
+    var inputTime = 0
+    var sendTime = 0
     var Axe = 0
     var Archer = 0
     var LC = 0
@@ -19467,6 +19471,9 @@ define('two/fakeSender', [
         [DATE_TYPES.OUT]: 'date_type_out'
     }
     console.log(FAKE_UNIT, FAKE_TYPE, FAKE_DATE)
+    const timeToSend = function(sendTime) {
+        return sendTime < (timeHelper.gameTime() + timeOffset)
+    }
     const updateGroups = function() {
         selectedGroups = []
         selectedGroupsP = []
@@ -19513,15 +19520,15 @@ define('two/fakeSender', [
     const sendFakes = function() {
         targets.forEach(function(target, index) {
             setTimeout(function() {
+                targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
                 intervalFinal = Math.floor(Math.random() * 10000) + commandInterval * 1000
                 newdate = utils.getTimeFromString(dateGet) + intervalFinal
                 date = utils.formatDate(newdate)
-                console.log(date)
                 socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
                     fakeVillages.forEach(function(fakeVillage, index1) {
                         if (running == true) {
-                            let ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                             setTimeout(function() {
+                                var ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                                 var repeatFour = 0
                                 for (var i = 0; i < data.villages.length; i++) {
                                     var villageId = data.villages[i].id
@@ -19554,7 +19561,7 @@ define('two/fakeSender', [
                                             var infantryTrebuchet = 0
                                             var cavalryLc = 0
                                             var cavalryHc = 0
-                                            if (target != 0 && targetLimit > 0 && ownLimit > 0) {
+                                            if (targetLimit > 0 && ownLimit > 0) {
                                                 socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
                                                     my_village_id: modelDataService.getSelectedVillage().getId(),
                                                     village_id: target,
@@ -19566,104 +19573,202 @@ define('two/fakeSender', [
                                                         'y': data.village_y,
                                                         'name': data.village_name
                                                     }
-                                                    console.log(targetFinal, village, Spear, Sword, Axe)
                                                     if (fakeType == 'attack') {
                                                         fakeUnits.forEach(function(unit, index2) {
                                                             if (running == true) {
                                                                 setTimeout(function() {
                                                                     if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                spear: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             axe: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                axe: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                archer: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             doppelsoldner: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                doppelsoldner: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantrySword += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                sword: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantrySword += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             light_cavalry: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        cavalryLc += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                light_cavalry: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            cavalryLc += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             mounted_archer: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        cavalryLc += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                mounted_archer: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            cavalryLc += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             ram: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryRam += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                ram: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryRam += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             catapult: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryRam += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                catapult: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryRam += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        cavalryHc += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                heavy_cavalry: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            cavalryHc += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             trebuchet: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryTrebuchet += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                trebuchet: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryTrebuchet += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                 }, index2 * 1000)
                                                             } else if (running == false) {
@@ -19675,37 +19780,73 @@ define('two/fakeSender', [
                                                             if (running == true) {
                                                                 setTimeout(function() {
                                                                     if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantrySupport += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                spear: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantrySupport += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantrySupport += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                archer: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantrySupport += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     }
                                                                     if (unit == 'sword' && Sword > 0) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                sword: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     }
                                                                     if (unit == 'heavy_cavalry' && HC > 0) {
-                                                                        commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(date)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, date, whenSend, {
+                                                                                heavy_cavalry: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     }
                                                                 }, index3 * 1000)
                                                             } else if (running == false) {
@@ -19715,23 +19856,37 @@ define('two/fakeSender', [
                                                     } else if (fakeType == 'four') {
                                                         if (running == true) {
                                                             if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                ownLimit -= 4
-                                                                targetLimit -= 4
-                                                                repeatFour += 1
-                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                inputTime = utils.getTimeFromString(date)
+                                                                sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                if (timeToSend(sendTime)) {
+                                                                    console.log('Fejk nie zdąży')
+                                                                } else {
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    ownLimit -= 4
+                                                                    targetLimit -= 4
+                                                                    repeatFour += 1
+                                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                }
                                                             } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 4
-                                                                targetLimit -= 4
-                                                                repeatFour += 1
-                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                inputTime = utils.getTimeFromString(date)
+                                                                sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                if (timeToSend(sendTime)) {
+                                                                    console.log('Fejk nie zdąży')
+                                                                } else {
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    ownLimit -= 4
+                                                                    targetLimit -= 4
+                                                                    repeatFour += 1
+                                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                }
                                                             }
                                                         } else if (running == false) {
                                                             return
@@ -19739,160 +19894,309 @@ define('two/fakeSender', [
                                                     } else if (fakeType == 'full') {
                                                         if (running == true) {
                                                             if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                ownLimit -= 4
-                                                                targetLimit -= 4
-                                                                repeatFour += 1
-                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                inputTime = utils.getTimeFromString(date)
+                                                                sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                if (timeToSend(sendTime)) {
+                                                                    console.log('Fejk nie zdąży')
+                                                                } else {
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                    ownLimit -= 4
+                                                                    targetLimit -= 4
+                                                                    repeatFour += 1
+                                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                }
                                                             } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                ownLimit -= 4
-                                                                targetLimit -= 4
-                                                                repeatFour += 1
-                                                                addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                inputTime = utils.getTimeFromString(date)
+                                                                sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                if (timeToSend(sendTime)) {
+                                                                    console.log('Fejk nie zdąży')
+                                                                } else {
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
+                                                                    ownLimit -= 4
+                                                                    targetLimit -= 4
+                                                                    repeatFour += 1
+                                                                    addLog(village.id, targetFinal.id, fourUnit, 'kareta')
+                                                                }
                                                             }
                                                             newattackdate = utils.getTimeFromString(date) - 2000
                                                             dateattack = utils.formatDate(newattackdate)
                                                             fakeUnits.forEach(function(unit, index4) {
                                                                 setTimeout(function() {
                                                                     if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                spear: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             axe: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                axe: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                archer: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             doppelsoldner: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryAxe += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                doppelsoldner: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryAxe += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantrySword += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                sword: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantrySword += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             light_cavalry: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        cavalryLc += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                light_cavalry: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            cavalryLc += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             mounted_archer: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        cavalryLc += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                mounted_archer: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            cavalryLc += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             ram: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryRam += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                ram: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryRam += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             catapult: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryRam += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                catapult: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryRam += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        cavalryHc += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                heavy_cavalry: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            cavalryHc += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                     if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             trebuchet: 1
-                                                                        }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantryTrebuchet += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateattack)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
+                                                                                trebuchet: 1
+                                                                            }, {}, COMMAND_TYPES.ATTACK, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantryTrebuchet += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'atak')
+                                                                        }
                                                                     }
                                                                 }, index4 * 1000)
                                                             })
-                                                            newsupportdate = utils.getTimeFromString(date) + 4000
+                                                            newsupportdate = utils.getTimeFromString(date) + 2000
                                                             dateSupport = utils.formatDate(newsupportdate)
                                                             supportUnits.forEach(function(unit, index5) {
                                                                 setTimeout(function() {
                                                                     if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantrySupport += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateSupport)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                                spear: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantrySupport += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        infantrySupport += 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateSupport)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                                archer: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            infantrySupport += 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     }
                                                                     if (unit == 'sword' && Sword > 0) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateSupport)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                                sword: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     }
                                                                     if (unit == 'heavy_cavalry' && HC > 0) {
-                                                                        commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                        travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                        ownLimit -= 1
-                                                                        targetLimit -= 1
-                                                                        addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        inputTime = utils.getTimeFromString(dateSupport)
+                                                                        sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                                                        if (timeToSend(sendTime)) {
+                                                                            console.log('Fejk nie zdąży')
+                                                                        } else {
+                                                                            commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
+                                                                                heavy_cavalry: 1
+                                                                            }, {}, COMMAND_TYPES.SUPPORT, false)
+                                                                            ownLimit -= 1
+                                                                            targetLimit -= 1
+                                                                            addLog(village.id, targetFinal.id, unit, 'wsparcie')
+                                                                        }
                                                                     }
                                                                 }, index5 * 1000)
                                                             })
@@ -19926,6 +20230,7 @@ define('two/fakeSender', [
     }
     const fakeSender = {}
     fakeSender.init = function() {
+        timeOffset = utils.getTimeOffset()
         commandQueue = require('two/commandQueue')
         COMMAND_QUEUE_DATE_TYPES = require('two/commandQueue/types/dates')
         initialized = true
@@ -19959,18 +20264,6 @@ define('two/fakeSender', [
         running = true
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
         addLog('', '', 'start', '')
-        targetGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
-        if (targetGroups == false) {
-            utils.notif('error', $filter('i18n')('error.no_group_selected', $rootScope.loc.ale, 'fake_sender'))
-            fakeSender.stopError()
-            return
-        }
-        targetGroups.forEach(function(group) {
-            groupTargets = groupList.getGroupVillageIds(group)
-            for (var i of groupTargets) {
-                targets.push(i)
-            }
-        })
         fakeType = fakeSenderSettings[SETTINGS.TYPEG]
         if (fakeType == false) {
             utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
@@ -20045,38 +20338,24 @@ define('two/fakeSender', [
         } else {
             whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
         }
-        sendFakes()
+        targetGroups = fakeSenderSettings[SETTINGS.GROUP_TARGET]
+        if (targetGroups == false) {
+            utils.notif('error', $filter('i18n')('error.no_group_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        targetGroups.forEach(function(group) {
+            groupTargets = groupList.getGroupVillageIds(group)
+            for (var i of groupTargets) {
+                targets.push(i)
+            }
+            sendFakes()
+        })
     }
     fakeSender.fakeTribe = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
         addLog('', '', 'start', '')
-        tribeId = fakeSenderSettings[SETTINGS.TRIBE_ID]
-        if (tribeId == 0) {
-            utils.notif('error', $filter('i18n')('error.no_tribe_selected', $rootScope.loc.ale, 'fake_sender'))
-            fakeSender.stopError()
-            return
-        }
-        var players = []
-        socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
-            tribe: tribeId
-        }, function(data) {
-            var members = data.members
-            for (var i = 0; i < members.length; i++) {
-                var randomPlayer = Math.floor(Math.random() * members.length)
-                players.push(members[randomPlayer].id)
-            }
-        })
-        players.forEach(function(playerId) {
-            socketService.emit(routeProvider.CHAR_GET_PROFILE, {
-                character_id: playerId
-            }, function(data) {
-                var villages = data.villages
-                villages.forEach(function(village) {
-                    targets.push(village.village_id)
-                })
-            })
-        })
         fakeType = fakeSenderSettings[SETTINGS.TYPET]
         if (fakeType == false) {
             utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
@@ -20151,49 +20430,39 @@ define('two/fakeSender', [
         } else {
             whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
         }
-        sendFakes()
+        tribeId = fakeSenderSettings[SETTINGS.TRIBE_ID]
+        if (tribeId == 0) {
+            utils.notif('error', $filter('i18n')('error.no_tribe_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        var players = []
+        socketService.emit(routeProvider.TRIBE_GET_MEMBERLIST, {
+            tribe: tribeId
+        }, function(data) {
+            var members = data.members
+            for (var i = 0; i < members.length; i++) {
+                var randomPlayer = Math.floor(Math.random() * members.length)
+                players.push(members[randomPlayer].id)
+            }
+            players.forEach(function(playerId) {
+                socketService.emit(routeProvider.CHAR_GET_PROFILE, {
+                    character_id: playerId
+                }, function(data) {
+                    var villages = data.villages
+                    villages.forEach(function(village) {
+                        targets.push(village.village_id)
+                    })
+                    sendFakes()
+                })
+            })
+        })
     }
     fakeSender.fakeProvince = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
         addLog('', '', 'start', '')
         enemies = fakeSenderSettings[SETTINGS.ENEMIES]
-        var provinceData = []
-        var characterData = 0
-        tribeId = 0
-        provinceId = fakeSenderSettings[SETTINGS.PROVINCE_ID]
-        if (provinceId == 0) {
-            utils.notif('error', $filter('i18n')('error.no_province_selected', $rootScope.loc.ale, 'fake_sender'))
-            fakeSender.stopError()
-            return
-        }
-        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
-            my_village_id: modelDataService.getSelectedVillage().getId(),
-            village_id: provinceId,
-            num_reports: 1
-        }, function(data) {
-            provinceData.push(data.province.x)
-            provinceData.push(data.province.y)
-            characterData = data.character_id
-            socketService.emit(routeProvider.MAP_GETPROVINCE, {
-                x: provinceData[0],
-                y: provinceData[1]
-            }, function(data) {
-                var provinceVillages = data.villages
-                provinceVillages.forEach(function(village) {
-                    if (village.village_id == provinceId) {
-                        tribeId = village.tribe_id
-                    }
-                })
-                provinceVillages.forEach(function(fake) {
-                    if (enemies && fake.tribe_id == tribeId) {
-                        targets.push(fake.village_id)
-                    } else if (fake.character_id == characterData) {
-                        targets.push(fake.village_id)
-                    }
-                })
-            })
-        })
         fakeType = fakeSenderSettings[SETTINGS.TYPEPro]
         if (fakeType == false) {
             utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
@@ -20268,26 +20537,48 @@ define('two/fakeSender', [
         } else {
             whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
         }
-        sendFakes()
+        var provinceData = []
+        var characterData = 0
+        tribeId = 0
+        provinceId = fakeSenderSettings[SETTINGS.PROVINCE_ID]
+        if (provinceId == 0) {
+            utils.notif('error', $filter('i18n')('error.no_province_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: provinceId,
+            num_reports: 1
+        }, function(data) {
+            provinceData.push(data.province.x)
+            provinceData.push(data.province.y)
+            characterData = data.character_id
+            socketService.emit(routeProvider.MAP_GETPROVINCE, {
+                x: provinceData[0],
+                y: provinceData[1]
+            }, function(data) {
+                var provinceVillages = data.villages
+                provinceVillages.forEach(function(village) {
+                    if (village.village_id == provinceId) {
+                        tribeId = village.tribe_id
+                    }
+                })
+                provinceVillages.forEach(function(fake) {
+                    if (enemies && fake.tribe_id == tribeId) {
+                        targets.push(fake.village_id)
+                    } else if (fake.character_id == characterData) {
+                        targets.push(fake.village_id)
+                    }
+                })
+                sendFakes()
+            })
+        })
     }
     fakeSender.fakePlayer = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.FAKE_SENDER_START)
         addLog('', '', 'start', '')
-        playerId = fakeSenderSettings[SETTINGS.PLAYER_ID]
-        if (provinceId == 0) {
-            utils.notif('error', $filter('i18n')('error.no_player_selected', $rootScope.loc.ale, 'fake_sender'))
-            fakeSender.stopError()
-            return
-        }
-        socketService.emit(routeProvider.CHAR_GET_PROFILE, {
-            character_id: playerId
-        }, function(data) {
-            var villages = data.villages
-            villages.forEach(function(village) {
-                targets.push(village.village_id)
-            })
-        })
         fakeType = fakeSenderSettings[SETTINGS.TYPEP]
         if (fakeType == false) {
             utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'fake_sender'))
@@ -20362,7 +20653,21 @@ define('two/fakeSender', [
         } else {
             whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
         }
-        sendFakes()
+        playerId = fakeSenderSettings[SETTINGS.PLAYER_ID]
+        if (playerId == 0) {
+            utils.notif('error', $filter('i18n')('error.no_player_selected', $rootScope.loc.ale, 'fake_sender'))
+            fakeSender.stopError()
+            return
+        }
+        socketService.emit(routeProvider.CHAR_GET_PROFILE, {
+            character_id: playerId
+        }, function(data) {
+            var villages = data.villages
+            villages.forEach(function(village) {
+                targets.push(village.village_id)
+            })
+            sendFakes()
+        })
     }
     fakeSender.fakeVillages = function() {
         running = true
