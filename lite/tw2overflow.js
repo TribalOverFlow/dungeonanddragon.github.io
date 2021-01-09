@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 09 Jan 2021 22:08:00 GMT
+ * Sat, 09 Jan 2021 22:33:09 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19580,7 +19580,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19597,7 +19597,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             axe: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19614,7 +19614,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19631,7 +19631,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             doppelsoldner: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19649,7 +19649,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19667,7 +19667,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             light_cavalry: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19684,7 +19684,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             mounted_archer: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19702,7 +19702,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             ram: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19719,10 +19719,10 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             catapult: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
-                                                                        console.log(sendTime, inputTime)
+                                                                        console.log(travelTime, sendTime, inputTime)
                                                                         if (timeToSend(sendTime)) {
                                                                             console.log('Fejk nie zdąży')
                                                                         } else {
@@ -19738,7 +19738,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19756,7 +19756,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             trebuchet: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19783,7 +19783,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19800,7 +19800,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19818,7 +19818,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'sword' && Sword > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19835,7 +19835,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'heavy_cavalry' && HC > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(date)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19857,7 +19857,7 @@ define('two/fakeSender', [
                                                     } else if (fakeType == 'four') {
                                                         if (running == true) {
                                                             if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                 if (timeToSend(sendTime)) {
@@ -19873,7 +19873,7 @@ define('two/fakeSender', [
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
                                                                 }
                                                             } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                 if (timeToSend(sendTime)) {
@@ -19895,7 +19895,7 @@ define('two/fakeSender', [
                                                     } else if (fakeType == 'full') {
                                                         if (running == true) {
                                                             if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
-                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                 if (timeToSend(sendTime)) {
@@ -19911,7 +19911,7 @@ define('two/fakeSender', [
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
                                                                 }
                                                             } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
-                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, true)
+                                                                travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                 if (timeToSend(sendTime)) {
@@ -19934,7 +19934,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19951,7 +19951,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             axe: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19968,7 +19968,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -19985,7 +19985,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             doppelsoldner: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20003,7 +20003,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20021,7 +20021,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             light_cavalry: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20038,7 +20038,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             mounted_archer: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20056,7 +20056,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             ram: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20073,7 +20073,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             catapult: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20091,7 +20091,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20109,7 +20109,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             trebuchet: 1
-                                                                        }, COMMAND_TYPES.ATTACK, {}, true)
+                                                                        }, COMMAND_TYPES.ATTACK, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateattack)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20133,7 +20133,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateSupport)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20150,7 +20150,7 @@ define('two/fakeSender', [
                                                                     } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateSupport)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20168,7 +20168,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'sword' && Sword > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateSupport)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
@@ -20185,7 +20185,7 @@ define('two/fakeSender', [
                                                                     if (unit == 'heavy_cavalry' && HC > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
-                                                                        }, COMMAND_TYPES.SUPPORT, {}, true)
+                                                                        }, COMMAND_TYPES.SUPPORT, {}, false)
                                                                         inputTime = utils.getTimeFromString(dateSupport)
                                                                         sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
                                                                         if (timeToSend(sendTime)) {
