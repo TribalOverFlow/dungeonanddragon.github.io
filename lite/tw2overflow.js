@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 08 Jan 2021 23:20:06 GMT
+ * Sat, 09 Jan 2021 09:14:01 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -4663,7 +4663,7 @@ define('two/alertSender', [
     var timecompleted = 0
     var finalTime = ''
     const STORAGE_KEYS = {
-        ALERTS: 'auto_withdraw_alerts'
+        ALERTS: 'alert_sender_alerts'
     }
     const storeAlerts = function() {
         Lockr.set(STORAGE_KEYS.ALERTS, sendedAlert)
@@ -4755,11 +4755,11 @@ define('two/alertSender', [
     alertSender.start = function() {
         eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STARTED)
         running = true
+        checkincomingsAttacks()
         setInterval(function() {
             running = true
             checkincomingsAttacks()
         }, 60000)
-        checkincomingsAttacks()
     }
     alertSender.stop = function() {
         eventQueue.trigger(eventTypeProvider.ALERT_SENDER_STOPPED)
@@ -33085,18 +33085,43 @@ require([
 })
 
 define('two/reportSender', [
-    'queues/EventQueue'
+    'queues/EventQueue',
+    'Lockr'
 ], function(
-    eventQueue
+    eventQueue,
+    Lockr
 ) {
     var player = modelDataService.getSelectedCharacter()
+    let sendedScoutReport = []
+    let sendedAttackReport = []
+    let sendedDefendReport = []
     var playerId = player.data.character_id
     var initialized = false
     var running = false
-    var scoutReportsId = []
-    var defenseReportsId = []
-    var attackReportsId = []
     var convert
+    const STORAGE_KEYS = {
+        SCOUT_REPORTS: 'report_sender_scout',
+        ATTACK_REPORTS: 'report_sender_attack',
+        DEFEND_REPORTS: 'report_sender_defend',
+    }
+    const storeScoutReport = function() {
+        Lockr.set(STORAGE_KEYS.SCOUT_REPORTS, sendedScoutReport)
+    }
+    const storeAttackReport = function() {
+        Lockr.set(STORAGE_KEYS.ATTACK_REPORTS, sendedAttackReport)
+    }
+    const storeDefendReport = function() {
+        Lockr.set(STORAGE_KEYS.DEFEND_REPORTS, sendedDefendReport)
+    }
+    const pushScoutReport = function(sentReport) {
+        sendedScoutReport.push(sentReport)
+    }
+    const pushAttackReport = function(sentReport) {
+        sendedAttackReport.push(sentReport)
+    }
+    const pushDefendReport = function(sentReport) {
+        sendedDefendReport.push(sentReport)
+    }
 
     function secondsToDaysHHMMSS(totalSeconds) {
         var returnString = ''
@@ -33106,63 +33131,67 @@ define('two/reportSender', [
         return returnString
     }
     var checkNewReports = function() {
-        if (!running) {
-            return false
+        if (running == true) {
+            socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
+                offset: 0,
+                count: 50,
+                query: '',
+                types: ['scouting']
+            }, function(data) {
+                var reports = data.reports
+                for (var i = 0; i < reports.length; i++) {
+                    if (sendedScoutReport.includes(reports[i].id)) {
+                        console.log('Raport zwiadowczy już wysłany')
+                    } else {
+                        pushScoutReport(reports[i].id)
+                        storeScoutReport()
+                        socketService.emit(routeProvider.REPORT_GET, {
+                            id: reports[i].id
+                        }, sendInfoScout)
+                    }
+                }
+            })
+            socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
+                offset: 0,
+                count: 100,
+                query: '',
+                types: ['defense']
+            }, function(data) {
+                var reports = data.reports
+                for (var i = 0; i < reports.length; i++) {
+                    if (sendedDefendReport.includes(reports[i].id)) {
+                        console.log('Raport wsparcia już wysłany')
+                    } else {
+                        pushDefendReport(reports[i].id)
+                        storeDefendReport()
+                        socketService.emit(routeProvider.REPORT_GET, {
+                            id: reports[i].id
+                        }, sendInfoDefense)
+                    }
+                }
+            })
+            socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
+                offset: 0,
+                count: 100,
+                query: '',
+                types: ['attack']
+            }, function(data) {
+                var reports = data.reports
+                for (var i = 0; i < reports.length; i++) {
+                    if (sendedAttackReport.includes(reports[i].id)) {
+                        console.log('Raport ataku już wysłany')
+                    } else {
+                        pushAttackReport(reports[i].id)
+                        storeAttackReport()
+                        socketService.emit(routeProvider.REPORT_GET, {
+                            id: reports[i].id
+                        }, sendInfoAttack)
+                    }
+                }
+            })
+        } else if (running == false) {
+            return
         }
-        socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
-            offset: 0,
-            count: 50,
-            query: '',
-            types: ['scouting']
-        }, function(data) {
-            var reports = data.reports
-            for (var i = 0; i < reports.length; i++) {
-                if (scoutReportsId.includes(reports[i].id)) {
-                    console.log('Raport zwiadowczy już wysłany')
-                } else {
-                    scoutReportsId.push(reports[i].id)
-                    socketService.emit(routeProvider.REPORT_GET, {
-                        id: reports[i].id
-                    }, sendInfoScout)
-                }
-            }
-        })
-        socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
-            offset: 0,
-            count: 100,
-            query: '',
-            types: ['defense']
-        }, function(data) {
-            var reports = data.reports
-            for (var i = 0; i < reports.length; i++) {
-                if (defenseReportsId.includes(reports[i].id)) {
-                    console.log('Raport wsparcia już wysłany')
-                } else {
-                    defenseReportsId.push(reports[i].id)
-                    socketService.emit(routeProvider.REPORT_GET, {
-                        id: reports[i].id
-                    }, sendInfoDefense)
-                }
-            }
-        })
-        socketService.emit(routeProvider.REPORT_GET_LIST_REVERSE, {
-            offset: 0,
-            count: 100,
-            query: '',
-            types: ['attack']
-        }, function(data) {
-            var reports = data.reports
-            for (var i = 0; i < reports.length; i++) {
-                if (attackReportsId.includes(reports[i].id)) {
-                    console.log('Raport ataku już wysłany')
-                } else {
-                    attackReportsId.push(reports[i].id)
-                    socketService.emit(routeProvider.REPORT_GET, {
-                        id: reports[i].id
-                    }, sendInfoAttack)
-                }
-            }
-        })
     }
     var sendInfoScout = function sendInfoScout(data) {
         var alertText = []
@@ -33245,7 +33274,7 @@ define('two/reportSender', [
         if (defCharacterId != playerId) {
             if (time < 10800) {
                 socketService.emit(routeProvider.MESSAGE_REPLY, {
-                    message_id: 8462,
+                    message_id: 2965,
                     message: message
                 })
                 alertText = []
@@ -33253,7 +33282,7 @@ define('two/reportSender', [
         } else {
             if (time < 10800) {
                 socketService.emit(routeProvider.MESSAGE_REPLY, {
-                    message_id: 8463,
+                    message_id: 2966,
                     message: message
                 })
                 alertText = []
@@ -33480,7 +33509,7 @@ define('two/reportSender', [
             var message = alertText.join()
             if (time < 10800) {
                 socketService.emit(routeProvider.MESSAGE_REPLY, {
-                    message_id: 8461,
+                    message_id: 2964,
                     message: message
                 })
                 alertText = []
@@ -33748,7 +33777,7 @@ define('two/reportSender', [
                 var message = alertText.join()
                 if (time < 10800) {
                     socketService.emit(routeProvider.MESSAGE_REPLY, {
-                        message_id: 8460,
+                        message_id: 2963,
                         message: message
                     })
                     alertText = []
@@ -33759,15 +33788,18 @@ define('two/reportSender', [
     var reportSender = {}
     reportSender.init = function() {
         initialized = true
+        sendedDefendReport = Lockr.get(STORAGE_KEYS.DEFEND_REPORTS, [], true)
+        sendedAttackReport = Lockr.get(STORAGE_KEYS.ATTACK_REPORTS, [], true)
+        sendedScoutReport = Lockr.get(STORAGE_KEYS.SCOUT_REPORTS, [], true)
     }
     reportSender.start = function() {
         eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STARTED)
         running = true
+        checkNewReports()
         setInterval(function() {
             running = true
             checkNewReports()
         }, 60000)
-        checkNewReports()
     }
     reportSender.stop = function() {
         eventQueue.trigger(eventTypeProvider.REPORT_SENDER_STOPPED)
