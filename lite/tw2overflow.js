@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 09 Jan 2021 23:52:46 GMT
+ * Sun, 10 Jan 2021 00:02:09 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -32754,7 +32754,7 @@ define('two/reportSender', [
         alertText.push('[size=XL][b]Raport szpiegowski: [report]' + newToken + '[/report][br]' + resultString + ' --- Typ: ' + type + '[/b][/size][br][b][size=large] Czas wejścia szpiegów: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Liczba szpiegów: [b]' + defScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + defScoutsLossesFinal + '[/color][/b][br]Wioska pochodzenia: [/b]' + origin + '[b] Gracz szpiegujący: [/b]' + gamer + '[br]Liczba szpiegów: [b]' + attScoutsFinal + '[/b] Stracone: [b][color=e21f1f]' + attScoutsLossesFinal + '[/color][/b][/size]')
         var message = alertText.join()
         if (defCharacterId != playerId) {
-            if (time < 10800) {
+            if (time < 21600000) {
                 socketService.emit(routeProvider.MESSAGE_REPLY, {
                     message_id: 2965,
                     message: message
@@ -32764,7 +32764,7 @@ define('two/reportSender', [
                 storeReport()
             }
         } else {
-            if (time < 10800) {
+            if (time < 21600000) {
                 socketService.emit(routeProvider.MESSAGE_REPLY, {
                     message_id: 2966,
                     message: message
@@ -32993,7 +32993,7 @@ define('two/reportSender', [
             time = Math.floor((dateNow / 1000) - timecreated)
             alertText.push('[size=XL][b]Raport obronny: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersF + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
             var message = alertText.join()
-            if (time < 10800) {
+            if (time < 21600000) {
                 socketService.emit(routeProvider.MESSAGE_REPLY, {
                     message_id: 2964,
                     message: message
@@ -33263,7 +33263,7 @@ define('two/reportSender', [
             if (defCharacterName != null) {
                 alertText.push('[size=XL][b]Raport z ataku: [report]' + newToken + '[/report][br]' + resultString + '[/b][/size][br][b][size=large] Czas wejścia ataku: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + defVillageId + ']' + defVillageName + '[/village][b] Gracz cel: [/b][player=' + defCharacterId + ']' + defCharacterName + '[/player][br]Modyfikator obrony: [b]' + defModifier + '[/b] Bonus za mury: [b]' + wallBonus + '[/b][br]Wiara: [b]' + defFaith + '[/b] Bonus nocny: [b]' + nightB + '[/b][br]Pozostałe bonusy: [b]' + finishedDefEffects + '[/b][br][b]Wioska pochodzenia: [/b]' + origin + '[b] Gracz atakujący: [/b]' + gamer + '[br]Modyfikator ataku: [b]' + attModifier + '[/b] Morale: [b]' + morale + '[/b][br]Wiara: [b]' + attFaith + '[/b] Szczęście: [b]' + luck + '[/b][br]Pozostałe bonusy: [b]' + finishedAttEffects + '[/b][br]Oficerowie: [b]' + officersD + '[/b][br]' + loyaltyStart + '' + loyaltyFinish + '[br]' + wallStart + '' + wallFinish + '[/size]')
                 var message = alertText.join()
-                if (time < 10800) {
+                if (time < 21600000) {
                     socketService.emit(routeProvider.MESSAGE_REPLY, {
                         message_id: 2963,
                         message: message
