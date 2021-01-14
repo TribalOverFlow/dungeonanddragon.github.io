@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 13 Jan 2021 23:51:11 GMT
+ * Thu, 14 Jan 2021 08:02:13 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -25671,6 +25671,7 @@ define('two/powerHelper', [
     let running = false
     let settings
     var lcD = 0
+    var wall = 0
     var lcAmount = 0
     var hcD = 0
     var hcAmount = 0
@@ -25743,7 +25744,50 @@ define('two/powerHelper', [
     powerHelper.setBunker = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.POWER_HELPER_START)
-        var wall = powerHelperSettings[SETTINGS.WALL]
+        var wallGet = powerHelperSettings[SETTINGS.WALL]
+        if (wallGet == 'level_1') {
+            wall = 1
+        } else if (wallGet == 'level_2') {
+            wall = 2
+        } else if (wallGet == 'level_3') {
+            wall = 2
+        } else if (wallGet == 'level_4') {
+            wall = 2
+        } else if (wallGet == 'level_5') {
+            wall = 5
+        } else if (wallGet == 'level_6') {
+            wall = 6
+        } else if (wallGet == 'level_7') {
+            wall = 7
+        } else if (wallGet == 'level_8') {
+            wall = 8
+        } else if (wallGet == 'level_9') {
+            wall = 9
+        } else if (wallGet == 'level_10') {
+            wall = 10
+        } else if (wallGet == 'level_11') {
+            wall = 11
+        } else if (wallGet == 'level_12') {
+            wall = 12
+        } else if (wallGet == 'level_13') {
+            wall = 13
+        } else if (wallGet == 'level_14') {
+            wall = 14
+        } else if (wallGet == 'level_15') {
+            wall = 15
+        } else if (wallGet == 'level_16') {
+            wall = 16
+        } else if (wallGet == 'level_17') {
+            wall = 17
+        } else if (wallGet == 'level_18') {
+            wall = 18
+        } else if (wallGet == 'level_19') {
+            wall = 19
+        } else if (wallGet == 'level_20') {
+            wall = 20
+        } else {
+            wall = 0
+        }
         var def_inf = [25, 55, 10, 10, 30, 40, 200, 20, 100, 250, 100, 200, 100]
         var def_kav = [45, 5, 5, 30, 40, 30, 160, 50, 50, 400, 50, 250, 100]
         var def_arc = [10, 30, 10, 60, 30, 50, 180, 20, 100, 150, 100, 200, 50]
@@ -27120,6 +27164,17 @@ define('two/powerHelper/ui', [
         $scope.findCombination = findCombination
         $scope.clearBunker = clearBunker
         $scope.clearBeatBunker = clearBeatBunker
+        $scope.spearD = 0
+        $scope.swordD = 0
+        $scope.axeD = 0
+        $scope.archerD = 0
+        $scope.lcD = 0
+        $scope.maD = 0
+        $scope.hcD = 0
+        $scope.ramD = 0
+        $scope.catapultD = 0
+        $scope.berserkerD = 0
+        $scope.trebuchetD = 0
         settings.injectScope($scope)
         $scope.selectTab = selectTab
         let eventScope = new EventScope('twoverflow_power_helper_window', function onDestroy() {
