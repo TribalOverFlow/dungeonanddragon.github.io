@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 19 Jan 2021 21:49:54 GMT
+ * Tue, 19 Jan 2021 22:04:49 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19533,6 +19533,8 @@ define('two/fakeSender', [
                     fakeVillages.forEach(function(fakeVillage, index1) {
                         if (running == true) {
                             setTimeout(function() {
+                                limitThisVillage = allLimits[i]
+                                console.log(limitThisVillage, allLimits)
                                 var repeatFour = 0
                                 for (var i = 0; i < data.villages.length; i++) {
                                     var villageId = data.villages[i].id
@@ -19581,8 +19583,6 @@ define('two/fakeSender', [
                                                         fakeUnits.forEach(function(unit, index2) {
                                                             if (running == true) {
                                                                 setTimeout(function() {
-                                                                    limitThisVillage = allLimits[i]
-                                                                    console.log(limitThisVillage)
                                                                     if (unit == 'spear' && Spear > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
