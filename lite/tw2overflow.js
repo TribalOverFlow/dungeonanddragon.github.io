@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 14 Jan 2021 08:02:13 GMT
+ * Tue, 19 Jan 2021 20:25:03 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19394,6 +19394,9 @@ define('two/fakeSender', [
     let COMMAND_QUEUE_DATE_TYPES
     const LOGS_LIMIT = 500
     var village = {}
+    var allLimits = []
+    var limitThisVillage = 0
+    var limitSubtract = 0
     var targetFinal = {}
     let selectedGroups = []
     let selectedGroupsP = []
@@ -19433,6 +19436,8 @@ define('two/fakeSender', [
     var dateattack = ''
     var dateSupport = ''
     var targetLimit = 0
+    var ownLimit = 0
+    var targetLimitGeneral = 0
     var ownGroups = ''
     var targetGroups = ''
     var commandInterval = 0
@@ -19520,7 +19525,7 @@ define('two/fakeSender', [
     const sendFakes = function() {
         targets.forEach(function(target, index) {
             setTimeout(function() {
-                targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
+                targetLimit = targetLimitGeneral
                 intervalFinal = Math.floor(Math.random() * 10000) + commandInterval * 1000
                 newdate = utils.getTimeFromString(dateGet) + intervalFinal
                 date = utils.formatDate(newdate)
@@ -19528,7 +19533,6 @@ define('two/fakeSender', [
                     fakeVillages.forEach(function(fakeVillage, index1) {
                         if (running == true) {
                             setTimeout(function() {
-                                var ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWN]
                                 var repeatFour = 0
                                 for (var i = 0; i < data.villages.length; i++) {
                                     var villageId = data.villages[i].id
@@ -19561,7 +19565,7 @@ define('two/fakeSender', [
                                             var infantryTrebuchet = 0
                                             var cavalryLc = 0
                                             var cavalryHc = 0
-                                            if (targetLimit > 0 && ownLimit > 0) {
+                                            if (targetLimit > 0) {
                                                 socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
                                                     my_village_id: modelDataService.getSelectedVillage().getId(),
                                                     village_id: target,
@@ -19577,7 +19581,8 @@ define('two/fakeSender', [
                                                         fakeUnits.forEach(function(unit, index2) {
                                                             if (running == true) {
                                                                 setTimeout(function() {
-                                                                    if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
+                                                                    limitThisVillage = allLimits[i]
+                                                                    if (unit == 'spear' && Spear > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19589,12 +19594,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 spear: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
+                                                                    } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             axe: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19606,12 +19612,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 axe: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19623,12 +19630,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 archer: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
+                                                                    } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             doppelsoldner: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19640,13 +19648,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 doppelsoldner: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
+                                                                    if (unit == 'sword' && Sword > 0 && infantrySword < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19658,13 +19667,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 sword: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySword += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
+                                                                    if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             light_cavalry: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19676,12 +19686,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 light_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryLc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
+                                                                    } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             mounted_archer: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19693,13 +19704,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 mounted_archer: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryLc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
+                                                                    if (unit == 'ram' && Ram > 0 && infantryRam < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             ram: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19711,12 +19723,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 ram: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryRam += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
+                                                                    } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             catapult: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19729,13 +19742,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 catapult: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryRam += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
+                                                                    if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19747,13 +19761,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 heavy_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryHc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
+                                                                    if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             trebuchet: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19765,7 +19780,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 trebuchet: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryTrebuchet += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -19780,7 +19796,8 @@ define('two/fakeSender', [
                                                         supportUnits.forEach(function(unit, index3) {
                                                             if (running == true) {
                                                                 setTimeout(function() {
-                                                                    if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
+                                                                    limitThisVillage = allLimits[i]
+                                                                    if (unit == 'spear' && Spear > 0 && infantrySupport < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -19792,12 +19809,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 spear: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
-                                                                    } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -19809,13 +19827,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 archer: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
                                                                     }
-                                                                    if (unit == 'sword' && Sword > 0) {
+                                                                    if (unit == 'sword' && Sword > 0 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -19827,12 +19846,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 sword: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
                                                                     }
-                                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                                    if (unit == 'heavy_cavalry' && HC > 0 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -19844,7 +19864,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 heavy_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
@@ -19856,7 +19877,8 @@ define('two/fakeSender', [
                                                         })
                                                     } else if (fakeType == 'four') {
                                                         if (running == true) {
-                                                            if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
+                                                            limitThisVillage = allLimits[i]
+                                                            if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1 && limitThisVillage > 3 && targetLimit > 3) {
                                                                 travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
@@ -19867,12 +19889,13 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                    ownLimit -= 4
+                                                                    limitSubtract = allLimits[i] - 4
+                                                                    allLimits.splice(i, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
                                                                 }
-                                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
+                                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1 && limitThisVillage > 3 && targetLimit > 3) {
                                                                 travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
@@ -19883,7 +19906,8 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                    ownLimit -= 4
+                                                                    limitSubtract = allLimits[i] - 4
+                                                                    allLimits.splice(i, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
@@ -19894,7 +19918,8 @@ define('two/fakeSender', [
                                                         }
                                                     } else if (fakeType == 'full') {
                                                         if (running == true) {
-                                                            if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1) {
+                                                            limitThisVillage = allLimits[i]
+                                                            if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1 && limitThisVillage > 3 && targetLimit > 3) {
                                                                 travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
@@ -19905,12 +19930,13 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                    ownLimit -= 4
+                                                                    limitSubtract = allLimits[i] - 4
+                                                                    allLimits.splice(i, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
                                                                 }
-                                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1) {
+                                                            } else if ((Ram > 0 && fourUnit == 'ram') || (Trebuchet > 0 && fourUnit == 'trebuchet') && repeatFour < 1 && limitThisVillage > 3 && targetLimit > 3) {
                                                                 travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
                                                                 sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
@@ -19921,7 +19947,8 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                    ownLimit -= 4
+                                                                    limitSubtract = allLimits[i] - 4
+                                                                    allLimits.splice(i, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
@@ -19931,7 +19958,8 @@ define('two/fakeSender', [
                                                             dateattack = utils.formatDate(newattackdate)
                                                             fakeUnits.forEach(function(unit, index4) {
                                                                 setTimeout(function() {
-                                                                    if (unit == 'spear' && Spear > 0 && infantryAxe < 1) {
+                                                                    limitThisVillage = allLimits[i]
+                                                                    if (unit == 'spear' && Spear > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19943,12 +19971,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 spear: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1) {
+                                                                    } else if (unit == 'axe' && Axe > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             axe: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19960,12 +19989,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 axe: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1) {
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19977,12 +20007,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 archer: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1) {
+                                                                    } else if (unit == 'doppelsoldner' && Berserker > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             doppelsoldner: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -19994,13 +20025,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 doppelsoldner: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'sword' && Sword > 0 && infantrySword < 1) {
+                                                                    if (unit == 'sword' && Sword > 0 && infantrySword < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -20012,13 +20044,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 sword: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySword += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1) {
+                                                                    if (unit == 'light_cavalry' && LC > 0 && cavalryLc < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             light_cavalry: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -20030,12 +20063,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 light_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryLc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1) {
+                                                                    } else if (unit == 'mounted_archer' && MA > 0 && cavalryLc < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             mounted_archer: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -20047,13 +20081,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 mounted_archer: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryLc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'ram' && Ram > 0 && infantryRam < 1) {
+                                                                    if (unit == 'ram' && Ram > 0 && infantryRam < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             ram: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -20065,12 +20100,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 ram: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryRam += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
-                                                                    } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1) {
+                                                                    } else if (unit == 'catapult' && Catapult > 0 && infantryRam < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             catapult: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -20082,13 +20118,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 catapult: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryRam += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1) {
+                                                                    if (unit == 'heavy_cavalry' && HC > 0 && cavalryHc < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -20100,13 +20137,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 heavy_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryHc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
                                                                         }
                                                                     }
-                                                                    if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1) {
+                                                                    if (unit == 'trebuchet' && Trebuchet > 0 && infantryTrebuchet < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             trebuchet: 1
                                                                         }, COMMAND_TYPES.ATTACK, {}, false)
@@ -20118,7 +20156,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 trebuchet: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryTrebuchet += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20130,7 +20169,8 @@ define('two/fakeSender', [
                                                             dateSupport = utils.formatDate(newsupportdate)
                                                             supportUnits.forEach(function(unit, index5) {
                                                                 setTimeout(function() {
-                                                                    if (unit == 'spear' && Spear > 0 && infantrySupport < 1) {
+                                                                    limitThisVillage = allLimits[i]
+                                                                    if (unit == 'spear' && Spear > 0 && infantrySupport < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -20142,12 +20182,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 spear: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
-                                                                    } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1) {
+                                                                    } else if (unit == 'archer' && Archer > 0 && infantrySupport < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             archer: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -20159,13 +20200,14 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 archer: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
                                                                     }
-                                                                    if (unit == 'sword' && Sword > 0) {
+                                                                    if (unit == 'sword' && Sword > 0 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             sword: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -20177,12 +20219,13 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 sword: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
                                                                     }
-                                                                    if (unit == 'heavy_cavalry' && HC > 0) {
+                                                                    if (unit == 'heavy_cavalry' && HC > 0 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             heavy_cavalry: 1
                                                                         }, COMMAND_TYPES.SUPPORT, {}, false)
@@ -20194,7 +20237,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 heavy_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            ownLimit -= 1
+                                                                            limitSubtract = allLimits[i] - 1
+                                                                            allLimits.splice(i, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
@@ -20324,12 +20368,14 @@ define('two/fakeSender', [
             fakeSender.stopError()
             return
         }
-        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETG]
+        targetLimitGeneral = fakeSenderSettings[SETTINGS.LIMIT_TARGETG]
+        ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWNG]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPG]
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
             for (var i of groupVillages) {
                 fakeVillages.push(i)
+                allLimits.push(ownLimit)
             }
         })
         commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALG]
@@ -20416,12 +20462,14 @@ define('two/fakeSender', [
             fakeSender.stopError()
             return
         }
-        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETT]
+        targetLimitGeneral = fakeSenderSettings[SETTINGS.LIMIT_TARGETT]
+        ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWNT]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPT]
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
             for (var i of groupVillages) {
                 fakeVillages.push(i)
+                allLimits.push(ownLimit)
             }
         })
         commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALT]
@@ -20523,12 +20571,14 @@ define('two/fakeSender', [
             fakeSender.stopError()
             return
         }
-        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETPRO]
+        targetLimitGeneral = fakeSenderSettings[SETTINGS.LIMIT_TARGETPRO]
+        ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWNPRO]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPPRO]
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
             for (var i of groupVillages) {
                 fakeVillages.push(i)
+                allLimits.push(ownLimit)
             }
         })
         commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALPRO]
@@ -20639,12 +20689,14 @@ define('two/fakeSender', [
             fakeSender.stopError()
             return
         }
-        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGETP]
+        targetLimitGeneral = fakeSenderSettings[SETTINGS.LIMIT_TARGETP]
+        ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWNP]
         ownGroups = fakeSenderSettings[SETTINGS.GROUPP]
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
             for (var i of groupVillages) {
                 fakeVillages.push(i)
+                allLimits.push(ownLimit)
             }
         })
         commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVALP]
@@ -20768,13 +20820,15 @@ define('two/fakeSender', [
             fakeSender.stopError()
             return
         }
-        targetLimit = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
+        targetLimitGeneral = fakeSenderSettings[SETTINGS.LIMIT_TARGET]
+        ownLimit = fakeSenderSettings[SETTINGS.LIMIT_OWNG]
         ownGroups = fakeSenderSettings[SETTINGS.GROUP]
         commandInterval = fakeSenderSettings[SETTINGS.COMMAND_INTERVAL]
         ownGroups.forEach(function(group) {
             groupVillages = groupList.getGroupVillageIds(group)
             for (var i of groupVillages) {
                 fakeVillages.push(i)
+                allLimits.push(ownLimit)
             }
         })
         dateType = fakeSenderSettings[SETTINGS.DATE_TYPEV]
@@ -25670,28 +25724,28 @@ define('two/powerHelper', [
     let initialized = false
     let running = false
     let settings
-    var lcD = 0
+    var lcDFinal = 0
     var wall = 0
     var lcAmount = 0
-    var hcD = 0
+    var hcDFinal = 0
     var hcAmount = 0
-    var catapultD = 0
+    var catapultDFinal = 0
     var catapultAmount = 0
-    var axeD = 0
+    var axeDFinal = 0
     var axeAmount = 0
-    var archerD = 0
+    var archerDFinal = 0
     var archerAmount = 0
-    var maD = 0
+    var maDFinal = 0
     var maAmount = 0
     var ramAmount = 0
-    var ramD = 0
-    var spearD = 0
+    var ramDFinal = 0
+    var spearDFinal = 0
     var spearAmount = 0
     var swordAmount = 0
-    var swordD = 0
+    var swordDFinal = 0
     var trebuchetAmount = 0
-    var trebuchetD = 0
-    var berserkerD = 0
+    var trebuchetDFinal = 0
+    var berserkerDFinal = 0
     var berserkerAmount = 0
     let powerHelperSettings
     const STORAGE_KEYS = {
@@ -26869,29 +26923,29 @@ define('two/powerHelper', [
         function sumEach() {
             if (wall > 0) {
                 var wallmodifier = 1 + (wall * 0.05285)
-                spearD = Math.ceil((spearInf + spearCav + spearArc) / wallmodifier)
-                swordD = Math.ceil((swordInf + swordCav + swordArc) / wallmodifier)
-                axeD = Math.ceil((axeInf + axeCav + axeArc) / wallmodifier)
-                archerD = Math.ceil((archerInf + archerCav + archerArc) / wallmodifier)
-                lcD = Math.ceil((lcInf + lcCav + lcArc) / wallmodifier)
-                maD = Math.ceil((maInf + maCav + maArc) / wallmodifier)
-                hcD = Math.ceil((hcInf + hcCav + hcArc) / wallmodifier)
-                ramD = Math.ceil((ramInf + ramCav + ramArc) / wallmodifier)
-                catapultD = Math.ceil((catapultInf + catapultCav + catapultArc) / wallmodifier)
-                berserkerD = Math.ceil((berserkerInf + berserkerCav + berserkerArc) / wallmodifier)
-                trebuchetD = Math.ceil((trebuchetInf + trebuchetCav + trebuchetArc) / wallmodifier) + sumSiege
+                spearDFinal = Math.ceil((spearInf + spearCav + spearArc) / wallmodifier)
+                swordDFinal = Math.ceil((swordInf + swordCav + swordArc) / wallmodifier)
+                axeDFinal = Math.ceil((axeInf + axeCav + axeArc) / wallmodifier)
+                archerDFinal = Math.ceil((archerInf + archerCav + archerArc) / wallmodifier)
+                lcDFinal = Math.ceil((lcInf + lcCav + lcArc) / wallmodifier)
+                maDFinal = Math.ceil((maInf + maCav + maArc) / wallmodifier)
+                hcDFinal = Math.ceil((hcInf + hcCav + hcArc) / wallmodifier)
+                ramDFinal = Math.ceil((ramInf + ramCav + ramArc) / wallmodifier)
+                catapultDFinal = Math.ceil((catapultInf + catapultCav + catapultArc) / wallmodifier)
+                berserkerDFinal = Math.ceil((berserkerInf + berserkerCav + berserkerArc) / wallmodifier)
+                trebuchetDFinal = Math.ceil((trebuchetInf + trebuchetCav + trebuchetArc) / wallmodifier) + sumSiege
             } else {
-                spearD = Math.ceil(spearInf + spearCav + spearArc)
-                swordD = Math.ceil(swordInf + swordCav + swordArc)
-                axeD = Math.ceil(axeInf + axeCav + axeArc)
-                archerD = Math.ceil(archerInf + archerCav + archerArc)
-                lcD = Math.ceil(lcInf + lcCav + lcArc)
-                maD = Math.ceil(maInf + maCav + maArc)
-                hcD = Math.ceil(hcInf + hcCav + hcArc)
-                ramD = Math.ceil(ramInf + ramCav + ramArc)
-                catapultD = Math.ceil(catapultInf + catapultCav + catapultArc)
-                berserkerD = Math.ceil(berserkerInf + berserkerCav + berserkerArc)
-                trebuchetD = Math.ceil(trebuchetInf + trebuchetCav + trebuchetArc)
+                spearDFinal = Math.ceil(spearInf + spearCav + spearArc)
+                swordDFinal = Math.ceil(swordInf + swordCav + swordArc)
+                axeDFinal = Math.ceil(axeInf + axeCav + axeArc)
+                archerDFinal = Math.ceil(archerInf + archerCav + archerArc)
+                lcDFinal = Math.ceil(lcInf + lcCav + lcArc)
+                maDFinal = Math.ceil(maInf + maCav + maArc)
+                hcDFinal = Math.ceil(hcInf + hcCav + hcArc)
+                ramDFinal = Math.ceil(ramInf + ramCav + ramArc)
+                catapultDFinal = Math.ceil(catapultInf + catapultCav + catapultArc)
+                berserkerDFinal = Math.ceil(berserkerInf + berserkerCav + berserkerArc)
+                trebuchetDFinal = Math.ceil(trebuchetInf + trebuchetCav + trebuchetArc)
             }
             fullFarmRatio()
         }
@@ -26951,37 +27005,37 @@ define('two/powerHelper', [
         return initialized
     }
     powerHelper.getSpearD = function() {
-        return spearD
+        return spearDFinal
     }
     powerHelper.getSwordD = function() {
-        return swordD
+        return swordDFinal
     }
     powerHelper.getAxeD = function() {
-        return axeD
+        return axeDFinal
     }
     powerHelper.getArcherD = function() {
-        return archerD
+        return archerDFinal
     }
     powerHelper.getLcD = function() {
-        return lcD
+        return lcDFinal
     }
     powerHelper.getMaD = function() {
-        return maD
+        return maDFinal
     }
     powerHelper.getHcD = function() {
-        return hcD
+        return hcDFinal
     }
     powerHelper.getRamD = function() {
-        return ramD
+        return ramDFinal
     }
     powerHelper.getCatapultD = function() {
-        return catapultD
+        return catapultDFinal
     }
     powerHelper.getBerserkerD = function() {
-        return berserkerD
+        return berserkerDFinal
     }
     powerHelper.getTrebuchetD = function() {
-        return trebuchetD
+        return trebuchetDFinal
     }
     powerHelper.getSpearFD = function() {
         return spearAmount
