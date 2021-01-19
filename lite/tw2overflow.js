@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 19 Jan 2021 22:14:51 GMT
+ * Tue, 19 Jan 2021 22:53:50 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19797,7 +19797,6 @@ define('two/fakeSender', [
                                                         supportUnits.forEach(function(unit, index3) {
                                                             if (running == true) {
                                                                 setTimeout(function() {
-                                                                    limitThisVillage = allLimits[i]
                                                                     if (unit == 'spear' && Spear > 0 && infantrySupport < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
@@ -19810,8 +19809,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 spear: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
@@ -19828,8 +19827,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 archer: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
@@ -19847,8 +19846,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 sword: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
@@ -19865,8 +19864,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, date, whenSend, {
                                                                                 heavy_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
@@ -19878,7 +19877,6 @@ define('two/fakeSender', [
                                                         })
                                                     } else if (fakeType == 'four') {
                                                         if (running == true) {
-                                                            limitThisVillage = allLimits[i]
                                                             if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1 && limitThisVillage > 3 && targetLimit > 3) {
                                                                 travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
@@ -19890,8 +19888,8 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                    limitSubtract = allLimits[i] - 4
-                                                                    allLimits.splice(i, 1, limitSubtract)
+                                                                    limitSubtract = allLimits[index1] - 4
+                                                                    allLimits.splice(index1, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
@@ -19907,8 +19905,8 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                    limitSubtract = allLimits[i] - 4
-                                                                    allLimits.splice(i, 1, limitSubtract)
+                                                                    limitSubtract = allLimits[index1] - 4
+                                                                    allLimits.splice(index1, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
@@ -19919,7 +19917,6 @@ define('two/fakeSender', [
                                                         }
                                                     } else if (fakeType == 'full') {
                                                         if (running == true) {
-                                                            limitThisVillage = allLimits[i]
                                                             if (fourUnit == 'catapult' && Catapult > 0 && repeatFour < 1 && limitThisVillage > 3 && targetLimit > 3) {
                                                                 travelTime = utils.getTravelTime(village, targetFinal, snobUnit, COMMAND_TYPES.ATTACK, {}, false)
                                                                 inputTime = utils.getTimeFromString(date)
@@ -19931,8 +19928,8 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                    limitSubtract = allLimits[i] - 4
-                                                                    allLimits.splice(i, 1, limitSubtract)
+                                                                    limitSubtract = allLimits[index1] - 4
+                                                                    allLimits.splice(index1, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
@@ -19948,8 +19945,8 @@ define('two/fakeSender', [
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
                                                                     commandQueue.addCommand(village, targetFinal, date, whenSend, snobUnit, {}, COMMAND_TYPES.ATTACK, false)
-                                                                    limitSubtract = allLimits[i] - 4
-                                                                    allLimits.splice(i, 1, limitSubtract)
+                                                                    limitSubtract = allLimits[index1] - 4
+                                                                    allLimits.splice(index1, 1, limitSubtract)
                                                                     targetLimit -= 4
                                                                     repeatFour += 1
                                                                     addLog(village.id, targetFinal.id, fourUnit, 'kareta')
@@ -19959,7 +19956,6 @@ define('two/fakeSender', [
                                                             dateattack = utils.formatDate(newattackdate)
                                                             fakeUnits.forEach(function(unit, index4) {
                                                                 setTimeout(function() {
-                                                                    limitThisVillage = allLimits[i]
                                                                     if (unit == 'spear' && Spear > 0 && infantryAxe < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
@@ -19972,8 +19968,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 spear: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -19990,8 +19986,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 axe: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20008,8 +20004,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 archer: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20026,8 +20022,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 doppelsoldner: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryAxe += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20045,8 +20041,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 sword: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySword += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20064,8 +20060,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 light_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryLc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20082,8 +20078,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 mounted_archer: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryLc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20101,8 +20097,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 ram: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryRam += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20119,8 +20115,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 catapult: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, BUILDING_TYPES.WALL)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryRam += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20138,8 +20134,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 heavy_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             cavalryHc += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20157,8 +20153,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateattack, whenSend, {
                                                                                 trebuchet: 1
                                                                             }, {}, COMMAND_TYPES.ATTACK, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantryTrebuchet += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'atak')
@@ -20170,7 +20166,6 @@ define('two/fakeSender', [
                                                             dateSupport = utils.formatDate(newsupportdate)
                                                             supportUnits.forEach(function(unit, index5) {
                                                                 setTimeout(function() {
-                                                                    limitThisVillage = allLimits[i]
                                                                     if (unit == 'spear' && Spear > 0 && infantrySupport < 1 && limitThisVillage > 0 && targetLimit > 0) {
                                                                         travelTime = utils.getTravelTime(village, targetFinal, {
                                                                             spear: 1
@@ -20183,8 +20178,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 spear: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
@@ -20201,8 +20196,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 archer: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             infantrySupport += 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
@@ -20220,8 +20215,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 sword: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
@@ -20238,8 +20233,8 @@ define('two/fakeSender', [
                                                                             commandQueue.addCommand(village, targetFinal, dateSupport, whenSend, {
                                                                                 heavy_cavalry: 1
                                                                             }, {}, COMMAND_TYPES.SUPPORT, false)
-                                                                            limitSubtract = allLimits[i] - 1
-                                                                            allLimits.splice(i, 1, limitSubtract)
+                                                                            limitSubtract = allLimits[index1] - 1
+                                                                            allLimits.splice(index1, 1, limitSubtract)
                                                                             targetLimit -= 1
                                                                             addLog(village.id, targetFinal.id, unit, 'wsparcie')
                                                                         }
