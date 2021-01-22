@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 21 Jan 2021 18:23:39 GMT
+ * Thu, 21 Jan 2021 20:19:06 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -38609,6 +38609,8 @@ define('two/supportSender', [
     'two/supportSender/settings/map',
     'two/supportSender/settings/updates',
     'two/ready',
+    'helper/time',
+    'Lockr',
     'queues/EventQueue'
 ], function (
     Settings,
@@ -38616,18 +38618,22 @@ define('two/supportSender', [
     SETTINGS_MAP,
     UPDATES,
     ready,
+    timeHelper,
+    Lockr,
     eventQueue
 ) {
     let initialized = false
     let running = false
+    const LOGS_LIMIT = 500
     let settings
     let supportSenderSettings
-
+    let logs
     let selectedPresets = []
     let selectedGroups = []
 
     const STORAGE_KEYS = {
-        SETTINGS: 'support_sender_settings'
+        SETTINGS: 'support_sender_settings',
+        LOGS: 'support_sender_log'
     }
 
     const updatePresets = function () {
@@ -38651,11 +38657,27 @@ define('two/supportSender', [
             selectedGroups.push(allGroups[groupId])
         })
     }
+    const addLog = function(villageId, targetId, unit, amount) {
+        let data = {
+            time: timeHelper.gameTime(),
+            villageId: villageId,
+            targetId: targetId,
+            unit: unit,
+            amount: amount
+        }
+        logs.unshift(data)
+        if (logs.length > LOGS_LIMIT) {
+            logs.splice(logs.length - LOGS_LIMIT, logs.length)
+        }
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        return true
+    }
 
     const supportSender = {}
 
     supportSender.init = function () {
         initialized = true
+        logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
 
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
@@ -38689,18 +38711,28 @@ define('two/supportSender', [
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
 
-    supportSender.start = function () {
+    supportSender.sendSupport = function () {
         running = true
-
-        console.log('selectedPresets', selectedPresets)
-        console.log('selectedGroups', selectedGroups)
-
         eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_START)
+        addLog('', '', 'start', '')
     }
 
     supportSender.stop = function () {
         running = false
-
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
+        addLog('', '', 'stop', '')
+    }
+    supportSender.getLogs = function() {
+        return logs
+    }
+    supportSender.clearLogs = function() {
+        logs = []
+        Lockr.set(STORAGE_KEYS.LOGS, logs)
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_CLEAR_LOGS)
+        return logs
+    }
+    supportSender.stopError = function() {
+        running = false
         eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
     }
 
@@ -38718,11 +38750,11 @@ define('two/supportSender', [
 
     return supportSender
 })
-
 define('two/supportSender/events', [], function () {
     angular.extend(eventTypeProvider, {
         SUPPORT_SENDER_START: 'support_sender_start',
-        SUPPORT_SENDER_STOP: 'support_sender_stop'
+        SUPPORT_SENDER_STOP: 'support_sender_stop',
+        SUPPORT_SENDER_CLEAR_LOGS: 'support_sender_clear_logs'
     })
 })
 
@@ -38732,46 +38764,113 @@ define('two/supportSender/ui', [
     'two/supportSender/settings',
     'two/supportSender/settings/map',
     'two/Settings',
+    'queues/EventQueue',
     'two/EventScope',
-    'two/utils'
+    'two/utils',
+    'struct/MapData'
 ], function (
     interfaceOverflow,
     supportSender,
     SETTINGS,
     SETTINGS_MAP,
     Settings,
+    eventQueue,
     EventScope,
-    utils
+    utils,
+    mapData
 ) {
     let $scope
     let settings
     let presetList = modelDataService.getPresetList()
     let groupList = modelDataService.getGroupList()
     let $button
-    
+    let logsView = {}
+    let villagesInfo = {}
+    let villagesLabel = {}
+    let supportVillage
+    let supportProvince
+    let mapSelectedVillage = false  
+    let mapSelectedProvince = false    
     const TAB_TYPES = {
         SUPPORT: 'support',
         LOGS: 'logs'
     }
-
     const selectTab = function (tabType) {
         $scope.selectedTab = tabType
     }
-
-    const saveSettings = function () {
-        settings.setAll(settings.decode($scope.settings))
-
-        utils.notif('success', 'Settings saved')
-    }
-
-    const switchState = function () {
+    const sendSupport = function () {
         if (supportSender.isRunning()) {
             supportSender.stop()
         } else {
-            supportSender.start()
+            settings.setAll(settings.decode($scope.settings))
+            supportSender.sendSupport()
         }
     }
-
+    const clear = function() {
+        $scope.settings[SETTINGS.GROUPS] = false
+    }
+    const setMapSelectedVillage = function(event, menu) {
+        mapSelectedVillage = menu.data
+        mapSelectedProvince = menu.data
+    }
+    const unsetMapSelectedVillage = function() {
+        mapSelectedVillage = false
+        mapSelectedProvince = false
+    }
+    const addMapSelectedVillage = function() {
+        if (!mapSelectedVillage) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'support_sender'))
+        }
+        mapData.loadTownDataAsync(mapSelectedVillage.x, mapSelectedVillage.y, 1, 1, function(data) {
+            supportVillage.origin = data
+        })
+        $scope.settings[SETTINGS.VILLAGE] = mapSelectedVillage.id
+    }
+    const addMapSelectedProvince = function() {
+        if (!mapSelectedProvince) {
+            return utils.notif('error', $filter('i18n')('error_no_map_selected_village', $rootScope.loc.ale, 'support_sender'))
+        }
+        mapData.loadTownDataAsync(mapSelectedProvince.x, mapSelectedProvince.y, 1, 1, function(data) {
+            supportProvince.origin = data
+        })
+        $scope.settings[SETTINGS.PROVINCE] = mapSelectedProvince.id
+    }
+    const loadVillageInfo = function(villageId) {
+        if (villagesInfo[villageId]) {
+            return villagesInfo[villageId]
+        }
+        villagesInfo[villageId] = true
+        villagesLabel[villageId] = 'ŁADOWANIE...'
+        socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+            my_village_id: modelDataService.getSelectedVillage().getId(),
+            village_id: villageId,
+            num_reports: 1
+        }, function(data) {
+            villagesInfo[villageId] = {
+                x: data.village_x,
+                y: data.village_y,
+                name: data.village_name,
+                last_report: data.last_reports[0]
+            }
+            villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
+        })
+    }
+    logsView.updateVisibleLogs = function() {
+        const offset = $scope.pagination.logs.offset
+        const limit = $scope.pagination.logs.limit
+        logsView.visibleLogs = logsView.logs.slice(offset, offset + limit)
+        $scope.pagination.logs.count = logsView.logs.length
+        logsView.visibleLogs.forEach(function(log) {
+            if (log.villageId) {
+                loadVillageInfo(log.villageId)
+                loadVillageInfo(log.targetId)
+            }
+        })
+    }
+    logsView.clearLogs = function() {
+        supportSender.clearLogs()
+        $scope.logsView.logs = []
+    }
     const eventHandlers = {
         updatePresets: function () {
             $scope.presets = Settings.encodeList(presetList.getPresets(), {
@@ -38785,31 +38884,78 @@ define('two/supportSender/ui', [
                 type: 'groups'
             })
         },
+        updateLogs: function() {
+            $scope.logs = supportSender.getLogs()
+            logsView.updateVisibleLogs()
+        },
+        autoCompleteSelected: function(event, id, data, type) {
+            if (id !== 'supportsender_village_search') {
+                return false
+            }
+            supportVillage[type] = {
+                id: data.raw.id,
+                x: data.raw.x,
+                y: data.raw.y,
+                name: data.raw.name
+            }
+            $scope.searchQuery[type] = ''
+            $scope.settings[SETTINGS.VILLAGE] = supportVillage.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        onAutoCompleteVillage: function(data) {
+            supportVillage.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.VILLAGE] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        onAutoCompleteProvince: function(data) {
+            supportProvince.origin = {
+                id: data.id,
+                x: data.x,
+                y: data.y,
+                name: data.name
+            }
+            $scope.settings[SETTINGS.PROVINCE] = data.id
+            settings.setAll(settings.decode($scope.settings))
+        },
+        clearLogs: function() {
+            utils.notif('success', $filter('i18n')('logs_cleared', $rootScope.loc.ale, 'support_sender'))
+            eventHandlers.updateLogs()
+        },
         start: function () {
             $scope.running = true
-
-            $button.classList.remove('btn-orange')
-            $button.classList.add('btn-red')
-
-            utils.notif('success', 'Example module started')
         },
         stop: function () {
             $scope.running = false
-
-            $button.classList.remove('btn-red')
-            $button.classList.add('btn-orange')
-
-            utils.notif('success', 'Example module stopped')
         }
     }
 
     const init = function () {
         settings = supportSender.getSettings()
-        $button = interfaceOverflow.addMenuButton('Chorąży', 50)
+        supportVillage = {
+            origin: false
+        }
+        supportProvince = {
+            origin: false
+        }
+        $button = interfaceOverflow.addMenuButton('Chorąży', 50, $filter('i18n')('description', $rootScope.loc.ale, 'support_sender'))
         $button.addEventListener('click', buildWindow)
-
-        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td><div auto-complete=\"autoCompleteSupport\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!commandData.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"commandData.origin\" class=\"command-village\">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelected()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><table class=\"tbl-border-light tbl-striped header-center\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody class=\"supporterLog\"><tr class=\"noSupports\"><td colspan=\"5\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}</table></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"switchState()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender th{text-align:center}#two-support-sender .supporterLog td{text-align:center}#two-support-sender .supporterLog .origin:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .supporterLog .target:hover{color:#fff;text-shadow:0 1px 0 #000}#two-support-sender .noSupports td{height:26px;text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}')
+        eventQueue.register(eventTypeProvider.SUPPORT_SENDER_START, function() {
+            $button.classList.remove('btn-orange')
+            $button.classList.add('btn-red')
+        })
+        eventQueue.register(eventTypeProvider.SUPPORT_SENDER_STOP, function() {
+            $button.classList.remove('btn-red')
+            $button.classList.add('btn-orange')
+        })
+        $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
+        $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
+        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteSupport\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportVillage.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportVillage.origin\" class=\"command-village\">{{ supportVillage.origin.name }} ({{ supportVillage.origin.x }}|{{ supportVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVillage()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportProvince.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportProvince.origin\" class=\"command-village\">{{ supportProvince.origin.name }} ({{ supportProvince.origin.x }}|{{ supportProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.unit }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSupport()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender th{text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}#two-support-sender .logs{margin-bottom:10px}#two-support-sender .logs td,#two-support-sender .logs th{text-align:center;line-height:30px}#two-support-sender .icon-20x20-village:before{margin-top:-11px}')
     }
 
     const buildWindow = function () {
@@ -38819,26 +38965,57 @@ define('two/supportSender/ui', [
         $scope.running = supportSender.isRunning()
         $scope.selectedTab = TAB_TYPES.SUPPORT
         $scope.settingsMap = SETTINGS_MAP
-
+        $scope.pagination = {}
+        $scope.supportProvince = supportProvince
+        $scope.supportVillage = supportVillage
+        $scope.clear = clear
+        $scope.autoCompleteVillage = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'support_sender'),
+            onEnter: eventHandlers.onAutoCompleteVillage,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'support_sender'),
+            dropDown: true
+        }
+        $scope.autoCompleteProvince = {
+            type: ['village'],
+            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'support_sender'),
+            onEnter: eventHandlers.onAutoCompleteProvince,
+            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'support_sender'),
+            dropDown: true
+        }
         settings.injectScope($scope)
         eventHandlers.updatePresets()
         eventHandlers.updateGroups()
-
         $scope.selectTab = selectTab
-        $scope.saveSettings = saveSettings
-        $scope.switchState = switchState
+        $scope.sendSupport = sendSupport
+        $scope.addMapSelectedVillage = addMapSelectedVillage
+        $scope.addMapSelectedProvince = addMapSelectedProvince
+        $scope.logsView = logsView
+        $scope.logsView.logs = supportSender.getLogs()
+        $scope.villagesInfo = villagesInfo
+        $scope.villagesLabel = villagesLabel
+        $scope.openVillageInfo = windowDisplayService.openVillageInfo
+        $scope.jumpToVillage = mapService.jumpToVillage
+        $scope.pagination.logs = {
+            count: logsView.logs.length,
+            offset: 0,
+            loader: logsView.updateVisibleLogs,
+            limit: storageService.getPaginationLimit()
+        }
+        logsView.updateVisibleLogs()
 
         let eventScope = new EventScope('twoverflow_support_sender_window', function onDestroy () {
-            console.log('example window closed')
+            console.log('supportSender window closed')
         })
+        eventScope.register(eventTypeProvider.SELECT_SELECTED, eventHandlers.autoCompleteSelected, true)
         eventScope.register(eventTypeProvider.ARMY_PRESET_UPDATE, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.ARMY_PRESET_DELETED, eventHandlers.updatePresets, true)
         eventScope.register(eventTypeProvider.GROUPS_CREATED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_DESTROYED, eventHandlers.updateGroups, true)
         eventScope.register(eventTypeProvider.GROUPS_UPDATED, eventHandlers.updateGroups, true)
+        eventScope.register(eventTypeProvider.SUPPORT_SENDER_CLEAR_LOGS, eventHandlers.clearLogs)
         eventScope.register(eventTypeProvider.SUPPORT_SENDER_START, eventHandlers.start)
-        eventScope.register(eventTypeProvider.SUPPORT_SENDER_STOP, eventHandlers.stop)
-        
+        eventScope.register(eventTypeProvider.SUPPORT_SENDER_STOP, eventHandlers.stop)        
         windowManagerService.getScreenWithInjectedScope('!twoverflow_support_sender_window', $scope)
     }
 
@@ -38847,6 +39024,8 @@ define('two/supportSender/ui', [
 
 define('two/supportSender/settings', [], function () {
     return {
+        VILLAGE: 'village',
+        PROVINCE: 'province',
         DISTANCE: 'distance',
         PRESET: 'preset',
         GROUP: 'group',
@@ -38928,6 +39107,14 @@ define('two/supportSender/settings/map', [
             inputType: 'number',
             min: 0,
             max: 300
+        },
+        [SETTINGS.VILLAGE]: {
+            default: 0,
+            inputType: 'number'
+        },
+        [SETTINGS.PROVINCE]: {
+            default: 0,
+            inputType: 'number'
         }
     }
 })
