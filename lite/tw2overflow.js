@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 23 Jan 2021 21:14:32 GMT
+ * Sat, 23 Jan 2021 21:22:04 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7774,12 +7774,6 @@ define('two/autoCollector', [
             village_id: modelDataService.getSelectedVillage().getId()
         })
     }
-    const reroll = function() {
-        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-            village_id: modelDataService.getSelectedVillage().getId(),
-            item_id: itemId
-        })
-    }
     const rerollItemInfo = function() {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {}, function(data) {
             finalReward = data.milestones[5].animation
@@ -7797,23 +7791,49 @@ define('two/autoCollector', [
                 }
             })
         })
+        console.log(rerollAmount)
+        console.log(itemId)
         if (finalReward == 'food_capacity_increase' && jobsLength == 0) {
             if (rerollAmount == 1 && resourcesCollected >= 9000 && timeReset >= 3600000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             } else if (rerollAmount == 2 && resourcesCollected >= 8000 && timeReset >= 7300000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             } else if (rerollAmount == 3 && resourcesCollected >= 7100 && timeReset >= 11100000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             } else if (rerollAmount == 4 && resourcesCollected >= 6200 && timeReset >= 15000000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             } else if (rerollAmount == 5 && resourcesCollected >= 5400 && timeReset >= 19000000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             } else if (rerollAmount == 6 && resourcesCollected >= 4600 && timeReset >= 23100000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             } else if (rerollAmount == 7 && resourcesCollected >= 3900 && timeReset >= 27300000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             } else if (rerollAmount >= 8 && resourcesCollected >= 3200 && timeReset >= 31600000) {
-                reroll()
+                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                    village_id: modelDataService.getSelectedVillage().getId(),
+                    item_id: itemId
+                })
             }
         }
     }
@@ -7862,8 +7882,10 @@ define('two/autoCollector', [
             setTimeout(function() {
                 recall = true
                 analyse()
-                rerollItemInfo()
             }, 1500)
+            setTimeout(function() {
+                rerollItemInfo()
+            }, 10000)
         })
         $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOBS_REROLLED, analyse)
         $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOB_COLLECTED, analyse)
