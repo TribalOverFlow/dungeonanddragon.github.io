@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Thu, 21 Jan 2021 20:19:06 GMT
+ * Sat, 23 Jan 2021 20:45:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7756,6 +7756,13 @@ define('two/autoCollector', [
     let running = false
     let recall = true
     let nextUpdateId = 0
+    let finalReward = ''
+    let jobsLength = 0
+    let itemId = 0
+    let rerollAmount = 0
+    let resourcesCollected = 0
+    let items = []
+    let timeReset = 0
     const startJob = function(job) {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_START_JOB, {
             job_id: job.id
@@ -7767,8 +7774,50 @@ define('two/autoCollector', [
             village_id: modelDataService.getSelectedVillage().getId()
         })
     }
+    const reroll = function() {
+        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+            village_id: modelDataService.getSelectedVillage().getId(),
+            item_id: itemId
+        })
+    }
+    const rerollItemInfo = function() {
+        socketService.emit(routeProvider.GET_INVENTORY, {}, function(inventory) {
+            items = inventory.inventory
+            items.forEach(function(item) {
+                if (item.type == 'resource_deposit_reroll') {
+                    rerollAmount = item.amount
+                    itemId = item.id
+                }
+            })
+        })
+        if (finalReward == 'food_capacity_increase' && jobsLength == 0) {
+            if (rerollAmount == 1 && resourcesCollected >= 9000 && timeReset >= 3600000) {
+                reroll()
+            } else if (rerollAmount == 2 && resourcesCollected >= 8000 && timeReset >= 7300000) {
+                reroll()
+            } else if (rerollAmount == 3 && resourcesCollected >= 7000 && timeReset >= 11100000) {
+                reroll()
+            } else if (rerollAmount == 4 && resourcesCollected >= 6000 && timeReset >= 15000000) {
+                reroll()
+            } else if (rerollAmount == 5 && resourcesCollected >= 5100 && timeReset >= 19000000) {
+                reroll()
+            } else if (rerollAmount == 6 && resourcesCollected >= 4200 && timeReset >= 23100000) {
+                reroll()
+            } else if (rerollAmount == 7 && resourcesCollected >= 3350 && timeReset >= 27300000) {
+                reroll()
+            } else if (rerollAmount >= 8 && resourcesCollected >= 2500 && timeReset >= 31600000) {
+                reroll()
+            }
+        }
+    }
     const updateDepositInfo = function() {
-        socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {})
+        socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {}, function(data) {
+            finalReward = data.milestones[5].animation
+            resourcesCollected = data.resources_collected
+            jobsLength = data.jobs.length
+            timeReset = data.time_new_milestones * 1000 - Date.now() + 1000
+            console.log(timeReset)
+        })
     }
     const analyse = function() {
         if (!running) {
@@ -7812,6 +7861,7 @@ define('two/autoCollector', [
             setTimeout(function() {
                 recall = true
                 analyse()
+                rerollItemInfo()
             }, 1500)
         })
         $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOBS_REROLLED, analyse)
@@ -38763,7 +38813,9 @@ define('two/supportSender/ui', [
     'two/supportSender',
     'two/supportSender/settings',
     'two/supportSender/settings/map',
+    'two/supportSender/types/type',
     'two/Settings',
+    'helper/time',
     'queues/EventQueue',
     'two/EventScope',
     'two/utils',
@@ -38773,7 +38825,9 @@ define('two/supportSender/ui', [
     supportSender,
     SETTINGS,
     SETTINGS_MAP,
+    DATE_TYPES,
     Settings,
+    $timeHelper,
     eventQueue,
     EventScope,
     utils,
@@ -38807,7 +38861,19 @@ define('two/supportSender/ui', [
         }
     }
     const clear = function() {
-        $scope.settings[SETTINGS.GROUPS] = false
+        $scope.settings[SETTINGS.GROUP] = false
+        $scope.settings[SETTINGS.DATE] = ''
+        $scope.settings[SETTINGS.DATE_TYPE] = 'date_type_arrive'
+        $scope.settings[SETTINGS.VILLAGE] = 0
+        $scope.settings[SETTINGS.PROVINCE] = 0
+        $scope.settings[SETTINGS.PRESET] = false
+        $scope.settings[SETTINGS.DISTANCE] = 90
+        $scope.settings[SETTINGS.SPEAR] = 100
+        $scope.settings[SETTINGS.SWORD] = 100
+        $scope.settings[SETTINGS.ARCHER] = 100
+        $scope.settings[SETTINGS.HC] = 30
+        $scope.settings[SETTINGS.TREBUCHET] = 0
+        settings.setAll(settings.decode($scope.settings))
     }
     const setMapSelectedVillage = function(event, menu) {
         mapSelectedVillage = menu.data
@@ -38854,6 +38920,49 @@ define('two/supportSender/ui', [
             }
             villagesLabel[villageId] = `${data.village_name} (${data.village_x}|${data.village_y})`
         })
+    }
+    const formatedDate = function (_ms) {
+        const date = new Date(_ms || ($timeHelper.gameTime() + utils.getTimeOffset()))
+
+        const rawMS = date.getMilliseconds()
+        const ms = $timeHelper.zerofill(rawMS - (rawMS % 100), 3)
+        const sec = $timeHelper.zerofill(date.getSeconds(), 2)
+        const min = $timeHelper.zerofill(date.getMinutes(), 2)
+        const hour = $timeHelper.zerofill(date.getHours(), 2)
+        const day = $timeHelper.zerofill(date.getDate(), 2)
+        const month = $timeHelper.zerofill(date.getMonth() + 1, 2)
+        const year = date.getFullYear()
+
+        return hour + ':' + min + ':' + sec + ':' + ms + ' ' + day + '/' + month + '/' + year
+    }
+
+    const addDateDiff = function (date, diff) {
+        if (!utils.isValidDateTime(date)) {
+            return ''
+        }
+
+        date = utils.getTimeFromString(date)
+        date += diff
+
+        return formatedDate(date)
+    }
+    const addCurrentDate = function () {
+        $scope.settings[SETTINGS.DATE] = formatedDate()
+    }
+    const incrementDate = function () {
+        if (!$scope.settings[SETTINGS.DATE]) {
+            return false
+        }
+
+        $scope.settings[SETTINGS.DATE] = addDateDiff($scope.settings[SETTINGS.DATE], 100)
+    }
+
+    const reduceDate = function () {
+        if (!$scope.settings[SETTINGS.DATE]) {
+            return false
+        }
+
+        $scope.settings[SETTINGS.DATE] = addDateDiff($scope.settings[SETTINGS.DATE], -100)
     }
     logsView.updateVisibleLogs = function() {
         const offset = $scope.pagination.logs.offset
@@ -38954,7 +39063,7 @@ define('two/supportSender/ui', [
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteSupport\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportVillage.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportVillage.origin\" class=\"command-village\">{{ supportVillage.origin.name }} ({{ supportVillage.origin.x }}|{{ supportVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVillage()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportProvince.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportProvince.origin\" class=\"command-village\">{{ supportProvince.origin.name }} ({{ supportProvince.origin.x }}|{{ supportProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.unit }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSupport()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteSupport\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportVillage.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportVillage.origin\" class=\"command-village\">{{ supportVillage.origin.name }} ({{ supportVillage.origin.x }}|{{ supportVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVillage()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td><tr><td><input ng-model=\"settings[SETTINGS.DATE]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE]\" drop-down=\"true\"></div><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportProvince.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportProvince.origin\" class=\"command-village\">{{ supportProvince.origin.name }} ({{ supportProvince.origin.x }}|{{ supportProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.unit }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSupport()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
         interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender th{text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}#two-support-sender .logs{margin-bottom:10px}#two-support-sender .logs td,#two-support-sender .logs th{text-align:center;line-height:30px}#two-support-sender .icon-20x20-village:before{margin-top:-11px}')
     }
 
@@ -38969,6 +39078,10 @@ define('two/supportSender/ui', [
         $scope.supportProvince = supportProvince
         $scope.supportVillage = supportVillage
         $scope.clear = clear
+        $scope.datetype = Settings.encodeList(DATE_TYPES, {
+            textObject: 'support_sender',
+            disabled: false
+        })
         $scope.autoCompleteVillage = {
             type: ['village'],
             placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'support_sender'),
@@ -38988,6 +39101,9 @@ define('two/supportSender/ui', [
         eventHandlers.updateGroups()
         $scope.selectTab = selectTab
         $scope.sendSupport = sendSupport
+        $scope.addCurrentDate = addCurrentDate
+        $scope.incrementDate = incrementDate
+        $scope.reduceDate = reduceDate
         $scope.addMapSelectedVillage = addMapSelectedVillage
         $scope.addMapSelectedProvince = addMapSelectedProvince
         $scope.logsView = logsView
@@ -39024,6 +39140,8 @@ define('two/supportSender/ui', [
 
 define('two/supportSender/settings', [], function () {
     return {
+        DATE: 'date',
+        DATE_TYPE: 'datetype',
         VILLAGE: 'village',
         PROVINCE: 'province',
         DISTANCE: 'distance',
@@ -39073,31 +39191,31 @@ define('two/supportSender/settings/map', [
             type: 'groups'
         },
         [SETTINGS.SPEAR]: {
-            default: 60,
+            default: 100,
             inputType: 'number',
             min: 0,
             max: 24000
         },
         [SETTINGS.SWORD]: {
-            default: 60,
+            default: 100,
             inputType: 'number',
             min: 0,
             max: 24000
         },
         [SETTINGS.ARCHER]: {
-            default: 60,
+            default: 100,
             inputType: 'number',
             min: 0,
             max: 24000
         },
         [SETTINGS.HC]: {
-            default: 60,
+            default: 30,
             inputType: 'number',
             min: 0,
             max: 4000
         },
         [SETTINGS.TREBUCHET]: {
-            default: 60,
+            default: 0,
             inputType: 'number',
             min: 0,
             max: 2400
@@ -39112,6 +39230,15 @@ define('two/supportSender/settings/map', [
             default: 0,
             inputType: 'number'
         },
+        [SETTINGS.DATE]: {
+            default: '0',
+            inputType: 'text'
+        },
+        [SETTINGS.DATE_TYPE]: {
+            default: 'date_type_arrive',
+            disabledOption: true,
+            inputType: 'select'
+        },
         [SETTINGS.PROVINCE]: {
             default: 0,
             inputType: 'number'
@@ -39119,6 +39246,12 @@ define('two/supportSender/settings/map', [
     }
 })
 
+define('two/fakeSender/types/dates', [], function () {
+    return {
+        ARRIVE: 'date_type_arrive',
+        OUT: 'date_type_out'
+    }
+})
 require([
     'two/ready',
     'two/supportSender',
