@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 23 Jan 2021 20:57:24 GMT
+ * Sat, 23 Jan 2021 21:14:32 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7786,8 +7786,8 @@ define('two/autoCollector', [
             resourcesCollected = data.resources_collected
             jobsLength = data.jobs.length
             timeReset = data.time_new_milestones * 1000 - Date.now() + 1000
-            console.log(timeReset)
         })
+        console.log(timeReset)
         socketService.emit(routeProvider.GET_INVENTORY, {}, function(inventory) {
             items = inventory.inventory
             items.forEach(function(item) {
