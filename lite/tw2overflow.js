@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 23 Jan 2021 20:45:24 GMT
+ * Sat, 23 Jan 2021 20:57:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -7781,6 +7781,13 @@ define('two/autoCollector', [
         })
     }
     const rerollItemInfo = function() {
+        socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {}, function(data) {
+            finalReward = data.milestones[5].animation
+            resourcesCollected = data.resources_collected
+            jobsLength = data.jobs.length
+            timeReset = data.time_new_milestones * 1000 - Date.now() + 1000
+            console.log(timeReset)
+        })
         socketService.emit(routeProvider.GET_INVENTORY, {}, function(inventory) {
             items = inventory.inventory
             items.forEach(function(item) {
@@ -7795,29 +7802,23 @@ define('two/autoCollector', [
                 reroll()
             } else if (rerollAmount == 2 && resourcesCollected >= 8000 && timeReset >= 7300000) {
                 reroll()
-            } else if (rerollAmount == 3 && resourcesCollected >= 7000 && timeReset >= 11100000) {
+            } else if (rerollAmount == 3 && resourcesCollected >= 7100 && timeReset >= 11100000) {
                 reroll()
-            } else if (rerollAmount == 4 && resourcesCollected >= 6000 && timeReset >= 15000000) {
+            } else if (rerollAmount == 4 && resourcesCollected >= 6200 && timeReset >= 15000000) {
                 reroll()
-            } else if (rerollAmount == 5 && resourcesCollected >= 5100 && timeReset >= 19000000) {
+            } else if (rerollAmount == 5 && resourcesCollected >= 5400 && timeReset >= 19000000) {
                 reroll()
-            } else if (rerollAmount == 6 && resourcesCollected >= 4200 && timeReset >= 23100000) {
+            } else if (rerollAmount == 6 && resourcesCollected >= 4600 && timeReset >= 23100000) {
                 reroll()
-            } else if (rerollAmount == 7 && resourcesCollected >= 3350 && timeReset >= 27300000) {
+            } else if (rerollAmount == 7 && resourcesCollected >= 3900 && timeReset >= 27300000) {
                 reroll()
-            } else if (rerollAmount >= 8 && resourcesCollected >= 2500 && timeReset >= 31600000) {
+            } else if (rerollAmount >= 8 && resourcesCollected >= 3200 && timeReset >= 31600000) {
                 reroll()
             }
         }
     }
     const updateDepositInfo = function() {
-        socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {}, function(data) {
-            finalReward = data.milestones[5].animation
-            resourcesCollected = data.resources_collected
-            jobsLength = data.jobs.length
-            timeReset = data.time_new_milestones * 1000 - Date.now() + 1000
-            console.log(timeReset)
-        })
+        socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {})
     }
     const analyse = function() {
         if (!running) {
