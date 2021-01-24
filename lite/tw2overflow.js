@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 24 Jan 2021 14:10:13 GMT
+ * Sun, 24 Jan 2021 14:13:56 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -39190,6 +39190,8 @@ define('two/supportSender/ui', [
     }
     const clear = function() {
         $scope.settings[SETTINGS.GROUP] = false
+        $scope.settings[SETTINGS.ONE_PACK] = false
+        $scope.settings[SETTINGS.SEND_NOW] = false
         $scope.settings[SETTINGS.DATE] = ''
         $scope.settings[SETTINGS.DATE_TYPE] = 'date_type_arrive'
         $scope.settings[SETTINGS.VILLAGE] = 0
@@ -39585,7 +39587,7 @@ define('two/supportSender/settings/map', [
     }
 })
 
-define('two/supportSender/types/dates', [], function () {
+define('two/supportSender/types/type', [], function () {
     return {
         ARRIVE: 'date_type_arrive',
         OUT: 'date_type_out'
