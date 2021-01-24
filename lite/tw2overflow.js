@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 24 Jan 2021 17:36:46 GMT
+ * Sun, 24 Jan 2021 18:04:41 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -3543,8 +3543,8 @@ define('two/language', [
         },
         "support_sender": {
             "title": "Chorąży",
-            "support": "Wysyłanie wsparć",
-            "remove": "Zawracanie wsparć",
+            "support": "Wyślij wsparcia",
+            "remove": "Wycofaj wsparcia",
             "insertpreset": "Wstaw",
             "error.no_preset_selected": "Nie wybrano szablonu.",
             "error.no_unit_selected": "Nie wybrano jednostek do wsparcia.",
@@ -3582,7 +3582,7 @@ define('two/language', [
             "support.archer": "Łucznicy",
             "support.heavycavalry": "Ciężka Kawaleria",
             "support.trebuchet": "Trebusze",
-            "support.start": "Start",
+            "support.start": "Wyślij",
             "remove.start": "Wycofaj",
             "support.pause": "Pauza",
             "support.clear": "Wyczyść",
@@ -38858,7 +38858,7 @@ define('two/supportSender', [
                                             'y': data.village_y,
                                             'name': data.village_name
                                         }
-                                        if (HC >= hc) {
+                                        if (HC >= hc && hc != 0) {
                                             units = {
                                                 heavy_cavalry: hc
                                             }
@@ -38868,7 +38868,7 @@ define('two/supportSender', [
                                                 commandQueue.start()
                                             }
                                         }
-                                        if (Sword >= sword) {
+                                        if (Sword >= sword && sword != 0) {
                                             units = {
                                                 sword: sword
                                             }
@@ -38878,7 +38878,7 @@ define('two/supportSender', [
                                                 commandQueue.start()
                                             }
                                         }
-                                        if (Trebuchet >= trebuchet) {
+                                        if (Trebuchet >= trebuchet && trebuchet != 0) {
                                             units = {
                                                 trebuchet: trebuchet
                                             }
@@ -38888,7 +38888,7 @@ define('two/supportSender', [
                                                 commandQueue.start()
                                             }
                                         }
-                                        if (Spear >= spear && Archer >= archer) {
+                                        if (Spear >= spear && Archer >= archer && spear != 0 && archer != 0) {
                                             units = {
                                                 archer: archer,
                                                 spear: spear
@@ -38899,7 +38899,7 @@ define('two/supportSender', [
                                             if (!commandQueue.isRunning()) {
                                                 commandQueue.start()
                                             }
-                                        } else if (Spear >= spear && Archer < archer) {
+                                        } else if (Spear >= spear && Archer < archer && spear != 0 && archer != 0) {
                                             units = {
                                                 archer: '*',
                                                 spear: spear
@@ -38910,7 +38910,7 @@ define('two/supportSender', [
                                             if (!commandQueue.isRunning()) {
                                                 commandQueue.start()
                                             }
-                                        } else if (Spear < spear && Archer >= archer) {
+                                        } else if (Spear < spear && Archer >= archer && spear != 0 && archer != 0) {
                                             units = {
                                                 archer: archer,
                                                 spear: '*'
@@ -38921,7 +38921,7 @@ define('two/supportSender', [
                                             if (!commandQueue.isRunning()) {
                                                 commandQueue.start()
                                             }
-                                        } else if (Spear == 0 && Archer >= archer) {
+                                        } else if (archer != 0 && Archer >= archer) {
                                             units = {
                                                 archer: archer
                                             }
@@ -38930,7 +38930,7 @@ define('two/supportSender', [
                                             if (!commandQueue.isRunning()) {
                                                 commandQueue.start()
                                             }
-                                        } else if (Spear >= spear && Archer == 0) {
+                                        } else if (Spear >= spear && spear != 0) {
                                             units = {
                                                 spear: spear
                                             }
@@ -38948,7 +38948,7 @@ define('two/supportSender', [
                     if (index == (villages.length - 1) && running == true) {
                         setTimeout(function() {
                             supportSender.stopSend()
-                        }, 11000)
+                        }, villages.length * 5000)
                     }
                 })
             })
