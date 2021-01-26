@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sat, 23 Jan 2021 21:22:04 GMT
+ * Tue, 26 Jan 2021 17:20:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1947,40 +1947,68 @@ define('two/language', [
         },
         "support_sender": {
             "title": "Chorąży",
-            "support": "Wsparcia",
+            "support": "Wyślij wsparcia",
+            "remove": "Wycofaj wsparcia",
+            "insertpreset": "Wstaw",
+            "error.no_preset_selected": "Nie wybrano szablonu.",
+            "error.no_unit_selected": "Nie wybrano jednostek do wsparcia.",
+            "error.no_village_selected": "Nie wybrano celu wsparcia.",
+            "error.no_type_selected": "Nie wskazano czy wsparcia mają wyjść/dotrzeć.",
+            "error.no_date_selected": "Nie wskazano czasu.",
+            "date_type_arrive": "Czas dotarcia na cel",
+            "date_type_out": "Czas wyjścia z  twojej wioski",
             "support.units": "Jednostki",
             "support.caution": "Uwaga!",
             "support.header": "Auto Wsparcia",
+            "remove.header": "Auto Cofanie Wsparć",
             "support.target": "Cel do wysłania wsparć",
-            "support.merge": "1. Ustwienia działają oddzielnie jak również razem: prowincja+grupa, grupa+dystans",
-            "support.all": "2. Jeśli nie wybrałeś grupy, prowincji oraz dystansu nastąpi wysyłanie z wszystkich wiosek w których znajdują się wskazane jednostki",
-            "support.byprovince": "Wyślij wsparcia tylko z wybranej prowincji",
-            "support.bygroup": "Wyślij wsparcia tylko z wybranej grupy wiosek",
-            "support.bydistance": "Wyślij wsparcia tylko z pobliskich wiosek",
+            "support.time": "Ustawienia Czasu",
+            "support.merge": "1. Ustawienia działają oddzielnie jak również razem.",
+            "support.all": "2. Jeśli nie wybrałeś grupy, prowincji oraz dystansu nastąpi wysyłanie z wszystkich wiosek w których znajdują się wskazane jednostki.",
+            "support.byprovince": "Wyślij wsparcia z wybranej prowincji",
+            "support.bygroup": "Wyślij wsparcia z wybranej grupy wiosek",
+            "support.bydistance": "Wyślij wsparcia z pobliskich wiosek",
             "support.add_village": "Wybierz wioskę...",
+            "support.add_province": "Wybierz prowincję...",
+            "support.add_origin": "Źródło",
+            "support.add_target": "Cel",
             "support.no_village": "Nie wybrano wioski",
+            "support.no_province": "Nie wybrano prowincji",
             "support.add_map_selected": "Wybrana wioska z mapy",
             "support.selected": "Wybierz",
             "support.group": "Grupa/y",
             "support.preset": "Szablon",
+            "support.miscelanous": "Pozostałe ustawienia",
             "support.textpreset": "Lub wybierz szablon z którego zostaną pobrane ilości jednostek defensywnych",
-            "support.distance": "Dystans do wspieranej wioski",
+            "support.distance": "Dystans",
             "support.spear": "Pikinierzy",
             "support.sword": "Miecznicy",
             "support.archer": "Łucznicy",
             "support.heavycavalry": "Ciężka Kawaleria",
             "support.trebuchet": "Trebusze",
-            "support.start": "Start",
+            "support.start": "Wyślij",
+            "remove.start": "Wycofaj",
             "support.pause": "Pauza",
             "support.clear": "Wyczyść",
             "logs": "Logi",
+            "start": "Rozpoczęto wysyłanie wsparć",
+            "stop": "Zatrzymano wysyłanie wsparć",
+            "startR": "Rozpoczęto wycofywanie wsparć",
+            "stopR": "Zatrzymano wycofywanie wsparć",
             "logs.origin": "Wioska Źródłowa",
             "logs.target": "Wioska Cel",
             "logs.unit": "Jednostka",
             "logs.amount": "Ilość",
             "logs.date": "Data",
             "logs.noSupports": "Nie wysłano żadnych wsparć.",
-            "logs.clear": "Wyczyść logi"
+            "logs.clear": "Wyczyść logi",
+            "onepack": "Jednorazowa paczka?",
+            "sendnow": "Ślij natychmiast(pomija ustawienia czasu)",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "archer": "Łucznik",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "trebuchet": "Trebusz"
         },
         "tutorial_helper": {
             "title": "Giermek",
@@ -3515,22 +3543,38 @@ define('two/language', [
         },
         "support_sender": {
             "title": "Chorąży",
-            "support": "Wsparcia",
+            "support": "Wyślij wsparcia",
+            "remove": "Wycofaj wsparcia",
+            "insertpreset": "Wstaw",
+            "error.no_preset_selected": "Nie wybrano szablonu.",
+            "error.no_unit_selected": "Nie wybrano jednostek do wsparcia.",
+            "error.no_village_selected": "Nie wybrano celu wsparcia.",
+            "error.no_type_selected": "Nie wskazano czy wsparcia mają wyjść/dotrzeć.",
+            "error.no_date_selected": "Nie wskazano czasu.",
+            "date_type_arrive": "Czas dotarcia na cel",
+            "date_type_out": "Czas wyjścia z  twojej wioski",
             "support.units": "Jednostki",
             "support.caution": "Uwaga!",
             "support.header": "Auto Wsparcia",
+            "remove.header": "Auto Cofanie Wsparć",
             "support.target": "Cel do wysłania wsparć",
-            "support.merge": "1. Ustwienia działają oddzielnie jak również razem: prowincja+grupa, grupa+dystans",
-            "support.all": "2. Jeśli nie wybrałeś grupy, prowincji oraz dystansu nastąpi wysyłanie z wszystkich wiosek w których znajdują się wskazane jednostki",
-            "support.byprovince": "Wyślij wsparcia tylko z wybranej prowincji",
-            "support.bygroup": "Wyślij wsparcia tylko z wybranej grupy wiosek",
-            "support.bydistance": "Wyślij wsparcia tylko z pobliskich wiosek",
+            "support.time": "Ustawienia Czasu",
+            "support.merge": "1. Ustwienia działają oddzielnie jak również razem.",
+            "support.all": "2. Jeśli nie wybrałeś grupy, prowincji oraz dystansu nastąpi wysyłanie z wszystkich wiosek w których znajdują się wskazane jednostki.",
+            "support.byprovince": "Wyślij wsparcia z wybranej prowincji",
+            "support.bygroup": "Wyślij wsparcia z wybranej grupy wiosek",
+            "support.bydistance": "Wyślij wsparcia z pobliskich wiosek",
             "support.add_village": "Wybierz wioskę...",
+            "support.add_province": "Wybierz prowincję...",
+            "support.add_origin": "Źródło",
+            "support.add_target": "Cel",
             "support.no_village": "Nie wybrano wioski",
+            "support.no_province": "Nie wybrano prowincji",
             "support.add_map_selected": "Wybrana wioska z mapy",
             "support.selected": "Wybierz",
             "support.group": "Grupa/y",
             "support.preset": "Szablon",
+            "support.miscelanous": "Pozostałe ustawienia",
             "support.textpreset": "Lub wybierz szablon z którego zostaną pobrane ilości jednostek defensywnych",
             "support.distance": "Dystans do wspieranej wioski",
             "support.spear": "Pikinierzy",
@@ -3538,17 +3582,29 @@ define('two/language', [
             "support.archer": "Łucznicy",
             "support.heavycavalry": "Ciężka Kawaleria",
             "support.trebuchet": "Trebusze",
-            "support.start": "Start",
+            "support.start": "Wyślij",
+            "remove.start": "Wycofaj",
             "support.pause": "Pauza",
             "support.clear": "Wyczyść",
             "logs": "Logi",
+            "start": "Rozpoczęto wysyłanie wsparć",
+            "stop": "Zatrzymano wysyłanie wsparć",
+            "startR": "Rozpoczęto wycofywanie wsparć",
+            "stopR": "Zatrzymano wycofywanie wsparć",
             "logs.origin": "Wioska Źródłowa",
             "logs.target": "Wioska Cel",
             "logs.unit": "Jednostka",
             "logs.amount": "Ilość",
             "logs.date": "Data",
             "logs.noSupports": "Nie wysłano żadnych wsparć.",
-            "logs.clear": "Wyczyść logi"
+            "logs.clear": "Wyczyść logi",
+            "onepack": "Jednorazowa paczka?",
+            "sendnow": "Ślij natychmiast(pomija ustawienia czasu)",
+            "spear": "Pikinier",
+            "sword": "Miecznik",
+            "archer": "Łucznik",
+            "heavy_cavalry": "Ciężki kawalerzysta",
+            "trebuchet": "Trebusz"
         },
         "tutorial_helper": {
             "title": "Giermek",
@@ -7776,12 +7832,12 @@ define('two/autoCollector', [
     }
     const rerollItemInfo = function() {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {}, function(data) {
-            finalReward = data.milestones[5].animation
+            finalReward = data.milestones[5].reward.animation
             resourcesCollected = data.resources_collected
             jobsLength = data.jobs.length
             timeReset = data.time_new_milestones * 1000 - Date.now() + 1000
         })
-        console.log(timeReset)
+        console.log(timeReset, jobsLength, finalReward)
         socketService.emit(routeProvider.GET_INVENTORY, {}, function(inventory) {
             items = inventory.inventory
             items.forEach(function(item) {
@@ -7791,8 +7847,7 @@ define('two/autoCollector', [
                 }
             })
         })
-        console.log(rerollAmount)
-        console.log(itemId)
+        console.log(rerollAmount, itemId)
         if (finalReward == 'food_capacity_increase' && jobsLength == 0) {
             if (rerollAmount == 1 && resourcesCollected >= 9000 && timeReset >= 3600000) {
                 socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
@@ -38681,17 +38736,21 @@ define('two/supportSender', [
     'two/supportSender/settings',
     'two/supportSender/settings/map',
     'two/supportSender/settings/updates',
+    'two/attackView/types/commands',
     'two/ready',
     'helper/time',
+    'two/utils',
     'Lockr',
     'queues/EventQueue'
-], function (
+], function(
     Settings,
     SETTINGS,
     SETTINGS_MAP,
     UPDATES,
+    COMMAND_TYPES,
     ready,
     timeHelper,
+    utils,
     Lockr,
     eventQueue
 ) {
@@ -38701,34 +38760,831 @@ define('two/supportSender', [
     let settings
     let supportSenderSettings
     let logs
+    var travelTime = 0
+    var inputTime = 0
+    var sendTime = 0
+    let timeOffset
+    var player = modelDataService.getSelectedCharacter()
+    let presetSPEAR = null
+    let presetSWORD = null
+    let presetARCHER = null
+    let presetHC = null
+    let presetTREBUCHET = null
+    let archer = 0
+    let hc = 0
+    let spear = 0
+    let sword = 0
+    let trebuchet = 0
+    let Trebuchet = 0
+    let Archer = 0
+    let Spear = 0
+    let Sword = 0
+    let HC = 0
+    let COMMAND_QUEUE_DATE_TYPES
     let selectedPresets = []
+    let presetSelected = 0
+    let village = 0
+    let province = 0
+    let villageData = {}
+    let targetFinal = {}
+    let units = {}
+    let commandQueue = false
+    let date = ''
+    let distance = 0
+    let onePack = false
+    let sendNow = false
+    let dateType = ''
+    let whenSend = ''
+    var ownGroups = ''
+    var groupVillages = null
+    let groupList = modelDataService.getGroupList()
+    let villages = []
+    let villagesInProvince = []
     let selectedGroups = []
-
     const STORAGE_KEYS = {
         SETTINGS: 'support_sender_settings',
         LOGS: 'support_sender_log'
     }
-
-    const updatePresets = function () {
+    const updatePresets = function() {
         selectedPresets = []
-
         const allPresets = modelDataService.getPresetList().getPresets()
         const presetsSelectedByTheUser = supportSenderSettings[SETTINGS.PRESET]
-
-        presetsSelectedByTheUser.forEach(function (presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
+        selectedPresets.push(allPresets[presetsSelectedByTheUser])
     }
-
-    const updateGroups = function () {
+    const updateGroups = function() {
         selectedGroups = []
-
         const allGroups = modelDataService.getGroupList().getGroups()
         const groupsSelectedByTheUser = supportSenderSettings[SETTINGS.GROUPS]
-
-        groupsSelectedByTheUser.forEach(function (groupId) {
+        groupsSelectedByTheUser.forEach(function(groupId) {
             selectedGroups.push(allGroups[groupId])
         })
+    }
+    const timeToSend = function(sendTime) {
+        return sendTime < (timeHelper.gameTime() + timeOffset)
+    }
+    const requestVillageProvinceNeighbours = function(villageId, callback) {
+        socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
+            'village_id': villageId
+        }, callback)
+    }
+    const sendSupports = function() {
+        if (running == true) {
+            const commandType = COMMAND_TYPES.SUPPORT
+            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+                villages.forEach(function(villageId, index) {
+                    setTimeout(function() {
+                        for (var i = 0; i < data.villages.length; i++) {
+                            var newId = data.villages[i].id
+                            if (newId == villageId) {
+                                villageData = {
+                                    'id': data.villages[i].id,
+                                    'x': data.villages[i].x,
+                                    'y': data.villages[i].y,
+                                    'name': data.villages[i].name,
+                                    'character_id': player.getId()
+                                }
+                                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                    village_id: villageId
+                                }, function(info) {
+                                    Archer = info.available_units.archer.total
+                                    HC = info.available_units.heavy_cavalry.total
+                                    Spear = info.available_units.spear.total
+                                    Sword = info.available_units.sword.total
+                                    Trebuchet = info.available_units.trebuchet.total
+                                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                        my_village_id: modelDataService.getSelectedVillage().getId(),
+                                        village_id: village,
+                                        num_reports: 1
+                                    }, function(data) {
+                                        targetFinal = {
+                                            'id': data.village_id,
+                                            'x': data.village_x,
+                                            'y': data.village_y,
+                                            'name': data.village_name
+                                        }
+                                        if (HC >= hc && hc != 0) {
+                                            units = {
+                                                heavy_cavalry: hc
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hc)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Sword >= sword && sword != 0) {
+                                            units = {
+                                                sword: sword
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', sword)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Trebuchet >= trebuchet && trebuchet != 0) {
+                                            units = {
+                                                trebuchet: trebuchet
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchet)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Spear >= spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && Archer < archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: '*',
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear < spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: '*'
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (archer != 0 && Archer >= archer) {
+                                            units = {
+                                                archer: archer
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && spear != 0) {
+                                            units = {
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    }, index * 5000)
+                    if (index == (villages.length - 1) && running == true) {
+                        setTimeout(function() {
+                            supportSender.stopSend()
+                        }, villages.length * 5000)
+                    }
+                })
+            })
+        } else if (running == false) {
+            return
+        }
+    }
+    const sendOneSupport = function() {
+        if (running == true) {
+            var spearLimit = spear
+            var swordLimit = sword
+            var archerLimit = archer
+            var hcLimit = hc
+            var trebuchetLimit = trebuchet
+            const commandType = COMMAND_TYPES.SUPPORT
+            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+                villages.forEach(function(villageId, index) {
+                    setTimeout(function() {
+                        for (var i = 0; i < data.villages.length; i++) {
+                            var newId = data.villages[i].id
+                            if (newId == villageId) {
+                                villageData = {
+                                    'id': data.villages[i].id,
+                                    'x': data.villages[i].x,
+                                    'y': data.villages[i].y,
+                                    'name': data.villages[i].name,
+                                    'character_id': player.getId()
+                                }
+                                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                    village_id: villageId
+                                }, function(info) {
+                                    Archer = info.available_units.archer.total
+                                    HC = info.available_units.heavy_cavalry.total
+                                    Spear = info.available_units.spear.total
+                                    Sword = info.available_units.sword.total
+                                    Trebuchet = info.available_units.trebuchet.total
+                                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                        my_village_id: modelDataService.getSelectedVillage().getId(),
+                                        village_id: village,
+                                        num_reports: 1
+                                    }, function(data) {
+                                        targetFinal = {
+                                            'id': data.village_id,
+                                            'x': data.village_x,
+                                            'y': data.village_y,
+                                            'name': data.village_name
+                                        }
+                                        if (HC >= hc && hc != 0 && hcLimit > 0 && hcLimit >= hc) {
+                                            units = {
+                                                heavy_cavalry: hc
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hc)
+                                                hcLimit -= hc
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (HC >= hc && hc != 0 && hcLimit > 0 && hcLimit < hc) {
+                                            units = {
+                                                heavy_cavalry: hcLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hcLimit)
+                                                hcLimit -= hcLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (HC < hc && hc != 0 && hcLimit > 0 && hcLimit >= HC) {
+                                            units = {
+                                                heavy_cavalry: HC
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', HC)
+                                                hcLimit -= HC
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (HC < hc && hc != 0 && hcLimit > 0 && hcLimit < HC) {
+                                            units = {
+                                                heavy_cavalry: hcLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hcLimit)
+                                                hcLimit -= hcLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Sword >= sword && sword != 0 && swordLimit > 0 && swordLimit >= sword) {
+                                            units = {
+                                                sword: sword
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', sword)
+                                                swordLimit -= sword
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Sword >= sword && sword != 0 && swordLimit > 0 && swordLimit < sword) {
+                                            units = {
+                                                sword: swordLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', swordLimit)
+                                                swordLimit -= swordLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Sword < sword && sword != 0 && swordLimit > 0 && swordLimit >= Sword) {
+                                            units = {
+                                                sword: Sword
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', Sword)
+                                                swordLimit -= Sword
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Sword < sword && sword != 0 && swordLimit > 0 && swordLimit < Sword) {
+                                            units = {
+                                                sword: swordLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', swordLimit)
+                                                swordLimit -= swordLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Trebuchet >= trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit >= trebuchet) {
+                                            units = {
+                                                trebuchet: trebuchet
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchet)
+                                                trebuchetLimit -= trebuchet
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Trebuchet >= trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit < trebuchet) {
+                                            units = {
+                                                trebuchet: trebuchetLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchetLimit)
+                                                trebuchetLimit -= trebuchetLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Trebuchet < trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit >= Trebuchet) {
+                                            units = {
+                                                trebuchet: Trebuchet
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', Trebuchet)
+                                                trebuchetLimit -= Trebuchet
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Trebuchet < trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit < Trebuchet) {
+                                            units = {
+                                                trebuchet: trebuchetLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchetLimit)
+                                                trebuchetLimit -= trebuchetLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Spear >= spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && Archer < archer && spear != 0 && archer != 0 && spearLimit > 0 && archerLimit > 0) {
+                                            units = {
+                                                archer: '*',
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                spearLimit = spearLimit - spear
+                                                archerLimit = archerLimit - Archer
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear < spear && Archer >= archer && spear != 0 && archer != 0 && spearLimit > 0 && archerLimit > 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: '*'
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                spearLimit = spearLimit - Spear
+                                                archerLimit = archerLimit - archer
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (archer != 0 && Archer >= archer && archerLimit > 0) {
+                                            units = {
+                                                archer: archer
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 6000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                archerLimit = archerLimit - archer
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && spear != 0 && spearLimit > 0) {
+                                            units = {
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'spear', spear)
+                                                spearLimit = spearLimit - spear
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    }, index * 5000)
+                    if (index == (villages.length - 1) && running == true) {
+                        setTimeout(function() {
+                            supportSender.stopSend()
+                        }, villages.length * 5000)
+                    }
+                })
+            })
+        } else if (running == false) {
+            return
+        }
+    }
+    const sendSupportsNow = function() {
+        if (running == true) {
+            const commandType = COMMAND_TYPES.SUPPORT
+            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+                villages.forEach(function(villageId, index) {
+                    setTimeout(function() {
+                        for (var i = 0; i < data.villages.length; i++) {
+                            var newId = data.villages[i].id
+                            if (newId == villageId) {
+                                villageData = {
+                                    'id': data.villages[i].id,
+                                    'x': data.villages[i].x,
+                                    'y': data.villages[i].y,
+                                    'name': data.villages[i].name,
+                                    'character_id': player.getId()
+                                }
+                                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                    village_id: villageId
+                                }, function(info) {
+                                    Archer = info.available_units.archer.total
+                                    HC = info.available_units.heavy_cavalry.total
+                                    Spear = info.available_units.spear.total
+                                    Sword = info.available_units.sword.total
+                                    Trebuchet = info.available_units.trebuchet.total
+                                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                        my_village_id: modelDataService.getSelectedVillage().getId(),
+                                        village_id: village,
+                                        num_reports: 1
+                                    }, function(data) {
+                                        targetFinal = {
+                                            'id': data.village_id,
+                                            'x': data.village_x,
+                                            'y': data.village_y,
+                                            'name': data.village_name
+                                        }
+                                        if (HC >= hc && hc != 0) {
+                                            units = {
+                                                heavy_cavalry: hc
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hc)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Sword >= sword && sword != 0) {
+                                            units = {
+                                                sword: sword
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', sword)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Trebuchet >= trebuchet && trebuchet != 0) {
+                                            units = {
+                                                trebuchet: trebuchet
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchet)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Spear >= spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && Archer < archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: '*',
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear < spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: '*'
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (archer != 0 && Archer >= archer) {
+                                            units = {
+                                                archer: archer
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 6000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && spear != 0) {
+                                            units = {
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    }, index * 5000)
+                    if (index == (villages.length - 1) && running == true) {
+                        setTimeout(function() {
+                            supportSender.stopSend()
+                        }, villages.length * 5000)
+                    }
+                })
+            })
+        } else if (running == false) {
+            return
+        }
     }
     const addLog = function(villageId, targetId, unit, amount) {
         let data = {
@@ -38745,55 +39601,162 @@ define('two/supportSender', [
         Lockr.set(STORAGE_KEYS.LOGS, logs)
         return true
     }
-
     const supportSender = {}
-
-    supportSender.init = function () {
+    supportSender.init = function() {
+        timeOffset = utils.getTimeOffset()
+        commandQueue = require('two/commandQueue')
+        COMMAND_QUEUE_DATE_TYPES = require('two/commandQueue/types/dates')
         initialized = true
         logs = Lockr.get(STORAGE_KEYS.LOGS, [], true)
-
         settings = new Settings({
             settingsMap: SETTINGS_MAP,
             storageKey: STORAGE_KEYS.SETTINGS
         })
-
-        settings.onChange(function (changes, updates) {
+        settings.onChange(function(changes, updates) {
             supportSenderSettings = settings.getAll()
-
             if (updates[UPDATES.PRESETS]) {
                 updatePresets()
             }
-
             if (updates[UPDATES.GROUPS]) {
                 updateGroups()
             }
         })
-
         supportSenderSettings = settings.getAll()
-
         console.log('supportSender settings', supportSenderSettings)
-
-        ready(function () {
+        ready(function() {
             updatePresets()
         }, 'presets')
-
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_UPDATE, updatePresets)
         $rootScope.$on(eventTypeProvider.ARMY_PRESET_DELETED, updatePresets)
         $rootScope.$on(eventTypeProvider.GROUPS_CREATED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_DESTROYED, updateGroups)
         $rootScope.$on(eventTypeProvider.GROUPS_UPDATED, updateGroups)
     }
-
-    supportSender.sendSupport = function () {
+    supportSender.sendSupport = function() {
         running = true
         eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_START)
         addLog('', '', 'start', '')
+        var villagesGetId = player.getVillageList()
+        ownGroups = supportSenderSettings[SETTINGS.GROUP]
+        if (ownGroups) {
+            ownGroups.forEach(function(group) {
+                groupVillages = groupList.getGroupVillageIds(group)
+                for (var i of groupVillages) {
+                    villages.push(i)
+                }
+            })
+        }
+        province = supportSenderSettings[SETTINGS.PROVINCE]
+        if (province > 0) {
+            requestVillageProvinceNeighbours(province, function(responseData) {
+                villagesInProvince = responseData.villages
+                villagesInProvince.forEach(function(provinceVillage) {
+                    if (!villages.includes(provinceVillage)) {
+                        villages.push(provinceVillage)
+                    }
+                })
+            })
+        }
+        if (ownGroups == false && province == 0) {
+            villagesGetId.forEach(function(village) {
+                villages.push(village.data.villageId)
+            })
+        }
+        console.log(villages)
+        onePack = supportSenderSettings[SETTINGS.ONE_PACK]
+        sendNow = supportSenderSettings[SETTINGS.SEND_NOW]
+        date = supportSenderSettings[SETTINGS.DATE]
+        if (date == '' && sendNow == false) {
+            utils.notif('error', $filter('i18n')('error.no_date_selected', $rootScope.loc.ale, 'support_sender'))
+            supportSender.stopError()
+            return
+        }
+        dateType = supportSenderSettings[SETTINGS.DATE_TYPE]
+        if (dateType == 'date_type_arrive') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.ARRIVE
+        } else if (dateType == 'date_type_out') {
+            whenSend = COMMAND_QUEUE_DATE_TYPES.OUT
+        } else {
+            utils.notif('error', $filter('i18n')('error.no_type_selected', $rootScope.loc.ale, 'support_sender'))
+            supportSender.stopError()
+            return
+        }
+        village = supportSenderSettings[SETTINGS.VILLAGE]
+        if (village == '') {
+            utils.notif('error', $filter('i18n')('error.no_village_selected', $rootScope.loc.ale, 'support_sender'))
+            supportSender.stopError()
+            return
+        }
+        distance = supportSenderSettings[SETTINGS.DISTANCE]
+        console.log(distance)
+        spear = supportSenderSettings[SETTINGS.SPEAR]
+        sword = supportSenderSettings[SETTINGS.SWORD]
+        archer = supportSenderSettings[SETTINGS.ARCHER]
+        hc = supportSenderSettings[SETTINGS.HC]
+        trebuchet = supportSenderSettings[SETTINGS.TREBUCHET]
+        if (spear == 0 && sword == 0 && archer == 0 && trebuchet == 0 && hc == 0) {
+            utils.notif('error', $filter('i18n')('error.no_unit_selected', $rootScope.loc.ale, 'support_sender'))
+            supportSender.stopError()
+            return
+        }
+        if (onePack) {
+            sendOneSupport()
+        } else {
+            if (sendNow) {
+                sendSupportsNow()
+            } else {
+                sendSupports()
+            }
+        }
     }
-
-    supportSender.stop = function () {
+    supportSender.getPresetUnits = function() {
+        presetSelected = supportSenderSettings[SETTINGS.PRESET]
+        if (presetSelected == false) {
+            utils.notif('error', $filter('i18n')('error.no_preset_selected', $rootScope.loc.ale, 'support_sender'))
+            supportSender.stopError()
+            return
+        }
+        socketService.emit(routeProvider.GET_PRESETS, {}, function(data) {
+            for (var i = 0; i < data.presets.length; i++) {
+                if (data.presets[i].id == presetSelected) {
+                    presetSPEAR = data.presets[i].units.spear
+                    presetSWORD = data.presets[i].units.sword
+                    presetARCHER = data.presets[i].units.archer
+                    presetHC = data.presets[i].units.heavy_cavalry
+                    presetTREBUCHET = data.presets[i].units.trebuchet
+                }
+            }
+        })
+    }
+    supportSender.removeSupport = function() {
+        running = true
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_START)
+        addLog('', '', 'startR', '')
+    }
+    supportSender.getPresetSpear = function() {
+        return presetSPEAR
+    }
+    supportSender.getPresetSword = function() {
+        return presetSWORD
+    }
+    supportSender.getPresetTrebuchet = function() {
+        return presetTREBUCHET
+    }
+    supportSender.getPresetArcher = function() {
+        return presetARCHER
+    }
+    supportSender.getPresetHc = function() {
+        return presetHC
+    }
+    supportSender.stopSend = function() {
         running = false
         eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
         addLog('', '', 'stop', '')
+    }
+    supportSender.stopRemove = function() {
+        running = false
+        eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
+        addLog('', '', 'stopR', '')
     }
     supportSender.getLogs = function() {
         return logs
@@ -38808,19 +39771,15 @@ define('two/supportSender', [
         running = false
         eventQueue.trigger(eventTypeProvider.SUPPORT_SENDER_STOP)
     }
-
-    supportSender.getSettings = function () {
+    supportSender.getSettings = function() {
         return settings
     }
-
-    supportSender.isInitialized = function () {
+    supportSender.isInitialized = function() {
         return initialized
     }
-
-    supportSender.isRunning = function () {
+    supportSender.isRunning = function() {
         return running
     }
-
     return supportSender
 })
 define('two/supportSender/events', [], function () {
@@ -38870,6 +39829,7 @@ define('two/supportSender/ui', [
     let mapSelectedProvince = false    
     const TAB_TYPES = {
         SUPPORT: 'support',
+        REMOVE: 'remove',
         LOGS: 'logs'
     }
     const selectTab = function (tabType) {
@@ -38877,14 +39837,36 @@ define('two/supportSender/ui', [
     }
     const sendSupport = function () {
         if (supportSender.isRunning()) {
-            supportSender.stop()
+            supportSender.stopSend()
         } else {
             settings.setAll(settings.decode($scope.settings))
             supportSender.sendSupport()
         }
     }
+    const removeSupport = function () {
+        if (supportSender.isRunning()) {
+            supportSender.stopRemove()
+        } else {
+            settings.setAll(settings.decode($scope.settings))
+            supportSender.removeSupport()
+        }
+    }
+    const insertPresetUnits= function() {
+        supportSender.getPresetUnits()
+        $scope.settings[SETTINGS.SPEAR] = supportSender.getPresetSpear()
+        $scope.settings[SETTINGS.SWORD] = supportSender.getPresetSword()
+        $scope.settings[SETTINGS.ARCHER] = supportSender.getPresetArcher()
+        $scope.settings[SETTINGS.TREBUCHET] = supportSender.getPresetTrebuchet()
+        $scope.settings[SETTINGS.HC] = supportSender.getPresetHc()
+        settings.setAll(settings.decode($scope.settings))
+    }
+    const clearR = function() {
+        settings.setAll(settings.decode($scope.settings))
+    }
     const clear = function() {
         $scope.settings[SETTINGS.GROUP] = false
+        $scope.settings[SETTINGS.ONE_PACK] = false
+        $scope.settings[SETTINGS.SEND_NOW] = false
         $scope.settings[SETTINGS.DATE] = ''
         $scope.settings[SETTINGS.DATE_TYPE] = 'date_type_arrive'
         $scope.settings[SETTINGS.VILLAGE] = 0
@@ -39086,8 +40068,8 @@ define('two/supportSender/ui', [
         })
         $rootScope.$on(eventTypeProvider.SHOW_CONTEXT_MENU, setMapSelectedVillage)
         $rootScope.$on(eventTypeProvider.DESTROY_CONTEXT_MENU, unsetMapSelectedVillage)
-        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-two-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"200px\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td><tr><td><div auto-complete=\"autoCompleteSupport\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportVillage.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportVillage.origin\" class=\"command-village\">{{ supportVillage.origin.name }} ({{ supportVillage.origin.x }}|{{ supportVillage.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVillage()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td><tr><td><input ng-model=\"settings[SETTINGS.DATE]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE]\" drop-down=\"true\"></div><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_village' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportProvince.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportProvince.origin\" class=\"command-village\">{{ supportProvince.origin.name }} ({{ supportProvince.origin.x }}|{{ supportProvince.origin.y }})<td class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'prank_helper' }}</b></a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.unit }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSupport()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
-        interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender th{text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}#two-support-sender .logs{margin-bottom:10px}#two-support-sender .logs td,#two-support-sender .logs th{text-align:center;line-height:30px}#two-support-sender .icon-20x20-village:before{margin-top:-11px}')
+        interfaceOverflow.addTemplate('twoverflow_support_sender_window', `<div id=\"two-support-sender\" class=\"win-content two-window\"><header class=\"win-head\"><h2>{{ 'title' | i18n:loc.ale:'support_sender' }}</h2><ul class=\"list-btn\"><li><a href=\"#\" class=\"size-34x34 btn-red icon-26x26-close\" ng-click=\"closeWindow()\"></a></ul></header><div class=\"win-main\" scrollbar=\"\"><div class=\"tabs tabs-bg\"><div class=\"tabs-three-col\"><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.SUPPORT)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.SUPPORT}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.SUPPORT}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SUPPORT}\">{{ 'support' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.REMOVE)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.REMOVE}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.REMOVE}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.REMOVE}\">{{ 'remove' | i18n:loc.ale:'support_sender' }}</a></div></div></div><div class=\"tab\" ng-click=\"selectTab(TAB_TYPES.LOGS)\" ng-class=\"{'tab-active': selectedTab == TAB_TYPES.LOGS}\"><div class=\"tab-inner\"><div ng-class=\"{'box-border-light': selectedTab === TAB_TYPES.LOGS}\"><a href=\"#\" ng-class=\"{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}\">{{ 'logs' | i18n:loc.ale:'support_sender' }}</a></div></div></div></div></div><div class=\"box-paper footer\"><div class=\"scroll-wrap\"><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><h5 class=\"twx-section\">{{ 'support.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-striped\"><col width=\"30%\"><col width=\"10%\"><col><col width=\"140px\"><col width=\"60px\"><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.time' | i18n:loc.ale:'support_sender' }}</span><tr><td><input ng-model=\"settings[SETTINGS.DATE]\" class=\"textfield-border date\" pattern=\"\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*\" placeholder=\"{{ 'fake.add_date' | i18n:loc.ale:'fake_sender' }}\" tooltip=\"\" tooltip-content=\"hh:mm:ss:SSS dd/MM/yyyy\"><td class=\"text-center\"><span class=\"icon-26x26-time\"></span><td class=\"actionsTime\"><a class=\"btn btn-orange small\" ng-click=\"reduceDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_minus' | i18n:loc.ale:'fake_sender' }}\">-</a><a class=\"btn btn-orange big\" ng-click=\"addCurrentDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date' | i18n:loc.ale:'fake_sender' }}\">{{ 'now' | i18n:loc.ale:'common' }}</a><a class=\"btn btn-orange small\" ng-click=\"incrementDate()\" tooltip=\"\" tooltip-content=\"{{ 'fake.add_current_date_plus' | i18n:loc.ale:'fake_sender' }}\">+</a><td colspan=\"2\"><div select=\"\" list=\"datetype\" selected=\"settings[SETTINGS.DATE_TYPE]\" drop-down=\"true\"></div><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.target' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.VILLAGE]\"><td><td><td><td><tr><td><div auto-complete=\"autoCompleteVillage\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportVillage.origin\" class=\"command-village\">{{ 'support.no_village' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportVillage.origin\" class=\"command-village\">{{ supportVillage.origin.name }} ({{ supportVillage.origin.x }}|{{ supportVillage.origin.y }})<td colspan=\"2\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedVillage()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.byprovince' | i18n:loc.ale:'support_sender' }}</span><tr><td class=\"cell-bottom\"><input placeholder=\"0\" class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.PROVINCE]\"><td><td><td><td><tr><td><div auto-complete=\"autoCompleteProvince\" placeholder=\"{{ 'support.add_province' | i18n:loc.ale:'support_sender' }}\"></div><td class=\"text-center\"><span class=\"icon-26x26-rte-village\"></span><td ng-if=\"!supportProvince.origin\" class=\"command-village\">{{ 'support.no_province' | i18n:loc.ale:'support_sender' }}<td ng-if=\"supportProvince.origin\" class=\"command-village\">{{ supportProvince.origin.name }} ({{ supportProvince.origin.x }}|{{ supportProvince.origin.y }})<td colspan=\"2\" class=\"actions\"><a class=\"btn btn-orange\" ng-click=\"addMapSelectedProvince()\" tooltip=\"\" tooltip-content=\"{{ 'support.add_map_selected' | i18n:loc.ale:'support_sender' }}\">{{ 'support.selected' | i18n:loc.ale:'support_sender' }}</a><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.bygroup' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"3\"><span class=\"ff-cell-fix\">{{ 'support.group' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"groups\" selected=\"settings[SETTINGS.GROUP]\" drop-down=\"true\"></div></table><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"10%\"><col><col width=\"140px\"><col width=\"60px\"><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.bydistance' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.distance' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.DISTANCE].min\" max=\"settingsMap[SETTINGS.DISTANCE].max\" value=\"settings[SETTINGS.DISTANCE]\" enabled=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.DISTANCE]\"><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.units' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.spear' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SPEAR].min\" max=\"settingsMap[SETTINGS.SPEAR].max\" value=\"settings[SETTINGS.SPEAR]\" enabled=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SPEAR]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.sword' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.SWORD].min\" max=\"settingsMap[SETTINGS.SWORD].max\" value=\"settings[SETTINGS.SWORD]\" enabled=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.SWORD]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.archer' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.ARCHER].min\" max=\"settingsMap[SETTINGS.ARCHER].max\" value=\"settings[SETTINGS.ARCHER]\" enabled=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.ARCHER]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.heavycavalry' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.HC].min\" max=\"settingsMap[SETTINGS.HC].max\" value=\"settings[SETTINGS.HC]\" enabled=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.HC]\"><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.trebuchet' | i18n:loc.ale:'support_sender' }}</span><td><div range-slider=\"\" min=\"settingsMap[SETTINGS.TREBUCHET].min\" max=\"settingsMap[SETTINGS.TREBUCHET].max\" value=\"settings[SETTINGS.TREBUCHET]\" enabled=\"true\"></div><td colspan=\"2\" class=\"cell-bottom\"><input class=\"fit textfield-border text-center\" ng-model=\"settings[SETTINGS.TREBUCHET]\"><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.textpreset' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"2\"><span class=\"ff-cell-fix\">{{ 'support.preset' | i18n:loc.ale:'support_sender' }}</span><td class=\"item-insertP\"><span class=\"btn btn-orange addSelected\" ng-click=\"insertPU()\">{{ 'insertpreset' | i18n:loc.ale:'support_sender' }}</span><td colspan=\"2\"><div select=\"\" list=\"presets\" selected=\"settings[SETTINGS.PRESET]\" drop-down=\"true\"></div><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.miscelanous' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'onepack' | i18n:loc.ale:'support_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.ONE_PACK]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><td colspan=\"4\"><span class=\"ff-cell-fix\">{{ 'sendnow' | i18n:loc.ale:'support_sender' }}</span><td><span class=\"switch\"><div switch-slider=\"\" enabled=\"true\" border=\"true\" value=\"settings[SETTINGS.SEND_NOW]\" vertical=\"false\" size=\"'56x28'\"></div></span><tr><th colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.caution' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.merge' | i18n:loc.ale:'support_sender' }}</span><tr><td colspan=\"5\"><span class=\"ff-cell-fix\">{{ 'support.all' | i18n:loc.ale:'support_sender' }}</span></table></div><div class=\"settings\" ng-show=\"selectedTab === TAB_TYPES.REMOVE\"><h5 class=\"twx-section\">{{ 'remove.header' | i18n:loc.ale:'support_sender' }}</h5><table class=\"tbl-border-light tbl-content tbl-medium-height\"><table class=\"tbl-border-light tbl-striped\"><col width=\"20%\"><col width=\"10%\"><col><col width=\"140px\"><col width=\"60px\"><tbody></table></table></div><div class=\"rich-text\" ng-show=\"selectedTab === TAB_TYPES.LOGS\"><div class=\"page-wrap\" pagination=\"pagination.logs\"></div><p class=\"text-center\" ng-show=\"!logsView.logs.length\">{{ 'logs.noSupports' | i18n:loc.ale:'support_sender' }}<table class=\"tbl-border-light tbl-striped header-center logs\" ng-show=\"logsView.logs.length\"><col width=\"25%\"><col width=\"25%\"><col><col><col width=\"20%\"><thead><tr><th>{{ 'logs.origin' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.target' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.unit' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.amount' | i18n:loc.ale:'support_sender' }}<th>{{ 'logs.date' | i18n:loc.ale:'support_sender' }}<tbody><tr ng-repeat=\"log in logsView.logs track by $index\"><td ng-if=\"log.unit === 'start'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'support_sender' }}</b></a><td ng-if=\"log.unit === 'startR'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-green\"></span> <b>{{ log.unit | i18n:loc.ale:'support_sender' }}</b></a><td ng-if=\"log.unit === 'stop'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'support_sender' }}</b></a><td ng-if=\"log.unit === 'stopR'\" colspan=\"4\"><a><span class=\"icon-bg-black icon-26x26-dot-red\"></span> <b>{{ log.unit | i18n:loc.ale:'support_sender' }}</b></a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'stopR' && log.unit !== 'startR'\"><a class=\"link\" ng-click=\"openVillageInfo(log.villageId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.villageId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'stopR' && log.unit !== 'startR'\"><a class=\"link\" ng-click=\"openVillageInfo(log.targetId)\"><span class=\"icon-20x20-village\"></span> {{ villagesLabel[log.targetId] }}</a><td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'stopR' && log.unit !== 'startR'\"><span class=\"unit-icon icon-20x20-unit-{{ log.unit }}\"></span>{{ log.unit | i18n:loc.ale:'support_sender' }}<td ng-if=\"log.unit !== 'stop' && log.unit !== 'start' && log.unit !== 'stopR' && log.unit !== 'startR'\">{{ log.amount }}<td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</table><div class=\"page-wrap\" pagination=\"pagination.logs\"></div></div></div></div></div><footer class=\"win-foot\"><ul class=\"list-btn list-center\"><li ng-show=\"selectedTab === TAB_TYPES.SUPPORT\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clear()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"sendSupport()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'support.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.REMOVE\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"clearR()\">{{ 'support.clear' | i18n:loc.ale:'support_sender' }}</a> <a href=\"#\" ng-class=\"{false:'btn-green', true:'btn-red'}[running]\" class=\"btn-border\" ng-click=\"removeSupport()\"><span ng-show=\"running\">{{ 'support.pause' | i18n:loc.ale:'support_sender' }}</span> <span ng-show=\"!running\">{{ 'remove.start' | i18n:loc.ale:'support_sender' }}</span></a><li ng-show=\"selectedTab === TAB_TYPES.LOGS\"><a href=\"#\" class=\"btn-border btn-orange\" ng-click=\"logsView.clearLogs()\">{{ 'logs.clear' | i18n:loc.ale:'support_sender' }}</a></ul></footer></div>`)
+        interfaceOverflow.addStyle('#two-support-sender div[select]{text-align:center}#two-support-sender div[select] .select-wrapper{height:34px}#two-support-sender div[select] .select-wrapper .select-button{height:28px;margin-top:1px}#two-support-sender div[select] .select-wrapper .select-handler{text-align:center;-webkit-box-shadow:none;box-shadow:none;height:28px;line-height:28px;margin-top:1px;width:200px}#two-support-sender .range-container{width:250px}#two-support-sender .textfield-border{width:219px;height:34px;margin-bottom:2px;padding-top:2px}#two-support-sender .textfield-border.fit{width:100%}#two-support-sender th{text-align:center}#two-support-sender .force-26to20{transform:scale(.8);width:20px;height:20px}#two-support-sender .item-insertP{text-align:center}#two-support-sender .item-insertP span{height:34px;line-height:34px;text-align:center;width:125px}#two-support-sender .actions{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actions a{width:100px}#two-support-sender .actionsTime{height:34px;line-height:34px;text-align:center;user-select:none}#two-support-sender .actionsTime .big{width:54px}#two-support-sender .actionsTime .small{width:26px}#two-support-sender .logs{margin-bottom:10px}#two-support-sender .logs td,#two-support-sender .logs th{text-align:center;line-height:30px}#two-support-sender .icon-20x20-village:before{margin-top:-11px}')
     }
 
     const buildWindow = function () {
@@ -39101,22 +40083,24 @@ define('two/supportSender/ui', [
         $scope.supportProvince = supportProvince
         $scope.supportVillage = supportVillage
         $scope.clear = clear
+        $scope.clearR = clearR
+        $scope.insertPU = insertPresetUnits
         $scope.datetype = Settings.encodeList(DATE_TYPES, {
             textObject: 'support_sender',
             disabled: false
         })
         $scope.autoCompleteVillage = {
             type: ['village'],
-            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'support_sender'),
+            placeholder: $filter('i18n')('support.add_village', $rootScope.loc.ale, 'support_sender'),
             onEnter: eventHandlers.onAutoCompleteVillage,
-            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'support_sender'),
+            tooltip: $filter('i18n')('support.add_target', $rootScope.loc.ale, 'support_sender'),
             dropDown: true
         }
         $scope.autoCompleteProvince = {
             type: ['village'],
-            placeholder: $filter('i18n')('rename.add_village_search', $rootScope.loc.ale, 'support_sender'),
+            placeholder: $filter('i18n')('support.add_province', $rootScope.loc.ale, 'support_sender'),
             onEnter: eventHandlers.onAutoCompleteProvince,
-            tooltip: $filter('i18n')('rename.add_origin', $rootScope.loc.ale, 'support_sender'),
+            tooltip: $filter('i18n')('support.add_origin', $rootScope.loc.ale, 'support_sender'),
             dropDown: true
         }
         settings.injectScope($scope)
@@ -39124,6 +40108,7 @@ define('two/supportSender/ui', [
         eventHandlers.updateGroups()
         $scope.selectTab = selectTab
         $scope.sendSupport = sendSupport
+        $scope.removeSupport = removeSupport
         $scope.addCurrentDate = addCurrentDate
         $scope.incrementDate = incrementDate
         $scope.reduceDate = reduceDate
@@ -39164,6 +40149,8 @@ define('two/supportSender/ui', [
 define('two/supportSender/settings', [], function () {
     return {
         DATE: 'date',
+        ONE_PACK: 'onepack',
+        SEND_NOW: 'sendnow',
         DATE_TYPE: 'datetype',
         VILLAGE: 'village',
         PROVINCE: 'province',
@@ -39265,11 +40252,19 @@ define('two/supportSender/settings/map', [
         [SETTINGS.PROVINCE]: {
             default: 0,
             inputType: 'number'
+        },
+        [SETTINGS.ONE_PACK]: {
+            default: false,
+            inputType: 'checkbox'
+        },
+        [SETTINGS.SEND_NOW]: {
+            default: false,
+            inputType: 'checkbox'
         }
     }
 })
 
-define('two/fakeSender/types/dates', [], function () {
+define('two/supportSender/types/type', [], function () {
     return {
         ARRIVE: 'date_type_arrive',
         OUT: 'date_type_out'

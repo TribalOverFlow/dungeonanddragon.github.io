@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 24 Jan 2021 18:04:41 GMT
+ * Tue, 26 Jan 2021 17:20:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -1963,7 +1963,7 @@ define('two/language', [
             "remove.header": "Auto Cofanie Wsparć",
             "support.target": "Cel do wysłania wsparć",
             "support.time": "Ustawienia Czasu",
-            "support.merge": "1. Ustwienia działają oddzielnie jak również razem.",
+            "support.merge": "1. Ustawienia działają oddzielnie jak również razem.",
             "support.all": "2. Jeśli nie wybrałeś grupy, prowincji oraz dystansu nastąpi wysyłanie z wszystkich wiosek w których znajdują się wskazane jednostki.",
             "support.byprovince": "Wyślij wsparcia z wybranej prowincji",
             "support.bygroup": "Wyślij wsparcia z wybranej grupy wiosek",
@@ -1980,7 +1980,7 @@ define('two/language', [
             "support.preset": "Szablon",
             "support.miscelanous": "Pozostałe ustawienia",
             "support.textpreset": "Lub wybierz szablon z którego zostaną pobrane ilości jednostek defensywnych",
-            "support.distance": "Dystans do wspieranej wioski",
+            "support.distance": "Dystans",
             "support.spear": "Pikinierzy",
             "support.sword": "Miecznicy",
             "support.archer": "Łucznicy",
@@ -7832,12 +7832,12 @@ define('two/autoCollector', [
     }
     const rerollItemInfo = function() {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {}, function(data) {
-            finalReward = data.milestones[5].animation
+            finalReward = data.milestones[5].reward.animation
             resourcesCollected = data.resources_collected
             jobsLength = data.jobs.length
             timeReset = data.time_new_milestones * 1000 - Date.now() + 1000
         })
-        console.log(timeReset)
+        console.log(timeReset, jobsLength, finalReward)
         socketService.emit(routeProvider.GET_INVENTORY, {}, function(inventory) {
             items = inventory.inventory
             items.forEach(function(item) {
@@ -7847,8 +7847,7 @@ define('two/autoCollector', [
                 }
             })
         })
-        console.log(rerollAmount)
-        console.log(itemId)
+        console.log(rerollAmount, itemId)
         if (finalReward == 'food_capacity_increase' && jobsLength == 0) {
             if (rerollAmount == 1 && resourcesCollected >= 9000 && timeReset >= 3600000) {
                 socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
@@ -38761,6 +38760,10 @@ define('two/supportSender', [
     let settings
     let supportSenderSettings
     let logs
+    var travelTime = 0
+    var inputTime = 0
+    var sendTime = 0
+    let timeOffset
     var player = modelDataService.getSelectedCharacter()
     let presetSPEAR = null
     let presetSWORD = null
@@ -38806,9 +38809,7 @@ define('two/supportSender', [
         selectedPresets = []
         const allPresets = modelDataService.getPresetList().getPresets()
         const presetsSelectedByTheUser = supportSenderSettings[SETTINGS.PRESET]
-        presetsSelectedByTheUser.forEach(function(presetId) {
-            selectedPresets.push(allPresets[presetId])
-        })
+        selectedPresets.push(allPresets[presetsSelectedByTheUser])
     }
     const updateGroups = function() {
         selectedGroups = []
@@ -38817,6 +38818,9 @@ define('two/supportSender', [
         groupsSelectedByTheUser.forEach(function(groupId) {
             selectedGroups.push(allGroups[groupId])
         })
+    }
+    const timeToSend = function(sendTime) {
+        return sendTime < (timeHelper.gameTime() + timeOffset)
     }
     const requestVillageProvinceNeighbours = function(villageId, callback) {
         socketService.emit(routeProvider.VILLAGES_IN_PROVINCE, {
@@ -38862,30 +38866,51 @@ define('two/supportSender', [
                                             units = {
                                                 heavy_cavalry: hc
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'heavy_cavalry', hc)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hc)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         }
                                         if (Sword >= sword && sword != 0) {
                                             units = {
                                                 sword: sword
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'sword', sword)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', sword)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         }
                                         if (Trebuchet >= trebuchet && trebuchet != 0) {
                                             units = {
                                                 trebuchet: trebuchet
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'trebuchet', trebuchet)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchet)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         }
                                         if (Spear >= spear && Archer >= archer && spear != 0 && archer != 0) {
@@ -38893,51 +38918,86 @@ define('two/supportSender', [
                                                 archer: archer,
                                                 spear: spear
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'archer', archer)
-                                            addLog(villageId, village, 'spear', spear)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         } else if (Spear >= spear && Archer < archer && spear != 0 && archer != 0) {
                                             units = {
                                                 archer: '*',
                                                 spear: spear
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'archer', archer)
-                                            addLog(villageId, village, 'spear', spear)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         } else if (Spear < spear && Archer >= archer && spear != 0 && archer != 0) {
                                             units = {
                                                 archer: archer,
                                                 spear: '*'
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'archer', archer)
-                                            addLog(villageId, village, 'spear', spear)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         } else if (archer != 0 && Archer >= archer) {
                                             units = {
                                                 archer: archer
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'archer', archer)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         } else if (Spear >= spear && spear != 0) {
                                             units = {
                                                 spear: spear
                                             }
-                                            commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
-                                            addLog(villageId, village, 'spear', spear)
-                                            if (!commandQueue.isRunning()) {
-                                                commandQueue.start()
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
                                             }
                                         }
                                     })
@@ -38957,8 +39017,574 @@ define('two/supportSender', [
         }
     }
     const sendOneSupport = function() {
+        if (running == true) {
+            var spearLimit = spear
+            var swordLimit = sword
+            var archerLimit = archer
+            var hcLimit = hc
+            var trebuchetLimit = trebuchet
+            const commandType = COMMAND_TYPES.SUPPORT
+            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+                villages.forEach(function(villageId, index) {
+                    setTimeout(function() {
+                        for (var i = 0; i < data.villages.length; i++) {
+                            var newId = data.villages[i].id
+                            if (newId == villageId) {
+                                villageData = {
+                                    'id': data.villages[i].id,
+                                    'x': data.villages[i].x,
+                                    'y': data.villages[i].y,
+                                    'name': data.villages[i].name,
+                                    'character_id': player.getId()
+                                }
+                                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                    village_id: villageId
+                                }, function(info) {
+                                    Archer = info.available_units.archer.total
+                                    HC = info.available_units.heavy_cavalry.total
+                                    Spear = info.available_units.spear.total
+                                    Sword = info.available_units.sword.total
+                                    Trebuchet = info.available_units.trebuchet.total
+                                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                        my_village_id: modelDataService.getSelectedVillage().getId(),
+                                        village_id: village,
+                                        num_reports: 1
+                                    }, function(data) {
+                                        targetFinal = {
+                                            'id': data.village_id,
+                                            'x': data.village_x,
+                                            'y': data.village_y,
+                                            'name': data.village_name
+                                        }
+                                        if (HC >= hc && hc != 0 && hcLimit > 0 && hcLimit >= hc) {
+                                            units = {
+                                                heavy_cavalry: hc
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hc)
+                                                hcLimit -= hc
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (HC >= hc && hc != 0 && hcLimit > 0 && hcLimit < hc) {
+                                            units = {
+                                                heavy_cavalry: hcLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hcLimit)
+                                                hcLimit -= hcLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (HC < hc && hc != 0 && hcLimit > 0 && hcLimit >= HC) {
+                                            units = {
+                                                heavy_cavalry: HC
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', HC)
+                                                hcLimit -= HC
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (HC < hc && hc != 0 && hcLimit > 0 && hcLimit < HC) {
+                                            units = {
+                                                heavy_cavalry: hcLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hcLimit)
+                                                hcLimit -= hcLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Sword >= sword && sword != 0 && swordLimit > 0 && swordLimit >= sword) {
+                                            units = {
+                                                sword: sword
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', sword)
+                                                swordLimit -= sword
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Sword >= sword && sword != 0 && swordLimit > 0 && swordLimit < sword) {
+                                            units = {
+                                                sword: swordLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', swordLimit)
+                                                swordLimit -= swordLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Sword < sword && sword != 0 && swordLimit > 0 && swordLimit >= Sword) {
+                                            units = {
+                                                sword: Sword
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', Sword)
+                                                swordLimit -= Sword
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Sword < sword && sword != 0 && swordLimit > 0 && swordLimit < Sword) {
+                                            units = {
+                                                sword: swordLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', swordLimit)
+                                                swordLimit -= swordLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Trebuchet >= trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit >= trebuchet) {
+                                            units = {
+                                                trebuchet: trebuchet
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchet)
+                                                trebuchetLimit -= trebuchet
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Trebuchet >= trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit < trebuchet) {
+                                            units = {
+                                                trebuchet: trebuchetLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchetLimit)
+                                                trebuchetLimit -= trebuchetLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Trebuchet < trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit >= Trebuchet) {
+                                            units = {
+                                                trebuchet: Trebuchet
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', Trebuchet)
+                                                trebuchetLimit -= Trebuchet
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Trebuchet < trebuchet && trebuchet != 0 && trebuchetLimit > 0 && trebuchetLimit < Trebuchet) {
+                                            units = {
+                                                trebuchet: trebuchetLimit
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchetLimit)
+                                                trebuchetLimit -= trebuchetLimit
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Spear >= spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && Archer < archer && spear != 0 && archer != 0 && spearLimit > 0 && archerLimit > 0) {
+                                            units = {
+                                                archer: '*',
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                spearLimit = spearLimit - spear
+                                                archerLimit = archerLimit - Archer
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear < spear && Archer >= archer && spear != 0 && archer != 0 && spearLimit > 0 && archerLimit > 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: '*'
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                spearLimit = spearLimit - Spear
+                                                archerLimit = archerLimit - archer
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (archer != 0 && Archer >= archer && archerLimit > 0) {
+                                            units = {
+                                                archer: archer
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 6000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                archerLimit = archerLimit - archer
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && spear != 0 && spearLimit > 0) {
+                                            units = {
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'spear', spear)
+                                                spearLimit = spearLimit - spear
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    }, index * 5000)
+                    if (index == (villages.length - 1) && running == true) {
+                        setTimeout(function() {
+                            supportSender.stopSend()
+                        }, villages.length * 5000)
+                    }
+                })
+            })
+        } else if (running == false) {
+            return
+        }
     }
     const sendSupportsNow = function() {
+        if (running == true) {
+            const commandType = COMMAND_TYPES.SUPPORT
+            socketService.emit(routeProvider.GET_CHARACTER_VILLAGES, {}, function(data) {
+                villages.forEach(function(villageId, index) {
+                    setTimeout(function() {
+                        for (var i = 0; i < data.villages.length; i++) {
+                            var newId = data.villages[i].id
+                            if (newId == villageId) {
+                                villageData = {
+                                    'id': data.villages[i].id,
+                                    'x': data.villages[i].x,
+                                    'y': data.villages[i].y,
+                                    'name': data.villages[i].name,
+                                    'character_id': player.getId()
+                                }
+                                socketService.emit(routeProvider.VILLAGE_UNIT_INFO, {
+                                    village_id: villageId
+                                }, function(info) {
+                                    Archer = info.available_units.archer.total
+                                    HC = info.available_units.heavy_cavalry.total
+                                    Spear = info.available_units.spear.total
+                                    Sword = info.available_units.sword.total
+                                    Trebuchet = info.available_units.trebuchet.total
+                                    socketService.emit(routeProvider.MAP_GET_VILLAGE_DETAILS, {
+                                        my_village_id: modelDataService.getSelectedVillage().getId(),
+                                        village_id: village,
+                                        num_reports: 1
+                                    }, function(data) {
+                                        targetFinal = {
+                                            'id': data.village_id,
+                                            'x': data.village_x,
+                                            'y': data.village_y,
+                                            'name': data.village_name
+                                        }
+                                        if (HC >= hc && hc != 0) {
+                                            units = {
+                                                heavy_cavalry: hc
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 8000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'heavy_cavalry', hc)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Sword >= sword && sword != 0) {
+                                            units = {
+                                                sword: sword
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 4000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'sword', sword)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Trebuchet >= trebuchet && trebuchet != 0) {
+                                            units = {
+                                                trebuchet: trebuchet
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 10000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'trebuchet', trebuchet)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                        if (Spear >= spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && Archer < archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: '*',
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear < spear && Archer >= archer && spear != 0 && archer != 0) {
+                                            units = {
+                                                archer: archer,
+                                                spear: '*'
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (archer != 0 && Archer >= archer) {
+                                            units = {
+                                                archer: archer
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 6000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'archer', archer)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        } else if (Spear >= spear && spear != 0) {
+                                            units = {
+                                                spear: spear
+                                            }
+                                            travelTime = utils.getTravelTime(villageData, targetFinal, units, commandType, {}, false)
+                                            inputTime = utils.getTimeFromString(date)
+                                            sendTime = whenSend === COMMAND_QUEUE_DATE_TYPES.ARRIVE ? (inputTime - travelTime) : inputTime
+                                            if (timeToSend(sendTime)) {
+                                                console.log('Wsparcie nie zdąży')
+                                            } else {
+                                                date = utils.formatDate(timeHelper.gameTime() + 2000)
+                                                commandQueue.addCommand(villageData, targetFinal, date, whenSend, units, {}, commandType, false)
+                                                addLog(villageId, village, 'spear', spear)
+                                                if (!commandQueue.isRunning()) {
+                                                    commandQueue.start()
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    }, index * 5000)
+                    if (index == (villages.length - 1) && running == true) {
+                        setTimeout(function() {
+                            supportSender.stopSend()
+                        }, villages.length * 5000)
+                    }
+                })
+            })
+        } else if (running == false) {
+            return
+        }
     }
     const addLog = function(villageId, targetId, unit, amount) {
         let data = {
@@ -38977,6 +39603,7 @@ define('two/supportSender', [
     }
     const supportSender = {}
     supportSender.init = function() {
+        timeOffset = utils.getTimeOffset()
         commandQueue = require('two/commandQueue')
         COMMAND_QUEUE_DATE_TYPES = require('two/commandQueue/types/dates')
         initialized = true
@@ -39020,22 +39647,24 @@ define('two/supportSender', [
             })
         }
         province = supportSenderSettings[SETTINGS.PROVINCE]
-        requestVillageProvinceNeighbours(province, function(responseData) {
-            villagesInProvince = responseData.villages
-            villagesInProvince.forEach(function(provinceVillage) {
-                if (!villages.includes(provinceVillage)) {
-                    villages.push(provinceVillage)
-                }
+        if (province > 0) {
+            requestVillageProvinceNeighbours(province, function(responseData) {
+                villagesInProvince = responseData.villages
+                villagesInProvince.forEach(function(provinceVillage) {
+                    if (!villages.includes(provinceVillage)) {
+                        villages.push(provinceVillage)
+                    }
+                })
             })
-        })
-        if(ownGroups == false && province == 0) {
+        }
+        if (ownGroups == false && province == 0) {
             villagesGetId.forEach(function(village) {
                 villages.push(village.data.villageId)
             })
         }
         console.log(villages)
-        onePack = supportSenderSettings[SETTINGS.ONE_PACK] 
-        sendNow = supportSenderSettings[SETTINGS.SEND_NOW] 
+        onePack = supportSenderSettings[SETTINGS.ONE_PACK]
+        sendNow = supportSenderSettings[SETTINGS.SEND_NOW]
         date = supportSenderSettings[SETTINGS.DATE]
         if (date == '' && sendNow == false) {
             utils.notif('error', $filter('i18n')('error.no_date_selected', $rootScope.loc.ale, 'support_sender'))
@@ -39058,19 +39687,19 @@ define('two/supportSender', [
             supportSender.stopError()
             return
         }
-        distance = supportSenderSettings[SETTINGS.DISTANCE] 
+        distance = supportSenderSettings[SETTINGS.DISTANCE]
         console.log(distance)
-        spear = supportSenderSettings[SETTINGS.SPEAR] 
-        sword = supportSenderSettings[SETTINGS.SWORD] 
-        archer = supportSenderSettings[SETTINGS.ARCHER] 
-        hc = supportSenderSettings[SETTINGS.HC] 
+        spear = supportSenderSettings[SETTINGS.SPEAR]
+        sword = supportSenderSettings[SETTINGS.SWORD]
+        archer = supportSenderSettings[SETTINGS.ARCHER]
+        hc = supportSenderSettings[SETTINGS.HC]
         trebuchet = supportSenderSettings[SETTINGS.TREBUCHET]
         if (spear == 0 && sword == 0 && archer == 0 && trebuchet == 0 && hc == 0) {
             utils.notif('error', $filter('i18n')('error.no_unit_selected', $rootScope.loc.ale, 'support_sender'))
             supportSender.stopError()
             return
         }
-        if(onePack) {
+        if (onePack) {
             sendOneSupport()
         } else {
             if (sendNow) {
