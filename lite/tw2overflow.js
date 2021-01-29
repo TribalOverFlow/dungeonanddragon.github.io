@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 29 Jan 2021 00:34:17 GMT
+ * Fri, 29 Jan 2021 01:03:33 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -294,11 +294,17 @@ define('two/utils', [
         const targetIsBarbarian = !target.character_id
         const targetIsSameTribe = target.character_id && target.tribe_id &&
                 target.tribe_id === modelDataService.getSelectedCharacter().getTribeId()
-        console.log(units)
         if (useEffects !== false) {
             if (type === 'attack') {
                 if (targetIsBarbarian) {
-                    useEffects = true
+                    if (units['snob'] == '*' || units['snob'] == 'number' && units['snob'] != 0) {
+                        useEffects = false
+                    } else {
+                        useEffects = true
+                    }
+                }
+                if ('supporter' in officers) {
+                    useEffects = false
                 }
             } else if (type === 'support') {
                 if (targetIsSameTribe) {
@@ -307,9 +313,6 @@ define('two/utils', [
 
                 if ('supporter' in officers) {
                     useEffects = true
-                }
-                if (units['snob'] == '*') {
-                    useEffects = false
                 }
             }
         }
