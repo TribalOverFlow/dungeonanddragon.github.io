@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 26 Jan 2021 17:20:24 GMT
+ * Fri, 29 Jan 2021 00:04:57 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -298,6 +298,7 @@ define('two/utils', [
         if (useEffects !== false) {
             if (type === 'attack') {
                 if ('supporter' in officers) {
+                    console.log('utils atak typ')
                     delete officers.supporter
                 }
 
@@ -7836,61 +7837,60 @@ define('two/autoCollector', [
             resourcesCollected = data.resources_collected
             jobsLength = data.jobs.length
             timeReset = data.time_new_milestones * 1000 - Date.now() + 1000
-        })
-        console.log(timeReset, jobsLength, finalReward)
-        socketService.emit(routeProvider.GET_INVENTORY, {}, function(inventory) {
-            items = inventory.inventory
-            items.forEach(function(item) {
-                if (item.type == 'resource_deposit_reroll') {
-                    rerollAmount = item.amount
-                    itemId = item.id
+            socketService.emit(routeProvider.GET_INVENTORY, {}, function(inventory) {
+                items = inventory.inventory
+                items.forEach(function(item) {
+                    if (item.type == 'resource_deposit_reroll') {
+                        rerollAmount = item.amount
+                        itemId = item.id
+                    }
+                })
+                console.log(rerollAmount, jobsLength, timeReset, finalReward, resourcesCollected)
+                if (finalReward == 'food_capacity_increase' && jobsLength == 0) {
+                    if (rerollAmount == 1 && resourcesCollected >= 9000 && timeReset >= 3600000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    } else if (rerollAmount == 2 && resourcesCollected >= 8000 && timeReset >= 7300000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    } else if (rerollAmount == 3 && resourcesCollected >= 7100 && timeReset >= 11100000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    } else if (rerollAmount == 4 && resourcesCollected >= 6200 && timeReset >= 15000000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    } else if (rerollAmount == 5 && resourcesCollected >= 5400 && timeReset >= 19000000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    } else if (rerollAmount == 6 && resourcesCollected >= 4600 && timeReset >= 23100000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    } else if (rerollAmount == 7 && resourcesCollected >= 3900 && timeReset >= 27300000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    } else if (rerollAmount >= 8 && resourcesCollected >= 3200 && timeReset >= 31600000) {
+                        socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
+                            village_id: modelDataService.getSelectedVillage().getId(),
+                            item_id: itemId
+                        })
+                    }
                 }
             })
         })
-        console.log(rerollAmount, itemId)
-        if (finalReward == 'food_capacity_increase' && jobsLength == 0) {
-            if (rerollAmount == 1 && resourcesCollected >= 9000 && timeReset >= 3600000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            } else if (rerollAmount == 2 && resourcesCollected >= 8000 && timeReset >= 7300000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            } else if (rerollAmount == 3 && resourcesCollected >= 7100 && timeReset >= 11100000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            } else if (rerollAmount == 4 && resourcesCollected >= 6200 && timeReset >= 15000000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            } else if (rerollAmount == 5 && resourcesCollected >= 5400 && timeReset >= 19000000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            } else if (rerollAmount == 6 && resourcesCollected >= 4600 && timeReset >= 23100000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            } else if (rerollAmount == 7 && resourcesCollected >= 3900 && timeReset >= 27300000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            } else if (rerollAmount >= 8 && resourcesCollected >= 3200 && timeReset >= 31600000) {
-                socketService.emit(routeProvider.PREMIUM_USE_ITEM, {
-                    village_id: modelDataService.getSelectedVillage().getId(),
-                    item_id: itemId
-                })
-            }
-        }
     }
     const updateDepositInfo = function() {
         socketService.emit(routeProvider.RESOURCE_DEPOSIT_GET_INFO, {})
@@ -7940,7 +7940,7 @@ define('two/autoCollector', [
             }, 1500)
             setTimeout(function() {
                 rerollItemInfo()
-            }, 10000)
+            }, 20000)
         })
         $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOBS_REROLLED, analyse)
         $rootScope.$on(eventTypeProvider.RESOURCE_DEPOSIT_JOB_COLLECTED, analyse)
@@ -7953,6 +7953,7 @@ define('two/autoCollector', [
         eventQueue.trigger(eventTypeProvider.AUTO_COLLECTOR_STARTED)
         running = true
         analyse()
+        rerollItemInfo()
     }
     autoCollector.stop = function() {
         eventQueue.trigger(eventTypeProvider.AUTO_COLLECTOR_STOPPED)
@@ -18261,6 +18262,7 @@ define('two/commandQueue', [
 
             if (commandType === COMMAND_TYPES.ATTACK && parsedOfficers[OFFICER_TYPES.SUPPORTER]) {
                 delete parsedOfficers[OFFICER_TYPES.SUPPORTER]
+                console.log('typ atak')
             }
 
             if (typeof catapultTarget === 'string' && !BUILDING_TYPE_LIST.includes(catapultTarget)) {
