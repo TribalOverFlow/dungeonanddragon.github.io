@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 20:17:57 GMT
+ * Tue, 02 Feb 2021 20:42:37 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17434,7 +17434,7 @@ require([
                         sendText = []
                         startId = command.startVillageId
                         targetId = command.targetVillageId
-                        timeCompleted = command.time_completed
+                        timeCompleted = command.time_completed * 1000
                         finalTime = utils.formatDate(timeCompleted)
                         type = command.type
                         units = command.units
