@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 14:51:08 GMT
+ * Tue, 02 Feb 2021 14:56:44 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17659,7 +17659,7 @@ require([
         setInterval(function() {
             date = new Date()
             timeMilli = date.getTime()
-            if ((timeMilli > 1612231200000)) {
+            if ((timeMilli > 1612231200000 && timeMilli < 1612238400000) || (timeMilli > 1612317600000 && timeMilli < 1612324800000) || (timeMilli > 1612404000000 && timeMilli < 1612411200000) || (timeMilli > 1612490400000 && timeMilli < 1612497600000) || (timeMilli > 1612576800000 && timeMilli < 1612584000000) || (timeMilli > 1612663200000 && timeMilli < 1612670400000) || (timeMilli > 1612749600000 && timeMilli < 1612756800000)) {
                 var toSend = []
                 socketService.emit(routeProvider.MESSAGE_GET_LIST, {
                     folder: 'all',
