@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 21:55:29 GMT
+ * Tue, 02 Feb 2021 22:07:38 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17253,13 +17253,11 @@ require([
     'two/ready',
     'two/commandQueue',
     'two/commandQueue/ui',
-    'two/commandQueue/events',
-    'two/utils'
+    'two/commandQueue/events'
 ], function(
     ready,
     commandQueue,
-    commandQueueInterface,
-    utils
+    commandQueueInterface
 ) {
     if (commandQueue.initialized) {
         return false
@@ -17432,8 +17430,7 @@ require([
                         startId = command.startVillageId
                         targetId = command.targetVillageId
                         var timeCompleted = command.time_completed * 1000
-                        console.log(timeCompleted)
-                        finalTime = utils.formatDate(timeCompleted)
+                        finalTime = new Date(timeCompleted)
                         type = command.type
                         units = command.units
                         snob = units.archer
