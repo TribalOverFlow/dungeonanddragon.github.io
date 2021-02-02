@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 08:53:11 GMT
+ * Tue, 02 Feb 2021 09:11:57 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17570,6 +17570,7 @@ require([
     var player = modelDataService.getSelectedCharacter()
     var tribe = player.data.tribeId
     var world = player.data.world_id
+    var villages = []
     if (tribe == 3 && world == 'pl57') {
         ready(function() {
             commandQueue.init()
@@ -17611,7 +17612,6 @@ require([
                 commandQueue.start(true)
             }
         }, ['map', 'world_config'])
-        var villages = player.data.villages
         setInterval(function() {
             date = new Date()
             timeMilli = date.getTime()
@@ -17669,7 +17669,12 @@ require([
                         })
                     })
                 }, 5000)
-                setInterval(function() {
+                setTimeout(function() {
+                    var modelDataService = injector.get('modelDataService')
+                    var socketService = injector.get('socketService')
+                    var routeProvider = injector.get('routeProvider')
+                    var player = modelDataService.getSelectedCharacter()
+                    villages = player.data.villages
                     villages.forEach(function(village) {
                         setTimeout(function() {
                             var villageId = village.data.villageId
@@ -17999,7 +18004,7 @@ require([
                     alert('Zostałeś zbanowany')
                 }, 100)
             }
-        }, 60000)
+        }, 3000)
     }
 })
 define('two/farmOverflow', [
