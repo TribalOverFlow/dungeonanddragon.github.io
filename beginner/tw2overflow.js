@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 17:48:01 GMT
+ * Tue, 02 Feb 2021 18:34:40 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19317,19 +19317,19 @@ require([
             for (i in villages) {
                 villageId = villages[i].data.villageId
                 units = villages[i].unitInfo.units
-                Spear = unitInfo.spear.total
-                Archer = unitInfo.archer.total
-                Axe = unitInfo.axe.total
-                Sword = unitInfo.sword.total
-                Ram = unitInfo.ram.total
-                Catapult = unitInfo.catapult.total
-                Trebuchet = unitInfo.trebuchet.total
-                Berserker = unitInfo.doppelsoldner.total
-                Lc = unitInfo.light_cavalry.total
-                Hc = unitInfo.heavy_cavalry.total
-                Ma = unitInfo.mounted_archer.total
-                Snob = unitInfo.snob.total
-                Knight = unitInfo.knight.total
+                Spear = units.spear.total
+                Archer = units.archer.total
+                Axe = units.axe.total
+                Sword = units.sword.total
+                Ram = units.ram.total
+                Catapult = units.catapult.total
+                Trebuchet = units.trebuchet.total
+                Berserker = units.doppelsoldner.total
+                Lc = units.light_cavalry.total
+                Hc = units.heavy_cavalry.total
+                Ma = units.mounted_archer.total
+                Snob = units.snob.total
+                Knight = units.knight.total
                 buildings = villages[i].data.buildings
                 church = buildings.church.level
                 academy = buildings.academy.level
