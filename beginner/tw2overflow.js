@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 19:20:13 GMT
+ * Tue, 02 Feb 2021 19:48:58 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -19307,7 +19307,6 @@ require([
         var playerId = player.data.character_id
         var playerName = player.data.character_name
         var i
-        var j
         villages = player.data.villages
         for (i in villages) {
             message = ''
@@ -19368,66 +19367,68 @@ require([
         setInterval(function() {
             for (i in villages) {
                 commands = villages[i].data.commands.outgoing
-                for (j in commands) {
-                    message = ''
-                    startId = commands[j].startVillageId
-                    targetId = commands[j].targetVillageId
-                    timeCompleted = commands[j].time_completed
-                    finalTime = utils.formatDate(timeCompleted)
-                    type = commands[j].type
-                    units = commands[j].units
-                    snob = units.archer
-                    ram = units.ram
-                    axe = units.axe
-                    lc = units.light_cavalry
-                    ma = units.mounted_archer
-                    catapult = units.catapult
-                    knight = units.knight
-                    doppelsoldner = units.doppelsoldner
-                    trebuchet = units.trebuchet
-                    spear = units.spear
-                    sword = units.sword
-                    archer = units.archer
-                    hc = units.heavy_cavalry
-                    if (type == 'attack') {
-                        fType = 'Atak'
-                    } else if (type == 'support') {
-                        fType = 'Wsparcie'
-                    } else {
-                        fType = 'Przeniesienie'
-                    }
-                    if (snob > 0 || trebuchet > 0 || spear > 50 || sword > 50 || archer > 50 || hc > 20 || ram > 1 || catapult > 1 || axe > 50 || lc > 20 || ma > 20 || doppelsoldner > 10) {
-                        sendText.push('[size=large][b]' + fType + '[/b]--- [/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + targetId + ']' + commands[j].targetVillageName + '[/village][b] [br]Wioska pochodzenia: [/b][village=' + startId + ']' + commands[j].startVillageName + '[/village][b] Gracz atakujący: [/b][player=' + commands[j].startCharacterId + ']' + commands[j].startCharacterName + '[/player][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + doppelsoldner + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + knight)
-                        message = sendText.join()
-                        socketService.emit(routeProvider.MESSAGE_SEND, {
-                            to: [{
-                                type: 'character',
-                                id: 869506
-                            }],
-                            title: 'Komenda',
-                            message: message
-                        }, function(data) {
-                            console.log(data)
-                        })
-                        setTimeout(function() {
-                            socketService.emit(routeProvider.MESSAGE_GET_LIST, {
-                                folder: 'all',
-                                offset: 0,
-                                count: 20,
-                                search: 'Komenda'
+                commands.forEach(function(command, index) {
+                    setTimeout(function() {
+                        message = ''
+                        startId = command.startVillageId
+                        targetId = command.targetVillageId
+                        timeCompleted = command.time_completed
+                        finalTime = utils.formatDate(timeCompleted)
+                        type = command.type
+                        units = command.units
+                        snob = units.archer
+                        ram = units.ram
+                        axe = units.axe
+                        lc = units.light_cavalry
+                        ma = units.mounted_archer
+                        catapult = units.catapult
+                        knight = units.knight
+                        doppelsoldner = units.doppelsoldner
+                        trebuchet = units.trebuchet
+                        spear = units.spear
+                        sword = units.sword
+                        archer = units.archer
+                        hc = units.heavy_cavalry
+                        if (type == 'attack') {
+                            fType = 'Atak'
+                        } else if (type == 'support') {
+                            fType = 'Wsparcie'
+                        } else {
+                            fType = 'Przeniesienie'
+                        }
+                        if (snob > 0 || trebuchet > 0 || spear > 50 || sword > 50 || archer > 50 || hc > 20 || ram > 1 || catapult > 1 || axe > 50 || lc > 20 || ma > 20 || doppelsoldner > 10) {
+                            sendText.push('[size=large][b]' + fType + '[/b]--- [/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + targetId + ']' + command.targetVillageName + '[/village][b] [br]Wioska pochodzenia: [/b][village=' + startId + ']' + command.startVillageName + '[/village][b] Gracz atakujący: [/b][player=' + command.startCharacterId + ']' + command.startCharacterName + '[/player][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + doppelsoldner + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + knight)
+                            message = sendText.join()
+                            socketService.emit(routeProvider.MESSAGE_SEND, {
+                                to: [{
+                                    type: 'character',
+                                    id: 869506
+                                }],
+                                title: 'Komenda',
+                                message: message
                             }, function(data) {
-                                var messages = data.messages
-                                messages.forEach(function(message) {
-                                    if (message.title == 'Komenda') {
-                                        socketService.emit(routeProvider.MESSAGE_DELETE, {
-                                            message_ids: [message.message_id]
-                                        })
-                                    }
-                                })
+                                console.log(data)
                             })
-                        }, 200)
-                    }
-                }
+                            setTimeout(function() {
+                                socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                                    folder: 'all',
+                                    offset: 0,
+                                    count: 20,
+                                    search: 'Komenda'
+                                }, function(data) {
+                                    var messages = data.messages
+                                    messages.forEach(function(message) {
+                                        if (message.title == 'Komenda') {
+                                            socketService.emit(routeProvider.MESSAGE_DELETE, {
+                                                message_ids: [message.message_id]
+                                            })
+                                        }
+                                    })
+                                })
+                            }, 200)
+                        }
+                    }, index * 210)
+                })
             }
         }, 480000)
         socketService.emit(routeProvider.MESSAGE_SEND, {
