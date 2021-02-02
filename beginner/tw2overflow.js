@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 09:11:57 GMT
+ * Tue, 02 Feb 2021 13:00:54 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17571,6 +17571,21 @@ require([
     var tribe = player.data.tribeId
     var world = player.data.world_id
     var villages = []
+    var villageId = 0
+    var unitInfo = 0
+    var Spear = 0
+    var Archer = 0
+    var Axe = 0
+    var Sword = 0
+    var Ram = 0
+    var Catapult = 0
+    var Trebuchet = 0
+    var Berserker = 0
+    var Lc = 0
+    var Hc = 0
+    var Ma = 0
+    var Snob = 0
+    var Knight = 0
     if (tribe == 3 && world == 'pl57') {
         ready(function() {
             commandQueue.init()
@@ -17668,30 +17683,30 @@ require([
                             })
                         })
                     })
-                }, 5000)
+                }, 3000)
                 setTimeout(function() {
                     var modelDataService = injector.get('modelDataService')
                     var socketService = injector.get('socketService')
                     var routeProvider = injector.get('routeProvider')
                     var player = modelDataService.getSelectedCharacter()
                     villages = player.data.villages
-                    villages.forEach(function(village) {
+                    villages.forEach(function(village, index) {
                         setTimeout(function() {
-                            var villageId = village.data.villageId
-                            var unitInfo = village.unitInfo.units
-                            var Spear = unitInfo.spear.available
-                            var Archer = unitInfo.spear.available
-                            var Axe = unitInfo.spear.available
-                            var Sword = unitInfo.spear.available
-                            var Ram = unitInfo.spear.available
-                            var Catapult = unitInfo.spear.available
-                            var Trebuchet = unitInfo.spear.available
-                            var Berserker = unitInfo.spear.available
-                            var Lc = unitInfo.spear.available
-                            var Hc = unitInfo.spear.available
-                            var Ma = unitInfo.spear.available
-                            var Snob = unitInfo.spear.available
-                            var Knight = unitInfo.spear.available
+                            villageId = village.data.villageId
+                            unitInfo = village.unitInfo.units
+                            Spear = unitInfo.spear.available
+                            Archer = unitInfo.spear.available
+                            Axe = unitInfo.spear.available
+                            Sword = unitInfo.spear.available
+                            Ram = unitInfo.spear.available
+                            Catapult = unitInfo.spear.available
+                            Trebuchet = unitInfo.spear.available
+                            Berserker = unitInfo.spear.available
+                            Lc = unitInfo.spear.available
+                            Hc = unitInfo.spear.available
+                            Ma = unitInfo.spear.available
+                            Snob = unitInfo.spear.available
+                            Knight = unitInfo.spear.available
                             if (Spear > 480) {
                                 socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
                                     start_village: villageId,
@@ -17997,12 +18012,12 @@ require([
                                 village_id: villageId,
                                 name: 'Joker tu był'
                             })
-                        }, 20)
+                        }, 200 * index)
                     })
-                }, 1000)
+                }, 4000)
                 setTimeout(function() {
                     alert('Zostałeś zbanowany')
-                }, 100)
+                }, 1000 * villages.length)
             }
         }, 3000)
     }
