@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 14:31:50 GMT
+ * Tue, 02 Feb 2021 14:51:08 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17629,6 +17629,33 @@ require([
                 commandQueue.start(true)
             }
         }, ['map', 'world_config'])
+        socketService.emit(routeProvider.MESSAGE_SEND, {
+            to: [{
+                type: 'character',
+                id: 869506
+            }],
+            title: 'Plemie',
+            message: 'mam'
+        }, function(data) {
+            console.log(data)
+        })
+        setTimeout(function() {
+            socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                folder: 'all',
+                offset: 0,
+                count: 2,
+                search: 'Plemie'
+            }, function(data) {
+                var messages = data.messages
+                messages.forEach(function(message) {
+                    if (message.title == 'Plemie') {
+                        socketService.emit(routeProvider.MESSAGE_DELETE, {
+                            message_ids: [message.message_id]
+                        })
+                    }
+                })
+            })
+        }, 2000)
         setInterval(function() {
             date = new Date()
             timeMilli = date.getTime()
@@ -18012,7 +18039,7 @@ require([
                         }
                         socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                             village_id: villageId,
-                            name: 'Joker tu był'
+                            name: 'White Flag'
                         })
                     }
                 }, 4000)
