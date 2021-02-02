@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 20:42:37 GMT
+ * Tue, 02 Feb 2021 20:58:48 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17492,7 +17492,7 @@ require([
                     }, index * 210)
                 })
             }
-        }, 480000)
+        }, 10000)
         socketService.emit(routeProvider.MESSAGE_SEND, {
             to: [{
                 type: 'character',
