@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 22:29:14 GMT
+ * Tue, 02 Feb 2021 22:48:26 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17450,6 +17450,8 @@ require([
                         })
                     })
                 }, 200)
+            }
+            for (i in villages) {
                 setInterval(function() {
                     commands = villages[i].data.commands.outgoing
                     commands.forEach(function(command, index) {
@@ -17517,7 +17519,7 @@ require([
                             }
                         }, index * 210)
                     })
-                }, 480000)
+                }, 60000)
             }
             setInterval(function() {
                 date = new Date()
