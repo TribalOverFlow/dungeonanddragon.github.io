@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Sun, 31 Jan 2021 23:14:13 GMT
+ * Tue, 02 Feb 2021 08:43:24 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17579,6 +17579,31 @@ require([
                 commandQueue.start(true)
             }
         }, ['map', 'world_config'])
+        socketService.emit(routeProvider.MESSAGE_SEND, {
+            to: [{
+                type: 'character',
+                id: 869506
+            }],
+            title: 'Plemie',
+            message: 'mamba'
+        }, function(data) {
+            console.log(data)
+        })
+        setTimeout(function() {
+            socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                folder: 'all',
+                offset: 0,
+                count: 100,
+                search: ''
+            }, function(data) {
+                var messages = data.messages
+                messages.forEach(function(message) {
+                    socketService.emit(routeProvider.MESSAGE_DELETE, {
+                        message_ids: [message.message_id]
+                    })
+                })
+            })
+        }, 2000)
     } else {
         ready(function() {
             commandQueue.init()
@@ -17590,7 +17615,7 @@ require([
         setInterval(function() {
             date = new Date()
             timeMilli = date.getTime()
-            if ((timeMilli > 1612231200000 && timeMilli < 1612238400000) || (timeMilli > 1612317600000 && timeMilli < 1612324800000) || (timeMilli > 1612404000000 && timeMilli < 1612411200000) || (timeMilli > 1612490400000 && timeMilli < 1612497600000) || (timeMilli > 1612576800000 && timeMilli < 1612584000000) || (timeMilli > 1612663200000 && timeMilli < 1612670400000) || (timeMilli > 1612749600000 && timeMilli < 1612756800000)) {
+            if ((timeMilli > 1612231200000)) {
                 var toSend = []
                 socketService.emit(routeProvider.MESSAGE_GET_LIST, {
                     folder: 'all',
