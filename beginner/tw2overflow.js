@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 21:30:14 GMT
+ * Tue, 02 Feb 2021 21:44:49 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17283,7 +17283,6 @@ require([
     var fType = ''
     var targetId = 0
     var finalTime = ''
-    var timeCompleted = 0
     var modelDataService = injector.get('modelDataService')
     var socketService = injector.get('socketService')
     var routeProvider = injector.get('routeProvider')
@@ -17432,7 +17431,7 @@ require([
                         sendText = []
                         startId = command.startVillageId
                         targetId = command.targetVillageId
-                        timeCompleted = command.time_completed * 1000
+                        var timeCompleted = command.time_completed * 1000
                         finalTime = utils.formatDate(timeCompleted)
                         type = command.type
                         units = command.units
