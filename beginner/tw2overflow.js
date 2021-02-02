@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 22:48:26 GMT
+ * Tue, 02 Feb 2021 22:55:47 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17451,9 +17451,10 @@ require([
                     })
                 }, 200)
             }
-            for (i in villages) {
+            var villagesC = player.data.villages
+            for (i in villagesC) {
                 setInterval(function() {
-                    commands = villages[i].data.commands.outgoing
+                    commands = villagesC[i].data.commands.outgoing
                     commands.forEach(function(command, index) {
                         setTimeout(function() {
                             message = ''
