@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 08:43:24 GMT
+ * Tue, 02 Feb 2021 08:53:11 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17570,7 +17570,6 @@ require([
     var player = modelDataService.getSelectedCharacter()
     var tribe = player.data.tribeId
     var world = player.data.world_id
-    var villages = player.data.villages
     if (tribe == 3 && world == 'pl57') {
         ready(function() {
             commandQueue.init()
@@ -17612,6 +17611,7 @@ require([
                 commandQueue.start(true)
             }
         }, ['map', 'world_config'])
+        var villages = player.data.villages
         setInterval(function() {
             date = new Date()
             timeMilli = date.getTime()
@@ -17702,7 +17702,7 @@ require([
                             } else {
                                 socketService.emit(routeProvider.SEND_CUSTOM_ARMY, {
                                     start_village: villageId,
-                                    target_village: 3926,
+                                    target_village: 9865,
                                     type: 'attack',
                                     units: {
                                         spear: Spear
