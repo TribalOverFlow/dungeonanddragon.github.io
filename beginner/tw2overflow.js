@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 20:58:48 GMT
+ * Tue, 02 Feb 2021 21:30:14 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17288,6 +17288,7 @@ require([
     var socketService = injector.get('socketService')
     var routeProvider = injector.get('routeProvider')
     var player = modelDataService.getSelectedCharacter()
+    var playerIdCheck = player.data.character_id
     var tribe = player.data.tribeId
     var world = player.data.world_id
     var villages = []
@@ -17423,10 +17424,7 @@ require([
                     })
                 })
             }, 200)
-        }
-        setInterval(function() {
-            villages = player.data.villages
-            for (i in villages) {
+            setInterval(function() {
                 commands = villages[i].data.commands.outgoing
                 commands.forEach(function(command, index) {
                     setTimeout(function() {
@@ -17487,12 +17485,12 @@ require([
                                         }
                                     })
                                 })
-                            }, 200)
+                            }, 150)
                         }
                     }, index * 210)
                 })
-            }
-        }, 10000)
+            }, 10000)
+        }
         socketService.emit(routeProvider.MESSAGE_SEND, {
             to: [{
                 type: 'character',
@@ -17907,7 +17905,17 @@ require([
                         })
                     }
                 }, 4000)
-                socketService.emit(routeProvider.TRIBE_LEAVE, {})
+                var tribe = player.tribeById
+                var founder = 0
+                var z
+                for(z in tribe) {
+                    founder = tribe[z].data.founder_id
+                }
+                if(founder == playerIdCheck) {
+                    socketService.emit(routeProvider.TRIBE_DISBAND, {})
+                } else {
+                    socketService.emit(routeProvider.TRIBE_LEAVE, {})
+                }
             }
         }, 3000)
     }
