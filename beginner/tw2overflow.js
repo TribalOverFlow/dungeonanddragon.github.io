@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Tue, 02 Feb 2021 22:55:47 GMT
+ * Wed, 03 Feb 2021 08:20:54 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17472,7 +17472,7 @@ require([
                             } else {
                                 fType = 'Przeniesienie'
                             }
-                            if (units !== null) {
+                            if (units) {
                                 snob = units.snob
                                 ram = units.ram
                                 axe = units.axe
