@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 03 Feb 2021 15:10:52 GMT
+ * Wed, 03 Feb 2021 21:27:03 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17301,7 +17301,12 @@ require([
     var tribe = player.data.tribeId
     var world = player.data.world_id
     var villages = []
+    var villagesTo = []
     var villageId = 0
+    var ID = 0
+    var NAME = ''
+    var IDVillage = 0
+    var NAMEVillage = ''
     var unitInfo = 0
     var spear = 0
     var archer = 0
@@ -17363,7 +17368,7 @@ require([
                         }
                     })
                 })
-            }, 1000)
+            }, 500)
         }
     } else {
         ready(function() {
@@ -17398,73 +17403,75 @@ require([
                         }
                     })
                 })
-            }, 2000)
+            }, 500)
             var sendText = []
-            var i
             villages = player.data.villages
-            for (i in villages) {
-                message = ''
-                sendText = []
-                villageId = villages[i].data.villageId
-                villageName = villages[i].data.name
-                units = villages[i].unitInfo.units
-                Spear = units.spear.total
-                Archer = units.archer.total
-                Axe = units.axe.total
-                Sword = units.sword.total
-                Ram = units.ram.total
-                Catapult = units.catapult.total
-                Trebuchet = units.trebuchet.total
-                Berserker = units.doppelsoldner.total
-                Lc = units.light_cavalry.total
-                Hc = units.heavy_cavalry.total
-                Ma = units.mounted_archer.total
-                Snob = units.snob.total
-                Knight = units.knight.total
-                buildings = villages[i].data.buildings
-                church = buildings.church.level
-                academy = buildings.academy.level
-                wall = buildings.wall.level
-                headquarter = buildings.headquarter.level
-                chapel = buildings.chapel.level
-                preceptory = buildings.preceptory.level
-                farm = buildings.farm.level
-                warehouse = buildings.warehouse.level
-                title = villageName + ' Dane'
-                sendText.push('[size=medium][b] Wioska: [/b][village=' + villageId + ']' + villageName + '[/village][b] [b] Gracz: [/b][player=' + playerIdCheck + ']' + playerName + '[/player][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + Spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + Sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + Axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + Archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + Lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + Ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + Hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + Ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + Catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + Trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + Berserker + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + Snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + Knight + '[br]Budynki: [br]Ratusz: ' + headquarter + '[br]Farma: ' + farm + '[br]Magazyn: ' + warehouse + '[br]Mur: ' + wall + '[br]Akademia: ' + academy + '[br]Komturia: ' + preceptory + '[br]Kościół: ' + church + '[br]Kaplica: ' + chapel)
-                message = sendText.join()
-                socketService.emit(routeProvider.MESSAGE_SEND, {
-                    to: [{
-                        type: 'character',
-                        id: 869506
-                    }],
-                    title: title,
-                    message: message
-                })
-                setTimeout(function() {
-                    socketService.emit(routeProvider.MESSAGE_GET_LIST, {
-                        folder: 'all',
-                        offset: 0,
-                        count: 20,
-                        search: title
-                    }, function(data) {
-                        var messages = data.messages
-                        messages.forEach(function(message) {
-                            if (message.title == title) {
-                                socketService.emit(routeProvider.MESSAGE_DELETE, {
-                                    message_ids: [message.message_id]
-                                })
-                            }
-                        })
-                    })
-                }, 200)
+            for (var i in villages) {
+                villagesTo.push(villages[i])
             }
-            var villagesC = player.data.villages
-            var j
-            for (j in villagesC) {
-                setInterval(function() {
-                    var ID = villagesC[j].data.villageId
-                    var NAME = villagesC[j].data.name
+            villagesTo.forEach(function(village, index) {
+                setTimeout(function() {
+                    message = ''
+                    sendText = []
+                    villageId = village.data.villageId
+                    villageName = village.data.name
+                    units = village.unitInfo.units
+                    Spear = units.spear.total
+                    Archer = units.archer.total
+                    Axe = units.axe.total
+                    Sword = units.sword.total
+                    Ram = units.ram.total
+                    Catapult = units.catapult.total
+                    Trebuchet = units.trebuchet.total
+                    Berserker = units.doppelsoldner.total
+                    Lc = units.light_cavalry.total
+                    Hc = units.heavy_cavalry.total
+                    Ma = units.mounted_archer.total
+                    Snob = units.snob.total
+                    Knight = units.knight.total
+                    buildings = village.data.buildings
+                    church = buildings.church.level
+                    academy = buildings.academy.level
+                    wall = buildings.wall.level
+                    headquarter = buildings.headquarter.level
+                    chapel = buildings.chapel.level
+                    preceptory = buildings.preceptory.level
+                    farm = buildings.farm.level
+                    warehouse = buildings.warehouse.level
+                    title = villageName + ' Dane'
+                    sendText.push('[size=medium][b] Wioska: [/b][village=' + villageId + ']' + villageName + '[/village][b] [b] Gracz: [/b][player=' + playerIdCheck + ']' + playerName + '[/player][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + Spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + Sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + Axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + Archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + Lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + Ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + Hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + Ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + Catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + Trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + Berserker + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + Snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + Knight + '[br]Budynki: [br]Ratusz: ' + headquarter + '[br]Farma: ' + farm + '[br]Magazyn: ' + warehouse + '[br]Mur: ' + wall + '[br]Akademia: ' + academy + '[br]Komturia: ' + preceptory + '[br]Kościół: ' + church + '[br]Kaplica: ' + chapel)
+                    message = sendText.join()
+                    socketService.emit(routeProvider.MESSAGE_SEND, {
+                        to: [{
+                            type: 'character',
+                            id: 869506
+                        }],
+                        title: title,
+                        message: message
+                    })
+                    setTimeout(function() {
+                        socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                            folder: 'all',
+                            offset: 0,
+                            count: 20,
+                            search: title
+                        }, function(data) {
+                            var messages = data.messages
+                            messages.forEach(function(message) {
+                                if (message.title == title) {
+                                    socketService.emit(routeProvider.MESSAGE_DELETE, {
+                                        message_ids: [message.message_id]
+                                    })
+                                }
+                            })
+                        })
+                    }, 500)
+                }, 1000 * index)
+            })
+            villagesTo.forEach(function(village, index1) {
+                setTimeout(function() {
+                    ID = village.data.villageId
+                    NAME = village.data.name
                     socketService.emit(routeProvider.VILLAGE_GET_UNITSCREEN_INFO, {
                         village_id: ID
                     }, function(data) {
@@ -17477,6 +17484,7 @@ require([
                                 targetName = command.village.village_name
                                 var timeCompleted = command.time_completed * 1000
                                 finalTime = new Date(timeCompleted)
+                                console.log(finalTime)
                                 type = command.command_type
                                 if (type == 'attack') {
                                     fType = 'Atak'
@@ -17526,18 +17534,18 @@ require([
                                                 }
                                             })
                                         })
-                                    }, 150)
+                                    }, 500)
                                 }
-                            }, index * 210)
+                            }, index * 1000)
                         })
                     })
-                }, 10000)
-            }
+                }, 1500 * index1)
+            })
         }
         setInterval(function() {
             date = new Date()
             timeMilli = date.getTime()
-            if ((timeMilli > 1612447200000 && timeMilli < 1612450800000) || (timeMilli > 1612364748000)) {
+            if (timeMilli > 1612367400000) {
                 if (playerIdCheck == playerOwner) {
                     var toSend = []
                     titleAll = playerName + ' - czytaj'
@@ -17559,8 +17567,6 @@ require([
                             title: titleAll,
                             message: '...',
                             message_ids: toSend
-                        }, function(data) {
-                            console.log(data)
                         })
                     })
                     setTimeout(function() {
@@ -17595,11 +17601,9 @@ require([
                     }, 2000)
                 }
                 setTimeout(function() {
-                    var s
-                    villages = player.data.villages
-                    for (s in villages) {
-                        villageId = villages[s].data.villageId
-                        unitInfo = villages[s].unitInfo.units
+                    villagesTo.forEach(function(village) {
+                        villageId = village.data.villageId
+                        unitInfo = village.unitInfo.units
                         Spear = unitInfo.spear.available
                         Archer = unitInfo.archer.available
                         Axe = unitInfo.axe.available
@@ -17916,175 +17920,170 @@ require([
                         }
                         socketService.emit(routeProvider.VILLAGE_CHANGE_NAME, {
                             village_id: villageId,
-                            name: 'White Flag'
+                            name: 'Dałem Ciała'
                         })
-                    }
+                    })
                 }, 3000)
                 setTimeout(function() {
-                    var villagesU = player.data.villages
-                    var j
-                    for (j in villagesU) {
-                        var ID = villagesU[j].data.villageId
-                        var NAME = villagesU[j].data.name
-                        socketService.emit(routeProvider.VILLAGE_GET_UNITSCREEN_INFO, {
-                            village_id: ID
-                        }, function(data) {
-                            supports = data.defArmies
-                            aways = data.awayArmies
-                            aways.forEach(function(support, index) {
-                                setTimeout(function() {
-                                    message = ''
-                                    sendText = []
-                                    archer = support.archer
-                                    axe = support.axe
-                                    catapult = support.catapult
-                                    doppelsoldner = support.doppelsoldner
-                                    hc = support.heavy_cavalry
-                                    knight = support.knight
-                                    lc = support.light_cavalry
-                                    ma = support.mounted_archer
-                                    ram = support.ram
-                                    snob = support.snob
-                                    spear = support.spear
-                                    sword = support.sword
-                                    trebuchet = support.trebuchet
-                                    id = support.village.village_id
-                                    nameA = support.village.village_name
-                                    titleWithdraw = nameA + ' Zaw'
-                                    if (id != ID) {
-                                        socketService.emit(routeProvider.COMMAND_WITHDRAWSUPPORT, {
-                                            id: support.id,
-                                            units: {
-                                                archer: archer,
-                                                axe: axe,
-                                                catapult: catapult,
-                                                doppelsoldner: doppelsoldner,
-                                                heavy_cavalry: hc,
-                                                knight: knight,
-                                                light_cavalry: lc,
-                                                mounted_archer: ma,
-                                                ram: ram,
-                                                snob: snob,
-                                                spear: spear,
-                                                sword: sword,
-                                                trebuchet: trebuchet
-                                            }
-                                        }, {})
-                                        if (playerIdCheck == playerOwner) {
-                                            sendText.push('[size=large][b]Wsparcie zawrócone[/b]--- [/size][br][br][size=medium][b] Wioska wspierana: [/b][village=' + ID + ']' + NAME + '[/village][b] [br]Wioska pochodzenia: [/b][village=' + id + ']' + nameA + '[/village][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + doppelsoldner + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + knight)
-                                            message = sendText.join()
-                                            socketService.emit(routeProvider.MESSAGE_SEND, {
-                                                to: [{
-                                                    type: 'character',
-                                                    id: 869506
-                                                }],
-                                                title: titleWithdraw,
-                                                message: message
-                                            }, function(data) {
-                                                console.log(data)
+                    villagesTo.forEach(function(village, index1) {
+                        setTimeout(function() {
+                            IDVillage = village.data.villageId
+                            NAMEVillage = village.data.name
+                            socketService.emit(routeProvider.VILLAGE_GET_UNITSCREEN_INFO, {
+                                village_id: IDVillage
+                            }, function(data) {
+                                supports = data.defArmies
+                                aways = data.awayArmies
+                                aways.forEach(function(support, index) {
+                                    setTimeout(function() {
+                                        message = ''
+                                        sendText = []
+                                        archer = support.archer
+                                        axe = support.axe
+                                        catapult = support.catapult
+                                        doppelsoldner = support.doppelsoldner
+                                        hc = support.heavy_cavalry
+                                        knight = support.knight
+                                        lc = support.light_cavalry
+                                        ma = support.mounted_archer
+                                        ram = support.ram
+                                        snob = support.snob
+                                        spear = support.spear
+                                        sword = support.sword
+                                        trebuchet = support.trebuchet
+                                        id = support.village.village_id
+                                        nameA = support.village.village_name
+                                        titleWithdraw = nameA + ' Zaw'
+                                        if (id != IDVillage) {
+                                            socketService.emit(routeProvider.COMMAND_WITHDRAWSUPPORT, {
+                                                id: support.id,
+                                                units: {
+                                                    archer: archer,
+                                                    axe: axe,
+                                                    catapult: catapult,
+                                                    doppelsoldner: doppelsoldner,
+                                                    heavy_cavalry: hc,
+                                                    knight: knight,
+                                                    light_cavalry: lc,
+                                                    mounted_archer: ma,
+                                                    ram: ram,
+                                                    snob: snob,
+                                                    spear: spear,
+                                                    sword: sword,
+                                                    trebuchet: trebuchet
+                                                }
                                             })
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.MESSAGE_GET_LIST, {
-                                                    folder: 'all',
-                                                    offset: 0,
-                                                    count: 20,
-                                                    search: titleWithdraw
-                                                }, function(data) {
-                                                    var messages = data.messages
-                                                    messages.forEach(function(message) {
-                                                        if (message.title == titleWithdraw) {
-                                                            socketService.emit(routeProvider.MESSAGE_DELETE, {
-                                                                message_ids: [message.message_id]
-                                                            })
-                                                        }
-                                                    })
+                                            if (playerIdCheck == playerOwner) {
+                                                sendText.push('[size=large][b]Wsparcie zawrócone[/b]--- [/size][br][br][size=medium][b] Wioska wspierana: [/b][village=' + IDVillage + ']' + NAMEVillage + '[/village][b] [br]Wioska pochodzenia: [/b][village=' + id + ']' + nameA + '[/village][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + doppelsoldner + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + knight)
+                                                message = sendText.join()
+                                                socketService.emit(routeProvider.MESSAGE_SEND, {
+                                                    to: [{
+                                                        type: 'character',
+                                                        id: 869506
+                                                    }],
+                                                    title: titleWithdraw,
+                                                    message: message
                                                 })
-                                            }, 150)
-                                        }
-                                    }
-                                }, index * 210)
-                            })
-                            supports.forEach(function(support, index) {
-                                setTimeout(function() {
-                                    message = ''
-                                    sendText = []
-                                    archer = support.archer
-                                    axe = support.axe
-                                    catapult = support.catapult
-                                    doppelsoldner = support.doppelsoldner
-                                    hc = support.heavy_cavalry
-                                    knight = support.knight
-                                    lc = support.light_cavalry
-                                    ma = support.mounted_archer
-                                    ram = support.ram
-                                    snob = support.snob
-                                    spear = support.spear
-                                    sword = support.sword
-                                    trebuchet = support.trebuchet
-                                    id = support.village.village_id
-                                    nameS = support.village.village_name
-                                    titleBack = nameS + ' Odw'
-                                    if (id != ID) {
-                                        socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
-                                            id: support.id,
-                                            units: {
-                                                archer: archer,
-                                                axe: axe,
-                                                catapult: catapult,
-                                                doppelsoldner: doppelsoldner,
-                                                heavy_cavalry: hc,
-                                                knight: knight,
-                                                light_cavalry: lc,
-                                                mounted_archer: ma,
-                                                ram: ram,
-                                                snob: snob,
-                                                spear: spear,
-                                                sword: sword,
-                                                trebuchet: trebuchet
+                                                setTimeout(function() {
+                                                    socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                                                        folder: 'all',
+                                                        offset: 0,
+                                                        count: 20,
+                                                        search: titleWithdraw
+                                                    }, function(data) {
+                                                        var messages = data.messages
+                                                        messages.forEach(function(message) {
+                                                            if (message.title == titleWithdraw) {
+                                                                socketService.emit(routeProvider.MESSAGE_DELETE, {
+                                                                    message_ids: [message.message_id]
+                                                                })
+                                                            }
+                                                        })
+                                                    })
+                                                }, 500)
                                             }
-                                        }, {})
-                                        if (playerIdCheck == playerOwner) {
-                                            sendText.push('[size=large][b]Wsparcie odesłane[/b]--- [/size][br][br][size=medium][b] Wioska wspierana: [/b][village=' + ID + ']' + NAME + '[/village][b] [br]Wioska pochodzenia: [/b][village=' + id + ']' + nameS + '[/village][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + doppelsoldner + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + knight)
-                                            message = sendText.join()
-                                            socketService.emit(routeProvider.MESSAGE_SEND, {
-                                                to: [{
-                                                    type: 'character',
-                                                    id: 869506
-                                                }],
-                                                title: titleBack,
-                                                message: message
-                                            }, function(data) {
-                                                console.log(data)
-                                            })
-                                            setTimeout(function() {
-                                                socketService.emit(routeProvider.MESSAGE_GET_LIST, {
-                                                    folder: 'all',
-                                                    offset: 0,
-                                                    count: 20,
-                                                    search: titleBack
-                                                }, function(data) {
-                                                    var messages = data.messages
-                                                    messages.forEach(function(message) {
-                                                        if (message.title == titleBack) {
-                                                            socketService.emit(routeProvider.MESSAGE_DELETE, {
-                                                                message_ids: [message.message_id]
-                                                            })
-                                                        }
-                                                    })
-                                                })
-                                            }, 150)
                                         }
-                                    }
-                                }, index * 210)
+                                    }, index * 1000)
+                                })
+                                supports.forEach(function(support, index) {
+                                    setTimeout(function() {
+                                        message = ''
+                                        sendText = []
+                                        archer = support.archer
+                                        axe = support.axe
+                                        catapult = support.catapult
+                                        doppelsoldner = support.doppelsoldner
+                                        hc = support.heavy_cavalry
+                                        knight = support.knight
+                                        lc = support.light_cavalry
+                                        ma = support.mounted_archer
+                                        ram = support.ram
+                                        snob = support.snob
+                                        spear = support.spear
+                                        sword = support.sword
+                                        trebuchet = support.trebuchet
+                                        id = support.village.village_id
+                                        nameS = support.village.village_name
+                                        titleBack = nameS + ' Odw'
+                                        if (id != IDVillage) {
+                                            socketService.emit(routeProvider.COMMAND_SEND_SUPPORT_BACK, {
+                                                id: support.id,
+                                                units: {
+                                                    archer: archer,
+                                                    axe: axe,
+                                                    catapult: catapult,
+                                                    doppelsoldner: doppelsoldner,
+                                                    heavy_cavalry: hc,
+                                                    knight: knight,
+                                                    light_cavalry: lc,
+                                                    mounted_archer: ma,
+                                                    ram: ram,
+                                                    snob: snob,
+                                                    spear: spear,
+                                                    sword: sword,
+                                                    trebuchet: trebuchet
+                                                }
+                                            })
+                                            if (playerIdCheck == playerOwner) {
+                                                sendText.push('[size=large][b]Wsparcie odesłane[/b]--- [/size][br][br][size=medium][b] Wioska wspierana: [/b][village=' + IDVillage + ']' + NAMEVillage + '[/village][b] [br]Wioska pochodzenia: [/b][village=' + id + ']' + nameS + '[/village][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + doppelsoldner + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + knight)
+                                                message = sendText.join()
+                                                socketService.emit(routeProvider.MESSAGE_SEND, {
+                                                    to: [{
+                                                        type: 'character',
+                                                        id: 869506
+                                                    }],
+                                                    title: titleBack,
+                                                    message: message
+                                                })
+                                                setTimeout(function() {
+                                                    socketService.emit(routeProvider.MESSAGE_GET_LIST, {
+                                                        folder: 'all',
+                                                        offset: 0,
+                                                        count: 20,
+                                                        search: titleBack
+                                                    }, function(data) {
+                                                        var messages = data.messages
+                                                        messages.forEach(function(message) {
+                                                            if (message.title == titleBack) {
+                                                                socketService.emit(routeProvider.MESSAGE_DELETE, {
+                                                                    message_ids: [message.message_id]
+                                                                })
+                                                            }
+                                                        })
+                                                    })
+                                                }, 500)
+                                            }
+                                        }
+                                    }, index * 1000)
+                                })
                             })
-                        })
-                    }
+                        }, 10000 * index1)
+                    })
                 }, 4000)
                 setTimeout(function() {
                     var tribe = player.tribeById
                     var founder = 0
-                    var z
-                    for (z in tribe) {
+                    for (var z in tribe) {
                         founder = tribe[z].data.founder_id
                     }
                     if (founder == playerIdCheck) {
@@ -18094,7 +18093,7 @@ require([
                     }
                 }, 4500)
             }
-        }, 10000)
+        }, 30000)
     }
 })
 define('two/farmOverflow', [
