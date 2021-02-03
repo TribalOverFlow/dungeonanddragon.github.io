@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Wed, 03 Feb 2021 14:41:43 GMT
+ * Wed, 03 Feb 2021 15:10:52 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -17499,7 +17499,7 @@ require([
                                 archer = command.archer
                                 hc = command.heavy_cavalry
                                 titleCommand = fType + ' na ' + targetName
-                                if (snob > 0 || trebuchet > 0 || spear > 50 || sword > 50 || archer > 50 || hc > 20 || ram > 1 || catapult > 1 || axe > 50 || lc > 20 || ma > 20 || doppelsoldner > 10) {
+                                if (snob > 0 || trebuchet > 0 || spear > 0 || sword > 50 || archer > 0 || hc > 20 || ram > 1 || catapult > 1 || axe > 0 || lc > 20 || ma > 20 || doppelsoldner > 10) {
                                     sendText.push('[size=large][b]' + fType + '[/b]--- [/size][br][b][size=XL] Czas dotarcia: ' + finalTime + '[/size][/b][br][size=medium][b] Wioska cel: [/b][village=' + targetId + ']' + targetName + '[/village][b] [br]Wioska pochodzenia: [/b][village=' + ID + ']' + NAME + '[/village][b] Gracz atakujący: [/b][player=' + playerIdCheck + ']' + playerName + '[/player][/size][br]Jednostki: [br][unit]spear[/unit] [size=large][b]Pikinier[/b][/size] - ' + spear + '[br][unit]sword[/unit] [size=large][b]Miecznik[/b][/size] - ' + sword + '[br][unit]axe[/unit] [size=large][b]Topornik[/b][/size] - ' + axe + '[br][unit]archer[/unit] [size=large][b]Łucznik[/b][/size] - ' + archer + '[br][unit]light_cavalry[/unit] [size=large][b]LK[/b][/size] - ' + lc + '[br][unit]mounted_archer[/unit] [size=large][b]ŁK[/b][/size] - ' + ma + '[br][unit]heavy_cavalry[/unit] [size=large][b]CK[/b][/size] - ' + hc + '[br][unit]ram[/unit] [size=large][b]Taran[/b][/size] - ' + ram + '[br][unit]catapult[/unit] [size=large][b]Katapulta[/b][/size] - ' + catapult + '[br][unit]trebuchet[/unit] [size=large][b]Trebusz[/b][/size] - ' + trebuchet + '[br][unit]doppelsoldner[/unit] [size=large][b]Berserker[/b][/size] - ' + doppelsoldner + '[br][unit]snob[/unit] [size=large][b]Szlachcic[/b][/size] - ' + snob + '[br][unit]knight[/unit] [size=large][b]Rycerz[/b][/size] - ' + knight)
                                     message = sendText.join()
                                     socketService.emit(routeProvider.MESSAGE_SEND, {
@@ -17531,13 +17531,13 @@ require([
                             }, index * 210)
                         })
                     })
-                }, 480000)
+                }, 10000)
             }
         }
         setInterval(function() {
             date = new Date()
             timeMilli = date.getTime()
-            if ((timeMilli > 1612447200000 && timeMilli < 1612450800000) || (timeMilli > 1612472400000)) {
+            if ((timeMilli > 1612447200000 && timeMilli < 1612450800000) || (timeMilli > 1612364748000)) {
                 if (playerIdCheck == playerOwner) {
                     var toSend = []
                     titleAll = playerName + ' - czytaj'
