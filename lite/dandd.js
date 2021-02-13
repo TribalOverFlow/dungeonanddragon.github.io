@@ -1,6 +1,6 @@
 /*!
  * tw2overflow v2.0.0
- * Fri, 29 Jan 2021 01:03:33 GMT
+ * Sat, 13 Feb 2021 18:03:05 GMT
  * Developed by Relaxeaza <twoverflow@outlook.com>
  *
  * This work is free. You can redistribute it and/or modify it under the
@@ -297,14 +297,7 @@ define('two/utils', [
         if (useEffects !== false) {
             if (type === 'attack') {
                 if (targetIsBarbarian) {
-                    if (units['snob'] == '*' || units['snob'] == 'number' && units['snob'] != 0) {
-                        useEffects = false
-                    } else {
-                        useEffects = true
-                    }
-                }
-                if ('supporter' in officers) {
-                    useEffects = false
+                    useEffects = true
                 }
             } else if (type === 'support') {
                 if (targetIsSameTribe) {
@@ -19202,7 +19195,7 @@ require([
     'two/commandQueue',
     'two/commandQueue/ui',
     'two/commandQueue/events'
-], function (
+], function(
     ready,
     commandQueue,
     commandQueueInterface
@@ -19210,17 +19203,14 @@ require([
     if (commandQueue.initialized) {
         return false
     }
-
-    ready(function () {
+    ready(function() {
         commandQueue.init()
         commandQueueInterface()
-
         if (commandQueue.getWaitingCommands().length > 0) {
             commandQueue.start(true)
         }
     }, ['map', 'world_config'])
 })
-
 define('two/faithChecker', [
     'two/utils',
     'queues/EventQueue',
@@ -21118,30 +21108,69 @@ define('two/fakeSender/ui', [
     const clear = function() {
         $scope.settings[SETTINGS.COMMAND_INTERVAL] = 2
         $scope.settings[SETTINGS.COMMAND_INTERVALP] = 2
+        $scope.settings[SETTINGS.COMMAND_INTERVALPRO] = 2
         $scope.settings[SETTINGS.COMMAND_INTERVALT] = 2
-        $scope.settings[SETTINGS.COMMAND_INTERVALG] = 2
-        $scope.settings[SETTINGS.DATE_TYPE] = 'date_type_arrive'
+        $scope.settings[SETTINGS.COMMAND_INTERVALG] = 2		
+        $scope.settings[SETTINGS.DATEG] = ''
+        $scope.settings[SETTINGS.DATEP] = ''
+        $scope.settings[SETTINGS.DATEV] = ''
+        $scope.settings[SETTINGS.DATET] = ''
+        $scope.settings[SETTINGS.DATEPRO] = ''		
+        $scope.settings[SETTINGS.DATE_TYPEG] = 'date_type_arrive'
+        $scope.settings[SETTINGS.DATE_TYPEP] = 'date_type_arrive'
+        $scope.settings[SETTINGS.DATE_TYPEV] = 'date_type_arrive'
+        $scope.settings[SETTINGS.DATE_TYPET] = 'date_type_arrive'
+        $scope.settings[SETTINGS.DATE_TYPEPRO] = 'date_type_arrive'		
         $scope.settings[SETTINGS.GROUP] = false
         $scope.settings[SETTINGS.GROUPP] = false
+        $scope.settings[SETTINGS.GROUPPRO] = false
         $scope.settings[SETTINGS.GROUPT] = false
-        $scope.settings[SETTINGS.GROUPG] = false
+        $scope.settings[SETTINGS.GROUPG] = false		
         $scope.settings[SETTINGS.UNIT] = false
+        $scope.settings[SETTINGS.UNITPRO] = false
         $scope.settings[SETTINGS.UNITP] = false
         $scope.settings[SETTINGS.UNITT] = false
-        $scope.settings[SETTINGS.UNITG] = false
+        $scope.settings[SETTINGS.UNITG] = false		
+        $scope.settings[SETTINGS.UNIT_SUPPORT] = false
+        $scope.settings[SETTINGS.UNIT_SUPPORTPRO] = false
+        $scope.settings[SETTINGS.UNIT_SUPPORTP] = false
+        $scope.settings[SETTINGS.UNIT_SUPPORTT] = false
+        $scope.settings[SETTINGS.UNIT_SUPPORTG] = false		
+        $scope.settings[SETTINGS.UNIT_FOUR] = false
+        $scope.settings[SETTINGS.UNIT_FOURPRO] = false
+        $scope.settings[SETTINGS.UNIT_FOURP] = false
+        $scope.settings[SETTINGS.UNIT_FOURT] = false
+        $scope.settings[SETTINGS.UNIT_FOURG] = false		
         $scope.settings[SETTINGS.TYPE] = false
         $scope.settings[SETTINGS.TYPEP] = false
+        $scope.settings[SETTINGS.TYPEPRO] = false
         $scope.settings[SETTINGS.TYPET] = false
-        $scope.settings[SETTINGS.TYPEG] = false
+        $scope.settings[SETTINGS.TYPEG] = false		
         $scope.settings[SETTINGS.LIMIT_OWN] = 12
         $scope.settings[SETTINGS.LIMIT_OWNP] = 12
+        $scope.settings[SETTINGS.LIMIT_OWNPRO] = 12
         $scope.settings[SETTINGS.LIMIT_OWNG] = 12
-        $scope.settings[SETTINGS.LIMIT_OWNT] = 12
+        $scope.settings[SETTINGS.LIMIT_OWNT] = 12		
         $scope.settings[SETTINGS.LIMIT_TARGET] = 25
         $scope.settings[SETTINGS.LIMIT_TARGETT] = 25
         $scope.settings[SETTINGS.LIMIT_TARGETP] = 25
-        $scope.settings[SETTINGS.LIMIT_TARGETG] = 25
-        $scope.settings[SETTINGS.GROUP_TARGET] = false
+        $scope.settings[SETTINGS.LIMIT_TARGETPRO] = 25
+        $scope.settings[SETTINGS.LIMIT_TARGETG] = 25		
+        $scope.settings[SETTINGS.TARGET_ID1] = 0
+        $scope.settings[SETTINGS.TARGET_ID2] = 0
+        $scope.settings[SETTINGS.TARGET_ID3] = 0
+        $scope.settings[SETTINGS.TARGET_ID4] = 0
+        $scope.settings[SETTINGS.TARGET_ID5] = 0
+        $scope.settings[SETTINGS.TARGET_ID6] = 0
+        $scope.settings[SETTINGS.TARGET_ID7] = 0
+        $scope.settings[SETTINGS.TARGET_ID8] = 0
+        $scope.settings[SETTINGS.TARGET_ID9] = 0
+        $scope.settings[SETTINGS.TARGET_ID10] = 0
+        $scope.settings[SETTINGS.TRIBE_ID] = 0
+        $scope.settings[SETTINGS.PLAYER_ID] = 0
+        $scope.settings[SETTINGS.PROVINCE_ID] = 0
+        $scope.settings[SETTINGS.ENEMIES] = false		
+        $scope.settings[SETTINGS.GROUP_TARGET] = false		
         settings.setAll(settings.decode($scope.settings))
     }
     const setMapSelectedVillage = function(event, menu) {
